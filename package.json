@@ -1,0 +1,40 @@
+{
+  "name": "NovaBot-MD",
+  "version": "1.0.0",
+  "description": "Bot de whatsapp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "GataNina-Li",
+  "license": "ISC",
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.3.1",
+    "chalk": "^4.1.2",
+    "gradient-string": "^2.0.2",
+    "human-readable": "^0.2.1",
+    "jimp": "^0.16.13",
+    "cheerio": "^1.0.0-rc.10",
+    "axios": "^0.24.0",
+    "api-dylux": "^1.2.2",
+    "performance-now": "^2.1.0",  
+    "fluent-ffmpeg": "^2.1.2",
+    "node-fetch": "2.x",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
+    "yargs": "^17.2.1",
+    "fs": "0.0.1-security",
+    "lowdb": "^2.1.0",
+    "mongoose": "^6.2.1",
+    "node-webpmux": "^3.1.7",
+    "mime-types": "^2.1.35",
+    "youtube-yts": "^2.0.0", 
+    "google-it": "^1.6.3",
+    "google-tts-api": "^2.0.2",
+    "ytdl-core": "^4.11.4",
+    "yt-search": "^2.10.2", 
+    "pino": "^8.14.1",
+    "qrcode": "^1.5.3",
+    "qrcode-terminal": "^0.12.0"
+  }
+}
