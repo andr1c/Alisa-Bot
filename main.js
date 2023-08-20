@@ -38,15 +38,20 @@ return `${message.substr(0, 500)}` // Devuelve los primeros 500 caracteres de 'm
 } else { // Caso contrario
 return `${message}`}} // Devuelve 'message' completo
 
-const getCmd = (id) => { //Función llamada 'getCmd' que toma un parámetro 'id'
-const stickerdb = JSON.parse(fs.readFileSync('./libs/database/stickerdb.json'))
-let anu = null;
-Object.keys(stickerdb).forEach(nganu => { // Itera sobre las claves del objeto 'stickerdb' utilizando 'forEach'
-if (stickerdb[nganu].id === id) { // Si el valor de la propiedad 'id' en el objeto 'stickerdb[nganu]' es igual a 'id'
-anu = nganu
-}})
-if (anu !== null) { // De lo contrario
-return stickerdb[anu].cmd // Devolver el valor de la propiedad 'cmd' en el objeto 'stickerdb[anu]'
+const addCmd = (cmd, id) =>  {
+const stickerdb = global.db.data.sticker //gracias a aiden
+stickerdb[id] = {id: id,
+cmd: cmd
+}}
+const getCmd = (id) => {
+const stickerdb = global.db.data.sticker
+let anu = null;  
+Object.keys(stickerdb).forEach(nganu => { 
+if (stickerdb[nganu].id === id) { 
+anu = nganu  
+}})  
+if (anu !== null) {  
+return stickerdb[anu].cmd  
 }}
 const getFileBuffer = async (mediakey, MediaType) => {
 const stream = await downloadContentFromMessage(mediakey, MediaType)
@@ -130,61 +135,13 @@ const isQuotedDocument = type === 'extendedTextMessage' && content.includes('doc
 const isQuotedMsg = type === 'extendedTextMessage' && content.includes('Message') // Mensaje citado de cualquier tipo
 const isViewOnce = (type === 'viewOnceMessage') // Verifica si el tipo de mensaje es (mensaje de vista única)
 
-//base de datos 
-let isNumber = x => typeof x === 'number' && !isNaN(x)
+//base de datos
 let user = global.db.data.users[m.sender]
-if (typeof user !== 'object') global.db.data.users[m.sender] = {}
-if (user) {
-if (!isNumber(user.afkTime)) user.afkTime = -1
-if (!('afkReason' in user)) user.afkReason = ''
-if (!isNumber(user.limit)) user.limit = 20
-if(!isNumber(user.money)) user.money = 100
-if(!isNumber(user.exp)) user.exp = 0
-if(!isNumber(user.health)) user.health = 100
-if (!isNumber(user.level)) user.level = 0
-if(!isNumber(user.premium)) user.premium = false
- } else global.db.data.users[m.sender] = {
-afkTime: -1,
-afkReason: '',
-limit: 20,
-money: 100,
-exp: 0,
-level: 0,
-health: 100
-}
-    
-let chats = global.db.data.chats[m.chat]
-if (typeof chats !== 'object') global.db.data.chats[m.chat] = {}
-if (chats) {
-if (!('antilink' in chats)) chats.antilink = false
-if (!('antiarabe' in chats)) chats.antiarabe = false
-if (!('antifake' in chats)) chats.antifake = false
-if (!('welcome' in chats)) chats.welcome = true
-if (!('modeadmin' in chats)) chats.modeadmin = false
-if (!('modojadibot' in chats)) chats.modojadibot = true
-if (!('ban' in chats)) chats.ban = false
-} else global.db.data.chats[m.chat] = {
-antilink: false,
-antiarabe: false, 
-antifake: false, 
-welcome: true,  
-modeadmin: false, 
-modojadibot: true, 
-ban: false, 
-}
-let setting = global.db.data.settings[numBot]
-if (typeof setting !== 'object') global.db.data.settings[numBot] = {}
-if (setting) {
-if (!isNumber(setting.status)) setting.status = 0
-if (!('autobio' in setting)) setting.autobio = true
-} else global.db.data.settings[numBot] = {
-status: 0,
-autobio: true, 
-}
-//
+let chats = global.db.data.users[m.chat]
+let setting = global.db.data.settings[conn.user.jid]  
 
 //autobio
-if (db.data.settings[numBot].autobio) {
+if (global.db.data.settings[numBot].autobio) {
 let setting = global.db.data.settings[numBot]
 if (new Date() * 1 - setting.status > 1000) {
 //let uptime = await runtime(process.uptime())
@@ -193,16 +150,16 @@ await conn.updateProfileStatus(bio)
 setting.status = new Date() * 1
 }} 
 	
-if (db.data.chats[m.chat].antifake && !isGroupAdmins) {	
-if (m.chat && m.sender.startsWith('1')) return conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
+if (global.db.data.chats[m.chat].antifake && !isGroupAdmins) {	
+if (m.chat && m.sender.startsWith('+994')) return conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
 }
-if (db.data.chats[m.chat].antiarabe && !isGroupAdmins) {
+if (global.db.data.chats[m.chat].antiarabe && !isGroupAdmins) {
 reply(`Este numero`)
-if (m.chat && m.sender.startsWith('212')) return conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
+if (m.chat && m.sender.startsWith('+212')) return conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
 }
 	
 //antilink
-if (db.data.chats[m.chat].antilink) {
+if (global.db.data.chats[m.chat].antilink) {
 if (budy.match(`chat.whatsapp.com`)) {
 let delet = m.key.participant
 let bang = m.key.id
@@ -221,10 +178,11 @@ if (!conn.public && !isCreator) {
 if (!m.key.fromMe) return
 }        	
 //Banea chat
-if (db.data.chats[m.chat].ban && !isCreator) {
+if (global.db.data.chats[m.chat].ban && !isCreator) {
 return
 }
-if (db.data.chats[m.chat].modeadmin && !isGroupAdmins) {
+//modoadmin
+if (global.db.data.chats[m.chat].modeadmin && !isGroupAdmins) {
 return
 }
       
@@ -259,12 +217,7 @@ irq: 0
 const thumb = fs.readFileSync("./media/test.jpg")
 let fkontak = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status@broadcast", "fromMe": false, "id": "Halo" }, "message": { "contactMessage": { "vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${userSender.split('@')[0]}:${userSender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD` }}, "participant": "0@s.whatsapp.net" }
 const ftroli ={key: {fromMe: false,"participant":"0@s.whatsapp.net", "remoteJid": "status@broadcast"}, "message": {orderMessage: {itemCount: 2022,status: 200, thumbnail: thumb, surface: 200, message: "ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ", orderTitle: "sᴜᴘᴇʀ ʙᴏᴛ ᴅᴇ ᴡʜᴀᴛsᴀᴘᴘ", sellerJid: '0@s.whatsapp.net'}}, contextInfo: {"forwardingScore":999,"isForwarded":true},sendEphemeral: true}
-const fdoc = {key : {participant : '0@s.whatsapp.net', ...(from ? { remoteJid: `status@broadcast` } : {}) },message: {documentMessage: {title: "A", jpegThumbnail: null}}}//const fgif = {key: {participant: `0@s.whatsapp.net`, ...(m.chat ? { remoteJid: "status@broadcast" } : {})},message: {"videoMessage": { "title":botname, "h": wm,'seconds': '359996400', 'gifPlayback': 'true', 'caption': ownername, 'jpegThumbnail': thumb}}}
-//const fgclink = {key: {participant: "0@s.whatsapp.net","remoteJid": "0@s.whatsapp.net"},"message": {"groupInviteMessage": {"groupJid": "6288213840883-1616169743@g.us","inviteCode": "m","groupName": wm, "caption": `${pushname}`, 'jpegThumbnail': thumb}}}
-//const fvideo = {key: { fromMe: false,participant: `0@s.whatsapp.net`, ...(m.chat ? { remoteJid: "status@broadcast" } : {}) },message: { "videoMessage": { "title":botname, "h": wm,'seconds': '359996400', 'caption': `${pushname}`, 'jpegThumbnail': thumb}}}
-//const fakeimg = { key: {participant: `0@s.whatsapp.net`, ...(false ? { remoteJid: "6289643739077-1613049930@g.us" } : {})},message: {"imageMessage": { "title":`*yo soy aiden*`, "h": `Hmm`,'seconds': '99999', 'imagePlayback': 'true', 'caption': `texto`, 'jpegThumbnail': thumb }}}
-//const floc = {key : {participant : '0@s.whatsapp.net', ...(m.chat ? { remoteJid: `status@broadcast` } : {}) },message: {locationMessage: {name: wm,jpegThumbnail: thumb}}}
-//const fakestatus = {key: {fromMe: false,participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {})},message: { "imageMessage": {"url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc","mimetype": "image/jpeg","caption": 'aiden pendejo',"fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=","fileLength": "28777","height": 1080,"width": 1079,"mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=","fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=","directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69","mediaKeyTimestamp": "1610993486","jpegThumbnail": fs.readFileSync('./media/cheemspic.jpg'),"scansSidecar": "1W0XhfaAcDwc7xh1R8lca6Qg/1bB4naFCSngM2LKO2NoP5RI7K+zLw=="}}}
+const fdoc = {key : {participant : '0@s.whatsapp.net', ...(from ? { remoteJid: `status@broadcast` } : {}) },message: {documentMessage: {title: "A", jpegThumbnail: null}}}
 const kick = function (from, orangnya) {
 for (let i of orangnya) {
 conn.groupParticipantsUpdate(from, [i], "remove");
@@ -284,11 +237,6 @@ chalk.bold.white('\n│💬MENSAJE: ') + chalk.whiteBright(`\n▣─────
 
 //ARRANCA LA DIVERSIÓN
 switch (command) {
-case 'imagen': //envia una imagen
-imagen = fs.readFileSync('./media/menu2.jpg') // puede ser cualquier imagen como en plugins
-conn.sendMessage(m.chat, {image: imagen, caption: '*ejemplo*' }, { quoted: m }) 
-break
-
 case 'yts':
 if (!text) return reply(`*Ejemplo:*\n${prefix + command} historia wa anime`)
 const yts = require("youtube-yts");
@@ -306,20 +254,6 @@ for (let i of search.all) {
 }
 await conn.sendMessage(from, { image: { url: search.all[0].thumbnail }, caption: teks }, { quoted: fkontak });
 await conn.sendMessage(from, {text: info.result, edit: key}, { quoted: fkontak })
-break
-case 'query': // envia un mensaje en forma de ad
-conn.sendMessage(from, {text: global.wm, contextInfo: {
-externalAdReply: {
-title: global.wm, 
-body: "sᴜᴘᴇʀ ʙᴏᴛ ᴅᴇ ᴡʜᴀᴛsᴀᴘᴘ",
-mediaUrl: null, 
-sourceUrl: null, 
-previewType: 'PHOTO',
-showAdAttribution: true, //puedes cambiarlo a false si gustas
-thumbnail: null, // imagen puedes hacer a traves de fs o dejarlo null
-sourceUrl: md //'link'
-    }
-  }}, {});
 break
 
 case 'serbot': case 'jadibot':
@@ -342,23 +276,19 @@ reply(`*No hay subbots activo el este momento intente mas tardes*`)
 } 
 break 
  
-case 'getcase': 
-if (!isCreator) return conn.sendMessage(from, { text: `*ESTE COMANDO ES PARA MI JEFE*` }, { quoted: msg }); 
-if (!text) return m.reply(`Que comando a buscar o que?`) 
-try { 
-bbreak = 'break' 
-reply('case ' + `'${args[0]}'` + fs.readFileSync('./main.js').toString().split(`case '${args[0]}'`)[1].split(bbreak)[0] + bbreak) 
-} catch (err) { 
-console.error(err) 
-reply(" Error, tal vez no existe el comando") 
-} 
+case 'acortar':
+ if (!text) return m.reply(`*Ingresa un link para acortar!*`)
+let shortUrl1 = await (await fetch(`https://tinyurl.com/api-create.php?url=${args[0]}`)).text()  
+if (!shortUrl1) return m.reply(`*⚠️ ERROR*`)
+let done = `*❇️ LINK ACORTADO*\n\n*➵ link: ${text}*\n➵ *Link Acortado: ${shortUrl1}*`
+m.reply(done)
 break
-
+    
 case 'google': {      
 if (!text) return reply(`*Ejemplo:*\n${prefix + command} gatito`)
 let google = require('google-it')
 google({'query': text}).then(res => {
-let teks = `Google : ${text}\n\n`
+let teks = `💫 𝘙𝘌𝘚𝘜𝘓𝘛𝘈𝘋𝘖𝘚 𝘋𝘌 : ${text}\n\n`
 for (let g of res) {
 teks += `🔶 *Titulo* : ${g.title}\n`
 teks += `🔶 *Descripcion* : ${g.snippet}\n`
@@ -418,7 +348,7 @@ case 'menu':
    break 
 
 case 'owner': case 'creador':
- conn.sendMessage(from, {   
+conn.sendMessage(from, {   
   text: `*Hola este bot esta desarrollo si quiere contacta con mi creador aqui te dejo sus número:*\nwa.me/595975740803`,  
   contextInfo:{  
   forwardingScore: 9999999,  
@@ -437,6 +367,10 @@ case 'owner': case 'creador':
   }  
   }, { quoted: fkontak }) 
    break 
+
+case 'grupos': case 'grupoficiales': 
+conn.sendMessage(from, { text: `*BOT EL DESARROLLO*\n\n*Te puede unirte al grupo update para infomarte sobre las nuevas actulizaciones/novedades de Lolibot y enteraste cuando sera en lanzamiento de NovaBot-MD (Muy pronto) vuelve pero super distinto 😼*\n\n${nn}` }, { quoted: msg })
+break
 
 case 'grupo':
 if (!m.isGroup) return reply(info.group);  
@@ -484,50 +418,71 @@ await conn.groupParticipantsUpdate(m.chat, [m.sender], "promote")
 break 
 		
 case 'welcome':
+case 'audios':
 case 'modeadmin':
 case 'antifake': case 'antinternacional':
 case 'antiarabe':
-case 'modojadibot':
+case 'detect':
 case 'antilink': {
 if (!m.isGroup) return reply(info.group)
 if (!isBotAdmins) return reply(info.botAdmin)
 if (!isGroupAdmins) return reply(info.admin)
 if (!text) return reply(`*Use de esta forma ejemplo:*\n*${prefix + command} on*\n*${prefix + command} off*`)
 if (args[0] === "on") {
-if (db.data.chats[m.chat].antilink) 
-if (db.data.chats[m.chat].welcome)
-if (db.data.chats[m.chat].modeadmin)
-if (db.data.chats[m.chat].antifake)
-if (db.data.chats[m.chat].antiarabe)
-if (db.data.chats[m.chat].modojadibot)
-db.data.chats[m.chat].antilink = true
-db.data.chats[m.chat].welcome = true
-db.data.chats[m.chat].modeadmin = true
-db.data.chats[m.chat].antifake = true
-db.data.chats[m.chat].antiarabe = true
-db.data.chats[m.chat].modojadibot = true
+if (!global.db.data.chats[m.chat].detect) 
+if (!global.db.data.chats[m.chat].antilink) 
+if (!global.db.data.chats[m.chat].audios) 
+if (!global.db.data.chats[m.chat].welcome)
+if (!global.db.data.chats[m.chat].modeadmin)
+if (!global.db.data.chats[m.chat].antifake)
+if (!global.db.data.chats[m.chat].antiarabe)
+global.db.data.chats[m.chat].detect = true
+global.db.data.chats[m.chat].antilink = true
+global.db.data.chats[m.chat].audios = true
+global.db.data.chats[m.chat].welcome = true
+global.db.data.chats[m.chat].modeadmin = true
+global.db.data.chats[m.chat].antifake = true
+global.db.data.chats[m.chat].antiarabe = true
 reply(`*✅El ${command} se activo con exito*`)
 } else if (args[0] === "off") {
-if (!db.data.chats[m.chat].antilink)
-if (!db.data.chats[m.chat].welcome) 
-if (!db.data.chats[m.chat].modeadmin)
-if (db.data.chats[m.chat].antifake)
-if (db.data.chats[m.chat].antiarabe)
-if (db.data.chats[m.chat].modojadibot)
-db.data.chats[m.chat].antilink = false
-db.data.chats[m.chat].welcome = false
-db.data.chats[m.chat].modeadmin = false
-db.data.chats[m.chat].antifake = false
-db.data.chats[m.chat].antiarabe = false
-db.data.chats[m.chat].modojadibot = false
+if (!global.db.data.chats[m.chat].detect) 
+if (!global.db.data.chats[m.chat].antilink)
+if (!global.db.data.chats[m.chat].audios) 
+if (!global.db.data.chats[m.chat].welcome) 
+if (!global.db.data.chats[m.chat].modeadmin)
+if (!global.db.data.chats[m.chat].antifake)
+if (!global.db.data.chats[m.chat].antiarabe)
+global.db.data.chats[m.chat].detect = false
+global.db.data.chats[m.chat].antilink = false
+global.db.data.chats[m.chat].audios = false
+global.db.data.chats[m.chat].welcome = false
+global.db.data.chats[m.chat].modeadmin = false
+global.db.data.chats[m.chat].antifake = false
+global.db.data.chats[m.chat].antiarabe = false
 reply(`*${command} desactivado!*`)
 }}
+case 'modojadibot':
+case 'anticall': 
+if (!isCreator) return reply(info.owner)
+if (args[0] === "on") {
+if (db.data.chats[m.chat].modojadibot)
+if (db.data.settings[numBot].anticall)
+db.data.chats[m.chat].modojadibot = true
+db.data.settings[numBot].anticall = true
+reply(`*✅El ${command} se activo con exito*`)
+} else if (args[0] === "off") {
+if (db.data.chats[m.chat].modojadibot)
+if (db.data.settings[numBot].anticall)
+db.data.settings[numBot].anticall = false
+db.data.chats[m.chat].modojadibot = false
+reply(`*${command} desactivado!*`)
+}
 break
 
 case 'join': {
 if (!isCreator) return reply(info.owner)
 if (!text) return reply(`*Y EL LINK DEL GRUPO?*`)
- if (!isUrl(args[0]) && !args[0].includes('whatsapp.com')) return reply(`*Link incorrecto!*`)
+if (!isUrl(args[0]) && !args[0].includes('whatsapp.com')) return reply(`*Link incorrecto!*`)
 reply(`*YA ME UNIR 😼*`)
 let result = args[0].split('https://chat.whatsapp.com/')[1]
 await conn.groupAcceptInvite(result).then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))}
@@ -551,7 +506,7 @@ case 'kick': {
 if (!m.isGroup) return reply(info.group) 
 if (!isBotAdmins) return reply(info.botAdmin)
 if (!isGroupAdmins) return reply(info.admin)
-if (!text) return reply(`[ ⚠️ ] A QUIEN CARAJO ELIMINO? ETIQUETA ALGUN USUARIO NO SOY ADIVINO 😯`)
+if (!m.quoted) return reply(`[ ⚠️ ] A QUIEN CARAJO ELIMINO? ETIQUETA ALGUN USUARIO NO SOY ADIVINO 😯`)
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 conn.groupParticipantsUpdate(m.chat, [users], 'remove')}
 break
@@ -573,15 +528,22 @@ let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender :
 await conn.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
 }
 break
-	
-case 'block': {
+
+case 'link': case 'linkgc': {
+if (!m.isGroup) return reply(info.group) 
+if (!isBotAdmins) return reply(info.botAdmin)
+let response = await conn. groupInviteCode(m.chat)
+conn.sendText(m.chat, `https://chat.whatsapp.com/${response}`, m, { detectLink: true })}
+break
+            	
+case 'block': case 'bloquear': {
 if (!isCreator) return reply(info.owner)
 reply(`*El usuario fue bloqueado del bot*`)
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await conn.updateBlockStatus(users, 'block')}
 break
 	
-case 'unblock': {
+case 'unblock': case 'desbloquear': {
 if (!isCreator) return reply(info.owner)
 reply(`*El usuario fue desbloqueado*`)
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
@@ -638,9 +600,16 @@ let texttosay = text
 : m.text;
 const SpeakEngine = require("google-tts-api"); 
 const texttospeechurl = SpeakEngine.getAudioUrl(texttosay, {lang: "es", slow: false, host: "https://translate.google.com",});
-conn.sendMessage(m.chat, { audio: { url: texttospeechurl }, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": yt, "showAdAttribution": true}}, seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, { quoted: m })
+conn.sendMessage(m.chat, { audio: { url: texttospeechurl }, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": md, "showAdAttribution": true}}, seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, { quoted: m })
 break		
-		
+
+case "a":
+if (!global.db.data.chats[m.chat].audios) return
+let vn = './media/a.mp3'
+await conn.sendPresenceUpdate('recording', m.chat)
+conn.sendMessage(m.chat, { audio: { url: vn }, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": md, "showAdAttribution": true}}, seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, { quoted: m })
+break
+              		
 case 'simi': {
 if (!text) return conn.sendMessage(from, { text: `*INGRESE UN TEXTO PARA HABLAR CONMIGO*` }, { quoted: msg })
 await conn.sendPresenceUpdate('composing', m.chat)
@@ -658,26 +627,109 @@ let hasill = await tioress.json()
 m.reply(`${hasill.result}`.trim())   
 break
 
-case 'play':
- if (!text) return conn.sendMessage(from, { text: `*ingrese nombre de alguna cancion*` }, { quoted: msg })
-const {key1} = await conn.sendMessage(from, {text: '*⏳ Aguarde un momento....*\n\nᴱˡ ᵃᵘᵈᶦᵒ ᵖᵘᵉᵈᵉ ᵗᵃʳᵈᵃ ᵉⁿᵗʳᵉ ⁵ ᵒ ¹⁰ ᵐᶦⁿᵘᵗᵒˢ ᵉˡ ᵉⁿᵛᶦᵃˢᵉ ᵗᵉⁿᵈʳᵃ́ ᵖᵃᶜᶦᵉⁿᶜᶦᵃ'}, { quoted: fdoc })
-let lolhuman = await fetch(`https://api.lolhuman.xyz/api/ytplay?apikey=${lolkeysapi}&query=${text}`)   
-let lolh = await lolhuman.json()
-let n = lolh.result.text || 'error'
-await conn.sendMessage(from, { audio: { url: lolh.result.audio.link }, fileName: `error.mp3`, mimetype: 'audio/mp4' }, { quoted: msg }); 
-await conn.sendMessage(from, {text: info.result, edit: key1}, { quoted: fdoc })
+case 'pareja':
+let member = participants.map(u => u.id)
+let me = m.sender
+let love = member[Math.floor(Math.random() * member.length)]
+conn.sendMessage(m.chat, { text: `*Te deberias casar con @${love.split('@')[0]} hacen una bonita pareja 💕*`,
+contextInfo:{
+mentionedJid:[me, love],
+forwardingScore: 9999999,
+isForwarded: true, 
+"externalAdReply": {
+"showAdAttribution": true,
+"containsAutoReply": true,
+"title": ` ${botname}`,
+"body": `${pushname}`,
+"previewType": "PHOTO",
+"thumbnailUrl": ``,
+"thumbnail": imagen1, 
+"sourceUrl": md}}},
+{ quoted: m})
 break
 
-case 'play2':    
+case 'fake':
+var gh = body.slice(11);
+var mentioned = m.message.extendedTextMessage && m.message.extendedTextMessage.contextInfo && m.message.extendedTextMessage.contextInfo.mentionedJid ? m.message.extendedTextMessage.contextInfo.mentionedJid[0] : null;
+var replace = gh.split("|")[0];
+var target = gh.split("|")[1];
+var bot = gh.split("|")[2];
+if (mentioned && target && bot) {
+var quotedMessage = {
+key: {
+fromMe: false,
+participant: mentioned
+},
+message: {
+conversation: target
+}};
+var sendMessageOptions = {
+text: `${bot}`,
+quoted: quotedMessage
+};
+conn.sendMessage(from, sendMessageOptions, { quoted: quotedMessage });
+} else {
+conn.sendMessage(from, { text: `Ejemplo: ${prefix + command} @tag|puto|😯`}, { quoted: msg });
+}
+break
+    
+case 'play':  case 'play2': {
 if (!text) return conn.sendMessage(from, { text: `*ingrese nombre de alguna cancion*` }, { quoted: msg })
-conn.sendMessage(from, { text: `*Aguarde un momento*\n\nᴱˡ ᵛᶦᵈᵉᵒ ᵖᵘᵉᵈᵉ ᵗᵃʳᵈᵃ ᵉⁿᵗʳᵉ ⁵ ᵒ ¹⁰ ᵐᶦⁿᵘᵗᵒˢ ᵉˡ ᵉⁿᵛᶦᵃˢᵉ ᵗᵉⁿᵈʳᵃ́ ᵖᵃᶜᶦᵉⁿᶜᶦᵃ` }, { quoted: fdoc });    
+const playmp3 = require('./libs/ytdl2')
+let yts = require("youtube-yts")
+conn.sendMessage(from, { text: `*Aguarde un momento*\n\nᴱˡ ᴬᵘᵈᶦᵒ ᵖᵘᵉᵈᵉ ᵗᵃʳᵈᵃ ᵉⁿᵗʳᵉ ⁵ ᵒ ¹⁰ ᵐᶦⁿᵘᵗᵒˢ ᵉˡ ᵉⁿᵛᶦᵃˢᵉ ᵗᵉⁿᵈʳᵃ́ ᵖᵃᶜᶦᵉⁿᶜᶦᵃ` }, { quoted: fdoc });    
+let search = await yts(text)
+let anup3k = search.videos[0]
+const pl= await playmp3.mp3(anup3k.url)
+await conn.sendMessage(from, { audio: fs.readFileSync(pl.path), fileName: `error.mp3`, mimetype: 'audio/mp4' }, { quoted: m }); 
+await fs.unlinkSync(pl.path)
+}
+break
+case "ytmp3": case "ytaudio": 
+const mp = require('./libs/ytdl2')
+if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return reply(`*Que esta buscado?*\n\n*Ejemplo:*\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
+conn.sendMessage(from, { text: `*Aguarde un momento*\n\nᴱˡ ᴬᵘᵈᶦᵒ ᵖᵘᵉᵈᵉ ᵗᵃʳᵈᵃ ᵉⁿᵗʳᵉ ⁵ ᵒ ¹⁰ ᵐᶦⁿᵘᵗᵒˢ ᵉˡ ᵉⁿᵛᶦᵃˢᵉ ᵗᵉⁿᵈʳᵃ́ ᵖᵃᶜᶦᵉⁿᶜᶦᵃ` }, { quoted: fdoc });    
 let mediaa = await ytplayvid(text)
-await conn.sendMessage(from, { video: { url: mediaa.result }, fileName: `error.mp4`, thumbnail: mediaa.thumb, mimetype: 'video/mp4' }, { quoted: msg });
-break                              
+const audio = await mp.mp3(text)
+await conn.sendMessage(from, {audio: fs.readFileSync(audio.path), mimetype: 'audio/mp4',
+contextInfo: {
+externalAdReply: { title:audio.meta.title,
+body: botname,
+//await getBuffer(pl.meta.image),
+thumbnail: getBuffer(audio.meta.image), 
+mediaType:2,
+mediaUrl:text,
+}}}, {quoted:m})
+await fs.unlinkSync(audio.path)
+break
+case 'ytmp4': case 'ytvideo': {
+const mp = require('./libs/ytdl2')
+if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return reply(`*Que esta buscado?*\n\n*Ejemplo:*\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
+conn.sendMessage(from, { text: `*Aguarde un momento*\n\nᴱˡ ᵛᶦᵈᵉᵒ ᵖᵘᵉᵈᵉ ᵗᵃʳᵈᵃ ᵉⁿᵗʳᵉ ⁵ ᵒ ¹⁰ ᵐᶦⁿᵘᵗᵒˢ ᵉˡ ᵉⁿᵛᶦᵃˢᵉ ᵗᵉⁿᵈʳᵃ́ ᵖᵃᶜᶦᵉⁿᶜᶦᵃ` }, { quoted: fdoc });    
+const vid = await mp.mp4(text)
+const ytc = `*❏ Título :* ${vid.title} 
+*❏ Duración :* ${vid.duration}
+*❏ Subido :* ${vid.date}
+*❏ calidad :* ${vid.quality}`
+await conn.sendMessage(from, {video: {url : vid.videoUrl}, caption: ytc }, {quoted:m})
+}
+break   
+
+case 'git': case 'gitclone':
+if (!args[0]) return reply(`*Ejemplo :*\n${prefix + command} ${md}`)
+if (!isUrl(args[0]) && !args[0].includes('github.com')) return reply(`Link invalido!!`)
+conn.sendMessage(from, { text: `*𝘈𝘎𝘜𝘈𝘙𝘋𝘌 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖...*\n\nˢᶦ ᵉˡ ᵃʳᶜʰᶦᵛᵒ ⁿᵒ ˡˡᵉᵍᵃ ᵉˢ ᵠᵘᵉ ʳᵉᵖᵒˢᶦᵗᵒʳᶦᵒ ᵉˢ ᵐᵘʸ ᵖᵉˢᵃᵈᵒ` }, { quoted: m })
+let regex1 = /(?:https|git)(?::\/\/|@)github\.com[\/:]([^\/:]+)\/(.+)/i
+let [, user, repo] = args[0].match(regex1) || []
+repo = repo.replace(/.git$/, '')
+let url = `https://api.github.com/repos/${user}/${repo}/zipball`
+let filename = (await fetch(url, {method: 'HEAD'})).headers.get('content-disposition').match(/attachment; filename=(.*)/)[1]
+conn.sendMessage(m.chat, { document: { url: url }, fileName: filename+'.zip', mimetype: 'application/zip' }, { quoted: m }).catch((err) => reply(info.error))
+break
 
 case 's': case 'sticker': {  
 if (/image/.test(mime)) {  
-reply(`*AGUARDE UN MOMENTO*`)  
+conn.sendMessage(m.chat, { text: `⏳ *Aguarde un momento estoy creando tu stickers....*\n\n*ᴺᵒ ʰᵃᵍᵃ ˢᵖᵃᵐ*` }, { quoted: m });    
 media = await quoted.download()  
 let encmedia = await conn.sendImageAsSticker(from, media, m, { packname: global.packname, author: global.author })  
 await fs.unlinkSync(encmedia)  
@@ -691,7 +743,30 @@ await fs.unlinkSync(encmedia)
 reply(`*Y LA IMAGEN?*`)  
 }}  
 break; 
-	      		
+
+case 'addcmd':
+if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg });   
+ if (!m.quoted) return conn.sendMessage(from, { text: `*[ ⚠️ ] 𝚁𝙴𝚂𝙿𝙾𝙽𝙳𝙴 𝙰𝙻 𝚂𝚃𝙸𝙲𝙺𝙴𝚁 𝙾 𝙸𝙼𝙰𝙶𝙴𝙽 𝙰𝙻 𝙲𝚄𝙰𝙻 𝙳𝙴𝚂𝙴𝙰 𝙰𝙶𝚁𝙴𝙶𝙰𝚁 𝚄𝙽 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙾 𝚃𝙴𝚇𝚃𝙾*` }, { quoted: msg }); 
+if (!m.quoted.fileSha256) return conn.sendMessage(from, { text: `*[ ⚠️ ] 𝚂𝙾𝙻𝙾 𝙿𝚄𝙴𝙳𝙴𝚂 𝙰𝚂𝙸𝙶𝙰𝙽𝙰𝚁 𝙲𝙾𝙼𝙰𝙽𝙳𝙾𝚂 𝙾 𝚃𝙴𝚇𝚃𝙾𝚂 𝙰 𝚂𝚃𝙸𝙲𝙺𝙴𝚁𝚂 𝙴 𝙸𝙼𝙰𝙶𝙴𝙽𝙴𝚂*` }, { quoted: msg }); 
+if (!text) return conn.sendMessage(from, { text: `*[ ⚠️ ] 𝙴𝚁𝚁𝙾𝚁 𝙳𝙴 𝚄𝚂𝙾, 𝚃𝙴𝚇𝚃𝙾 𝙵𝙰𝙻𝚃𝙰𝙽𝚃𝙴*\n\n*𝚄𝚂𝙾 𝙲𝙾𝚁𝚁𝙴𝙲𝚃𝙾 𝙳𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾:*\n*${usedPrefix + command} <texto> <responder a sticker o imagen>*\n\n*𝙴𝙹𝙴𝙼𝙿𝙻𝙾 𝙳𝙴 𝚄𝚂𝙾 𝙲𝙾𝚁𝚁𝙴𝙲𝚃𝙾 𝙳𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾:*\n*${usedPrefix + command} <#menu> <responder a sticker o imagen>*` }, { quoted: msg });    
+let sticker = global.db.data.sticker
+let hash = m.quoted.fileSha256.toString('base64')
+addCmd(text, hash)
+m.reply(`*[ ✔ ] EL TEXTO/COMANDO ASIGNADO AL STICKER/IMAGEN FUE AGREGADO A LA BASE DE DATOS CORRECTAMENTE*`)
+break
+
+case 'getcase': 
+if (!isCreator) return conn.sendMessage(from, { text: `*ESTE COMANDO ES PARA MI JEFE*` }, { quoted: msg }); 
+if (!text) return m.reply(`Que comando a buscar o que?`) 
+try { 
+bbreak = 'break' 
+reply('case ' + `'${args[0]}'` + fs.readFileSync('./main.js').toString().split(`case '${args[0]}'`)[1].split(bbreak)[0] + bbreak) 
+} catch (err) { 
+console.error(err) 
+reply(" Error, tal vez no existe el comando") 
+} 
+break
+    	      		
 case 'update':
 if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg });    
 try {    
