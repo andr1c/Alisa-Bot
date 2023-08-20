@@ -6,6 +6,7 @@
  const cheerio = require('cheerio')
  const Jimp = require('jimp')
  const os = require('os')
+ const chalk = require('chalk')
  const fs = require("fs")
   
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('../libs/fuctions.js'); 
@@ -41,10 +42,10 @@ await conn.sendMessage(m.chat, {image: imagen1, caption: stateRun, mentionedJid:
   
 module.exports = { state }
 
- let file = require.resolve(__filename)  
-  fs.watchFile(file, () => {  
-  fs.unwatchFile(file)  
-  console.log(`Update ${__filename}`)  
-  delete require.cache[file]  
-  require(file)  
-  })
+let file = require.resolve(__filename)
+fs.watchFile(file, () => {
+	fs.unwatchFile(file)
+	console.log(chalk.redBright(`Update ${__filename}`))
+	delete require.cache[file]
+	require(file)
+})
