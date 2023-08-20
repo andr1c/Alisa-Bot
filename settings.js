@@ -18,6 +18,8 @@ global.lolkeysapi = 'GataDios' //api lohum
 global.imagen1 = fs.readFileSync('./media/menu.jpg')
 global.noperfil = fs.readFileSync('./media/sinfoto.jpg')
 global.md = 'https://github.com/elrebelde21'
+global.yt = 'https://www.youtube.com/@LoliBot'
+global.nn = 'https://chat.whatsapp.com/KlqNmoUcVnsGJxIfATIDrK' //Update 
 
 global.packname = "𝐍𝐨𝐯𝐚𝐁𝐨𝐭-𝐌𝐃"
 global.author = "1.0.0"
