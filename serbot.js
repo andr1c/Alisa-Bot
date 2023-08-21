@@ -88,9 +88,7 @@ const { default: makeWaSocket, decodeJid, useMultiFileAuthState, DisconnectReaso
              try { 
                const sendQR = await sendImage( 
                  from, 
-                 await qrcode.toDataURL(up.qr, { scale: 8 }), 
-                 String(countQR) + 
-                   '/3\n*Escanea este codigo QR para convertirte en un Bot (SubBot)*\nJadibot hecho por @Skidy89', 
+                 await qrcode.toDataURL(up.qr, { scale: 8 }), `*Escanea este codigo QR para convertirte en un Bot (SubBot)*\nJadibot hecho por @Skidy89`, 
                  m 
                ); 
                if (chatQR) { 
