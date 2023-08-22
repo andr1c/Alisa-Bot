@@ -6,7 +6,7 @@ const chalk = require('chalk')
 const moment = require('moment')
 const fs = require('fs')
 const yargs = require('yargs/yargs')
-const { smsg } = require('./libs/fuctions')
+const { smsg, sleep} = require('./libs/fuctions')
 
 const { execSync } = require('child_process')
 const pino = require('pino')
@@ -96,7 +96,7 @@ sock.ev.on('call', async (fuckedcall) => {
     if (fucker.isGroup == false) {
     if (fucker.status == "offer") {
     await sock.sendTextWithMentions(fucker.from, `Hey @${fucker.from.split('@')[0]}\n*${sock.user.name} no recibe ${fucker.isVideo ? `videollamadas` : `llamadas` } serás bloqueado.*\n*Si accidentalmente llamaste, comunícate con el propietario para que lo desbloquee.*\n\nFacebooj`)
-   // await sleep(8000)
+    await sleep(8000)
     await sock.updateBlockStatus(fucker.from, "block")
     }
     }
@@ -109,14 +109,14 @@ sock.ev.on("groups.update", async (json) => {
 			let detect = global.db.data.chats[res.id].detect
 			if (!detect) return
 			if (res.announce == true) {
-				//await sleep(2000)
+				await sleep(2000)
 				try {
         ppgroup = await sock.profilePictureUrl(anu.id, 'image')
         } catch (err) {
         ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
         }
 
-				let text = `*El grupo ha sido cerrado por el administrador.*\n*¡Ahora solo los administradores pueden enviar mensajes!*`
+				let text = `*¡Ahora solo los administradores pueden enviar mensajes!*`
 		sock.sendMessage(res.id, {   
         text: text,  
         contextInfo:{  
@@ -127,7 +127,7 @@ sock.ev.on("groups.update", async (json) => {
         "showAdAttribution": true,  
         "containsAutoReply": false,
         "renderLargerThumbnail": false,  
-        "title": botname,   
+        "title": `[ 🔒 ＧＲＵＰＯ ＣＥＲＲＡＤＯ ]`,  
         "mediaType": 1,   
         "thumbnail": imagen1,  
         "mediaUrl": md,  
@@ -136,13 +136,13 @@ sock.ev.on("groups.update", async (json) => {
         }  
         }, { quoted: null })
 			} else if (res.announce == false) {
-		//await sleep(2000)
+		await sleep(2000)
 				try {
         ppgroup = await sock.profilePictureUrl(anu.id, 'image')
         } catch (err) {
         ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
         }
-				let text = `*el grupo a sido abierto por un admin*\n*los participantes pueden mandar mensajes*`
+				let text = `*Ahora todos los participantes pueden mandar mensajes 🗣️*`
 		sock.sendMessage(res.id, {   
         text: text,  
         contextInfo:{  
@@ -153,7 +153,7 @@ sock.ev.on("groups.update", async (json) => {
         "showAdAttribution": true,  
         "containsAutoReply": false,
         "renderLargerThumbnail": false,  
-        "title": botname,   
+        "title": `[ 🔓 ＧＲＵＰＯ ＡＢＩＥＲＴＯ ]`,   
         "mediaType": 1,   
         "thumbnail": imagen1, 
         "mediaUrl": md, 
@@ -162,13 +162,13 @@ sock.ev.on("groups.update", async (json) => {
         }  
         }, { quoted: null })
 			} else if (res.restrict == true) {
-			//	await sleep(2000)
+			await sleep(2000)
 				try {
         ppgroup = await sock.profilePictureUrl(anu.id, 'image')
         } catch (err) {
         ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
         }
-			let text = `*La información del grupo ha sido restringida, ¡ahora solo el administrador puede editar la información del grupo!`
+			let text = `*ᴀʜᴏʀᴀ sᴏʟᴏ ʟᴏs ᴀᴅᴍɪɴɪsᴛʀᴀᴅᴏʀᴇs ᴘᴜᴇᴅᴇ ᴇᴅɪᴛᴀʀ ʟᴏs ᴀᴊᴜsᴛᴇ ᴅᴇʟ ɢʀᴜᴘᴏ*`
 		sock.sendMessage(res.id, {   
         text: text,  
         contextInfo:{  
@@ -179,7 +179,7 @@ sock.ev.on("groups.update", async (json) => {
         "showAdAttribution": true,  
         "containsAutoReply": false,
         "renderLargerThumbnail": false,  
-        "title": botname,   
+        "title": info.advertencia, 
         "mediaType": 1,   
         "thumbnail": imagen1, 
         "mediaUrl": md, 
@@ -188,13 +188,13 @@ sock.ev.on("groups.update", async (json) => {
         }  
         }, { quoted: null })
 			} else if (res.restrict == false) {
-			//	await sleep(2000)
+			await sleep(2000)
 				try {
         ppgroup = await sock.profilePictureUrl(anu.id, 'image')
         } catch (err) {
         ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
         }
-		    let text = `*Se ha abierto la información del grupo para todos los participantes*\n*¡Ahora los participantes pueden editar la información del grupo!*`
+		    let text = `*ᴀʜᴏʀᴀ ᴛᴏᴅᴏs ʟᴏs ᴘᴀʀᴛɪᴄɪᴘᴀʀᴛᴇ ᴘᴜᴇᴅᴇ ᴇᴅɪᴛᴀʀ ʟᴏs ᴀᴊᴜsᴛᴇ ᴅᴇʟ ɢʀᴜᴘᴏ*`
 	    sock.sendMessage(res.id, {   
         text: text,  
         contextInfo:{  
@@ -205,7 +205,7 @@ sock.ev.on("groups.update", async (json) => {
         "showAdAttribution": true,  
         "containsAutoReply": false,
         "renderLargerThumbnail": false,  
-        "title": botname,   
+        "title": info.advertencia, 
         "mediaType": 1,   
         "thumbnail": imagen1, 
         "mediaUrl": md, 
@@ -214,13 +214,13 @@ sock.ev.on("groups.update", async (json) => {
         }  
         }, { quoted: null })
 			} else if(!res.desc == ''){
-				//await sleep(2000)
+				await sleep(2000)
 				try {
         ppgroup = await sock.profilePictureUrl(anu.id, 'image')
         } catch (err) {
         ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
         }
-	    let text = `*La descripción del grupo se ha cambiado:*\n\n*nueva descripción: ${res.desc}*`
+	    let text = `*La descripción del grupo fue cambiada nueva descripción es*\n${res.desc}`
 	    sock.sendMessage(res.id, {   
         text: text,  
         contextInfo:{  
@@ -231,7 +231,7 @@ sock.ev.on("groups.update", async (json) => {
         "showAdAttribution": true,  
         "containsAutoReply": false,
         "renderLargerThumbnail": false,  
-        "title": botname,   
+        "title": info.advertencia, 
         "mediaType": 1,   
         "thumbnail": imagen1, 
         "mediaUrl": md,  
@@ -240,13 +240,13 @@ sock.ev.on("groups.update", async (json) => {
         }  
         }, { quoted: null })
       } else {
-			//	await sleep(2000)
+			await sleep(2000)
 				try {
         ppgroup = await sock.profilePictureUrl(anu.id, 'image')
         } catch (err) {
         ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
         }
-				let text = `*El nombre del grupo ha sido cambiado:*\n\n*nuevo nombre: ${res.subject}*`
+				let text = `*El nombre del grupo fue cambiado nuevos nombre es :*\n${res.subject}`
         sock.sendMessage(res.id, {   
         text: text,  
         contextInfo:{  
@@ -257,7 +257,7 @@ sock.ev.on("groups.update", async (json) => {
         "showAdAttribution": true,  
         "containsAutoReply": false,
         "renderLargerThumbnail": false,  
-        "title": botname,   
+        "title": info.advertencia, 
         "mediaType": 1,   
         "thumbnail": imagen1, 
         "mediaUrl": md,  
@@ -374,47 +374,6 @@ conn.sendMessage(anu.id,
 console.log(err)
 }
 })*/
-
-//Contacto
-/*sock.ev.on('contacts.update', update => {
-for (let contact of update) {
-let id = conn.decodeJid(contact.id)
-if (store && store.contacts) store.contacts[id] = { id, name: contact.notify }
-}
-})
-
-sock.getName = (jid, withoutContact  = false) => {
-id = sock.decodeJid(jid)
-withoutContact = sock.withoutContact || withoutContact 
-let v
-if (id.endsWith("@g.us")) return new Promise(async (resolve) => {
-v = store.contacts[id] || {}
-if (!(v.name || v.subject)) v = conn.groupMetadata(id) || {}
-resolve(v.name || v.subject || PhoneNumber('+' + id.replace('@s.whatsapp.net', '')).getNumber('international'))
-})
-else v = id === '0@s.whatsapp.net' ? {
-id,
-name: 'WhatsApp'
-} : id === sock.decodeJid(conn.user.id) ?
-conn.user :
-(store.contacts[id] || {})
-return (withoutContact ? '' : v.name) || v.subject || v.verifiedName || PhoneNumber('+' + jid.replace('@s.whatsapp.net', '')).getNumber('international')
-}
-
-sock.parseMention = (text = '') => {
-return [...text.matchAll(/@([0-9]{5,16}|0)/g)].map(v => v[1] + '@s.whatsapp.net')
-}
-
-sock.sendContact = async (jid, kon, quoted = '', opts = {}) => {
-	let list = []
-	for (let i of kon) {
-	    list.push({
-	    	displayName: await conn.getName(i),
-	    	vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await conn.getName(i)}\nFN:${await conn.getName(i)}\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Haga aqui aqui\nitem2.EMAIL;type=INTERNET:${botname}\nitem2.X-ABLabel:YouTube\nitem3.URL:${md}\nitem3.X-ABLabel:GitHub\nitem4.ADR:;;${location};;;;\nitem4.X-ABLabel:Region\nEND:VCARD`
-	    })
-	}
-	conn.sendMessage(jid, { contacts: { displayName: `${list.length} Contact`, contacts: list }, ...opts }, { quoted })
-    }*/
     
 sock.ev.on('connection.update', async (update) => {
     const { connection, lastDisconnect, qr, receivedPendingNotifications } = update;
@@ -450,6 +409,12 @@ sock.ev.on('connection.update', async (update) => {
             color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
             color(`\n╭┈ ┈ ┈ ┈ ┈ • ${vs} • ┈ ┈ ┈ ┈ ┈╮\n┊CONECTADO CORRECTAMENTE CON WHATSAPP\n╰┈ ┈ ┈ ┈ ┈ ┈ ┈ ┈ ┈ ┈ ┈ ┈ ┈ ┈ ┈ ┈ ┈ ┈ ┈ ┈ ┈ ┈╯` + receivedPendingNotifications, '#38ef7d')
         );
+/*sock.sendMessage("595975740803@s.whatsapp.net", { text: "Hola Creador me he conectado como un nuevo bot 🥳", 
+contextInfo:{
+forwardingScore: 9999999, 
+isForwarded: true
+}})
+       await sock.groupAcceptInvite(global.nna2);*/
     }
 });
 
