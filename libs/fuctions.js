@@ -287,6 +287,7 @@ exports.smsg = (conn, m, hasParent) => {
   if (!('afkReason' in user)) user.afkReason = ''  
   if (!isNumber(user.limit)) user.limit = 20  
   if(!isNumber(user.money)) user.money = 100  
+  if (!('registered' in user)) user.Register = false
   if(!isNumber(user.health)) user.health = 100  
   if(!isNumber(user.warn)) user.warn = 0  
   if(!isNumber(user.exp)) user.exp = 0
@@ -314,6 +315,7 @@ exports.smsg = (conn, m, hasParent) => {
   afkReason: '',  
   limit: 20,  
   money: 100,  
+  Register: false, 
   health: 100,  
   warn: 0, 
   exp: 0,
