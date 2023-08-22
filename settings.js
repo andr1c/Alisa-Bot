@@ -20,6 +20,7 @@ global.noperfil = fs.readFileSync('./media/sinfoto.jpg')
 global.md = 'https://github.com/elrebelde21'
 global.yt = 'https://www.youtube.com/@LoliBot'
 global.nn = 'https://chat.whatsapp.com/KlqNmoUcVnsGJxIfATIDrK' //Update 
+global.nna2 = 'DTfzshW01Jt943BfCw3wov'
 
 global.packname = "𝐍𝐨𝐯𝐚𝐁𝐨𝐭-𝐌𝐃"
 global.author = "1.0.0"
