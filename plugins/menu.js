@@ -20,7 +20,7 @@ return `╔═══════ೋೋ═══════╗
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
 ║✾ ᴜsᴜᴀʀɪᴏ : ${Object.keys(global.db.data.users).length}
 ║✾ ᴀᴄᴛɪᴠɪᴅᴀᴅ : ${runtime(process.uptime())}
-║✾ ᴍᴏᴅᴏ : ${conn.public ? 'publico' : 'privado'}
+║✾ ᴍᴏᴅᴏ : ${conn.public ? 'Público' : `Privado`}
 ║
 ║✾ ʟɪᴍɪᴛᴇ : ${user.limit}
 ║✾ ɴɪᴠᴇʟ : ${user.level}
@@ -39,58 +39,65 @@ return `╔═══════ೋೋ═══════╗
 ╚══════════════════════
 
 ╔═════「 *💫 ＩＮＦＯ* 」═════╗ 
-║❑ ${prefix}estado 
-║❑ ${prefix}ping (Velocidad del bot)
-║❑ ${prefix}report (report comando con falla/errores/ortografía, etc)
-║❑ ${prefix}grupos (unirte al los grupos oficiales y divirte con el bot 😸)
-║❑ ${prefix}owner (te envia los contactos del mi creador)
+║❑ ${prefix}estado _(comprueba el estado del bot)_
+║❑ ${prefix}ping _(Velocidad del bot)_
+║❑ ${prefix}grupos _(unirte al los grupos oficiales y divirte con el bot 😸)_
+║❑ ${prefix}owner _(te envia los contactos del mi creador)_
+║❑ ${prefix}report _(reporta comando con falla/errores/ortografía, etc)_
 ╚═════════════════════
 
 ╔════「 ＪＡＤＩＢＯＴ 」════╗
 ║ *(Este serbot esta modo beta)*
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
-║❑ ${prefix}serbot (Te envia qr para convertirte el un sub bot) 
+║❑ ${prefix}serbot _(Te envia qr para convertirte el un sub bot)_
 ║❑ ${prefix}jadibot
-║❑ ${prefix}bots (prueba si hay sub bot conectado) 
-║❑ ${prefix}stop (📴 comando solo para los sub bot) 
+║❑ ${prefix}bots _(comprueba si hay sub bot conectado)_
+║❑ ${prefix}stop _(comando solo para sub bot)_
 ╚══════════════════════
 
-╔════「 ＤＥＳＣＡＲＧＡ 」════╗
-║❑ ${prefix}play
-║❑ ${prefix}play2 
-║❑ ${prefix}yts 
-║❑ ${prefix}ytmp3 
-║❑ ${prefix}ytmp4 
-║❑ ${prefix}gitclone 
+╔════「 🔄ＤＥＳＣＡＲＧＡ 」════╗
+║❑ ${prefix}play _(Titulo/nombre de la canción para descargar el audio)_
+║❑ ${prefix}play2 _(Titulo/nonbre de la canción para descarga el video)_
+║❑ ${prefix}yts _(buscar los links para descarga el video)_
+║❑ ${prefix}ytmp3 _(ingresa el link para descargar el audio)_
+║❑ ${prefix}ytmp4 _(ingresa el link para descargar el video)_
+║❑ ${prefix}gitclone _(ingresa el link del GitHub para descargar el repositorio)_
 ║❑ ${prefix}tiktok (pronto)
 ║❑ ${prefix}Facebook (pronto)
 ╚══════════════════════ 
 
 ╔═════「 ＧＲＵＰＯＳ 」═════╗
-║❑ ${prefix}antilink (Elimina a los que manda link de otro grupo) 
-║❑ ${prefix}antifake (eliminar a los números virtuales) 
-║❑ ${prefix}antiarabe (eliminar a los numero arabe) 
-║❑ ${prefix}kick (@tag) 
-║❑ ${prefix}promote (@tag) 
-║❑ ${prefix}demote (@tag) 
+║❑ ${prefix}antilink _(Elimina a los que manda link de otro grupo)_
+║❑ ${prefix}antifake _(eliminar a los números virtuales)_
+║❑ ${prefix}antiarabe _(eliminar a los numero arabe)_
+║❑ ${prefix}kick _(@tag)_
+║❑ ${prefix}add _(@tag)_
+║❑ ${prefix}invita _(@tag)_
+║❑ ${prefix}promote _(@tag)_
+║❑ ${prefix}demote _(@tag)_
 ║❑ ${prefix}grupo close/open 
-║❑ ${prefix}hidetag (etiqueta a todos el un mensaje) 
-║❑ ${prefix}tagall (etiqueta a todos el una listas) 
+║❑ ${prefix}setppname _(cambia el nombre del grupo)_
+║❑ ${prefix}setdesc _(cambia la descripción del Grupo)_
+║❑ ${prefix}setppgroup _(cambia la foto del Grupo)_
+║❑ ${prefix}hidetag _(etiqueta a todos el un mensaje)_
+║❑ ${prefix}tagall _(etiqueta a todos el una listas)_
 ╚══════════════════════
 
 ╔═══「 ＢＵＳＣＡＤＯＲＥＳ 」═══╗
-║❑ ${prefix}google
-║❑ ${prefix}ia
+║❑ ${prefix}google _(ingresa nombre de que quiera buscar)_
+║❑ ${prefix}ia _(ingresa el texto de que quiera buscar con la (IA)_
 ╚═══════════════════════
 
 ╔═════「 ＪＵＥＧＯＳ 」═════╗
-║❑ ${prefix}simi (no usar api caida 😯) 
-║❑ ${prefix}ppt (pronto) 
+║❑ ${prefix}simi _(Hablar con el bot)_
+║❑ ${prefix}ppt (Esta mantenimiento funciona pero responde cuando quiere xd) 
 ╚══════════════════════
 
 ╔═════「 ＯＷＮＥＲ 」═════╗
-║❑ ${prefix}autoadmin
-║❑ ${prefix}join
+║ _(Comando explusivo para propietario/owner del bot)_
+║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
+║❑ ${prefix}autoadmin 
+║❑ ${prefix}join 
 ║❑ ${prefix}setpp (cambia la foto del bot) 
 ║❑ ${prefix}public (modo público) 
 ║❑ ${prefix}privado (modo privado) 
