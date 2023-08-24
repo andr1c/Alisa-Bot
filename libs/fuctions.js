@@ -346,16 +346,16 @@ exports.smsg = (conn, m, hasParent) => {
   if (!('antilink' in chats)) chats.antilink = false  
   if (!('ban' in chats)) chats.ban = false  
   if (!('modeadmin' in chats)) chats.modeadmin = false  
-  if (!('welcome' in chats)) chats.welcome = false
+  if (!('welcome' in chats)) chats.welcome = true
   if (!('audios' in chats)) chats.audios = true
   if (!('antiFake' in chats)) chats.antiFake = false
   if (!('antiArabe' in chats)) chats.antiArabe = false
-  if (!('detect' in chats)) chats.detect = false 
+  if (!('detect' in chats)) chats.detect = true
   } else global.db.data.chats[m.chat] = {  
   antilink: false,  
   ban: false,   
   modeAdmin: false,  
-  welcome: false,  
+  welcome: true,  
   audios: true, 
   antiFake: false,
   antiArabe: false,
@@ -569,15 +569,6 @@ exports.smsg = (conn, m, hasParent) => {
     /**
     * @param {*} jid
     */
-
-    conn.decodeJid = (jid) => {
-    if (!jid) return jid
-    if (/:\d+@/gi.test(jid)) {
-    let decode = jidDecode(jid) || {}
-    return decode.user && decode.server && decode.user + '@' + decode.server || jid
-    } else return jid
-    }
-    
     /**
     * @param {*} jid?
     */
@@ -655,34 +646,40 @@ exports.smsg = (conn, m, hasParent) => {
     }
     conn.sendImage = async (jid, path, caption = '', quoted = '', options) => { 
  let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0) 
- return await conn.sendMessage(jid, { image: buffer, caption: caption, ...options }) 
+ return await conn.sendMessage(jid, { image: buffer, caption: caption, ...options }, { quoted }) 
  } 
-	/**
-	 * 
-	 * @param {*} jid 
-	 * @param {*} forceForward 
-	 * @param {*} options 
-	 * @returns 
-	 */
-	m.copyNForward = (jid = m.chat, forceForward = false, options = {}) => conn.copyNForward(jid, m, forceForward, options)
-    /**
-    * a normal reply
-    */
-    m.reply = (text, chatId, options) => conn.sendMessage(chatId ? chatId : m.chat, { text: text }, { quoted: m, detectLinks: false, thumbnail: global.thumb, ...options })
-
-    /**
-    * copy message?
-    */
-    m.copy = () => exports.smsg(conn, M.fromObject(M.toObject(m)))
-    
-    return m
-}
-
-
-let file = require.resolve(__filename)
-fs.watchFile(file, () => {
-	fs.unwatchFile(file)
-	console.log(chalk.redBright(`Update ${__filename}`))
-	delete require.cache[file]
-	require(file)
-})
+  
+     m.reply = (text, chatId, options) => conn.sendMessage(chatId ? chatId : m.chat, { text: text }, { quoted: m, detectLinks: false, thumbnail: global.thumb, ...options }) 
+     /** 
+         * Copy this message 
+         */ 
+         m.copy = () => exports.smsg(conn, M.fromObject(M.toObject(m))) 
+  
+ conn.decodeJid = (jid) => { 
+ if (!jid) return jid 
+ if (/:\d+@/gi.test(jid)) { 
+ let decode = jidDecode(jid) || {} 
+ return decode.user && decode.server && decode.user + '@' + decode.server || jid 
+ } else return jid 
+ } 
+  
+         /** 
+          *  
+          * @param {*} jid  
+          * @param {*} forceForward  
+          * @param {*} options  
+          * @returns  
+          */ 
+         m.copyNForward = (jid = m.chat, forceForward = false, options = {}) => conn.copyNForward(jid, m, forceForward, options) 
+  
+     return m 
+ } 
+  
+  
+ let file = require.resolve(__filename) 
+ fs.watchFile(file, () => { 
+         fs.unwatchFile(file) 
+         console.log(chalk.redBright(`Update ${__filename}`)) 
+         delete require.cache[file] 
+         require(file) 
+ })
