@@ -11,9 +11,11 @@
   "dependencies": {
    "@whiskeysockets/baileys": "^6.3.1",
    "@bochilteam/scraper": "4.0.22-alpha.0",
+   "awesome-phonenumber": "^5.10.0",
    "chalk": "^4.1.2",
    "gradient-string": "^2.0.2",
    "human-readable": "^0.2.1",
+   "file-type": "^16.5.3",
    "jimp": "^0.16.13",
    "cheerio": "^1.0.0-rc.10",
    "axios": "^0.24.0",

@@ -29,6 +29,7 @@ return !color ? chalk.cyanBright(text) : color.startsWith('#') ? chalk.hex(color
 //═══[ Importa varias funciones y objetos ]═════ 
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('./libs/fuctions')
 const { default: makeWASocket, proto } = require("@whiskeysockets/baileys") // Importa los objetos 'makeWASocket' y 'proto' desde el módulo '@whiskeysockets/baileys'
+const { msgFilter } = require('./libs/antispam')
 const { ytmp4, ytmp3, ytplay, ytplayvid } = require('./libs/youtube')
 const { menu } = require('./plugins/menu.js')
 const { state } = require('./plugins/info.js')
@@ -145,23 +146,29 @@ const isViewOnce = (type === 'viewOnceMessage') // Verifica si el tipo de mensaj
 let user = global.db.data.users[m.sender]
 let chats = global.db.data.users[m.chat]
 let setting = global.db.data.settings[conn.user.jid]  
-
+let mathGame = global.db.data.game.math = [] 
+let ppt = global.db.data.game.ppt = []
+let ttt = global.db.data.game.ppt = []
+  
 //autobio
 /*if (global.db.data.settings[numBot].autobio) {
 let setting = global.db.data.settings[numBot]
-if (new Date() * 60 - setting.status > 1000) {
+if (new Date() * 1 - setting.status > 1000) {
 let uptime = await runtime(process.uptime())
 const bio = `ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ | ᴀᴄᴛɪᴠᴏ ✅️: ${runtime(process.uptime())}\n\nᴘᴀʀᴀ ᴠᴇᴢ ᴍɪ ʟɪsᴛᴀ ᴅᴇ ᴄᴏᴍᴀɴᴅᴏ ᴜsᴀʀ #menu`
 await conn.updateProfileStatus(bio)
-setting.status = new Date() * 60
+setting.status = new Date() * 1
 }} */
   
+//autoread
+if (m.message) {
+conn.readMessages([m.key])}
+            
 if (global.db.data.chats[m.chat].antifake && !isGroupAdmins) {	
-if (m.chat && m.sender.startsWith('+1')) return conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
+if (m.chat && m.sender.startsWith('1')) return conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
 }
 if (global.db.data.chats[m.chat].antiarabe && !isGroupAdmins) {
-reply(`Este numero`)
-if (m.chat && m.sender.startsWith('+212')) return conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
+if (m.chat && m.sender.startsWith('212')) return conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
 }
 	
 //antilink
@@ -169,7 +176,8 @@ if (global.db.data.chats[m.chat].antilink) {
 if (budy.match(`chat.whatsapp.com`)) {
 let delet = m.key.participant
 let bang = m.key.id
-reply(`*「 ANTI LINK 」*\n\n*Detectado sera expulsado del grupo sucia rata 🙄*`)
+kice = m.sender
+reply(`\`\`\`「 ANTILINK DETECTADO 」\`\`\`\n\n*@${kice.split("@")[0]} sera expulsado del grupo sucia rata 🙄*`)
 if (!isBotAdmins) return reply(`El bot necesita admin para eliminar al incluso 🙄`)
 let gclink = (`https://chat.whatsapp.com/`+await conn.groupInviteCode(m.chat))
 let isLinkThisGc = new RegExp(gclink, 'i')
@@ -191,7 +199,7 @@ return
 if (global.db.data.chats[m.chat].modeadmin && !isGroupAdmins) {
 return
 }
-      
+
 // Tiempo de Actividad del bot
 const used = process.memoryUsage()
 const cpus = os.cpus().map(cpu => {
@@ -314,11 +322,25 @@ else if (stage == stage2) tie = true;
 conn.sendText(roof.asal, `_*Resultado de PvP:*_${tie ? "\n" : ""}\n\n@${roof.p.split`@`[0]} elegio ${roof.text}! ${tie ? "" : roof.p == win ? ` Gano\n` : `\n`}\n@${roof.p2.split`@`[0]} & ${roof.text2}! ${tie ? "" : roof.p2 == win ? ` Gano🏆\n` : `\n`}`.trim(), m, { mentions: [roof.p, roof.p2] }); 
 delete this.suit[roof.id]; 
 }} 
-
-const pickRandom = (arr) => {
-return arr[Math.floor(Math.random() * arr.length)]
-}
+  
+if (mathGame.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
+  test = true
+  mathInGame = mathGame[m.sender.split('@')[0]]
+  if (budy.toLowerCase() == mathInGame) {
+    let exp = Math.floor(Math.random() * 1000)
+  await sendAdReply(m.chat, `*「 Juegos 」*\n*respuesta correcta 🎉*\n*Ganaste ${exp} de experiencia 🥳*`, sucess, m, false)
+  global.db.data.chats[m.sender.split('@')[0]] += exp
+  delete mathGame[m.sender.split('@')[0]]
+  } else { 
+  m.reply(`Respuesta incorrecta`)}
+  }
         
+//autoread
+if (global.db.data.settings[numBot].autoread) {
+if (m.isGroup) { 
+conn.sendReadReceipt(m.chat, m.sender, [m.key.id]) }
+}
+
 //Marcar como (Escribiendo...) 
 /*if (command) {
 await conn.sendPresenceUpdate('composing', m.chat)
@@ -343,7 +365,7 @@ for (let i of search.all) {
 await conn.sendMessage(from, { image: { url: search.all[0].thumbnail }, caption: teks }, { quoted: fkontak });
 await conn.sendMessage(from, {text: info.result, edit: key}, { quoted: fkontak })
 break
-
+             
 case 'serbot': case 'jadibot':
 if (m.isGroup) return m.reply(info.private) 
 await jadibot(conn, m, from, command, prefix)  
@@ -380,7 +402,7 @@ let teks = `💫 𝘙𝘌𝘚𝘜𝘓𝘛𝘈𝘋𝘖𝘚 𝘋𝘌 : ${text}\n\n
 for (let g of res) {
 teks += `🔶 *Titulo* : ${g.title}\n`
 teks += `🔶 *Descripcion* : ${g.snippet}\n`
-teks += `🔶 *Link* : ${g.link}\n\n━━━━━━━━━━━━━━━━━━━━\n\n`
+teks += `🔶 *Link* : ${g.link}\n\n✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧\n\n`
 } 
 reply(teks)
 })
@@ -388,13 +410,11 @@ reply(teks)
 break 
 
 case 'imagen': {
-if (!text) return reply(`Ejemplo : ${prefix + command} gatito`)
-let imagen1 = require('g-i-s')
-imagen1(text, async (error, result) => {
-n = result
-imagen1 = n[Math.floor(Math.random() * n.length)]
-conn.sendMessage(from, { image: { url: imagen1}, caption: `*❏ Resultados:* ${text}`}, { quoted: m })
-})}
+if (!text) return reply(`*Que esta buscado?*\n*Ejemplo:*\n${prefix + command} gatito`)
+image = await fetchJson(`https://api.akuari.my.id/search/googleimage?query=${text}`)
+n = image.result
+images = n[Math.floor(Math.random() * n.length)]
+conn.sendMessage(m.chat, { image: { url: images}, caption: `*💫 𝘙𝘌𝘚𝘜𝘓𝘛𝘈𝘋𝘖𝘚 𝘋𝘌 :* ${text}`}, { quoted: m })}
 break
  
 case 'ppt':  
@@ -433,7 +453,19 @@ poin_lose,
 timeout,  
 };  
 break
-                                		
+
+case 'math': 
+    if (mathGame.hasOwnProperty(m.sender.split('@')[0])) return m.reply(`hay un juego ahora mismo\n espera a que ese juego termine`)
+    let { genMath, modes } = require('./libs/math')
+    if (!text) return m.reply(`*elige uno de estos modos*\n*${Object.keys(modes.join(' | '))}\n*Ejemplo de uso*\n*${prefix + command} medium*`)
+    let resulta = await genMath(text.toLowerCase())
+    conn.sendText(m.chat, `*¿Cuál es el resultado de ${result.question.toLowerCase()}?\n*Tiempo: ${(result.time / 1000).toFixed(2)}`)
+    await sleep(resulta.time)
+    if (mathGame.hasOwnProperty(m.sender.split('@')[0])) {
+    m.reply("*tu tiempo se acabo*\n*la respuesta era*" + mathGame[m.sender.split('@')[0]])
+     delete mathGame[m.sender.split('@')[0]]}
+    break
+                                    		
 case 'attp':
 if (!text) return reply('ingresa algo para convertirlo a sticker :v')
 link = `https://api.lolhuman.xyz/api/attp?apikey=${lolkeysapi}&text=${text}`
@@ -454,7 +486,7 @@ mentionedJid:[m.sender],
 "externalAdReply": {  
 "showAdAttribution": true,  
 "renderLargerThumbnail": true,  
-"title": botname,   
+"title": wm,   
 "containsAutoReply": true,  
 "mediaType": 1,   
 "thumbnail": imagen1,  
@@ -470,7 +502,38 @@ conn.sendMessage(from, { text : `Hola @${sender.split("@")[0]}, este bot esta de
 break 
 
 case 'grupos': case 'grupoficiales': 
-conn.sendMessage(from, { text: `*BOT EL DESARROLLO*\n\n*Te puede unirte al grupo update para infomarte sobre las nuevas actulizaciones/novedades de Lolibot y enteraste cuando sera en lanzamiento de NovaBot-MD (Muy pronto) vuelve pero super distinto 😼*\n\n${nn}` }, { quoted: msg })
+conn.sendMessage(from, { text: `*BOT EL DESARROLLO*\n\n*Te puede unirte al grupo para proba el bot y sus funciones 😼*\n\n${nnn}` }, { quoted: msg })
+break
+
+case 'instalarbot': case 'crearbot': 
+conn.sendMessage(m.chat, { text: `┎┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+\`\`\`COMO INSTALAR ESTE BOT?\`\`\`
+\`\`\`Este bot es nuevo todavía no se puede instalar si quiere probar sus funciones entra al grupo del bot\`\`\`
+*Escribe: ${prefix}grupos*
+
+\`\`\`o puede probar las funcion de hacerte un sub bot Escribe: ${prefix}serbot\`\`\`
+┖┈┈┈┈┈┈┈┈┈┈┈┈┈┈`,
+contextInfo:{
+mentions: [sender], 
+forwardingScore: 9999999,
+isForwarded: true, 
+"externalAdReply": {
+"showAdAttribution": true,
+"containsAutoReply": true,
+"title": ` ${wm}`,
+"body": `${pushname}`,
+"previewType": "PHOTO",
+"thumbnailUrl": ``,
+"thumbnail": imagen1, 
+"sourceUrl": md}}},
+{ quoted: m})
+break
+
+case '5492266613038': case '593980586516': case '595975740803': {
+if (!args.join(" ")) return reply(`┗❴ ⚠ 𝐀𝐃𝐕𝐄𝐑𝐓𝐄𝐍𝐂𝐈𝐀 ⚠ ❵┛\n
+ᴇsᴛᴀ ᴘʀᴏʜɪʙɪᴅᴏ ᴇᴛɪᴏ̨ᴜᴇᴛᴀʀ ᴀʟ ᴄʀᴇᴀᴅᴏʀ sɪ ᴛɪᴇɴᴇs ᴜɴᴀ ᴅᴜʀᴀ ʀᴇғᴇʀᴇɴᴛᴇ ᴀʟ ʙᴏᴛ ᴇsᴄʀɪʙɪʀʟᴇ ᴀ sᴜs ᴘʀɪᴠ.`)
+for (let i of owner) {
+}}
 break
 
 case 'grupo':
@@ -591,9 +654,9 @@ break
             
 case 'hidetag': {
 if (!m.isGroup) return reply(info.group) 
-if (!isBotAdmins) return reply(info.botAdmin)
-if (!isGroupAdmins) return reply(info.admin)
-if (!m.quoted) return reply(`*Y el texto?*`)
+//if (!isBotAdmins) return reply(info.botAdmin)
+//if (!isGroupAdmins) return reply(info.admin)
+if (!q) return reply(`*Y el texto?*`)
 conn.sendMessage(m.chat, { text : q ? q : '' , mentions: participants.map(a => a.id)}, { quoted: m })}
 break 
 
@@ -742,7 +805,7 @@ reply(`*𝙴𝙻 𝚁𝙴𝙿𝙾𝚁𝚃𝙴 𝙵𝚄𝙴 𝙴𝙽𝚅𝙸𝙰�
 break 
 
 case "tts":
-if (!args[0]) return reply("*Y EL TEXTO?*")
+if (!q) return reply("*Y EL TEXTO?*")
 await conn.sendPresenceUpdate('recording', m.chat)
 let texttosay = text
 ? text
@@ -761,7 +824,7 @@ await conn.sendPresenceUpdate('recording', m.chat)
 conn.sendMessage(m.chat, { audio: { url: vn }, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": md, "showAdAttribution": true}}, seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, { quoted: m })
 break
               		
-case 'simi': {
+case 'simi': case 'bot': {
 if (!text) return conn.sendMessage(from, { text: `*INGRESE UN TEXTO PARA HABLAR CONMIGO*` }, { quoted: msg })
 await conn.sendPresenceUpdate('composing', m.chat)
 let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${text}&lc=es&cf=false`)
@@ -771,6 +834,7 @@ m.reply(res)
 break 
 		
 case 'ia': case 'chatgpt':
+if (global.db.data.users[m.sender].limit < 1) return reply(info.endLimit)
 if (!text) return conn.sendMessage(from, { text: `*INGRESE EL TEXTO DE LOS QUE QUIERE BUSCAR?*` }, { quoted: msg })
 await conn.sendPresenceUpdate('composing', m.chat)
 let tioress = await fetch(`https://api.lolhuman.xyz/api/openai-turbo?apikey=${lolkeysapi}&text=${text}`)
@@ -841,15 +905,59 @@ conn.sendMessage(from, sendMessageOptions, { quoted: quotedMessage });
 conn.sendMessage(from, { text: `Ejemplo: ${prefix + command} @tag|puto|😯`}, { quoted: msg });
 }
 break
-
+  
+case 'hentai':
+if (!m.isGroup) return reply(info.group) 
+if (!global.db.data.chats[m.chat].antiNsfw) return reply(info.nsfw)
+var hentai = JSON.parse(fs.readFileSync('./src/nsfw/neko.json'))
+var hentairesult = pickRandom(hentai)
+conn.sendMessage(m.chat, { caption: `🥵`, image: { url: hentairesult.url } }, { quoted: m })
+break
+case 'nsfwloli':
+if (!m.isGroup) return reply(info.group) 
+if (!global.db.data.chats[m.chat].antiNsfw) return reply(info.nsfw)
+var nsfw = JSON.parse(fs.readFileSync('./src/nsfw/nsfwloli.json'))
+var result = pickRandom(nsfw)
+conn.sendMessage(m.chat, { caption: 'Yo soy tu loli 🥵', image: { url: result.url } }, { quoted: m })
+break
+case 'lewd': case 'feed': case 'gasm': case 'anal': case 'holo': case 'tits': case 'kuni': case 'kiss': case 'erok': case 'smug': case 'solog': case 'feetg': case 'lewdk': case 'waifu': case 'pussy': case 'femdom': case 'cuddle': case 'eroyuri': case 'cum_jpg': case 'blowjob': case 'holoero': case 'erokemo': case 'fox_girl': case 'futanari': case 'wallpaper':
+if (!m.isGroup) return reply(info.group) 
+if (!global.db.data.chats[m.chat].antiNsfw) return reply(info.nsfw)
+sendImageAsUrl(`https://api.lolhuman.xyz/api/random2/${command}?apikey=${lolkeysapi}`, `*🔥 ${command} 🔥*`)
+break
+		    
 case 'play':  case 'play2': {
 if (!text) return conn.sendMessage(from, { text: `*ingrese nombre de alguna cancion*` }, { quoted: msg })
 const playmp3 = require('./libs/ytdl2')
 let yts = require("youtube-yts")
-conn.sendMessage(from, { text: `*Aguarde un momento*\n\nᴱˡ ᴬᵘᵈᶦᵒ ᵖᵘᵉᵈᵉ ᵗᵃʳᵈᵃ ᵉⁿᵗʳᵉ ⁵ ᵒ ¹⁰ ᵐᶦⁿᵘᵗᵒˢ ᵉˡ ᵉⁿᵛᶦᵃˢᵉ ᵗᵉⁿᵈʳᵃ́ ᵖᵃᶜᶦᵉⁿᶜᶦᵃ` }, { quoted: fdoc });    
 let search = await yts(text)
 let anup3k = search.videos[0]
+let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
+eek = await getBuffer(anu.thumbnail)
 const pl= await playmp3.mp3(anup3k.url)
+conn.sendMessage(from, { image : eek, caption:  `❒═════❬ *🔄DESCARGADO* ❭═════╾❒
+┬
+├‣ *𝚃𝚒𝚝𝚞𝚕𝚘* : 
+┴
+${anu.title}
+┬
+├‣ *𝙳𝚞𝚛𝚊𝚌𝚒𝚘𝚗* : 
+┴
+${anu.timestamp}
+┬
+├‣ *Vista* : 
+┴
+ ${anu.views}
+┬
+├‣ *Autor* : 
+┴
+${anu.author.name}
+┬
+├‣ *Link* :
+┴
+${anu.url}
+┬
+❒═════════════════╾❒` }, { quoted: m})
 await conn.sendMessage(from, { audio: fs.readFileSync(pl.path), fileName: `error.mp3`, mimetype: 'audio/mp4' }, { quoted: m }); 
 await fs.unlinkSync(pl.path)
 db.data.users[m.sender].limit -= 1
@@ -890,6 +998,41 @@ reply(info.limit)
 }
 break   
 
+case "facebook": case "fb":{
+if (!text) return reply(`*Y el link?*\n\n*Ejemplo:* ${prefix + command} https://www.facebook.com/groups/2616981278627207/permalink/3572542609737731/?mibextid=Nif5oz`)
+//XeonStickWait()
+let res = await Facebook(q)
+let ghdp = await conn.sendMessage(from, {video:{url: res.url[0].url}, caption: 'Exito'}, {quoted:m})
+}
+break
+case "igvid": case "instagram": {
+if (!text) return reply(`*Y el link?"\n\n*Ejemplo:* ${prefix + command} https://www.instagram.com/reel/Ctjt0srIQFg/?igshid=MzRlODBiNWFlZA==`)
+//XeonStickWait()
+let insta = await Instagram(text)
+const gha1 = await conn.sendMessage(m.chat,{video:{url: insta.url[0].url},caption: 'Exitos'},{quoted:m})
+}
+break
+case 'igstalk': {
+if (!args[0]) return reply(`*Ingrese el nombre del usuario de ig*\n\n*Ejemplo:* ${prefix + command} gata_dios`)
+const fg = require('api-dylux')
+    try {
+    let res = await fg.igStalk(args[0])
+    let te = `┌──「 *STALKING* 
+▢ *🔖Name:* ${res.name} 
+▢ *🔖Username:* ${res.username}
+▢ *👥Follower:* ${res.followersH}
+▢ *🫂Following:* ${res.followingH}
+▢ *📌Bio:* ${res.description}
+▢ *🏝️Posts:* ${res.postsH}
+▢ *🔗 Link* : https://instagram.com/${res.username.replace(/^@/, '')}
+└────────────`
+     await conn.sendMessage(m.chat, {image: { url: res.profilePic }, caption: te }, {quoted: m})
+      } catch {
+        reply(`*⚠️Error*`)
+      }
+}
+break
+
 case 'git': case 'gitclone':
 if (!args[0]) return reply(`*Ejemplo :*\n${prefix + command} ${md}`)
 if (!isUrl(args[0]) && !args[0].includes('github.com')) return reply(`Link invalido!!`)
@@ -900,6 +1043,18 @@ repo = repo.replace(/.git$/, '')
 let url = `https://api.github.com/repos/${user}/${repo}/zipball`
 let filename = (await fetch(url, {method: 'HEAD'})).headers.get('content-disposition').match(/attachment; filename=(.*)/)[1]
 conn.sendMessage(m.chat, { document: { url: url }, fileName: filename+'.zip', mimetype: 'application/zip' }, { quoted: m }).catch((err) => reply(info.error))
+db.data.users[m.sender].limit -= 1
+reply(info.limit) 
+break
+
+case 'tiktok':
+if (!text) return m.reply( `*Ejemplo:* ${prefix + command} https://vm.tiktok.com/ZMjdrFCtg/`)
+if (!q.includes('tiktok')) return m.reply(`*link invalido!*`)
+//await loading ()
+conn.fakeReply(m.chat, `⏳ *Aguarde un momento....*`, '0@s.whatsapp.net', 'No haga spam')
+require('./libs/tiktok').Tiktok(q).then( data => {
+conn.sendMessage(m.chat, { video: { url: data.nowm }}, { quoted: m })
+conn.sendMessage(m.chat, { audio: { url: data.audio }, mimetype: 'audio/mp4' }, { quoted: m })})
 db.data.users[m.sender].limit -= 1
 reply(info.limit) 
 break
@@ -916,8 +1071,46 @@ break
 
 case 'ss': case 'ssweb': {
 if (!q) return reply(`*Ejemplo:* ${prefix+command} link`)
+conn.fakeReply(m.chat, `⏳ *Aguarde un momento....*`, '0@s.whatsapp.net', 'No haga spam')
 let krt = await scp1.ssweb(q)
 conn.sendMessage(from, {image:krt.result, caption: info.result}, {quoted:m})
+}
+break
+
+case 'buy': {
+let count = command.replace(/^buy/i, '');
+count = count ? /all/i.test(count) ? Math.floor(global.db.data.users[m.sender].exp / 450) : parseInt(count) : args[0] ? parseInt(args[0]) : 1;
+count = Math.max(1, count);
+if (global.db.data.users[m.sender].exp >= 450 * count) {
+global.db.data.users[m.sender].exp -= 450 * count;
+global.db.data.users[m.sender].limit += count;
+reply(`╔═❖ *ɴᴏᴛᴀ ᴅᴇ ᴘᴀɢᴏ*\n║‣ *ʜᴀs ᴄᴏᴍᴘʀᴀᴅᴏ :* ${count}💎\n║‣ *ʜᴀs ɢᴀsᴛᴀᴅᴏ :* ${450 * count} XP\n╚═══════════════`);
+} else reply(`🔶 ɴᴏ ᴛɪᴇɴᴇ sᴜғɪᴄɪᴇɴᴛᴇ xᴘ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ *${count}* ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴘᴜᴇᴅᴇs ᴄᴏɴsᴇɢᴜɪʀ *xᴘ* ᴜsᴀɴᴅᴏ ᴇʟ ᴄᴏᴍᴀɴᴅᴏs #minar`)}
+break
+
+case 'minar':
+const date = global.db.data.users[m.sender].lastmiming + 600000;
+if (new Date - global.db.data.users[m.sender].lastmiming < 600000) return reply(`*[ ⏳ ] Espera 10 min para volver a minar*`) 
+const exp = Math.floor(Math.random() * 1000)
+global.db.data.users[m.sender].exp += exp;
+reply(`*Genlal minarte ${exp} XP*`)
+global.db.data.users[m.sender].lastmiming = new Date * 1;
+break 
+
+case 'rob': {
+const date = global.db.data.users[m.sender].robs + 600000;
+if (new Date - global.db.data.users[m.sender].robs < 600000) return reply(`*[ 🚓 ] regresa el ${date} minutos*`) 
+  if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false;
+  else who = m.chat;
+  if (!who) return reply(`*⚠️ ETIQUETA A LA PERSONA BOBO*`) 
+  if (!(who in global.db.data.users)) throw `*⚠️ El usuario no se encuentra en mi base de datos.*`;
+  const users = global.db.data.users[who];
+  const rob = Math.floor(Math.random() * 500);
+  if (users.exp < rob) return conn.sendMessage(from ,{text: `*Este @${who.split`@`[0]} es Pobre tiene menos de 500 xp*`, mentions: [who], },{quoted: m})
+  global.db.data.users[m.sender].exp += rob;
+  global.db.data.users[who].exp -= rob;
+  conn.sendMessage(from ,{text: `*🐭 Robaste ${rob} XP a @${who.split`@`[0]}*`, mentions: [who], },{quoted: m})
+global.db.data.users[m.sender].robs = new Date * 1;
 }
 break
 
@@ -952,7 +1145,7 @@ conn.sendMessage(from, {sticker:fs.readFileSync("gifee.webp")},{quoted:m})
 let media = await quoted.download()
 let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: pcknm, author: atnm })
 } else if (/video/.test(mime)) {
-if ((quoted.msg || quoted).seconds > 11) return replygcxeon('Maximum 10 Seconds!')
+if ((quoted.msg || quoted).seconds > 11) return reply('Maximum 10 Seconds!')
 let media = await quoted.download()
 let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: pcknm, author: atnm })
 } else {
@@ -1017,6 +1210,18 @@ reply(`Uff Limit moment whatsapp.`)
 } else reply('*⚠️Ingresa el numero*')}
 break
 	    
+case 'addcase':
+if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg }); 
+if (!text) throw 'envia el case'
+try {
+const addcase =[fs.readFileSync('main.js', 'utf8').slice(0, fs.readFileSync('main.js', 'utf8').lastIndexOf('break') + 5), q, fs.readFileSync('main.js', 'utf8').slice(fs.readFileSync('main.js', 'utf8').lastIndexOf('break') + 5)].join('\n');
+fs.writeFileSync('main.js', addcase)
+conn.editMessage(m.chat, '*aguarde estoy agregado el case*', '*Listo!!*', 5, m)
+} catch (error) {
+throw error
+}
+break
+	    
 case 'getcase': 
 if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg }); 
 if (!text) return m.reply(`Que comando a buscar o que?`) 
@@ -1029,7 +1234,7 @@ reply(" Error, tal vez no existe el comando")
 } 
 break
 
-case 'update':
+case 'update': 
 if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg });    
 try {    
 let stdout = execSync('git pull' + (m.fromMe && q ? ' ' + q : ''))
@@ -1070,7 +1275,10 @@ contextInfo:{
 forwardingScore: 9999999, 
 isForwarded: true
 }})
-}}}}
+
+process.on('uncaughtException', function (err) {
+console.log('Caught exception: ', err)
+})}}}}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
