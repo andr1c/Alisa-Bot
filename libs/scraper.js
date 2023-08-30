@@ -7,7 +7,7 @@ const qs = require('qs')
 const request = require('request');
 const randomarray = async (array) => {
 	return array[Math.floor(Math.random() * array.length)]
-}
+} 
 exports.rexdl = async (query) => {
 	return new Promise((resolve) => {
 		axios.get('https://rexdl.com/?s=' + query)

@@ -1,16 +1,18 @@
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./fuctions2.js')
-const { default: makeWASocket, BufferJSON, MessageType, MessageOptions, Mimetype, generateWAMessageFromContent, downloadContentFromMessage, proto, jidDecode, relayMessage, generateWAMessage, prepareWAMessageMedia } = require('@whiskeysockets/baileys')
+const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, getAggregateVotesInPollMessage, proto } = require("@whiskeysockets/baileys")
 const chalk = require('chalk')
 const fs = require('fs')
 const Crypto = require('crypto')
 const axios = require('axios')
+const pino = require('pino')
 const moment = require('moment-timezone')
 const { sizeFormatter } = require('human-readable')
 const util = require('util')
 const jimp = require('jimp')
 const { defaultMaxListeners } = require('stream')
-const FileType = require("file-type")
-
+const FileType = import("file-type")
+const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
+const PhoneNumber = import('awesome-phonenumber')
 
 const downloadMediaMessage = async (message) => {
         let mime = (message.msg || message).mimetype || ''
@@ -151,10 +153,10 @@ exports.runtime = function(seconds) {
 	return dDisplay + ":" + hDisplay + ":" + mDisplay + ":" + sDisplay;
 }
 
-exports.clockString = function(seconds) {
-    let h = isNaN(seconds) ? '--' : Math.floor(seconds % (3600 * 24) / 3600)
-    let m = isNaN(seconds) ? '--' : Math.floor(seconds % 3600 / 60)
-    let s = isNaN(seconds) ? '--' : Math.floor(seconds % 60)
+exports.clockString = (ms) => {
+    let h = isNaN(ms) ? '--' : Math.floor(ms / 3600000)
+    let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
+    let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
     return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')
 }
 
@@ -276,9 +278,11 @@ exports.smsg = (conn, m, hasParent) => {
         m.fromMe = m.key.fromMe
         m.isGroup = m.chat.endsWith('@g.us')
         m.sender = m.fromMe ? (conn.user.id.split(":")[0]+'@s.whatsapp.net' || conn.user.id) : (m.key.participant || m.key.remoteJid)
+        m.limit = false
+        m.money = false
     }
     
-//Base de datos    
+try {   
   let isNumber = x => typeof x === 'number' && !isNaN(x)  // NaN in number?
   let user = global.db.data.users[m.sender]  
   if (typeof user !== 'object') global.db.data.users[m.sender] = {}  
@@ -286,8 +290,8 @@ exports.smsg = (conn, m, hasParent) => {
   if (!isNumber(user.afkTime)) user.afkTime = -1  
   if (!('afkReason' in user)) user.afkReason = ''  
   if (!isNumber(user.limit)) user.limit = 20  
-  if(!isNumber(user.money)) user.money = 100  
   if (!('registered' in user)) user.Register = false
+  if(!isNumber(user.money)) user.money = 0  
   if(!isNumber(user.health)) user.health = 100  
   if(!isNumber(user.warn)) user.warn = 0  
   if(!isNumber(user.exp)) user.exp = 0
@@ -314,13 +318,13 @@ exports.smsg = (conn, m, hasParent) => {
   afkTime: -1,  
   afkReason: '',  
   limit: 20,  
-  money: 100,  
-  Register: false, 
+  registered: false, 
+  money: 0,  
   health: 100,  
   warn: 0, 
   exp: 0,
-  role: '🍱 Novato I',
-  level: 0,
+  role: 'Novato I',
+  level: 1,
   armor: 0,
   sword: 0,
   pickaxe: 0,
@@ -348,6 +352,8 @@ exports.smsg = (conn, m, hasParent) => {
   if (!('modeadmin' in chats)) chats.modeadmin = false  
   if (!('welcome' in chats)) chats.welcome = true
   if (!('audios' in chats)) chats.audios = true
+  if (!('antiNsfw' in chats)) chats.antiNsfw = true
+  if (!('antispam' in chats)) chats.antispam = true
   if (!('antiFake' in chats)) chats.antiFake = false
   if (!('antiArabe' in chats)) chats.antiArabe = false
   if (!('detect' in chats)) chats.detect = true
@@ -355,11 +361,13 @@ exports.smsg = (conn, m, hasParent) => {
   antilink: false,  
   ban: false,   
   modeAdmin: false,  
-  welcome: true,  
+  welcome: true, 
   audios: true, 
+  antiNsfw: true, 
+  antispam: true, 
   antiFake: false,
   antiArabe: false,
-  detect: true, 
+  Detect: true, 
   }
   
   let setting = global.db.data.settings[conn.user.jid]
@@ -369,16 +377,25 @@ exports.smsg = (conn, m, hasParent) => {
   if (!('autobio' in setting)) setting.autobio = true
   if (!('jadibot' in setting)) setting.jadibot = true 
   if (!('antiCall' in setting)) setting.antiCall = true
+  if (!('privado' in setting)) setting.privado = false
   } else global.db.data.settings[conn.user.jid] = {  
   status: 0,  
   autobio: true,
   jadibot: true,
-  antiCall: true
+  antiCall: true, 
+  privado: false
   } 
-  
-  global.db.data.sticker = global.db.data.sticker || {}
 
-//
+  
+  global.db.data.sticker = global.db.data.sticker || {} // sticker for addcmd
+} catch (error) {
+m.error = error
+if (error) {
+console.error(m.error)
+}
+}
+
+  
 
     if (m.message) {
         m.mtype = Object.keys(m.message)[0]
@@ -442,8 +459,52 @@ exports.smsg = (conn, m, hasParent) => {
     }
     if (m.msg.url) m.download = () => downloadMediaMessage(m.msg)
     m.text = (m.mtype == 'listResponseMessage' ? m.msg.singleSelectReply.selectedRowId : '') || m.msg.text || m.msg.caption || m.msg || ''
-
-	
+    
+    
+    conn.getFile = async (PATH, save) => {
+    let res
+    let data = Buffer.isBuffer(PATH) ? PATH : /^data:.*?\/.*?;base64,/i.test(PATH) ? Buffer.from(PATH.split`,`[1], 'base64') : /^https?:\/\//.test(PATH) ? await (res = await getBuffer(PATH)) : fs.existsSync(PATH) ? (filename = PATH, fs.readFileSync(PATH)) : typeof PATH === 'string' ? PATH : Buffer.alloc(0)
+    //if (!Buffer.isBuffer(data)) throw new TypeError('Result is not a buffer')
+    let type = await FileType.fromBuffer(data) || {
+    mime: 'application/octet-stream',
+    ext: '.bin'
+    }
+    filename = path.join(__filename, '../src/' + new Date * 1 + '.' + type.ext)
+    if (data && save) fs.promises.writeFile(filename, data)
+    return {
+    res,
+    filename,
+	size: await getSizeMedia(data),
+    ...type,
+    data
+    }
+    }
+    /**
+    * @param {*} jid
+    * @param {*} path
+    * @param {*} fileName
+    * @param {*} quoted
+    * @param {*} options
+    * @return
+    */
+	conn.sendFile = async(jid, PATH, fileName, quoted = {}, options = {}) => {
+    let types = await conn.getFile(PATH, true)
+    let { filename, size, ext, mime, data } = types
+    let type = '', mimetype = mime, pathFile = filename
+    if (options.asDocument) type = 'document'
+    if (options.asSticker || /webp/.test(mime)) {
+    let { writeExif } = require('./lib/sticker.js')
+    let media = { mimetype: mime, data }
+    pathFile = await writeExif(media, { packname: global.packname, author: global.packname2, categories: options.categories ? options.categories : [] })
+    await fs.promises.unlink(filename)
+    type = 'sticker'
+    mimetype = 'image/webp'}
+    else if (/image/.test(mime)) type = 'image'
+    else if (/video/.test(mime)) type = 'video'
+    else if (/audio/.test(mime)) type = 'audio'
+    else type = 'document'
+    await conn.sendMessage(jid, { [type]: { url: pathFile }, mimetype, fileName, ...options }, { quoted, ...options })
+    return fs.promises.unlink(pathFile)}
     /**
      * 
      * @param {*} jid 
@@ -467,6 +528,16 @@ exports.smsg = (conn, m, hasParent) => {
 
     /**
     * @param {*} jid
+    * @param {*} path
+    * @param {*} caption 
+    */
+    conn.sendImage = async (jid, path, caption = '', quoted = '', options) => { 
+     let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0) 
+     return await conn.sendMessage(jid, { image: buffer, caption: caption, ...options }, { quoted }) 
+     } 
+     
+    /**
+    * @param {*} jid
     * @param {*} caption
     * @param {*} thumbnail
     * @param {*} quoted
@@ -485,13 +556,21 @@ exports.smsg = (conn, m, hasParent) => {
     "title": botname,   
     "containsAutoReply": false,  
     "mediaType": 1,   
-    "thumbnail": thumbnail ? thumbnail : global.imagen1,  
-    "mediaUrl": nn,  
-    "sourceUrl": nn
+    "thumbnail": thumbnail ? thumbnail : global.menu,  
+    "mediaUrl": md, 
+    "sourceUrl": md
     }
     }  
     }, { quoted: quoted ? quoted : m }) 
     }
+    
+    /**
+    * @param {*} jid
+    * @param {*} caption
+    * @param {*} thumbail // optional
+    * @param {*} orderTitle // optional
+    * @param {*} userJid // optional
+    */
     
     conn.sendCart = async (jid, text, thumbail, orderTitle, userJid) => {
     var messa = await prepareWAMessageMedia({ image: thumbail ? thumbail : success }, { upload: conn.waUploadToServer })
@@ -503,7 +582,7 @@ exports.smsg = (conn, m, hasParent) => {
     "surface": "CATALOG",
     "message": text,
     "orderTitle": orderTitle ? orderTitle : 'unknown',
-    "sellerJid": "5218442114446@s.whatsapp.net",
+    "sellerJid": "52186@s.whatsapp.net",
     "token": "AR4flJ+gzJw9zdUj+RpekLK8gqSiyei/OVDUFQRcmFmqqQ==",
     "totalAmount1000": "-500000000",
     "totalCurrencyCode":"USD",
@@ -544,7 +623,8 @@ exports.smsg = (conn, m, hasParent) => {
     * @param {*} quoted
     */
     conn.sendAudio = async (jid, audio, quoted) => { // audio? uwu
-    conn.sendMessage(jid, { audio: audio, mimetype: 'audio/mpeg' }, { quoted : quoted ? quoted : m })  
+    await conn.sendPresenceUpdate('recording', jid)
+    await conn.sendMessage(jid, { audio: { url: audio }, fileName: 'error.mp3', mimetype: 'audio/mp4', ptt: true }, { quoted: quoted ? quoted : m })
     }
     
     
@@ -565,10 +645,26 @@ exports.smsg = (conn, m, hasParent) => {
     */
     
     conn.sendText = (jid, text, quoted = '', options) => conn.sendMessage(jid, { text: text, ...options }, { quoted })
+   
+    /**
+    * @returns
+    */
+    
+    conn.parseMention = async(text) => {
+    return [...text.matchAll(/@([0-9]{5,16}|0)/g)].map(v => v[1] + '@s.whatsapp.net')}
     
     /**
     * @param {*} jid
     */
+
+    conn.decodeJid = (jid) => {
+    if (!jid) return jid
+    if (/:\d+@/gi.test(jid)) {
+    let decode = jidDecode(jid) || {}
+    return decode.user && decode.server && decode.user + '@' + decode.server || jid
+    } else return jid
+    }
+    
     /**
     * @param {*} jid?
     */
@@ -632,6 +728,11 @@ exports.smsg = (conn, m, hasParent) => {
      * @param {*} options 
      * @returns 
      */
+     conn.sendImage = async (jid, path, caption = '', quoted = '', options) => { 
+ let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0) 
+ return await conn.sendMessage(jid, { image: buffer, caption: caption, ...options }, { quoted }) 
+ } 
+ 
     conn.sendVideoAsSticker = async (jid, path, quoted, options = {}) => {
         let buff = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
         let buffer
@@ -644,42 +745,35 @@ exports.smsg = (conn, m, hasParent) => {
         await conn.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted })
         return buffer
     }
-    conn.sendImage = async (jid, path, caption = '', quoted = '', options) => { 
- let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0) 
- return await conn.sendMessage(jid, { image: buffer, caption: caption, ...options }, { quoted }) 
- } 
-  
-     m.reply = (text, chatId, options) => conn.sendMessage(chatId ? chatId : m.chat, { text: text }, { quoted: m, detectLinks: false, thumbnail: global.thumb, ...options }) 
-     /** 
-         * Copy this message 
-         */ 
-         m.copy = () => exports.smsg(conn, M.fromObject(M.toObject(m))) 
-  
- conn.decodeJid = (jid) => { 
- if (!jid) return jid 
- if (/:\d+@/gi.test(jid)) { 
- let decode = jidDecode(jid) || {} 
- return decode.user && decode.server && decode.user + '@' + decode.server || jid 
- } else return jid 
- } 
-  
-         /** 
-          *  
-          * @param {*} jid  
-          * @param {*} forceForward  
-          * @param {*} options  
-          * @returns  
-          */ 
-         m.copyNForward = (jid = m.chat, forceForward = false, options = {}) => conn.copyNForward(jid, m, forceForward, options) 
-  
-     return m 
- } 
-  
-  
- let file = require.resolve(__filename) 
- fs.watchFile(file, () => { 
-         fs.unwatchFile(file) 
-         console.log(chalk.redBright(`Update ${__filename}`)) 
-         delete require.cache[file] 
-         require(file) 
- })
+    conn.sendPoll = (jid, name = '', values = [], selectableCount = 1) => { return conn.sendMessage(jid, { poll: { name, values, selectableCount }}) }
+    
+    
+	/**
+	 * 
+	 * @param {*} jid 
+	 * @param {*} forceForward 
+	 * @param {*} options 
+	 * @returns 
+	 */
+	m.copyNForward = (jid = m.chat, forceForward = false, options = {}) => conn.copyNForward(jid, m, forceForward, options)
+    /**
+    * a normal reply
+    */
+    m.reply = (text, chatId, options) => conn.sendMessage(chatId ? chatId : m.chat, { text: text }, { quoted: m, detectLinks: false, thumbnail: global.thumb, ...options })
+
+    /**
+    * copy message?
+    */
+    m.copy = () => exports.smsg(conn, M.fromObject(M.toObject(m)))
+    
+    return m
+}
+
+
+let file = require.resolve(__filename)
+fs.watchFile(file, () => {
+	fs.unwatchFile(file)
+	console.log(chalk.redBright(`Update ${__filename}`))
+	delete require.cache[file]
+	require(file)
+})
