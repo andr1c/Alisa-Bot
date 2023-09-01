@@ -9,26 +9,36 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 const Jimp = require('jimp')
 const os = require('os')
- 
-const menu = (main, prefix, pushname, m) => {
+
+const menu = (main, prefix, pushname, sender, m) => {
 let user = global.db.data.users[m.sender]
+const date = moment.tz('America/Bogota').format('DD/MM/YYYY')
+const time = moment.tz('America/Argentina/Buenos_Aires').format('LT')
+/*const d = new Date(new Date + 3600000);
+const locale = 'es';
+const week = d.toLocaleDateString(locale, {weekday: 'long'});
+const date = d.toLocaleDateString(locale, {day: 'numeric', month: 'long', year: 'numeric'});*/
 let wa = m.key.id.length > 21 ? 'Android' : m.key.id.substring(0, 2) == '3A' ? 'IOS' : 'whatsapp web'
 
-return `╭┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉╮
-┋◤━━━━━ ☆. ∆ .☆ ━━━━━◥
-┋✾ Hola *${pushname}* 👋🏻 〕
-┋◤━━━━━ ☆. ∆ .☆ ━━━━━◥
-┋✏Prefijo: [ ${prefix} ]
-┋👥Usuarios: ${Object.keys(global.db.data.users).length}
-┋🕐Tiempo de actividad: ${runtime(process.uptime())}
-┋✅Modo: ${conn.public ? 'publico' : 'privado'}
-┋👑Creador: wa.me/595975740803
-┋
-┋💎Limite: ${user.limit}
-┋📚Nivel: ${user.level}
-┋🧰Rango: ${user.role}
-┋✨XP: ${user.exp}
-┗┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+return `╔══════ ≪ •❈• ≫ ══════╗
+║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
+║✾ Hola @${sender.split("@")[0]} 👋🏻 
+║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
+║✾ ᴘʀᴇғɪᴊᴏ: [ ${prefix} ]
+║✾ ғᴇᴄʜᴀ: ${date}
+║✾ ʜᴏʀᴀ: ${time}
+║✾ ᴜsᴜᴀʀɪᴏ : ${Object.keys(global.db.data.users).length}
+║✾ ᴀᴄᴛɪᴠɪᴅᴀᴅ : ${runtime(process.uptime())}
+║✾ ᴍᴏᴅᴏ : ${conn.public ? 'publico' : 'privado'}
+║
+║✾ ʟɪᴍɪᴛᴇ : ${user.limit}
+║✾ ɴɪᴠᴇʟ : ${user.level}
+║✾ ʀᴀɴɢᴏ : ${user.role}
+║✾ ᴇxᴘ : ${user.exp}
+║ 
+║✾ ʀᴇɢɪsᴛʀᴀᴅᴏ : ⁉️
+║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
+╚══════ ≪ •❈• ≫ ══════╝
 
 \`\`\`🟢 ＩＮＦＯＲＭＡＣＩＯＮ 🟢\`\`\`
 \`\`\`♨️ ᴇʟ ʙᴏᴛ ᴇs ɴᴜᴇᴠᴏ ᴛᴏᴅᴀᴠɪᴀ ᴇsᴛᴀ ᴅᴇsᴀʀʀᴏʟʟᴀᴅᴏ,  sɪ ᴘʀᴇsᴇɴᴛᴀ ᴀʟɢᴜɴ ᴘʀᴏʙʟᴇᴍᴀ, ᴄᴏᴍᴜɴɪᴄᴀʀsᴇ ᴄᴏɴ ᴍɪ ᴄʀᴇᴀᴅᴏʀ ᴇsᴄʀɪʙɪʀ #creador\`\`\`
@@ -158,7 +168,10 @@ return `╭┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉╮
 	
 *╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*⃐🪙 ＥＣＯＮＯＭＩＡ*️⃟ᬽ፝֟━*
 ├❥ᰰຼ ❏ ${prefix}minar _(para minar exp)_
+├❥ᰰຼ ❏ ${prefix}robar
 ├❥ᰰຼ ❏ ${prefix}rob _(roban exp algun usuarios)_
+├❥ᰰຼ ❏ ${prefix}trabajar
+├❥ᰰຼ ❏ ${prefix}work _(trabajar y ganas exp)_
 ├❥ᰰຼ ❏ ${prefix}buy _(comprar mas diamante (limit)_
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
 
@@ -166,7 +179,6 @@ return `╭┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉╮
 ├❥ᰰຼ ❏ ${prefix}s
 ├❥ᰰຼ ❏ ${prefix}sticker 
 ├❥ᰰຼ ❏ ${prefix}wm
-├❥ᰰຼ ❏ ${prefix}robat
 ├❥ᰰຼ ❏ ${prefix}attp
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
 
@@ -176,6 +188,8 @@ return `╭┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉╮
 ├❥ᰰຼ ❏ ${prefix}anticall
 ├❥ᰰຼ ❏ ${prefix}modojadibot
 ├❥ᰰຼ ❏ ${prefix}autoadmin 
+├❥ᰰຼ ❏ ${prefix}bc (difusión a todos los chat)
+├❥ᰰຼ ❏ ${prefix}bcgc (difusión solo a grupos)
 ├❥ᰰຼ ❏ ${prefix}join 
 ├❥ᰰຼ ❏ ${prefix}setpp (cambia la foto del bot) 
 ├❥ᰰຼ ❏ ${prefix}public (modo público) 
