@@ -15,10 +15,13 @@ const fetch = require('node-fetch')
 const axios = require('axios')
 const cheerio = require('cheerio')
 const gpt = require('api-dylux')
+const util = require('util')
 const mimetype = require("mime-types")
 const webp = require("node-webpmux")
 const Jimp = require('jimp')
 const scp1 = require('./libs/scraper') 
+const { facebook } = require('./libs/facebook')
+const { instagram } = require('./libs/instagram')
 const {jadibot, listJadibot } = require('./serbot.js')  
 const speed = require("performance-now")
 const ffmpeg = require("fluent-ffmpeg")
@@ -72,11 +75,11 @@ module.exports = conn = async (conn, m, chatUpdate, mek) => { // Raíz "conn" pa
 var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage' && m.message.imageMessage.caption) ? m.message.imageMessage.caption : (m.mtype == 'videoMessage' && m.message.videoMessage.caption ) ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? m.message.listResponseMessage.singleSelectReply.selectedRowId :  (m.mtype == 'stickerMessage') && (getCmd(m.message.stickerMessage.fileSha256.toString()) !== null && getCmd(m.message.stickerMessage.fileSha256.toString()) !== undefined) ? getCmd(m.message.stickerMessage.fileSha256.toString()) : ''
 	
 // ‿︵‿︵ʚɞ『 ATRIBUTOS 』ʚɞ‿︵‿︵
-if (m.key.id.startsWith("BAE5")) return
-var budy = (typeof m.text == 'string' ? m.text : '') // Asignar a la variable budy el valor m.text si es cadena	
+if (m.key.id.startsWith("BAE5")) return  
+  var budy = (typeof m.text == 'string' ? m.text : '') // Asignar a la variable budy el valor m.text si es cadena	
 //var prefix = prefa ? /^[°•π÷×¶∆£¢€¥®™+✓_=/|~!?@#$%^&.©^]/gi.test(body) ? body.match(/^[°•π÷×¶∆£¢€¥®™+✓_=/|~!?@#$%^&.©^]/gi)[0] : "" : prefa ?? global.prefix
-global.prefix = new RegExp('^[°•π÷×¶∆£¢€¥®™+✓_=/|~!?@#$%^&.©^' + '*/i!#$%+£¢€¥^°=¶∆×÷π√✓©®:;?&.\\-.@'.replace(/[|\\{}()[\]^$+*?.\-\^]/g, '\\$&') + ']', 'i')
-var prefix = global.prefix.test(body) ? body.match(global.prefix)[0] : '' // Almacenar el prefijo predeterminado
+  var _prefix = /^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi.test(body) ? body.match(/^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi)[0] : ""
+global.prefix = _prefix // Almacenar el prefijo predeterminado
 const isCmd = body.startsWith(prefix) // Verificar si el contenido de body comienza con el valor almacenado en prefix.
 const from = m.chat // Remitente del mensaje
 const msg = JSON.parse(JSON.stringify(mek, undefined, 2)) // Mensaje convertido a formato JSON
@@ -141,6 +144,10 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
 const isQuotedDocument = type === 'extendedTextMessage' && content.includes('documentMessage')
 const isQuotedMsg = type === 'extendedTextMessage' && content.includes('Message') // Mensaje citado de cualquier tipo
 const isViewOnce = (type === 'viewOnceMessage') // Verifica si el tipo de mensaje es (mensaje de vista única)
+
+function pickRandom(list) {
+  return list[Math.floor(list.length * Math.random())]
+}
 
 //base de datos
 let user = global.db.data.users[m.sender]
@@ -236,7 +243,7 @@ const kick = function (from, orangnya) {
 for (let i of orangnya) {
 conn.groupParticipantsUpdate(from, [i], "remove");
 }}
-const time = moment(Number(msg.messageTimestamp + "000")).locale("es-mx").tz("America/Asuncion").format('MMMM Do YYYY, h:mm:ss a')
+const time = moment(Number(msg.messageTimestamp + "000")).locale("es-mx").tz("America/Bogota").format('MMMM Do YYYY, h:mm:ss a')
 
 // ‿︵‿︵ʚɞ『 INFO CONSOLE 』ʚɞ‿︵‿︵	
 if (m.message) {
@@ -334,12 +341,6 @@ if (mathGame.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
   } else { 
   m.reply(`Respuesta incorrecta`)}
   }
-        
-//autoread
-if (global.db.data.settings[numBot].autoread) {
-if (m.isGroup) { 
-conn.sendReadReceipt(m.chat, m.sender, [m.key.id]) }
-}
 
 //Marcar como (Escribiendo...) 
 /*if (command) {
@@ -478,18 +479,18 @@ await state(conn, m, speed, sender, fkontak)
 break
 
 case 'menu': 
-conn.sendMessage(from, { text: menu(conn, prefix, pushname, m),  
+conn.sendMessage(from, { text: menu(conn, prefix, pushname, sender, m),  
 contextInfo:{  
 forwardingScore: 9999999,  
 isForwarded: true,   
-mentionedJid:[m.sender],  
+mentionedJid:[sender],  
 "externalAdReply": {  
 "showAdAttribution": true,  
 "renderLargerThumbnail": true,  
 "title": wm,   
 "containsAutoReply": true,  
 "mediaType": 1,   
-"thumbnail": imagen1,  
+"thumbnail": imagen3,  
 "mediaUrl": md, 
 "sourceUrl": md, 
 }}}, { quoted: fkontak }) 
@@ -798,8 +799,8 @@ var latensi = speed() - timestamp
 conn.sendMessage(from, { text: `*Pong 🏓  ${latensi.toFixed(4)}*` }, { quoted: msg });  
 break  		
 
-case 'bug': case 'report': {
-if (!text) return reply(`*𝙸𝙽𝙶𝚁𝙴𝚂𝙴 𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙲𝙾𝙽 𝙵𝙰𝙻𝙻𝙾𝚂*\n\n*𝙴𝙹𝙴𝙼𝙿𝙻𝙾':*\n${prefix + command} sticker no funciona`)
+case 'report': {
+if (!text) return reply(`*𝙸𝙽𝙶𝚁𝙴𝚂𝙴 𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙲𝙾𝙽 𝙵𝙰𝙻𝙻𝙾𝚂*\n\n*𝙴𝙹𝙴𝙼𝙿𝙻𝙾:*\n${prefix + command} sticker no funciona`)
 conn.sendMessage(`595975740803@s.whatsapp.net`, {text: `╭━━〔 *𝚁𝙴𝙿𝙾𝚁𝚃𝙴 | 𝚁𝙴𝙿𝙾𝚁𝚃 * 〕━━⬣\n┃\n┃✿ *𝙽𝚞𝚖𝚎𝚛𝚘 | 𝚗𝚞𝚖𝚋𝚎𝚛*\n┃⇢ wa.me/${m.sender.split("@")[0]}\n┃\n┃✿ *𝙼𝚎𝚗𝚜𝚊𝚓𝚎 | 𝚝𝚎𝚡𝚝*\n┃: ${text}┃\n╰━━━〔 *${vs}* 〕━━━⬣` })
 reply(`*𝙴𝙻 𝚁𝙴𝙿𝙾𝚁𝚃𝙴 𝙵𝚄𝙴 𝙴𝙽𝚅𝙸𝙰𝙳𝙾 𝙰 𝙼𝙸 𝙲𝚁𝙴𝙰𝙳𝙾𝚁, 𝙽𝙾𝚂 𝙲𝙾𝙽𝚃𝙰𝚁𝙴𝙼𝙾𝚂 𝙲𝙾𝙽 𝚄𝚂𝚃𝙴𝙳 𝚂𝙸 𝙴𝚂 𝙽𝙴𝙲𝙴𝚂𝙰𝚁𝙸𝙾, 𝙳𝙴 𝚂𝙴𝚁 𝙵𝙰𝙻𝚂𝙾 𝚂𝙴𝚁𝙰 𝙸𝙶𝙽𝙾𝚁𝙰𝙳𝙾 𝚈 𝙱𝙻𝙾𝚀𝚄𝙴𝙰𝙳𝙾 𝙳𝙴𝙻 𝙱𝙾𝚃*`)}
 break 
@@ -928,36 +929,23 @@ break
 		    
 case 'play':  case 'play2': {
 if (!text) return conn.sendMessage(from, { text: `*ingrese nombre de alguna cancion*` }, { quoted: msg })
-const playmp3 = require('./libs/ytdl2')
 let yts = require("youtube-yts")
 let search = await yts(text)
 let anup3k = search.videos[0]
 let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
 eek = await getBuffer(anu.thumbnail)
+conn.sendMessage(from, { image : eek, caption:  `╭───≪~*╌◌ᰱ•••⃙❨͟͞P̸͟͞L̸͟A̸͟͞Y̸͟͞❩⃘•••ᰱ◌╌*~*
+│║📌 *Título* : ${anu.title}
+│║📆 *Publicado:* ${anu.ago}
+│║⌚ *Duración:* ${anu.timestamp}
+│║👤 *Autor:* ${anu.author.name}
+│║👀 *Vistas:*  ${anu.views}
+│║
+│║  *si quiere descarga el video usar:*
+│║ #ytvideo ${anu.url}
+╰─•┈┈┈•••✦𝒟ℳ✦•••┈┈┈•─╯⟤` }, { quoted: m})
+const playmp3 = require('./libs/ytdl2')
 const pl= await playmp3.mp3(anup3k.url)
-conn.sendMessage(from, { image : eek, caption:  `❒═════❬ *🔄DESCARGADO* ❭═════╾❒
-┬
-├‣ *𝚃𝚒𝚝𝚞𝚕𝚘* : 
-┴
-${anu.title}
-┬
-├‣ *𝙳𝚞𝚛𝚊𝚌𝚒𝚘𝚗* : 
-┴
-${anu.timestamp}
-┬
-├‣ *Vista* : 
-┴
- ${anu.views}
-┬
-├‣ *Autor* : 
-┴
-${anu.author.name}
-┬
-├‣ *Link* :
-┴
-${anu.url}
-┬
-❒═════════════════╾❒` }, { quoted: m})
 await conn.sendMessage(from, { audio: fs.readFileSync(pl.path), fileName: `error.mp3`, mimetype: 'audio/mp4' }, { quoted: m }); 
 await fs.unlinkSync(pl.path)
 db.data.users[m.sender].limit -= 1
@@ -989,7 +977,7 @@ if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return reply(`*Que est
 conn.sendMessage(from, { text: `*Aguarde un momento*\n\nᴱˡ ᵛᶦᵈᵉᵒ ᵖᵘᵉᵈᵉ ᵗᵃʳᵈᵃ ᵉⁿᵗʳᵉ ⁵ ᵒ ¹⁰ ᵐᶦⁿᵘᵗᵒˢ ᵉˡ ᵉⁿᵛᶦᵃˢᵉ ᵗᵉⁿᵈʳᵃ́ ᵖᵃᶜᶦᵉⁿᶜᶦᵃ` }, { quoted: fdoc });    
 const vid = await mp.mp4(text)
 const ytc = `*❏ Título :* ${vid.title} 
-*❏ Duración :* ${vid.duration}
+*❏ Duración :* ${vid.timestamp}
 *❏ Subido :* ${vid.date}
 *❏ calidad :* ${vid.quality}`
 await conn.sendMessage(from, {video: {url : vid.videoUrl}, caption: ytc }, {quoted:m})
@@ -1001,35 +989,19 @@ break
 case "facebook": case "fb":{
 if (!text) return reply(`*Y el link?*\n\n*Ejemplo:* ${prefix + command} https://www.facebook.com/groups/2616981278627207/permalink/3572542609737731/?mibextid=Nif5oz`)
 //XeonStickWait()
-let res = await Facebook(q)
-let ghdp = await conn.sendMessage(from, {video:{url: res.url[0].url}, caption: 'Exito'}, {quoted:m})
+const Rres = await fetch(`https://api.lolhuman.xyz/api/facebook?apikey=${lolkeysapi}&url=${args[0]}`);
+ const Jjson = await Rres.json();
+ let VIDEO = Jjson.result[0];
+ if (VIDEO == '' || !VIDEO || VIDEO == null) VIDEO = Jjson.result[1];
+        //conn.sendFile(m.chat, VIDEO, 'error.mp4', `*𝙰𝚀𝚄𝙸 𝙴𝚂𝚃𝙰 𝚂𝚄 𝚅𝙸𝙳𝙴𝙾*`, m);
+await conn.sendMessage(from, {video:{url: Rres}, caption: 'Exito'}, {quoted:m})
 }
 break
 case "igvid": case "instagram": {
 if (!text) return reply(`*Y el link?"\n\n*Ejemplo:* ${prefix + command} https://www.instagram.com/reel/Ctjt0srIQFg/?igshid=MzRlODBiNWFlZA==`)
 //XeonStickWait()
-let insta = await Instagram(text)
+let insta = await instagram(text)
 const gha1 = await conn.sendMessage(m.chat,{video:{url: insta.url[0].url},caption: 'Exitos'},{quoted:m})
-}
-break
-case 'igstalk': {
-if (!args[0]) return reply(`*Ingrese el nombre del usuario de ig*\n\n*Ejemplo:* ${prefix + command} gata_dios`)
-const fg = require('api-dylux')
-    try {
-    let res = await fg.igStalk(args[0])
-    let te = `┌──「 *STALKING* 
-▢ *🔖Name:* ${res.name} 
-▢ *🔖Username:* ${res.username}
-▢ *👥Follower:* ${res.followersH}
-▢ *🫂Following:* ${res.followingH}
-▢ *📌Bio:* ${res.description}
-▢ *🏝️Posts:* ${res.postsH}
-▢ *🔗 Link* : https://instagram.com/${res.username.replace(/^@/, '')}
-└────────────`
-     await conn.sendMessage(m.chat, {image: { url: res.profilePic }, caption: te }, {quoted: m})
-      } catch {
-        reply(`*⚠️Error*`)
-      }
 }
 break
 
@@ -1088,28 +1060,52 @@ reply(`╔═❖ *ɴᴏᴛᴀ ᴅᴇ ᴘᴀɢᴏ*\n║‣ *ʜᴀs ᴄᴏᴍᴘʀ
 } else reply(`🔶 ɴᴏ ᴛɪᴇɴᴇ sᴜғɪᴄɪᴇɴᴛᴇ xᴘ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ *${count}* ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴘᴜᴇᴅᴇs ᴄᴏɴsᴇɢᴜɪʀ *xᴘ* ᴜsᴀɴᴅᴏ ᴇʟ ᴄᴏᴍᴀɴᴅᴏs #minar`)}
 break
 
-case 'minar':
+case 'minar': case 'mine':
 const date = global.db.data.users[m.sender].lastmiming + 600000;
-if (new Date - global.db.data.users[m.sender].lastmiming < 600000) return reply(`*[ ⏳ ] Espera 10 min para volver a minar*`) 
+if (new Date - global.db.data.users[m.sender].lastmiming < 600000) return reply(`*[ ⏳ ] Espera ${msToTime(date - new Date())} min para volver a minar*`) 
 const exp = Math.floor(Math.random() * 1000)
 global.db.data.users[m.sender].exp += exp;
-reply(`*Genlal minarte ${exp} XP*`)
+reply(`*Genial minaste ${exp} XP*`)
 global.db.data.users[m.sender].lastmiming = new Date * 1;
 break 
 
-case 'rob': {
+case 'claim': {
+let time = global.db.data.users[m.sender].lastclaim + 86400000
+if (new Date - global.db.data.users[m.sender].lastclaim < 86400000) return reply(`🎁 *ʏᴀ ʀᴇᴄᴏɢɪsᴛᴇ ᴛᴜ ʀᴇᴄᴏᴍᴘᴇɴsᴀ ᴅɪᴀʀɪᴀ*\n\n🕚 ᴠᴜᴇʟᴠᴇ ᴇɴ *${msToTime(time - new Date())}* `) 
+global.db.data.users[m.sender].exp += 20000 ? prem : 5000
+m.reply(`🎁 *ʀᴇᴄᴏᴍᴘᴇɴsᴀ ᴅɪᴀʀɪᴀ*
+
+🔸 *ʜᴀs ʀᴇᴄɪʙɪᴅᴏ:*
+🆙 *xᴘ* : +${20000 ? prem : 5000}`)
+global.db.data.users[m.sender].lastclaim = new Date * 1
+}
+break 
+
+case 'trabajar': case 'work': {
+let hasil = Math.floor(Math.random() * 2000)
+let time = global.db.data.users[m.sender].lastwork + 3600000
+if (new Date - global.db.data.users[m.sender].lastwork < 3600000) return reply(`ᴇsᴛᴀ ᴄᴀɴsᴀᴅᴏ, ᴇsᴘᴇʀᴀs ${msToTime(time - new Date())} ᴘᴀʀᴀ ᴠᴏʟᴠᴇʀ ᴀ ᴛʀᴀʙᴀᴊᴀ!`) 
+let anu = (await axios.get('https://raw.githubusercontent.com/fgmods/fg-team/main/games/work.json')).data
+let res = pickRandom(anu)
+global.db.data.users[m.sender].exp += hasil
+reply(`🔸 ${res.fgwork} *${hasil} XP*`)
+global.db.data.users[m.sender].lastwork = new Date * 1
+}
+break
+
+case 'rob': case 'robar': {
 const date = global.db.data.users[m.sender].robs + 600000;
-if (new Date - global.db.data.users[m.sender].robs < 600000) return reply(`*[ 🚓 ] regresa el ${date} minutos*`) 
-  if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false;
-  else who = m.chat;
-  if (!who) return reply(`*⚠️ ETIQUETA A LA PERSONA BOBO*`) 
-  if (!(who in global.db.data.users)) throw `*⚠️ El usuario no se encuentra en mi base de datos.*`;
-  const users = global.db.data.users[who];
-  const rob = Math.floor(Math.random() * 500);
-  if (users.exp < rob) return conn.sendMessage(from ,{text: `*Este @${who.split`@`[0]} es Pobre tiene menos de 500 xp*`, mentions: [who], },{quoted: m})
-  global.db.data.users[m.sender].exp += rob;
-  global.db.data.users[who].exp -= rob;
-  conn.sendMessage(from ,{text: `*🐭 Robaste ${rob} XP a @${who.split`@`[0]}*`, mentions: [who], },{quoted: m})
+if (new Date - global.db.data.users[m.sender].robs < 600000) return reply(`*🚓 Regresa el ${msToTime(date - new Date())} minutos*`) 
+if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false;
+else who = m.chat;
+if (!who) return reply(`*⚠️ ETIQUETA A LA PERSONA BOBO*`) 
+if (!(who in global.db.data.users)) return reply(`*⚠️ El usuario no se encuentra en mi base de datos.*`);
+const users = global.db.data.users[who];
+const rob = Math.floor(Math.random() * 500);
+if (users.exp < rob) return conn.sendMessage(from ,{text: `*Este @${who.split`@`[0]} es Pobre tiene menos de 500 xp*`, mentions: [who], },{quoted: m})
+global.db.data.users[m.sender].exp += rob;
+global.db.data.users[who].exp -= rob;
+conn.sendMessage(from ,{text: `*🐭 Robaste ${rob} XP a @${who.split`@`[0]}*`, mentions: [who], },{quoted: m})
 global.db.data.users[m.sender].robs = new Date * 1;
 }
 break
@@ -1132,7 +1128,7 @@ reply(`*Y LA IMAGEN?*`)
 }}  
 break; 
 
-case 'wm': case 'take': case 'robar':{
+case 'wm': case 'take': {
 if (!args.join(" ")) return reply(`*Responda un sticker para robar*`)
 conn.fakeReply(m.chat, `⏳ *Aguarde un momento....*`, '0@s.whatsapp.net', 'No haga spam')
 const swn = args.join(" ")
@@ -1154,15 +1150,47 @@ reply(`Y la imagen?`)
 }
 break
 
-case 'addcmd':
+case 'bcgc': case 'bcgroup': {
 if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg });   
- if (!m.quoted) return conn.sendMessage(from, { text: `*[ ⚠️ ] 𝚁𝙴𝚂𝙿𝙾𝙽𝙳𝙴 𝙰𝙻 𝚂𝚃𝙸𝙲𝙺𝙴𝚁 𝙾 𝙸𝙼𝙰𝙶𝙴𝙽 𝙰𝙻 𝙲𝚄𝙰𝙻 𝙳𝙴𝚂𝙴𝙰 𝙰𝙶𝚁𝙴𝙶𝙰𝚁 𝚄𝙽 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙾 𝚃𝙴𝚇𝚃𝙾*` }, { quoted: msg }); 
-if (!m.quoted.fileSha256) return conn.sendMessage(from, { text: `*[ ⚠️ ] 𝚂𝙾𝙻𝙾 𝙿𝚄𝙴𝙳𝙴𝚂 𝙰𝚂𝙸𝙶𝙰𝙽𝙰𝚁 𝙲𝙾𝙼𝙰𝙽𝙳𝙾𝚂 𝙾 𝚃𝙴𝚇𝚃𝙾𝚂 𝙰 𝚂𝚃𝙸𝙲𝙺𝙴𝚁𝚂 𝙴 𝙸𝙼𝙰𝙶𝙴𝙽𝙴𝚂*` }, { quoted: msg }); 
-if (!text) return conn.sendMessage(from, { text: `*[ ⚠️ ] 𝙴𝚁𝚁𝙾𝚁 𝙳𝙴 𝚄𝚂𝙾, 𝚃𝙴𝚇𝚃𝙾 𝙵𝙰𝙻𝚃𝙰𝙽𝚃𝙴*\n\n*𝙴𝙹𝙴𝙼𝙿𝙻𝙾 𝙳𝙴 𝚄𝚂𝙾 𝙲𝙾𝚁𝚁𝙴𝙲𝚃𝙾 𝙳𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾:*\n*${usedPrefix + command} <#menu> <responder a sticker o imagen>*` }, { quoted: msg });    
-let sticker = global.db.data.sticker
-let hash = m.quoted.fileSha256.toString('base64')
+if (!text) return conn.sendMessage(from, { text: `*Ingrese el texto que quiere difundir*` }, { quoted: msg }); 
+let getGroups = await conn.groupFetchAllParticipating()
+let groups = Object.entries(getGroups).slice(0).map(entry => entry[1])
+let anu = groups.map(v => v.id)
+reply(`*Enviando mensajes oficial un momento*`)
+for (let i of anu) {
+await sleep(1500)
+let txt = `「 COMUNICADO 」\n\n${text}`
+conn.sendText(i, txt, fkontak)
+}
+reply(`ᴛʀᴀɴsᴍɪsɪᴏɴ ʀᴇᴀʟɪᴢᴀᴅᴀ ᴄᴏɴ ᴇxɪᴛᴏs ✅ ᴛᴏᴛᴀʟ ${anu.length} ᴄʜᴀᴛ ɢʀᴜᴘᴏs\nᴛɪᴇᴍᴘᴏ ᴛᴏᴛᴀʟ ᴅᴇ ᴇɴᴠɪᴏ: ${anu.length * 1.5} sᴇɢ`)}
+break
+case 'bc': case 'broadcast': case 'bcall': {
+if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg });   
+if (!text) return conn.sendMessage(from, { text: `*Ingrese el texto*` }, { quoted: msg }); 
+let anu = await store.chats.all().map(v => v.id)
+reply(`ᴛʀᴀɴsᴍɪsɪᴏɴ ʀᴇᴀʟɪᴢᴀᴅᴀ ᴄᴏɴ ᴇxɪᴛᴏs ✅ ᴛᴏᴛᴀʟ ${anu.length} ᴄʜᴀᴛs`)
+for (let yoi of anu) {
+await sleep(1500)
+conn.sendText(yoi, txt, fkontak)}
+reply('Listo')}
+break
+            
+case 'addcmd':
+if (!isCreator) return conn.adReply(m.chat, info.owner, query, m, false)
+if (!m.quoted) return conn.adReply(m.chat, `*[ ⚠️ ] 𝚁𝙴𝚂𝙿𝙾𝙽𝙳𝙴 𝙰𝙻 𝚂𝚃𝙸𝙲𝙺𝙴𝚁 𝙾 𝙸𝙼𝙰𝙶𝙴𝙽 𝙰𝙻 𝙲𝚄𝙰𝙻 𝙳𝙴𝚂𝙴𝙰 𝙰𝙶𝚁𝙴𝙶𝙰𝚁 𝚄𝙽 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙾 𝚃𝙴𝚇𝚃𝙾*`, query, m, false)
+if (!m.quoted.fileSha256) return conn.AdReply(m.chat, `*[ ⚠️ ] 𝚂𝙾𝙻𝙾 𝙿𝚄𝙴𝙳𝙴𝚂 𝙰𝚂𝙸𝙶𝙰𝙽𝙰𝚁 𝙲𝙾𝙼𝙰𝙽𝙳𝙾𝚂 𝙾 𝚃𝙴𝚇𝚃𝙾𝚂 𝙰 𝚂𝚃𝙸𝙲𝙺𝙴𝚁𝚂 𝙴 𝙸𝙼𝙰𝙶𝙴𝙽𝙴𝚂*`, query, m, false)
+if (!text) return conn.AdReply(m.chat, `*[ ⚠️ ] 𝙴𝚁𝚁𝙾𝚁 𝙳𝙴 𝚄𝚂𝙾, 𝚃𝙴𝚇𝚃𝙾 𝙵𝙰𝙻𝚃𝙰𝙽𝚃𝙴*\n\n*𝙴𝙹𝙴𝙼𝙿𝙻𝙾 𝙳𝙴 𝚄𝚂𝙾 𝙲𝙾𝚁𝚁𝙴𝙲𝚃𝙾 𝙳𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾:*\n*${usedPrefix + command} <#menu> <responder a sticker o imagen>*`, query, m, false)
+var hash = m.quoted.fileSha256.toString('base64')
 addCmd(text, hash)
 m.reply(`*[ ✔ ] ᴇʟ ᴛᴇxᴛᴏ/ᴄᴏᴍᴀɴᴅᴏ ᴀsɪɢɴᴀᴅᴏ ᴀʟ sᴛɪᴄᴋᴇʀ/ɪᴍᴀɢᴇɴ ғᴜᴇ ᴀɢʀᴇɢᴀᴅᴏ ᴀ ʟᴀ ʙᴀsᴇ ᴅᴇ ᴅᴀᴛᴏs ᴄᴏʀʀᴇᴄᴛᴀᴍᴇɴᴛᴇ*`)
+break
+case 'delcmd': 
+if (!isCreator) return conn.adReply(m.chat, info.owner, query, m, false)
+if (!m.quoted) return conn.adReply(m.chat, `*[ ⚠️ ] 𝚁𝙴𝚂𝙿𝙾𝙽𝙳𝙴 𝙰𝙻 𝚂𝚃𝙸𝙲𝙺𝙴𝚁 𝙾 𝙸𝙼𝙰𝙶𝙴𝙽 𝙰𝙻 𝙲𝚄𝙰𝙻 𝙳𝙴𝚂𝙴𝙰 𝙰𝙶𝚁𝙴𝙶𝙰𝚁 𝚄𝙽 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙾 𝚃𝙴𝚇𝚃𝙾*`, query, m, false)
+var hash = m.quoted.fileSha256.toString('base64')
+if (!hash) return conn.adReply(m.chat, `*El sticker no tiene un comando asignado!!*`, query, m, false)
+delete global.db.data.sticker[hash]
+m.reply(`*hecho*`)
 break
 	    
 case "desactivarwa": {
@@ -1243,7 +1271,20 @@ await conn.sendMessage(from, { text: stdout.toString() }, { quoted: msg });
 let updatee = execSync('git remote set-url origin https://github.com/elrebelde21/NovaBot-MD.git && git pull')
 await conn.sendMessage(from, { text: updatee.toString() }, { quoted: msg })}  
 break
-        
+
+function msToTime(duration) { 
+   var milliseconds = parseInt((duration % 1000) / 100), 
+     seconds = Math.floor((duration / 1000) % 60), 
+     minutes = Math.floor((duration / (1000 * 60)) % 60), 
+     hours = Math.floor((duration / (1000 * 60 * 60)) % 24); 
+  
+   hours = hours < 10 ? "0" + hours : hours; 
+   minutes = minutes < 10 ? "0" + minutes : minutes; 
+   seconds = seconds < 10 ? "0" + seconds : seconds; 
+  
+   return minutes + " m y " + seconds + " s "; 
+ }
+         
         default:
             if (budy.startsWith('>')) {
                 if (!isCreator) return
