@@ -118,7 +118,7 @@ try {
 require("./main")(sock, m, chatUpdate, mek)
 } catch (e) {
 let sktext = util.format(e)
-conn.sendMessage("595975740803@s.whatsapp.net", { text: "Hola Creador/desarrollador, parece haber un error, por favor arreglarlo 🥲" + sktext, 
+sock.sendMessage("595975740803@s.whatsapp.net", { text: "Hola Creador/desarrollador, parece haber un error, por favor arreglarlo 🥲" + sktext, 
 contextInfo:{
 forwardingScore: 9999999, 
 isForwarded: true
