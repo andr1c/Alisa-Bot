@@ -287,6 +287,17 @@ try {
   let user = global.db.data.users[m.sender]  
   if (typeof user !== 'object') global.db.data.users[m.sender] = {}  
   if (user) {
+ if (!('registered' in user))
+user.registered = false
+//-- user registered 
+if (!user.registered) {
+if (!('name' in user))
+user.name = m.name
+if (!isNumber(user.age))
+user.age = -1
+if (!isNumber(user.regTime))
+user.regTime = -1
+}
   if (!isNumber(user.afkTime)) user.afkTime = -1  
   if (!('afkReason' in user)) user.afkReason = ''  
    if (!isNumber(user.limit)) user.limit = 20  
@@ -321,7 +332,13 @@ try {
   afkTime: -1,  
   afkReason: '',  
   limit: 20,  
-  registered: false, 
+  registered: false,
+  lastclaim: 0,
+  name: m.name,
+  age: -1,
+  regTime: -1,
+  afk: -1,
+  afkReason: '',
   money: 0,  
   health: 100,  
   warn: 0, 
