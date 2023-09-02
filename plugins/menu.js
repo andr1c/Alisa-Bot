@@ -12,6 +12,8 @@ const os = require('os')
 
 const menu = (main, prefix, pushname, sender, m) => {
 let user = global.db.data.users[m.sender]
+let totalreg = Object.keys(global.db.data.users).length
+let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length
 const date = moment.tz('America/Bogota').format('DD/MM/YYYY')
 const time = moment.tz('America/Argentina/Buenos_Aires').format('LT')
 /*const d = new Date(new Date + 3600000);
@@ -36,7 +38,7 @@ return `╔══════ ≪ •❈• ≫ ══════╗
 ║✾ ʀᴀɴɢᴏ : ${user.role}
 ║✾ ᴇxᴘ : ${user.exp}
 ║ 
-║✾ ʀᴇɢɪsᴛʀᴀᴅᴏ : ⁉️
+║✾ ʀᴇɢɪsᴛʀᴀᴅᴏ : ${rtotalreg} de ${totalreg}
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
 ╚══════ ≪ •❈• ≫ ══════╝
 
@@ -49,6 +51,8 @@ return `╔══════ ≪ •❈• ≫ ══════╗
 ===============================
 
 *╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*⃐ℹ️ ＩＮＦＯ ＢＯＴ*️⃟ᬽ፝֟━*
+├❥ᰰຼ ❏ ${prefix}reg 
+├❥ᰰຼ _(registrarte para poder usar el bot)_
 ├❥ᰰຼ ❏ ${prefix}estado 
 ├❥ᰰຼ _(comprueba el estado del bot)_
 ├❥ᰰຼ ❏ ${prefix}ping 
@@ -71,8 +75,6 @@ return `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ _(General un qr para convertirte el un sub bot)_
 ├❥ᰰຼ ❏ ${prefix}bots
 ├❥ _(comprueba si hay sub bot conectado)_
-├❥ᰰຼ ❏ ${prefix}stop
-├❥ᰰຼ _(comando solo para sub bot)_
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
 
 *╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*⃐🔄ＤＥＳＣＡＲＧＡ*️⃟ᬽ፝֟━*
@@ -173,6 +175,7 @@ return `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}trabajar
 ├❥ᰰຼ ❏ ${prefix}work _(trabajar y ganas exp)_
 ├❥ᰰຼ ❏ ${prefix}buy _(comprar mas diamante (limit)_
+├❥ᰰຼ ❏ ${prefix}afk
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
 
 *╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*⃐👽ＳＴＩＣＫＥＲ*️⃟ᬽ፝֟━*
