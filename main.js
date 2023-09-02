@@ -33,7 +33,7 @@ return !color ? chalk.cyanBright(text) : color.startsWith('#') ? chalk.hex(color
 //═══[ Importa varias funciones y objetos ]═════ 
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('./libs/fuctions')
 const { default: makeWASocket, proto } = require("@whiskeysockets/baileys") // Importa los objetos 'makeWASocket' y 'proto' desde el módulo '@whiskeysockets/baileys'
-const { msgFilter } = require('./libs/antispam')
+//const { msgFilter } = require('./libs/antispam')
 const { ytmp4, ytmp3, ytplay, ytplayvid } = require('./libs/youtube')
 const { menu } = require('./plugins/menu.js')
 const { state } = require('./plugins/info.js')
