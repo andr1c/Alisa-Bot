@@ -49,6 +49,8 @@ AntiNsfw: `*Los comando +18 esta desactivado*\nSi eres admin y quiere activarlos
 endLimit: 'Uff esta pobres no tener mas 💎',
 }
 
+global.multiplier = 69 // Cuanto más alto, más difícil subir de nivel 
+
 let file = require.resolve(__filename) 
 fs.watchFile(file, () => { 
 fs.unwatchFile(file)
