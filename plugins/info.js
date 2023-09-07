@@ -8,11 +8,9 @@
  const os = require('os')
  const chalk = require('chalk')
  const fs = require("fs")
-  
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('../libs/fuctions.js'); 
 
 async function state(conn, m, speed, sender, fkontak) {
-//let data = await obtenerDatos()
 const totalMemory = Math.round(os.totalmem() / (1024 * 1024 * 1024))
 const freeMemory = Math.round(os.freemem() / (1024 * 1024 * 1024))
 const usedMemory = totalMemory - freeMemory
@@ -20,6 +18,7 @@ const cpuUsage = os.loadavg()[0]
 let me = m.sender
 var timestamp = speed();  
 var latensi = speed() - timestamp  
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 let stateRun = `┏━━━━❰･𝐄𝐒𝐓𝐀𝐃𝐎 𝐃𝐄𝐋 𝐁𝐎𝐓･❱━━━━
 ┃
 ┃웃 Hola @${me.split('@')[0]}
@@ -39,8 +38,64 @@ let stateRun = `┏━━━━❰･𝐄𝐒𝐓𝐀𝐃𝐎 𝐃𝐄𝐋 𝐁�
 let ments = [me]        
 await conn.sendMessage(m.chat, {image: imagen1, caption: stateRun, mentionedJid:[sender]}, { quoted: fkontak })
 }
-  
-module.exports = { state }
+
+async function owner(conn, m, sender) {
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+let vcard = `BEGIN:VCARD\nVERSION:3.0\nN:;OWNER 👑;;;\nFN:OWNER\nORG:OWNER 👑\nTITLE:\nitem1.TEL;waid=595975740803:+595 975 740803\nitem1.X-ABLabel:OWNER 👑\nX-WA-BIZ-DESCRIPTION:ᴇsᴄʀɪʙɪ sᴏʟᴏ ᴘᴏʀ ᴄᴏsᴀs ᴅᴇʟ ʙᴏᴛ.\nX-WA-BIZ-NAME:Owner 👑\nEND:VCARD`
+let a = await conn.sendMessage(m.chat, { contacts: { displayName: 'ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ 👑', contacts: [{ vcard }] }}, {quoted: m})
+await conn.sendMessage(m.chat, { text : `Hola @${sender.split("@")[0]}, este bot esta desarrollo si quiere contacta con mi creador aqui te dejo sus número`, mentions: [sender]}, { quoted: a })
+}
+
+async function grupo(conn, m, sender) {
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+conn.sendMessage(m.chat, { text: `*BOT EL DESARROLLO*\n\n*Te puede unirte al grupo para proba el bot y sus funciones 😼*\n\n${nnn}` }, { quoted: m })
+}
+
+async function instalar(conn, m, pushname, sender) {
+if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
+conn.sendMessage(m.chat, { text: `┎┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+\`\`\`COMO INSTALAR ESTE BOT?\`\`\`
+\`\`\`Este bot es nuevo todavía no se puede instalar si quiere probar sus funciones entra al grupo del bot\`\`\`
+*Escribe: ${prefix}grupos*
+
+\`\`\`o puede probar las funcion de hacerte un sub bot Escribe: ${prefix}serbot\`\`\`
+┖┈┈┈┈┈┈┈┈┈┈┈┈┈┈`,
+contextInfo:{
+mentions: [sender], 
+forwardingScore: 9999999,
+isForwarded: true, 
+"externalAdReply": {
+"showAdAttribution": true,
+"containsAutoReply": true,
+"title": ` ${wm}`,
+"body": `${pushname}`,
+"previewType": "PHOTO",
+"thumbnailUrl": ``,
+"thumbnail": imagen1, 
+"sourceUrl": md}}},
+{ quoted: m})
+}
+
+async function ping(conn, from, msg, speed) {
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+var timestamp = speed();  
+var latensi = speed() - timestamp  
+conn.sendMessage(from, { text: `*Pong 🏓  ${latensi.toFixed(4)}*` }, { quoted: msg  })
+}
+
+async function report(conn, from, m, prefix, command, text) {
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (!text) return m.reply(`*𝙸𝙽𝙶𝚁𝙴𝚂𝙴 𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙲𝙾𝙽 𝙵𝙰𝙻𝙻𝙾𝚂*\n\n*𝙴𝙹𝙴𝙼𝙿𝙻𝙾:*\n${prefix + command} sticker no funciona`)
+conn.sendMessage(`595975740803@s.whatsapp.net`, {text: `╭━━〔 *𝚁𝙴𝙿𝙾𝚁𝚃𝙴 | 𝚁𝙴𝙿𝙾𝚁𝚃 * 〕━━⬣\n┃\n┃✿ *𝙽𝚞𝚖𝚎𝚛𝚘 | 𝚗𝚞𝚖𝚋𝚎𝚛*\n┃⇢ wa.me/${m.sender.split("@")[0]}\n┃\n┃✿ *𝙼𝚎𝚗𝚜𝚊𝚓𝚎 | 𝚝𝚎𝚡𝚝*\n┃: ${text}┃\n╰━━━〔 *${vs}* 〕━━━⬣` })
+m.reply(`*𝙴𝙻 𝚁𝙴𝙿𝙾𝚁𝚃𝙴 𝙵𝚄𝙴 𝙴𝙽𝚅𝙸𝙰𝙳𝙾 𝙰 𝙼𝙸 𝙲𝚁𝙴𝙰𝙳𝙾𝚁, 𝙽𝙾𝚂 𝙲𝙾𝙽𝚃𝙰𝚁𝙴𝙼𝙾𝚂 𝙲𝙾𝙽 𝚄𝚂𝚃𝙴𝙳 𝚂𝙸 𝙴𝚂 𝙽𝙴𝙲𝙴𝚂𝙰𝚁𝙸𝙾, 𝙳𝙴 𝚂𝙴𝚁 𝙵𝙰𝙻𝚂𝙾 𝚂𝙴𝚁𝙰 𝙸𝙶𝙽𝙾𝚁𝙰𝙳𝙾 𝚈 𝙱𝙻𝙾𝚀𝚄𝙴𝙰𝙳𝙾 𝙳𝙴𝙻 𝙱𝙾𝚃*`)
+}
+
+async function ow(conn, args) {   
+if (!args.join(" ")) return m.reply(`┗❴ ⚠ 𝐀𝐃𝐕𝐄𝐑𝐓𝐄𝐍𝐂𝐈𝐀 ⚠ ❵┛\n\nᴇsᴛᴀ ᴘʀᴏʜɪʙɪᴅᴏ ᴇᴛɪᴏᴜᴇᴛᴀʀ ᴀʟ ᴄʀᴇᴀᴅᴏʀ sɪ ᴛɪᴇɴᴇs ᴜɴᴀ ᴅᴜʀᴀ ʀᴇғᴇʀᴇɴᴛᴇ ᴀʟ ʙᴏᴛ ᴇsᴄʀɪʙɪʀʟᴇ ᴀ sᴜs ᴘʀɪᴠ.`)
+for (let i of owner) {
+}}
+
+module.exports = { state, owner, grupo, instalar, ping, report, ow}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {

@@ -21,7 +21,7 @@ const locale = 'es';
 const week = d.toLocaleDateString(locale, {weekday: 'long'});
 const date = d.toLocaleDateString(locale, {day: 'numeric', month: 'long', year: 'numeric'});*/
 let wa = m.key.id.length > 21 ? 'Android' : m.key.id.substring(0, 2) == '3A' ? 'IOS' : 'whatsapp web'
-
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 return `╔══════ ≪ •❈• ≫ ══════╗
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
 ║✾ Hola @${sender.split("@")[0]} 👋🏻 
@@ -75,6 +75,8 @@ return `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ _(General un qr para convertirte el un sub bot)_
 ├❥ᰰຼ ❏ ${prefix}bots
 ├❥ _(comprueba si hay sub bot conectado)_
+├❥ᰰຼ ❏ ${prefix}stop
+├❥ᰰຼ _(Comando solo para los sub bot)_
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
 
 *╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*⃐🔄ＤＥＳＣＡＲＧＡ*️⃟ᬽ፝֟━*
@@ -92,8 +94,8 @@ return `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ _(ingresa el link del GitHub para descargar el repositorio)_
 ├❥ᰰຼ ❏ ${prefix}tiktok
 ├❥ᰰຼ (Ingresa el link del tiktok para descargar el video)
-├❥ᰰຼ ❏ ${prefix}Facebook
-├❥ᰰຼ (ingresa un link de Facebook para descargar el video)
+├❥ᰰຼ ❏ ${prefix}mediafire
+├❥ᰰຼ (descarga archivo de mediafire)_
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
 
 *╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*🔰⃐ＧＲＵＰＯＳ*️⃟ᬽ፝֟━*
@@ -122,6 +124,8 @@ return `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ _(ingresa el texto de que quiera buscar con la (IA)_
 ├❥ᰰຼ ❏ ${prefix}imagen
 ├❥ᰰຼ _ingresa texto de la imagen que quiere buscar_
+├❥ᰰຼ ❏ ${prefix}traducir
+├❥ᰰຼ _(traducir algun texto)_
 ├❥ᰰຼ ❏ ${prefix}ss 
 ├❥ᰰຼ _(ingresa un link para manda captura)_
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
@@ -175,7 +179,11 @@ return `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}trabajar
 ├❥ᰰຼ ❏ ${prefix}work _(trabajar y ganas exp)_
 ├❥ᰰຼ ❏ ${prefix}buy _(comprar mas diamante (limit)_
-├❥ᰰຼ ❏ ${prefix}afk
+├❥ᰰຼ ❏ ${prefix}bal
+├❥ᰰຼ ❏ ${prefix}balace _(para sabes cuanto diamante/exp tiene)_
+├❥ᰰຼ ❏ ${prefix}claim
+├❥ᰰຼ _(recoger tu recompensa)_
+├❥ᰰຼ ❏ ${prefix}afk 
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
 
 *╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*⃐👽ＳＴＩＣＫＥＲ*️⃟ᬽ፝֟━*
