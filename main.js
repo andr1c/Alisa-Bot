@@ -7,7 +7,7 @@
 const baileys = require('@whiskeysockets/baileys'); // trabajar a través de descargas por Whatsapp 
 const moment = require('moment-timezone') // Trabajar con fechas y horas en diferentes zonas horarias
 const gradient = require('gradient-string') // Aplicar gradientes de color al texto
-const { execSync } = require('child_process') // Función 'execSync' del módulo 'child_process' para ejecutar comandos en el sistema operativo
+const { exec, spawn, execSync } = require("child_process")// Función 'execSync' del módulo 'child_process' para ejecutar comandos en el sistema operativo
 const chalk = require('chalk') // Estilizar el texto en la consola
 const os = require('os') // Proporciona información del sistema operativo
 const fs = require('fs') // Trabajar con el sistema de archivos
@@ -21,9 +21,10 @@ const mimetype = require("mime-types")
 const webp = require("node-webpmux")
 const Jimp = require('jimp')
 const scp1 = require('./libs/scraper') 
-const { facebook } = require('./libs/facebook')
-const { instagram } = require('./libs/instagram')
-const {jadibot, listJadibot } = require('./serbot.js')  
+const { File } = require("megajs")
+const { mediafireDl } = require('./libs/mediafire.js') 
+const {jadibot, listJadibot, killJadibot} = require('./serbot.js')  
+const { jadibot2 } = require('./serbot2.js')
 const speed = require("performance-now")
 const ffmpeg = require("fluent-ffmpeg")
 
@@ -36,7 +37,12 @@ const { default: makeWASocket, proto } = require("@whiskeysockets/baileys") // I
 //const { msgFilter } = require('./libs/antispam')
 const { ytmp4, ytmp3, ytplay, ytplayvid } = require('./libs/youtube')
 const { menu } = require('./plugins/menu.js')
-const { state } = require('./plugins/info.js')
+const { state, owner, grupo, instalar, ping, report, ow} = require('./plugins/info.js')
+const {rob, bal, reg, work, mine, buy, afk, claim} = require('./plugins/rpg.js')
+const {gay, pareja, fake, sim} = require('./plugins/juegos.js')
+const {yt, acortar, google, imagen, tran, tts, ia, ssw} = require('./plugins/buscadores.js')
+const {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, on, on2} = require('./plugins/grupos.js')
+const {nsfw1, nsfw2, nsfw3} = require('./plugins/nsfw.js')
 
 const msgs = (message) => { // Función 'msgs' que toma un parámetro 'message'
 if (message.length >= 10) { // Longitud de 'message' es mayor o igual a 10 caracteres
@@ -95,10 +101,10 @@ const pushname = m.pushName || "Sin nombre" // Obtiene el nombre de visualizaci�
 const botnm = conn.user.id.split(":")[0] + "@s.whatsapp.net"
 const userSender = m.key.fromMe ? botnm : m.isGroup && m.key.participant.includes(":") ? m.key.participant.split(":")[0] + "@s.whatsapp.net" : m.key.remoteJid.includes(":") ? m.key.remoteJid.split(":")[0] + "@s.whatsapp.net" : m.key.fromMe ? botnm : m.isGroup ? m.key.participant : m.key.remoteJid
 const mentionByTag = type == 'extendedTextMessage' && m.message.extendedTextMessage.contextInfo != null ? m.message.extendedTextMessage.contextInfo.mentionedJid : []
-        const mentionByReply = type == 'extendedTextMessage' && m.message.extendedTextMessage.contextInfo != null ? m.message.extendedTextMessage.contextInfo.participant || '' : ''
-        const numberQuery = q.replace(new RegExp('[()+-/ +/]', 'gi'), '') + '@s.whatsapp.net'
-        const usernya = mentionByReply ? mentionByReply : mentionByTag[0]
-        const Input = mentionByTag[0] ? mentionByTag[0] : mentionByReply ? mentionByReply : q ? numberQuery : false
+const mentionByReply = type == 'extendedTextMessage' && m.message.extendedTextMessage.contextInfo != null ? m.message.extendedTextMessage.contextInfo.participant || '' : ''
+const numberQuery = q.replace(new RegExp('[()+-/ +/]', 'gi'), '') + '@s.whatsapp.net'
+const usernya = mentionByReply ? mentionByReply : mentionByTag[0]
+const Input = mentionByTag[0] ? mentionByTag[0] : mentionByReply ? mentionByReply : q ? numberQuery : false
 const isCreator = global.owner.map(([numero]) => numero.replace(/[^\d\s().+:]/g, '').replace(/\s/g, '') + '@s.whatsapp.net').includes(userSender) // Eliminar todo a excepción de números 
 const itsMe = m.sender == conn.user.id ? true : false // Verifica si el remitente del mensaje es el propio bot
 const text = args.join(" ") // Unir rgumentos en una sola cadena separada por espacios
@@ -121,7 +127,6 @@ const groupMetadata = m.isGroup ? await conn.groupMetadata(from) : '' // Obtiene
 const groupName = m.isGroup ? groupMetadata.subject : '' // Nombre del grupo
 const participants = m.isGroup ? await groupMetadata.participants : '' // Lista de participantes del grupo
 const groupAdmins = m.isGroup ? await getGroupAdmins(participants) : '' // // Lista de administradores del grupo
-
 const isBotAdmins = m.isGroup ? groupAdmins.includes(numBot) : false // Verifica si el bot es un administrador del grupo
 const isGroupAdmins = m.isGroup ? groupAdmins.includes(userSender) : false // Verifica si el remitente del mensaje es un administrador del grupo
 const isBaneed = m.isGroup ? blockList.includes(userSender) : false // Verifica si el remitente del mensaje está en la lista de bloqueados
@@ -133,7 +138,6 @@ const reply = (text) => {
  const sendImage = ( image, caption ) => { conn.sendMessage(from, { image: image, caption: caption }, { quoted: m })} 
  const sendImageAsUrl = ( url, caption ) => { conn.sendMessage(from, { image:  {url: url }, caption: caption }, { quoted: m })}
 const sendSticker = ( image, fkontak) => { conn.sendMessage(m.chat, { sticker: image }, { quoted: fkontak})}
-
 const isAudio = type == 'audioMessage' // Mensaje de Audio
 const isSticker = type == 'stickerMessage' // Mensaje de Sticker
 const isContact = type == 'contactMessage' // Mensaje de Contacto
@@ -145,11 +149,6 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
 const isQuotedDocument = type === 'extendedTextMessage' && content.includes('documentMessage')
 const isQuotedMsg = type === 'extendedTextMessage' && content.includes('Message') // Mensaje citado de cualquier tipo
 const isViewOnce = (type === 'viewOnceMessage') // Verifica si el tipo de mensaje es (mensaje de vista única)
-
-//función pickrandow
-function pickRandom(list) {
-return list[Math.floor(list.length * Math.random())]
-}
 
 //base de datos
 let user = global.db.data.users[m.sender]
@@ -183,14 +182,14 @@ if (global.db.data.chats[m.chat].antilink) {
 if (budy.match(`chat.whatsapp.com`)) {
 let delet = m.key.participant
 let bang = m.key.id
-kice = m.sender
-reply(`\`\`\`「 ANTILINK DETECTADO 」\`\`\`\n\n*@${kice.split("@")[0]} sera expulsado del grupo sucia rata 🙄*`)
-if (!isBotAdmins) return reply(`El bot necesita admin para eliminar al incluso 🙄`)
+user = m.sender
+conn.sendMessage(m.chat, {text: `\`\`\`「 ANTILINK DETECTADO 」\`\`\`\n\n@${user.split("@")[0]} eso no esta permitido necesita atencion con tu puto grupo quebrado sucia rata 🙄`, mentions: [user], },{quoted: m}) 
+if (!isBotAdmins) return reply(`Te salvarte puto no soy admins 🙄`)
 let gclink = (`https://chat.whatsapp.com/`+await conn.groupInviteCode(m.chat))
 let isLinkThisGc = new RegExp(gclink, 'i')
 let isgclink = isLinkThisGc.test(m.text)
 if (isgclink) return reply(`Te salvarte el link enviado es de este grupo`)
-if (isGroupAdmins) return reply(`Te salvarte perra eres admin jjj`)
+if (isGroupAdmins) return reply(`Te salvarte por que eres un admins :v`)
 conn.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: bang, participant: delet }})
 conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')}}
 
@@ -256,116 +255,47 @@ m.isGroup ? chalk.bold.greenBright('\n│📤GRUPO: ') + chalk.greenBright(group
 chalk.bold.white('\n│💬MENSAJE: ') + chalk.whiteBright(`\n▣────────────···\n${msgs(m.text)}\n`))
 )}
 
-//Suit PvP 
-this.suit = this.suit ? this.suit : {}; 
-let roof = Object.values(this.suit).find((roof) => roof.id && roof.status && [roof.p, roof.p2].includes(m.sender)); 
-if (roof) { 
-let win = ""; 
-let tie = false; 
-if (m.sender == roof.p2 && body == "aceptar" && m.isGroup && roof.status == "wait") { 
-if (/^(tolak|negar|nanti|n|ga(k.)?bisa|no|Rechazar)/i.test(m.text)) { 
-conn.sendTextWithMentions(m.chat, `@${roof.p2.split`@`[0]} Rechazo el juego\nppt cancelado`, m); 
-delete this.suit[roof.id]; 
-return !0; 
-} 
-roof.status = "play"; 
-roof.asal = m.chat; 
-clearTimeout(roof.waktu); 
-//delete roof[roof.id].waktu 
-conn.sendText(m.chat, `*Jugador 1:* @${roof.p.split`@`[0]}\n*jugador 2:* @${roof.p2.split`@`[0]}\n\nPor favor revisa tu privado el este número`, m, { mentions: [roof.p, roof.p2] }); 
-if (!roof.pilih) 
-conn.sendText(roof.p, `*Escribe:*\n\nPiedra 🗿\nPapel 📄\nTijera ✂️`); 
-if (!roof.pilih2) 
-conn.sendText(roof.p2, `*Escribe:*\n\nPiedra 🗿\nPapel 📄\nTijera ✂️`, m); 
-roof.waktu_milih = setTimeout(() => { 
-if (!roof.pilih && !roof.pilih2) 
-conn.sendText(m.chat, `Ambos jugadores no tenian intencion de jugar,\nPPT cancelado`); 
-else if (!roof.pilih || !roof.pilih2) { 
-win = !roof.pilih ? roof.p2 : roof.p; 
-conn.sendTextWithMentions(m.chat, `@${(roof.pilih ? roof.p2 : roof.p).split`@`[0]} No escogio, Game Over`, m)} 
-delete this.suit[roof.id]; 
-return !0; 
-}, roof.timeout)} 
-let jwb = m.sender == roof.p; 
-let jwb2 = m.sender == roof.p2; 
-let g = /tijera/i; 
-let b = /piedra/i; 
-let k = /papel/i; 
-let reg = /^(tesoura|pedra|papel)/i; 
-if (jwb && reg.test(m.text) && !roof.pilih && !m.isGroup) { 
-roof.pilih = reg.exec(m.text.toLowerCase())[0]; 
-roof.text = m.text; 
-conn.sendText(`Eligiste ${m.text} ${!roof.pilih2 ? `\n\nEsperando a tu oponente...` : "" }`); 
-if (!roof.pilih2) 
-conn.sendText(roof.p2, "_Ya tu oponente eligio_\nTe toca eligir", 0 )} 
-if (jwb2 && reg.test(m.text) && !roof.pilih2 && !m.isGroup) { 
-roof.pilih2 = reg.exec(m.text.toLowerCase())[0]; 
-roof.text2 = m.text; 
-conn.sendText(`Escogiste ${m.text} ${!roof.pilih ? `\n\nEsperando al oponente...` : ""}`); 
-if (!roof.pilih) 
-conn.sendText(roof.p, "_Ya tu oponente eligió_\nte toca eligir", 0 )} 
-let stage = roof.pilih; 
-let stage2 = roof.pilih2; 
-if (roof.pilih && roof.pilih2) { 
-clearTimeout(roof.waktu_milih); 
-if (b.test(stage) && g.test(stage2)) win = roof.p; 
-else if (b.test(stage) && k.test(stage2)) win = roof.p2; 
-else if (g.test(stage) && k.test(stage2)) win = roof.p; 
-else if (g.test(stage) && b.test(stage2)) win = roof.p2; 
-else if (k.test(stage) && b.test(stage2)) win = roof.p; 
-else if (k.test(stage) && g.test(stage2)) win = roof.p2; 
-else if (stage == stage2) tie = true; 
-conn.sendText(roof.asal, `_*Resultado de PvP:*_${tie ? "\n" : ""}\n\n@${roof.p.split`@`[0]} elegio ${roof.text}! ${tie ? "" : roof.p == win ? ` Gano\n` : `\n`}\n@${roof.p2.split`@`[0]} & ${roof.text2}! ${tie ? "" : roof.p2 == win ? ` Gano🏆\n` : `\n`}`.trim(), m, { mentions: [roof.p, roof.p2] }); 
-delete this.suit[roof.id]; 
-}} 
-
-//afk
-let mentionUser = [...new Set([...(m.mentionedJid || []), ...(m.quoted ? [m.quoted.sender] : [])])]
-for (let jid of mentionUser) {
-let user = global.db.data.users[jid]
-if (!user) continue
-let afkTime = user.afkTime
-if (!afkTime || afkTime < 0) continue
-let reason = user.afkReason || ''
-m.reply(`💤 𝙽𝙾 𝙻𝙾𝚂 𝙴𝚃𝙸𝚀𝚄𝙴𝚃𝙴 💤\n𝙴𝚜𝚝𝚎 𝚞𝚜𝚞𝚊𝚛𝚒𝚘 𝚚𝚞𝚎 𝚖𝚎𝚗𝚌𝚒𝚘𝚗𝚊𝚜 𝚎𝚜𝚝𝚊 𝙰𝙵𝙺\n\n${reason ? '🔸️ *𝚁𝙰𝚉𝙾𝙽* : ' + reason : '🔸️ *𝚁𝙰𝚉𝙾𝙽* : 𝚂𝚒𝚗 𝚛𝚊𝚣𝚘𝚗'}\n🔸️ *𝙴𝚂𝚃𝚄𝚅𝙾 𝙸𝙽𝙰𝙲𝚃𝙸𝚅𝙾 𝙳𝚄𝚁𝙰𝙽𝚃𝙴 : ${clockString(new Date - afkTime)}`.trim())}
-if (global.db.data.users[m.sender].afkTime > -1) {
-let user = global.db.data.users[m.sender]
-m.reply(`╭━─━─━─≪☣️≫─━─━─━╮\n┃𝙳𝙴𝙹𝙰𝚂𝚃𝙴 𝙳𝙴 𝙴𝚂𝚃𝙰 𝙰𝙵𝙺\n┃${user.afkReason ? '\n┃🔸️ *𝚁𝙰𝚉𝙾𝙽 :* ' + user.afkReason : ''}\n┃🔸 *𝙴𝚂𝚃𝚄𝚅𝙾 𝙸𝙽𝙰𝙲𝚃𝙸𝚅𝙾 𝙳𝚄𝚁𝙰𝙽𝚃𝙴* ${clockString(new Date - user.afkTime)}\n╰━─━─━─≪☣️≫─━─━─━╯`.trim())
-user.afkTime = -1
-user.afkReason = '' 
-}
-
 //Marcar como (Escribiendo...) 
 /*if (command) {
 await conn.sendPresenceUpdate('composing', m.chat)
 }*///Para que le guste :v
      
 //ARRANCA LA DIVERSIÓN
-switch (command) {
+switch (command) { 
 case 'yts':
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-if (!text) return reply(`*Ejemplo:*\n${prefix + command} anime`)
-const yts = require("youtube-yts");
-const search = await yts(text);
-const {key} = await conn.sendMessage(from, {text: info.wait}, { quoted: fkontak })
-await conn.sendMessage(from, {text: info.waitt, edit: key}, { quoted: fkontak })
-await conn.sendMessage(from, {text: info.waittt, edit: key}, { quoted: fkontak })
-await conn.sendMessage(from, {text: info.waitttt, edit: key}, { quoted: fkontak })	
-let teks = '💫 Resultados de ' + text + '\n\n';
-let no = 1;
-let themeemoji = "🔶"
-for (let i of search.all) {
-  teks += `${themeemoji} OPCIÓN : ${no++}\n${themeemoji} TIPO: ${i.type}\n${themeemoji} ID DEL VIDEO : ${i.videoId}\n${themeemoji} TITULO: ${i.title}\n${themeemoji} VISTAS : ${i.views}\n${themeemoji} DURACIÓN : ${i.timestamp}\n${themeemoji} SUBIDOS: ${i.ago}\n${themeemoji} URL: ${i.url}\n\n✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧\n\n`;
-}
-await conn.sendMessage(from, { image: { url: search.all[0].thumbnail }, caption: teks }, { quoted: fkontak });
-await conn.sendMessage(from, {text: info.result, edit: key}, { quoted: fkontak })
+await yt(conn, m, text, from, command, fkontak, prefix)  
+break
+case 'acortar':
+await acortar(conn, m, text, command)  
+break
+case 'google': {      
+await google(conn, m, text, command)}
+break 
+case 'imagen': {
+await imagen(conn, m, text, command)}
+break
+case 'traducir': case 'translate': {
+await tran(conn, m, args, quoted, prefix, command)}
+break
+case "tts":
+await tts(conn, m, q, text, quoted)
+break		              				
+case 'ia': case 'chatgpt':
+await ia(conn, m, text, quoted)
+break
+case 'ss': case 'ssweb': {
+await ssw(conn, m, q, prefix, command, quoted, scp1)}
 break
 
-case 'serbot': case 'jadibot':
-if (m.isGroup) return m.reply(info.private) 
+case 'serbot': case 'qr':
 await jadibot(conn, m, from, command, prefix)  
 break  
-  
+case 'jadibot': case 'sercode':
+jadibot2(conn, m, command, text)
+break
+case 'stop':
+killJadibot(conn, m, prefix, command)
+break
 case 'bots': case 'listbots':
 try { 
 let user = [... new Set([...global.listJadibot.filter(conn => conn.user).map(conn => conn.user)])] 
@@ -377,91 +307,14 @@ te += " ❑ Nombre : " + i.name + "\n\n"
 } 
 conn.sendMessage(from ,{text: te, mentions: [y], },{quoted: m}) 
 } catch (err) { 
-reply(`*No hay subbots activo el este momento intente mas tardes*`)} 
+reply(`*NO HAY SUBBOT CONECTADO, INTENTE MAS TARDES*`)} 
 break 
-
-case 'acortar':
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
- if (!text) return m.reply(`*Ingresa un link para acortar!*`)
-let shortUrl1 = await (await fetch(`https://tinyurl.com/api-create.php?url=${args[0]}`)).text()  
-if (!shortUrl1) return m.reply(`*⚠️ ERROR*`)
-let done = `*❇️ LINK ACORTADO*\n\n*➵ link: ${text}*\n➵ *Link Acortado: ${shortUrl1}*`
-m.reply(done)
-break
-
-case 'google': {      
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-if (!text) return reply(`*Ejemplo:*\n${prefix + command} gatito`)
-let google = require('google-it')
-google({'query': text}).then(res => {
-let teks = `💫 𝘙𝘌𝘚𝘜𝘓𝘛𝘈𝘋𝘖𝘚 𝘋𝘌 : ${text}\n\n`
-for (let g of res) {
-teks += `🔶 *Titulo* : ${g.title}\n`
-teks += `🔶 *Descripcion* : ${g.snippet}\n`
-teks += `🔶 *Link* : ${g.link}\n\n✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧\n\n`
-} 
-reply(teks)
-})}
-break 
-
-case 'imagen': {
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-if (!text) return reply(`*Que esta buscado?*\n*Ejemplo:*\n${prefix + command} gatito`)
-image = await fetchJson(`https://api.akuari.my.id/search/googleimage?query=${text}`)
-n = image.result
-images = n[Math.floor(Math.random() * n.length)]
-conn.sendMessage(m.chat, { image: { url: images}, caption: `*💫 𝘙𝘌𝘚𝘜𝘓𝘛𝘈𝘋𝘖𝘚 𝘋𝘌 :* ${text}`}, { quoted: m })}
-break
- 
-case 'ppt':  
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-if (!m.isGroup) return reply(info.group);  
-this.suit = this.suit ? this.suit : {};  
-let poin = 10;  
-let poin_lose = 10;  
-let timeout = 60000;  
-if (Object.values(this.suit).find((roof) => roof.id.startsWith("ppt") && [roof.p, roof.p2].includes(m.sender))) {  
-return reply("primero completa o espera a que termine el juego anterior")}  
-if (m.mentionedJid[0] === m.sender) {  
-return reply("No puedo jugar contigo Pelotudo")}  
-if (!m.mentionedJid[0]) {  
-return reply("*Con quien quiere jugar?*\n*bolu etiqueta a la persona no soy adivino*")}  
-if (Object.values(this.suit).find((roof) => roof.id.startsWith("suit") && [roof.p, roof.p2].includes(m.mentionedJid[0]))) {  
-return reply("_Esa persona esta jugando con otra :(_")}  
-let id = "ppt_" + new Date() * 1;  
-let caption = `*Jugador 1:* @${m.sender.split`@`[0]}\nJugador 2:* @${m.mentionedJid[0].split`@`[0]}\n\n*Escribe :* _aceptar_ para acerta\nEscribe _rechazar_ para cancelar`;  
-this.suit[id] = {  
-chat: await m.reply(caption),  
-id: id,  
-p: m.sender,  
-p2: m.mentionedJid[0],  
-status: "wait",  
-waktu: setTimeout(() => {  
-if (this.suit[id]) {  
-conn.sendText(m.chat, `*_se agoto el tiempo_*\n*al parecer @${roof.p2.split`@`[0]} ni siquiera se digno a responder*`, m);  
-delete this.suit[id];  
-}}, 60000),  
-poin,  
-poin_lose,  
-timeout,  
-};  
-break
-                                    		
-case 'attp':
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-if (!text) return reply('ingresa algo para convertirlo a sticker :v')
-link = `https://api.lolhuman.xyz/api/attp?apikey=${lolkeysapi}&text=${text}`
-conn.sendMessage(m.chat, { sticker: { url: link } }, { quoted: fkontak})
-break
-
+                                  		
 //info
 case 'estado':
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-await state(conn, m, speed, sender, fkontak) 
+state(conn, m, speed, sender, fkontak) 
 break
-
 case 'menu': 
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
 conn.sendMessage(from, { text: menu(conn, prefix, pushname, sender, m),  
 contextInfo:{  
 forwardingScore: 9999999,  
@@ -478,452 +331,107 @@ mentionedJid:[sender],
 "sourceUrl": md, 
 }}}, { quoted: fkontak }) 
 break 
-
-case 'owner': case 'creador':
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-let vcard = `BEGIN:VCARD\nVERSION:3.0\nN:;OWNER 👑;;;\nFN:OWNER\nORG:OWNER 👑\nTITLE:\nitem1.TEL;waid=595975740803:+595 975 740803\nitem1.X-ABLabel:OWNER 👑\nX-WA-BIZ-DESCRIPTION:ᴇsᴄʀɪʙɪ sᴏʟᴏ ᴘᴏʀ ᴄᴏsᴀs ᴅᴇʟ ʙᴏᴛ.\nX-WA-BIZ-NAME:Owner 👑\nEND:VCARD`
-let a = await conn.sendMessage(from, { contacts: { displayName: 'ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ 👑', contacts: [{ vcard }] }}, {quoted: m})
-conn.sendMessage(from, { text : `Hola @${sender.split("@")[0]}, este bot esta desarrollo si quiere contacta con mi creador aqui te dejo sus número`, mentions: [sender]}, { quoted: a })
+case 'owner': case 'creador': 
+owner(conn, m, sender) 
 break 
-
 case 'grupos': case 'grupoficiales': 
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-conn.sendMessage(from, { text: `*BOT EL DESARROLLO*\n\n*Te puede unirte al grupo para proba el bot y sus funciones 😼*\n\n${nnn}` }, { quoted: msg })
+grupo(conn, m, sender) 
 break
-
 case 'instalarbot': case 'crearbot': 
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-conn.sendMessage(m.chat, { text: `┎┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-\`\`\`COMO INSTALAR ESTE BOT?\`\`\`
-\`\`\`Este bot es nuevo todavía no se puede instalar si quiere probar sus funciones entra al grupo del bot\`\`\`
-*Escribe: ${prefix}grupos*
-
-\`\`\`o puede probar las funcion de hacerte un sub bot Escribe: ${prefix}serbot\`\`\`
-┖┈┈┈┈┈┈┈┈┈┈┈┈┈┈`,
-contextInfo:{
-mentions: [sender], 
-forwardingScore: 9999999,
-isForwarded: true, 
-"externalAdReply": {
-"showAdAttribution": true,
-"containsAutoReply": true,
-"title": ` ${wm}`,
-"body": `${pushname}`,
-"previewType": "PHOTO",
-"thumbnailUrl": ``,
-"thumbnail": imagen1, 
-"sourceUrl": md}}},
-{ quoted: m})
+instalar(conn, m, pushname, sender) 
 break
-
-case '5492266613038': case '593980586516': case '595975740803': {
-if (!args.join(" ")) return reply(`┗❴ ⚠ 𝐀𝐃𝐕𝐄𝐑𝐓𝐄𝐍𝐂𝐈𝐀 ⚠ ❵┛\n
-ᴇsᴛᴀ ᴘʀᴏʜɪʙɪᴅᴏ ᴇᴛɪᴏ̨ᴜᴇᴛᴀʀ ᴀʟ ᴄʀᴇᴀᴅᴏʀ sɪ ᴛɪᴇɴᴇs ᴜɴᴀ ᴅᴜʀᴀ ʀᴇғᴇʀᴇɴᴛᴇ ᴀʟ ʙᴏᴛ ᴇsᴄʀɪʙɪʀʟᴇ ᴀ sᴜs ᴘʀɪᴠ.`)
-for (let i of owner) {
-}}
+case '5492266613038': case '593980586516': case '595975740803': await ow(conn, args) 
 break
-
-case 'grupo':
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-if (!m.isGroup) return reply(info.group);  
-if (!isBotAdmins) return reply(info.botAdmin)
-if (!isGroupAdmins) return reply(info.admin)
-if (!text) return reply(`*Accion mal usaba*\n\n*Use de esta forma:*\n*${prefix + command} abrir*\n*${prefix + command} cerrar*`)
-if (args[0] === 'abrir') {
-if (args[0] === 'open') {
-m.reply(`*GRUPO ABIERTO CON EXITO✅*`)
-await conn.groupSettingUpdate(from, 'not_announcement')
-}} else if (args[0] === 'cerrar') {
-if (args[0] === 'close') {
-m.reply(`*GRUPO CERRADO CON EXITO✅*`)
-await conn.groupSettingUpdate(from, 'announcement')
-}}
-break
-
-case 'delete': case 'del': {
-if (!m.quoted) throw false
-if (!isBotAdmins) return reply(info.botAdmin)
-if (!isGroupAdmins) return reply(info.admin)
-let { chat, fromMe, id} = m.quoted
-let delet = m.message.extendedTextMessage.contextInfo.participant
-let bang = m.message.extendedTextMessage.contextInfo.stanzaId
-return conn.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: bang, participant: delet }})}
-break  
-
-case 'public': case 'publico': {
-if (!isCreator) return reply(info.owner)
-conn.public = true
-reply('✅Cambio con exitoso a uso público')}
-break
-case 'self': case 'privado': {
-if (!isCreator) return reply(info.owner)
-conn.public = false
-reply('✅Cambio con exitoso a uso privado')}
-break	
-
-case 'autoadmin': case 'tenerpoder': {
-if (!m.isGroup) return reply(info.group)
-if (!isCreator) return reply(info.owner)
-m.reply('Ya eres admin mi jefe 😎') 
-await conn.groupParticipantsUpdate(m.chat, [m.sender], "promote")}
-break 
-		
-case 'welcome':
-case 'audios':
-case 'modeadmin':
-case 'antifake': case 'antinternacional':
-case 'antiarabe':
-case 'detect':
-case 'antilink': {
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-if (!m.isGroup) return reply(info.group)
-if (!isBotAdmins) return reply(info.botAdmin)
-if (!isGroupAdmins) return reply(info.admin)
-if (!text) return reply(`*Use de esta forma ejemplo:*\n*${prefix + command} on*\n*${prefix + command} off*`)
-if (args[0] === "on") {
-if (!global.db.data.chats[m.chat].detect) 
-if (!global.db.data.chats[m.chat].antilink) 
-if (!global.db.data.chats[m.chat].audios) 
-if (!global.db.data.chats[m.chat].welcome)
-if (!global.db.data.chats[m.chat].modeadmin)
-if (!global.db.data.chats[m.chat].antifake)
-if (!global.db.data.chats[m.chat].antiarabe)
-global.db.data.chats[m.chat].detect = true
-global.db.data.chats[m.chat].antilink = true
-global.db.data.chats[m.chat].audios = true
-global.db.data.chats[m.chat].welcome = true
-global.db.data.chats[m.chat].modeadmin = true
-global.db.data.chats[m.chat].antifake = true
-global.db.data.chats[m.chat].antiarabe = true
-reply(`*✅El ${command} se activo con exito*`)
-} else if (args[0] === "off") {
-if (!global.db.data.chats[m.chat].detect) 
-if (!global.db.data.chats[m.chat].antilink)
-if (!global.db.data.chats[m.chat].audios) 
-if (!global.db.data.chats[m.chat].welcome) 
-if (!global.db.data.chats[m.chat].modeadmin)
-if (!global.db.data.chats[m.chat].antifake)
-if (!global.db.data.chats[m.chat].antiarabe)
-global.db.data.chats[m.chat].detect = false
-global.db.data.chats[m.chat].antilink = false
-global.db.data.chats[m.chat].audios = false
-global.db.data.chats[m.chat].welcome = false
-global.db.data.chats[m.chat].modeadmin = false
-global.db.data.chats[m.chat].antifake = false
-global.db.data.chats[m.chat].antiarabe = false
-reply(`*${command} desactivado!*`)}}
-case 'modojadibot':
-case 'anticall': 
-if (!isCreator) return reply(info.owner)
-if (args[0] === "on") {
-if (db.data.chats[m.chat].modojadibot)
-if (db.data.settings[numBot].anticall)
-db.data.chats[m.chat].modojadibot = true
-db.data.settings[numBot].anticall = true
-reply(`*✅El ${command} se activo con exito*`)
-} else if (args[0] === "off") {
-if (db.data.chats[m.chat].modojadibot)
-if (db.data.settings[numBot].anticall)
-db.data.settings[numBot].anticall = false
-db.data.chats[m.chat].modojadibot = false
-reply(`*${command} desactivado!*`)}
-break
-
-case 'join': {
-if (!isCreator) return reply(info.owner)
-if (!text) return reply(`*Y EL LINK DEL GRUPO?*`)
-if (!isUrl(args[0]) && !args[0].includes('whatsapp.com')) return reply(`*Link incorrecto!*`)
-reply(`*YA ME UNIR 😼*`)
-let result = args[0].split('https://chat.whatsapp.com/')[1]
-await conn.groupAcceptInvite(result).then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))}
-break
-            
-case 'hidetag': {
-if (!m.isGroup) return reply(info.group) 
-if (!isBotAdmins) return reply(info.botAdmin)
-if (!isGroupAdmins) return reply(info.admin)
-if (!q) return reply(`*Y el texto?*`)
-conn.sendMessage(m.chat, { text : q ? q : '' , mentions: participants.map(a => a.id)}, { quoted: m })}
-break 
-
-case 'leave': {
-if (!isCreator) return reply(info.owner)
-reply(m.chat, `*Adios fue un gusto esta aqui hasta pronto 👋*`)
-await conn.groupLeave(m.chat)}
-break
-
-case 'setppname': case 'nuevonombre': case 'newnombre': {
-if (!m.isGroup) return reply(info.group) 
-if (!isBotAdmins) return reply(info.botAdmin)
-if (!isGroupAdmins) return reply(info.admin)
-if (!text) return reply('*⚠️ Ingresa el texto*')
-await conn.groupUpdateSubject(m.chat, text)
-await reply(`*✅El nombre del grupo se cambio correctamente*`)}
-break
-case 'setdesc': case 'descripción': {
-if (!m.isGroup) return reply(info.group) 
-if (!isBotAdmins) return reply(info.botAdmin)
-if (!isGroupAdmins) return reply(info.admin)
-if (!text) return reply('*⚠️ Ingresa el texto*')
-await conn.groupUpdateDescription(m.chat, text)
-await reply(`*✅La descripción del grupo se cambio con éxito*`)}
-break
-case 'setppgroup': case 'setpp': {
-if (!m.isGroup) return reply(info.group) 
-if (!isBotAdmins) return reply(info.botAdmin)
-if (!isGroupAdmins) return reply(info.admin)
-if (!quoted) return reply(`*⚠️Y la imagen?*`)
-if (!/image/.test(mime)) return reply(`*⚠️ Responde a una con:* ${prefix + command}`)
-if (/webp/.test(mime)) return reply(`*⚠️Responde a una  Image con :* ${prefix + command}`)
-var mediz = await conn. downloadAndSaveMediaMessage(quoted, 'ppgc.jpeg')
-if (args[0] == `full`) {
-var { img } = await generateProfilePicture(mediz)
-await conn.query({tag: 'iq', attrs: {to: m.chat, type:'set', xmlns: 'w:profile:picture' }, content: [ {tag: 'picture', attrs: { type: 'image' }, content: img } ]}) 
-fs.unlinkSync(mediz)
-reply(`*✅Exito*`)
-} else {
-var memeg = await conn.updateProfilePicture(m.chat, { url: mediz })
-fs.unlinkSync(mediz)
-reply(`*✅Exito*`)}}
-break
-
-case 'add': {
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-if (!m.isGroup) return reply(info.group);  
-if (!isBotAdmins) return reply(info.botAdmin)
-if (!isGroupAdmins) return reply(info.admin)
-if (!isCreator) return reply(info.owner)
-if (!text) return reply(`*[ ⚠️ ] INGRESA EL NÚMERO DEL LA PERSONA QUE QUIERA AGREGA*\n*EJEMPLO:*\n${prefix}add +5244446577`)
-if (text.includes('+')) return reply(`*⚠️ INGRESA EL NUMERO SIN EL (+)*`)
-let group = m.chat
-let link = 'https://chat.whatsapp.com/' + await conn.groupInviteCode(group)
-await conn.sendMessage(text+'@s.whatsapp.net', {text: `≡ *INVITACIÓN*\n\nHola un usuario te invito a unirte a este grupos\n\n${link}`, mentions: [m.sender]})
-reply(`*✅Listo*`)}
-break
-            
-case 'kick': {
-if (!m.isGroup) return reply(info.group) 
-if (!isBotAdmins) return reply(info.botAdmin)
-if (!isGroupAdmins) return reply(info.admin)
-if (!m.quoted) return reply(`[ ⚠️ ] A QUIEN CARAJO ELIMINO? ETIQUETA ALGUN USUARIO NO SOY ADIVINO 😯`)
-let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-conn.groupParticipantsUpdate(m.chat, [users], 'remove')}
-break
-	
-case 'promote': {
-if (!m.isGroup) return reply(info.group) 
-if (!isBotAdmins) return reply(info.botAdmin)
-if (!isGroupAdmins) return reply(info.admin)
-if (!m.quoted) return reply(`*[ ⚠️ ] A QUIEN LE DOY ADMIN? ETIQUETA A LA PERSONA O RESPONDE A SUS MENSAJES*`)
-let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-await conn.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
-}
-break
-	
-case 'demote': {
-if (!m.isGroup) return reply(info.group) 
-if (!isBotAdmins) return reply(info.botAdmin)
-if (!isGroupAdmins) return reply(info.admin)
-if (!m.quoted) return reply(`*[ ⚠️ ] A QUIEN LE QUITO ADMINS? ETIQUETA A LA PERSONA O RESPONDE A SUS MENSAJES*`)
-let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-await conn.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
-}
-break
-             
-case 'link': case 'linkgc': {
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-if (!m.isGroup) return reply(info.group) 
-if (!isBotAdmins) return reply(info.botAdmin)
-let response = await conn. groupInviteCode(m.chat)
-conn.sendText(m.chat, `https://chat.whatsapp.com/${response}`, m, { detectLink: true })}
-break
-                        	
-case 'block': case 'bloquear': {
-if (!isCreator) return reply(info.owner)
-reply(`*El usuario fue bloqueado del bot*`)
-let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-await conn.updateBlockStatus(users, 'block')}
-break
-	
-case 'unblock': case 'desbloquear': {
-if (!isCreator) return reply(info.owner)
-reply(`*El usuario fue desbloqueado*`)
-let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-await conn.updateBlockStatus(users, 'unblock')}
-break
-	
-case 'banchat': {
-if (!m.isGroup) return reply(info.group) 
-if (!isBotAdmins) return reply(info.botAdmin)
-if (!isGroupAdmins) return reply(info.admin)
-if (!text) return reply(`*Accion mal usaba*\n\n*Use de esta forma:*\n*${prefix + command} on*\n*${prefix + command} off*`)
-if (args[0] === "on") {
-if (db.data.chats[m.chat].ban) return reply(`*Ya esta baneado este chat*`)
-db.data.chats[m.chat].ban = true
-reply(`*BOT OFF*`)
-} else if (args[0] === "off") {
-if (!db.data.chats[m.chat].ban) return reply(`*Este chat ya esta desbaneado*`)
-db.data.chats[m.chat].ban = false
-reply(`*BOT ONLINE YA ESTOY DISPONIBLE ✅*`)}}
-break
-             
-case 'tagall': {
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-if (!m.isGroup) return reply(info.group) 
-if (!isBotAdmins) return reply(info.botAdmin)
-if (!isGroupAdmins) return reply(info.admin)
-let teks = `❑ ━〔 *📢 ＩＮＶＯＣＡＣＩＯ́Ｎ 📢* 〕━ ❑\n\n`
-teks += `❑ Mensaje:  ${q ? q : 'Active perra'}\n\n`
-for (let mem of participants) {
-teks += `➥ @${mem.id.split('@')[0]}\n`
-}
-conn.sendMessage(m.chat, { text: teks, mentions: participants.map(a => a.id) }, { quoted: m })
-}
-break
-
-case 'ping':  
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-var timestamp = speed();  
-var latensi = speed() - timestamp  
-conn.sendMessage(from, { text: `*Pong 🏓  ${latensi.toFixed(4)}*` }, { quoted: msg });  
+case 'ping': 
+ping(conn, from, msg, speed) 
 break  		
-
-case 'report': {
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-if (!text) return reply(`*𝙸𝙽𝙶𝚁𝙴𝚂𝙴 𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙲𝙾𝙽 𝙵𝙰𝙻𝙻𝙾𝚂*\n\n*𝙴𝙹𝙴𝙼𝙿𝙻𝙾:*\n${prefix + command} sticker no funciona`)
-conn.sendMessage(`595975740803@s.whatsapp.net`, {text: `╭━━〔 *𝚁𝙴𝙿𝙾𝚁𝚃𝙴 | 𝚁𝙴𝙿𝙾𝚁𝚃 * 〕━━⬣\n┃\n┃✿ *𝙽𝚞𝚖𝚎𝚛𝚘 | 𝚗𝚞𝚖𝚋𝚎𝚛*\n┃⇢ wa.me/${m.sender.split("@")[0]}\n┃\n┃✿ *𝙼𝚎𝚗𝚜𝚊𝚓𝚎 | 𝚝𝚎𝚡𝚝*\n┃: ${text}┃\n╰━━━〔 *${vs}* 〕━━━⬣` })
-reply(`*𝙴𝙻 𝚁𝙴𝙿𝙾𝚁𝚃𝙴 𝙵𝚄𝙴 𝙴𝙽𝚅𝙸𝙰𝙳𝙾 𝙰 𝙼𝙸 𝙲𝚁𝙴𝙰𝙳𝙾𝚁, 𝙽𝙾𝚂 𝙲𝙾𝙽𝚃𝙰𝚁𝙴𝙼𝙾𝚂 𝙲𝙾𝙽 𝚄𝚂𝚃𝙴𝙳 𝚂𝙸 𝙴𝚂 𝙽𝙴𝙲𝙴𝚂𝙰𝚁𝙸𝙾, 𝙳𝙴 𝚂𝙴𝚁 𝙵𝙰𝙻𝚂𝙾 𝚂𝙴𝚁𝙰 𝙸𝙶𝙽𝙾𝚁𝙰𝙳𝙾 𝚈 𝙱𝙻𝙾𝚀𝚄𝙴𝙰𝙳𝙾 𝙳𝙴𝙻 𝙱𝙾𝚃*`)}
+case 'report': 
+report(conn, from, m, prefix, command, text)
 break 
 
-case "tts":
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-if (!q) return reply("*Y EL TEXTO?*")
-await conn.sendPresenceUpdate('recording', m.chat)
-let texttosay = text
-? text
-: m.quoted && m.quoted.text
-? m.quoted.text
-: m.text;
-const SpeakEngine = require("google-tts-api"); 
-const texttospeechurl = SpeakEngine.getAudioUrl(texttosay, {lang: "es", slow: false, host: "https://translate.google.com",});
-conn.sendMessage(m.chat, { audio: { url: texttospeechurl }, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": md, "showAdAttribution": true}}, seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, { quoted: m })
-break		
+//grupo
+case 'welcome': case 'audios': case 'modeadmin': case 'antifake': case 'antinternacional': case 'antiarabe': case 'detect': case 'antilink': await on(conn, m, isBotAdmins, isGroupAdmins, text, prefix, command, args)
+break
+case 'modojadibot': case 'anticall': case 'antiprivado': await on2(conn, m, isCreator, text, prefix, command, args)
+break            
+case 'grupo': grup(conn, m, args, isBotAdmins, isGroupAdmins, command, prefix, text)
+break
+case 'delete': case 'del': 
+del(conn, m, isBotAdmins, isGroupAdmins)
+break  		
+case 'join': 
+join(conn, m, isCreator, text, args)
+break            
+case 'hidetag': case 'notificar': 
+hide(conn, m, isBotAdmins, isGroupAdmins, q, participants)
+break 
+case 'setppname': case 'nuevonombre': case 'newnombre': 
+setna(conn, m, isBotAdmins, isGroupAdmins, text)
+break
+case 'setdesc': case 'descripción': 
+setde(conn, m, isBotAdmins, isGroupAdmins, text)
+break
+case 'setppgroup': case 'setpp': 
+setpp(conn, m, isBotAdmins, isGroupAdmins, quoted, prefix, command, mime, args, from)
+break
+case 'add': case 'agregar': case 'invitar': 
+add(conn, m, isBotAdmins, isGroupAdmins, text, sender, prefix)
+break           
+case 'kick': case 'echar':
+k(conn, m, isBotAdmins, isGroupAdmins, quoted, text, sender)
+break
+case 'promote': 
+p(conn, m, isBotAdmins, isGroupAdmins, quoted, sender)
+break
+case 'demote':
+d(conn, m, isBotAdmins, isGroupAdmins, quoted, sender)
+break            
+case 'link': case 'linkgc': 
+link(conn, m, isBotAdmins)
+break                        		
+case 'banchat': 
+ban(conn, m, isBotAdmins, isGroupAdmins, text, args, prefix, command)
+break             
+case 'tagall': 
+tag(conn, m, isBotAdmins, isGroupAdmins, participants, q)
+break
 
+//juegos
+case 'simi': case 'bot': {
+await sim(conn, m, text, quoted)}
+break 
+case 'gay': { 
+await gay(conn, m, participants, sender)}
+break            
+case 'pareja':
+await pareja(conn, m, pushname, participants, sender)
+break
+case 'ppt': {
+await ppt(conn, m, pushname, sender)}
+break       
+case 'fake': {
+await fake(conn, text, prefix, command, body, from, m, sender, quoted)}
+break
+//audios
 case "a":
 if (!global.db.data.chats[m.chat].audios) return
 let vn = './media/a.mp3'
 await conn.sendPresenceUpdate('recording', m.chat)
 conn.sendMessage(m.chat, { audio: { url: vn }, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": md, "showAdAttribution": true}}, seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, { quoted: m })
 break
-              		
-case 'simi': case 'bot': {
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-if (!text) return conn.sendMessage(from, { text: `*INGRESE UN TEXTO PARA HABLAR CONMIGO*` }, { quoted: msg })
-await conn.sendPresenceUpdate('composing', m.chat)
-let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${text}&lc=es&cf=false`)
-let res = anu.success;
-m.reply(res)}
-break 
-		
-case 'ia': case 'chatgpt':
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-if (global.db.data.users[m.sender].limit < 1) return reply(info.endLimit)
-if (!text) return conn.sendMessage(from, { text: `*INGRESE EL TEXTO DE LOS QUE QUIERE BUSCAR?*` }, { quoted: msg })
-await conn.sendPresenceUpdate('composing', m.chat)
-let tioress = await fetch(`https://api.lolhuman.xyz/api/openai-turbo?apikey=${lolkeysapi}&text=${text}`)
-let hasill = await tioress.json()
-m.reply(`${hasill.result}`.trim())   
-db.data.users[m.sender].limit -= 1
-break
 
-case 'gay': {
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-if (!m.isGroup) return reply(info.group) 
-let member = participants.map(u => u.id)
-let me = m.sender
-let jodoh = member[Math.floor(Math.random() * member.length)]
-let ra = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','62','63','64','65','66','67','68','69','70','71','72','73','74','75','76','77','78','79','80','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95','96','97','98','99','100']
-let kah = ra[Math.floor(Math.random() * ra.length)]
-let jawab = `@${jodoh.split('@')[0]} Es 🏳️‍🌈 ${kah}% Gay\n\nQuién quiere violar a este gay? `
-let ments = [me, jodoh]
-conn.sendMessage(m.chat, { text: jawab, contextInfo:{
-mentionedJid:[me, jodoh],
-forwardingScore: 9999999,
-isForwarded: true, }}, { quoted: m })}
-break
-            
-case 'pareja':
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-if (!m.isGroup) return reply(info.group) 
-let member = participants.map(u => u.id)
-let me = m.sender
-let jodoh = member[Math.floor(Math.random() * member.length)]
-let love = member[Math.floor(Math.random() * member.length)]
-conn.sendMessage(m.chat, { text: `*Te deberias casar con @${love.split('@')[0]} hacen una bonita pareja 💕*`,
-contextInfo:{
-mentionedJid:[me, love],
-forwardingScore: 9999999,
-isForwarded: true, 
-"externalAdReply": {
-"showAdAttribution": true,
-"containsAutoReply": true,
-"title": ` ${botname}`,
-"body": `${pushname}`,
-"previewType": "PHOTO",
-"thumbnailUrl": ``,
-"thumbnail": imagen1, 
-"sourceUrl": md}}},
-{ quoted: m})
-break
-          
-case 'fake':
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-var gh = body.slice(11);
-var mentioned = m.message.extendedTextMessage && m.message.extendedTextMessage.contextInfo && m.message.extendedTextMessage.contextInfo.mentionedJid ? m.message.extendedTextMessage.contextInfo.mentionedJid[0] : null;
-var replace = gh.split("|")[0];
-var target = gh.split("|")[1];
-var bot = gh.split("|")[2];
-if (mentioned && target && bot) {
-var quotedMessage = {
-key: {
-fromMe: false,
-participant: mentioned
-},
-message: {
-conversation: target
-}};
-var sendMessageOptions = {
-text: `${bot}`,
-quoted: quotedMessage
-};
-conn.sendMessage(from, sendMessageOptions, { quoted: quotedMessage });
-} else {
-conn.sendMessage(from, { text: `Ejemplo: ${prefix + command} @tag|puto|😯`}, { quoted: msg })}
-break
-  
-case 'hentai':
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-if (!m.isGroup) return reply(info.group) 
-if (!global.db.data.chats[m.chat].antiNsfw) return reply(info.nsfw)
-var hentai = JSON.parse(fs.readFileSync('./src/nsfw/neko.json'))
-var hentairesult = pickRandom(hentai)
-conn.sendMessage(m.chat, { caption: `🥵`, image: { url: hentairesult.url } }, { quoted: m })
+//nswf
+case 'hentai': {
+await nsfw1(conn, m, pickRandom)}
 break
 case 'nsfwloli':
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-if (!m.isGroup) return reply(info.group) 
-if (!global.db.data.chats[m.chat].antiNsfw) return reply(info.nsfw)
-var nsfw = JSON.parse(fs.readFileSync('./src/nsfw/nsfwloli.json'))
-var result = pickRandom(nsfw)
-conn.sendMessage(m.chat, { caption: 'Yo soy tu loli 🥵', image: { url: result.url } }, { quoted: m })
+await nsfw2(conn, m, pickRandom)
 break
 case 'lewd': case 'feed': case 'gasm': case 'anal': case 'holo': case 'tits': case 'kuni': case 'kiss': case 'erok': case 'smug': case 'solog': case 'feetg': case 'lewdk': case 'waifu': case 'pussy': case 'femdom': case 'cuddle': case 'eroyuri': case 'cum_jpg': case 'blowjob': case 'holoero': case 'erokemo': case 'fox_girl': case 'futanari': case 'wallpaper':
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-if (!m.isGroup) return reply(info.group) 
-if (!global.db.data.chats[m.chat].antiNsfw) return reply(info.nsfw)
-sendImageAsUrl(`https://api.lolhuman.xyz/api/random2/${command}?apikey=${lolkeysapi}`, `*🔥 ${command} 🔥*`)
+await nsfw3(conn, m, pickRandom, sendImageAsUrl, command)
 break
-		    
+
+//descargas		    
 case 'play':  case 'play2': {
 if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
 if (!text) return conn.sendMessage(from, { text: `*ingrese nombre de alguna cancion*` }, { quoted: msg })
@@ -947,8 +455,7 @@ const pl= await playmp3.mp3(anup3k.url)
 await conn.sendMessage(from, { audio: fs.readFileSync(pl.path), fileName: `error.mp3`, mimetype: 'audio/mp4' }, { quoted: m }); 
 await fs.unlinkSync(pl.path)
 db.data.users[m.sender].limit -= 1
-reply(info.limit) 
-}
+reply(info.limit)}
 break
 case "ytmp3": case "ytaudio": 
 if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
@@ -977,7 +484,7 @@ if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return reply(`*Que est
 conn.sendMessage(from, { text: `*Aguarde un momento*\n\nᴱˡ ᵛᶦᵈᵉᵒ ᵖᵘᵉᵈᵉ ᵗᵃʳᵈᵃ ᵉⁿᵗʳᵉ ⁵ ᵒ ¹⁰ ᵐᶦⁿᵘᵗᵒˢ ᵉˡ ᵉⁿᵛᶦᵃˢᵉ ᵗᵉⁿᵈʳᵃ́ ᵖᵃᶜᶦᵉⁿᶜᶦᵃ` }, { quoted: fdoc });    
 const vid = await mp.mp4(text)
 const ytc = `*❏ Título :* ${vid.title} 
-*❏ Duración :* ${vid.timestamp}
+*❏ Duración :* ${vid.duracion}
 *❏ Subido :* ${vid.date}
 *❏ calidad :* ${vid.quality}`
 await conn.sendMessage(from, {video: {url : vid.videoUrl}, caption: ytc }, {quoted:m})
@@ -999,7 +506,6 @@ conn.sendMessage(m.chat, { document: { url: url }, fileName: filename+'.zip', mi
 db.data.users[m.sender].limit -= 1
 reply(info.limit) 
 break
-
 case 'tiktok':
 if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
 if (!text) return m.reply( `*Ejemplo:* ${prefix + command} https://vm.tiktok.com/ZMjdrFCtg/`)
@@ -1012,7 +518,6 @@ conn.sendMessage(m.chat, { audio: { url: data.audio }, mimetype: 'audio/mp4' }, 
 db.data.users[m.sender].limit -= 1
 reply(info.limit) 
 break
-
 case 'lyrics': case 'letra': {
 if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
 if (!text) return reply(`*Que esta buscado? ingresa el titulo/nombre de la canción*\n*Ejemplo:* ${prefix + command} ozuna`)
@@ -1022,126 +527,63 @@ conn.editMessage(m.chat, '*Aguarde un momento....*', `*❏ Titulo:* ${result.tit
 db.data.users[m.sender].limit -= 1
 reply(info.limit)}
 break
-
-case 'ss': case 'ssweb': {
+case 'mediafire': {
 if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-if (!q) return reply(`*Ejemplo:* ${prefix+command} link`)
-conn.fakeReply(m.chat, `⏳ *Aguarde un momento....*`, '0@s.whatsapp.net', 'No haga spam')
-let krt = await scp1.ssweb(q)
-conn.sendMessage(from, {image:krt.result, caption: info.result}, {quoted:m})}
-break
-
+if (!text) return reply(`*Ejemplo:*\n${prefix + command} https://www.mediafire.com/file/admrdma1ff3cq10/Siete-Ocho.zip/file`) 
+const baby1 = await mediafireDl(text)
+if (baby1[0].size.split('MB')[0] >= 1500) return reply('No puedo descarga el archivo supera el limite 900 MB ' + util.format(baby1))
+const result4 = `╭━─━─━─≪💎≫─━─━─━╮
+┆      *MEDIAFIRE*
+┆——————«•»——————
+┆🔸️ *Nombre:* ${baby1[0].nama} 
+┆——————«•»——————
+┆🔸️ *Tamaño:*  ${baby1[0].size} 
+┆——————«•»——————
+┆🔸️ *Extension:* ${baby1[0].mime}
+╰━─━─━─≪💎≫─━─━─━╯\n\n_Descargo archivo aguarde un momento...._  ` 
+ reply(`${result4}`) 
+ conn.sendMessage(m.chat, { document : { url : baby1[0].link}, fileName : baby1[0].nama, mimetype: baby1[0].mime ,  quoted : m, contextInfo: { externalAdReply:{ 
+   title: botname, 
+   body:"💫", 
+   showAdAttribution: true, 
+   mediaType:2, 
+   thumbnail: fs.readFileSync(`./media/menu.jpg`) , 
+   mediaUrl: md,  
+ sourceUrl: md }}}, {quoted: m})
+ db.data.users[m.sender].limit -= 2
+reply(info.limit)}
+ break 
+ 
+//rpg
 case 'reg': {
-let Reg = /\|?(.*)([.|] *?)([0-9]*)$/i
-let user = global.db.data.users[m.sender]
-if (user.registered === true) return reply(`*Ya estas registrado 🧐*`) 
-if (!Reg.test(text)) return reply(`*❎ Incorrecto*\nUse de esta forma\nEjemplo: ${prefix}reg nombre.edad`) 
-let [_, name, splitter, age] = text.match(Reg)
-if (!name) return reply('El nombre no puede esta vacio') 
-if (!age) return reply('La edad no puede esta vacia (Numeros)') 
-age = parseInt(age)
-if (age > 100) return reply('Que viejo (。-`ω´-)') 
-if (age < 5) return reply('🚼  Basado, los bebes saber escribir.✍️😳') 
-if (name.length >= 30) return reply('🐈 Fua que basado, el nombre es muy largo que quiere un puente como nombre😹') 
-user.name = name.trim()
-user.age = age
-user.regTime = + new Date
-user.registered = true
-// let sn = createHash('md5').update(m.sender).digest('hex')
-let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : m.fromMe ? conn.user.jid : m.sender
-const date = moment.tz('America/Bogota').format('DD/MM/YYYY')
-const time = moment.tz('America/Argentina/Buenos_Aires').format('LT')
-global.db.data.users[m.sender].limit += 2
-global.db.data.users[m.sender].exp += 200
-conn.sendMessage(m.chat, { text: `*[ ✅ REGISTRO COMPLETADO ]*\n◉ *Nombre:* ${name}\n◉ *Edad:* ${age}\n◉ *Hora:* ${time}\n◉ *Fecha:* ${date}\n◉ *Número:* wa.me/${sender.split("@")[0]}\n\n🎁 Recompensa\n◉ 2 diamante 💎\n◉ 200 exp\n\n*Para ver los comandos del bot usar:*\n\n${prefix}menu`,
-contextInfo:{
-mentionedJid:[name],
-forwardingScore: 9999999,
-isForwarded: true, 
-"externalAdReply": {
-"showAdAttribution": true,
-"containsAutoReply": true,
-"title": `${botname}`,
-"body": `${name}`,
-"previewType": "PHOTO",
-"thumbnailUrl": ``,
-"thumbnail": imagen1, 
-"sourceUrl": md}}},
-{ quoted: m})}
+await reg(conn, m, sender, text, fkontak)}
 break            
-
 case 'afk': {
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-let user = global.db.data.users[m.sender]
-user.afkTime = + new Date
-user.afkReason = text
-m.reply(`╭━─━─━─≪ 𝙰𝙺𝙵 ≫─━─━─━╮
-┃ 𝙴𝚂𝚃𝙴 𝚄𝚂𝚄𝙰𝚁𝙸𝙾𝚂 ${pushname}.
-┃ 😴 𝙴𝚂𝚃𝙰 𝙸𝙽𝙰𝙲𝚃𝙸𝚅𝙾. 
-┃ ≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋
-┃ 💤 𝙽𝙾 𝙻𝙾𝚂 𝙴𝚃𝙸𝚀𝚄𝙴𝚃𝙴 💤
-┃ ☣️ 𝙼𝙾𝚃𝙸𝚅𝙾𝚂 : ${text ? text : ''}
-╰━─━─━─≪ ${vs} ≫─━─━─━╯`)}
+await afk(conn, m, args, sender, pushname)}
 break             
-
-case 'buy': {
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-let count = command.replace(/^buy/i, '');
-count = count ? /all/i.test(count) ? Math.floor(global.db.data.users[m.sender].exp / 450) : parseInt(count) : args[0] ? parseInt(args[0]) : 1;
-count = Math.max(1, count);
-if (global.db.data.users[m.sender].exp >= 450 * count) {
-global.db.data.users[m.sender].exp -= 450 * count;
-global.db.data.users[m.sender].limit += count;
-reply(`╔═❖ *ɴᴏᴛᴀ ᴅᴇ ᴘᴀɢᴏ*\n║‣ *ʜᴀs ᴄᴏᴍᴘʀᴀᴅᴏ :* ${count}💎\n║‣ *ʜᴀs ɢᴀsᴛᴀᴅᴏ :* ${450 * count} XP\n╚═══════════════`);
-} else reply(`🔶 ɴᴏ ᴛɪᴇɴᴇ sᴜғɪᴄɪᴇɴᴛᴇ xᴘ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ *${count}* ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴘᴜᴇᴅᴇs ᴄᴏɴsᴇɢᴜɪʀ *xᴘ* ᴜsᴀɴᴅᴏ ᴇʟ ᴄᴏᴍᴀɴᴅᴏs #minar`)}
+case 'buy': case 'buyall': {
+await buy(conn, m, sender, args, command, text, fkontak)}
 break
-
 case 'minar': case 'mine':
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-const date = global.db.data.users[m.sender].lastmiming + 600000;
-if (new Date - global.db.data.users[m.sender].lastmiming < 600000) return reply(`*[ ⏳ ] Espera ${msToTime(date - new Date())} min para volver a minar*`) 
-const exp = Math.floor(Math.random() * 1000)
-global.db.data.users[m.sender].exp += exp;
-reply(`*Genial minaste ${exp} XP*`)
-global.db.data.users[m.sender].lastmiming = new Date * 1;
+await mine(conn, m, sender, fkontak)
 break 
-
 case 'trabajar': case 'work': {
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-let hasil = Math.floor(Math.random() * 2000)
-let time = global.db.data.users[m.sender].lastwork + 3600000
-if (new Date - global.db.data.users[m.sender].lastwork < 3600000) return reply(`ᴇsᴛᴀ ᴄᴀɴsᴀᴅᴏ, ᴇsᴘᴇʀᴀs ${msToTime(time - new Date())} ᴘᴀʀᴀ ᴠᴏʟᴠᴇʀ ᴀ ᴛʀᴀʙᴀᴊᴀ!`) 
-let anu = (await axios.get('https://raw.githubusercontent.com/fgmods/fg-team/main/games/work.json')).data
-let res = pickRandom(anu)
-global.db.data.users[m.sender].exp += hasil
-reply(`🔸 ${res.fgwork} *${hasil} XP*`)
-global.db.data.users[m.sender].lastwork = new Date * 1
-}
+await work(conn, m, sender, fkontak)}
 break
-
-case 'rob': case 'robar': {
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
-const date = global.db.data.users[m.sender].robs + 600000;
-if (new Date - global.db.data.users[m.sender].robs < 600000) return reply(`*🚓 Regresa el ${msToTime(date - new Date())} minutos*`) 
-if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false;
-else who = m.chat;
-if (!who) return reply(`*⚠️ ETIQUETA A LA PERSONA BOBO*`) 
-if (!(who in global.db.data.users)) return reply(`*⚠️ El usuario no se encuentra en mi base de datos.*`);
-const users = global.db.data.users[who];
-const rob = Math.floor(Math.random() * 500);
-if (users.exp < rob) return conn.sendMessage(from ,{text: `*Este @${who.split`@`[0]} es Pobre tiene menos de 500 xp*`, mentions: [who], },{quoted: m})
-global.db.data.users[m.sender].exp += rob;
-global.db.data.users[who].exp -= rob;
-conn.sendMessage(from ,{text: `*🐭 Robaste ${rob} XP a @${who.split`@`[0]}*`, mentions: [who], },{quoted: m})
-global.db.data.users[m.sender].robs = new Date * 1;
-}
+case 'rob': case 'robar': { 
+await rob(conn, m, sender, fkontak)}
 break
-
+case 'bal': case 'balance': case 'diamond': {
+await bal(conn, m, sender, fkontak)}
+break
+case 'claim': case 'daily': 
+await claim(conn, m, sender)
+break
+//stickers
 case 's': case 'sticker': {  
 if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
 if (/image/.test(mime)) {  
 conn.fakeReply(m.chat, `⏳ *Aguarde un momento estoy creando tu stickers....*`, '0@s.whatsapp.net', 'No haga spam')
-//conn.sendMessage(m.chat, { text: `⏳ *Aguarde un momento estoy creando tu stickers....*\n\n*ᴺᵒ ʰᵃᵍᵃ ˢᵖᵃᵐ*` }, { quoted: m });    
 media = await quoted.download()  
 let encmedia = await conn.sendImageAsSticker(from, media, m, { packname: global.packname, author: global.author })  
 await fs.unlinkSync(encmedia)  
@@ -1152,10 +594,8 @@ let encmedia = await conn.sendVideoAsSticker(from, media, m, { packname: global.
 await new Promise((resolve) => setTimeout(resolve, 2000));   
 await fs.unlinkSync(encmedia)  
 } else {  
-reply(`*Y LA IMAGEN?*`)  
-}}  
+reply(`*Y LA IMAGEN?*`)}}  
 break; 
-
 case 'wm': case 'take': {
 if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
 if (!args.join(" ")) return reply(`*Responda un sticker para robar*`)
@@ -1174,11 +614,37 @@ if ((quoted.msg || quoted).seconds > 11) return reply('Maximum 10 Seconds!')
 let media = await quoted.download()
 let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: pcknm, author: atnm })
 } else {
-reply(`Y la imagen?`)
-}
-}
+reply(`Y la imagen?`)}}
+break
+case 'attp':
+if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
+if (!text) return reply('ingresa algo para convertirlo a sticker :v')
+link = `https://api.lolhuman.xyz/api/attp?apikey=${lolkeysapi}&text=${text}`
+conn.sendMessage(m.chat, { sticker: { url: link } }, { quoted: fkontak})
 break
 
+//owner
+case 'public': case 'publico': {
+if (!isCreator) return reply(info.owner)
+conn.public = true
+reply('✅Cambio con exitoso a uso público')}
+break
+case 'self': case 'privado': {
+if (!isCreator) return reply(info.owner)
+conn.public = false
+reply('✅Cambio con exitoso a uso privado')}
+break	
+case 'autoadmin': case 'tenerpoder': {
+if (!m.isGroup) return reply(info.group)
+if (!isCreator) return reply(info.owner)
+m.reply('Ya eres admin mi jefe 😎') 
+await conn.groupParticipantsUpdate(m.chat, [m.sender], "promote")}
+break 
+case 'leave': {
+if (!isCreator) return reply(info.owner)
+reply(m.chat, `*Adios fue un gusto esta aqui hasta pronto 👋*`)
+await conn.groupLeave(m.chat)}
+break
 case 'bcgc': case 'bcgroup': {
 if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg });   
 if (!text) return conn.sendMessage(from, { text: `*Ingrese el texto que quiere difundir*` }, { quoted: msg }); 
@@ -1189,8 +655,7 @@ reply(`*Enviando mensajes oficial un momento*`)
 for (let i of anu) {
 await sleep(1500)
 let txt = `「 COMUNICADO 」\n\n${text}`
-conn.sendText(i, txt, fkontak)
-}
+conn.sendText(i, txt, fkontak)}
 reply(`ᴛʀᴀɴsᴍɪsɪᴏɴ ʀᴇᴀʟɪᴢᴀᴅᴀ ᴄᴏɴ ᴇxɪᴛᴏs ✅ ᴛᴏᴛᴀʟ ${anu.length} ᴄʜᴀᴛ ɢʀᴜᴘᴏs\nᴛɪᴇᴍᴘᴏ ᴛᴏᴛᴀʟ ᴅᴇ ᴇɴᴠɪᴏ: ${anu.length * 1.5} sᴇɢ`)}
 break
 case 'bc': case 'broadcast': case 'bcall': {
@@ -1203,7 +668,18 @@ await sleep(1500)
 conn.sendText(yoi, txt, fkontak)}
 reply('Listo')}
 break
-            
+case 'block': case 'bloquear': {
+if (!isCreator) return reply(info.owner)
+reply(`*El usuario fue bloqueado del bot*`)
+let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+await conn.updateBlockStatus(users, 'block')}
+break
+case 'unblock': case 'desbloquear': {
+if (!isCreator) return reply(info.owner)
+reply(`*El usuario fue desbloqueado*`)
+let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+await conn.updateBlockStatus(users, 'unblock')}
+break            
 case 'addcmd':
 if (!isCreator) return conn.adReply(m.chat, info.owner, query, m, false)
 if (!m.quoted) return conn.adReply(m.chat, `*[ ⚠️ ] 𝚁𝙴𝚂𝙿𝙾𝙽𝙳𝙴 𝙰𝙻 𝚂𝚃𝙸𝙲𝙺𝙴𝚁 𝙾 𝙸𝙼𝙰𝙶𝙴𝙽 𝙰𝙻 𝙲𝚄𝙰𝙻 𝙳𝙴𝚂𝙴𝙰 𝙰𝙶𝚁𝙴𝙶𝙰𝚁 𝚄𝙽 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙾 𝚃𝙴𝚇𝚃𝙾*`, query, m, false)
@@ -1220,8 +696,38 @@ var hash = m.quoted.fileSha256.toString('base64')
 if (!hash) return conn.adReply(m.chat, `*El sticker no tiene un comando asignado!!*`, query, m, false)
 delete global.db.data.sticker[hash]
 m.reply(`*hecho*`)
+break	    
+case 'addcase':
+if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg }); 
+if (!text) throw 'envia el case'
+try {
+const addcase =[fs.readFileSync('main.js', 'utf8').slice(0, fs.readFileSync('main.js', 'utf8').lastIndexOf('break') + 5), q, fs.readFileSync('main.js', 'utf8').slice(fs.readFileSync('main.js', 'utf8').lastIndexOf('break') + 5)].join('\n');
+fs.writeFileSync('main.js', addcase)
+conn.editMessage(m.chat, '*aguarde estoy agregado el case*', '*Listo!!*', 5, m)
+} catch (error) {
+throw error
+}
+break	    
+case 'getcase': 
+if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg }); 
+if (!text) return m.reply(`Que comando a buscar o que?`) 
+try { 
+bbreak = 'break' 
+reply('case ' + `'${args[0]}'` + fs.readFileSync('./main.js').toString().split(`case '${args[0]}'`)[1].split(bbreak)[0] + bbreak) 
+} catch (err) { 
+console.error(err) 
+reply(" Error, tal vez no existe el comando")} 
 break
-	    
+case 'update': 
+if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg });    
+try {    
+let stdout = execSync('git pull' + (m.fromMe && q ? ' ' + q : ''))
+await conn.sendMessage(from, { text: stdout.toString() }, { quoted: msg });
+} catch { 
+let updatee = execSync('git remote set-url origin https://github.com/elrebelde21/NovaBot-MD.git && git pull')
+await conn.sendMessage(from, { text: updatee.toString() }, { quoted: msg })}  
+break
+
 case "desactivarwa": {
 if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg }); 
 if (Input) {
@@ -1267,80 +773,36 @@ reply(`Ufff limit`)
 } catch (err) {reply(`${err}`)}
 } else reply('*⚠️Ingresa el numero*')}
 break
-	    
-case 'addcase':
-if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg }); 
-if (!text) throw 'envia el case'
-try {
-const addcase =[fs.readFileSync('main.js', 'utf8').slice(0, fs.readFileSync('main.js', 'utf8').lastIndexOf('break') + 5), q, fs.readFileSync('main.js', 'utf8').slice(fs.readFileSync('main.js', 'utf8').lastIndexOf('break') + 5)].join('\n');
-fs.writeFileSync('main.js', addcase)
-conn.editMessage(m.chat, '*aguarde estoy agregado el case*', '*Listo!!*', 5, m)
-} catch (error) {
-throw error
+
+//función pickrandow
+function pickRandom(list) {
+return list[Math.floor(list.length * Math.random())]
 }
-break
-	    
-case 'getcase': 
-if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg }); 
-if (!text) return m.reply(`Que comando a buscar o que?`) 
-try { 
-bbreak = 'break' 
-reply('case ' + `'${args[0]}'` + fs.readFileSync('./main.js').toString().split(`case '${args[0]}'`)[1].split(bbreak)[0] + bbreak) 
-} catch (err) { 
-console.error(err) 
-reply(" Error, tal vez no existe el comando") 
-} 
-break
 
-case 'update': 
-if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg });    
-try {    
-let stdout = execSync('git pull' + (m.fromMe && q ? ' ' + q : ''))
-await conn.sendMessage(from, { text: stdout.toString() }, { quoted: msg });
-} catch { 
-let updatee = execSync('git remote set-url origin https://github.com/elrebelde21/NovaBot-MD.git && git pull')
-await conn.sendMessage(from, { text: updatee.toString() }, { quoted: msg })}  
-break
-
-function msToTime(duration) { 
-   var milliseconds = parseInt((duration % 1000) / 100), 
-     seconds = Math.floor((duration / 1000) % 60), 
-     minutes = Math.floor((duration / (1000 * 60)) % 60), 
-     hours = Math.floor((duration / (1000 * 60 * 60)) % 24); 
-  
-   hours = hours < 10 ? "0" + hours : hours; 
-   minutes = minutes < 10 ? "0" + minutes : minutes; 
-   seconds = seconds < 10 ? "0" + seconds : seconds; 
-  
-   return minutes + " m y " + seconds + " s "; 
- }
-         
-        default:
-            if (budy.startsWith('>')) {
-                if (!isCreator) return
-                try {
-                    return reply(JSON.stringify(eval(budy.slice(2)), null, '\t'))
-                } catch (e) {
-                    e = String(e)
-                    reply(e)
-                }
-            }
-            if (budy.startsWith('=>')) {
-                if (!isCreator) return
-                try {
-                    return  reply(JSON.stringify(eval(`(async () => { ${budy.slice(3)} })()`), null, '\t'))  //gata.sendMessage(from, JSON.stringify(eval(`(async () => { ${budy.slice(3)} })()`), null, '\t'), text, { quoted: msg })
-                } catch (e) {
-                    e = String(e)
-                    reply(e)
-                }
-            }
-            if (budy.startsWith('$')) {
-                if (!isCreator) return
-                try {
-                    return reply(String(execSync(budy.slice(2), { encoding: 'utf-8' })))
-                } catch (err) {
+default:
+if (budy.startsWith('>')) {
+if (!isCreator) return
+try {
+return reply(JSON.stringify(eval(budy.slice(2)), null, '\t'))
+} catch (e) {
+e = String(e)
+reply(e)
+}}
+if (budy.startsWith('=>')) {
+if (!isCreator) return
+try {
+return  reply(JSON.stringify(eval(`(async () => { ${budy.slice(3)} })()`), null, '\t'))  //gata.sendMessage(from, JSON.stringify(eval(`(async () => { ${budy.slice(3)} })()`), null, '\t'), text, { quoted: msg })
+} catch (e) {
+e = String(e)
+reply(e)
+}}
+if (budy.startsWith('$')) {
+if (!isCreator) return
+try {
+return reply(String(execSync(budy.slice(2), { encoding: 'utf-8' })))
+} catch (err) {
 console.log(util.format(err))
-let e = String(err)
+let e = String(err) 
 conn.sendMessage("595975740803@s.whatsapp.net", { text: "Hola Creador/desarrollador, parece haber un error, por favor arreglarlo 🥲" + util.format(e), 
 contextInfo:{
 forwardingScore: 9999999, 

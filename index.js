@@ -1,6 +1,6 @@
 (async () => {
 require("./settings")
-const { default: makeWASocket, makeInMemoryStore, useMultiFileAuthState, DisconnectReason, proto , jidNormalizedUser,WAMessageStubType, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, msgRetryCounterMap, makeCacheableSignalKeyStore, fetchLatestBaileysVersion } = require("@whiskeysockets/baileys")
+const { default: makeWASocket, Browsers, makeInMemoryStore, useMultiFileAuthState, DisconnectReason, proto , jidNormalizedUser,WAMessageStubType, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, msgRetryCounterMap, makeCacheableSignalKeyStore, fetchLatestBaileysVersion } = require("@whiskeysockets/baileys")
 const { state, saveCreds } = await useMultiFileAuthState('./sessions')
 const chalk = require('chalk')
 const moment = require('moment')
@@ -26,7 +26,6 @@ low = require('./libs/database/lowdb')
 
 const { Low, JSONFile } = low
 const mongoDB = require('./libs/database/mongoDB')
-
 global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
 global.db = new Low(
 /https?:\/\//.test(opts['db'] || '') ?
@@ -51,13 +50,13 @@ setting: {},
 others: {},
 sticker: {},
 ...(global.db.data || {})}
-  global.db.chain = _.chain(global.db.data)}
+global.db.chain = _.chain(global.db.data)}
 loadDatabase() //Gracias aiden pro 😎 
 //skid chinga tu madre :v
 
 if (global.db) setInterval(async () => {
-    if (global.db.data) await global.db.write()
-  }, 30 * 1000)
+if (global.db.data) await global.db.write()
+}, 30 * 1000)
 
 //_________________
     
@@ -73,7 +72,7 @@ const socketSettings = {
 printQRInTerminal: true,
 logger: pino({ level: 'silent' }),
 auth: { creds: state.creds, keys: makeCacheableSignalKeyStore(state.keys, pino({level: 'silent'})) },
-browser: [`NovaBot-MD`,'Safari','3.0'], 
+browser: Browsers.macOS("NovaBot-MD"),
 msgRetry,
 msgRetryCache,
 version,
@@ -113,27 +112,17 @@ m = smsg(sock, mek)
 //if (m.key.fromMe === true) return
 //if (m.mtype === 'senderKeyDistributionMessage') mek = chatUpdate.messages[1]
 global.numBot = sock.user.id.split(":")[0] + "@s.whatsapp.net"
-global.numBot2 = sock.user.id
-try {
+global.numBot2 = sock.user.id 
 require("./main")(sock, m, chatUpdate, mek)
 } catch (e) {
-let sktext = util.format(e)
-console.log(sktext)
-/*sock.sendMessage("595975740803@s.whatsapp.net", { text: "Hola Creador/desarrollador, parece haber un error, por favor arreglarlo 🥲" + sktext, 
-contextInfo:{
-forwardingScore: 9999999, 
-isForwarded: true
-}})*/
-}} catch (e) {
 console.log(e)
-}})
-} catch (err) {
+}})} catch (err) {
 console.log(err)
 }})
 
 //anticall
 sock.ev.on('call', async (fuckedcall) => { 
- sock.user.jid = sock.user.id.split(":")[0] + "@s.whatsapp.net" // jid in user?
+sock.user.jid = sock.user.id.split(":")[0] + "@s.whatsapp.net" // jid in user?
 let anticall = global.db.data.settings[numBot].anticall
 if (!anticall) return
 console.log(fuckedcall)
@@ -409,22 +398,17 @@ color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│🧡 INICIA
 console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
 color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│ESCANEA EL QR, EXPIRA 45 SEG...\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯`, '#f12711')
-)
-const code = await sock.requestPairingCode('595975740803')
-console.log(color(`o usa este código: ${code}`, '#f12711'))
-} else if (connection === 'close') {
-console.log(
-color('[SYS]', '#009FFF'),
+)} else if (connection === 'close') {
+console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
 color(`⚠️ CONEXION CERRADA, SE INTENTARA RECONECTAR`, '#f64f59')
 );
 lastDisconnect.error?.output?.statusCode !== DisconnectReason.loggedOut
 ? startBot()
-: console.log(
-color('[SYS]', '#009FFF'), 
-color(moment().format('DD/MM/YY HH:mm:LTS'), '#A1FFCE'),
+: console.log(color('[SYS]', '#009FFF'),
+color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
 color(`Wa Web logged Out`, '#f64f59')
-);;
+);
 } else if (connection == 'open') {
 console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),

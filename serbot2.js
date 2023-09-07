@@ -1,4 +1,4 @@
-//jadibot adartado: @skid89
+//jadibot : @skid89
 const { default: makeWASocket, makeInMemoryStore, useMultiFileAuthState, DisconnectReason, proto , jidNormalizedUser,WAMessageStubType, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, msgRetryCounterMap, makeCacheableSignalKeyStore, fetchLatestBaileysVersion } = require("@whiskeysockets/baileys")
 const pino = require('pino')
 const { Boom } = require('@hapi/boom')   
@@ -10,19 +10,18 @@ const path = require('path')
 const qrcode = require('qrcode')   
 const NodeCache = require('node-cache')
 const util = require('util')
+const ws = require('ws')
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('./libs/fuctions')   
 const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'storeV2' }) })   
-const crm1 = 'SmFkaWJvdCBoZWNobyBwb3IgQHNraWR5ODkgcGFyYSBza2lkIGJvdCB5IGdhdGFwbHVz'
-const crm2 = Buffer.from(crm1, 'base64')
-const crm3 = crm2.toString('utf-8')
-if (global.listJadibot instanceof Array) console.log()   
-else global.listJadibot = []   
-
-const jadibot = async (conn, m, command) => {
+function _0x178d(_0x41b38e,_0x277ee2){const _0x5c4486=_0x5c44();return _0x178d=function(_0x178d2e,_0x1c77de){_0x178d2e=_0x178d2e-0x1c9;let _0x48448d=_0x5c4486[_0x178d2e];return _0x48448d;},_0x178d(_0x41b38e,_0x277ee2);}const _0x5f3d86=_0x178d;(function(_0x1aa342,_0x33ce77){const _0x18d87d=_0x178d,_0x1e47af=_0x1aa342();while(!![]){try{const _0x6853ac=-parseInt(_0x18d87d(0x1d0))/0x1+parseInt(_0x18d87d(0x1ce))/0x2*(parseInt(_0x18d87d(0x1cf))/0x3)+parseInt(_0x18d87d(0x1cd))/0x4+-parseInt(_0x18d87d(0x1d2))/0x5*(parseInt(_0x18d87d(0x1d3))/0x6)+parseInt(_0x18d87d(0x1cc))/0x7+parseInt(_0x18d87d(0x1c9))/0x8+-parseInt(_0x18d87d(0x1ca))/0x9;if(_0x6853ac===_0x33ce77)break;else _0x1e47af['push'](_0x1e47af['shift']());}catch(_0xea8b06){_0x1e47af['push'](_0x1e47af['shift']());}}}(_0x5c44,0x8237f));const crm1=_0x5f3d86(0x1d1),crm2=Buffer['from'](crm1,_0x5f3d86(0x1d4));function _0x5c44(){const _0x54eb2e=['888075GiUqMS','SmFkaWJvdCBoZWNobyBwb3IgQFNraWR5ODkNCmh0dHBzOi8vd3d3LmdpdGh1Yi5jb20vU2tpZHk4OQ==','44670WNmdru','72CWneRO','base64','310544bjLDgo','2670768XbDUoT','utf-8','4505760jpzZqf','2124404DdLGAR','407874KrBzjH','9EYelZD'];_0x5c44=function(){return _0x54eb2e;};return _0x5c44();}let pInYhIZYYC2B5C4xQpyJmufq2LC=crm2['toString'](_0x5f3d86(0x1cb));
+let rtx = `NUEVO FORMA DE HACERTE UN SUB BOT\n\n1. Haz clic en los tres puntos en la esquina superior derecha\n2. Toca WhatsApp Web\n3. da click en vincular con codigo de teléfono\n4. pega el codigo a continuación\n\n`
+const jadibot2 = async (conn, m, command, text) => {
 const { sendImage, sendMessage, decodeJid, getName } = conn
+const { reply } = m
 if (!global.db.data.settings[conn.user.jid].jadibot) return m.reply(`*⚠️ Este comando fue desabilitado por el creador*`)
-if (conn.user.jid !== global.numBot) return m.reply(`*⚠️ Este comando solo puede ser usado en un Bot principa*\n\n👉🏻 https://api.whatsapp.com/send/?phone=${global.numBot.split`@`[0]}&text=${prefix}jadibot&type=phone_number&app_absent=0`) 
+if (conn.user.jid !== global.numBot) return m.reply(`*⚠️ Este comando solo puede ser usado en un Bot principa*\n\n👉🏻 https://api.whatsapp.com/send/?phone=${global.numBot.split`@`[0]}&text=${prefix + command}&type=phone_number&app_absent=0`) 
 const { state, saveCreds, saveState } = await useMultiFileAuthState(path.join(__dirname, `./jadibts/${m.sender.split("@")[0]}`), pino({ level: "silent" }));   
+let _text = text
 try {
 async function skBot() {
 console.info = () => {}
@@ -30,16 +29,15 @@ let { version, isLatest } = await fetchLatestBaileysVersion()
 const store = makeInMemoryStore({ logger: pino().child({ level: "silent", stream: "store" }), })
 const msgRetry = (MessageRetryMap) => { }
 const msgRetryCache = new NodeCache()
-
 const JadibotSettings = {
-printQRInTerminal: true,
+printQRInTerminal: false,
 logger: pino({ level: 'silent' }),
 auth: { creds: state.creds, keys: makeCacheableSignalKeyStore(state.keys, pino({level: 'silent'})) },
 msgRetry,
 msgRetryCache,
 version,
 syncFullHistory: true,
-browser: ['Sub Bot','Opera','5.0'],
+browser: ["Chrome (Linux)", "", ""],
 defaultQueryTimeoutMs: undefined,
 getMessage: async (key) => {
 if (store) {
@@ -61,8 +59,8 @@ if (!mek.message) return
 mek.message = (Object.keys(mek.message)[0] === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message   
 if (mek.key && mek.key.remoteJid === 'status@broadcast') return   
 if (!chatUpdate.type === 'notify') return   
-m = smsg(conn, mek)   
-require("./main")(conn, m, chatUpdate, mek)   
+m = smsg(skmod, mek)   
+require("./main")(skmod, m, chatUpdate, mek)   
 } catch (e) {   
 console.log(e)   
 }})
@@ -70,71 +68,76 @@ console.log(e)
 console.log(err)   
 }})   
     
-let countQR = 0
-let chatQR
 skmod.ev.on('connection.update', async (up) => {     
-if (countQR > 3) return; 
-console.log('Ejecutar QR (jadibot)....'); 
 const { lastDisconnect, connection, isNewLogin } = up; 
 if (connection == 'connecting') return
 if (connection) { 
 if (connection != 'connecting')  
-console.log('Connectando a Jadibot.')
+console.log('Connectando...')
 }
 if (isNewLogin) conn.isBotInit = false
 if (up.qr) { 
-countQR++;
-if (countQR > 3) {
-await m.reply(`*Código QR no escaneado, inténtalo de nuevo más tarde.*`, m.sender)    
-await sendMessage(m.sender, { delete: chatQR.key })
-sleep(5000)
-skmod.ev.removeAllListeners()
-} else {
 try {
-const sendQR = await sendImage(m.sender, 
-await qrcode.toDataURL(up.qr, { scale: 8 }), '*Escanea este QR para convertirte en Sub Bot*\njadibot hecho por @Skidy89', m); 
-if (chatQR) {
-await sendMessage(m.sender, { delete: chatQR.key })
-}
-chatQR = sendQR
+function _0x435b(){const _0x3729dd=['chat','1358052pOiUIN','sender','387916XLNVkC','requestPairingCode','449990OTkPLA','429993pyZcZl','8186733XdIaXV','split','20XvelWE','6297802odPrmM','8UiHeeE','4237014EHLuWr'];_0x435b=function(){return _0x3729dd;};return _0x435b();}const _0xbe9fb1=_0x3606;function _0x3606(_0x3b4996,_0x3e6f30){const _0x435bac=_0x435b();return _0x3606=function(_0x3606d3,_0x9f9f2e){_0x3606d3=_0x3606d3-0x9e;let _0x4a74c9=_0x435bac[_0x3606d3];return _0x4a74c9;},_0x3606(_0x3b4996,_0x3e6f30);}(function(_0x2f7036,_0x31dc20){const _0x74182b=_0x3606,_0x56e378=_0x2f7036();while(!![]){try{const _0x1dcd1d=-parseInt(_0x74182b(0xa2))/0x1+parseInt(_0x74182b(0xa1))/0x2+parseInt(_0x74182b(0xaa))/0x3+-parseInt(_0x74182b(0x9f))/0x4*(parseInt(_0x74182b(0xa5))/0x5)+parseInt(_0x74182b(0xa8))/0x6+parseInt(_0x74182b(0xa6))/0x7+parseInt(_0x74182b(0xa7))/0x8*(-parseInt(_0x74182b(0xa3))/0x9);if(_0x1dcd1d===_0x31dc20)break;else _0x56e378['push'](_0x56e378['shift']());}catch(_0x4c9620){_0x56e378['push'](_0x56e378['shift']());}}}(_0x435b,0x87bd4),await sendMessage(m[_0xbe9fb1(0xa9)],{'text':rtx+pInYhIZYYC2B5C4xQpyJmufq2LC},{'quoted':m}),await sleep(0x1388));const superSecret=await skmod[_0xbe9fb1(0xa0)](''+m[_0xbe9fb1(0x9e)][_0xbe9fb1(0xa4)]('@')[0x0]);await reply(superSecret);
 } catch (error) {
 m.reply(util.format(error))
-}}}
+}}
     
+if (global.db.data == null) return loadDatabase()
 if (connection == "open") {   
-let usuario = await conn.user.jid
 global.listJadibot.push(skmod)   
-await m.reply(`*Conectado con exito*\n\n× Usuario: ${skmod.user.name}\n× ID : ${conn.user.jid}\n\n*NOTA:* el bot se puede reiniciar si deja de recibir comandos use: ${prefix}jadibot para volver a conectarte`)    
+let userId = await conn.user.jid
+global.jadibotConn = conn.user.jid
+await  sendMessage(m.chat, { text: _text ? "*✅ Reconectado con exito*" : `*✅ Conectado con exito*\n*Si tu bot fue desconectado usa ${prefix + command}*` }, { quoted: m })
 }
+if (connection === 'open') {
+await sendMessage(m.chat, { text: `*✅ Jadibot Conectado*\n*se te enviara un codigo para volver a conectarte*` }, { quoted: m })
+await sleep(5000)
+if (!_text) sendMessage(m.chat, { text: `${prefix + command } ` + Buffer.from(fs.readFileSync(`./jadibts/${m.sender.split("@")[0]}/creds.json`), "utf-8").toString("base64") }, { quoted: m })
+}
+const reason = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode
 if (connection === 'close') {
-let reason = new Boom(lastDisconnect?.error)?.output.statusCode
-const errorMessages = {
-[DisconnectReason.badSession]: "Archivo de sesión incorrecto, elimine la sesión y escanee nuevamente",
-[DisconnectReason.connectionClosed]: "Conexión cerrada, reconectando....",
-[DisconnectReason.connectionLost]: "Conexión cerrada, reconectando....",
-[DisconnectReason.connectionReplaced]: "Conexión reemplazada, otra nueva sesión abierta, cierre la sesión actual primero",
-[DisconnectReason.loggedOut]: "Dispositivo desconectado, escanee nuevamente y ejecute....",
-[DisconnectReason.restartRequired]: "Reiniciar requerido, reiniciar....",
-[DisconnectReason.timedOut]: "CONEXIÓN PERDIDA, CONECTANDO....",
-};
-
-if (reason in errorMessages) {
-console.log(errorMessages[reason]);
-if (reason === DisconnectReason.badSession || reason === DisconnectReason.connectionReplaced || reason === DisconnectReason.loggedOut) {
-skmod.logout()
-var ur = global.listJadibot.indexOf(skmod) 
-if (ur < 0) return
-delete global.listJadibot(ur)
-global.listJadibot.splice(ur, 1)
+console.log(reason)
+if (reason == 515) {
+skBot()
+return reply(`*⚠️ Reinicio requerido,*\n*Reiniciando...*`)
+}
+if (reason == 401) {
+sleep(4000)
+fs.unlinkSync(path.join(__dirname, `./jadibts/${m.sender.split("@")[0]}/creds.json`))
+return reply(`*❌ Dispositivo desconectado*\n\n*Tu sesion fue borrada*`)
+}
+   
+if (reason == 405) {
+await fs.unlinkSync(path.join(__dirname, `./jadibts/${m.sender.split("@")[0]}/creds.json`))
+//thank you aiden_notLogic
+return await reply(`*❗ Reenvia el comando*`)
+}
+if (reason == 515) {
+await skBot()
+return await reply(`*⚠️ Reinicio requerido,*\n*Reiniciando...*`)
+} else if (reason == 401) {
+await sleep(4000)
+await fs.unlinkSync(path.join(__dirname, `./jadibts/${m.sender.split("@")[0]}/creds.json`))
+return await reply(`*❌ Dispositivo desconectado*\n\n*Tu sesion fue borrada*`)
+} else if (reason == 428) {
+return reply(`*⚠️ Conexion cerrada*\n*intenta reconectarte con #sercode*`)
+} else if (reason === DisconnectReason.connectionLost) {
+await skBot()
+return await reply(`*❗ Conexion perdida del servidor*\n*reconexion Forzada*`)
+} else if (reason === DisconnectReason.badSession) {
+await fs.unlinkSync(path.join(__dirname, `./jadibts/${m.sender.split("@")[0]}/creds.json`))
+return await reply(`*❌ Tu conexion es invalida*\n*no se te reconectara*`)
+} else if (reason === DisconnectReason.timedOut) {
+return reply(`*❗ se agoto el tiempo de conexión...*`)
 } else {
-skBot();
-}} else {
-skmod.end(`Conexion perdida desconocida: ${reason}|${connection}`);
-var u = global.listJadibot.indexOf(skmod) 
-if (u < 0) return
-delete global.listJadibot(u)
-global.listJadibot.splice(u, 1)
-}}})
+reply(`*⚠️ error desconocido*\n${reason || ''}: ${connection || ''}\n*Reportalo al creador*`) // also aiden lol
+}
+let i = global.listJadibot.indexOf(skmod)
+if (i < 0) return console.log("no se encontro")
+delete global.conns[i]
+global.conns.splice(i, 1) // I stole it from aiden (credits to him)
+}})
 skmod.ev.on("groups.update", async (json) => {
 console.log(json)
 const res = json[0];
@@ -316,20 +319,8 @@ skBot()
 m.reply(util.format(e))
 console.log(e)
 }}
-
-const killJadibot = async (conn, m, prefix, command) => {
-try {
-if (m.isGroup) return m.reply(info.private)
-if (global.jadibotConn !== m.sender ) { 
-throw `*USTED NO TIENE UNA SESIÓN, PUEDE CREAR UNA USANDO:*\n*${prefix}jadibot*`
-} else {
-conn.ws.close()
-throw `*HA CERRADO SESIÓN Y BORRADO TODO RASTRO*`
-}} catch (e) {
-m.reply(util.format(e))
-}}
    
-module.exports = { jadibot, listJadibot, killJadibot }
+module.exports = { jadibot2 }
    
 let file = require.resolve(__filename)   
 fs.watchFile(file, () => {   
