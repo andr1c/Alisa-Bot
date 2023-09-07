@@ -12,7 +12,8 @@ const jimp = require('jimp')
 const { defaultMaxListeners } = require('stream')
 const FileType = import("file-type")
 const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
-const PhoneNumber = import('awesome-phonenumber')
+const PhoneNumber = require('awesome-phonenumber')
+
 
 const downloadMediaMessage = async (message) => {
         let mime = (message.msg || message).mimetype || ''
@@ -203,7 +204,7 @@ exports.tanggal = (numer) => {
 				thisDay = myDays[thisDay];
 				var yy = tgl.getYear()
 				var year = (yy < 1000) ? yy + 1900 : yy; 
-				const time = moment.tz('America/Bogota').format('DD/MM HH:mm:ss')
+				const time = moment.tz('Asia/Jakarta').format('DD/MM HH:mm:ss')
 				let d = new Date
 				let locale = 'id'
 				let gmt = new Date(0).getTime() - new Date('1 January 1970').getTime()
@@ -280,6 +281,7 @@ exports.smsg = (conn, m, hasParent) => {
         m.sender = m.fromMe ? (conn.user.id.split(":")[0]+'@s.whatsapp.net' || conn.user.id) : (m.key.participant || m.key.remoteJid)
         m.limit = false
         m.money = false
+        m.device = m.key.id.length > 21 ? 'Android' : m.key.id.substring(0, 2) == '3A' ? 'IOS' : 'whatsapp web'
     }
     
 try {   
@@ -397,26 +399,26 @@ user.regTime = -1
   if (!('autobio' in setting)) setting.autobio = true
   if (!('jadibot' in setting)) setting.jadibot = true 
   if (!('antiCall' in setting)) setting.antiCall = true
-  if (!('privado' in setting)) setting.privado = false
+  if (!('antiprivado' in setting)) setting.antiprivado = false
   } else global.db.data.settings[conn.user.jid] = {  
   status: 0,  
   autobio: true,
   jadibot: true,
   antiCall: true, 
-  privado: false
+  antiprivado: false
   } 
 
 global.db.data.sticker = global.db.data.sticker || {} // sticker for addcmd
 
-if (user) { //@skid89
+if (user) {
 if (user.level <= 3) {
-  user.role = 'NOVATO(A) I'
+  user.role = 'NOVATO(A)  I'
 } else if (user.level <= 6) {
-  user.role = 'NOVATO(A) II'
+  user.role = 'NOVATO(A)  II'
 } else if (user.level <= 9) {
-  user.role = 'NOVATO(A) III'
+  user.role = 'NOVATO(A)  III'
 } else if (user.level <= 12) {
-  user.role = 'NOVATO(A) IV'
+  user.role = 'NOVATO(A)  IV'
 } else if (user.level <= 15) {
   user.role = 'APRENDIS I'
 } else if (user.level <= 18) {
@@ -426,13 +428,13 @@ if (user.level <= 3) {
 } else if (user.level <= 24) {
   user.role = 'APRENDIS IV'
 } else if (user.level <= 27) {
-  user.role = 'EXPLORADOR(A)  I'
+  user.role = 'EXPLORADOR(A) I'
 } else if (user.level <= 30) {
-  user.role = 'EXPLORADOR(A)  II'
+  user.role = 'EXPLORADOR(A) II'
 } else if (user.level <= 33) {
-  user.role = 'EXPLORADOR(A)  III'
+  user.role = 'EXPLORADOR(A) III'
 } else if (user.level <= 36) {
-  user.role = 'EXPLORADOR(A)  IV'
+  user.role = 'EXPLORADOR(A) IV'
 } else if (user.level <= 39) {
   user.role = '🏆 Elite I'
 } else if (user.level <= 42) {
@@ -509,11 +511,16 @@ if (user.level <= 3) {
   user.role = '🌌 Infinito III'
 } else if (user.level <= 150) {
   user.role = '🌠 Eterno'
-}}} catch (error) {
+}
+}
+} catch (error) {
 m.error = error
 if (error) {
 console.error(m.error)
-}}
+}
+}
+
+  
 
     if (m.message) {
         m.mtype = Object.keys(m.message)[0]
@@ -674,9 +681,9 @@ console.error(m.error)
     "title": botname,   
     "containsAutoReply": false,  
     "mediaType": 1,   
-    "thumbnail": thumbnail ? thumbnail : global.imagen1,  
-    "mediaUrl": md, 
-    "sourceUrl": md
+    "thumbnail": thumbnail ? thumbnail : global.menu,  
+    "mediaUrl": `https://chat.whatsapp.com/Ebbo3i9xxiZFErul4gyApJ`,  
+    "sourceUrl": `https://chat.whatsapp.com/Ebbo3i9xxiZFErul4gyApJ`  
     }
     }  
     }, { quoted: quoted ? quoted : m }) 
@@ -700,7 +707,7 @@ console.error(m.error)
     "surface": "CATALOG",
     "message": text,
     "orderTitle": orderTitle ? orderTitle : 'unknown',
-    "sellerJid": "46@s.whatsapp.net",
+    "sellerJid": "5218442114446@s.whatsapp.net",
     "token": "AR4flJ+gzJw9zdUj+RpekLK8gqSiyei/OVDUFQRcmFmqqQ==",
     "totalAmount1000": "-500000000",
     "totalCurrencyCode":"USD",
@@ -740,9 +747,9 @@ console.error(m.error)
     * @param {*} audio
     * @param {*} quoted
     */
-    conn.sendAudio = async (jid, audio, quoted) => { // audio? uwu
+    conn.sendAudio = async (jid, audio, quoted, ppt) => { // audio? uwu
     await conn.sendPresenceUpdate('recording', jid)
-    await conn.sendMessage(jid, { audio: { url: audio }, fileName: 'error.mp3', mimetype: 'audio/mp4', ptt: true }, { quoted: quoted ? quoted : m })
+    await conn.sendMessage(jid, { audio: { url: audio }, fileName: 'error.mp3', mimetype: 'audio/mp4', ptt: ppt ? ptt : true }, { quoted: quoted ? quoted : m })
     }
     
     
@@ -879,6 +886,23 @@ console.error(m.error)
     */
     m.copy = () => exports.smsg(conn, M.fromObject(M.toObject(m)))
     
+    conn.appenTextMessage = async(text, chatUpdate) => {
+        let messages = await generateWAMessage(m.chat, { text: text, mentions: m.mentionedJid }, {
+            userJid: conn.user.id,
+            quoted: m.quoted && m.quoted.fakeObj
+        })
+        messages.key.fromMe = areJidsSameUser(m.sender, conn.user.id)
+        messages.key.id = m.key.id
+        messages.pushName = m.pushName
+        if (m.isGroup) messages.participant = m.sender
+        let msg = {
+            ...chatUpdate,
+            messages: [proto.WebMessageInfo.fromObject(messages)],
+            type: 'append'
+        }
+        conn.ev.emit('messages.upsert', msg)
+    }
+
     return m
 }
 
