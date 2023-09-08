@@ -311,11 +311,11 @@ const date = moment.tz('America/Bogota').format('DD/MM/YYYY')
 let name = num
 const miembros = metadata.participants.length
 sock.sendMessage(anu.id, { 
-text: `*Hola* @${name.split("@")[0]} ¿COMO ESTAS?😃
+text: `💫 *Hola* @${name.split("@")[0]} ¿COMO ESTAS?😃
 💫 *Grupos :* ${metadata.subject}
 💫 *Participarte : ${miembros}*
 💫 *Fecha :* ${date}
-${global.db.data.chats[m.chat].antilink ? '✅ *Antilink Esta activo* (aqui no permite compartir enlace del otro grupo)' : '❌ *Antilink Esta desactivado* (aqui si permite compartir enlace)'}
+${global.db.data.chats[m.chat].antilink ? '✅ *Antilink | antienlace esta activo' : '❌ *Antilink | antienlace esta Desactivado'}
 
 📢 *Lee la descripción*
 

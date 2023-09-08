@@ -39,11 +39,11 @@ const { ytmp4, ytmp3, ytplay, ytplayvid } = require('./libs/youtube')
 const { menu } = require('./plugins/menu.js')
 const { state, owner, grupo, instalar, ping, report, ow} = require('./plugins/info.js')
 const {rob, bal, reg, work, mine, buy, afk, claim} = require('./plugins/rpg.js')
-const {gay, pareja, fake, sim} = require('./plugins/juegos.js')
+const {game, game1, game2, game3, game4, game5} = require('./plugins/juegos.js')
 const {yt, acortar, google, imagen, tran, tts, ia, ssw} = require('./plugins/buscadores.js')
 const {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, on, on2} = require('./plugins/grupos.js')
 const {nsfw1, nsfw2, nsfw3} = require('./plugins/nsfw.js')
-
+const {randow1, randow2, randow3, randow4} = require('./plugins/randow.js')
 const msgs = (message) => { // Función 'msgs' que toma un parámetro 'message'
 if (message.length >= 10) { // Longitud de 'message' es mayor o igual a 10 caracteres
 return `${message.substr(0, 500)}` // Devuelve los primeros 500 caracteres de 'message'
@@ -159,14 +159,14 @@ let ppt = global.db.data.game.ppt = []
 let ttt = global.db.data.game.ppt = []
   
 //autobio
-/*if (global.db.data.settings[numBot].autobio) {
+if (global.db.data.settings[numBot].autobio) {
 let setting = global.db.data.settings[numBot]
 if (new Date() * 1 - setting.status > 1000) {
 let uptime = await runtime(process.uptime())
 const bio = `ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ | ᴀᴄᴛɪᴠᴏ ✅️: ${runtime(process.uptime())}\n\nᴘᴀʀᴀ ᴠᴇᴢ ᴍɪ ʟɪsᴛᴀ ᴅᴇ ᴄᴏᴍᴀɴᴅᴏ ᴜsᴀʀ #menu`
 await conn.updateProfileStatus(bio)
 setting.status = new Date() * 1
-}} */
+}} 
   
 //autoread
 if (m.message) {
@@ -398,19 +398,22 @@ break
 
 //juegos
 case 'simi': case 'bot': {
-await sim(conn, m, text, quoted)}
+await game(conn, m, text, quoted)}
 break 
 case 'gay': { 
-await gay(conn, m, participants, sender)}
+await game1(conn, m, participants, sender)}
 break            
 case 'pareja':
-await pareja(conn, m, pushname, participants, sender)
+await game2(conn, m, pushname, participants, sender)
 break
-case 'ppt': {
-await ppt(conn, m, pushname, sender)}
-break       
 case 'fake': {
-await fake(conn, text, prefix, command, body, from, m, sender, quoted)}
+await game3(conn, text, prefix, command, body, from, m, sender, quoted)}
+break
+case 'follar': case 'violar':
+game4(conn, m, pushname, text, sender)
+break
+case 'ppt':
+game5(conn, m, pushname, text, sender)
 break
 //audios
 case "a":
@@ -419,8 +422,7 @@ let vn = './media/a.mp3'
 await conn.sendPresenceUpdate('recording', m.chat)
 conn.sendMessage(m.chat, { audio: { url: vn }, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": md, "showAdAttribution": true}}, seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, { quoted: m })
 break
-
-//nswf
+//nsfw
 case 'hentai': {
 await nsfw1(conn, m, pickRandom)}
 break
@@ -430,7 +432,27 @@ break
 case 'lewd': case 'feed': case 'gasm': case 'anal': case 'holo': case 'tits': case 'kuni': case 'kiss': case 'erok': case 'smug': case 'solog': case 'feetg': case 'lewdk': case 'waifu': case 'pussy': case 'femdom': case 'cuddle': case 'eroyuri': case 'cum_jpg': case 'blowjob': case 'holoero': case 'erokemo': case 'fox_girl': case 'futanari': case 'wallpaper':
 await nsfw3(conn, m, pickRandom, sendImageAsUrl, command)
 break
-
+//randow
+case 'memes':
+await randow1(sendImageAsUrl, m)
+break
+case 'loli': 
+await randow2(sendImageAsUrl, m, pickRandom)
+break
+case 'lolivid':
+await randow3(conn, m, pickRandom)
+break
+case 'neko':
+await randow4(sendImageAsUrl, m, pickRandom)
+break
+case 'akira': case 'akiyama': case 'anna': case 'asuna': case 'ayuzawa': case 'boruto': case 'chiho': case 'chitoge': case 'deidara': case 'erza': case 'elaina': case 'eba': case 'emilia': case 'hestia': case 'hinata': case 'inori': case 'isuzu': case 'itachi': case 'itori': case 'kaga': case 'kagura': case 'kaori': case 'keneki': case 'kotori': case 'kurumi': case 'madara': case 'mikasa': case 'miku': case 'minato': case 'naruto': case 'nezuko': case 'sagiri': case 'sasuke': case 'sakura': case 'cosplay':
+let a = JSON.parse(fs.readFileSync(`./src/randow/anime-${command}.json`))
+var result = pickRandom(a)
+sendImageAsUrl(result, `${command}`)
+break
+case 'blackpink':
+sendImageAsUrl("https://delirius-image-random.vercel.app/api/all");
+break
 //descargas		    
 case 'play':  case 'play2': {
 if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
