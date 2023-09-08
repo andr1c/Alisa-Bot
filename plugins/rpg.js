@@ -158,7 +158,7 @@ m.reply(`╭━─━─━─≪ 𝙰𝙺𝙵 ≫─━─━─━╮
 
 async function claim(conn, m, sender) {
 const free = 5000
-const prem = 20000
+const prem = 2000
 let time = global.db.data.users[m.sender].lastclaim + 86400000
 if (new Date - global.db.data.users[m.sender].lastclaim < 86400000) return m.reply(`🎁 *ʏᴀ ʀᴇᴄᴏɢɪsᴛᴇ ᴛᴜ ʀᴇᴄᴏᴍᴘᴇɴsᴀ ᴅɪᴀʀɪᴀ*\n\n🕚 ᴠᴜᴇʟᴠᴇ ᴇɴ ${msToTime(time - new Date())}`) 
 global.db.data.users[m.sender].exp += 2 ? prem : free

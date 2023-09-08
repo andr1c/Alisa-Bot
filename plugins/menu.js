@@ -134,7 +134,10 @@ return `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}simi 
 ├❥ᰰຼ _(Hablar con el bot)_
 ├❥ᰰຼ ❏ ${prefix}ppt
-├❥ᰰຼ _(Esta mantenimiento funciona pero responde cuando quiere xd)_
+├❥ᰰຼ _(juegas un piedra, papel, o tijera)_
+├❥ᰰຼ ❏ ${prefix}gay @tag
+├❥ᰰຼ ❏ ${prefix}pareja @tag
+├❥ᰰຼ ❏ ${prefix}follar @tag
 ├❥ᰰຼ ❏ ${prefix}fake
 ├❥ᰰຼ _(Ingresa el texto + tag para joder a alguien con chat fake😹)_
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
@@ -142,7 +145,6 @@ return `╔══════ ≪ •❈• ≫ ══════╗
 *╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*⃐🥵COMANDO +18*️⃟ᬽ፝֟━*
 ├❥ᰰຼ  *Activa con (antiNsfw on)*
 ├ *✧･ﾟ: *✧･ﾟ:*✧･ﾟ: *✧･ﾟ:*✧･ﾟ: *✧･ﾟ:
-├❥ᰰຼ ❏ ${prefix}waifu
 ├❥ᰰຼ ❏ ${prefix}pussy
 ├❥ᰰຼ ❏ ${prefix}nsfwloli
 ├❥ᰰຼ ❏ ${prefix}hentai
@@ -172,6 +174,50 @@ return `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ *Nota: usarlo baja tu responsabilidad*
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫* 	
 	
+╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*⛩️ ⃐RANDOW*️⃟ᬽ፝֟━*
+├❥ᰰຼ ❏ ${prefix}memes
+├❥ᰰຼ ❏ ${prefix}loli
+├❥ᰰຼ ❏ ${prefix}lolivid
+├❥ᰰຼ ❏ ${prefix}neko
+├❥ᰰຼ ❏ ${prefix}waifu	
+├❥ᰰຼ ❏ ${prefix}blackpink
+├❥ᰰຼ ❏ ${prefix}akira
+├❥ᰰຼ ❏ ${prefix}akiyama
+├❥ᰰຼ ❏ ${prefix}anna
+├❥ᰰຼ ❏ ${prefix}asuna
+├❥ᰰຼ ❏ ${prefix}ayuzawa
+├❥ᰰຼ ❏ ${prefix}boruto
+├❥ᰰຼ ❏ ${prefix}chiho
+├❥ᰰຼ ❏ ${prefix}chitoge
+├❥ᰰຼ ❏ ${prefix}deidara
+├❥ᰰຼ ❏ ${prefix}erza
+├❥ᰰຼ ❏ ${prefix}elaina
+├❥ᰰຼ ❏ ${prefix}eba
+├❥ᰰຼ ❏ ${prefix}emilia
+├❥ᰰຼ ❏ ${prefix}hestia
+├❥ᰰຼ ❏ ${prefix}hinata
+├❥ᰰຼ ❏ ${prefix}inori
+├❥ᰰຼ ❏ ${prefix}isuzu
+├❥ᰰຼ ❏ ${prefix}itachi
+├❥ᰰຼ ❏ ${prefix}itori
+├❥ᰰຼ ❏ ${prefix}kaga
+├❥ᰰຼ ❏ ${prefix}kagura
+├❥ᰰຼ ❏ ${prefix}kaori':
+├❥ᰰຼ ❏ ${prefix}keneki
+├❥ᰰຼ ❏ ${prefix}kotori
+├❥ᰰຼ ❏ ${prefix}kurumi
+├❥ᰰຼ ❏ ${prefix}madara
+├❥ᰰຼ ❏ ${prefix}mikasa
+├❥ᰰຼ ❏ ${prefix}miku
+├❥ᰰຼ ❏ ${prefix}minato
+├❥ᰰຼ ❏ ${prefix}naruto
+├❥ᰰຼ ❏ ${prefix}nezuko
+├❥ᰰຼ ❏ ${prefix}sagiri
+├❥ᰰຼ ❏ ${prefix}sasuke
+├❥ᰰຼ ❏ ${prefix}sakura
+├❥ᰰຼ ❏ ${prefix}'cosplay
+*╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
+             
 *╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*⃐🪙 ＥＣＯＮＯＭＩＡ*️⃟ᬽ፝֟━*
 ├❥ᰰຼ ❏ ${prefix}minar _(para minar exp)_
 ├❥ᰰຼ ❏ ${prefix}robar

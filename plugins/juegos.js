@@ -11,7 +11,15 @@ const cheerio = require('cheerio')
 const Jimp = require('jimp')
 const os = require('os')
 
-async function gay(conn, m, participants, sender) {
+async function game(conn, m, text, quoted) {
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (!text) return conn.sendMessage(m.chat, { text: `*INGRESE UN TEXTO PARA HABLAR CONMIGO*` }, { quoted: m })
+await conn.sendPresenceUpdate('composing', m.chat)
+let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${text}&lc=es&cf=false`)
+let res = anu.success;
+m.reply(res)}
+
+async function game1(conn, m, participants, sender) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (!m.isGroup) return m.reply(info.group) 
 let member = participants.map(u => u.id)
@@ -27,7 +35,7 @@ forwardingScore: 9999999,
 isForwarded: true, }}, { quoted: m })
 }
 
-async function pareja(conn, m, pushname, participants, sender) {
+async function game2(conn, m, pushname, participants, sender) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (!m.isGroup) return m.reply(info.group) 
 let member = participants.map(u => u.id)
@@ -51,7 +59,7 @@ isForwarded: true,
 { quoted: m})
 }
 
-async function fake(conn, text, prefix, command, body, from, m, sender, quoted, target, bot, participant) {
+async function game3(conn, text, prefix, command, body, from, m, sender, quoted, target, bot, participant) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 var gh = body.slice(11);
 var mentioned = m.message.extendedTextMessage && m.message.extendedTextMessage.contextInfo && m.message.extendedTextMessage.contextInfo.mentionedJid ? m.message.extendedTextMessage.contextInfo.mentionedJid[0] : null;
@@ -76,15 +84,74 @@ conn.sendMessage(m.chat, sendMessageOptions, { quoted: quotedMessage });
 conn.sendMessage(m.chat, { text: `Ejemplo: ${prefix + command} @tag|puto|😯`}, { quoted: m })
 }}
 
-async function sim(conn, m, text, quoted) {
+async function game4(conn, m, pushname, text, sender) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (!text) return conn.sendMessage(m.chat, { text: `*INGRESE UN TEXTO PARA HABLAR CONMIGO*` }, { quoted: m })
-await conn.sendPresenceUpdate('composing', m.chat)
-let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${text}&lc=es&cf=false`)
-let res = anu.success;
-m.reply(res)}
+if (!text) return m.reply(`*Ingrese el @ o el nombre de la persona*`) 
+let me = m.sender
+let user = m.mentionedJid[0] ? m.mentionedJid[0] : m.sender
+conn.sendMessage(m.chat, { text: `🤤👅🥵 *𝐀𝐂𝐀𝐁𝐀𝐒 𝐃𝐄 𝐅𝐎𝐋𝐋𝐀𝐑𝐓𝐄𝐋@!*🥵👅🤤
 
-module.exports = {gay, pareja, fake, sim}
+𝙏𝙚 𝙖𝙘𝙖𝙗𝙖𝙨 𝙙𝙚 𝙛𝙤𝙡𝙡𝙖𝙧 𝙖 𝙡𝙖 𝙥𝙚𝙧𝙧𝙖 𝙙𝙚 ${text} 𝙖 𝟰 𝙥𝙖𝙩𝙖𝙨 𝙢𝙞𝙚𝙣𝙩𝙧𝙖𝙨 𝙩𝙚 𝙜𝙚𝙢𝙞𝙖 𝙘𝙤𝙢𝙤 𝙪𝙣𝙖 𝙢𝙖𝙡𝙙𝙞𝙩𝙖 𝙥𝙚𝙧𝙧𝙖 "𝐀𝐚𝐚𝐡.., 𝐀𝐚𝐚𝐡𝐡, 𝐬𝐢𝐠𝐮𝐞, 𝐧𝐨 𝐩𝐚𝐫𝐞𝐬, 𝐧𝐨 𝐩𝐚𝐫𝐞𝐬.." 𝙮 𝙡𝙖 𝙝𝙖𝙨 𝙙𝙚𝙟𝙖𝙙𝙤 𝙩𝙖𝙣 𝙧𝙚𝙫𝙚𝙣𝙩𝙖𝙙𝙖 𝙦𝙪𝙚 𝙣𝙤 𝙥𝙪𝙚𝙙𝙚 𝙨𝙤𝙨𝙩𝙚𝙣𝙚𝙧 𝙣𝙞 𝙨𝙪 𝙥𝙧𝙤𝙥𝙞𝙤 𝙘𝙪𝙚𝙧𝙥𝙤 𝙡𝙖 𝙢𝙖𝙡𝙙𝙞𝙩𝙖 𝙯𝙤𝙧𝙧𝙖!
+
+${text}
+🤤🥵 *¡𝐘𝐀 𝐓𝐄 𝐇𝐀𝐍 𝐅𝐎𝐋𝐋𝐀𝐃𝐎!* 🥵🤤`, mentionedJid: [user] }, { quoted: m})}
+
+async function game5(conn, m, pushname, text, astro, sender, prefix, command) {
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (!text) return m.reply(`🥌ᴘɪᴇᴅʀᴀ, 📄ᴘᴀᴘᴇʟ, ᴏ ✂️ᴛɪᴊᴇʀᴀ\nᴘᴜᴇᴅᴇ ᴜsᴀʀ ᴇsᴛᴏs ᴄᴏᴍᴀɴᴅᴏ\n🥌.ppt piedra\n📄 .ppt papel\n✂️.ppt tijera\n\nᴜsᴇ ᴇɴ ᴍɪɴᴜsᴄᴜʟᴀs\n\n*Ejemplo :* #ppt papel\n`) 
+var astro = Math.random()
+if (astro < 0.34) {
+astro = 'piedra' 
+} else if (astro > 0.34 && astro < 0.67) {
+astro = 'tijera' 
+} else {
+astro = 'papel'
+}
+if (text == astro) {
+global.db.data.users[m.sender].exp += 500
+m.reply(`🔰 EMPATE! 🤝\n\n👉🏻 TU: ${text}\n👉🏻 EL BOT: ${astro}\n🎁 PREMIOS +500 XP`)
+} else if (text == 'papel') {
+if (astro == 'piedra') {
+global.db.data.users[m.sender].exp += 2000
+m.reply(`🥳 HA GANADO! 🎉\n\n👉🏻 TU: ${text}\n👉🏻 EL BOT: ${astro}\n🎁 PREMIO +2000 XP`)
+} else {
+global.db.data.users[m.sender].exp -= 300
+m.reply(`HA PERDIDO ! 🤡\n\n👉🏻 TU: ${text}\n👉🏻 EL BOT: ${astro}\n❌ PREMIO -300 XP`)
+}
+} else if (text == 'tijera') {
+if (astro == 'papel') {
+global.db.data.users[m.sender].exp += 1000
+m.reply(`🥳 HA GANADO! 🎉\n\n👉🏻 TU: ${text}\n👉🏻 EL BOT: ${astro}\n🎁 PREMIO +1000 XP`)
+} else {
+global.db.data.users[m.sender].exp -= 300
+m.reply(`HA PERDIDO! 🤡\n\n👉🏻 TU: ${text}\n👉🏻 EL BOT: ${astro}\n❌ PREMIO -300 XP`)
+}
+} else if (text == 'tijera') {
+if (astro == 'papel') {
+global.db.data.users[m.sender].exp += 1000
+m.reply(`🥳 HA GANADO! 🎉\n\n👉🏻 TU: ${text}\n👉🏻 EL BOT: ${astro}\n🎁 PREMIO +1000 XP`)
+} else {
+global.db.data.users[m.sender].exp -= 300
+m.reply(`HA PERDIDO! 🤡\n\n👉🏻 TU: ${text}\n👉🏻 EL BOT: ${astro}\n❌ PREMIO -300 XP`)
+}
+} else if (text == 'papel') {
+if (astro == 'piedra') {
+global.db.data.users[m.sender].exp += 1000
+m.reply(`🥳 HA GANADO! 🎉\n\n👉🏻 TU: ${text}\n👉🏻 EL BOT: ${astro}\n🎁 PREMIO +1000 XP`)
+} else {
+global.db.data.users[m.sender].exp -= 300
+m.reply(`HA PERDIDO! 🤡\n\n👉🏻 TU: ${text}\n👉🏻 EL BOT: ${astro}\n❌ PREMIO -300 XP`)
+}
+} else if (text == 'piedra') {
+if (astro == 'tijera') {
+global.db.data.users[m.sender].exp += 1000
+m.reply(`🥳 HA GANADO! 🎉\n\n👉🏻 TU: ${text}\n👉🏻 EL BOT: ${astro}\n🎁 PREMIO +1000 XP`)
+} else {
+global.db.data.users[m.sender].exp -= 300
+m.reply(`HA PERDIDO! 🤡\n\n👉🏻 TU: ${text}\n👉🏻 EL BOT: ${astro}\n❌ PREMIO -300 XP`)
+}}}
+
+module.exports = {game, game1, game2, game3, game4, game5}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
