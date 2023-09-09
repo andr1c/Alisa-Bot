@@ -1,4 +1,5 @@
-//jadibot adartado: @skid89
+// jadibot
+// @skidy89
 const { default: makeWASocket, makeInMemoryStore, useMultiFileAuthState, DisconnectReason, proto , jidNormalizedUser,WAMessageStubType, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, msgRetryCounterMap, makeCacheableSignalKeyStore, fetchLatestBaileysVersion } = require("@whiskeysockets/baileys")
 const pino = require('pino')
 const { Boom } = require('@hapi/boom')   
