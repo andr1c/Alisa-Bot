@@ -467,7 +467,7 @@ user.regTime = -1
   } 
 
 global.db.data.sticker = global.db.data.sticker || {} // sticker for addcmd
-if (user) {
+if (user) { // creado por @skidy89?
 if (user.level <= 3) {
   user.role = 'NOVATO(A) I'
 } else if (user.level <= 6) {
