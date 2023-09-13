@@ -1,6 +1,6 @@
 (async () => {
 require("./settings")
-const { default: makeWASocket, Browsers, makeInMemoryStore, useMultiFileAuthState, DisconnectReason, proto , jidNormalizedUser,WAMessageStubType, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, msgRetryCounterMap, makeCacheableSignalKeyStore, fetchLatestBaileysVersion } = require("@whiskeysockets/baileys")
+const { default: makeWASocket, Browsers, makeInMemoryStore, useMultiFileAuthState, DisconnectReason, proto , jidNormalizedUser,WAMessageStubType, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, msgRetryCounterMap, makeCacheableSignalKeyStore, fetchLatestBaileysVersion, getAggregateVotesInPollMessage } = require("@whiskeysockets/baileys")
 const { state, saveCreds } = await useMultiFileAuthState('./sessions')
 const chalk = require('chalk')
 const moment = require('moment')
@@ -9,9 +9,13 @@ const yargs = require('yargs/yargs')
 const { smsg, sleep, getBuffer} = require('./libs/fuctions')
 const _ = require('lodash')
 const NodeCache = require('node-cache')
+const os = require('os')
 const { execSync } = require('child_process')
 const util = require('util')
 const pino = require('pino')
+const { tmpdir } = require('os')
+const { join } = require('path')
+const { readdirSync, statSync, unlinkSync } = require('fs')
 const color = (text, color) => {
 return !color ? chalk.green(text) : color.startsWith('#') ? chalk.hex(color)(text) : chalk.keyword(color)(text)
 }
@@ -26,6 +30,7 @@ low = require('./libs/database/lowdb')
 
 const { Low, JSONFile } = low
 const mongoDB = require('./libs/database/mongoDB')
+
 global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
 global.db = new Low(
 /https?:\/\//.test(opts['db'] || '') ?
@@ -50,14 +55,44 @@ setting: {},
 others: {},
 sticker: {},
 ...(global.db.data || {})}
-global.db.chain = _.chain(global.db.data)}
+  global.db.chain = _.chain(global.db.data)}
 loadDatabase() //Gracias aiden pro 😎 
 //skid chinga tu madre :v
 
 if (global.db) setInterval(async () => {
 if (global.db.data) await global.db.write()
 }, 30 * 1000)
+//_________________
 
+//tmp
+function clearTmp() { 
+const tmp = [tmpdir(), join(__dirname, './tmp')];
+const filename = [];
+tmp.forEach((dirname) => readdirSync(dirname).forEach((file) => filename.push(join(dirname, file))));
+  
+return filename.map((file) => {
+const stats = statSync(file);
+    
+if (stats.isFile() && (Date.now() - stats.mtimeMs >= 1000 * 60 * 3)) {
+return unlinkSync(file); // 3 minutes
+}
+return false;
+});
+}
+
+if (!opts['test']) { 
+if (global.db) { 
+setInterval(async () => { 
+if (global.db.data) await global.db.write(); 
+if (opts['autocleartmp'] && (global.support || {}).find) (tmp = [os.tmpdir(), 'tmp'], tmp.forEach((filename) => cp.spawn('find', [filename, '-amin', '3', '-type', 'f', '-delete']))); 
+}, 30 * 1000); 
+}}
+setInterval(async () => {
+await clearTmp()
+await console.log(color('[SYS]', '#009FFF'),
+color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
+color(`\n╭━─━─━─≪🔆≫─━─━─━╮\n│SE LIMPIO LA CARPETA TMP CORRECTAMENTE\n╰━─━─━─≪🔆≫─━─━─━╯`, '#f12711')
+)}, 180000)
 //_________________
     
 async function startBot() {
@@ -82,7 +117,7 @@ if (store) {
 const msg = store.loadMessage(key.remoteJid, key.id)
 return msg.message && undefined
 } return {
-conversation: 'simple bot',
+conversation: 'SimpleBot',
 }}}
 
 const sock = makeWASocket(socketSettings)
@@ -92,7 +127,7 @@ if (store) {
 const msg = store.loadMessage(key.remoteJid, key.id)
 return msg.message && undefined
 } return {
-conversation: 'simple bot',
+conversation: 'SimpleBot',
 }}
 
 sock.ev.on('messages.upsert', async chatUpdate => {
@@ -100,26 +135,33 @@ sock.ev.on('messages.upsert', async chatUpdate => {
 try {
 chatUpdate.messages.forEach(async (mek) => {
 try {
-//mek = (Object.keys(chatUpdate.messages[0])[0] !== "senderKeyDistributionMessage") ?  chatUpdate.messages[0] : chatUpdate.messages[1]
-
+mek = chatUpdate.messages[0]
 if (!mek.message) return
-//console.log(chatUpdate.type)
 mek.message = (Object.keys(mek.message)[0] === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message
 if (mek.key && mek.key.remoteJid === 'status@broadcast') return
-    
-if (!sock.public && !m.key.fromMe && !chatUpdate.type === 'notify') return
-m = smsg(sock, mek)
-//if (m.key.fromMe === true) return
-//if (m.mtype === 'senderKeyDistributionMessage') mek = chatUpdate.messages[1]
+if (!sock.public && !mek.key.fromMe && chatUpdate.type === 'notify') return
+if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
+if (mek.key.id.startsWith('FatihArridho_')) return
 global.numBot = sock.user.id.split(":")[0] + "@s.whatsapp.net"
-global.numBot2 = sock.user.id 
-require("./main")(sock, m, chatUpdate, mek)
+global.numBot2 = sock.user.id
+m = smsg(sock, mek)
+require("./main")(sock, m, chatUpdate, mek, store)
 } catch (e) {
 console.log(e)
-}})} catch (err) {
+}})
+} catch (err) {
 console.log(err)
 }})
 
+async function getMessage(key){
+if (store) {
+const msg = await store.loadMessage(key.remoteJid, key.id)
+return msg?.message
+}
+return {
+conversation: "Hola"
+}}
+    
 //anticall
 sock.ev.on('call', async (fuckedcall) => { 
 sock.user.jid = sock.user.id.split(":")[0] + "@s.whatsapp.net" // jid in user?
@@ -398,7 +440,8 @@ color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│🧡 INICIA
 console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
 color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│ESCANEA EL QR, EXPIRA 45 SEG...\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯`, '#f12711')
-)} else if (connection === 'close') {
+)
+} else if (connection === 'close') {
 console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
 color(`⚠️ CONEXION CERRADA, SE INTENTARA RECONECTAR`, '#f64f59')
@@ -431,5 +474,4 @@ process.on('RefenceError', console.log)
 }
 
 startBot()
-
 })()

@@ -1,18 +1,19 @@
-// Código desde cero y comentarios hecho por: 
+//Código desde cero y comentarios hecho por: 
 // @gata_dios
 // @Skidy89
 // @elrebelde21 
 
 //═════════[ Importaciones ]═════════ 
 const baileys = require('@whiskeysockets/baileys'); // trabajar a través de descargas por Whatsapp 
+const { WaMessageStubType, areJidsSameUser, downloadContentFromMessage, generateWAMessageContent, generateWAMessageFromContent, generateWAMessage, prepareWAMessageMedia, relayMessage} = require('@whiskeysockets/baileys'); // Importa los objetos 'makeWASocket' y 'proto' desde el módulo '@whiskeysockets/baileys'
 const moment = require('moment-timezone') // Trabajar con fechas y horas en diferentes zonas horarias
 const gradient = require('gradient-string') // Aplicar gradientes de color al texto
 const { exec, spawn, execSync } = require("child_process")// Función 'execSync' del módulo 'child_process' para ejecutar comandos en el sistema operativo
 const chalk = require('chalk') // Estilizar el texto en la consola
 const os = require('os') // Proporciona información del sistema operativo
-const fs = require('fs') // Trabajar con el sistema de archivos
+const fs = require('fs') // Trabajar con el sistema de archivos 
 const fetch = require('node-fetch')
-const axios = require('axios')
+const axios = require('axios') 
 const cheerio = require('cheerio')
 const gpt = require('api-dylux')
 const util = require('util')
@@ -22,142 +23,136 @@ const webp = require("node-webpmux")
 const Jimp = require('jimp')
 const scp1 = require('./libs/scraper') 
 const { File } = require("megajs")
+const speed = require("performance-now")
+const ffmpeg = require("fluent-ffmpeg")
+const { TelegraPh, UploadFileUgu, webp2mp4File, floNime } = require('./libs/uploader.js')
+const { toAudio, toPTT, toVideo } = require('./libs/converter.js')
+const { canLevelUp, xpRange } = require('./libs/levelling.js')
+const { smsg, fetchBuffer, getBuffer, buffergif, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom, msToTime, downloadMediaMessage } = require('./libs/fuctions')
+const { ytmp4, ytmp3, ytplay, ytplayvid } = require('./libs/youtube')
 const { mediafireDl } = require('./libs/mediafire.js') 
 const {jadibot, listJadibot, killJadibot} = require('./serbot.js')  
 const { jadibot2 } = require('./serbot2.js')
-const speed = require("performance-now")
-const ffmpeg = require("fluent-ffmpeg")
-
-const color = (text, color) => { // Función 'color' que toma un texto y un color como parámetros
-return !color ? chalk.cyanBright(text) : color.startsWith('#') ? chalk.hex(color)(text) : chalk.keyword(color)(text)} // Si no hay color, utilizar el color celeste brillante (por defecto)
-
-//═══[ Importa varias funciones y objetos ]═════ 
-const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('./libs/fuctions')
-const { default: makeWASocket, proto } = require("@whiskeysockets/baileys") // Importa los objetos 'makeWASocket' y 'proto' desde el módulo '@whiskeysockets/baileys'
-//const { msgFilter } = require('./libs/antispam')
-const { ytmp4, ytmp3, ytplay, ytplayvid } = require('./libs/youtube')
 const { menu } = require('./plugins/menu.js')
 const { state, owner, grupo, instalar, ping, report, ow} = require('./plugins/info.js')
-const {rob, bal, reg, work, mine, buy, afk, claim} = require('./plugins/rpg.js')
-const {game, game1, game2, game3, game4, game5} = require('./plugins/juegos.js')
+const {rob, bal, reg, work, mine, buy, afk, claim, perfil, nivel} = require('./plugins/rpg.js') 
+const {game, game1, game2, game3, game4, game5, game6} = require('./plugins/juegos.js')
 const {yt, acortar, google, imagen, tran, tts, ia, ssw} = require('./plugins/buscadores.js')
+const {efec, url} = require('./plugins/convertidores.js') 
 const {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, on, on2} = require('./plugins/grupos.js')
-const {nsfw1, nsfw2, nsfw3} = require('./plugins/nsfw.js')
-const {randow1, randow2, randow3, randow4} = require('./plugins/randow.js')
-const msgs = (message) => { // Función 'msgs' que toma un parámetro 'message'
-if (message.length >= 10) { // Longitud de 'message' es mayor o igual a 10 caracteres
-return `${message.substr(0, 500)}` // Devuelve los primeros 500 caracteres de 'message'
-} else { // Caso contrario
-return `${message}`}} // Devuelve 'message' completo
+const {nsfw1, nsfw2, nsfw3, nsfw4, nsfw5} = require('./plugins/nsfw.js')
+const {randow1, randow2, randow3, randow4, randow5} = require('./plugins/randow.js')
 
-const addCmd = (cmd, id) =>  {
-const stickerdb = global.db.data.sticker //gracias a aiden
-stickerdb[id] = {id: id,
-cmd: cmd
-}}
-const getCmd = (id) => {
-const stickerdb = global.db.data.sticker
-let anu = null;  
-Object.keys(stickerdb).forEach(nganu => { 
-if (stickerdb[nganu].id === id) { 
-anu = nganu  
-}})  
-if (anu !== null) {  
-return stickerdb[anu].cmd  
-}}
-const getFileBuffer = async (mediakey, MediaType) => {
-const stream = await downloadContentFromMessage(mediakey, MediaType)
-let buffer = Buffer.from([])
-for await(const chunk of stream) {
-buffer = Buffer.concat([buffer, chunk]) }
-return buffer}
-
-let blockList = []
-/**
-* @param {proto.IWebMessageInfo.message} mek
-* @param {proto.IWebMessageInfo} chatUpdate
-* @param {import("@whiskeysockets/baileys").WASocket} 
-*/
-module.exports = conn = async (conn, m, chatUpdate, mek) => { // Raíz "conn" para mensajes y argumentos
-var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage' && m.message.imageMessage.caption) ? m.message.imageMessage.caption : (m.mtype == 'videoMessage' && m.message.videoMessage.caption ) ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? m.message.listResponseMessage.singleSelectReply.selectedRowId :  (m.mtype == 'stickerMessage') && (getCmd(m.message.stickerMessage.fileSha256.toString()) !== null && getCmd(m.message.stickerMessage.fileSha256.toString()) !== undefined) ? getCmd(m.message.stickerMessage.fileSha256.toString()) : ''
-	
-// ‿︵‿︵ʚɞ『 ATRIBUTOS 』ʚɞ‿︵‿︵
-if (m.key.id.startsWith("BAE5")) return  
-  var budy = (typeof m.text == 'string' ? m.text : '') // Asignar a la variable budy el valor m.text si es cadena	
-//var prefix = prefa ? /^[°•π÷×¶∆£¢€¥®™+✓_=/|~!?@#$%^&.©^]/gi.test(body) ? body.match(/^[°•π÷×¶∆£¢€¥®™+✓_=/|~!?@#$%^&.©^]/gi)[0] : "" : prefa ?? global.prefix
-  var _prefix = /^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi.test(body) ? body.match(/^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi)[0] : ""
-global.prefix = _prefix // Almacenar el prefijo predeterminado
-const isCmd = body.startsWith(prefix) // Verificar si el contenido de body comienza con el valor almacenado en prefix.
-const from = m.chat // Remitente del mensaje
-const msg = JSON.parse(JSON.stringify(mek, undefined, 2)) // Mensaje convertido a formato JSON
-const content = JSON.stringify(m.message) // Contenido del mensaje convertido a formato JSON
-const type = m.mtype // Tipo de mensaje
-const arg = body.substring(body.indexOf(' ') + 1) // Argumento extraído del cuerpo del mensaje
-const command = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase() // Comando extraído del cuerpo del mensaje
-const args = body.trim().split(/ +/).slice(1) // Obtiene los argumentos del comando
-const q = args.join(" ") // Une los argumentos en una sola cadena separada por espacios
-let t = m.messageTimestamp // Marca de tiempo de mensaje
-const pushname = m.pushName || "Sin nombre" // Obtiene el nombre de visualización del usuario de lo contrario será "Sin nombre"
-const botnm = conn.user.id.split(":")[0] + "@s.whatsapp.net"
-const userSender = m.key.fromMe ? botnm : m.isGroup && m.key.participant.includes(":") ? m.key.participant.split(":")[0] + "@s.whatsapp.net" : m.key.remoteJid.includes(":") ? m.key.remoteJid.split(":")[0] + "@s.whatsapp.net" : m.key.fromMe ? botnm : m.isGroup ? m.key.participant : m.key.remoteJid
-const mentionByTag = type == 'extendedTextMessage' && m.message.extendedTextMessage.contextInfo != null ? m.message.extendedTextMessage.contextInfo.mentionedJid : []
-const mentionByReply = type == 'extendedTextMessage' && m.message.extendedTextMessage.contextInfo != null ? m.message.extendedTextMessage.contextInfo.participant || '' : ''
-const numberQuery = q.replace(new RegExp('[()+-/ +/]', 'gi'), '') + '@s.whatsapp.net'
-const usernya = mentionByReply ? mentionByReply : mentionByTag[0]
-const Input = mentionByTag[0] ? mentionByTag[0] : mentionByReply ? mentionByReply : q ? numberQuery : false
-const isCreator = global.owner.map(([numero]) => numero.replace(/[^\d\s().+:]/g, '').replace(/\s/g, '') + '@s.whatsapp.net').includes(userSender) // Eliminar todo a excepción de números 
-const itsMe = m.sender == conn.user.id ? true : false // Verifica si el remitente del mensaje es el propio bot
-const text = args.join(" ") // Unir rgumentos en una sola cadena separada por espacios
-const quoted = m.quoted ? m.quoted : m // Obtiene el mensaje citado si existe, de lo contrario, se establece como el propio mensaje
-const sender = m.key.fromMe ? botnm : m.isGroup ? m.key.participant : m.key.remoteJid // Obtiene el remitente del mensaje según el tipo de chat (individual o grupo)
-const mime = (quoted.msg || quoted).mimetype || '' // Tipo de archivo adjunto del mensaje citado o del propio mensaje
-const isMedia = /image|video|sticker|audio/.test(mime) // Verifica si el mensaje contiene un archivo multimedia (imagen, video, sticker o audio)
-const numBot = conn.user.id.split(":")[0] + "@s.whatsapp.net" // JID del Bot
-const numBot2 = conn.user.id // Número de teléfono del bot
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
-const mentions = []
-if (m.message[type].contextInfo) { 
-if (m.message[type].contextInfo.mentionedJid) {
-const msd = m.message[type].contextInfo.mentionedJid
-for (let i = 0; i < msd.length; i++) {
-mentions.push(msd[i])}}}
-	
-// ‿︵‿︵ʚɞ『 GRUPO 』ʚɞ‿︵‿︵
-const groupMetadata = m.isGroup ? await conn.groupMetadata(from) : '' // Obtiene información del grupo
-const groupName = m.isGroup ? groupMetadata.subject : '' // Nombre del grupo
-const participants = m.isGroup ? await groupMetadata.participants : '' // Lista de participantes del grupo
-const groupAdmins = m.isGroup ? await getGroupAdmins(participants) : '' // // Lista de administradores del grupo
-const isBotAdmins = m.isGroup ? groupAdmins.includes(numBot) : false // Verifica si el bot es un administrador del grupo
-const isGroupAdmins = m.isGroup ? groupAdmins.includes(userSender) : false // Verifica si el remitente del mensaje es un administrador del grupo
-const isBaneed = m.isGroup ? blockList.includes(userSender) : false // Verifica si el remitente del mensaje está en la lista de bloqueados
-
-// ‿︵‿︵ʚɞ『 TIPOS DE MENSAJES Y CITADOS 』ʚɞ‿︵‿︵
-const reply = (text) => {
- m.reply(text)} // Enviar una respuesta 
- const sendAdMessage = (text, edit, title, body, image, url) => { conn.sendMessage(from, {text: text, edit: key, contextInfo: { externalAdReply: { title: title, body: body, mediaUrl: url, sourceUrl: url, previewType: 'PHOTO', showAdAttribution: true, thumbnail: image, sourceUrl: url }}}, {})} 
- const sendImage = ( image, caption ) => { conn.sendMessage(from, { image: image, caption: caption }, { quoted: m })} 
- const sendImageAsUrl = ( url, caption ) => { conn.sendMessage(from, { image:  {url: url }, caption: caption }, { quoted: m })}
-const sendSticker = ( image, fkontak) => { conn.sendMessage(m.chat, { sticker: image }, { quoted: fkontak})}
-const isAudio = type == 'audioMessage' // Mensaje de Audio
-const isSticker = type == 'stickerMessage' // Mensaje de Sticker
-const isContact = type == 'contactMessage' // Mensaje de Contacto
-const isLocation = type == 'locationMessage' // Mensaje de Localización 
-const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageMessage')
-const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')
-const isQuotedAudio = type === 'extendedTextMessage' && content.includes('audioMessage')
-const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')
-const isQuotedDocument = type === 'extendedTextMessage' && content.includes('documentMessage')
-const isQuotedMsg = type === 'extendedTextMessage' && content.includes('Message') // Mensaje citado de cualquier tipo
-const isViewOnce = (type === 'viewOnceMessage') // Verifica si el tipo de mensaje es (mensaje de vista única)
-
-//base de datos
-let user = global.db.data.users[m.sender]
-let chats = global.db.data.users[m.chat]
-let setting = global.db.data.settings[conn.user.jid]  
-let mathGame = global.db.data.game.math = [] 
-let ppt = global.db.data.game.ppt = []
-let ttt = global.db.data.game.ppt = []
+const msgs = (message) => { 
+if (message.length >= 10) { 
+return `${message.substr(0, 500)}` 
+} else { 
+return `${message}`}} 
+const getFileBuffer = async (mediakey, MediaType) => {  
+const stream = await downloadContentFromMessage(mediakey, MediaType)  
+let buffer = Buffer.from([])  
+for await(const chunk of stream) {  
+buffer = Buffer.concat([buffer, chunk]) }  
+return buffer
+}  
   
+/**  
+* @param {proto.IWebMessageInfo.message} mek  
+* @param {proto.IWebMessageInfo} chatUpdate  
+* @param {import("@whiskeysockets/baileys").WASocket}   
+*/  
+module.exports = conn = async (conn, m, chatUpdate, mek, store) => {  
+var budy = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
+  
+// ‿︵‿︵ʚɞ『 ATRIBUTOS 』ʚɞ‿︵‿︵  
+if (m.key.id.startsWith("BAE5")) return  
+var body = (typeof m.text == 'string' ? m.text : '') 
+var _prefix = /^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi.test(body) ? body.match(/^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi)[0] : ""
+global.prefix = _prefix
+const isCmd = body.startsWith(prefix)   
+const from = m.chat 
+const msg = JSON.parse(JSON.stringify(mek, undefined, 2)) 
+const content = JSON.stringify(m.message) 
+const type = m.mtype 
+const arg = body.substring(body.indexOf(' ') + 1) 
+const command = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase() 
+const args = body.trim().split(/ +/).slice(1) 
+const q = args.join(" ") 
+let t = m.messageTimestamp 
+const pushname = m.pushName || "Sin nombre" 
+const botnm = conn.user.id.split(":")[0] + "@s.whatsapp.net"  
+const _isBot = conn.user.jid
+const userSender = m.key.fromMe ? botnm : m.isGroup && m.key.participant.includes(":") ? m.key.participant.split(":")[0] + "@s.whatsapp.net" : m.key.remoteJid.includes(":") ? m.key.remoteJid.split(":")[0] + "@s.whatsapp.net" : m.key.fromMe ? botnm : m.isGroup ? m.key.participant : m.key.remoteJid  
+const isCreator = global.owner.map(([numero]) => numero.replace(/[^\d\s().+:]/g, '').replace(/\s/g, '') + '@s.whatsapp.net').includes(userSender) 
+const itsMe = m.sender == conn.user.id ? true : false 
+const text = args.join(" ") 
+const quoted = m.quoted ? m.quoted : m 
+const sender = m.key.fromMe ? botnm : m.isGroup ? m.key.participant : m.key.remoteJid 
+const mime = (quoted.msg || quoted).mimetype || ''  
+const isMedia = /image|video|sticker|audio/.test(mime)
+const mentions = []  
+if (m.message[type].contextInfo) {   
+if (m.message[type].contextInfo.mentionedJid) {  
+const msd = m.message[type].contextInfo.mentionedJid  
+for (let i = 0; i < msd.length; i++) {mentions.push(msd[i])}}}  
+
+// ‿︵‿︵ʚɞ『 GRUPO 』ʚɞ‿︵‿︵    
+const groupMetadata = m.isGroup ? await conn.groupMetadata(from) : ''
+const groupName = m.isGroup ? groupMetadata.subject : '' 
+const participants = m.isGroup ? await groupMetadata.participants : '' 
+const groupAdmins = m.isGroup ? await getGroupAdmins(participants) : '' 
+  const isBotAdmins = m.isGroup ? groupAdmins.includes(botnm) : false  
+  const isGroupAdmins = m.isGroup ? groupAdmins.includes(userSender) : false 
+  const isBaneed = m.isGroup ? blockList.includes(userSender) : false 
+  const isPremium = m.isGroup ? premium.includes(userSender) : false   
+  const who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender;
+  const thumb = fs.readFileSync("./media/test.jpg")
+const fkontak = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status@broadcast", "fromMe": false, "id": "Halo" }, "message": { "contactMessage": { "vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${userSender.split('@')[0]}:${userSender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD` }}, "participant": "0@s.whatsapp.net" }
+const ftroli ={key: {fromMe: false,"participant":"0@s.whatsapp.net", "remoteJid": "status@broadcast"}, "message": {orderMessage: {itemCount: 2022,status: 200, thumbnail: thumb, surface: 200, message: "ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ", orderTitle: "sᴜᴘᴇʀ ʙᴏᴛ ᴅᴇ ᴡʜᴀᴛsᴀᴘᴘ", sellerJid: '0@s.whatsapp.net'}}, contextInfo: {"forwardingScore":999,"isForwarded":true},sendEphemeral: true}
+const fdoc = {key : {participant : '0@s.whatsapp.net', ...(from ? { remoteJid: `status@broadcast` } : {}) },message: {documentMessage: {title: botname, jpegThumbnail: null}}}
+const kick = function (from, orangnya) {  
+for (let i of orangnya) {  
+conn.groupParticipantsUpdate(m.chat, [i], "remove")}}  
+const time = moment(Number(msg.messageTimestamp + "000")).locale("es-mx").tz("America/Asuncion").format('MMMM Do YYYY, h:mm:ss a')  
+  
+const reply = (text) => {  
+m.reply(text)} 
+const sendAdMessage = (text, title, body, image, url) => { conn.sendMessage(m.chat, {text: text, contextInfo: { externalAdReply: { title: title, body: body, mediaUrl: url, sourceUrl: url, previewType: 'PHOTO', showAdAttribution: true, thumbnail: image, sourceUrl: url }}}, {})}  
+const sendImage = ( image, caption ) => { conn.sendMessage(m.chat, { image: image, caption: caption }, { quoted: m })}  
+const sendImageAsUrl = ( url, caption ) => { conn.sendMessage(m.chat, { image:  {url: url }, caption: caption }, { quoted: m })}  
+
+// ‿︵‿︵ʚɞ『 TIPOS DE MENSAJES Y CITADOS 』ʚɞ‿︵‿︵  
+  const isAudio = type == 'audioMessage' // Mensaje de Audio  
+  const isSticker = type == 'stickerMessage' // Mensaje de Sticker  
+  const isContact = type == 'contactMessage' // Mensaje de Contacto  
+  const isLocation = type == 'locationMessage' // Mensaje de Localización   
+  const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageMessage')  
+  const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')  
+  const isQuotedAudio = type === 'extendedTextMessage' && content.includes('audioMessage')  
+  const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')  
+  const isQuotedDocument = type === 'extendedTextMessage' && content.includes('documentMessage')  
+  const isQuotedMsg = type === 'extendedTextMessage' && content.includes('Message') // Mensaje citado de cualquier tipo  
+const isViewOnce = (type === 'viewOnceMessage') // Verifica si el tipo de mensaje es (mensaje de vista única)  
+  
+if (isMedia && m.msg.fileSha256 && (m.msg.fileSha256.toString('base64') in global.db.data.sticker)) {
+let hash = global.db.data.sticker[m.msg.fileSha256.toString('base64')]
+let { text, mentionedJid } = hash
+let messages = await generateWAMessage(m.chat, { text: text, mentions: mentionedJid }, {
+userJid: conn.user.id,
+quoted: m.quoted && m.quoted.fakeObj
+})
+messages.key.fromMe = areJidsSameUser(m.sender, conn.user.id)
+messages.key.id = m.key.id
+messages.pushName = m.pushName
+if (m.isGroup) messages.participant = m.sender
+let msg = {
+...chatUpdate,
+messages: [proto.WebMessageInfo.fromObject(messages)],
+type: 'append'
+}
+conn.ev.emit('messages.upsert', msg)
+}
+          
 //autobio
 if (global.db.data.settings[numBot].autobio) {
 let setting = global.db.data.settings[numBot]
@@ -234,20 +229,11 @@ idle: 0,
 irq: 0
 }})
 
-const thumb = fs.readFileSync("./media/test.jpg")
-let fkontak = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status@broadcast", "fromMe": false, "id": "Halo" }, "message": { "contactMessage": { "vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${userSender.split('@')[0]}:${userSender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD` }}, "participant": "0@s.whatsapp.net" }
-const ftroli ={key: {fromMe: false,"participant":"0@s.whatsapp.net", "remoteJid": "status@broadcast"}, "message": {orderMessage: {itemCount: 2022,status: 200, thumbnail: thumb, surface: 200, message: "ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ", orderTitle: "sᴜᴘᴇʀ ʙᴏᴛ ᴅᴇ ᴡʜᴀᴛsᴀᴘᴘ", sellerJid: '0@s.whatsapp.net'}}, contextInfo: {"forwardingScore":999,"isForwarded":true},sendEphemeral: true}
-const fdoc = {key : {participant : '0@s.whatsapp.net', ...(from ? { remoteJid: `status@broadcast` } : {}) },message: {documentMessage: {title: "A", jpegThumbnail: null}}}
-const kick = function (from, orangnya) {
-for (let i of orangnya) {
-conn.groupParticipantsUpdate(from, [i], "remove");
-}}
-const time = moment(Number(msg.messageTimestamp + "000")).locale("es-mx").tz("America/Bogota").format('MMMM Do YYYY, h:mm:ss a')
-
 // ‿︵‿︵ʚɞ『 INFO CONSOLE 』ʚɞ‿︵‿︵	
 if (m.message) {
 console.log(chalk.bold.cyanBright(`▣────────────···\n│${botname} ${conn.user.id == global.numBot2 ? '' : '(jadibot)'}`), 
 chalk.bold.magenta('\n│⏰HORARIO: ') + chalk.magentaBright(moment(t * 1000).tz(place).format('DD/MM/YY HH:mm:ss'),
+chalk.bold.red('\n️│🏷️ TAGS: ') + chalk.bold.white(`[${conn.public ? 'Publico' : 'Privado'}]`), 
 chalk.bold.yellow('\n│📑TIPO (SMS): ') + chalk.yellowBright(`${type}`), 
 chalk.bold.cyan('\n│📊USUARIO: ') + chalk.cyanBright(pushname) + ' ➜', gradient.rainbow(userSender), 
 m.isGroup ? chalk.bold.greenBright('\n│📤GRUPO: ') + chalk.greenBright(groupName) + ' ➜ ' + gradient.rainbow(from) : chalk.bold.greenBright('\n│📥PRIVADO'), 
@@ -259,7 +245,7 @@ chalk.bold.white('\n│💬MENSAJE: ') + chalk.whiteBright(`\n▣─────
 /*if (command) {
 await conn.sendPresenceUpdate('composing', m.chat)
 }*///Para que le guste :v
-     
+
 //ARRANCA LA DIVERSIÓN
 switch (command) { 
 case 'yts':
@@ -298,8 +284,8 @@ killJadibot(conn, m, prefix, command)
 break
 case 'bots': case 'listbots':
 try { 
-let user = [... new Set([...global.listJadibot.filter(conn => conn.user).map(conn => conn.user)])] 
-te = "*Lista de subbots*\n\n" 
+let user = [... new Set([...global.listJadibot.filter(conn => conn.user).map(conn => conn.user)])];
+te = `*SUBBOT CONECTADO :* ${listJadibot.length}\n\n`   
 for (let i of user){ 
 y = await conn.decodeJid(i.id) 
 te += " ❑ Usuario : @" + y.split("@")[0] + "\n" 
@@ -314,23 +300,9 @@ break
 case 'estado':
 state(conn, m, speed, sender, fkontak) 
 break
-case 'menu': 
-conn.sendMessage(from, { text: menu(conn, prefix, pushname, sender, m),  
-contextInfo:{  
-forwardingScore: 9999999,  
-isForwarded: true,   
-mentionedJid:[sender],  
-"externalAdReply": {  
-"showAdAttribution": true,  
-"renderLargerThumbnail": true,  
-"title": wm,   
-"containsAutoReply": true,  
-"mediaType": 1,   
-"thumbnail": imagen3,  
-"mediaUrl": md, 
-"sourceUrl": md, 
-}}}, { quoted: fkontak }) 
-break 
+case 'menu':  
+menu(conn, prefix, pushname, sender, m, fkontak)
+break  
 case 'owner': case 'creador': 
 owner(conn, m, sender) 
 break 
@@ -344,7 +316,7 @@ case '5492266613038': case '593980586516': case '595975740803': await ow(conn, a
 break
 case 'ping': 
 ping(conn, from, msg, speed) 
-break  		
+break  		  
 case 'report': 
 report(conn, from, m, prefix, command, text)
 break 
@@ -360,7 +332,7 @@ case 'delete': case 'del':
 del(conn, m, isBotAdmins, isGroupAdmins)
 break  		
 case 'join': 
-join(conn, m, isCreator, text, args)
+join(conn, m, isCreator, text, args) 
 break            
 case 'hidetag': case 'notificar': 
 hide(conn, m, isBotAdmins, isGroupAdmins, q, participants)
@@ -415,22 +387,38 @@ break
 case 'ppt':
 game5(conn, m, pushname, text, sender)
 break
+case 'pregunta': 
+game6(text, m) 
+break 
 //audios
 case "a":
 if (!global.db.data.chats[m.chat].audios) return
 let vn = './media/a.mp3'
 await conn.sendPresenceUpdate('recording', m.chat)
-conn.sendMessage(m.chat, { audio: { url: vn }, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": md, "showAdAttribution": true}}, seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, { quoted: m })
+conn.sendMessage(m.chat, { audio: { url: vn }, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": md, "showAdAttribution": true}}, seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, { quoted: m }) 
+break
+//convertidores
+case 'bass': case 'blown': case 'deep': case 'earrape': case 'fast': case 'fat': case 'nightcore': case 'reverse': case 'robot': case 'slow': case 'smooth': case 'squirrel': 
+efec(conn, command, mime, quoted, exec, prefix, m, from) 
+break   
+case 'tourl': 
+url(conn, mime, quoted, util, m) 
 break
 //nsfw
-case 'hentai': {
-await nsfw1(conn, m, pickRandom)}
+case 'hentai': 
+await nsfw1(conn, m, pickRandom)
 break
-case 'nsfwloli':
+case 'nsfwloli': 
 await nsfw2(conn, m, pickRandom)
 break
 case 'lewd': case 'feed': case 'gasm': case 'anal': case 'holo': case 'tits': case 'kuni': case 'kiss': case 'erok': case 'smug': case 'solog': case 'feetg': case 'lewdk': case 'waifu': case 'pussy': case 'femdom': case 'cuddle': case 'eroyuri': case 'cum_jpg': case 'blowjob': case 'holoero': case 'erokemo': case 'fox_girl': case 'futanari': case 'wallpaper':
 await nsfw3(conn, m, pickRandom, sendImageAsUrl, command)
+break
+case 'hentai2':
+nsfw4(sendImageAsUrl, m) 
+break
+case 'porno':
+nsfw5(sendImageAsUrl, m) 
 break
 //randow
 case 'memes':
@@ -446,15 +434,13 @@ case 'neko':
 await randow4(sendImageAsUrl, m, pickRandom)
 break
 case 'akira': case 'akiyama': case 'anna': case 'asuna': case 'ayuzawa': case 'boruto': case 'chiho': case 'chitoge': case 'deidara': case 'erza': case 'elaina': case 'eba': case 'emilia': case 'hestia': case 'hinata': case 'inori': case 'isuzu': case 'itachi': case 'itori': case 'kaga': case 'kagura': case 'kaori': case 'keneki': case 'kotori': case 'kurumi': case 'madara': case 'mikasa': case 'miku': case 'minato': case 'naruto': case 'nezuko': case 'sagiri': case 'sasuke': case 'sakura': case 'cosplay':
-let a = JSON.parse(fs.readFileSync(`./src/randow/anime-${command}.json`))
-var result = pickRandom(a)
-sendImageAsUrl(result, `${command}`)
-break
-case 'blackpink':
+await randow5(sendImageAsUrl, command, pickRandom, m)
+break 
+case 'blackpink':  
 sendImageAsUrl("https://delirius-image-random.vercel.app/api/all");
-break
+break 
 //descargas		    
-case 'play':  case 'play2': {
+case 'play': case 'play2': {
 if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
 if (!text) return conn.sendMessage(from, { text: `*ingrese nombre de alguna cancion*` }, { quoted: msg })
 let yts = require("youtube-yts")
@@ -480,9 +466,8 @@ db.data.users[m.sender].limit -= 1
 reply(info.limit)}
 break
 case "ytmp3": case "ytaudio": 
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
 const mp = require('./libs/ytdl2')
-if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return reply(`*Que esta buscado?*\n\n*Ejemplo:*\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
+if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return reply(`*Ejemplo:*\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
 conn.sendMessage(from, { text: `*Aguarde un momento*\n\nᴱˡ ᴬᵘᵈᶦᵒ ᵖᵘᵉᵈᵉ ᵗᵃʳᵈᵃ ᵉⁿᵗʳᵉ ⁵ ᵒ ¹⁰ ᵐᶦⁿᵘᵗᵒˢ ᵉˡ ᵉⁿᵛᶦᵃˢᵉ ᵗᵉⁿᵈʳᵃ́ ᵖᵃᶜᶦᵉⁿᶜᶦᵃ` }, { quoted: fdoc });    
 let mediaa = await ytplayvid(text)
 const audio = await mp.mp3(text)
@@ -500,25 +485,24 @@ db.data.users[m.sender].limit -= 1
 reply(info.limit) 
 break
 case 'ytmp4': case 'ytvideo': {
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
 const mp = require('./libs/ytdl2')
 if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return reply(`*Que esta buscado?*\n\n*Ejemplo:*\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
 conn.sendMessage(from, { text: `*Aguarde un momento*\n\nᴱˡ ᵛᶦᵈᵉᵒ ᵖᵘᵉᵈᵉ ᵗᵃʳᵈᵃ ᵉⁿᵗʳᵉ ⁵ ᵒ ¹⁰ ᵐᶦⁿᵘᵗᵒˢ ᵉˡ ᵉⁿᵛᶦᵃˢᵉ ᵗᵉⁿᵈʳᵃ́ ᵖᵃᶜᶦᵉⁿᶜᶦᵃ` }, { quoted: fdoc });    
 const vid = await mp.mp4(text)
 const ytc = `*❏ Título :* ${vid.title} 
-*❏ Duración :* ${vid.duracion}
+*❏ Duración :* ${vid.duration}
 *❏ Subido :* ${vid.date}
 *❏ calidad :* ${vid.quality}`
 await conn.sendMessage(from, {video: {url : vid.videoUrl}, caption: ytc }, {quoted:m})
 db.data.users[m.sender].limit -= 1
 reply(info.limit)}
 break   
-
 case 'gitclone':
 if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
 if (!args[0]) return reply(`*Ejemplo :*\n${prefix + command} ${md}`)
 if (!isUrl(args[0]) && !args[0].includes('github.com')) return reply(`Link invalido!!`)
 conn.sendMessage(from, { text: `*𝘈𝘎𝘜𝘈𝘙𝘋𝘌 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖...*\n\nˢᶦ ᵉˡ ᵃʳᶜʰᶦᵛᵒ ⁿᵒ ˡˡᵉᵍᵃ ᵉˢ ᵠᵘᵉ ʳᵉᵖᵒˢᶦᵗᵒʳᶦᵒ ᵉˢ ᵐᵘʸ ᵖᵉˢᵃᵈᵒ` }, { quoted: m })
+try {
 let regex1 = /(?:https|git)(?::\/\/|@)github\.com[\/:]([^\/:]+)\/(.+)/i
 let [, user, repo] = args[0].match(regex1) || []
 repo = repo.replace(/.git$/, '')
@@ -527,6 +511,8 @@ let filename = (await fetch(url, {method: 'HEAD'})).headers.get('content-disposi
 conn.sendMessage(m.chat, { document: { url: url }, fileName: filename+'.zip', mimetype: 'application/zip' }, { quoted: m }).catch((err) => reply(info.error))
 db.data.users[m.sender].limit -= 1
 reply(info.limit) 
+} catch {
+reply(info.error)}
 break
 case 'tiktok':
 if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
@@ -534,11 +520,14 @@ if (!text) return m.reply( `*Ejemplo:* ${prefix + command} https://vm.tiktok.com
 if (!q.includes('tiktok')) return m.reply(`*link invalido!*`)
 //await loading ()
 conn.fakeReply(m.chat, `⏳ *Aguarde un momento....*`, '0@s.whatsapp.net', 'No haga spam')
+try {
 require('./libs/tiktok').Tiktok(q).then( data => {
 conn.sendMessage(m.chat, { video: { url: data.nowm }}, { quoted: m })
 conn.sendMessage(m.chat, { audio: { url: data.audio }, mimetype: 'audio/mp4' }, { quoted: m })})
 db.data.users[m.sender].limit -= 1
 reply(info.limit) 
+} catch {
+reply(info.error)}
 break
 case 'lyrics': case 'letra': {
 if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
@@ -575,7 +564,50 @@ const result4 = `╭━─━─━─≪💎≫─━─━─━╮
  db.data.users[m.sender].limit -= 2
 reply(info.limit)}
  break 
- 
+ case 'igstalk': {
+if (!args[0]) return reply(`*Ingrese el nombre del usuario*\n\n*Ejemplo:* ${prefix + command} Emilia`)
+const fg = require('api-dylux')
+try {
+let res = await fg.igStalk(args[0])
+let te = `╭━─━─━─≪≫─━─━─━╮
+│ ≡  *STALKING* 
+│——————«•»——————
+│🔸 *🔖Nombre:* ${res.name} 
+│🔸 *🔖Username:* ${res.username}
+│🔸 *👥Seguidores:* ${res.followersH}
+│🔸 *🫂Siguiendo:* ${res.followingH}
+│🔸 *📌Bio:* ${res.description}
+│🔸 *🏝️Posts:* ${res.postsH}
+│——————«•»——————
+│🔸 *🔗 Link* : https://instagram.com/${res.username.replace(/^@/, '')}
+╰━─━─━─≪≫─━─━─━╯`
+await conn.sendMessage(m.chat, {image: { url: res.profilePic }, caption: te }, {quoted: m})
+} catch {
+reply(info.error)}}
+break
+case 'facebook':
+if (!text) return reply(`*Ejemplo:* ${prefix + command} link`)
+conn.fakeReply(m.chat, `⏳ *Aguarde un momento....*`, '0@s.whatsapp.net', 'No haga spam')
+try {
+const Rres = await fetch(`https://api.lolhuman.xyz/api/facebook?apikey=${lolkeysapi}&url=${args[0]}`);
+const Jjson = await Rres.json();
+let VIDEO = Jjson.result[0];
+if (VIDEO == '' || !VIDEO || VIDEO == null) VIDEO = Jjson.result[1];
+conn.sendMessage(m.chat, {video: {url: VIDEO}, caption: `*🎥 AQUI ESTA TU VIDEO DE FACEBOOK*`}, {quoted: m})
+} catch {
+reply(info.error)}
+break
+case 'instagram':
+if (!text) return reply(`*Ejemplo:* ${prefix + command} link`)
+conn.fakeReply(m.chat, `⏳ *Aguarde un momento....*`, '0@s.whatsapp.net', 'No haga spam')
+try {
+const human = await fetch(`https://api.lolhuman.xyz/api/instagram?apikey=${lolkeysapi}&url=${args[0]}`);
+const json = await human.json();
+const videoig = json.result;
+const shortUrl1 = await (await fetch(`https://tinyurl.com/api-create.php?url=${args[0]}`)).text();
+conn.sendMessage(m.chat, {video: {url: videoig}, caption: `🔗 *Url:* ${shortUrl1}`}, {quoted: m})
+} catch {
+reply(info.error)}            
 //rpg
 case 'reg': {
 await reg(conn, m, sender, text, fkontak)}
@@ -601,6 +633,12 @@ break
 case 'claim': case 'daily': 
 await claim(conn, m, sender)
 break
+case 'perfil':
+await perfil(conn, who, sender, pushname, fkontak, m) 
+break
+case 'levelup': case 'nivel': {  
+nivel(conn, sender, canLevelUp, xpRange, m, pushname)}
+break  
 //stickers
 case 's': case 'sticker': {  
 if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
@@ -644,7 +682,16 @@ if (!text) return reply('ingresa algo para convertirlo a sticker :v')
 link = `https://api.lolhuman.xyz/api/attp?apikey=${lolkeysapi}&text=${text}`
 conn.sendMessage(m.chat, { sticker: { url: link } }, { quoted: fkontak})
 break
-
+case 'emojimix':
+let [emoji, emojis] = text.split('+')
+if (!emoji) throw `*❗ Ejemplo: ${prefix + command} 😑+😂*`
+if (!emojis) throw `*❗ Ejemplo: ${prefix + command} 😑+😂*` 
+resul = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(emoji)}_${encodeURIComponent(emojis)}`)
+for (let res of resul.results) {
+let medi = await conn.sendImageAsSticker(m.chat, res.url, m, { packname: global.packname, author: global.author })
+await fs.unlinkSync(medi) 
+}
+break
 //owner
 case 'public': case 'publico': {
 if (!isCreator) return reply(info.owner)
