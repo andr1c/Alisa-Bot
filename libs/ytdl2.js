@@ -8,7 +8,7 @@
  const ytM = require('node-youtube-music')
  const { randomBytes } = require('crypto')
  const ytIdRegex = /(?:youtube\.com\/\S*(?:(?:\/e(?:mbed))?\/|watch\?(?:\S*?&?v\=))|youtu\.be\/)([a-zA-Z0-9_-]{6,11})/
- 
+  
  class YT {
      constructor() { }
  
