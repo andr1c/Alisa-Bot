@@ -10,7 +10,7 @@ const cheerio = require('cheerio')
 const Jimp = require('jimp')
 const os = require('os')
 
-const menu = (main, prefix, pushname, sender, m) => {
+const menu = (conn, prefix, pushname, sender, m, fkontak) => {
 let user = global.db.data.users[m.sender]
 let totalreg = Object.keys(global.db.data.users).length
 let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length
@@ -22,7 +22,7 @@ const week = d.toLocaleDateString(locale, {weekday: 'long'});
 const date = d.toLocaleDateString(locale, {day: 'numeric', month: 'long', year: 'numeric'});*/
 let wa = m.key.id.length > 21 ? 'Android' : m.key.id.substring(0, 2) == '3A' ? 'IOS' : 'whatsapp web'
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-return `╔══════ ≪ •❈• ≫ ══════╗
+let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
 ║✾ Hola @${sender.split("@")[0]} 👋🏻 
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
@@ -37,6 +37,7 @@ return `╔══════ ≪ •❈• ≫ ══════╗
 ║✾ ɴɪᴠᴇʟ : ${user.level}
 ║✾ ʀᴀɴɢᴏ : ${user.role}
 ║✾ ᴇxᴘ : ${user.exp}
+║✾ ᴇxᴘ : ${user.money}
 ║ 
 ║✾ ʀᴇɢɪsᴛʀᴀᴅᴏ : ${rtotalreg} de ${totalreg}
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
@@ -94,6 +95,12 @@ return `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ _(ingresa el link del GitHub para descargar el repositorio)_
 ├❥ᰰຼ ❏ ${prefix}tiktok
 ├❥ᰰຼ (Ingresa el link del tiktok para descargar el video)
+├❥ᰰຼ ❏ ${prefix}igstalk
+├❥ᰰຼ _(Buscar algun usuarios de Instagram para vez sus perfil)_
+├❥ᰰຼ ❏ ${prefix}facebook
+├❥ᰰຼ _(descarga video de Facebook)_
+├❥ᰰຼ ❏ ${prefix}instagram
+├❥ᰰຼ _(descarga video de Instagram)_
 ├❥ᰰຼ ❏ ${prefix}mediafire
 ├❥ᰰຼ (descarga archivo de mediafire)_
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
@@ -138,9 +145,32 @@ return `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}gay @tag
 ├❥ᰰຼ ❏ ${prefix}pareja @tag
 ├❥ᰰຼ ❏ ${prefix}follar @tag
+├❥ᰰຼ ❏ ${prefix}pregunta
 ├❥ᰰຼ ❏ ${prefix}fake
 ├❥ᰰຼ _(Ingresa el texto + tag para joder a alguien con chat fake😹)_
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
+
+*╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*🎤 EFECTOS DE AUDIOS*️⃟ᬽ፝֟━*
+├❥ᰰຼ *(𝚁𝙴𝚂𝙿𝙾𝙽𝙳𝙴 𝙰 𝙰𝚄𝙳𝙸𝙾 𝙾 𝙽𝙾𝚃𝙰 𝙳𝙴 𝚅𝙾𝚉)*
+├ *✧･ﾟ: *✧･ﾟ:*✧･ﾟ: *✧･ﾟ:*✧･ﾟ: *✧･ﾟ:
+├❥ᰰຼ ❏ ${prefix}bass
+├❥ᰰຼ ❏ ${prefix}blown
+├❥ᰰຼ ❏ ${prefix}deep
+├❥ᰰຼ ❏ ${prefix}earrape
+├❥ᰰຼ ❏ ${prefix}fast
+├❥ᰰຼ ❏ ${prefix}fat
+├❥ᰰຼ ❏ ${prefix}nightcore
+├❥ᰰຼ ❏ ${prefix}reverse
+├❥ᰰຼ ❏ ${prefix}robot
+├❥ᰰຼ ❏ ${prefix}slow
+├❥ᰰຼ ❏ ${prefix}smooth
+├❥ᰰຼ ❏ ${prefix}squirrel
+*╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
+
+*╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*⃐🧧CONVERTIDORES*️⃟ᬽ፝֟━*
+├❥ᰰຼ ❏ ${prefix}tourl
+├❥ᰰຼ ❏ ${prefix}tts
+*╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫* 	
 
 *╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*⃐🥵COMANDO +18*️⃟ᬽ፝֟━*
 ├❥ᰰຼ  *Activa con (antiNsfw on)*
@@ -148,6 +178,8 @@ return `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}pussy
 ├❥ᰰຼ ❏ ${prefix}nsfwloli
 ├❥ᰰຼ ❏ ${prefix}hentai
+├❥ᰰຼ ❏ ${prefix}hentai2
+├❥ᰰຼ ❏ ${prefix}porno
 ├❥ᰰຼ ❏ ${prefix}lewd'
 ├❥ᰰຼ ❏ ${prefix}feed'
 ├❥ᰰຼ ❏ ${prefix}gasm
@@ -229,6 +261,9 @@ return `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}balace _(para sabes cuanto diamante/exp tiene)_
 ├❥ᰰຼ ❏ ${prefix}claim
 ├❥ᰰຼ _(recoger tu recompensa)_
+├❥ᰰຼ ❏ ${prefix}perfil
+├❥ᰰຼ ❏ ${prefix}nivel
+├❥ᰰຼ ❏ ${prefix}levelup
 ├❥ᰰຼ ❏ ${prefix}afk 
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
 
@@ -237,6 +272,7 @@ return `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}sticker 
 ├❥ᰰຼ ❏ ${prefix}wm
 ├❥ᰰຼ ❏ ${prefix}attp
+├❥ᰰຼ ❏ ${prefix}emojimix
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
 
 *╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*⃐👑ＯＷＮＥＲ*️⃟ᬽ፝֟━*
@@ -256,6 +292,21 @@ return `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ >
 ├❥ᰰຼ ❏ => 
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*`
+conn.sendMessage(m.chat, { text: menu,  
+contextInfo:{  
+forwardingScore: 9999999,  
+isForwarded: true,   
+mentionedJid:[sender],  
+"externalAdReply": {  
+"showAdAttribution": true,  
+"renderLargerThumbnail": true,  
+"title": wm,   
+"containsAutoReply": true,  
+"mediaType": 1,   
+"thumbnail": imagen3,  
+"mediaUrl": md, 
+"sourceUrl": md, 
+}}}, { quoted: fkontak }) 
 }
 
 module.exports = { menu }

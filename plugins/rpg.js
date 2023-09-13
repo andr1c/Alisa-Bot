@@ -172,6 +172,54 @@ m.reply(`🎁 *ʀᴇᴄᴏᴍᴘᴇɴsᴀ ᴅɪᴀʀɪᴀ*
 global.db.data.users[m.sender].lastclaim = new Date * 1
 }
 
+async function perfil(conn, who, sender, pushname, fkontak, m) {
+avatar = await conn.profilePictureUrl(who, 'image').catch((_) => 'https://telegra.ph/file/24fa902ead26340f3df2c.png')
+let { money, exp, role, limit, level, registered, age} = global.db.data.users[m.sender]
+conn.sendMessage(m.chat, { image: { url: avatar }, caption: `┏─━─━─━∞◆∞━─━─━─┓
+│🔸 ️🔖 ɴᴏᴍʙʀᴇ: ${pushname} ${registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''}
+│——————«•»——————
+│🔸️ 📱ɴᴜᴍᴇʀᴏ: wa.me/${sender.split("@")[0]} ${registered ? '\n│——————«•»——————\n│🔸 ️ᴇᴅᴀᴅ: ' + age + ' años' : ''}
+│——————«•»——————
+│🔸 ️💎 ᴅɪᴀᴍᴀɴᴛᴇs : ${limit}
+│——————«•»——————
+│🔸 ️🆙 ɴɪᴠᴇʟ : ${level}
+│——————«•»——————
+│🔸 ️⬆️ xᴘ : ${exp}
+│——————«•»——————
+│🔸 ️🏆ʀᴀɴɢᴏ: ${role}
+│——————«•»——————
+│🔸 ️📇 ʀᴇɢɪsᴛʀᴀᴅᴏs : ${registered ? 'Si': 'No'}
+┗─━─━─━∞◆∞━─━─━─┛`}, { quoted: fkontak })}
+
+async function nivel(conn, sender, canLevelUp, xpRange, m, pushname) {
+let name = conn.getName(m.sender);  
+let user = global.db.data.users[m.sender]; 
+if (!canLevelUp(user.level, user.exp, global.multiplier)) { 
+let {min, xp, max} = xpRange(user.level, global.multiplier); 
+return m.reply(`*[ TUS ESTADISTICAS 🆙 ]*
+
+Tus estadisticas en tiempo real 🕐
+
+├─ ❏ *NOMBRE:* *${pushname}*
+├─ ❏ *XP 🆙:* *${user.exp - min}/${xp}*
+└─ ❏ *NIVEL:* *${user.level}*
+└─ ❏ *RANGO:* *${user.role}*
+
+ᴛᴇ ғᴀʟᴛᴀ *${max - user.exp}* ᴅᴇ *XP* ᴘᴀʀᴀ sᴜʙɪʀ ᴅᴇ ɴɪᴠᴇʟ`)} 
+const before = user.level * 1; 
+while (canLevelUp(user.level, user.exp, global.multiplier)) user.level++; 
+if (before !== user.level) {
+const str = `*[ LEVEL UP 🎊 ]* 
+
+🥳 ${pushname} ғᴇʟɪᴄɪᴅᴀᴅᴇs ʟʟᴇɢᴀsᴛᴇ ᴀ ᴜɴ ɴᴜᴇᴠᴏ ɴɪᴠᴇʟ
+
+├─ ❏ *NIVEL ANTERIOR:* ${before}
+├─ ❏ *NIVEL ACTUAL:* ${user.level}
+├─ ❏ *RANGO:* ${user.role}
+
+*_ᴄᴜᴀɴᴛᴏ ᴍᴀs ɪɴᴛᴇʀᴀᴄᴛᴜᴇs ᴄᴏɴ ʟᴏs ʙᴏᴛs, ᴍᴀʏᴏʀ sᴇʀᴀ ᴛᴜ ɴɪᴠᴇʟ_*`.trim()
+return m.reply(str)}}
+
 //función pickrandow
 function pickRandom(list) {
 return list[Math.floor(list.length * Math.random())]
@@ -187,7 +235,7 @@ function msToTime(duration) {
    seconds = seconds < 10 ? "0" + seconds : seconds; 
    return minutes + " m y " + seconds + " s "; 
 }
-module.exports = { rob, reg, bal, work, mine, afk, buy, claim}
+module.exports = { rob, reg, bal, work, mine, afk, buy, claim, perfil, nivel}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {

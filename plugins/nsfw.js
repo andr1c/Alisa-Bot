@@ -29,7 +29,7 @@ if (!global.db.data.chats[m.chat].antiNsfw) return m.reply(info.nsfw)
 if (!m.isGroup) return m.reply(info.group) 
 var nsfw = JSON.parse(fs.readFileSync('./src/nsfw/nsfwloli.json'))
 var result = pickRandom(nsfw)
-conn.sendMessage(m.chat, { caption: 'Yo soy tu loli 🥵', image: { url: result.url } }, { quoted: m })
+conn.sendMessage(m.chat, { caption: '🥵', image: { url: result.url } }, { quoted: m })
 db.data.users[m.sender].limit -= 1
 m.reply(info.limit)}
 
@@ -42,7 +42,23 @@ sendImageAsUrl(`https://api.lolhuman.xyz/api/random2/${command}?apikey=${lolkeys
 db.data.users[m.sender].limit -= 3
 m.reply(info.limit)}
 
-module.exports = {nsfw1, nsfw2, nsfw3}
+async function nsfw4(sendImageAsUrl, m) {
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
+if (!global.db.data.chats[m.chat].antiNsfw) return m.reply(info.nsfw)
+sendImageAsUrl("https://delirius-nsfw.onrender.com/media/h/bdsm", '🥵')
+db.data.users[m.sender].limit -= 1
+m.reply(info.limit)}
+
+async function nsfw5(sendImageAsUrl, m) {
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
+if (!global.db.data.chats[m.chat].antiNsfw) return m.reply(info.nsfw)
+sendImageAsUrl("https://delirius-nsfw.onrender.com/media/r/ass", '🥵');
+db.data.users[m.sender].limit -= 1
+m.reply(info.limit)}
+
+module.exports = {nsfw1, nsfw2, nsfw3, nsfw4, nsfw5}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {

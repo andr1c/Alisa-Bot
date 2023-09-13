@@ -29,7 +29,12 @@ let nek = ne.split('\n')
 let neko = pickRandom(nek)
 sendImageAsUrl(neko)}
 
-module.exports = {randow1, randow2, randow3, randow4}
+async function randow5(sendImageAsUrl, command, pickRandom, m) {
+let a = JSON.parse(fs.readFileSync(`./src/randow/anime-${command}.json`))
+var result = pickRandom(a)
+sendImageAsUrl(result, `${command}`)}
+
+module.exports = {randow1, randow2, randow3, randow4, randow5}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {

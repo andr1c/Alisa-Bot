@@ -151,7 +151,14 @@ global.db.data.users[m.sender].exp -= 300
 m.reply(`HA PERDIDO! 🤡\n\n👉🏻 TU: ${text}\n👉🏻 EL BOT: ${astro}\n❌ PREMIO -300 XP`)
 }}}
 
-module.exports = {game, game1, game2, game3, game4, game5}
+async function game6(text, m) {
+if (!text) return m.reply('*Hey y la pregunta?*\n*Ejemplo:* #pregunta mañana llover?')
+let pr = ['no', 'si', 'nose', 'puede ser', 'no creo', 'olvio', 'Que pregunta mas boluda', 'A']
+let preg = pr[Math.floor(Math.random() * pr.length)]
+m.reply(`*🔸️ Pregunta:* ${text}
+*🔸️ Respuesta:* ${preg}`)}
+
+module.exports = {game, game1, game2, game3, game4, game5, game6}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {

@@ -30,13 +30,15 @@ let stateRun = `┏━━━━❰･𝐄𝐒𝐓𝐀𝐃𝐎 𝐃𝐄𝐋 𝐁�
 ┃➢ 𝙷𝙾𝚃𝚂 : ${os.hostname()}
 ┃➢ 𝙲𝙿𝚄 𝚄𝚂𝙰𝙽𝙳𝙾 : ${cpuUsage.toFixed(2)}%
 ┃➢ 𝙼𝙴𝙼𝙾𝚁𝙸𝙰 𝚃𝙾𝚃𝙰𝙻 : ${totalMemory} GB
-┃➢ 𝙰𝙲𝚃𝙸𝚅𝙾 : ${runtime(process.uptime())}
-┃➢ 𝙼𝙾𝙳𝙾 : ${conn.public ? 'Público' : `Privado`}
 ┃╍╍╍╍╍╍╍╍╍╍╍╍╍
 ┃➢ 𝚄𝚂𝚄𝙰𝚁𝙸𝙾𝚂 : ${Object.keys(global.db.data.users).length}
+┃➢ 𝙲𝙷𝙰𝚃 𝚃𝙾𝚃𝙰𝙻𝙴𝚂 : ${Object.keys(m.chat).length}
+┃➢ 𝙰𝙲𝚃𝙸𝚅𝙾 : ${runtime(process.uptime())}
+┃➢ 𝙼𝙾𝙳𝙾 : ${conn.public ? 'Público' : `Privado`}
+┃➢ 𝙱𝙾𝚃 𝚂𝙴𝙲𝚄𝙽𝙳𝙰𝚁𝙸𝙾𝚂 𝙰𝙲𝚃𝙸𝚅𝙾𝚂 : ${listJadibot.length}
 ┗━━━━━━━━━━━━━`.trim()
 let ments = [me]        
-await conn.sendMessage(m.chat, {image: imagen1, caption: stateRun, mentionedJid:[sender]}, { quoted: fkontak })
+await conn.sendMessage(m.chat, {image: imagen1, caption: stateRun, mentionedJid:[me]}, { quoted: fkontak })
 }
 
 async function owner(conn, m, sender) {
