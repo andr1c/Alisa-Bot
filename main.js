@@ -8,17 +8,19 @@ const baileys = require('@whiskeysockets/baileys'); // trabajar a través de des
 const { WaMessageStubType, areJidsSameUser, downloadContentFromMessage, generateWAMessageContent, generateWAMessageFromContent, generateWAMessage, prepareWAMessageMedia, relayMessage} = require('@whiskeysockets/baileys'); // Importa los objetos 'makeWASocket' y 'proto' desde el módulo '@whiskeysockets/baileys'
 const moment = require('moment-timezone') // Trabajar con fechas y horas en diferentes zonas horarias
 const gradient = require('gradient-string') // Aplicar gradientes de color al texto
-const { exec, spawn, execSync } = require("child_process")// Función 'execSync' del módulo 'child_process' para ejecutar comandos en el sistema operativo
+const { exec, spawn, execSync } = require("child_process")// Función 'execSync' del módulo 'child_process' para ejecutar comandos en el sistema operativo 
 const chalk = require('chalk') // Estilizar el texto en la consola
-const os = require('os') // Proporciona información del sistema operativo
-const fs = require('fs') // Trabajar con el sistema de archivos 
+const os = require('os') // Proporciona información del sistema operativo 
+const fs = require('fs') // Trabajar con el sistema de archivos   
 const fetch = require('node-fetch')
 const axios = require('axios') 
 const cheerio = require('cheerio')
 const gpt = require('api-dylux')
 const util = require('util')
 const createHash = require('crypto') 
-const mimetype = require("mime-types")
+const mimetype = require("mime-types")  
+const ws = require('ws')
+const JavaScriptObfuscator = require('javascript-obfuscator')
 const webp = require("node-webpmux")
 const Jimp = require('jimp')
 const scp1 = require('./libs/scraper') 
@@ -35,13 +37,13 @@ const {jadibot, listJadibot, killJadibot} = require('./serbot.js')
 const { jadibot2 } = require('./serbot2.js')
 const { menu } = require('./plugins/menu.js')
 const { state, owner, grupo, instalar, ping, report, ow} = require('./plugins/info.js')
-const {rob, bal, reg, work, mine, buy, afk, claim, perfil, nivel} = require('./plugins/rpg.js') 
-const {game, game1, game2, game3, game4, game5, game6} = require('./plugins/juegos.js')
+const {rob, bal, reg, work, mine, buy, afk, claim, perfil, nivel, cofre, lb} = require('./plugins/rpg.js') 
+const {game, game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, gamee} = require('./plugins/juegos.js') 
 const {yt, acortar, google, imagen, tran, tts, ia, ssw} = require('./plugins/buscadores.js')
 const {efec, url} = require('./plugins/convertidores.js') 
 const {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, on, on2} = require('./plugins/grupos.js')
 const {nsfw1, nsfw2, nsfw3, nsfw4, nsfw5} = require('./plugins/nsfw.js')
-const {randow1, randow2, randow3, randow4, randow5} = require('./plugins/randow.js')
+const {randow1, randow2, randow3, randow4, randow5} = require('./plugins/randow.js') 
 
 const msgs = (message) => { 
 if (message.length >= 10) { 
@@ -55,16 +57,16 @@ for await(const chunk of stream) {
 buffer = Buffer.concat([buffer, chunk]) }  
 return buffer
 }  
-  
+
 /**  
-* @param {proto.IWebMessageInfo.message} mek  
-* @param {proto.IWebMessageInfo} chatUpdate  
-* @param {import("@whiskeysockets/baileys").WASocket}   
+  * @param {proto.IWebMessageInfo.message} mek  
+  * @param {proto.IWebMessageInfo} chatUpdate  
+  * @param {import("@whiskeysockets/baileys").WASocket}   
 */  
 module.exports = conn = async (conn, m, chatUpdate, mek, store) => {  
 var budy = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
   
-// ‿︵‿︵ʚɞ『 ATRIBUTOS 』ʚɞ‿︵‿︵  
+// ‿︵‿︵ʚɞ『 ATRIBUTOS 』ʚɞ‿︵‿︵     
 if (m.key.id.startsWith("BAE5")) return  
 var body = (typeof m.text == 'string' ? m.text : '') 
 var _prefix = /^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi.test(body) ? body.match(/^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi)[0] : ""
@@ -94,19 +96,20 @@ const mentions = []
 if (m.message[type].contextInfo) {   
 if (m.message[type].contextInfo.mentionedJid) {  
 const msd = m.message[type].contextInfo.mentionedJid  
-for (let i = 0; i < msd.length; i++) {mentions.push(msd[i])}}}  
-
-// ‿︵‿︵ʚɞ『 GRUPO 』ʚɞ‿︵‿︵    
+for (let i = 0; i < msd.length; i++) {  
+mentions.push(msd[i])}}}  
+  
+// ‿︵‿︵ʚɞ『 GRUPO 』ʚɞ‿︵‿︵      
 const groupMetadata = m.isGroup ? await conn.groupMetadata(from) : ''
 const groupName = m.isGroup ? groupMetadata.subject : '' 
 const participants = m.isGroup ? await groupMetadata.participants : '' 
 const groupAdmins = m.isGroup ? await getGroupAdmins(participants) : '' 
-  const isBotAdmins = m.isGroup ? groupAdmins.includes(botnm) : false  
-  const isGroupAdmins = m.isGroup ? groupAdmins.includes(userSender) : false 
-  const isBaneed = m.isGroup ? blockList.includes(userSender) : false 
-  const isPremium = m.isGroup ? premium.includes(userSender) : false   
-  const who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender;
-  const thumb = fs.readFileSync("./media/test.jpg")
+const isBotAdmins = m.isGroup ? groupAdmins.includes(botnm) : false  
+const isGroupAdmins = m.isGroup ? groupAdmins.includes(userSender) : false 
+const isBaneed = m.isGroup ? blockList.includes(userSender) : false 
+const isPremium = m.isGroup ? premium.includes(userSender) : false   
+const who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender;
+const thumb = fs.readFileSync("./media/test.jpg")
 const fkontak = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status@broadcast", "fromMe": false, "id": "Halo" }, "message": { "contactMessage": { "vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${userSender.split('@')[0]}:${userSender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD` }}, "participant": "0@s.whatsapp.net" }
 const ftroli ={key: {fromMe: false,"participant":"0@s.whatsapp.net", "remoteJid": "status@broadcast"}, "message": {orderMessage: {itemCount: 2022,status: 200, thumbnail: thumb, surface: 200, message: "ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ", orderTitle: "sᴜᴘᴇʀ ʙᴏᴛ ᴅᴇ ᴡʜᴀᴛsᴀᴘᴘ", sellerJid: '0@s.whatsapp.net'}}, contextInfo: {"forwardingScore":999,"isForwarded":true},sendEphemeral: true}
 const fdoc = {key : {participant : '0@s.whatsapp.net', ...(from ? { remoteJid: `status@broadcast` } : {}) },message: {documentMessage: {title: botname, jpegThumbnail: null}}}
@@ -122,36 +125,33 @@ const sendImage = ( image, caption ) => { conn.sendMessage(m.chat, { image: imag
 const sendImageAsUrl = ( url, caption ) => { conn.sendMessage(m.chat, { image:  {url: url }, caption: caption }, { quoted: m })}  
 
 // ‿︵‿︵ʚɞ『 TIPOS DE MENSAJES Y CITADOS 』ʚɞ‿︵‿︵  
-  const isAudio = type == 'audioMessage' // Mensaje de Audio  
-  const isSticker = type == 'stickerMessage' // Mensaje de Sticker  
-  const isContact = type == 'contactMessage' // Mensaje de Contacto  
-  const isLocation = type == 'locationMessage' // Mensaje de Localización   
-  const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageMessage')  
-  const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')  
-  const isQuotedAudio = type === 'extendedTextMessage' && content.includes('audioMessage')  
-  const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')  
-  const isQuotedDocument = type === 'extendedTextMessage' && content.includes('documentMessage')  
-  const isQuotedMsg = type === 'extendedTextMessage' && content.includes('Message') // Mensaje citado de cualquier tipo  
+const isAudio = type == 'audioMessage' // Mensaje de Audio  
+const isSticker = type == 'stickerMessage' // Mensaje de Sticker  
+const isContact = type == 'contactMessage' // Mensaje de Contacto  
+const isLocation = type == 'locationMessage' // Mensaje de Localización   
+const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageMessage')  
+const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')  
+const isQuotedAudio = type === 'extendedTextMessage' && content.includes('audioMessage')  
+const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')  
+const isQuotedDocument = type === 'extendedTextMessage' && content.includes('documentMessage')  
+const isQuotedMsg = type === 'extendedTextMessage' && content.includes('Message') // Mensaje citado de cualquier tipo  
 const isViewOnce = (type === 'viewOnceMessage') // Verifica si el tipo de mensaje es (mensaje de vista única)  
   
 if (isMedia && m.msg.fileSha256 && (m.msg.fileSha256.toString('base64') in global.db.data.sticker)) {
 let hash = global.db.data.sticker[m.msg.fileSha256.toString('base64')]
 let { text, mentionedJid } = hash
-let messages = await generateWAMessage(m.chat, { text: text, mentions: mentionedJid }, {
-userJid: conn.user.id,
+let messages = await generateWAMessage(m.chat, { text: text, mentions: mentionedJid }, {userJid: conn.user.id,
 quoted: m.quoted && m.quoted.fakeObj
 })
 messages.key.fromMe = areJidsSameUser(m.sender, conn.user.id)
 messages.key.id = m.key.id
 messages.pushName = m.pushName
 if (m.isGroup) messages.participant = m.sender
-let msg = {
-...chatUpdate,
+let msg = {...chatUpdate,
 messages: [proto.WebMessageInfo.fromObject(messages)],
 type: 'append'
 }
-conn.ev.emit('messages.upsert', msg)
-}
+conn.ev.emit('messages.upsert', msg)}
           
 //autobio
 if (global.db.data.settings[numBot].autobio) {
@@ -167,6 +167,7 @@ setting.status = new Date() * 1
 if (m.message) {
 conn.readMessages([m.key])}
             
+//antifake
 if (global.db.data.chats[m.chat].antifake && !isGroupAdmins) {	
 if (m.chat && m.sender.startsWith('1')) return conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')}
 if (global.db.data.chats[m.chat].antiarabe && !isGroupAdmins) {
@@ -370,7 +371,7 @@ break
 
 //juegos
 case 'simi': case 'bot': {
-await game(conn, m, text, quoted)}
+await game(conn, m, text, pushname, quoted)}
 break 
 case 'gay': { 
 await game1(conn, m, participants, sender)}
@@ -390,8 +391,29 @@ break
 case 'pregunta': 
 game6(text, m) 
 break 
-//audios
-case "a":
+case 'doxear': case 'doxxeo': 
+game7(conn, pickRandom, text) 
+break
+case 'personalidad':
+game8(conn, text, pickRandom, m) 
+break
+case 'slot': 
+game9(conn, args, prefix, command, msToTime, m) 
+break
+case 'verdad':
+game10(sendImageAsUrl, pickRandom)   
+break   
+case 'reto': 
+game11(pickRandom, sendImageAsUrl)   
+break                
+case 'top': 
+game12(conn, text, participants, pickRandom, m) 
+break 
+case 'topgays': case 'topotakus': 
+gamee(conn, participants, command, m) 
+break 
+//audios 
+case "a": 
 if (!global.db.data.chats[m.chat].audios) return
 let vn = './media/a.mp3'
 await conn.sendPresenceUpdate('recording', m.chat)
@@ -479,11 +501,11 @@ body: botname,
 thumbnail: getBuffer(audio.meta.image), 
 mediaType:2,
 mediaUrl:text,
-}}}, {quoted:m})
+}}}, {quoted:m}) 
 await fs.unlinkSync(audio.path)
 db.data.users[m.sender].limit -= 1
 reply(info.limit) 
-break
+break 
 case 'ytmp4': case 'ytvideo': {
 const mp = require('./libs/ytdl2')
 if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return reply(`*Que esta buscado?*\n\n*Ejemplo:*\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
@@ -548,7 +570,7 @@ const result4 = `╭━─━─━─≪💎≫─━─━─━╮
 ┆——————«•»——————
 ┆🔸️ *Nombre:* ${baby1[0].nama} 
 ┆——————«•»——————
-┆🔸️ *Tamaño:*  ${baby1[0].size} 
+┆🔸️ *Tamaño:* ${baby1[0].size} 
 ┆——————«•»——————
 ┆🔸️ *Extension:* ${baby1[0].mime}
 ╰━─━─━─≪💎≫─━─━─━╯\n\n_Descargo archivo aguarde un momento...._  ` 
@@ -639,6 +661,12 @@ break
 case 'levelup': case 'nivel': {  
 nivel(conn, sender, canLevelUp, xpRange, m, pushname)}
 break  
+case 'cofre':
+cofre(conn, sender, m) 
+break 
+case 'lb': case 'leaderboard':
+lb(conn, participants, args, m) 
+break
 //stickers
 case 's': case 'sticker': {  
 if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
@@ -675,22 +703,16 @@ let media = await quoted.download()
 let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: pcknm, author: atnm })
 } else {
 reply(`Y la imagen?`)}}
-break
-case 'attp':
+break 
+case 'attp': {
 if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
 if (!text) return reply('ingresa algo para convertirlo a sticker :v')
-link = `https://api.lolhuman.xyz/api/attp?apikey=${lolkeysapi}&text=${text}`
-conn.sendMessage(m.chat, { sticker: { url: link } }, { quoted: fkontak})
+let link = `https://api.lolhuman.xyz/api/attp?apikey=${lolkeysapi}&text=${text}`
+await conn.sendMessage(m.chat, { sticker: { url: link } }, { quoted: fkontak})}
 break
-case 'emojimix':
-let [emoji, emojis] = text.split('+')
-if (!emoji) throw `*❗ Ejemplo: ${prefix + command} 😑+😂*`
-if (!emojis) throw `*❗ Ejemplo: ${prefix + command} 😑+😂*` 
-resul = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(emoji)}_${encodeURIComponent(emojis)}`)
-for (let res of resul.results) {
-let medi = await conn.sendImageAsSticker(m.chat, res.url, m, { packname: global.packname, author: global.author })
-await fs.unlinkSync(medi) 
-}
+case 'dado': 
+let dir = `https://api.lolhuman.xyz/api/sticker/dadu?apikey=${lolkeysapi}`
+conn.sendMessage(m.chat, { sticker: { url: dir } }, { quoted: fkontak})
 break
 //owner
 case 'public': case 'publico': {
@@ -749,23 +771,27 @@ reply(`*El usuario fue desbloqueado*`)
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await conn.updateBlockStatus(users, 'unblock')}
 break            
-case 'addcmd':
-if (!isCreator) return conn.adReply(m.chat, info.owner, query, m, false)
-if (!m.quoted) return conn.adReply(m.chat, `*[ ⚠️ ] 𝚁𝙴𝚂𝙿𝙾𝙽𝙳𝙴 𝙰𝙻 𝚂𝚃𝙸𝙲𝙺𝙴𝚁 𝙾 𝙸𝙼𝙰𝙶𝙴𝙽 𝙰𝙻 𝙲𝚄𝙰𝙻 𝙳𝙴𝚂𝙴𝙰 𝙰𝙶𝚁𝙴𝙶𝙰𝚁 𝚄𝙽 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙾 𝚃𝙴𝚇𝚃𝙾*`, query, m, false)
-if (!m.quoted.fileSha256) return conn.AdReply(m.chat, `*[ ⚠️ ] 𝚂𝙾𝙻𝙾 𝙿𝚄𝙴𝙳𝙴𝚂 𝙰𝚂𝙸𝙶𝙰𝙽𝙰𝚁 𝙲𝙾𝙼𝙰𝙽𝙳𝙾𝚂 𝙾 𝚃𝙴𝚇𝚃𝙾𝚂 𝙰 𝚂𝚃𝙸𝙲𝙺𝙴𝚁𝚂 𝙴 𝙸𝙼𝙰𝙶𝙴𝙽𝙴𝚂*`, query, m, false)
-if (!text) return conn.AdReply(m.chat, `*[ ⚠️ ] 𝙴𝚁𝚁𝙾𝚁 𝙳𝙴 𝚄𝚂𝙾, 𝚃𝙴𝚇𝚃𝙾 𝙵𝙰𝙻𝚃𝙰𝙽𝚃𝙴*\n\n*𝙴𝙹𝙴𝙼𝙿𝙻𝙾 𝙳𝙴 𝚄𝚂𝙾 𝙲𝙾𝚁𝚁𝙴𝙲𝚃𝙾 𝙳𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾:*\n*${usedPrefix + command} <#menu> <responder a sticker o imagen>*`, query, m, false)
-var hash = m.quoted.fileSha256.toString('base64')
-addCmd(text, hash)
+case 'setcmd':  case 'addcmd':
+if (!isCreator) return conn.adReply(m.chat, info.owner, m, false)
+if (!m.quoted) return conn.adReply(m.chat, `*[ ⚠️ ] 𝚁𝙴𝚂𝙿𝙾𝙽𝙳𝙴 𝙰𝙻 𝚂𝚃𝙸𝙲𝙺𝙴𝚁 𝙾 𝙸𝙼𝙰𝙶𝙴𝙽 𝙰𝙻 𝙲𝚄𝙰𝙻 𝙳𝙴𝚂𝙴𝙰 𝙰𝙶𝚁𝙴𝙶𝙰𝚁 𝚄𝙽 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙾 𝚃𝙴𝚇𝚃𝙾*`, m, false)
+if (!m.quoted.fileSha256) throw '*[ ⚠️ ] 𝚂𝙾𝙻𝙾 𝙿𝚄𝙴𝙳𝙴𝚂 𝙰𝚂𝙸𝙶𝙰𝙽𝙰𝚁 𝙲𝙾𝙼𝙰𝙽𝙳𝙾𝚂 𝙾 𝚃𝙴𝚇𝚃𝙾𝚂 𝙰 𝚂𝚃𝙸𝙲𝙺𝙴𝚁𝚂 𝙴 𝙸𝙼𝙰𝙶𝙴𝙽𝙴𝚂*'
+if (!text) throw `*[ ⚠️ ] 𝙴𝚁𝚁𝙾𝚁 𝙳𝙴 𝚄𝚂𝙾, 𝚃𝙴𝚇𝚃𝙾 𝙵𝙰𝙻𝚃𝙰𝙽𝚃𝙴*\n\n*𝙴𝙹𝙴𝙼𝙿𝙻𝙾 𝙳𝙴 𝚄𝚂𝙾 𝙲𝙾𝚁𝚁𝙴𝙲𝚃𝙾 𝙳𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾:*\n*${usedPrefix + command} <#menu> <responder a sticker o imagen>*`
+let hash = m.quoted.fileSha256.toString('base64')
+if (global.db.data.sticker[hash] && global.db.data.sticker[hash].locked) throw 'You have no permission to change this sticker command'
+global.db.data.sticker[hash] = {text, mentionedJid: m.mentionedJid, creator: m.sender, at: + new Date, locked: false, }
 m.reply(`*[ ✔ ] ᴇʟ ᴛᴇxᴛᴏ/ᴄᴏᴍᴀɴᴅᴏ ᴀsɪɢɴᴀᴅᴏ ᴀʟ sᴛɪᴄᴋᴇʀ/ɪᴍᴀɢᴇɴ ғᴜᴇ ᴀɢʀᴇɢᴀᴅᴏ ᴀ ʟᴀ ʙᴀsᴇ ᴅᴇ ᴅᴀᴛᴏs ᴄᴏʀʀᴇᴄᴛᴀᴍᴇɴᴛᴇ*`)
 break
-case 'delcmd': 
-if (!isCreator) return conn.adReply(m.chat, info.owner, query, m, false)
-if (!m.quoted) return conn.adReply(m.chat, `*[ ⚠️ ] 𝚁𝙴𝚂𝙿𝙾𝙽𝙳𝙴 𝙰𝙻 𝚂𝚃𝙸𝙲𝙺𝙴𝚁 𝙾 𝙸𝙼𝙰𝙶𝙴𝙽 𝙰𝙻 𝙲𝚄𝙰𝙻 𝙳𝙴𝚂𝙴𝙰 𝙰𝙶𝚁𝙴𝙶𝙰𝚁 𝚄𝙽 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙾 𝚃𝙴𝚇𝚃𝙾*`, query, m, false)
-var hash = m.quoted.fileSha256.toString('base64')
-if (!hash) return conn.adReply(m.chat, `*El sticker no tiene un comando asignado!!*`, query, m, false)
-delete global.db.data.sticker[hash]
-m.reply(`*hecho*`)
-break	    
+            case 'delcmd': 
+                let _sh = m.quoted.fileSha256.toString('base64')
+                if (!_sh) throw '*El sticker no tiene un comando asignado!!*'
+                if (global.db.data.sticker[_sh] && global.db.data.sticker[_sh].locked) throw '*❌ No tienes permiso de eliminar este comando*'        
+                delete global.db.data.sticker[_sh]
+                m.reply('*✅ Hecho*')
+            break
+            case 'listcmd': 
+                let _teks = `*Lista de comandos*\n*⚠️ Info los stickers con bold estan bloqueados!!*\n${Object.entries(global.db.data.sticker).map(([key, value], index) => `${index + 1}. ${value.locked ? `*${key}*` : key} : ${value.text}`).join('\n')}`.trim()
+                conn.sendText(m.chat, _teks, m, { mentions: Object.values(global.db.data.sticker).map(x => x.mentionedJid).reduce((a,b) => [...a, ...b], []) })
+            break
 case 'addcase':
 if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg }); 
 if (!text) throw 'envia el case'
@@ -782,10 +808,10 @@ if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: ms
 if (!text) return m.reply(`Que comando a buscar o que?`) 
 try { 
 bbreak = 'break' 
-reply('case ' + `'${args[0]}'` + fs.readFileSync('./main.js').toString().split(`case '${args[0]}'`)[1].split(bbreak)[0] + bbreak) 
+reply('case ' + `${args[0]}` + fs.readFileSync('./main.js').toString().split(`case '${args[0]}`)[1].split(bbreak)[0] + bbreak) 
 } catch (err) { 
 console.error(err) 
-reply(" Error, tal vez no existe el comando")} 
+reply("Error, tal vez no existe el comando")} 
 break
 case 'update': 
 if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg });    
@@ -847,7 +873,7 @@ break
 function pickRandom(list) {
 return list[Math.floor(list.length * Math.random())]
 }
-
+ 
 default:
 if (budy.startsWith('>')) {
 if (!isCreator) return
