@@ -1,5 +1,5 @@
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./fuctions2.js')
-const { default: makeWASocket, relayMessage, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, getAggregateVotesInPollMessage, proto } = require("@whiskeysockets/baileys")
+const { default: makeWASocket, relayMessage, areJidsSameUser, generateWAMessage, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, getAggregateVotesInPollMessage, proto } = require("@whiskeysockets/baileys")
 const chalk = require('chalk')
 const fs = require('fs')
 const child_process = require('child_process')
@@ -50,8 +50,6 @@ const downloadMediaMessage = async (message) => {
 	return buffer
 }
 
-
-
 exports.getSizeMedia = (path) => {
     return new Promise((resolve, reject) => {
         if (/http/.test(path)) {
@@ -71,11 +69,9 @@ exports.getSizeMedia = (path) => {
     })
 }
 
-
 const unixTimestampSeconds = (date = new Date()) => Math.floor(date.getTime() / 1000)
 
 exports.unixTimestampSeconds = unixTimestampSeconds
-
 
 function msToTime(duration) { 
    var milliseconds = parseInt((duration % 1000) / 100), 
@@ -106,7 +102,6 @@ exports.processTime = (timestamp, now) => {
 exports.getRandom = (ext) => {
     return `${Math.floor(Math.random() * 10000)}${ext}`
 }
-
 
 exports.fetchBuffer = async (url, options) => {
 	try {
@@ -225,8 +220,6 @@ Promise.all([unlink(`./tmp/${filename}.mp4`), unlink(`./tmp/${filename}.gif`)])
 return buffer5
 }
 
-
-
 exports.getTime = (format, date) => {
 	if (date) {
 		return moment(date).locale('id').format(format)
@@ -320,8 +313,6 @@ exports.getGroupAdmins = (participantes) => {
 	return admins
 }
 
-
-
 /**
  * Serialize Message
  * @param {WAConnection} conn 
@@ -378,6 +369,8 @@ user.regTime = -1
   if (!isNumber(user.lastmiming)) user.lastmiming = 0
   if (!isNumber(user.robs)) user.robs = 0
   if (!isNumber(user.lastclaim)) user.lastclaim = 0
+  if (!isNumber(user.lastslot)) user.lastslot= 0
+  if (!isNumber(user.lastcofre)) user.lastcofre = 0
   if(!isNumber(user.diamonds)) user.diamonds = 0
   if(!isNumber(user.swordDurability)) user.swordDurability = 100
   if(!isNumber(user.pickaxeDurability)) user.pickaxeDurability = 100
@@ -467,7 +460,7 @@ user.regTime = -1
   } 
 
 global.db.data.sticker = global.db.data.sticker || {} // sticker for addcmd
-if (user) { // creado por @skidy89?
+if (user) { //@skidy89
 if (user.level <= 3) {
   user.role = 'NOVATO(A) I'
 } else if (user.level <= 6) {
@@ -492,6 +485,8 @@ if (user.level <= 3) {
   user.role = 'EXPLORADOR(A) III'
 } else if (user.level <= 36) {
   user.role = 'EXPLORADOR(A) IV'
+} else if (user.level <= 36) {
+  user.role = '⚔️ Veterano IV'
 } else if (user.level <= 39) {
   user.role = '🏆 Elite I'
 } else if (user.level <= 42) {
@@ -568,18 +563,13 @@ if (user.level <= 3) {
   user.role = '🌌 Infinito III'
 } else if (user.level <= 150) {
   user.role = '🌠 Eterno'
-}
-}
-} catch (error) {
+}}} catch (error) {
 m.error = error
 if (error) {
 console.error(m.error)
-}
-}
+}}
 
-  
-
-    if (m.message) {
+if (m.message) {
         m.mtype = Object.keys(m.message)[0]
         m.body = m.message.conversation || m.message[m.mtype].caption || m.message[m.mtype].text || (m.mtype == 'listResponseMessage') && m.message[m.mtype].singleSelectReply.selectedRowId || (m.mtype == 'buttonsResponseMessage') && m.message[m.mtype].selectedButtonId || m.mtype
         m.msg = m.message[m.mtype]
@@ -650,7 +640,7 @@ console.error(m.error)
      * @param {*} options 
      * @returns 
      */
-    conn.sendImageAsSticker = async (jid, path, quoted, options = {}) => {
+   conn.sendImageAsSticker = async (jid, path, quoted, options = {}) => { 
         let buff = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
         let buffer
         if (options && (options.packname || options.author)) {
@@ -678,7 +668,6 @@ console.error(m.error)
                    }, mentionedJid: conn.parseMention(text)}}}}}, {})
        }
       
-
     /**
     * @param {*} jid
     * @param {*} path
@@ -710,11 +699,9 @@ console.error(m.error)
     "containsAutoReply": false,  
     "mediaType": 1,   
     "thumbnail": thumbnail ? thumbnail : global.menu,  
-    "mediaUrl": `https://chat.whatsapp.com/Ebbo3i9xxiZFErul4gyApJ`,  
-    "sourceUrl": `https://chat.whatsapp.com/Ebbo3i9xxiZFErul4gyApJ`  
-    }
-    }  
-    }, { quoted: quoted ? quoted : m }) 
+    "mediaUrl": md,  
+    "sourceUrl": md  
+    }}}, { quoted: quoted ? quoted : m }) 
     }
     
     /**
@@ -735,7 +722,7 @@ console.error(m.error)
     "surface": "CATALOG",
     "message": text,
     "orderTitle": orderTitle ? orderTitle : 'unknown',
-    "sellerJid": "5218442114446@s.whatsapp.net",
+    "sellerJid": "numero@s.whatsapp.net",
     "token": "AR4flJ+gzJw9zdUj+RpekLK8gqSiyei/OVDUFQRcmFmqqQ==",
     "totalAmount1000": "-500000000",
     "totalCurrencyCode":"USD",
@@ -780,26 +767,6 @@ console.error(m.error)
     await conn.sendMessage(jid, { audio: { url: audio }, fileName: 'error.mp3', mimetype: 'audio/mp4', ptt: ppt ? ptt : true, ...options }, { quoted: quoted ? quoted : m })
     }
     
-    conn.sendAudioWithAd = async (jid, audio, ppt, quoted, img, link, title, fase) => {
-    await conn.sendPresenceUpdate('recording', jid)
-    await conn.sendMessage(jid, { audio: { url: audio }, mimetype: 'audio/mp4', ptt: ppt ? ppt : false, contextInfo:{  
-    forwardingScore: 9999999,  
-    isForwarded: true,   
-    mentionedJid:[m.sender],  
-    "externalAdReply": {  
-    "showAdAttribution": true,  
-    "containsAutoReply": true,
-    "renderLargerThumbnail": fase ? fase : false,  
-    "title": title ? title : botname,
-    "containsAutoReply": true, 
-    "mediaType": 1,   
-    "thumbnail": img ? img : menu, 
-    "mediaUrl": link ? link : "https://wa.me/+5218442114446",
-    "sourceUrl": link ? link : "https://wa.me/+5218442114446",
-    }
-    }  
-    }, { quoted: quoted ? quoted : m })
-    } 
     /**
     * @param {*} jid
     * @param {*} text
@@ -807,8 +774,7 @@ console.error(m.error)
     * @param {*} options
     */
     conn.sendTextWithMentions = async (jid, text, quoted, options = {}) => conn.sendMessage(jid, { text: text, contextInfo: { mentionedJid: [...text.matchAll(/@(\d{0,16})/g)].map(v => v[1] + '@s.whatsapp.net') }, ...options }, { quoted })
-    
-    
+        
     /**
     * @param {*} jid
     * @param {*} text
@@ -858,36 +824,6 @@ console.error(m.error)
     (store.contacts[id] || {})
     return (withoutContact ? '' : v.name) || v.subject || v.verifiedName || PhoneNumber('+' + jid.replace('@s.whatsapp.net', '')).getNumber('international')
     }
-    
-    
-    /**
-    * @param {*} jid
-    * @param {*} path
-    * @param {*} fileName
-    * @param {*} quoted
-    * @param {*} options
-    * @return
-    */
-	conn.sendFile = async(jid, PATH, fileName, quoted = {}, options = {}) => {
-    let types = await conn.getFile(PATH, true)
-    let { filename, size, ext, mime, data } = types
-    let type = '', mimetype = mime, pathFile = filename
-    if (options.asDocument) type = 'document'
-    if (options.asSticker || /webp/.test(mime)) {
-    let { writeExif } = require('./libs/fuctions2.js')
-    let media = { mimetype: mime, data }
-    pathFile = await writeExif(media, { packname: global.packname, author: global.packname2, categories: options.categories ? options.categories : [] })
-    await fs.promises.unlink(filename)
-    type = 'sticker'
-    mimetype = 'image/webp'}
-    else if (/image/.test(mime)) type = 'image'
-    else if (/video/.test(mime)) type = 'video'
-    else if (/audio/.test(mime)) type = 'audio'
-    else type = 'document'
-    await conn.sendMessage(jid, { [type]: { url: pathFile }, mimetype, fileName, ...options }, { quoted, ...options })
-    return fs.promises.unlink(pathFile)
-    }
-
     
     /**
     *
@@ -954,7 +890,92 @@ console.error(m.error)
      * @param {*} path 
      * @returns 
      */
-    conn.getFile = async (PATH, save) => {
+     
+    conn.getFile = async (PATH, saveToFile = false) => { 
+         let res; let filename; 
+         const data = Buffer.isBuffer(PATH) ? PATH : PATH instanceof ArrayBuffer ? PATH.toBuffer() : /^data:.*?\/.*?;base64,/i.test(PATH) ? Buffer.from(PATH.split`,`[1], 'base64') : /^https?:\/\//.test(PATH) ? await (res = await fetch(PATH)).buffer() : fs.existsSync(PATH) ? (filename = PATH, fs.readFileSync(PATH)) : typeof PATH === 'string' ? PATH : Buffer.alloc(0); 
+         if (!Buffer.isBuffer(data)) throw new TypeError('Result is not a buffer'); 
+         const type = await FileType.fromBuffer(data) || { 
+           mime: 'application/octet-stream', 
+           ext: '.bin', 
+         }; 
+         if (data && saveToFile && !filename) (filename = path.join(__dirname, '../tmp/' + new Date * 1 + '.' + type.ext), await fs.promises.writeFile(filename, data)); 
+         return { 
+           res, 
+           filename, 
+           ...type, 
+           data, 
+           deleteFile() { 
+             return filename && fs.promises.unlink(filename); 
+           }, 
+         }}
+   /**
+    * @param {*} jid
+    * @param {*} path
+    * @param {*} fileName
+    * @param {*} quoted
+    * @param {*} options
+    * @return
+    */
+   conn.sendFile = async (jid, path, filename = '', caption = '', quoted, ptt = false, options = {}) => {
+         const type = await conn.getFile(path, true); 
+         let {res, data: file, filename: pathFile} = type; 
+         if (res && res.status !== 200 || file.length <= 65536) { 
+           try { 
+             throw {json: JSON.parse(file.toString())}; 
+           } catch (e) { 
+             if (e.json) throw e.json; 
+           } 
+         }      
+         const opt = {}; 
+         if (quoted) opt.quoted = quoted; 
+         if (!type) options.asDocument = true; 
+         let mtype = ''; let mimetype = options.mimetype || type.mime; let convert; 
+         if (/webp/.test(type.mime) || (/image/.test(type.mime) && options.asSticker)) mtype = 'sticker'; 
+         else if (/image/.test(type.mime) || (/webp/.test(type.mime) && options.asImage)) mtype = 'image'; 
+         else if (/video/.test(type.mime)) mtype = 'video'; 
+         else if (/audio/.test(type.mime)) { 
+           ( 
+             convert = await toAudio(file, type.ext), 
+             file = convert.data, 
+             pathFile = convert.filename, 
+             mtype = 'audio', 
+             mimetype = options.mimetype || 'audio/mpeg; codecs=opus' 
+           ); 
+         } else mtype = 'document'; 
+         if (options.asDocument) mtype = 'document'; 
+  
+         delete options.asSticker; 
+         delete options.asLocation; 
+         delete options.asVideo; 
+         delete options.asDocument; 
+         delete options.asImage; 
+  
+         const message = { 
+           ...options, 
+           caption, 
+           ptt, 
+           [mtype]: {url: pathFile}, 
+           mimetype, 
+           fileName: filename || pathFile.split('/').pop(), 
+         }; 
+         /** 
+                  * @type {import('@whiskeysockets/baileys').proto.WebMessageInfo} 
+                  */ 
+         let m; 
+         try { 
+           m = await conn.sendMessage(jid, message, {...opt, ...options}); 
+         } catch (e) { 
+           console.error(e); 
+           m = null; 
+         } finally { 
+           if (!m) m = await conn.sendMessage(jid, {...message, [mtype]: file}, {...opt, ...options}); 
+           file = null; // releasing the memory 
+           return m; 
+         } 
+       }
+    
+conn.getFile = async (PATH, save) => {
     let res
     let data = Buffer.isBuffer(PATH) ? PATH : /^data:.*?\/.*?;base64,/i.test(PATH) ? Buffer.from(PATH.split`,`[1], 'base64') : /^https?:\/\//.test(PATH) ? await (res = await fetch(PATH)) : fs.existsSync(PATH) ? (filename = PATH, fs.readFileSync(PATH)) : typeof PATH === 'string' ? PATH : Buffer.alloc(0)
     //if (!Buffer.isBuffer(data)) throw new TypeError('Result is not a buffer')
@@ -985,9 +1006,25 @@ console.error(m.error)
     return trueFileName
     }
     
+    conn.appenTextMessage = async(text, chatUpdate) => {
+        let messages = await generateWAMessage(m.chat, { text: text, mentions: m.mentionedJid }, {
+            userJid: conn.user.id,
+            quoted: m.quoted && m.quoted.fakeObj
+        })
+        messages.key.fromMe = areJidsSameUser(m.sender, conn.user.id)
+        messages.key.id = m.key.id
+        messages.pushName = m.pushName
+        if (m.isGroup) messages.participant = m.sender
+        let msg = {
+            ...chatUpdate,
+            messages: [proto.WebMessageInfo.fromObject(messages)],
+            type: 'append'
+        }
+        conn.ev.emit('messages.upsert', msg)
+    }
+    
     return m
 }
-
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
