@@ -103,7 +103,7 @@ endLimit: 'Uff esta pobres no tener mas 💎',
 }
 
 //---------------[ NIVELES ]----------------
-global.multiplier = 69 // Cuanto más alto, más difícil subir de nivel 
+global.multiplier = 90 // Cuanto más alto, más difícil subir de nivel 
 
 //---------[ BLOQUEO, PREMIUM ]----------------
 global.blockList = []  
