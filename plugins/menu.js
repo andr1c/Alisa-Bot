@@ -37,7 +37,7 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ║✾ ɴɪᴠᴇʟ : ${user.level}
 ║✾ ʀᴀɴɢᴏ : ${user.role}
 ║✾ ᴇxᴘ : ${user.exp}
-║✾ ᴇxᴘ : ${user.money}
+║✾ ᴄᴏɪɴs : ${user.money}
 ║ 
 ║✾ ʀᴇɢɪsᴛʀᴀᴅᴏ : ${rtotalreg} de ${totalreg}
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
@@ -145,7 +145,16 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}gay @tag
 ├❥ᰰຼ ❏ ${prefix}pareja @tag
 ├❥ᰰຼ ❏ ${prefix}follar @tag
+├❥ᰰຼ ❏ ${prefix}topgays
+├❥ᰰຼ ❏ ${prefix}topotakus
+├❥ᰰຼ ❏ ${prefix}top
 ├❥ᰰຼ ❏ ${prefix}pregunta
+├❥ᰰຼ ❏ ${prefix}verdad
+├❥ᰰຼ ❏ ${prefix}reto
+├❥ᰰຼ ❏ ${prefix}doxear
+├❥ᰰຼ ❏ ${prefix}personalidad
+├❥ᰰຼ ❏ ${prefix}slot
+├❥ᰰຼ ❏ ${prefix}dado
 ├❥ᰰຼ ❏ ${prefix}fake
 ├❥ᰰຼ _(Ingresa el texto + tag para joder a alguien con chat fake😹)_
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
@@ -261,6 +270,9 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}balace _(para sabes cuanto diamante/exp tiene)_
 ├❥ᰰຼ ❏ ${prefix}claim
 ├❥ᰰຼ _(recoger tu recompensa)_
+├❥ᰰຼ ❏ ${prefix}lb
+├❥ᰰຼ ❏ ${prefix}leaderboard
+├❥ᰰຼ ❏ ${prefix}cofre
 ├❥ᰰຼ ❏ ${prefix}perfil
 ├❥ᰰຼ ❏ ${prefix}nivel
 ├❥ᰰຼ ❏ ${prefix}levelup

@@ -97,13 +97,14 @@ let who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.m
 let user = global.db.data.users[who]
 if (!(who in global.db.data.users)) return m.reply(`✳️ ᴇʟ ᴜsᴜᴀʀɪᴏ ɴᴏ sᴇ ᴇɴᴄᴜᴇɴᴛʀᴀ ᴇɴ ᴍɪ ʙᴀsᴇ ᴅᴇ ᴅᴀᴛᴏs`) 
 conn.sendMessage(m.chat, {text: `╔════≪ 𝙱𝙰𝙻𝙰𝙽𝙲𝙴 ≫════╗
-║ • *📌𝙽𝚘𝚖𝚋𝚛𝚎* : @${who.split('@')[0]}
-║ • *💎𝙳𝚒𝚊𝚖𝚊𝚗𝚝𝚎𝚜* : ${user.limit}
-║ • *⬆️𝚇𝚙* : ${user.exp}
+║ • *📌𝙽𝙾𝙼𝙱𝚁𝙴 :* @${who.split('@')[0]}
+║ • *💎𝙳𝙸𝙰𝙼𝙰𝙽𝚃𝙴 :* ${user.limit}
+║ • *⬆️𝙴𝚇𝙿 :* ${user.exp}
+║ • *🪙𝙲𝙾𝙸𝙽𝚂 :* ${user.money}
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
 ║ *𝙽𝙾𝚃𝙰 :* 
 ║𝙿𝚞𝚎𝚍𝚎𝚜 𝚌𝚘𝚖𝚙𝚛𝚊𝚛 💎 𝚍𝚒𝚊𝚖𝚊𝚗𝚝𝚎𝚜
-║𝚞𝚜𝚊𝚗𝚍𝚘 𝚕𝚘𝚜 𝚌𝚘𝚖𝚊𝚗𝚍𝚘𝚜
+║𝚞𝚜𝚊𝚗𝚍𝚘 𝚕𝚘𝚜 𝚜𝚒𝚐𝚞𝚎𝚗𝚝𝚎 𝚌𝚘𝚖𝚊𝚗𝚍𝚘𝚜:
 ║ • *${prefix}buy <cantidad>*
 ║ • *${prefix}buyall*
 ╚═══════════════`, mentions: [who]}, {quoted: m})
@@ -157,18 +158,20 @@ m.reply(`╭━─━─━─≪ 𝙰𝙺𝙵 ≫─━─━─━╮
 ╰━─━─━─≪ ${vs} ≫─━─━─━╯`)}
 
 async function claim(conn, m, sender) {
-const free = 5000
-const prem = 2000
 let time = global.db.data.users[m.sender].lastclaim + 86400000
 if (new Date - global.db.data.users[m.sender].lastclaim < 86400000) return m.reply(`🎁 *ʏᴀ ʀᴇᴄᴏɢɪsᴛᴇ ᴛᴜ ʀᴇᴄᴏᴍᴘᴇɴsᴀ ᴅɪᴀʀɪᴀ*\n\n🕚 ᴠᴜᴇʟᴠᴇ ᴇɴ ${msToTime(time - new Date())}`) 
-global.db.data.users[m.sender].exp += 2 ? prem : free
+const exp = Math.floor(Math.random() * 200)
 const limit = Math.floor(Math.random() * 10)
+const money = Math.floor(Math.random() * 100)
 global.db.data.users[m.sender].limit += limit;
+global.db.data.users[m.sender].money += money
+global.db.data.users[m.sender].exp += exp
 m.reply(`🎁 *ʀᴇᴄᴏᴍᴘᴇɴsᴀ ᴅɪᴀʀɪᴀ*
 
 🔸 *ʜᴀs ʀᴇᴄɪʙɪᴅᴏ:*
-🆙 *xᴘ* : ${20 ? prem : free}
-💎 *Diamante :* ${limit}`)
+🆙 *xᴘ* : ${exp}
+💎 *ᴅɪᴀᴍᴀɴᴛᴇ :* ${limit}
+🪙 *ᴄᴏɪɴs :* ${money}`)
 global.db.data.users[m.sender].lastclaim = new Date * 1
 }
 
@@ -220,10 +223,78 @@ const str = `*[ LEVEL UP 🎊 ]*
 *_ᴄᴜᴀɴᴛᴏ ᴍᴀs ɪɴᴛᴇʀᴀᴄᴛᴜᴇs ᴄᴏɴ ʟᴏs ʙᴏᴛs, ᴍᴀʏᴏʀ sᴇʀᴀ ᴛᴜ ɴɪᴠᴇʟ_*`.trim()
 return m.reply(str)}}
 
+async function cofre(conn, sender, m) {
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].level < 9) return m.reply(`[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀ ᴇʟ ɴɪᴠᴇʟ 9 ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ .nivel`) 
+const date = global.db.data.users[m.sender].lastcofre + 86400000; //10 hs
+if (new Date - global.db.data.users[m.sender].lastcofre < 86400000) return m.reply(`*𝚈𝙰 𝚁𝙴𝙲𝙾𝙶𝙸𝚂𝚃𝙴 𝚃𝚄 𝙲𝙾𝙵𝚁𝙴 𝚅𝚄𝙴𝙻𝚅𝙴 𝙴𝙻 ${msToTime(date - new Date())}*`) 
+exp = Math.floor(Math.random() * 3000)
+limit = Math.floor(Math.random() * 30)
+trash = Math.floor(Math.random() * 200)
+potion = Math.floor(Math.random() * 10)
+money = Math.floor(Math.random() * 500)
+global.db.data.users[m.sender].exp += exp
+global.db.data.users[m.sender].limit += limit
+global.db.data.users[m.sender].trash += trash
+global.db.data.users[m.sender].potion += potion
+global.db.data.users[m.sender].money += money
+m.reply(`╔══🎉═🎉═🎉══⬣\n║🛒 𝙾𝙱𝚃𝙸𝙴𝙽𝙴𝚂 𝚄𝙽 𝙲𝙾𝙵𝚁𝙴\n║┈┈┈┈┈┈┈┈┈┈┈┈┈\n║⚡${exp} 𝙴𝚇𝙿\n║💎 ${limit} 𝙳𝙸𝙰𝙼𝙰𝙽𝚃𝙴\n║🗑️ ${trash} 𝙱𝙰𝚂𝚄𝚁𝙰\n🥤 ${potion} 𝙿𝙾𝙲𝙸𝙾𝙽𝙴𝚂\n║🪙 ${money} 𝙲𝙾𝙸𝙽𝚂\n╚═════════════════⬣`)
+global.db.data.users[m.sender].lastcofre = new Date * 1;
+}
+
+async function lb(conn, participants, args, m) {
+let member = participants.map(u => u.id)
+let me = m.split
+const users = Object.entries(global.db.data.users).map(([key, value]) => {
+return {...value, jid: key}});
+const sortedExp = users.map(toNumber('exp')).sort(sort('exp'));
+const sortedLim = users.map(toNumber('limit')).sort(sort('limit'));
+const sortedLevel = users.map(toNumber('level')).sort(sort('level'));
+const usersExp = sortedExp.map(enumGetKey);
+const usersLim = sortedLim.map(enumGetKey);
+const usersLevel = sortedLevel.map(enumGetKey);
+const len = args[0] && args[0].length > 0 ? Math.min(100, Math.max(parseInt(args[0]), 10)) : Math.min(10, sortedExp.length);
+const texto = `𝚃𝙰𝙱𝙻𝙰 𝙳𝙴 𝙲𝙻𝙰𝚂𝙸𝙵𝙸𝙲𝙰𝙲𝙸𝙾𝙽
+
+╔═❖ *𝚃𝙾𝙿 ${len} 𝚇𝙿* 🧬 
+║𝚃𝚞 : ${usersExp.indexOf(m.sender) + 1} 𝚍𝚎 ${usersExp.length}
+${sortedExp.slice(0, len).map(({jid, exp}, i) => `║${i + 1}. ${participants.some((p) => jid === p.jid) ? `(${conn.getName(jid)}) wa.me/` : '@'}${jid.split`@`[0]} ➭ *${exp} exp*`).join`\n`}
+╚═══════════════  
+
+╔═❖ *𝚃𝙾𝙿 ${len} 𝙳𝙸𝙰𝙼𝙰𝙽𝚃𝙴𝚂 💎*
+║𝚃𝚞 : ${usersLim.indexOf(m.sender) + 1} 𝚍𝚎 ${usersLim.length}
+${sortedLim.slice(0, len).map(({jid, limit}, i) => `║${i + 1}. ${participants.some((p) => jid === p.jid) ? `(${conn.getName(jid)}) wa.me/` : '@'}${jid.split`@`[0]} ➭ *${limit} diamantes*`).join`\n`}
+╚═══════════════  
+
+╔═❖ *𝚃𝙾𝙿 ${len} 𝙽𝙸𝚅𝙴𝙻* ⬆️
+║𝚃𝚞 : ${usersLevel.indexOf(m.sender) + 1} 𝚍𝚎 ${usersLevel.length}
+${sortedLevel.slice(0, len).map(({jid, level}, i) => `║${i + 1}. ${participants.some((p) => jid === p.jid) ? `(${conn.getName(jid)}) wa.me/` : '@'}${jid.split`@`[0]} ➭ *nivel ${level}*`).join`\n`}
+╚═══════════════ `.trim();
+conn.sendMessage(m.chat, { text: texto, contextInfo:{
+mentionedJid: [...texto.matchAll(/@(\d{0,16})/g)].map(v => v[1] + '@s.whatsapp.net')}}, { quoted: m })}
+
 //función pickrandow
 function pickRandom(list) {
 return list[Math.floor(list.length * Math.random())]
 }
+
+function sort(property, ascending = true) {
+  if (property) return (...args) => args[ascending & 1][property] - args[!ascending & 1][property];
+  else return (...args) => args[ascending & 1] - args[!ascending & 1];
+}
+
+function toNumber(property, _default = 0) {
+  if (property) {
+    return (a, i, b) => {
+      return {...b[i], [property]: a[property] === undefined ? _default : a[property]};
+    };
+  } else return (a) => a === undefined ? _default : a;
+}
+
+function enumGetKey(a) {
+  return a.jid;
+}
+
 //temporarily
 function msToTime(duration) { 
    var milliseconds = parseInt((duration % 1000) / 100), 
@@ -235,7 +306,7 @@ function msToTime(duration) {
    seconds = seconds < 10 ? "0" + seconds : seconds; 
    return minutes + " m y " + seconds + " s "; 
 }
-module.exports = { rob, reg, bal, work, mine, afk, buy, claim, perfil, nivel}
+module.exports = { rob, reg, bal, work, mine, afk, buy, claim, perfil, nivel, cofre, lb}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
