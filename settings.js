@@ -77,7 +77,7 @@ global.noperfil = fs.readFileSync('./media/sinfoto.jpg')
 global.md = 'https://github.com/elrebelde21'
 global.yt = 'https://www.youtube.com/@LoliBot'
 global.nn = 'https://chat.whatsapp.com/KlqNmoUcVnsGJxIfATIDrK' //Update 
-global.nnn = 'https://chat.whatsapp.com/KNzpnA8SJArLUXY4unzjgk' //LoliBot
+global.nnn = 'https://chat.whatsapp.com/H4hxytyGvucIF1k0UAR7es'
 global.nna2 = 'DTfzshW01Jt943BfCw3wov'
 
 //---------[ INFO ]---------
