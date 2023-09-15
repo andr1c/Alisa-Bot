@@ -334,11 +334,11 @@ exports.smsg = (conn, m, hasParent) => {
     }
 
 try {   
-  let isNumber = x => typeof x === 'number' && !isNaN(x)  // NaN in number?
-  let user = global.db.data.users[m.sender]  
-  if (typeof user !== 'object') global.db.data.users[m.sender] = {}  
-  if (user) {
- if (!('registered' in user))
+let isNumber = x => typeof x === 'number' && !isNaN(x)  // NaN in number?
+let user = global.db.data.users[m.sender]  
+if (typeof user !== 'object') global.db.data.users[m.sender] = {}  
+if (user) {
+if (!('registered' in user))
 user.registered = false
 //-- user registered 
 if (!user.registered) {
@@ -485,8 +485,6 @@ if (user.level <= 3) {
   user.role = 'EXPLORADOR(A) III'
 } else if (user.level <= 36) {
   user.role = 'EXPLORADOR(A) IV'
-} else if (user.level <= 36) {
-  user.role = '⚔️ Veterano IV'
 } else if (user.level <= 39) {
   user.role = '🏆 Elite I'
 } else if (user.level <= 42) {
@@ -570,8 +568,8 @@ console.error(m.error)
 }}
 
 if (m.message) {
-        m.mtype = Object.keys(m.message)[0]
-        m.body = m.message.conversation || m.message[m.mtype].caption || m.message[m.mtype].text || (m.mtype == 'listResponseMessage') && m.message[m.mtype].singleSelectReply.selectedRowId || (m.mtype == 'buttonsResponseMessage') && m.message[m.mtype].selectedButtonId || m.mtype
+m.mtype = Object.keys(m.message)[0]
+m.body = m.message.conversation || m.message[m.mtype].caption || m.message[m.mtype].text || (m.mtype == 'listResponseMessage') && m.message[m.mtype].singleSelectReply.selectedRowId || (m.mtype == 'buttonsResponseMessage') && m.message[m.mtype].selectedButtonId || m.mtype
         m.msg = m.message[m.mtype]
         if (m.mtype === 'ephemeralMessage') {
             exports.smsg(sock, m.msg)
@@ -640,7 +638,7 @@ if (m.message) {
      * @param {*} options 
      * @returns 
      */
-   conn.sendImageAsSticker = async (jid, path, quoted, options = {}) => { 
+    conn.sendImageAsSticker = async (jid, path, quoted, options = {}) => {
         let buff = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
         let buffer
         if (options && (options.packname || options.author)) {
@@ -698,12 +696,11 @@ if (m.message) {
     "title": botname,   
     "containsAutoReply": false,  
     "mediaType": 1,   
-    "thumbnail": thumbnail ? thumbnail : global.menu,  
+    "thumbnail": thumbnail ? thumbnail : global.imagen1,  
     "mediaUrl": md,  
     "sourceUrl": md  
-    }}}, { quoted: quoted ? quoted : m }) 
-    }
-    
+    }}}, { quoted: quoted ? quoted : m })}
+        
     /**
     * @param {*} jid
     * @param {*} caption
@@ -722,7 +719,7 @@ if (m.message) {
     "surface": "CATALOG",
     "message": text,
     "orderTitle": orderTitle ? orderTitle : 'unknown',
-    "sellerJid": "numero@s.whatsapp.net",
+    "sellerJid": "5497688@s.whatsapp.net",
     "token": "AR4flJ+gzJw9zdUj+RpekLK8gqSiyei/OVDUFQRcmFmqqQ==",
     "totalAmount1000": "-500000000",
     "totalCurrencyCode":"USD",
@@ -741,7 +738,7 @@ if (m.message) {
     * @param {*} fakecaption
     */
 
-    conn.fakeReply = (jid, caption,  fakeNumber, fakeCaption) => {
+conn.fakeReply = (jid, caption,  fakeNumber, fakeCaption) => {
     conn.sendMessage(jid, { text: caption }, {quoted: { key: { fromMe: false, participant: fakeNumber, ...(m.chat ? { remoteJid: null } : {}) }, message: { conversation: fakeCaption }}})
     }
 
@@ -766,7 +763,7 @@ if (m.message) {
     await conn.sendPresenceUpdate('recording', jid)
     await conn.sendMessage(jid, { audio: { url: audio }, fileName: 'error.mp3', mimetype: 'audio/mp4', ptt: ppt ? ptt : true, ...options }, { quoted: quoted ? quoted : m })
     }
-    
+        
     /**
     * @param {*} jid
     * @param {*} text
@@ -824,7 +821,7 @@ if (m.message) {
     (store.contacts[id] || {})
     return (withoutContact ? '' : v.name) || v.subject || v.verifiedName || PhoneNumber('+' + jid.replace('@s.whatsapp.net', '')).getNumber('international')
     }
-    
+        
     /**
     *
     * @param {*} jid
@@ -865,8 +862,7 @@ if (m.message) {
         return buffer
     }
     conn.sendPoll = (jid, name = '', values = [], selectableCount = 1) => { return conn.sendMessage(jid, { poll: { name, values, selectableCount }}) }
-    
-    
+        
 	/**
 	 * 
 	 * @param {*} jid 
@@ -891,24 +887,6 @@ if (m.message) {
      * @returns 
      */
      
-    conn.getFile = async (PATH, saveToFile = false) => { 
-         let res; let filename; 
-         const data = Buffer.isBuffer(PATH) ? PATH : PATH instanceof ArrayBuffer ? PATH.toBuffer() : /^data:.*?\/.*?;base64,/i.test(PATH) ? Buffer.from(PATH.split`,`[1], 'base64') : /^https?:\/\//.test(PATH) ? await (res = await fetch(PATH)).buffer() : fs.existsSync(PATH) ? (filename = PATH, fs.readFileSync(PATH)) : typeof PATH === 'string' ? PATH : Buffer.alloc(0); 
-         if (!Buffer.isBuffer(data)) throw new TypeError('Result is not a buffer'); 
-         const type = await FileType.fromBuffer(data) || { 
-           mime: 'application/octet-stream', 
-           ext: '.bin', 
-         }; 
-         if (data && saveToFile && !filename) (filename = path.join(__dirname, '../tmp/' + new Date * 1 + '.' + type.ext), await fs.promises.writeFile(filename, data)); 
-         return { 
-           res, 
-           filename, 
-           ...type, 
-           data, 
-           deleteFile() { 
-             return filename && fs.promises.unlink(filename); 
-           }, 
-         }}
    /**
     * @param {*} jid
     * @param {*} path
@@ -974,8 +952,8 @@ if (m.message) {
            return m; 
          } 
        }
-    
-conn.getFile = async (PATH, save) => {
+       
+    conn.getFile = async (PATH, save) => {
     let res
     let data = Buffer.isBuffer(PATH) ? PATH : /^data:.*?\/.*?;base64,/i.test(PATH) ? Buffer.from(PATH.split`,`[1], 'base64') : /^https?:\/\//.test(PATH) ? await (res = await fetch(PATH)) : fs.existsSync(PATH) ? (filename = PATH, fs.readFileSync(PATH)) : typeof PATH === 'string' ? PATH : Buffer.alloc(0)
     //if (!Buffer.isBuffer(data)) throw new TypeError('Result is not a buffer')
@@ -1022,7 +1000,7 @@ conn.getFile = async (PATH, save) => {
         }
         conn.ev.emit('messages.upsert', msg)
     }
-    
+   
     return m
 }
 
