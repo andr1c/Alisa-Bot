@@ -149,14 +149,14 @@ type: 'append'
 conn.ev.emit('messages.upsert', msg)}
           
 //autobio
-/*if (global.db.data.settings[numBot].autobio) {
+if (global.db.data.settings[numBot].autobio) {
 let setting = global.db.data.settings[numBot]
 if (new Date() * 1 - setting.status > 1000) {
 let uptime = await runtime(process.uptime())
 const bio = `ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ | ᴀᴄᴛɪᴠᴏ ✅️: ${runtime(process.uptime())}\n\nᴘᴀʀᴀ ᴠᴇᴢ ᴍɪ ʟɪsᴛᴀ ᴅᴇ ᴄᴏᴍᴀɴᴅᴏ ᴜsᴀʀ #menu`
 await conn.updateProfileStatus(bio)
 setting.status = new Date() * 1
-}} */
+}} 
   
 //autoread
 if (m.message) {
@@ -691,7 +691,7 @@ conn.sendMessage(m.chat, {video: {url: videoig}, caption: `🔗 *Url:* ${shortUr
 reply(info.error)}            
 //rpg
 case 'reg': {
-await reg(conn, m, sender, text, fkontak)}
+await reg(conn, m, sender, fkontak)}
 break            
 case 'unreg': 
 reg1(args, m, sender)  
