@@ -30,7 +30,7 @@ await conn.sendMessage(from, { image: { url: search.all[0].thumbnail }, caption:
 await conn.sendMessage(from, {text: info.result, edit: key}, { quoted: fkontak })
 }
 
-async function acortar(conn, m, text, command) {
+async function acortar(conn, m, text, args, command) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
  if (!text) return m.reply(`*Ingresa un link para acortar!*`)
 let shortUrl1 = await (await fetch(`https://tinyurl.com/api-create.php?url=${args[0]}`)).text()  

@@ -11,6 +11,7 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 const Jimp = require('jimp')
 const os = require('os')
+const {createHash} = require('crypto') 
 
 let mentionUser = [...new Set([...(m.mentionedJid || []), ...(m.quoted ? [m.quoted.sender] : [])])]
 for (let jid of mentionUser) {
@@ -37,19 +38,48 @@ if (!name) return m.reply('El nombre no puede esta vacio')
 if (!age) return m.reply('La edad no puede esta vacia (Numeros)') 
 age = parseInt(age)
 if (age > 100) return m.reply('Esta Viejo (。-`ω´-)') 
-if (age < 5) return m.reply('🚼  Basado, los bebes saber escribir.✍️😳') 
+if (age < 6) return m.reply('🚼  Basado, los bebes saber escribir.✍️😳') 
 if (name.length >= 30) return m.reply('🐈 Fua que basado, el nombre es muy largo que quiere un puente como nombre😹') 
 user.name = name.trim()
 user.age = age
 user.regTime = + new Date
 user.registered = true
-//let sn = createHash('md5').update(m.sender).digest('hex')
+const sn = createHash('md5').update(m.sender).digest('hex');
 let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : m.fromMe ? conn.user.jid : m.sender
 const date = moment.tz('America/Bogota').format('DD/MM/YYYY')
 const time = moment.tz('America/Argentina/Buenos_Aires').format('LT')
 global.db.data.users[m.sender].limit += 2
 global.db.data.users[m.sender].exp += 200
-conn.sendMessage(m.chat, { text: `*[ ✅ REGISTRO COMPLETADO ]*\n◉ *Nombre:* ${name}\n◉ *Edad:* ${age}\n◉ *Hora:* ${time}\n◉ *Fecha:* ${date}\n◉ *Número:* wa.me/${sender.split("@")[0]}\n\n🎁 Recompensa\n◉ 2 diamante 💎\n◉ 200 exp\n\n*Para ver los comandos del bot usar:*\n\n${prefix}menu`,
+conn.sendMessage(m.chat, { text: `┏─[ ✅ REGISTRO COMPLETADO ]─┓
+┃◉ *Nombre:* 
+┃➠ ${name}
+┃• • • • • • • • • • • • • • • • • • •
+┃◉ *Edad:*
+┃➠ ${age} años
+┃• • • • • • • • • • • • • • • • • • •
+┃◉ *Hora:* 
+┃➠ ${time}
+┃• • • • • • • • • • • • • • • • • • •
+┃◉ *Fecha:*
+┃➠ ${date}
+┃• • • • • • • • • • • • • • • • • • •
+┃◉ *Número:*
+┃➠ wa.me/${sender.split("@")[0]}
+┃• • • • • • • • • • • • • • • • • • •
+┃◉ *Numero del serie*
+┃➠ ${sn}
+┃• • • • • • • • • • • • • • • • • • •
+┃ ᵀᵘ ⁿᵘ́ᵐᵉʳᵒ ᵈᵉˡ ˢᵉʳᶦᵉ ᵗᵉ ˢᵉʳᵛᶦʳᵃ ᵉⁿ ᶜᵃˢᵒ ᵠᵘᵉ 
+┃ ᵠᵘᶦᵉʳᵃ ᵇᵒʳʳᵃʳ ˢᵘˢ ʳᵉᵍᶦˢᵗʳᵒˢ
+┃ Ejemplo: ${prefix}unreg (Numero del serie)
+┃• • • • • • • • • • • • • • • • • • •
+┃🎁 *Recompensa:*
+┃➠ 2 diamante 💎
+┃➠ 200 exp
+┃• • • • • • • • • • • • • • • • • • •
+┃ *Para ver los comandos del bot usar:*
+┃${prefix}menu
+┗─━─━━─━─━━─━─━─━━─━─━`,
 contextInfo:{
 mentionedJid:[name],
 forwardingScore: 9999999,
@@ -64,7 +94,25 @@ isForwarded: true,
 "thumbnail": imagen1, 
 "sourceUrl": md}}},
 { quoted: m})
+conn.sendMessage(m.chat, { text: sn, contextInfo:{forwardingScore: 9999999, isForwarded: true, }}, { quoted: m})
 }
+
+async function reg1(args, m, sender) { 
+const {createHash} = require('crypto') 
+if (!args[0]) return m.reply('*[ ✳️ ] Ingrese número de serie*\n*Verifique su número de serie con el comando #myns*') 
+const user = global.db.data.users[m.sender];
+const sn = createHash('md5').update(m.sender).digest('hex');
+if (args[0] !== sn) return m.reply('*[ ⚠️ ] *Número de serie incorrecto*\n\n*Usar : #myns*') 
+user.registered = false; 
+global.db.data.users[m.sender].limit -= 2
+global.db.data.users[m.sender].exp -= 200
+m.reply(`*✅ ᴿᵉᵍᶦˢᵗʳᵒ ᵉˡᶦᵐᶦⁿᵃᵈᵒ*`)}
+
+async function reg2(sender, m) { 
+const {createHash} = require('crypto') 
+let sn = createHash('md5').update(m.sender).digest('hex')
+m.reply(`ᴱˢᵗᵉ ᵉˢ ˢᵘˢ ⁿᵘ́ᵐᵉʳᵒ ᵈᵉˡ ˢᵉʳᶦᵉ:\n
+${sn}`)}
 
 async function rob(conn, m, sender, fkontak) {
 const user = global.db.data.users[m.sender]
@@ -306,7 +354,7 @@ function msToTime(duration) {
    seconds = seconds < 10 ? "0" + seconds : seconds; 
    return minutes + " m y " + seconds + " s "; 
 }
-module.exports = { rob, reg, bal, work, mine, afk, buy, claim, perfil, nivel, cofre, lb}
+module.exports = { rob, reg, reg1, reg2, bal, work, mine, afk, buy, claim, perfil, nivel, cofre, lb}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {

@@ -11,12 +11,6 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 const Jimp = require('jimp')
 const os = require('os')
-const getFileBuffer = async (mediakey, MediaType) => {
-const stream = await downloadContentFromMessage(mediakey, MediaType)
-let buffer = Buffer.from([])
-for await(const chunk of stream) {
-buffer = Buffer.concat([buffer, chunk]) }
-return buffer}
 
 async function grup(conn, m, args, isBotAdmins, isGroupAdmins, prefix, command, text) {
 if (!m.isGroup) return m.reply(info.group);  
@@ -51,28 +45,28 @@ await conn.groupAcceptInvite(result).then((res) => reply(jsonformat(res))).catch
 }
 
 async function setpp(conn, m, isBotAdmins, isGroupAdmins, quoted, prefix, command, mime, args, from) {   
-if (!m.isGroup) return reply(info.group) 
-if (!isBotAdmins) return reply(info.botAdmin)
-if (!isGroupAdmins) return reply(info.admin)
-if (!quoted) return reply(`*⚠️Y la imagen?*`)
-if (!/image/.test(mime)) return reply(`*⚠️ Responde a una con:* ${prefix + command}`)
-if (/webp/.test(mime)) return reply(`*⚠️Responde a una  Image con :* ${prefix + command}`)
+if (!m.isGroup) return m.reply(info.group) 
+if (!isBotAdmins) return m.reply(info.botAdmin)
+if (!isGroupAdmins) return m.reply(info.admin)
+if (!quoted) return m.reply(`*⚠️Y la imagen?*`)
+if (!/image/.test(mime)) return m.reply(`*⚠️ Responde a una con:* ${prefix + command}`)
+if (/webp/.test(mime)) return m.reply(`*⚠️Responde a una  Image con :* ${prefix + command}`)
 var mediz = await conn. downloadAndSaveMediaMessage(quoted, 'ppgc.jpeg')
 if (args[0] == `full`) {
 var { img } = await generateProfilePicture(mediz)
 await conn.query({tag: 'iq', attrs: {to: m.chat, type:'set', xmlns: 'w:profile:picture' }, content: [ {tag: 'picture', attrs: { type: 'image' }, content: img } ]}) 
 fs.unlinkSync(mediz)
-reply(`*✅Exito*`)
+m.reply(`*✅Exito*`)
 } else {
 var memeg = await conn.updateProfilePicture(m.chat, { url: mediz })
 fs.unlinkSync(mediz)
-reply(`*✅Exito*`)}}
+m.reply(`*✅Exito*`)}}
 
 async function hide(conn, m, isBotAdmins, isGroupAdmins, q, participants) {   
 if (!m.isGroup) return m.reply(info.group) 
 if (!isBotAdmins) return m.reply(info.botAdmin)
 if (!isGroupAdmins) return m.reply(info.admin)
-if (!q) return m.reply(`*Y el texto?*`)
+if (!q) return conn.sendMessage(m.chat, { text: `*Y el texto?*` }, { quoted: m })
 conn.sendMessage(m.chat, { text : q ? q : '' , mentions: participants.map(a => a.id)}, { quoted: m })}
 
 async function setna(conn, m, isBotAdmins, isGroupAdmins, text) {   

@@ -51,9 +51,13 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 \`\`\`ʙᴏᴛ sɪᴍᴘʟᴇ ᴄᴏɴ ᴘᴏᴄᴏs ᴄᴏᴍᴀɴᴅᴏs\`\`\`
 ===============================
 
-*╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*⃐ℹ️ ＩＮＦＯ ＢＯＴ*️⃟ᬽ፝֟━*
+*╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*⃐ℹ️ ＩＮＦＯＢＯＴ*️⃟ᬽ፝֟━*
 ├❥ᰰຼ ❏ ${prefix}reg 
 ├❥ᰰຼ _(registrarte para poder usar el bot)_
+├❥ᰰຼ ❏ ${prefix}unreg
+├❥ᰰຼ _(para borrar sus registro)_
+├❥ᰰຼ ❏ ${prefix}myns
+├❥ᰰຼ _(para vez tu numero del serie)_
 ├❥ᰰຼ ❏ ${prefix}estado 
 ├❥ᰰຼ _(comprueba el estado del bot)_
 ├❥ᰰຼ ❏ ${prefix}ping 
@@ -72,8 +76,11 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ  *(Este serbot esta modo beta)*
 ├ *✧･ﾟ: *✧･ﾟ:*✧･ﾟ: *✧･ﾟ:*✧･ﾟ: *✧･ﾟ:
 ├❥ᰰຼ ❏ ${prefix}serbot
-├❥ᰰຼ ❏ ${prefix}jadibot
+├❥ᰰຼ ❏ ${prefix}qr
 ├❥ _(General un qr para convertirte el un sub bot)_
+├❥ᰰຼ ❏ ${prefix}jadibot
+├❥ᰰຼ ❏ ${prefix}sercode
+├❥ _(Nueva forma de hacerte un subbot beta)_
 ├❥ᰰຼ ❏ ${prefix}bots
 ├❥ _(comprueba si hay sub bot conectado)_
 ├❥ᰰຼ ❏ ${prefix}stop
