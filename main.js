@@ -382,7 +382,7 @@ let id = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : m.chat
 let online = [...Object.keys(store.presences[id]), numBot]
 conn.sendText(m.chat, '*ESTA ACTIVO 😎 :*\n\n' + online.map(v => '❑ @' + v.replace(/@.+/, '')).join`\n`, m, { mentions: online })}
 break            
-case 'admins': case 'administradores':
+case 'admins': case 'administradores': {
 const pp = await conn.profilePictureUrl(m.chat, 'image').catch((_) => null) || './src/admins.jpg';
 const groupAdmins = participants.filter((p) => p.admin);
 const listAdmin = groupAdmins.map((v, i) => `${i + 1}. @${v.id.split('@')[0]}`).join('\n');
@@ -395,7 +395,7 @@ ${oi}
 
 *𝙰𝙳𝙼𝙸𝙽𝚂:*
 ${listAdmin}`.trim();
-conn.sendMessage(m.chat, { text: text, mentions: participants.map(a => a.id) }, { quoted: m })
+conn.sendMessage(m.chat, { text: text, mentions: participants.map(a => a.id) }, { quoted: m })}
 break
 case 'infogrupo': case 'groupinfo': {
 const pp = await conn.profilePictureUrl(m.chat, 'image').catch((_) => null) || './src/avatar_contact.png';
@@ -691,7 +691,7 @@ conn.sendMessage(m.chat, {video: {url: videoig}, caption: `🔗 *Url:* ${shortUr
 reply(info.error)}            
 //rpg
 case 'reg': {
-await reg(conn, m, sender, fkontak)}
+await reg(conn, m, sender, text, fkontak)}
 break            
 case 'unreg': 
 reg1(args, m, sender)  
