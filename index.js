@@ -65,20 +65,17 @@ if (global.db.data) await global.db.write()
 //_________________
 
 //tmp
-function clearTmp() { 
+function clearTmp() {
 const tmp = [tmpdir(), join(__dirname, './tmp')];
 const filename = [];
 tmp.forEach((dirname) => readdirSync(dirname).forEach((file) => filename.push(join(dirname, file))));
-  
 return filename.map((file) => {
 const stats = statSync(file);
-    
 if (stats.isFile() && (Date.now() - stats.mtimeMs >= 1000 * 60 * 3)) {
 return unlinkSync(file); // 3 minutes
 }
 return false;
-});
-}
+})}
 
 if (!opts['test']) { 
 if (global.db) { 
@@ -107,18 +104,18 @@ const socketSettings = {
 printQRInTerminal: true,
 logger: pino({ level: 'silent' }),
 auth: { creds: state.creds, keys: makeCacheableSignalKeyStore(state.keys, pino({level: 'silent'})) },
-browser: Browsers.macOS("NovaBot-MD"),
+browser: ['NovaBot-MD', 'Safari', '1.0.0'],
 msgRetry,
 msgRetryCache,
 version,
 syncFullHistory: true,
-getMessage: async (key) => {
-if (store) {
-const msg = store.loadMessage(key.remoteJid, key.id)
-return msg.message && undefined
-} return {
-conversation: 'SimpleBot',
-}}}
+getMessage: async (key) => { 
+if (store) { 
+const msg = await store.loadMessage(key.remoteJid, key.id); 
+return sock.chats[key.remoteJid] && sock.chats[key.remoteJid].messages[key.id] ? sock.chats[key.remoteJid].messages[key.id].message : undefined; 
+} 
+return proto.Message.fromObject({}); 
+}}
 
 const sock = makeWASocket(socketSettings)
 
@@ -153,15 +150,22 @@ console.log(e)
 console.log(err)
 }})
 
-async function getMessage(key){
-if (store) {
-const msg = await store.loadMessage(key.remoteJid, key.id)
-return msg?.message
-}
-return {
-conversation: "Holaa"
-}}
-    
+sock.ev.on('messages.update', async chatUpdate => {
+for(const { key, update } of chatUpdate) {
+if(update.pollUpdates && key.fromMe) {
+const pollCreation = await getMessage(key)
+if(pollCreation) {
+const pollUpdate = await getAggregateVotesInPollMessage({
+message: pollCreation,
+pollUpdates: update.pollUpdates,
+})
+var toCmd = pollUpdate.filter(v => v.voters.length !== 0)[0]?.name
+if (toCmd == undefined) return
+var prefCmd = prefix+toCmd
+sock.appenTextMessage(prefCmd, chatUpdate)
+}}}})
+
+
 //anticall
 sock.ev.on('call', async (fuckedcall) => { 
 sock.user.jid = sock.user.id.split(":")[0] + "@s.whatsapp.net" // jid in user?
@@ -189,7 +193,6 @@ ppgroup = await sock.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-
 let text = `*¡Ahora solo los administradores pueden enviar mensajes!*`
 sock.sendMessage(res.id, {text: text,  
 contextInfo:{  
@@ -357,7 +360,7 @@ text: `💫 *Hola* @${name.split("@")[0]} ¿COMO ESTAS?😃
 💫 *Grupos :* ${metadata.subject}
 💫 *Participarte : ${miembros}*
 💫 *Fecha :* ${date}
-${global.db.data.chats[m.chat].antilink ? '✅ *Antilink | antienlace esta activo' : '❌ *Antilink | antienlace esta Desactivado'}
+${global.db.data.chats[m.chat].antilink ? '✅ *Antilink | antienlace :* esta activo' : '❌ *Antilink | antienlace :* esta Desactivado'}
 
 📢 *Lee la descripción*
 
@@ -474,4 +477,5 @@ process.on('RefenceError', console.log)
 }
 
 startBot()
+
 })()

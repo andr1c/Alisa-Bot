@@ -6,10 +6,11 @@
 //═════════[ Importaciones ]═════════ 
 const baileys = require('@whiskeysockets/baileys'); // trabajar a través de descargas por Whatsapp 
 const { WaMessageStubType, areJidsSameUser, downloadContentFromMessage, generateWAMessageContent, generateWAMessageFromContent, generateWAMessage, prepareWAMessageMedia, relayMessage} = require('@whiskeysockets/baileys'); // Importa los objetos 'makeWASocket' y 'proto' desde el módulo '@whiskeysockets/baileys'
+const { default: makeWASocket, proto } = require("@whiskeysockets/baileys")
 const moment = require('moment-timezone') // Trabajar con fechas y horas en diferentes zonas horarias
-const gradient = require('gradient-string') // Aplicar gradientes de color al texto
-const { exec, spawn, execSync } = require("child_process")// Función 'execSync' del módulo 'child_process' para ejecutar comandos en el sistema operativo 
-const chalk = require('chalk') // Estilizar el texto en la consola
+const gradient = require('gradient-string') // Aplicar gradientes de color al texto 
+const { exec, spawn, execSync } =  require("child_process")// Función 'execSync' del módulo 'child_process' para ejecutar comandos en el sistema operativo 
+const chalk = require('chalk') // Estilizar el texto en la consola  
 const os = require('os') // Proporciona información del sistema operativo 
 const fs = require('fs') // Trabajar con el sistema de archivos   
 const fetch = require('node-fetch')
@@ -37,7 +38,7 @@ const {jadibot, listJadibot, killJadibot} = require('./serbot.js')
 const { jadibot2 } = require('./serbot2.js')
 const { menu } = require('./plugins/menu.js')
 const { state, owner, grupo, instalar, ping, report, ow} = require('./plugins/info.js')
-const {rob, bal, reg, work, mine, buy, afk, claim, perfil, nivel, cofre, lb} = require('./plugins/rpg.js') 
+const {rob, bal, reg, reg1, reg2, work, mine, buy, afk, claim, perfil, nivel, cofre, lb} = require('./plugins/rpg.js') 
 const {game, game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, gamee} = require('./plugins/juegos.js') 
 const {yt, acortar, google, imagen, tran, tts, ia, ssw} = require('./plugins/buscadores.js')
 const {efec, url} = require('./plugins/convertidores.js') 
@@ -58,11 +59,6 @@ buffer = Buffer.concat([buffer, chunk]) }
 return buffer
 }  
 
-/**  
-  * @param {proto.IWebMessageInfo.message} mek  
-  * @param {proto.IWebMessageInfo} chatUpdate  
-  * @param {import("@whiskeysockets/baileys").WASocket}   
-*/  
 module.exports = conn = async (conn, m, chatUpdate, mek, store) => {  
 var budy = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
   
@@ -97,7 +93,7 @@ if (m.message[type].contextInfo) {
 if (m.message[type].contextInfo.mentionedJid) {  
 const msd = m.message[type].contextInfo.mentionedJid  
 for (let i = 0; i < msd.length; i++) {  
-mentions.push(msd[i])}}}  
+mentions.push(msd[i])}}} 
   
 // ‿︵‿︵ʚɞ『 GRUPO 』ʚɞ‿︵‿︵      
 const groupMetadata = m.isGroup ? await conn.groupMetadata(from) : ''
@@ -147,21 +143,20 @@ messages.key.fromMe = areJidsSameUser(m.sender, conn.user.id)
 messages.key.id = m.key.id
 messages.pushName = m.pushName
 if (m.isGroup) messages.participant = m.sender
-let msg = {...chatUpdate,
-messages: [proto.WebMessageInfo.fromObject(messages)],
+let msg = {...chatUpdate, messages: [proto.WebMessageInfo.fromObject(messages)],
 type: 'append'
 }
 conn.ev.emit('messages.upsert', msg)}
           
 //autobio
-if (global.db.data.settings[numBot].autobio) {
+/*if (global.db.data.settings[numBot].autobio) {
 let setting = global.db.data.settings[numBot]
 if (new Date() * 1 - setting.status > 1000) {
 let uptime = await runtime(process.uptime())
 const bio = `ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ | ᴀᴄᴛɪᴠᴏ ✅️: ${runtime(process.uptime())}\n\nᴘᴀʀᴀ ᴠᴇᴢ ᴍɪ ʟɪsᴛᴀ ᴅᴇ ᴄᴏᴍᴀɴᴅᴏ ᴜsᴀʀ #menu`
 await conn.updateProfileStatus(bio)
 setting.status = new Date() * 1
-}} 
+}} */
   
 //autoread
 if (m.message) {
@@ -232,7 +227,7 @@ irq: 0
 
 // ‿︵‿︵ʚɞ『 INFO CONSOLE 』ʚɞ‿︵‿︵	
 if (m.message) {
-console.log(chalk.bold.cyanBright(`▣────────────···\n│${botname} ${conn.user.id == global.numBot2 ? '' : '(jadibot)'}`), 
+console.log(chalk.bold.cyanBright(`▣────────────···\n│${botname} ${conn.user.id == global.numBot2 ? '' : '(SubBot)'}`), 
 chalk.bold.magenta('\n│⏰HORARIO: ') + chalk.magentaBright(moment(t * 1000).tz(place).format('DD/MM/YY HH:mm:ss'),
 chalk.bold.red('\n️│🏷️ TAGS: ') + chalk.bold.white(`[${conn.public ? 'Publico' : 'Privado'}]`), 
 chalk.bold.yellow('\n│📑TIPO (SMS): ') + chalk.yellowBright(`${type}`), 
@@ -250,32 +245,32 @@ await conn.sendPresenceUpdate('composing', m.chat)
 //ARRANCA LA DIVERSIÓN
 switch (command) { 
 case 'yts':
-await yt(conn, m, text, from, command, fkontak, prefix)  
+yt(conn, m, text, from, command, fkontak, prefix)  
 break
-case 'acortar':
-await acortar(conn, m, text, command)  
+case 'acortar': 
+acortar(conn, m, text, args, command)  
 break
 case 'google': {      
-await google(conn, m, text, command)}
+google(conn, m, text, command)}
 break 
 case 'imagen': {
-await imagen(conn, m, text, command)}
+imagen(conn, m, text, command)}
 break
 case 'traducir': case 'translate': {
-await tran(conn, m, args, quoted, prefix, command)}
+tran(conn, m, args, quoted, prefix, command)}
 break
 case "tts":
-await tts(conn, m, q, text, quoted)
+tts(conn, m, q, text, quoted)
 break		              				
 case 'ia': case 'chatgpt':
-await ia(conn, m, text, quoted)
+ia(conn, m, text, quoted)
 break
 case 'ss': case 'ssweb': {
-await ssw(conn, m, q, prefix, command, quoted, scp1)}
+ssw(conn, m, q, prefix, command, quoted, scp1)}
 break
 
 case 'serbot': case 'qr':
-await jadibot(conn, m, from, command, prefix)  
+jadibot(conn, m, from, command, prefix)  
 break  
 case 'jadibot': case 'sercode':
 jadibot2(conn, m, command, text)
@@ -285,8 +280,8 @@ killJadibot(conn, m, prefix, command)
 break
 case 'bots': case 'listbots':
 try { 
-let user = [... new Set([...global.listJadibot.filter(conn => conn.user).map(conn => conn.user)])];
-te = `*SUBBOT CONECTADO :* ${listJadibot.length}\n\n`   
+let user = [... new Set([...global.listJadibot.filter(conn => conn.user).map(conn => conn.user)])] 
+te = `*SUBBOT CONECTADO :* ${listJadibot.length}\n\n`
 for (let i of user){ 
 y = await conn.decodeJid(i.id) 
 te += " ❑ Usuario : @" + y.split("@")[0] + "\n" 
@@ -295,8 +290,8 @@ te += " ❑ Nombre : " + i.name + "\n\n"
 conn.sendMessage(from ,{text: te, mentions: [y], },{quoted: m}) 
 } catch (err) { 
 reply(`*NO HAY SUBBOT CONECTADO, INTENTE MAS TARDES*`)} 
-break 
-                                  		
+break
+
 //info
 case 'estado':
 state(conn, m, speed, sender, fkontak) 
@@ -321,7 +316,21 @@ break
 case 'report': 
 report(conn, from, m, prefix, command, text)
 break 
-
+case 'speedtest': {
+m.reply('Testing Speed...')
+let cp = require('child_process')
+let { promisify } = require('util')
+let exec = promisify(cp.exec).bind(cp)
+let o
+try {
+o = await exec('python speed.py')
+} catch (e) {
+o = e
+} finally {
+let { stdout, stderr } = o
+if (stdout.trim()) m.reply(stdout)
+if (stderr.trim()) m.reply(stderr)}}
+break
 //grupo
 case 'welcome': case 'audios': case 'modeadmin': case 'antifake': case 'antinternacional': case 'antiarabe': case 'detect': case 'antilink': await on(conn, m, isBotAdmins, isGroupAdmins, text, prefix, command, args)
 break
@@ -334,14 +343,14 @@ del(conn, m, isBotAdmins, isGroupAdmins)
 break  		
 case 'join': 
 join(conn, m, isCreator, text, args) 
-break            
+break           
 case 'hidetag': case 'notificar': 
 hide(conn, m, isBotAdmins, isGroupAdmins, q, participants)
 break 
 case 'setppname': case 'nuevonombre': case 'newnombre': 
 setna(conn, m, isBotAdmins, isGroupAdmins, text)
 break
-case 'setdesc': case 'descripción': 
+case 'setdesc': case 'descripción':  
 setde(conn, m, isBotAdmins, isGroupAdmins, text)
 break
 case 'setppgroup': case 'setpp': 
@@ -364,11 +373,61 @@ link(conn, m, isBotAdmins)
 break                        		
 case 'banchat': 
 ban(conn, m, isBotAdmins, isGroupAdmins, text, args, prefix, command)
-break             
-case 'tagall': 
+break              
+case 'tagall':  
 tag(conn, m, isBotAdmins, isGroupAdmins, participants, q)
 break
+case 'listonline': case 'liston': {
+let id = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : m.chat
+let online = [...Object.keys(store.presences[id]), numBot]
+conn.sendText(m.chat, '*ESTA ACTIVO 😎 :*\n\n' + online.map(v => '❑ @' + v.replace(/@.+/, '')).join`\n`, m, { mentions: online })}
+break            
+case 'admins': case 'administradores':
+const pp = await conn.profilePictureUrl(m.chat, 'image').catch((_) => null) || './src/admins.jpg';
+const groupAdmins = participants.filter((p) => p.admin);
+const listAdmin = groupAdmins.map((v, i) => `${i + 1}. @${v.id.split('@')[0]}`).join('\n');
+const owner = groupMetadata.owner || groupAdmins.find((p) => p.admin === 'superadmin')?.id || m.chat.split`-`[0] + '@s.whatsapp.net';
+const pesan = args.join` `;
+const oi = `*𝙼𝙴𝙽𝚂𝙰𝙹𝙴:* ${pesan}`;
+const text = `*━「* 𝐈𝐍𝐕𝐎𝐂𝐀𝐍𝐃𝐎 𝐀𝐃𝐌𝐈𝐍𝐒 *」━*
 
+${oi}
+
+*𝙰𝙳𝙼𝙸𝙽𝚂:*
+${listAdmin}`.trim();
+conn.sendMessage(m.chat, { text: text, mentions: participants.map(a => a.id) }, { quoted: m })
+break
+case 'infogrupo': case 'groupinfo': {
+const pp = await conn.profilePictureUrl(m.chat, 'image').catch((_) => null) || './src/avatar_contact.png';
+const {antilink, welcome, antifake, modeadmin} = global.db.data.chats[m.chat];
+const groupAdmins = participants.filter((p) => p.admin);
+const listAdmin = groupAdmins.map((v, i) => `${i + 1}. @${v.id.split('@')[0]}`).join('\n');
+const owner = groupMetadata.owner || groupAdmins.find((p) => p.admin === 'superadmin')?.id || m.chat.split`-`[0] + '@s.whatsapp.net';
+const text = `╭━━[ .⋅ ɪɴғᴏ ᴅᴇ ɢʀᴜᴘᴏ ⋅]━━━⬣ 
+*🔸️ ɪᴅ:*
+• ${groupMetadata.id}
+
+*🔸️ ɴᴏᴍʙʀᴇ* : 
+• ${groupMetadata.subject}
+
+*🔸️ ᴍɪᴇᴍʙʀᴏs* :
+• ${participants.length} Participantes
+
+*🔸️ ᴄʀᴇᴀᴅᴏʀ ᴅᴇʟ ɢʀᴜᴘᴏ:*
+• @${owner.split('@')[0]}
+
+*🔸️ ᴀᴅᴍɪɴs:*
+ ${listAdmin}
+
+*🔸️ ᴄᴏɴғɪɢᴜʀᴀᴄɪᴏɴ ᴅᴇʟ ɢʀᴜᴘᴏ:*
+• Welcome: ${welcome ? '✅' : '❌'}
+• Antilink ${antilink ? '✅' : '❌'}
+• antifake ${antifake ? '✅' : '❌'}
+
+*🔸️ ᴅᴇsᴄʀɪᴘᴄɪᴏɴ* :
+• ${groupMetadata.desc?.toString() || 'desconocido'}`.trim();
+conn.sendMessage(m.chat, { image: pp, text: text, mentions: participants.map(a => a.id) }, { quoted: fkontak })}
+break
 //juegos
 case 'simi': case 'bot': {
 await game(conn, m, text, pushname, quoted)}
@@ -384,23 +443,23 @@ await game3(conn, text, prefix, command, body, from, m, sender, quoted)}
 break
 case 'follar': case 'violar':
 game4(conn, m, pushname, text, sender)
-break
-case 'ppt':
+break 
+case 'ppt': 
 game5(conn, m, pushname, text, sender)
 break
-case 'pregunta': 
-game6(text, m) 
-break 
+case 'pregunta':
+game6(text, m)  
+break   
 case 'doxear': case 'doxxeo': 
 game7(conn, pickRandom, text) 
 break
-case 'personalidad':
+case 'personalidad': 
 game8(conn, text, pickRandom, m) 
-break
-case 'slot': 
+break   
+case 'slot':  
 game9(conn, args, prefix, command, msToTime, m) 
 break
-case 'verdad':
+case 'verdad': 
 game10(sendImageAsUrl, pickRandom)   
 break   
 case 'reto': 
@@ -431,7 +490,7 @@ case 'hentai':
 await nsfw1(conn, m, pickRandom)
 break
 case 'nsfwloli': 
-await nsfw2(conn, m, pickRandom)
+await nsfw2(conn, m, pickRandom) 
 break
 case 'lewd': case 'feed': case 'gasm': case 'anal': case 'holo': case 'tits': case 'kuni': case 'kiss': case 'erok': case 'smug': case 'solog': case 'feetg': case 'lewdk': case 'waifu': case 'pussy': case 'femdom': case 'cuddle': case 'eroyuri': case 'cum_jpg': case 'blowjob': case 'holoero': case 'erokemo': case 'fox_girl': case 'futanari': case 'wallpaper':
 await nsfw3(conn, m, pickRandom, sendImageAsUrl, command)
@@ -468,8 +527,8 @@ if (!text) return conn.sendMessage(from, { text: `*ingrese nombre de alguna canc
 let yts = require("youtube-yts")
 let search = await yts(text)
 let anup3k = search.videos[0]
-let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
-eek = await getBuffer(anu.thumbnail)
+let anu = search.videos[Math.floor(Math.random() * search.videos.length)]  
+eek = await getBuffer(anu.thumbnail) 
 conn.sendMessage(from, { image : eek, caption:  `╭───≪~*╌◌ᰱ•••⃙❨͟͞P̸͟͞L̸͟A̸͟͞Y̸͟͞❩⃘•••ᰱ◌╌*~*
 │║📌 *Título* : ${anu.title}
 │║📆 *Publicado:* ${anu.ago}
@@ -506,7 +565,7 @@ await fs.unlinkSync(audio.path)
 db.data.users[m.sender].limit -= 1
 reply(info.limit) 
 break 
-case 'ytmp4': case 'ytvideo': {
+case 'ytmp4': case 'ytvideo': { 
 const mp = require('./libs/ytdl2')
 if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return reply(`*Que esta buscado?*\n\n*Ejemplo:*\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
 conn.sendMessage(from, { text: `*Aguarde un momento*\n\nᴱˡ ᵛᶦᵈᵉᵒ ᵖᵘᵉᵈᵉ ᵗᵃʳᵈᵃ ᵉⁿᵗʳᵉ ⁵ ᵒ ¹⁰ ᵐᶦⁿᵘᵗᵒˢ ᵉˡ ᵉⁿᵛᶦᵃˢᵉ ᵗᵉⁿᵈʳᵃ́ ᵖᵃᶜᶦᵉⁿᶜᶦᵃ` }, { quoted: fdoc });    
@@ -634,6 +693,12 @@ reply(info.error)}
 case 'reg': {
 await reg(conn, m, sender, text, fkontak)}
 break            
+case 'unreg': 
+reg1(args, m, sender)  
+break
+case 'myns':
+reg2(sender, m)
+break
 case 'afk': {
 await afk(conn, m, args, sender, pushname)}
 break             
@@ -772,26 +837,25 @@ let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender :
 await conn.updateBlockStatus(users, 'unblock')}
 break            
 case 'setcmd':  case 'addcmd':
-if (!isCreator) return conn.adReply(m.chat, info.owner, m, false)
-if (!m.quoted) return conn.adReply(m.chat, `*[ ⚠️ ] 𝚁𝙴𝚂𝙿𝙾𝙽𝙳𝙴 𝙰𝙻 𝚂𝚃𝙸𝙲𝙺𝙴𝚁 𝙾 𝙸𝙼𝙰𝙶𝙴𝙽 𝙰𝙻 𝙲𝚄𝙰𝙻 𝙳𝙴𝚂𝙴𝙰 𝙰𝙶𝚁𝙴𝙶𝙰𝚁 𝚄𝙽 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙾 𝚃𝙴𝚇𝚃𝙾*`, m, false)
-if (!m.quoted.fileSha256) throw '*[ ⚠️ ] 𝚂𝙾𝙻𝙾 𝙿𝚄𝙴𝙳𝙴𝚂 𝙰𝚂𝙸𝙶𝙰𝙽𝙰𝚁 𝙲𝙾𝙼𝙰𝙽𝙳𝙾𝚂 𝙾 𝚃𝙴𝚇𝚃𝙾𝚂 𝙰 𝚂𝚃𝙸𝙲𝙺𝙴𝚁𝚂 𝙴 𝙸𝙼𝙰𝙶𝙴𝙽𝙴𝚂*'
-if (!text) throw `*[ ⚠️ ] 𝙴𝚁𝚁𝙾𝚁 𝙳𝙴 𝚄𝚂𝙾, 𝚃𝙴𝚇𝚃𝙾 𝙵𝙰𝙻𝚃𝙰𝙽𝚃𝙴*\n\n*𝙴𝙹𝙴𝙼𝙿𝙻𝙾 𝙳𝙴 𝚄𝚂𝙾 𝙲𝙾𝚁𝚁𝙴𝙲𝚃𝙾 𝙳𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾:*\n*${usedPrefix + command} <#menu> <responder a sticker o imagen>*`
+if (!m.quoted) return reply('*[ ⚠️ ] 𝚁𝙴𝚂𝙿𝙾𝙽𝙳𝙴 𝙰𝙻 𝚂𝚃𝙸𝙲𝙺𝙴𝚁 𝙾 𝙸𝙼𝙰𝙶𝙴𝙽 𝙰𝙻 𝙲𝚄𝙰𝙻 𝙳𝙴𝚂𝙴𝙰 𝙰𝙶𝚁𝙴𝙶𝙰𝚁 𝚄𝙽 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙾 𝚃𝙴𝚇𝚃𝙾*') 
+if (!m.quoted.fileSha256) return reply('*⚠️ 𝙼𝙴𝙽𝙲𝙸𝙾𝙽𝙰 𝙰𝙻 𝙼𝙴𝙽𝚂𝙰𝙹𝙴*') 
+if (!text) return reply(`*[ ⚠️ ] 𝙴𝚁𝚁𝙾𝚁 𝙳𝙴 𝚄𝚂𝙾, 𝚃𝙴𝚇𝚃𝙾 𝙵𝙰𝙻𝚃𝙰𝙽𝚃𝙴*\n\n*𝙴𝙹𝙴𝙼𝙿𝙻𝙾 𝙳𝙴 𝚄𝚂𝙾 𝙲𝙾𝚁𝚁𝙴𝙲𝚃𝙾 𝙳𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾:*\n*${usedPrefix + command} <#menu> <responder a sticker o imagen>*`) 
 let hash = m.quoted.fileSha256.toString('base64')
-if (global.db.data.sticker[hash] && global.db.data.sticker[hash].locked) throw 'You have no permission to change this sticker command'
+if (global.db.data.sticker[hash] && global.db.data.sticker[hash].locked) return reply('*[ ⚠️ ] 𝙽𝚘 𝚝𝚒𝚎𝚗𝚎𝚜 𝚙𝚎𝚛𝚖𝚒𝚜𝚘 𝚙𝚊𝚛𝚊 𝚌𝚊𝚖𝚋𝚒𝚊𝚛 𝚎𝚜𝚝𝚎 𝚌𝚘𝚖𝚊𝚗𝚍𝚘 𝚍𝚎 𝚂𝚝𝚒𝚌𝚔𝚎𝚛*') 
 global.db.data.sticker[hash] = {text, mentionedJid: m.mentionedJid, creator: m.sender, at: + new Date, locked: false, }
 m.reply(`*[ ✔ ] ᴇʟ ᴛᴇxᴛᴏ/ᴄᴏᴍᴀɴᴅᴏ ᴀsɪɢɴᴀᴅᴏ ᴀʟ sᴛɪᴄᴋᴇʀ/ɪᴍᴀɢᴇɴ ғᴜᴇ ᴀɢʀᴇɢᴀᴅᴏ ᴀ ʟᴀ ʙᴀsᴇ ᴅᴇ ᴅᴀᴛᴏs ᴄᴏʀʀᴇᴄᴛᴀᴍᴇɴᴛᴇ*`)
 break
-            case 'delcmd': 
-                let _sh = m.quoted.fileSha256.toString('base64')
-                if (!_sh) throw '*El sticker no tiene un comando asignado!!*'
-                if (global.db.data.sticker[_sh] && global.db.data.sticker[_sh].locked) throw '*❌ No tienes permiso de eliminar este comando*'        
-                delete global.db.data.sticker[_sh]
-                m.reply('*✅ Hecho*')
-            break
-            case 'listcmd': 
-                let _teks = `*Lista de comandos*\n*⚠️ Info los stickers con bold estan bloqueados!!*\n${Object.entries(global.db.data.sticker).map(([key, value], index) => `${index + 1}. ${value.locked ? `*${key}*` : key} : ${value.text}`).join('\n')}`.trim()
-                conn.sendText(m.chat, _teks, m, { mentions: Object.values(global.db.data.sticker).map(x => x.mentionedJid).reduce((a,b) => [...a, ...b], []) })
-            break
+case 'delcmd': 
+let _sh = m.quoted.fileSha256.toString('base64')
+if (!_sh) return reply('*𝙴𝚜𝚝𝚎 𝚒𝚍 𝚍𝚎 𝚜𝚝𝚒𝚌𝚔𝚎𝚛 𝚗𝚘 𝚎𝚡𝚒𝚜𝚝𝚎*') 
+if (global.db.data.sticker[_sh] && global.db.data.sticker[_sh].locked) return reply('*[ ⚠️ ] No tienes permiso para cambiar este comando de Sticker*')      
+delete global.db.data.sticker[_sh]
+m.reply('*✅ 𝙷𝚎𝚌𝚑𝚘*')
+break
+case 'listcmd': 
+let _teks = `*𝙻𝙸𝚂𝚃𝙰 𝙳𝙴 𝙲𝙾𝙼𝙰𝙽𝙳𝙾𝚂*\n▢ *𝙸𝚗𝚏𝚘:* 𝚂𝚒 𝚎𝚜𝚝𝚊 𝚎𝚗 *𝚗𝚎𝚐𝚛𝚒𝚝𝚊* 𝚎𝚜𝚝𝚊 𝚋𝚕𝚘𝚚𝚞𝚎𝚊𝚍𝚘\n\n──────────────────\n${Object.entries(global.db.data.sticker).map(([key, value], index) => `${index + 1}. ${value.locked ? `*${key}*` : key} : ${value.text}`).join('\n')}`.trim()
+conn.sendText(m.chat, _teks, m, { mentions: Object.values(global.db.data.sticker).map(x => x.mentionedJid).reduce((a,b) => [...a, ...b], []) })
+break
 case 'addcase':
 if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg }); 
 if (!text) throw 'envia el case'
