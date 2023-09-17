@@ -118,9 +118,9 @@ DSBPreKeys.forEach(fileInDir => {
 unlinkSync(`./jadibts/${directorio}/${fileInDir}`)
 })}})
 if (SBprekey.length === 0) return; 
-console.log(chalk.cyanBright(`=> No hay archivos por eliminar.`))
+console.log(chalk.cyanBright(`🟢 NO HAY ARCHIVO POR ELIMINAR.`))
 } catch (err) {
-console.log(chalk.bold.red(`=> Algo salio mal durante la eliminación, archivos no eliminados`))
+console.log(chalk.bold.red(`🟢 ALGO SALIO MAL DURANTE LA ELIMINACIÓN, ARCHIVO NO ELIMINADOS`))
 }}
 
 function purgeOldFiles() {
@@ -136,21 +136,21 @@ if (err) throw err;
 if (stats.isFile() && stats.mtimeMs < oneHourAgo && file !== 'creds.json') { 
 unlinkSync(filePath, err => {  
 if (err) throw err
-console.log(chalk.bold.green(`Archivo ${file} borrado con éxito`))})
+console.log(chalk.bold.green(`🟢 ARCHIVO ${file} BORRADO CON EXITO`))})
 } else {  
-console.log(chalk.bold.red(`Archivo ${file} no borrado` + err))
+console.log(chalk.bold.red(`🟢 ARCHIVO ${file} NO BORRADO` + err))
 } }) }) }) })}
 setInterval(async () => {
   await purgeSession();
-  console.log(chalk.cyanBright(`\n╭━─━─━─≪🔆≫─━─━─━╮\n│AUTOPURGESESSIONS\n│ARCHIVOS ELIMINADOS ✅\n╰━─━─━─≪🔆≫─━─━─━╯\n`));
+  console.log(chalk.cyanBright(`╭━─━─━─≪🔆≫─━─━─━╮\n│AUTOPURGESESSIONS\n│ARCHIVOS ELIMINADOS ✅\n╰━─━─━─≪🔆≫─━─━─━╯`));
 }, 1000 * 60 * 60);
 setInterval(async () => {
   await purgeSessionSB();
-  console.log(chalk.cyanBright(`\n╭━─━─━─≪🔆≫─━─━─━╮\n│AUTO_PURGE_SESSIONS_SUB-BOTS\n│ ARCHIVOS ELIMINADOS ✅\n│\n╰━─━─━─≪🔆≫─━─━─━╯\n`));
+  console.log(chalk.cyanBright(`╭━─━─━─≪🔆≫─━─━─━╮\n│AUTO_PURGE_SESSIONS_SUB-BOTS\n│ ARCHIVOS ELIMINADOS ✅\n│\n╰━─━─━─≪🔆≫─━─━─━╯`));
 }, 1000 * 60 * 60);
 setInterval(async () => {
   await purgeOldFiles();
-  console.log(chalk.cyanBright(`\n╭━─━─━─≪🔆≫─━─━─━╮\n│AUTO_PURGE_OLDFILES\n│ARCHIVOS ELIMINADOS ✅\n╰━─━─━─≪🔆≫─━─━─━╯\n`));
+  console.log(chalk.cyanBright(`╭━─━─━─≪🔆≫─━─━─━╮\n│AUTO_PURGE_OLDFILES\n│ARCHIVOS ELIMINADOS ✅\n╰━─━─━─≪🔆≫─━─━─━╯`));
 }, 1000 * 60 * 60);
 //___________
     
@@ -416,49 +416,43 @@ const time = moment.tz('America/Bogota').format('HH:mm:ss')
 const date = moment.tz('America/Bogota').format('DD/MM/YYYY')
 let name = num
 const miembros = metadata.participants.length
-sock.sendMessage(anu.id, { 
-text: `💫 *Hola* @${name.split("@")[0]} ¿COMO ESTAS?😃
-💫 *Grupos :* ${metadata.subject}
+sock.sendMessage(anu.id, { text: `⪨────[ ＷＥＬＣＯＭＥ ]────⪩
+
+💫 *Hola* @${name.split("@")[0]} ¿COMO ESTAS? 😃
+💫 *Bienvenido a :* ${metadata.subject}
 💫 *Participarte : ${miembros}*
 💫 *Fecha :* ${date}
-${global.db.data.chats[m.chat].antilink ? '✅ *Antilink | antienlace :* esta activo' : '❌ *Antilink | antienlace :* esta Desactivado'}
 
-📢 *Lee la descripción*
+📢 *Lee la descripción* 📢
 
-${metadata.desc}`,
-contextInfo:{
+${metadata.desc}`, contextInfo:{
 forwardingScore: 9999999,
 isForwarded: true, 
 mentionedJid:[num],
-"externalAdReply": {
-"showAdAttribution": true,
-"renderLargerThumbnail": true,
-"thumbnail": welc, 
-"title": '乂 ＷＥＬＣＯＭＥ 乂', 
-body: `${metadata.subject}`,
+"externalAdReply": {"showAdAttribution": true,
 "containsAutoReply": true,
-"mediaType": 1, 
-"mediaUrl": [md, nn], 
-"sourceUrl": [md, nn]}}}) 
+"title": `乂 ＷＥＬＣＯＭＥ 乂`,
+body: `${metadata.subject}`,
+"previewType": "PHOTO",
+"thumbnailUrl": ``,
+"thumbnail": welc,
+"sourceUrl": md}}}) 
 } else if (anu.action == 'remove') {
 const buffer = await getBuffer(ppuser)
 let name = num
 const members = metadata.participants.length
-sock.sendMessage(anu.id, { 
-text: `Se fue @${name.split("@")[0]} nadie los van extraña 😹`,
+sock.sendMessage(anu.id, { text: `Se fue @${name.split("@")[0]} nadie los van extraña 😹`,
 contextInfo:{
 forwardingScore: 9999999,
 isForwarded: true, 
 mentionedJid:[num],
-"externalAdReply": {
-"showAdAttribution": true,
-"renderLargerThumbnail": true,
-"thumbnail": leave, 
+"externalAdReply": {"showAdAttribution": true,
+"containsAutoReply": true,
 "title": '乂 ＡＤＩＯ́Ｓ 乂', 
 body: `Esperemos que no vuelva -_-`,
-"containsAutoReply": true,
-"mediaType": 1, 
-"mediaUrl": md, 
+"previewType": "PHOTO",
+"thumbnailUrl": ``,
+"thumbnail": leave,
 "sourceUrl": md}}}) 
 } else if (anu.action == 'promote') {
 const buffer = await getBuffer(ppuser)

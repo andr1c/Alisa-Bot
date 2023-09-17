@@ -5,10 +5,10 @@
 
 //═════════[ Importaciones ]═════════ 
 const baileys = require('@whiskeysockets/baileys'); // trabajar a través de descargas por Whatsapp 
-const { WaMessageStubType, areJidsSameUser, downloadContentFromMessage, generateWAMessageContent, generateWAMessageFromContent, generateWAMessage, prepareWAMessageMedia, relayMessage} = require('@whiskeysockets/baileys'); // Importa los objetos 'makeWASocket' y 'proto' desde el módulo '@whiskeysockets/baileys'
-const { default: makeWASocket, proto } = require("@whiskeysockets/baileys")
+const { WaMessageStubType, areJidsSameUser, downloadContentFromMessage, generateWAMessageContent, generateWAMessageFromContent, generateWAMessage, prepareWAMessageMedia, relayMessage} = require('@whiskeysockets/baileys'); // Importa los objetos 'makeWASocket' y 'proto' desde el módulo '@whiskeysockets/baileys' 
+const { default: makeWASocket, proto } = require("@whiskeysockets/baileys") 
 const moment = require('moment-timezone') // Trabajar con fechas y horas en diferentes zonas horarias
-const gradient = require('gradient-string') // Aplicar gradientes de color al texto 
+const gradient = require('gradient-string') // Aplicar gradientes de color al texto  
 const { exec, spawn, execSync } =  require("child_process")// Función 'execSync' del módulo 'child_process' para ejecutar comandos en el sistema operativo 
 const chalk = require('chalk') // Estilizar el texto en la consola  
 const os = require('os') // Proporciona información del sistema operativo 
@@ -39,10 +39,10 @@ const { jadibot2 } = require('./serbot2.js')
 const { menu } = require('./plugins/menu.js')
 const { state, owner, grupo, instalar, ping, report, ow} = require('./plugins/info.js')
 const {rob, bal, reg, reg1, reg2, work, mine, buy, afk, claim, perfil, nivel, cofre, lb} = require('./plugins/rpg.js') 
-const {game, game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, gamee} = require('./plugins/juegos.js') 
-const {yt, acortar, google, imagen, tran, tts, ia, ssw} = require('./plugins/buscadores.js')
+const {game, game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, game13, game14} = require('./plugins/juegos.js') 
+const {yt, acortar, google, imagen, tran, tts, ia, ssw, wall} = require('./plugins/buscadores.js')
 const {efec, url} = require('./plugins/convertidores.js') 
-const {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, on, on2} = require('./plugins/grupos.js')
+const {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, on, on2, adm, infogr, warn1, warn2, online} = require('./plugins/grupos.js')
 const {nsfw1, nsfw2, nsfw3, nsfw4, nsfw5} = require('./plugins/nsfw.js')
 const {randow1, randow2, randow3, randow4, randow5} = require('./plugins/randow.js') 
 
@@ -86,6 +86,7 @@ const itsMe = m.sender == conn.user.id ? true : false
 const text = args.join(" ") 
 const quoted = m.quoted ? m.quoted : m 
 const sender = m.key.fromMe ? botnm : m.isGroup ? m.key.participant : m.key.remoteJid 
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 const mime = (quoted.msg || quoted).mimetype || ''  
 const isMedia = /image|video|sticker|audio/.test(mime)
 const mentions = []  
@@ -197,34 +198,6 @@ if (global.db.data.chats[m.chat].modeadmin && !isGroupAdmins) {
 return
 }
 
-// Tiempo de Actividad del bot
-const used = process.memoryUsage()
-const cpus = os.cpus().map(cpu => {
-cpu.total = Object.keys(cpu.times).reduce((last, type) => last + cpu.times[type], 0)
-return cpu
-})
-//conn.sendReadReceipt(from,sender,[m.key.id])
-        
-const cpu = cpus.reduce((last, cpu, _, { length }) => {
-last.total += cpu.total
-last.speed += cpu.speed / length
-last.times.user += cpu.times.user
-last.times.nice += cpu.times.nice
-last.times.sys += cpu.times.sys
-last.times.idle += cpu.times.idle
-last.times.irq += cpu.times.irq
-return last
-}, {
-speed: 0,
-total: 0,
-times: {
-user: 0,
-nice: 0,
-sys: 0,
-idle: 0,
-irq: 0
-}})
-
 // ‿︵‿︵ʚɞ『 INFO CONSOLE 』ʚɞ‿︵‿︵	
 if (m.message) {
 console.log(chalk.bold.cyanBright(`▣────────────···\n│${botname} ${conn.user.id == global.numBot2 ? '' : '(SubBot)'}`), 
@@ -268,14 +241,17 @@ break
 case 'ss': case 'ssweb': {
 ssw(conn, m, q, prefix, command, quoted, scp1)}
 break
-
+case 'wallpaper':
+wall(conn, text, command, m) 
+break 
+   
 case 'serbot': case 'qr':
 jadibot(conn, m, from, command, prefix)  
 break  
 case 'jadibot': case 'sercode':
 jadibot2(conn, m, command, text)
 break
-case 'stop':
+case 'stop': case 'deljadibot':
 killJadibot(conn, m, prefix, command)
 break
 case 'bots': case 'listbots':
@@ -317,7 +293,7 @@ case 'report':
 report(conn, from, m, prefix, command, text)
 break 
 case 'speedtest': {
-m.reply('Testing Speed...')
+m.reply('*🚀 Test de velocidad | Speed...*')
 let cp = require('child_process')
 let { promisify } = require('util')
 let exec = promisify(cp.exec).bind(cp)
@@ -342,7 +318,7 @@ case 'delete': case 'del':
 del(conn, m, isBotAdmins, isGroupAdmins)
 break  		
 case 'join': 
-join(conn, m, isCreator, text, args) 
+join(conn, m, isCreator, text, delay, args, sender)
 break           
 case 'hidetag': case 'notificar': 
 hide(conn, m, isBotAdmins, isGroupAdmins, q, participants)
@@ -376,57 +352,21 @@ ban(conn, m, isBotAdmins, isGroupAdmins, text, args, prefix, command)
 break              
 case 'tagall':  
 tag(conn, m, isBotAdmins, isGroupAdmins, participants, q)
-break
-case 'listonline': case 'liston': {
-let id = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : m.chat
-let online = [...Object.keys(store.presences[id]), numBot]
-conn.sendText(m.chat, '*ESTA ACTIVO 😎 :*\n\n' + online.map(v => '❑ @' + v.replace(/@.+/, '')).join`\n`, m, { mentions: online })}
 break            
-case 'admins': case 'administradores': {
-const pp = await conn.profilePictureUrl(m.chat, 'image').catch((_) => null) || './src/admins.jpg';
-const groupAdmins = participants.filter((p) => p.admin);
-const listAdmin = groupAdmins.map((v, i) => `${i + 1}. @${v.id.split('@')[0]}`).join('\n');
-const owner = groupMetadata.owner || groupAdmins.find((p) => p.admin === 'superadmin')?.id || m.chat.split`-`[0] + '@s.whatsapp.net';
-const pesan = args.join` `;
-const oi = `*𝙼𝙴𝙽𝚂𝙰𝙹𝙴:* ${pesan}`;
-const text = `*━「* 𝐈𝐍𝐕𝐎𝐂𝐀𝐍𝐃𝐎 𝐀𝐃𝐌𝐈𝐍𝐒 *」━*
-
-${oi}
-
-*𝙰𝙳𝙼𝙸𝙽𝚂:*
-${listAdmin}`.trim();
-conn.sendMessage(m.chat, { text: text, mentions: participants.map(a => a.id) }, { quoted: m })}
+case 'admins': case 'administradores': 
+adm(conn, participants, groupMetadata, args, m) 
 break
-case 'infogrupo': case 'groupinfo': {
-const pp = await conn.profilePictureUrl(m.chat, 'image').catch((_) => null) || './src/avatar_contact.png';
-const {antilink, welcome, antifake, modeadmin} = global.db.data.chats[m.chat];
-const groupAdmins = participants.filter((p) => p.admin);
-const listAdmin = groupAdmins.map((v, i) => `${i + 1}. @${v.id.split('@')[0]}`).join('\n');
-const owner = groupMetadata.owner || groupAdmins.find((p) => p.admin === 'superadmin')?.id || m.chat.split`-`[0] + '@s.whatsapp.net';
-const text = `╭━━[ .⋅ ɪɴғᴏ ᴅᴇ ɢʀᴜᴘᴏ ⋅]━━━⬣ 
-*🔸️ ɪᴅ:*
-• ${groupMetadata.id}
-
-*🔸️ ɴᴏᴍʙʀᴇ* : 
-• ${groupMetadata.subject}
-
-*🔸️ ᴍɪᴇᴍʙʀᴏs* :
-• ${participants.length} Participantes
-
-*🔸️ ᴄʀᴇᴀᴅᴏʀ ᴅᴇʟ ɢʀᴜᴘᴏ:*
-• @${owner.split('@')[0]}
-
-*🔸️ ᴀᴅᴍɪɴs:*
- ${listAdmin}
-
-*🔸️ ᴄᴏɴғɪɢᴜʀᴀᴄɪᴏɴ ᴅᴇʟ ɢʀᴜᴘᴏ:*
-• Welcome: ${welcome ? '✅' : '❌'}
-• Antilink ${antilink ? '✅' : '❌'}
-• antifake ${antifake ? '✅' : '❌'}
-
-*🔸️ ᴅᴇsᴄʀɪᴘᴄɪᴏɴ* :
-• ${groupMetadata.desc?.toString() || 'desconocido'}`.trim();
-conn.sendMessage(m.chat, { image: pp, text: text, mentions: participants.map(a => a.id) }, { quoted: fkontak })}
+case 'infogrupo': case 'groupinfo':
+infogr(conn, participants, groupMetadata, fkontak, m) 
+break  
+case 'warn': case 'advertencia':
+warn1(conn, m, isBotAdmins, isGroupAdmins, sender, command, text, delay) 
+break 
+case 'unwarn': case 'quitardvertencia': 
+warn2(conn, m, isBotAdmins, isGroupAdmins, sender, command, delay) 
+break
+case 'listonline': case 'liston': 
+online(conn, sender, args, store, m) 
 break
 //juegos
 case 'simi': case 'bot': {
@@ -469,8 +409,11 @@ case 'top':
 game12(conn, text, participants, pickRandom, m) 
 break 
 case 'topgays': case 'topotakus': 
-gamee(conn, participants, command, m) 
+game13(conn, participants, command, m) 
 break 
+case 'piropo':
+game14(m, pickRandom) 
+break
 //audios 
 case "a": 
 if (!global.db.data.chats[m.chat].audios) return
@@ -519,7 +462,7 @@ await randow5(sendImageAsUrl, command, pickRandom, m)
 break 
 case 'blackpink':  
 sendImageAsUrl("https://delirius-image-random.vercel.app/api/all");
-break 
+break
 //descargas		    
 case 'play': case 'play2': {
 if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
@@ -527,7 +470,7 @@ if (!text) return conn.sendMessage(from, { text: `*ingrese nombre de alguna canc
 let yts = require("youtube-yts")
 let search = await yts(text)
 let anup3k = search.videos[0]
-let anu = search.videos[Math.floor(Math.random() * search.videos.length)]  
+let anu = search.videos[Math.floor(Math.random() * search.videos.length)] 
 eek = await getBuffer(anu.thumbnail) 
 conn.sendMessage(from, { image : eek, caption:  `╭───≪~*╌◌ᰱ•••⃙❨͟͞P̸͟͞L̸͟A̸͟͞Y̸͟͞❩⃘•••ᰱ◌╌*~*
 │║📌 *Título* : ${anu.title}
