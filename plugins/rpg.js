@@ -111,8 +111,7 @@ m.reply(`*✅ ᴿᵉᵍᶦˢᵗʳᵒ ᵉˡᶦᵐᶦⁿᵃᵈᵒ*`)}
 async function reg2(sender, m) { 
 const {createHash} = require('crypto') 
 let sn = createHash('md5').update(m.sender).digest('hex')
-m.reply(`ᴱˢᵗᵉ ᵉˢ ˢᵘˢ ⁿᵘ́ᵐᵉʳᵒ ᵈᵉˡ ˢᵉʳᶦᵉ:\n
-${sn}`)}
+m.reply(`ᴱˢᵗᵉ ᵉˢ ˢᵘˢ ⁿᵘ́ᵐᵉʳᵒ ᵈᵉˡ ˢᵉʳᶦᵉ:\n${sn}`)}
 
 async function rob(conn, m, sender, fkontak) {
 const user = global.db.data.users[m.sender]

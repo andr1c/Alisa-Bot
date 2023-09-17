@@ -108,7 +108,15 @@ conn.fakeReply(m.chat, `⏳ *Aguarde un momento....*`, '0@s.whatsapp.net', 'No h
 let krt = await scp1.ssweb(q)
 conn.sendMessage(m.chat, {image:krt.result, caption: info.result}, {quoted:m})}
 
-module.exports = {yt, acortar, google, imagen, tran, tts, ia, ssw}
+async function wall(conn, text, command, m) {
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (!text) return m.reply(`*[ ⚠️ ] Ejemplo: ${prefix + command} anime*`) 
+let { wallpaper, wallpaperv2 } = require('@bochilteam/scraper')
+let _res = await (/2/.test(command) ? wallpaperv2 : wallpaper)(text) 
+let _img = _res[Math.floor(Math.random() * _res.length)]
+conn.sendMessage(m.chat, { image: { url: _img }, caption: `_*ＲＥＳＵＬＴＡＤＯＳ ＤＥ : ${text}*_`}, { quoted: m })}
+
+module.exports = {yt, acortar, google, imagen, tran, tts, ia, ssw, wall}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {

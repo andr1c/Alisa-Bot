@@ -124,11 +124,16 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}promote _(@tag)_
 ├❥ᰰຼ ❏ ${prefix}demote _(@tag)_
 ├❥ᰰຼ ❏ ${prefix}grupo close/open 
+├❥ᰰຼ ❏ ${prefix}warn _(@tag)_
+├❥ᰰຼ ❏ ${prefix}advertencia _(@tag)_
+├❥ᰰຼ ❏ ${prefix}unwarn _(@tag)_
+├❥ᰰຼ ❏ ${prefix}quitardvertencia _(@tag)_
 ├❥ᰰຼ ❏ ${prefix}setppname _(cambia el nombre del grupo)_
 ├❥ᰰຼ ❏ ${prefix}setdesc _(cambia la descripción del Grupo)_
 ├❥ᰰຼ ❏ ${prefix}setppgroup _(cambia la foto del Grupo)_
 ├❥ᰰຼ ❏ ${prefix}hidetag _(etiqueta a todos el un mensaje)_
 ├❥ᰰຼ ❏ ${prefix}tagall _(etiqueta a todos el una listas)_
+├❥ᰰຼ ❏ ${prefix}listonline _(etiquetas a los usuarios que esta activo|online)_
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
 
 *╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*🔎⃐ＢＵＳＣＡＤＯＲＥＳ*️⃟ᬽ፝֟━*
@@ -140,6 +145,8 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ _ingresa texto de la imagen que quiere buscar_
 ├❥ᰰຼ ❏ ${prefix}traducir
 ├❥ᰰຼ _(traducir algun texto)_
+├❥ᰰຼ ❏ ${prefix}wallpaper
+├❥ᰰຼ _(Buscar imagen del wallpaper)_
 ├❥ᰰຼ ❏ ${prefix}ss 
 ├❥ᰰຼ _(ingresa un link para manda captura)_
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
