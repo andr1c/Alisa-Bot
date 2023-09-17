@@ -113,16 +113,19 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
 
 *╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*🔰⃐ＧＲＵＰＯＳ*️⃟ᬽ፝֟━*
-├❥ᰰຼ ❏ ${prefix}antilink _(Elimina a los que manda link de otro grupo)_
-├❥ᰰຼ ❏ ${prefix}antifake _(eliminar a los números virtuales)_
-├❥ᰰຼ ❏ ${prefix}antiarabe _(eliminar a los numero arabe)_
-├❥ᰰຼ ❏ ${prefix}welcome _(dar las bienvenida)_
-├❥ᰰຼ ❏ ${prefix}detect _(detectan las funciones del Grupo)_
+├❥ᰰຼ ❏ ${prefix}antilink _(on/off)_
+├❥ᰰຼ ❏ ${prefix}antifake _(on/off)_
+├❥ᰰຼ ❏ ${prefix}antiarabe _(on/off)_
+├❥ᰰຼ ❏ ${prefix}welcome _(on/off)_
+├❥ᰰຼ ❏ ${prefix}detect _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}kick _(@tag)_
 ├❥ᰰຼ ❏ ${prefix}add _(@tag)_
 ├❥ᰰຼ ❏ ${prefix}invita _(@tag)_
 ├❥ᰰຼ ❏ ${prefix}promote _(@tag)_
 ├❥ᰰຼ ❏ ${prefix}demote _(@tag)_
+├❥ᰰຼ ❏ ${prefix}infogrupo
+├❥ᰰຼ ❏ ${prefix}groupinfo
+├❥ᰰຼ ❏ ${prefix}admins
 ├❥ᰰຼ ❏ ${prefix}grupo close/open 
 ├❥ᰰຼ ❏ ${prefix}warn _(@tag)_
 ├❥ᰰຼ ❏ ${prefix}advertencia _(@tag)_
@@ -169,6 +172,7 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}personalidad
 ├❥ᰰຼ ❏ ${prefix}slot
 ├❥ᰰຼ ❏ ${prefix}dado
+├❥ᰰຼ ❏ ${prefix}piropo
 ├❥ᰰຼ ❏ ${prefix}fake
 ├❥ᰰຼ _(Ingresa el texto + tag para joder a alguien con chat fake😹)_
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
