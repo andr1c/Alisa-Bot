@@ -15,8 +15,37 @@ const jimp = require('jimp')
 const { defaultMaxListeners } = require('stream')
 const FileType = require("file-type")
 const path = require("path")
+const os = require('os') // Proporciona información del sistema operativo 
 const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
 const PhoneNumber = require('awesome-phonenumber')
+
+// Tiempo de Actividad del bot
+const used = process.memoryUsage()
+const cpus = os.cpus().map(cpu => {
+cpu.total = Object.keys(cpu.times).reduce((last, type) => last + cpu.times[type], 0)
+return cpu
+})
+//conn.sendReadReceipt(from,sender,[m.key.id])
+        
+const cpu = cpus.reduce((last, cpu, _, { length }) => {
+last.total += cpu.total
+last.speed += cpu.speed / length
+last.times.user += cpu.times.user
+last.times.nice += cpu.times.nice
+last.times.sys += cpu.times.sys
+last.times.idle += cpu.times.idle
+last.times.irq += cpu.times.irq
+return last
+}, {
+speed: 0,
+total: 0,
+times: {
+user: 0,
+nice: 0,
+sys: 0,
+idle: 0,
+irq: 0
+}})
 
 exports.getBuffer = async (url, options) => {
 	try {
@@ -139,7 +168,7 @@ exports.fetchJson = async (url, options) => {
         return err
     }
 }
-
+       
 exports.runtime = function(seconds) {
 	seconds = Number(seconds);
 	var d = Math.floor(seconds / (3600 * 24));
@@ -338,20 +367,16 @@ let isNumber = x => typeof x === 'number' && !isNaN(x)  // NaN in number?
 let user = global.db.data.users[m.sender]  
 if (typeof user !== 'object') global.db.data.users[m.sender] = {}  
 if (user) {
-if (!('registered' in user))
-user.registered = false
-//-- user registered 
+if (!('registered' in user)) user.registered = false
 if (!user.registered) {
-if (!('name' in user))
-user.name = m.name
-if (!isNumber(user.age))
-user.age = -1
-if (!isNumber(user.regTime))
-user.regTime = -1
+if (!('name' in user)) user.name = m.name
+if (!isNumber(user.age)) user.age = -1
+if (!isNumber(user.regTime)) user.regTime = -1
 }
   if (!isNumber(user.afkTime)) user.afkTime = -1  
   if (!('afkReason' in user)) user.afkReason = ''  
-   if (!isNumber(user.limit)) user.limit = 20  
+  if (!isNumber(user.limit)) user.limit = 20  
+  if (!isNumber(user.warn)) user.warn = 0
   if (!('registered' in user)) user.Register = false
   if(!isNumber(user.money)) user.money = 0  
   if(!isNumber(user.health)) user.health = 100  
@@ -385,6 +410,7 @@ user.regTime = -1
   afkTime: -1,  
   afkReason: '',  
   limit: 20,  
+  warn: 0,
   registered: false,
   lastclaim: 0,
   name: m.name,
