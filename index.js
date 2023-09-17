@@ -13,9 +13,11 @@ const os = require('os')
 const { execSync } = require('child_process')
 const util = require('util')
 const pino = require('pino')
+const cfonts = require('cfonts') 
 const { tmpdir } = require('os')
 const { join } = require('path')
 const { readdirSync, statSync, unlinkSync } = require('fs')
+const {say} = cfonts;
 const color = (text, color) => {
 return !color ? chalk.green(text) : color.startsWith('#') ? chalk.hex(color)(text) : chalk.keyword(color)(text)
 }
@@ -86,11 +88,71 @@ if (opts['autocleartmp'] && (global.support || {}).find) (tmp = [os.tmpdir(), 't
 }}
 setInterval(async () => {
 await clearTmp()
-await console.log(color('[SYS]', '#009FFF'),
-color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
-color(`\n╭━─━─━─≪🔆≫─━─━─━╮\n│SE LIMPIO LA CARPETA TMP CORRECTAMENTE\n╰━─━─━─≪🔆≫─━─━─━╯`, '#f12711')
+console.log(chalk.cyanBright(`╭━─━─━─≪🔆≫─━─━─━╮\n│SE LIMPIO LA CARPETA TMP CORRECTAMENTE\n╰━─━─━─≪🔆≫─━─━─━╯`)
 )}, 180000)
 //_________________
+
+//sessions/jadibts
+function purgeSession() {
+let prekey = []
+let directorio = readdirSync("./sessions")
+let filesFolderPreKeys = directorio.filter(file => {
+return file.startsWith('pre-key-') || file.startsWith('session-') || file.startsWith('sender-') || file.startsWith('app-') 
+})
+prekey = [...prekey, ...filesFolderPreKeys]
+filesFolderPreKeys.forEach(files => {
+unlinkSync(`./sessions/${files}`)
+})} 
+
+function purgeSessionSB() {
+try {
+let listaDirectorios = readdirSync('./jadibts/');
+let SBprekey = []
+listaDirectorios.forEach(directorio => {
+if (statSync(`./jadibts/${directorio}`).isDirectory()) {
+let DSBPreKeys = readdirSync(`./jadibts/${directorio}`).filter(fileInDir => {
+return fileInDir.startsWith('pre-key-') /*|| fileInDir.startsWith('app-') || fileInDir.startsWith('session-')*/
+})
+SBprekey = [...SBprekey, ...DSBPreKeys]
+DSBPreKeys.forEach(fileInDir => {
+unlinkSync(`./jadibts/${directorio}/${fileInDir}`)
+})}})
+if (SBprekey.length === 0) return; 
+console.log(chalk.cyanBright(`=> No hay archivos por eliminar.`))
+} catch (err) {
+console.log(chalk.bold.red(`=> Algo salio mal durante la eliminación, archivos no eliminados`))
+}}
+
+function purgeOldFiles() {
+const directories = ['./sessions/', './jadibts/']
+const oneHourAgo = Date.now() - (60 * 60 * 1000)
+directories.forEach(dir => {
+readdirSync(dir, (err, files) => {
+if (err) throw err
+files.forEach(file => {
+const filePath = path.join(dir, file)
+stat(filePath, (err, stats) => {
+if (err) throw err;
+if (stats.isFile() && stats.mtimeMs < oneHourAgo && file !== 'creds.json') { 
+unlinkSync(filePath, err => {  
+if (err) throw err
+console.log(chalk.bold.green(`Archivo ${file} borrado con éxito`))})
+} else {  
+console.log(chalk.bold.red(`Archivo ${file} no borrado` + err))
+} }) }) }) })}
+setInterval(async () => {
+  await purgeSession();
+  console.log(chalk.cyanBright(`\n╭━─━─━─≪🔆≫─━─━─━╮\n│AUTOPURGESESSIONS\n│ARCHIVOS ELIMINADOS ✅\n╰━─━─━─≪🔆≫─━─━─━╯\n`));
+}, 1000 * 60 * 60);
+setInterval(async () => {
+  await purgeSessionSB();
+  console.log(chalk.cyanBright(`\n╭━─━─━─≪🔆≫─━─━─━╮\n│AUTO_PURGE_SESSIONS_SUB-BOTS\n│ ARCHIVOS ELIMINADOS ✅\n│\n╰━─━─━─≪🔆≫─━─━─━╯\n`));
+}, 1000 * 60 * 60);
+setInterval(async () => {
+  await purgeOldFiles();
+  console.log(chalk.cyanBright(`\n╭━─━─━─≪🔆≫─━─━─━╮\n│AUTO_PURGE_OLDFILES\n│ARCHIVOS ELIMINADOS ✅\n╰━─━─━─≪🔆≫─━─━─━╯\n`));
+}, 1000 * 60 * 60);
+//___________
     
 async function startBot() {
 
@@ -164,7 +226,6 @@ if (toCmd == undefined) return
 var prefCmd = prefix+toCmd
 sock.appenTextMessage(prefCmd, chatUpdate)
 }}}})
-
 
 //anticall
 sock.ev.on('call', async (fuckedcall) => { 
@@ -435,20 +496,26 @@ sock.ev.on('connection.update', async (update) => {
 const { connection, lastDisconnect, qr, receivedPendingNotifications } = update;
 console.log(receivedPendingNotifications)
 if (connection == 'connecting') {
-console.log(color('[SYS]', '#009FFF'),
-color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
-color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│🧡 INICIANDO AGUARDE UN MOMENTO...\n╰━─━━─━─≪ 🟢 ≫─━━─━─━╯`, '#f12711')
-);
+console.log('iniciando...')
+say('NovaBot-MD', {
+  font: 'chrome',
+  align: 'center',
+  gradient: ['red', 'magenta']});
+say(`Bot el desarrollo`, {
+  font: 'console',
+  align: 'center',
+  gradient: ['red', 'magenta']});
+  
+console.log(color(` `,'magenta'))
+console.log(color(` USUARIO CONECTADO => ` + JSON.stringify(sock.user, null, 2), 'yellow'))
 } else if (qr !== undefined) {
 console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
-color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│ESCANEA EL QR, EXPIRA 45 SEG...\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯`, '#f12711')
-)
+color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│ESCANEA EL QR, EXPIRA 45 SEG...\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯`, '#f12711'))
 } else if (connection === 'close') {
 console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
-color(`⚠️ CONEXION CERRADA, SE INTENTARA RECONECTAR`, '#f64f59')
-);
+color(`⚠️ CONEXION CERRADA, SE INTENTARA RECONECTAR`, '#f64f59'));
 lastDisconnect.error?.output?.statusCode !== DisconnectReason.loggedOut
 ? startBot()
 : console.log(color('[SYS]', '#009FFF'),
