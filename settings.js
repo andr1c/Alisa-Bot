@@ -102,8 +102,9 @@ AntiNsfw: `*Los comando +18 esta desactivado*\nSi eres admin y quiere activarlos
 endLimit: 'Uff esta pobres no tener mas 💎',
 }
 
-//---------------[ NIVELES ]----------------
+//---------------[ NIVELES, ADVERTENCIA ]----------------
 global.multiplier = 90 // Cuanto más alto, más difícil subir de nivel 
+global.maxwarn = '4' // máxima advertencias
 
 //---------[ BLOQUEO, PREMIUM ]----------------
 global.blockList = []  
