@@ -21,7 +21,7 @@ var latensi = speed() - timestamp
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 let stateRun = `┏━━━━❰･𝐄𝐒𝐓𝐀𝐃𝐎 𝐃𝐄𝐋 𝐁𝐎𝐓･❱━━━━
 ┃
-┃웃 Hola @${me.split('@')[0]}
+┃웃 Hola @${sender.split("@")[0]}
 ┃
 ┃╍╍╍╍╍╍╍╍╍╍╍╍╍
 ┃
@@ -37,8 +37,8 @@ let stateRun = `┏━━━━❰･𝐄𝐒𝐓𝐀𝐃𝐎 𝐃𝐄𝐋 𝐁�
 ┃➢ 𝙼𝙾𝙳𝙾 : ${conn.public ? 'Público' : `Privado`}
 ┃➢ 𝙱𝙾𝚃 𝚂𝙴𝙲𝚄𝙽𝙳𝙰𝚁𝙸𝙾𝚂 𝙰𝙲𝚃𝙸𝚅𝙾𝚂 : ${listJadibot.length}
 ┗━━━━━━━━━━━━━`.trim()
-let ments = [me]        
-await conn.sendMessage(m.chat, {image: imagen1, caption: stateRun, mentionedJid:[me]}, { quoted: fkontak })
+let ments = [me]      
+await conn.sendMessage(m.chat, {image: imagen1, caption: stateRun, contextInfo:{ mentionedJid:[sender]}}, { quoted: fkontak })
 }
 
 async function owner(conn, m, sender) {
@@ -54,7 +54,7 @@ conn.sendMessage(m.chat, { text: `*BOT EL DESARROLLO*\n\n*Te puede unirte al gru
 }
 
 async function instalar(conn, m, pushname, sender) {
-if (global.db.data.users[m.sender].registered < true) return reply(info.registra)
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 conn.sendMessage(m.chat, { text: `┎┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 \`\`\`COMO INSTALAR ESTE BOT?\`\`\`
 \`\`\`Este bot es nuevo todavía no se puede instalar si quiere probar sus funciones entra al grupo del bot\`\`\`
@@ -92,10 +92,16 @@ conn.sendMessage(`595975740803@s.whatsapp.net`, {text: `╭━━〔 *𝚁𝙴�
 m.reply(`*𝙴𝙻 𝚁𝙴𝙿𝙾𝚁𝚃𝙴 𝙵𝚄𝙴 𝙴𝙽𝚅𝙸𝙰𝙳𝙾 𝙰 𝙼𝙸 𝙲𝚁𝙴𝙰𝙳𝙾𝚁, 𝙽𝙾𝚂 𝙲𝙾𝙽𝚃𝙰𝚁𝙴𝙼𝙾𝚂 𝙲𝙾𝙽 𝚄𝚂𝚃𝙴𝙳 𝚂𝙸 𝙴𝚂 𝙽𝙴𝙲𝙴𝚂𝙰𝚁𝙸𝙾, 𝙳𝙴 𝚂𝙴𝚁 𝙵𝙰𝙻𝚂𝙾 𝚂𝙴𝚁𝙰 𝙸𝙶𝙽𝙾𝚁𝙰𝙳𝙾 𝚈 𝙱𝙻𝙾𝚀𝚄𝙴𝙰𝙳𝙾 𝙳𝙴𝙻 𝙱𝙾𝚃*`)
 }
 
-async function ow(conn, args) {   
-if (!args.join(" ")) return m.reply(`┗❴ ⚠ 𝐀𝐃𝐕𝐄𝐑𝐓𝐄𝐍𝐂𝐈𝐀 ⚠ ❵┛\n\nᴇsᴛᴀ ᴘʀᴏʜɪʙɪᴅᴏ ᴇᴛɪᴏᴜᴇᴛᴀʀ ᴀʟ ᴄʀᴇᴀᴅᴏʀ sɪ ᴛɪᴇɴᴇs ᴜɴᴀ ᴅᴜʀᴀ ʀᴇғᴇʀᴇɴᴛᴇ ᴀʟ ʙᴏᴛ ᴇsᴄʀɪʙɪʀʟᴇ ᴀ sᴜs ᴘʀɪᴠ.`)
+async function ow(conn, args, m) {   
+if (!args.join(" ")) return m.reply(`┗❴ ⚠ 𝐀𝐃𝐕𝐄𝐑𝐓𝐄𝐍𝐂𝐈𝐀 ⚠ ❵┛\n\nᴇsᴛᴀ ᴘʀᴏʜɪʙɪᴅᴏ ᴇᴛɪǫᴜᴇᴛᴀʀ ᴀʟ ᴄʀᴇᴀᴅᴏʀ/ᴅᴇsᴀʀʀᴏʟʟᴏ sɪ ᴛɪᴇɴᴇs ᴜɴᴀ sᴜɢᴇʀᴇɴᴄɪᴀs ʀᴇғᴇʀᴇɴᴛᴇ ᴀʟ ʙᴏᴛ ᴇsᴄʀɪʙɪʀʟᴇ ᴀ sᴜs ᴘʀɪᴠ.`)
+teks = `*|  |*`
+teks1 = `\n\nN`
+teks2 = `\n\n`
 for (let i of owner) {
-}}
+conn.sendMessage(i + "@s.whatsapp.net", {text: teks + teks1, mentions:[m.sender]}, {quoted:m})
+}
+conn.sendMessage(m.chat, {text: teks + teks2 + teks1, mentions:[m.sender]}, {quoted:m})
+}
 
 module.exports = { state, owner, grupo, instalar, ping, report, ow}
 

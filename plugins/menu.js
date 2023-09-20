@@ -173,6 +173,11 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}slot
 ├❥ᰰຼ ❏ ${prefix}dado
 ├❥ᰰຼ ❏ ${prefix}piropo
+├❥ᰰຼ ❏ ${prefix}horny
+├❥ᰰຼ ❏ ${prefix}simp
+├❥ᰰຼ ❏ ${prefix}lolice
+├❥ᰰຼ ❏ ${prefix}comentar
+├❥ᰰຼ ❏ ${prefix}comment
 ├❥ᰰຼ ❏ ${prefix}fake
 ├❥ᰰຼ _(Ingresa el texto + tag para joder a alguien con chat fake😹)_
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
@@ -318,6 +323,9 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}public (modo público) 
 ├❥ᰰຼ ❏ ${prefix}privado (modo privado) 
 ├❥ᰰຼ ❏ ${prefix}getcase
+├❥ᰰຼ ❏ ${prefix}update
+├❥ᰰຼ ❏ ${prefix}restart
+├❥ᰰຼ ❏ ${prefix}reiniciar
 ├❥ᰰຼ ❏ $
 ├❥ᰰຼ ❏ >
 ├❥ᰰຼ ❏ => 

@@ -110,9 +110,12 @@ async function k(conn, m, isBotAdmins, isGroupAdmins, quated, text, sender) {
 if (!m.isGroup) return m.reply(info.group) 
 if (!isBotAdmins) return m.reply(info.botAdmin)
 if (!isGroupAdmins) return m.reply(info.admin)
-if (!text) return m.reply(`[ ⚠️ ] A QUIEN CARAJO ELIMINO? ETIQUETA ALGUN USUARIO NO SOY ADIVINO 😯`)
-let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-conn.groupParticipantsUpdate(m.chat, [users], 'remove')}
+const kicktext = `*[ ⚠️ ] A QUIEN CARAJO ELIMINO? ETIQUETA ALGUN USUARIO NO SOY ADIVINO 😯*`;
+if (!m.mentionedJid[0] && !m.quoted) return m.reply(kicktext, m.chat, {mentions: conn.parseMention(kicktext)});
+if (m.mentionedJid.includes(conn.user.jid)) return;
+const user = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted.sender;
+const owr = m.chat.split`-`[0];
+await conn.groupParticipantsUpdate(m.chat, [user], 'remove')}
 
 async function p(conn, m, isBotAdmins, isGroupAdmins, quoted, sender) {   
 if (!m.isGroup) return m.reply(info.group) 
@@ -147,7 +150,7 @@ if (db.data.chats[m.chat].ban) return m.reply(`*Ya esta baneado este chat*`)
 db.data.chats[m.chat].ban = true
 m.reply(`*BOT OFF*`)
 } else if (args[0] === "off") {
-if (!db.data.chats[m.chat].ban) return m.reply(`*Este chat ya esta desbaneado*`)
+if (!db.data.chats[m.chat].ban) return m.reply(`*Este chat no esta baneado*`)
 db.data.chats[m.chat].ban = false
 m.reply(`*BOT ONLINE YA ESTOY DISPONIBLE ✅*`)}}
 
@@ -272,6 +275,19 @@ let id = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : m.chat
 let online = [...Object.keys(store.presences[id]), numBot]
 conn.sendText(m.chat, '*ESTA ONLINE 😎 :*\n\n' + online.map(v => '❑ @' + v.replace(/@.+/, '')).join`\n`, m, { mentions: online })} 
 
+async function listw(conn, isCreator, m) {
+const adv = Object.entries(global.db.data.users).filter((user) => user[1].warn);
+const warns = global.db.data.users.warn;
+const user = global.db.data.users;
+const imagewarn = './src/warn.jpg';
+const caption = `⚠️ 𝚄𝚂𝚄𝙰𝚁𝙸𝙾𝚂 𝙰𝙳𝚅𝙴𝚁𝚃𝙸𝙳𝙾𝚂\n 
+╔═══════════════════·•
+║ *𝚃𝚘𝚝𝚊𝚕 : ${adv.length} 𝚄𝚜𝚞𝚊𝚛𝚒𝚘𝚜* ${adv ? '\n' + adv.map(([jid, user], i) => `
+║
+║ 1.- ${isCreator ? '@' + jid.split`@`[0] : jid} *(${user.warn}/4)*\n║\n║ - - - - - - - - -`.trim()).join('\n') : ''}
+╚══════════════════·•`;
+conn.sendMessage(m.chat, {text: caption, contextInfo:{ mentionedJid: [...caption.matchAll(/@(\d{0,16})/g)].map(v => v[1] + '@s.whatsapp.net')}}, {quoted: m})}
+
 async function on(conn, m, isBotAdmins, isGroupAdmins, text, prefix, command, args){   
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (!m.isGroup) return m.reply(info.group)
@@ -286,6 +302,7 @@ if (!global.db.data.chats[m.chat].welcome)
 if (!global.db.data.chats[m.chat].modeadmin)
 if (!global.db.data.chats[m.chat].antifake)
 if (!global.db.data.chats[m.chat].antiarabe)
+if (!global.db.data.chats[m.chat].autosticker)
 global.db.data.chats[m.chat].detect = true
 global.db.data.chats[m.chat].antilink = true
 global.db.data.chats[m.chat].audios = true
@@ -293,6 +310,7 @@ global.db.data.chats[m.chat].welcome = true
 global.db.data.chats[m.chat].modeadmin = true
 global.db.data.chats[m.chat].antifake = true
 global.db.data.chats[m.chat].antiarabe = true
+global.db.data.chats[m.chat].autosticker = true
 m.reply(`*✅El ${command} se activo con exito*`)
 } else if (args[0] === "off") {
 if (!global.db.data.chats[m.chat].detect) 
@@ -302,6 +320,7 @@ if (!global.db.data.chats[m.chat].welcome)
 if (!global.db.data.chats[m.chat].modeadmin)
 if (!global.db.data.chats[m.chat].antifake)
 if (!global.db.data.chats[m.chat].antiarabe)
+if (!global.db.data.chats[m.chat].autosticker)
 global.db.data.chats[m.chat].detect = false
 global.db.data.chats[m.chat].antilink = false
 global.db.data.chats[m.chat].audios = false
@@ -309,6 +328,7 @@ global.db.data.chats[m.chat].welcome = false
 global.db.data.chats[m.chat].modeadmin = false
 global.db.data.chats[m.chat].antifake = false
 global.db.data.chats[m.chat].antiarabe = false
+global.db.data.chats[m.chat].autosticker = false
 m.reply(`*${command} desactivado!*`)}}
 
 async function on2(conn, m, isCreator, text, prefix, command, args){   
@@ -331,7 +351,7 @@ db.data.chats[m.chat].modojadibot = false
 db.data.settings[numBot].antiprivado = false
 m.reply(`*${command} desactivado!*`)}}
 
-module.exports = {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, on, on2, adm, infogr, warn1, warn2, online}
+module.exports = {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, on, on2, adm, infogr, warn1, warn2, online, listw}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
