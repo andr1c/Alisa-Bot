@@ -146,7 +146,7 @@ setInterval(async () => {
 }, 1000 * 60 * 60);
 setInterval(async () => {
   await purgeSessionSB();
-  console.log(chalk.cyanBright(`╭━─━─━─≪🔆≫─━─━─━╮\n│AUTO_PURGE_SESSIONS_SUB-BOTS\n│ ARCHIVOS ELIMINADOS ✅\n│\n╰━─━─━─≪🔆≫─━─━─━╯`));
+  console.log(chalk.cyanBright(`╭━─━─━─≪🔆≫─━─━─━╮\n│AUTO_PURGE_SESSIONS_SUB-BOTS\n│ ARCHIVOS ELIMINADOS ✅\n╰━─━─━─≪🔆≫─━─━─━╯`));
 }, 1000 * 60 * 60);
 setInterval(async () => {
   await purgeOldFiles();

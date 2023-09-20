@@ -332,6 +332,7 @@ skmod.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `*
 }}} catch (err) {
 console.log(err)
 }})
+skmod.public = true
 conn.ev.on('creds.update', saveCreds)   
 store.bind(conn.ev);   
 }
@@ -341,7 +342,7 @@ skBot()
 m.reply(util.format(e))
 }}
    
-module.exports = { jadibot2 }
+module.exports = { jadibot2}
    
 let file = require.resolve(__filename)   
 fs.watchFile(file, () => {   

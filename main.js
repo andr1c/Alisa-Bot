@@ -5,10 +5,10 @@
 
 //═════════[ Importaciones ]═════════ 
 const baileys = require('@whiskeysockets/baileys'); // trabajar a través de descargas por Whatsapp 
-const { WaMessageStubType, areJidsSameUser, downloadContentFromMessage, generateWAMessageContent, generateWAMessageFromContent, generateWAMessage, prepareWAMessageMedia, relayMessage} = require('@whiskeysockets/baileys'); // Importa los objetos 'makeWASocket' y 'proto' desde el módulo '@whiskeysockets/baileys' 
+const { WaMessageStubType, areJidsSameUser, downloadContentFromMessage, generateWAMessageContent, generateWAMessageFromContent, generateWAMessage, prepareWAMessageMedia, relayMessage} = require('@whiskeysockets/baileys'); // Importa los objetos 'makeWASocket' y 'proto' desde el módulo '@whiskeysockets/baileys'   
 const { default: makeWASocket, proto } = require("@whiskeysockets/baileys") 
 const moment = require('moment-timezone') // Trabajar con fechas y horas en diferentes zonas horarias
-const gradient = require('gradient-string') // Aplicar gradientes de color al texto  
+const gradient = require('gradient-string') // Aplicar gradientes de color al texto   
 const { exec, spawn, execSync } =  require("child_process")// Función 'execSync' del módulo 'child_process' para ejecutar comandos en el sistema operativo 
 const chalk = require('chalk') // Estilizar el texto en la consola  
 const os = require('os') // Proporciona información del sistema operativo 
@@ -35,14 +35,14 @@ const { smsg, fetchBuffer, getBuffer, buffergif, getGroupAdmins, formatp, tangga
 const { ytmp4, ytmp3, ytplay, ytplayvid } = require('./libs/youtube')
 const { mediafireDl } = require('./libs/mediafire.js') 
 const {jadibot, listJadibot, killJadibot} = require('./serbot.js')  
-const { jadibot2 } = require('./serbot2.js')
+const { jadibot2} = require('./serbot2.js')
 const { menu } = require('./plugins/menu.js')
 const { state, owner, grupo, instalar, ping, report, ow} = require('./plugins/info.js')
 const {rob, bal, reg, reg1, reg2, work, mine, buy, afk, claim, perfil, nivel, cofre, lb} = require('./plugins/rpg.js') 
-const {game, game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, game13, game14} = require('./plugins/juegos.js') 
+const {game, game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, game13, game14, game15, game16, game17, game18} = require('./plugins/juegos.js') 
 const {yt, acortar, google, imagen, tran, tts, ia, ssw, wall} = require('./plugins/buscadores.js')
 const {efec, url} = require('./plugins/convertidores.js') 
-const {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, on, on2, adm, infogr, warn1, warn2, online} = require('./plugins/grupos.js')
+const {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, on, on2, adm, infogr, warn1, warn2, online, listw} = require('./plugins/grupos.js')
 const {nsfw1, nsfw2, nsfw3, nsfw4, nsfw5} = require('./plugins/nsfw.js')
 const {randow1, randow2, randow3, randow4, randow5} = require('./plugins/randow.js') 
 
@@ -175,7 +175,7 @@ if (budy.match(`chat.whatsapp.com`)) {
 let delet = m.key.participant
 let bang = m.key.id
 user = m.sender
-conn.sendMessage(m.chat, {text: `\`\`\`「 ANTILINK DETECTADO 」\`\`\`\n\n@${user.split("@")[0]} eso no esta permitido necesita atencion con tu puto grupo quebrado sucia rata 🙄`, mentions: [user], },{quoted: m}) 
+conn.sendMessage(m.chat, {text: `\`\`\`「 ANTILINK DETECTADO 」\`\`\`\n\n@${user.split("@")[0]} eso no esta permitido 🤨, Necesita atencion con tu puto grupo quebrado sucia rata 🙄`, mentions: [user], },{quoted: m}) 
 if (!isBotAdmins) return reply(`Te salvarte puto no soy admins 🙄`)
 let gclink = (`https://chat.whatsapp.com/`+await conn.groupInviteCode(m.chat))
 let isLinkThisGc = new RegExp(gclink, 'i')
@@ -197,6 +197,20 @@ return
 if (global.db.data.chats[m.chat].modeadmin && !isGroupAdmins) {
 return
 }
+
+if (global.db.data.chats[m.chat].autosticker) {  
+if (/image/.test(mime)) {  
+m.reply(`_Calma crack estoy haciendo tu sticker 👏_\n\n_*Autosticker esta activado*_`)   
+media = await quoted.download()  
+let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: botname, body: `h`, mediaType: 2, sourceUrl: nn, thumbnail: imagen1}}}, { quoted: m })
+await fs.unlinkSync(encmedia)  
+} else if (/video/.test(mime)) {  
+if ((quoted.msg || quoted).seconds > 40) return reply('¡Máximo 40 segundos!')  
+media = await quoted.download()  
+let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: goblal.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: wm, body: `h`, mediaType: 2, sourceUrl: nn, thumbnail: imagen1}}}, { quoted: m })
+await new Promise((resolve) => setTimeout(resolve, 2000));   
+await fs.unlinkSync(encmedia)  
+}}
 
 // ‿︵‿︵ʚɞ『 INFO CONSOLE 』ʚɞ‿︵‿︵	
 if (m.message) {
@@ -244,17 +258,17 @@ break
 case 'wallpaper':
 wall(conn, text, command, m) 
 break 
-   
+
 case 'serbot': case 'qr':
 jadibot(conn, m, from, command, prefix)  
 break  
 case 'jadibot': case 'sercode':
 jadibot2(conn, m, command, text)
 break
-case 'stop': case 'deljadibot':
+case 'deljadibot': case 'stop':
 killJadibot(conn, m, prefix, command)
 break
-case 'bots': case 'listbots':
+case 'bots': case 'listbots': 
 try { 
 let user = [... new Set([...global.listJadibot.filter(conn => conn.user).map(conn => conn.user)])] 
 te = `*SUBBOT CONECTADO :* ${listJadibot.length}\n\n`
@@ -284,7 +298,7 @@ break
 case 'instalarbot': case 'crearbot': 
 instalar(conn, m, pushname, sender) 
 break
-case '5492266613038': case '593980586516': case '595975740803': await ow(conn, args) 
+case '5492266613038': case '593980586516': case '595975740803': await ow(conn, args, m) 
 break
 case 'ping': 
 ping(conn, from, msg, speed) 
@@ -308,7 +322,7 @@ if (stdout.trim()) m.reply(stdout)
 if (stderr.trim()) m.reply(stderr)}}
 break
 //grupo
-case 'welcome': case 'audios': case 'modeadmin': case 'antifake': case 'antinternacional': case 'antiarabe': case 'detect': case 'antilink': await on(conn, m, isBotAdmins, isGroupAdmins, text, prefix, command, args)
+case 'welcome': case 'audios': case 'modeadmin': case 'antifake': case 'antinternacional': case 'antiarabe': case 'detect': case 'antilink': case 'autosticker': await on(conn, m, isBotAdmins, isGroupAdmins, text, prefix, command, args)
 break
 case 'modojadibot': case 'anticall': case 'antiprivado': await on2(conn, m, isCreator, text, prefix, command, args)
 break            
@@ -365,6 +379,9 @@ break
 case 'unwarn': case 'quitardvertencia': 
 warn2(conn, m, isBotAdmins, isGroupAdmins, sender, command, delay) 
 break
+case 'listwarn': 
+listw(conn, isCreator, m) 
+break
 case 'listonline': case 'liston': 
 online(conn, sender, args, store, m) 
 break
@@ -414,8 +431,20 @@ break
 case 'piropo':
 game14(m, pickRandom) 
 break
-//audios 
-case "a": 
+case 'horny':  
+await game15(conn, m) 
+break
+case 'simp':  
+game16(conn, m) 
+break
+case 'lolice':
+game17(conn, m) 
+break  
+case 'comentar': case 'comment':
+game18(conn, text, m, sender, pushname)
+break 
+//audios
+case "a":  
 if (!global.db.data.chats[m.chat].audios) return
 let vn = './media/a.mp3'
 await conn.sendPresenceUpdate('recording', m.chat)
@@ -632,6 +661,21 @@ const shortUrl1 = await (await fetch(`https://tinyurl.com/api-create.php?url=${a
 conn.sendMessage(m.chat, {video: {url: videoig}, caption: `🔗 *Url:* ${shortUrl1}`}, {quoted: m})
 } catch {
 reply(info.error)}            
+break
+case 'apk': {
+let { search, download } = require('aptoide-scraper')
+if (!text) return reply('*[ ⚠️ ] Que apk esta buscando?*') 
+try {     
+let searchA = await search(text); 
+let data5 = await download(searchA[0].id); 
+let response = `╭━─━─━─≪≫─━─━─━╮\n│ ≡ *Descargador de Aptoide* ≡\n│——————«•»——————\n│🔸📌 *Nombre:* ${data5.name}\n│🔸📦 *Package:* ${data5.package}\n│🔸🕒 *Última actualización:* ${data5.lastup}\n│🔸📥 *Tamaño:* ${data5.size}\n╰━─━─━─≪≫─━─━─━╯` 
+await conn.sendMessage(m.chat, {image: {url: data5.icon}, caption: response}, {quoted: m}); 
+if (data5.size.includes('GB') || data5.size.replace(' MB', '') > 999) { 
+return await conn.sendMessage(m.chat, {text: '*[ ⛔ ] El archivo es demasiado pesado por lo que no se enviará.*'}, {quoted: m})} 
+await conn.sendMessage(m.chat, {document: {url: data5.dllink}, mimetype: 'application/vnd.android.package-archive', fileName: data5.name + '.apk', caption: null}, {quoted: m}); 
+} catch { 
+return reply(`*[ ⚠️ ] Error, no se encontrarón resultados para su búsqueda.*`)}}
+break
 //rpg
 case 'reg': {
 await reg(conn, m, sender, text, fkontak)}
@@ -681,12 +725,12 @@ if (global.db.data.users[m.sender].registered < true) return reply(info.registra
 if (/image/.test(mime)) {  
 conn.fakeReply(m.chat, `⏳ *Aguarde un momento estoy creando tu stickers....*`, '0@s.whatsapp.net', 'No haga spam')
 media = await quoted.download()  
-let encmedia = await conn.sendImageAsSticker(from, media, m, { packname: global.packname, author: global.author })  
+let encmedia = await conn.sendImageAsSticker(from, media, m, { packname: global.packname, author: global.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: botname, body: `h`, mediaType: 2, sourceUrl: nn, thumbnail: imagen1}}}, { quoted: m })
 await fs.unlinkSync(encmedia)  
 } else if (/video/.test(mime)) {  
 if ((quoted.msg || quoted).seconds > 20) return reply('¡Máximo 20 segundos!')  
 media = await quoted.download()  
-let encmedia = await conn.sendVideoAsSticker(from, media, m, { packname: global.author, author: global.packname })  
+let encmedia = await conn.sendVideoAsSticker(from, media, m, { packname: global.author, author: global.packname, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: wm, body: `h`, mediaType: 2, sourceUrl: nn, thumbnail: imagen1}}}, { quoted: m })
 await new Promise((resolve) => setTimeout(resolve, 2000));   
 await fs.unlinkSync(encmedia)  
 } else {  
@@ -704,11 +748,11 @@ conn.downloadAndSaveMediaMessage(quoted, "gifee")
 conn.sendMessage(from, {sticker:fs.readFileSync("gifee.webp")},{quoted:m})
 } else if (/image/.test(mime)) {
 let media = await quoted.download()
-let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: pcknm, author: atnm })
+let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: pcknm, author: atnm, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: botname, body: `h`, mediaType: 2, sourceUrl: nn, thumbnail: imagen1}}}, { quoted: m })
 } else if (/video/.test(mime)) {
 if ((quoted.msg || quoted).seconds > 11) return reply('Maximum 10 Seconds!')
 let media = await quoted.download()
-let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: pcknm, author: atnm })
+let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: pcknm, author: atnm, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: wm, body: `h`, mediaType: 2, sourceUrl: nn, thumbnail: imagen1}}}, { quoted: m })
 } else {
 reply(`Y la imagen?`)}}
 break 
@@ -828,6 +872,12 @@ await conn.sendMessage(from, { text: stdout.toString() }, { quoted: msg });
 } catch { 
 let updatee = execSync('git remote set-url origin https://github.com/elrebelde21/NovaBot-MD.git && git pull')
 await conn.sendMessage(from, { text: updatee.toString() }, { quoted: msg })}  
+break
+case 'reiniciar': case 'restart': {
+if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg });   
+m.reply('_🔄 Reiniciando Bot..._');
+await delay(3 * 3000) 
+conn.ws.close()}
 break
 
 case "desactivarwa": {
