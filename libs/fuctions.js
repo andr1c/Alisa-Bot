@@ -367,6 +367,7 @@ let isNumber = x => typeof x === 'number' && !isNaN(x)  // NaN in number?
 let user = global.db.data.users[m.sender]  
 if (typeof user !== 'object') global.db.data.users[m.sender] = {}  
 if (user) {
+if (!('premium' in user)) user.premium = false;
 if (!('registered' in user)) user.registered = false
 if (!user.registered) {
 if (!('name' in user)) user.name = m.name
@@ -374,10 +375,10 @@ if (!isNumber(user.age)) user.age = -1
 if (!isNumber(user.regTime)) user.regTime = -1
 }
   if (!isNumber(user.afkTime)) user.afkTime = -1  
+  if (!isNumber(user.joincount)) user.joincount = 1;
   if (!('afkReason' in user)) user.afkReason = ''  
   if (!isNumber(user.limit)) user.limit = 20  
   if (!isNumber(user.warn)) user.warn = 0
-  if (!('registered' in user)) user.Register = false
   if(!isNumber(user.money)) user.money = 0  
   if(!isNumber(user.health)) user.health = 100  
   if(!isNumber(user.warn)) user.warn = 0  
@@ -412,6 +413,8 @@ if (!isNumber(user.regTime)) user.regTime = -1
   limit: 20,  
   warn: 0,
   registered: false,
+  premium: false, 
+  joincount: 1,
   lastclaim: 0,
   name: m.name,
   age: -1,
@@ -455,6 +458,7 @@ if (!isNumber(user.regTime)) user.regTime = -1
   if (!('antispam' in chats)) chats.antispam = true
   if (!('antiFake' in chats)) chats.antiFake = false
   if (!('antiArabe' in chats)) chats.antiArabe = false
+  if (!('autosticker' in chats)) chats.autosticker = false
   if (!('detect' in chats)) chats.detect = true
   } else global.db.data.chats[m.chat] = {  
   antilink: false,  
@@ -466,6 +470,7 @@ if (!isNumber(user.regTime)) user.regTime = -1
   antispam: true, 
   antiFake: false,
   antiArabe: false,
+  autosticker: false, 
   Detect: true, 
   }
   
