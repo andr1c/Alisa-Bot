@@ -244,6 +244,7 @@ await sock.updateBlockStatus(fucker.from, "block")
 //detect
 sock.ev.on("groups.update", async (json) => {
 console.log(color(json, '#009FFF'))
+//console.log(json)
 const res = json[0];
 let detect = global.db.data.chats[res.id].detect
 if (!detect) return
@@ -501,7 +502,7 @@ say(`Bot el desarrollo`, {
   gradient: ['red', 'magenta']});
   
 console.log(color(` `,'magenta'))
-console.log(color(` USUARIO CONECTADO => ` + JSON.stringify(sock.user, null, 2), 'yellow'))
+console.log(color(`\n🟢 𝘜𝘚𝘜𝘈𝘙𝘐𝘖𝘚 𝘊𝘖𝘕𝘌𝘊𝘛𝘈𝘋𝘖 => ` + JSON.stringify(sock.user, null, 2), 'yellow'))
 } else if (qr !== undefined) {
 console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
