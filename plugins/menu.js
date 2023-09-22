@@ -24,7 +24,7 @@ let wa = m.key.id.length > 21 ? 'Android' : m.key.id.substring(0, 2) == '3A' ? '
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
-║✾ Hola @${sender.split("@")[0]} 👋🏻 
+║✾ Hola @${sender.split("@")[0]} 👋🏻
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
 ║✾ ᴘʀᴇғɪᴊᴏ: [ ${prefix} ]
 ║✾ ғᴇᴄʜᴀ: ${date}
@@ -32,6 +32,7 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ║✾ ᴜsᴜᴀʀɪᴏ : ${Object.keys(global.db.data.users).length}
 ║✾ ᴀᴄᴛɪᴠɪᴅᴀᴅ : ${runtime(process.uptime())}
 ║✾ ᴍᴏᴅᴏ : ${conn.public ? 'publico' : 'privado'}
+║✾ Bot ofc : ${conn.user.id == global.numBot2 ? 'Este es el bot ofc' : 'Soy un (Subbot) de wa.me/${global.numBot.split`@`[0]}'}
 ║
 ║✾ ʟɪᴍɪᴛᴇ : ${user.limit}
 ║✾ ɴɪᴠᴇʟ : ${user.level}
@@ -117,6 +118,7 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}antifake _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}antiarabe _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}welcome _(on/off)_
+├❥ᰰຼ ❏ ${prefix}autosticker _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}detect _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}kick _(@tag)_
 ├❥ᰰຼ ❏ ${prefix}add _(@tag)_
@@ -323,6 +325,7 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}public (modo público) 
 ├❥ᰰຼ ❏ ${prefix}privado (modo privado) 
 ├❥ᰰຼ ❏ ${prefix}getcase
+├❥ᰰຼ ❏ ${prefix}addcase
 ├❥ᰰຼ ❏ ${prefix}update
 ├❥ᰰຼ ❏ ${prefix}restart
 ├❥ᰰຼ ❏ ${prefix}reiniciar

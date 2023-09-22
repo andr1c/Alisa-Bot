@@ -18,6 +18,10 @@ const cpuUsage = os.loadavg()[0]
 let me = m.sender
 var timestamp = speed();  
 var latensi = speed() - timestamp  
+let getGroups = await conn.groupFetchAllParticipating()
+let groups = Object.entries(getGroups).slice(0).map(entry => entry[1])
+let anu = groups.map(v => v.id)
+let user = [... new Set([...global.listJadibot.filter(conn => conn.user).map(conn => conn.user)])] 
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 let stateRun = `┏━━━━❰･𝐄𝐒𝐓𝐀𝐃𝐎 𝐃𝐄𝐋 𝐁𝐎𝐓･❱━━━━
 ┃
@@ -32,10 +36,10 @@ let stateRun = `┏━━━━❰･𝐄𝐒𝐓𝐀𝐃𝐎 𝐃𝐄𝐋 𝐁�
 ┃➢ 𝙼𝙴𝙼𝙾𝚁𝙸𝙰 𝚃𝙾𝚃𝙰𝙻 : ${totalMemory} GB
 ┃╍╍╍╍╍╍╍╍╍╍╍╍╍
 ┃➢ 𝚄𝚂𝚄𝙰𝚁𝙸𝙾𝚂 : ${Object.keys(global.db.data.users).length}
-┃➢ 𝙲𝙷𝙰𝚃 𝚃𝙾𝚃𝙰𝙻𝙴𝚂 : ${Object.keys(m.chat).length}
-┃➢ 𝙰𝙲𝚃𝙸𝚅𝙾 : ${runtime(process.uptime())}
+┃➢ 𝙲𝙷𝙰𝚃 𝚃𝙾𝚃𝙰𝙻𝙴𝚂 : ${anu.length} 
+┃➢ 𝙰𝙲𝚃𝙸𝚅𝙾 : ${runtime(process.uptime())} 
 ┃➢ 𝙼𝙾𝙳𝙾 : ${conn.public ? 'Público' : `Privado`}
-┃➢ 𝙱𝙾𝚃 𝚂𝙴𝙲𝚄𝙽𝙳𝙰𝚁𝙸𝙾𝚂 𝙰𝙲𝚃𝙸𝚅𝙾𝚂 : ${listJadibot.length}
+┃➢ 𝙱𝙾𝚃 𝚂𝙴𝙲𝚄𝙽𝙳𝙰𝚁𝙸𝙾𝚂 𝙰𝙲𝚃𝙸𝚅𝙾𝚂 : ${user.length}
 ┗━━━━━━━━━━━━━`.trim()
 let ments = [me]      
 await conn.sendMessage(m.chat, {image: imagen1, caption: stateRun, contextInfo:{ mentionedJid:[sender]}}, { quoted: fkontak })
