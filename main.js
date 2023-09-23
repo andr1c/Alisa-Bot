@@ -1,8 +1,8 @@
 //Código desde cero y comentarios hecho por: 
 // @gata_dios
-// @Skidy89 
-// @elrebelde21 
-
+// @Skidy89
+// @elrebelde21   
+  
 //═════════[ Importaciones ]═════════ 
 const baileys = require('@whiskeysockets/baileys'); // trabajar a través de descargas por Whatsapp 
 const { WaMessageStubType, areJidsSameUser, downloadContentFromMessage, generateWAMessageContent, generateWAMessageFromContent, generateWAMessage, prepareWAMessageMedia, relayMessage} = require('@whiskeysockets/baileys'); // Importa los objetos 'makeWASocket' y 'proto' desde el módulo '@whiskeysockets/baileys'   
@@ -39,16 +39,16 @@ const { jadibot2} = require('./serbot2.js')
 const { menu } = require('./plugins/menu.js')
 const { state, owner, grupo, instalar, ping, report, ow} = require('./plugins/info.js')
 const {rob, bal, reg, reg1, reg2, work, mine, buy, afk, claim, perfil, nivel, cofre, lb} = require('./plugins/rpg.js') 
-const {game, game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, game13, game14, game15, game16, game17, game18} = require('./plugins/juegos.js') 
+const {game, game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, game13, game14, game15} = require('./plugins/juegos.js') 
 const {yt, acortar, google, imagen, tran, tts, ia, ssw, wall} = require('./plugins/buscadores.js')
-const {efec, url} = require('./plugins/convertidores.js') 
-const {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, on, on2, adm, infogr, warn1, warn2, online, listw} = require('./plugins/grupos.js')
+const {efec, url, tomp3, toimg} = require('./plugins/convertidores.js') 
+const {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, adm, infogr, warn1, warn2, online, listw, on, on2} = require('./plugins/grupos.js')
 const {nsfw1, nsfw2, nsfw3, nsfw4, nsfw5} = require('./plugins/nsfw.js')
-const {randow1, randow2, randow3, randow4, randow5} = require('./plugins/randow.js') 
+const {randow1, randow2, randow3, randow4, randow5, randow6, randow7, randow8, randow9} = require('./plugins/randow.js') 
 const {play, mp3, mp4, git, tiktok, letra, mediafire, fb, ig, ig2, apk} = require('./plugins/descargas.js')  
 const {s, wm, attp, dado} = require('./plugins/stickers.js') 
 const {owner1, owner2, owner3, owner4, owner5, owner6, owner7, owner8, owner9} = require('./plugins/propietario.js')  
-  
+
 const msgs = (message) => { 
 if (message.length >= 10) { 
 return `${message.substr(0, 500)}` 
@@ -152,6 +152,18 @@ type: 'append'
 }
 conn.ev.emit('messages.upsert', msg)}
           
+// ‿︵‿︵ʚɞ『 INFO CONSOLE 』ʚɞ‿︵‿︵	
+if (m.message) {
+console.log(chalk.bold.cyanBright(`▣────────────···\n│${botname} ${conn.user.id == global.numBot2 ? '' : '(SubBot)'}`), 
+chalk.bold.magenta('\n│⏰HORARIO: ') + chalk.magentaBright(moment(t * 1000).tz(place).format('DD/MM/YY HH:mm:ss'),
+chalk.bold.red('\n️│🏷️ TAGS: ') + chalk.bold.white(`[${conn.public ? 'Publico' : 'Privado'}]`), 
+chalk.bold.yellow('\n│📑TIPO (SMS): ') + chalk.yellowBright(`${type}`), 
+chalk.bold.cyan('\n│📊USUARIO: ') + chalk.cyanBright(pushname) + ' ➜', gradient.rainbow(userSender), 
+m.isGroup ? chalk.bold.greenBright('\n│📤GRUPO: ') + chalk.greenBright(groupName) + ' ➜ ' + gradient.rainbow(from) : chalk.bold.greenBright('\n│📥PRIVADO'), 
+//chalk.bold.red('\nETIQUETA: ') + chalk.redBright(`[${isBaneed ? 'Banned' : ''}]`),
+chalk.bold.white('\n│💬MENSAJE: ') + chalk.whiteBright(`\n▣────────────···\n${msgs(m.text)}\n`))
+)}
+
 //autobio
 if (global.db.data.settings[numBot].autobio) {
 let setting = global.db.data.settings[numBot]
@@ -187,7 +199,7 @@ if (budy.match(`chat.whatsapp.com`)) {
 let delet = m.key.participant
 let bang = m.key.id
 user = m.sender
-conn.sendMessage(m.chat, {text: `\`\`\`「 ANTILINK DETECTADO 」\`\`\`\n\n@${user.split("@")[0]} eso no esta permitido 🤨, Necesita atencion con tu puto grupo quebrado sucia rata 🙄`, mentions: [user], },{quoted: m}) 
+conn.sendMessage(m.chat, {text: `\`\`\`「 ANTILINK DETECTADO 」\`\`\`\n\n@${user.split("@")[0]} eso no esta permitido rata 🤨, Sera expulsado del grupo....`, mentions: [user], },{quoted: m}) 
 if (!isBotAdmins) return reply(`Te salvarte puto no soy admins 🙄`)
 let gclink = (`https://chat.whatsapp.com/`+await conn.groupInviteCode(m.chat))
 let isLinkThisGc = new RegExp(gclink, 'i')
@@ -210,6 +222,7 @@ if (global.db.data.chats[m.chat].modeadmin && !isGroupAdmins) {
 return
 }
 
+//autosticker
 if (global.db.data.chats[m.chat].autosticker) {  
 if (/image/.test(mime)) {  
 m.reply(`_Calma crack estoy haciendo tu sticker 👏_\n\n_*Autosticker esta activado*_`)   
@@ -224,17 +237,18 @@ await new Promise((resolve) => setTimeout(resolve, 2000));
 await fs.unlinkSync(encmedia)  
 }}
 
-// ‿︵‿︵ʚɞ『 INFO CONSOLE 』ʚɞ‿︵‿︵	
-if (m.message) {
-console.log(chalk.bold.cyanBright(`▣────────────···\n│${botname} ${conn.user.id == global.numBot2 ? '' : '(SubBot)'}`), 
-chalk.bold.magenta('\n│⏰HORARIO: ') + chalk.magentaBright(moment(t * 1000).tz(place).format('DD/MM/YY HH:mm:ss'),
-chalk.bold.red('\n️│🏷️ TAGS: ') + chalk.bold.white(`[${conn.public ? 'Publico' : 'Privado'}]`), 
-chalk.bold.yellow('\n│📑TIPO (SMS): ') + chalk.yellowBright(`${type}`), 
-chalk.bold.cyan('\n│📊USUARIO: ') + chalk.cyanBright(pushname) + ' ➜', gradient.rainbow(userSender), 
-m.isGroup ? chalk.bold.greenBright('\n│📤GRUPO: ') + chalk.greenBright(groupName) + ' ➜ ' + gradient.rainbow(from) : chalk.bold.greenBright('\n│📥PRIVADO'), 
-//chalk.bold.red('\nETIQUETA: ') + chalk.redBright(`[${isBaneed ? 'Banned' : ''}]`),
-chalk.bold.white('\n│💬MENSAJE: ') + chalk.whiteBright(`\n▣────────────···\n${msgs(m.text)}\n`))
-)}
+if (global.db.data.settings[conn.user.jid].antiprivado && !isCreator) {
+if (m.isBaileys && m.fromMe) return !0;
+if (m.isGroup) return !1;
+if (!m.message) return !0;
+if (m.text.includes('PIEDRA') || m.text.includes('PAPEL') || m.text.includes('TIJERA') ||  m.text.includes('menu') ||  m.text.includes('estado') || m.text.includes('bots') ||  m.text.includes('serbot') || m.text.includes('jadibot')) return !0
+const chat = global.db.data.chats[m.chat];
+const bot = global.db.data.settings[conn.user.jid] || {};
+if (bot.antiprivado && !isCreator) {
+await conn.sendMessage(m.chat, {text: `*ʜᴏʟᴀ @${sender.split`@`[0]}, ᴇsᴛᴀ ᴘʀᴏʜɪʙɪᴅᴏ ʜᴀʙʟᴀʀ ᴀʟ ᴘʀɪᴠᴀᴅᴏ ᴅᴇʟ ʙᴏᴛ ᴘᴏʀ ʟᴏ ᴄᴜᴀʟ sᴇʀᴀs ʙʟᴏϙᴜᴇᴀᴅᴏ.*\n*ᴘᴀʀᴀ ᴜsᴀʀ ᴇʟ ʙᴏᴛ ᴜɴɪʀᴛᴇ ᴀʟ ɢʀᴜᴘᴏ ᴅᴇʟ ʙᴏᴛ*\n\n${nn}`, mentions: [sender], },{quoted: m}) 
+await conn.updateBlockStatus(m.chat, 'block')}
+return !1;
+}
 
 //Marcar como (Escribiendo...) 
 /*if (command) {
@@ -270,7 +284,7 @@ break
 case 'wallpaper':
 wall(conn, text, command, m) 
 break 
-
+ 
 case 'serbot': case 'qr':
 jadibot(conn, m, from, command, prefix)  
 break  
@@ -279,7 +293,7 @@ jadibot2(conn, m, command, text)
 break
 case 'deljadibot': case 'stop':
 killJadibot(conn, m, prefix, command)
-break
+break 
 case 'bots': case 'listbots': 
 try { 
 let user = [... new Set([...global.listJadibot.filter(conn => conn.user).map(conn => conn.user)])] 
@@ -361,10 +375,10 @@ break
 case 'add': case 'agregar': case 'invitar': 
 add(conn, m, isBotAdmins, isGroupAdmins, text, sender, prefix)
 break           
-case 'kick': case 'echar':
+case 'kick': case 'echar': case 'sacar':
 k(conn, m, isBotAdmins, isGroupAdmins, quoted, text, sender)
-break
-case 'promote': 
+break 
+case 'promote':
 p(conn, m, isBotAdmins, isGroupAdmins, quoted, sender)
 break
 case 'demote':
@@ -402,7 +416,7 @@ case 'simi': case 'bot': {
 await game(conn, m, text, pushname, quoted)}
 break 
 case 'gay': { 
-await game1(conn, m, participants, sender)}
+await game1(conn, m, participants, sender, who)}
 break            
 case 'pareja':
 await game2(conn, m, pushname, participants, sender)
@@ -443,29 +457,26 @@ break
 case 'piropo':
 game14(m, pickRandom) 
 break
-case 'horny':  
-await game15(conn, m) 
+case 'racista':
+game15(m, body)  
 break
-case 'simp':  
-game16(conn, m) 
-break
-case 'lolice':
-game17(conn, m) 
-break  
-case 'comentar': case 'comment':
-game18(conn, text, m, sender, pushname)
-break 
 //audios 
 case "a":   
 if (!global.db.data.chats[m.chat].audios) return
 let vn = './media/a.mp3'
 await conn.sendPresenceUpdate('recording', m.chat)
 conn.sendMessage(m.chat, { audio: { url: vn }, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": md, "showAdAttribution": true}}, seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, { quoted: m }) 
-break 
+break  
 //convertidores
 case 'bass': case 'blown': case 'deep': case 'earrape': case 'fast': case 'fat': case 'nightcore': case 'reverse': case 'robot': case 'slow': case 'smooth': case 'squirrel': 
 efec(conn, command, mime, quoted, exec, prefix, m, from) 
 break   
+case 'toaudio': case 'tomp3': 
+tomp3(conn, mime, quoted, m) 
+break
+case 'toimg': 
+toimg(conn, mime, quoted, exec, m) 
+break
 case 'tourl': 
 url(conn, mime, quoted, util, m) 
 break
@@ -501,13 +512,25 @@ break
 case 'akira': case 'akiyama': case 'anna': case 'asuna': case 'ayuzawa': case 'boruto': case 'chiho': case 'chitoge': case 'deidara': case 'erza': case 'elaina': case 'eba': case 'emilia': case 'hestia': case 'hinata': case 'inori': case 'isuzu': case 'itachi': case 'itori': case 'kaga': case 'kagura': case 'kaori': case 'keneki': case 'kotori': case 'kurumi': case 'madara': case 'mikasa': case 'miku': case 'minato': case 'naruto': case 'nezuko': case 'sagiri': case 'sasuke': case 'sakura': case 'cosplay':
 await randow5(sendImageAsUrl, command, pickRandom, m)
 break 
+case 'horny':  
+await randow6(conn, m) 
+break
+case 'simp':  
+randow7(conn, m) 
+break
+case 'lolice':
+randow8(conn, m) 
+break  
+case 'comentar': case 'comment':
+randow9(conn, text, m, sender, pushname)
+break 
 case 'blackpink':  
 sendImageAsUrl("https://delirius-image-random.vercel.app/api/all");
 break
 //descargas		    
-case 'play': case 'play2': 
+case 'play':
 play(conn, text, m) 
-break
+break 
 case "ytmp3": case "ytaudio": 
 mp3(conn, args, text, command, fkontak, ytplayvid, m)
 break 
@@ -539,15 +562,15 @@ case 'apk':
 apk(conn, text, m)  
 break
 //rpg
-case 'reg': {
-await reg(conn, m, sender, text, fkontak)}
+case 'reg': 
+await reg(conn, m, sender, text, fkontak, delay)
 break            
 case 'unreg': 
 reg1(args, m, sender)  
 break
 case 'myns':
 reg2(sender, m)
-break
+break 
 case 'afk': {
 await afk(conn, m, args, sender, pushname)}
 break             
@@ -600,12 +623,12 @@ owner1(conn, isCreator, text, delay, fkontak, m)
 break
 case 'bc': case 'broadcast': case 'bcall': 
 owner2(conn, isCreator, text, store, delay, fkontak, m) 
-break   
+break 
 case 'block': case 'bloquear': 
-owner3(conn, isCreator, m) 
+owner3(conn, isCreator, quoted, sender, text, m) 
 break 
 case 'unblock': case 'desbloquear': 
-owner4(conn, isCreator, m) 
+owner4(conn, isCreator, quoted, sender, text, m) 
 break            
 case 'setcmd':  case 'addcmd':
 owner5(conn, quoted, text, command, m) 
