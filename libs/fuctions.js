@@ -1,5 +1,5 @@
-const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./fuctions2.js')
-const { default: makeWASocket, relayMessage, areJidsSameUser, generateWAMessage, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, getAggregateVotesInPollMessage, proto } = require("@whiskeysockets/baileys")
+const { imageToWebp, videoToWebp, writeExifImg, writeExifVid, toAudio } = require('./fuctions2.js')
+const { default: makeWASocket, WAMessageStubType, relayMessage, areJidsSameUser, generateWAMessage, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, getAggregateVotesInPollMessage, proto } = require("@whiskeysockets/baileys")
 const chalk = require('chalk')
 const fs = require('fs')
 const child_process = require('child_process')
@@ -168,7 +168,7 @@ exports.fetchJson = async (url, options) => {
         return err
     }
 }
-       
+
 exports.runtime = function(seconds) {
 	seconds = Number(seconds);
 	var d = Math.floor(seconds / (3600 * 24));
@@ -349,10 +349,12 @@ exports.getGroupAdmins = (participantes) => {
  * @param {Boolean} hasParent 
  */
 exports.smsg = (conn, m, hasParent) => {
-    
     if (!m) return m
     let M = proto.WebMessageInfo
+    let protocolMessageKey
+    
     if (m.key) {
+        m.messageInfo = M
         m.id = m.key.id
         m.isBaileys = m.id.startsWith('BAE5') && m.id.length === 16
         m.chat = m.key.remoteJid
@@ -363,8 +365,8 @@ exports.smsg = (conn, m, hasParent) => {
     }
 
 try {   
-let isNumber = x => typeof x === 'number' && !isNaN(x)  // NaN in number?
-let user = global.db.data.users[m.sender]  
+  let isNumber = x => typeof x === 'number' && !isNaN(x)  // NaN in number?
+  let user = global.db.data.users[m.sender]  
 if (typeof user !== 'object') global.db.data.users[m.sender] = {}  
 if (user) {
 if (!('premium' in user)) user.premium = false;
@@ -602,6 +604,19 @@ if (m.message) {
 m.mtype = Object.keys(m.message)[0]
 m.body = m.message.conversation || m.message[m.mtype].caption || m.message[m.mtype].text || (m.mtype == 'listResponseMessage') && m.message[m.mtype].singleSelectReply.selectedRowId || (m.mtype == 'buttonsResponseMessage') && m.message[m.mtype].selectedButtonId || m.mtype
         m.msg = m.message[m.mtype]
+        if (m.mtype == 'protocolMessage' && m.msg.key) { 
+        protocolMessageKey = m.msg.key; 
+        if (protocolMessageKey == 'status@broadcast') protocolMessageKey.remoteJid = m.chat; 
+        if (!protocolMessageKey.participant || protocolMessageKey.participant == 'status_me') protocolMessageKey.participant = m.sender; 
+        protocolMessageKey.fromMe = conn.decodeJid(protocolMessageKey.participant) === conn.decodeJid(conn.user.id); 
+        if (!protocolMessageKey.fromMe && protocolMessageKey.remoteJid === conn.decodeJid(conn.user.id)) protocolMessageKey.remoteJid = m.sender; 
+        } 
+  
+        try {
+        if (protocolMessageKey && m.mtype == 'protocolMessage') conn.ev.emit('message.delete', protocolMessageKey); 
+        } catch (e) {
+        console.error(e)
+        }
         if (m.mtype === 'ephemeralMessage') {
             exports.smsg(sock, m.msg)
             m.mtype = m.msg.mtype
@@ -658,9 +673,9 @@ m.body = m.message.conversation || m.message[m.mtype].caption || m.message[m.mty
             m.quoted.download = () => downloadMediaMessage(m.quoted)
         }
     }
-    if (m.msg.url) m.download = () => downloadMediaMessage(m.msg)
-    m.text = (m.mtype == 'listResponseMessage' ? m.msg.singleSelectReply.selectedRowId : '') || m.msg.text || m.msg.caption || m.msg || ''
-    
+  if (m.msg.url) m.download = () => conn.downloadMediaMessage(m.msg)
+    m.text = m.msg.text || m.msg.caption || m.message.conversation || m.msg.contentText || m.msg.selectedDisplayText || m.msg.title || ''
+
     /**
      * 
      * @param {*} jid 
@@ -669,6 +684,7 @@ m.body = m.message.conversation || m.message[m.mtype].caption || m.message[m.mty
      * @param {*} options 
      * @returns 
      */
+     
     conn.sendImageAsSticker = async (jid, path, quoted, options = {}) => {
         let buff = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
         let buffer
@@ -677,8 +693,7 @@ m.body = m.message.conversation || m.message[m.mtype].caption || m.message[m.mty
         } else {
             buffer = await imageToWebp(buff)
         }
-
-        await conn.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted })
+ await conn.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted })
         return buffer
     }
     
@@ -697,6 +712,18 @@ m.body = m.message.conversation || m.message[m.mtype].caption || m.message[m.mty
                    }, mentionedJid: conn.parseMention(text)}}}}}, {})
        }
       
+       conn.downloadMediaMessage = async (message) => {
+        let mime = (message.msg || message).mimetype || ''
+        let messageType = mime.split('/')[0].replace('application', 'document') ? mime.split('/')[0].replace('application', 'document') : mime.split('/')[0]
+        let extension = mime.split('/')[1]
+        const stream = await downloadContentFromMessage(message, messageType)
+        let buffer = Buffer.from([])
+        for await(const chunk of stream) {
+        buffer = Buffer.concat([buffer, chunk])
+        }
+        return buffer
+        }
+        
     /**
     * @param {*} jid
     * @param {*} path
@@ -729,9 +756,10 @@ m.body = m.message.conversation || m.message[m.mtype].caption || m.message[m.mty
     "mediaType": 1,   
     "thumbnail": thumbnail ? thumbnail : global.imagen1,  
     "mediaUrl": md,  
-    "sourceUrl": md  
-    }}}, { quoted: quoted ? quoted : m })}
-        
+    "sourceUrl": md
+    }}}, { quoted: quoted ? quoted : m }) 
+    }
+    
     /**
     * @param {*} jid
     * @param {*} caption
@@ -750,7 +778,7 @@ m.body = m.message.conversation || m.message[m.mtype].caption || m.message[m.mty
     "surface": "CATALOG",
     "message": text,
     "orderTitle": orderTitle ? orderTitle : 'unknown',
-    "sellerJid": "5497688@s.whatsapp.net",
+    "sellerJid": "54446767@s.whatsapp.net",
     "token": "AR4flJ+gzJw9zdUj+RpekLK8gqSiyei/OVDUFQRcmFmqqQ==",
     "totalAmount1000": "-500000000",
     "totalCurrencyCode":"USD",
@@ -758,9 +786,9 @@ m.body = m.message.conversation || m.message[m.mtype].caption || m.message[m.mty
     }), { userJid: userJid ? userJid : conn.user.id})
     conn.relayMessage(jid, order.message, { messageId: order.key.id })
     }
-    
-    conn.user.jid = conn.user.id.split(":")[0] + "@s.whatsapp.net" // jid in user?
-    conn.user.chat = m.chat // chat in user?????????
+   
+conn.user.jid = conn.user.id.split(":")[0] + "@s.whatsapp.net" // jid in user?
+conn.user.chat = m.chat // chat in user?????????
     
     /**
     * @param {*} jid
@@ -769,7 +797,7 @@ m.body = m.message.conversation || m.message[m.mtype].caption || m.message[m.mty
     * @param {*} fakecaption
     */
 
-conn.fakeReply = (jid, caption,  fakeNumber, fakeCaption) => {
+    conn.fakeReply = (jid, caption,  fakeNumber, fakeCaption) => {
     conn.sendMessage(jid, { text: caption }, {quoted: { key: { fromMe: false, participant: fakeNumber, ...(m.chat ? { remoteJid: null } : {}) }, message: { conversation: fakeCaption }}})
     }
 
@@ -794,15 +822,26 @@ conn.fakeReply = (jid, caption,  fakeNumber, fakeCaption) => {
     await conn.sendPresenceUpdate('recording', jid)
     await conn.sendMessage(jid, { audio: { url: audio }, fileName: 'error.mp3', mimetype: 'audio/mp4', ptt: ppt ? ptt : true, ...options }, { quoted: quoted ? quoted : m })
     }
-        
-    /**
+    conn.parseAudio = async (jid, audio, quoted, ppt, name, link, image) => {
+    await conn.sendPresenceUpdate('recording', jid)
+    await conn.sendMessage(jid, { audio: { url: audio }, fileName: 'error.mp3', mimetype: 'audio/mp4', ptt: ppt ? ptt : true, contextInfo:{  externalAdReply: { showAdAttribution: true,
+    mediaType:  1,
+    mediaUrl: link ? link : md,
+    title: name ? name : global.botname,
+    sourceUrl: link ? link : md, 
+    thumbnail: image ? image : global.imagen1
+    }}}, { quoted: quoted ? quoted : m })
+    }
+    
+  /**
     * @param {*} jid
     * @param {*} text
     * @param {*} quoted
     * @param {*} options
     */
     conn.sendTextWithMentions = async (jid, text, quoted, options = {}) => conn.sendMessage(jid, { text: text, contextInfo: { mentionedJid: [...text.matchAll(/@(\d{0,16})/g)].map(v => v[1] + '@s.whatsapp.net') }, ...options }, { quoted })
-        
+    
+    
     /**
     * @param {*} jid
     * @param {*} text
@@ -852,7 +891,7 @@ conn.fakeReply = (jid, caption,  fakeNumber, fakeCaption) => {
     (store.contacts[id] || {})
     return (withoutContact ? '' : v.name) || v.subject || v.verifiedName || PhoneNumber('+' + jid.replace('@s.whatsapp.net', '')).getNumber('international')
     }
-        
+    
     /**
     *
     * @param {*} jid
@@ -893,8 +932,8 @@ conn.fakeReply = (jid, caption,  fakeNumber, fakeCaption) => {
         return buffer
     }
     conn.sendPoll = (jid, name = '', values = [], selectableCount = 1) => { return conn.sendMessage(jid, { poll: { name, values, selectableCount }}) }
-        
-	/**
+    
+ 	/**
 	 * 
 	 * @param {*} jid 
 	 * @param {*} forceForward 
@@ -918,6 +957,24 @@ conn.fakeReply = (jid, caption,  fakeNumber, fakeCaption) => {
      * @returns 
      */
      
+    conn.getFile = async (PATH, saveToFile = false) => { 
+         let res; let filename; 
+         const data = Buffer.isBuffer(PATH) ? PATH : PATH instanceof ArrayBuffer ? PATH.toBuffer() : /^data:.*?\/.*?;base64,/i.test(PATH) ? Buffer.from(PATH.split`,`[1], 'base64') : /^https?:\/\//.test(PATH) ? await (res = await fetch(PATH)).buffer() : fs.existsSync(PATH) ? (filename = PATH, fs.readFileSync(PATH)) : typeof PATH === 'string' ? PATH : Buffer.alloc(0); 
+         if (!Buffer.isBuffer(data)) throw new TypeError('Result is not a buffer'); 
+         const type = await FileType.fromBuffer(data) || { 
+           mime: 'application/octet-stream', 
+           ext: '.bin', 
+         }; 
+         if (data && saveToFile && !filename) (filename = path.join(__dirname, '../tmp/' + new Date * 1 + '.' + type.ext), await fs.promises.writeFile(filename, data)); 
+         return { 
+           res, 
+           filename, 
+           ...type, 
+           data, 
+           deleteFile() { 
+             return filename && fs.promises.unlink(filename); 
+           }, 
+         }}
    /**
     * @param {*} jid
     * @param {*} path
@@ -984,23 +1041,6 @@ conn.fakeReply = (jid, caption,  fakeNumber, fakeCaption) => {
          } 
        }
        
-    conn.getFile = async (PATH, save) => {
-    let res
-    let data = Buffer.isBuffer(PATH) ? PATH : /^data:.*?\/.*?;base64,/i.test(PATH) ? Buffer.from(PATH.split`,`[1], 'base64') : /^https?:\/\//.test(PATH) ? await (res = await fetch(PATH)) : fs.existsSync(PATH) ? (filename = PATH, fs.readFileSync(PATH)) : typeof PATH === 'string' ? PATH : Buffer.alloc(0)
-    //if (!Buffer.isBuffer(data)) throw new TypeError('Result is not a buffer')
-    let type = await FileType.fromBuffer(data) || {
-    mime: 'application/octet-stream',
-    ext: '.bin'
-    }
-    filename = path.join(__filename, '../tmp/' + new Date * 1 + '.' + type.ext)
-    if (data && save) fs.promises.writeFile(filename, data)
-    return {
-    res,
-    filename,
-	size: await getSizeMedia(data),
-    ...type,
-    data
-    }}
     conn.downloadAndSaveMediaMessage = async (message, filename, attachExtension = true) => {
     let quoted = message.msg ? message.msg : message
     let mime = (message.msg || message).mimetype || ''
@@ -1031,7 +1071,6 @@ conn.fakeReply = (jid, caption,  fakeNumber, fakeCaption) => {
         }
         conn.ev.emit('messages.upsert', msg)
     }
-   
     return m
 }
 
