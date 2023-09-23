@@ -25,10 +25,10 @@ if (global.db.data.users[m.sender].afkTime > -1) {
 let user = global.db.data.users[m.sender]
 m.reply(`╭━─━─━─≪☣️≫─━─━─━╮\n┃𝙳𝙴𝙹𝙰𝚂𝚃𝙴 𝙳𝙴 𝙴𝚂𝚃𝙰 𝙰𝙵𝙺\n┃${user.afkReason ? '\n┃🔸️ *𝚁𝙰𝚉𝙾𝙽 :* ' + user.afkReason : ''}\n┃🔸 *𝙴𝚂𝚃𝚄𝚅𝙾 𝙸𝙽𝙰𝙲𝚃𝙸𝚅𝙾 𝙳𝚄𝚁𝙰𝙽𝚃𝙴* ${clockString(new Date - user.afkTime)}\n╰━─━─━─≪☣️≫─━─━─━╯`.trim())
 user.afkTime = -1
-user.afkReason = '' 
+user.afkReason = ''
 }
 
-async function reg(conn, m, sender, text, fkontak) { 
+async function reg(conn, m, sender, text, fkontak, delay) { 
 let Reg = /\|?(.*)([.|] *?)([0-9]*)$/i
 let user = global.db.data.users[m.sender]
 if (user.registered === true) return m.reply(`*Ya estas registrado 🧐*`) 
@@ -48,38 +48,27 @@ const sn = createHash('md5').update(m.sender).digest('hex');
 let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : m.fromMe ? conn.user.jid : m.sender
 const date = moment.tz('America/Bogota').format('DD/MM/YYYY')
 const time = moment.tz('America/Argentina/Buenos_Aires').format('LT')
+let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length
 global.db.data.users[m.sender].limit += 2
 global.db.data.users[m.sender].exp += 200
-conn.sendMessage(m.chat, { text: `┏─[ ✅ REGISTRO COMPLETADO ]─┓
-┃◉ *Nombre:* 
-┃➠ ${name}
-┃• • • • • • • • • • • • • • • • • • •
-┃◉ *Edad:*
-┃➠ ${age} años
-┃• • • • • • • • • • • • • • • • • • •
-┃◉ *Hora:* 
-┃➠ ${time}
-┃• • • • • • • • • • • • • • • • • • •
-┃◉ *Fecha:*
-┃➠ ${date}
-┃• • • • • • • • • • • • • • • • • • •
-┃◉ *Número:*
-┃➠ wa.me/${sender.split("@")[0]}
-┃• • • • • • • • • • • • • • • • • • •
-┃◉ *Numero del serie*
-┃➠ ${sn}
-┃• • • • • • • • • • • • • • • • • • •
-┃ ᵀᵘ ⁿᵘ́ᵐᵉʳᵒ ᵈᵉˡ ˢᵉʳᶦᵉ ᵗᵉ ˢᵉʳᵛᶦʳᵃ ᵉⁿ ᶜᵃˢᵒ ᵠᵘᵉ 
-┃ ᵠᵘᶦᵉʳᵃ ᵇᵒʳʳᵃʳ ˢᵘˢ ʳᵉᵍᶦˢᵗʳᵒˢ
-┃ Ejemplo: ${prefix}unreg (Numero del serie)
-┃• • • • • • • • • • • • • • • • • • •
-┃🎁 *Recompensa:*
-┃➠ 2 diamante 💎
-┃➠ 200 exp
-┃• • • • • • • • • • • • • • • • • • •
-┃ *Para ver los comandos del bot usar:*
-┃${prefix}menu
-┗─━─━━─━─━━─━─━─━━─━─━`,
+conn.sendMessage(m.chat, { text: `[ ✅ REGISTRO COMPLETADO ]
+
+ ◉ *Nombre:* ${name}
+ ◉ *Edad:* ${age} años
+ ◉ *Hora:* ${time}
+ ◉ *Fecha:* ${date}
+ ◉ *Número:* wa.me/${sender.split("@")[0]}
+ ◉ *Numero del serie* 
+ ⤷ ${sn}
+ 
+ 🎁 *Recompensa:*
+ ⤷ 2 diamante 💎
+ ⤷ 200 exp
+
+ *◉ Para ver los comandos del bot usar:*
+ ${prefix}menu
+ 
+ ◉ *Total de usuários registrados:* ${rtotalreg}`,
 contextInfo:{
 mentionedJid:[name],
 forwardingScore: 9999999,
@@ -93,7 +82,8 @@ isForwarded: true,
 "thumbnailUrl": ``,
 "thumbnail": imagen1, 
 "sourceUrl": md}}},
-{ quoted: m})
+{ quoted: fkontak})
+await delay(2 * 2000)
 conn.sendMessage(m.chat, { text: sn, contextInfo:{forwardingScore: 9999999, isForwarded: true, }}, { quoted: m})
 }
 
