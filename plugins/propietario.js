@@ -15,7 +15,7 @@ let anu = groups.map(v => v.id)
 m.reply(`*Enviando mensajes oficial un momento*`)
 for (let i of anu) {
 await delay(3 * 3000)
-let txt = `「 *ＣＯＭＵＮＩＣＡＤＯ* 」\n\n${text}`
+let txt = `「 ✅ *𝘊𝘖𝘔𝘜𝘕𝘐𝘊𝘈𝘋𝘖 𝘖𝘍𝘐𝘊𝘐𝘈𝘓* ✅ 」\n\n${text}`
 conn.sendText(i, txt, fkontak)}
 m.reply(`ᴛʀᴀɴsᴍɪsɪᴏɴ ʀᴇᴀʟɪᴢᴀᴅᴀ ᴄᴏɴ ᴇxɪᴛᴏs ✅ ᴛᴏᴛᴀʟ ${anu.length} ᴄʜᴀᴛ ɢʀᴜᴘᴏs\nᴛɪᴇᴍᴘᴏ ᴛᴏᴛᴀʟ ᴅᴇ ᴇɴᴠɪᴏ: ${anu.length * 1.5} sᴇɢ`)}
 
@@ -27,17 +27,17 @@ m.reply(`ᴛʀᴀɴsᴍɪsɪᴏɴ ʀᴇᴀʟɪᴢᴀᴅᴀ ᴄᴏɴ ᴇxɪᴛᴏ
 for (let yoi of anu) {
 //await sleep(1500)
 await delay(3 * 3000)
-let txt = `「 *ＣＯＭＵＮＩＣＡＤＯ* 」\n\n${text}`
+let txt = `「 ✅ *𝘊𝘖𝘔𝘜𝘕𝘐𝘊𝘈𝘋𝘖 𝘖𝘍𝘐𝘊𝘐𝘈𝘓* ✅ 」\n\n${text}`
 conn.sendText(yoi, txt, fkontak)}
 m.reply('Listo')}
 
-async function owner3(conn, isCreator, m) {
+async function owner3(conn, isCreator, quoted, sender, text, m) {
 if (!isCreator) return m.reply(info.owner)
 m.reply(`*El usuario fue bloqueado del bot*`)
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await conn.updateBlockStatus(users, 'block')}
 
-async function owner4(conn, isCreator, m) {
+async function owner4(conn, isCreator, quoted, sender, text, m) {
 if (!isCreator) return m.reply(info.owner)
 m.reply(`*El usuario fue desbloqueado*`)
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'

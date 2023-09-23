@@ -52,7 +52,27 @@ m.reply(util.format(anu))
 await fs.unlinkSync(media)
 }
 
-module.exports = {efec, url}
+async function tomp3(conn, mime, quoted, m) {
+if (!/video/.test(mime) && !/audio/.test(mime)) return m.reply(`*[ ⚠️ ] Responda a un audio*`) 
+if (!quoted) return m.reply(`*[ ⚠️ ] Responda a un audio*`) 
+let { toAudio } = require('../libs/converter.js')
+let media  = await conn.downloadMediaMessage(quoted)
+let audio = await toAudio(media, 'mp4')
+await conn.sendMessage(m.chat, {audio: audio, mimetype: 'audio/mpeg', contextInfo:{  externalAdReply: { showAdAttribution: true, mediaType:  1, mediaUrl: md, title: global.botname, sourceUrl: md, thumbnail: imagen1 }}}, { quoted: m })}
+
+async function toimg(conn, mime, quoted, exec, m) {
+if (!m.quoted) return m.reply('*Y el sticker?*\n*Responde a un stickers capo*') 
+if (!/webp/.test(mime)) return m.reply('*Y el sticker? Responde a un stickers capo*') 
+let media = await conn.downloadAndSaveMediaMessage(m.quoted)
+let ran = await getRandom('sk.png')
+exec(`ffmpeg -i ${media} ${ran}`, (err) => {
+fs.unlinkSync(media)
+if (err) throw err
+let buffer = fs.readFileSync(ran)
+conn.sendMessage(m.chat, { image: buffer }, { quoted: m})
+fs.unlinkSync(ran)})}
+
+module.exports = {efec, url, tomp3, toimg}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {

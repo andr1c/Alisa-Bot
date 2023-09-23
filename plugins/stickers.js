@@ -45,6 +45,7 @@ m.reply(`Y la imagen?`)}}
 async function attp(conn, text, lolkeysapi, fkontak, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (!text) return m.reply('ingresa algo para convertirlo a sticker :v')
+m.reply(`_*Calma crack estoy haciendo tu texto a sticker 👏*_\n\n_*Esto puede demorar unos minutos....*_`) 
 let link = `https://api.lolhuman.xyz/api/attp?apikey=${lolkeysapi}&text=${text}`
 await conn.sendMessage(m.chat, { sticker: { url: link } }, { quoted: fkontak})}
 

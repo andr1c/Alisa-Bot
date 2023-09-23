@@ -11,7 +11,7 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 const Jimp = require('jimp')
 const os = require('os')
-
+      
 async function grup(conn, m, args, isBotAdmins, isGroupAdmins, prefix, command, text) {
 if (!m.isGroup) return m.reply(info.group);  
 if (!isBotAdmins) return m.reply(info.botAdmin);  
@@ -44,7 +44,7 @@ if ( isCreator || m.fromMe) {
 m.reply(`*YA ME UNIR 😼*`)
 await delay(3 * 3000)
 let res = await conn.groupAcceptInvite(code).then((code) => m.reply(jsonformat(code))).catch((err) => m.reply(jsonformat(err)))
-////await conn.groupAcceptInvite(code)
+//await conn.groupAcceptInvite(code)
 } else {
 const data = global.owner.filter(([id]) => id)
 await delay(5 * 5000)
@@ -121,7 +121,7 @@ async function p(conn, m, isBotAdmins, isGroupAdmins, quoted, sender) {
 if (!m.isGroup) return m.reply(info.group) 
 if (!isBotAdmins) return m.reply(info.botAdmin)
 if (!isGroupAdmins) return m.reply(info.admin)
-if (!m.quoted) return m.reply(`*[ ⚠️ ] A QUIEN LE DOY ADMIN? ETIQUETA A LA PERSONA O RESPONDE A SUS MENSAJES*`)
+if (!m.mentionedJid[0] && !m.quoted) return m.reply(`*[ ⚠️ ] A QUIEN LE DOY ADMIN? ETIQUETA A LA PERSONA O RESPONDE A SUS MENSAJES*`)
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await conn.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))}
 
@@ -129,7 +129,7 @@ async function d(conn, m, isBotAdmins, isGroupAdmins, quoted, sender) {
 if (!m.isGroup) return m.reply(info.group) 
 if (!isBotAdmins) return m.reply(info.botAdmin)
 if (!isGroupAdmins) return m.reply(info.admin)
-if (!m.quoted) return m.reply(`*[ ⚠️ ] A QUIEN LE QUITO ADMINS? ETIQUETA A LA PERSONA O RESPONDE A SUS MENSAJES*`)
+if (!m.mentionedJid[0] && !m.quoted) return m.reply(`*[ ⚠️ ] A QUIEN LE QUITO ADMINS? ETIQUETA A LA PERSONA O RESPONDE A SUS MENSAJES*`)
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await conn.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))}
 
@@ -174,15 +174,15 @@ const groupAdmins = participants.filter((p) => p.admin);
 const listAdmin = groupAdmins.map((v, i) => `${i + 1}. @${v.id.split('@')[0]}`).join('\n➥ ');
 const owner = groupMetadata.owner || groupAdmins.find((p) => p.admin === 'superadmin')?.id || m.chat.split`-`[0] + '@s.whatsapp.net';
 const pesan = args.join` `;
-const oi = `*ＭＥＮＳＡＪＥ:* ${pesan}`;
-const text = `═✪〘 *ＩＮＶＯＣＡＮＤＯ ＡＤＭＩＮＳ* 〙✪═\n\n• *ＧＲＵＰＯ :* [ ${groupMetadata.subject} ]\n\n• ${oi}\n\n• *ＡＤＭＩＮＳ :*\n➥ ${listAdmin}\n\n*[ ⚠ ️] ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ sᴏʟᴏ ᴄᴜᴀɴᴅᴏ sᴇ ᴛʀᴀᴛᴇ ᴅᴇ ᴜɴᴀ ᴇᴍᴇʀɢᴇɴᴄɪᴀ*`.trim();
+const oi = `*Ｍｅｎｓａｊｅ:* ${pesan}`;
+const text = `═✪〘 *ＩＮＶＯＣＡＮＤＯ ＡＤＭＩＮＳ* 〙✪═\n\n• *Ｇｒｕｐｏ :* [ ${groupMetadata.subject} ]\n\n• ${oi}\n\n• *Ａｄｍｉｎｓ :*\n➥ ${listAdmin}\n\n*[ ⚠ ️] ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ sᴏʟᴏ ᴄᴜᴀɴᴅᴏ sᴇ ᴛʀᴀᴛᴇ ᴅᴇ ᴜɴᴀ ᴇᴍᴇʀɢᴇɴᴄɪᴀ*`.trim();
 conn.sendMessage(m.chat, { text: text, mentions: participants.map(a => a.id) }, { quoted: m })}
 
 async function infogr(conn, participants, groupMetadata, fkontak, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (!m.isGroup) return m.reply(info.group);  
 const pp = await conn.profilePictureUrl(m.chat, 'image').catch((_) => null) || './src/avatar_contact.png';
-const {antilink, welcome, antifake, modeadmin} = global.db.data.chats[m.chat];
+const {welcome, antilink, antifake} = global.db.data.chats[m.chat];
 const groupAdmins = participants.filter((p) => p.admin);
 const listAdmin = groupAdmins.map((v, i) => `${i + 1} @${v.id.split('@')[0]}`).join('\n ');
 const owner = groupMetadata.owner || groupAdmins.find((p) => p.admin === 'superadmin')?.id || m.chat.split`-`[0] + '@s.whatsapp.net';
@@ -205,11 +205,11 @@ const text = `╭━━[ .⋅ ɪɴғᴏ ᴅᴇ ɢʀᴜᴘᴏ ⋅]━━━⬣
 *🔸️ ᴄᴏɴғɪɢᴜʀᴀᴄɪᴏɴ ᴅᴇʟ ɢʀᴜᴘᴏ:*
 • Welcome: ${welcome ? '✅' : '❌'}
 • Antilink ${antilink ? '✅' : '❌'}
-• antifake ${antifake ? '✅' : '❌'}
+• Antifake ${antifake ? '✅' : '❌'}
 
 *🔸️ ᴅᴇsᴄʀɪᴘᴄɪᴏɴ* :
 • ${groupMetadata.desc?.toString() || 'desconocido'}`.trim();
-conn.sendMessage(m.chat, { image: pp, text: text, mentions: participants.map(a => a.id) }, { quoted: fkontak })}
+conn.sendFile(m.chat, pp, 'error.jpg', text, m, false, {mentions: [...groupAdmins.map((v) => v.id), owner]})}
 
 async function warn1(conn, m, isBotAdmins, isGroupAdmins, sender, command, text, delay) {
 if (!m.isGroup) return m.reply(info.group);  
@@ -219,7 +219,7 @@ let war = global.maxwarn
 let who
 if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false
 else who = m.chat
-if (!who) return m.reply(`[ ⚠️ ] ᴇᴛɪǫᴜᴇᴛᴀ ᴏ ᴍᴇɴᴄɪᴏɴᴀ ᴀ ᴀʟɢᴜɪᴇɴ\n\n📌 ᴇᴊᴇᴍᴘʟᴏ : ${prefix + command} @user`) 
+if (!who) return m.reply(`[ ⚠️ ] ᴇᴛɪǫᴜᴇᴛᴀ/ᴍᴇɴᴄɪᴏɴᴀ ᴀ ᴀʟɢᴜɪᴇɴ\n\n📌 ᴇᴊᴇᴍᴘʟᴏ : ${prefix + command} @user`) 
 if (!(who in global.db.data.users)) return m.reply(`✳️ ᴇʟ ᴜsᴜᴀʀɪᴏ ɴᴏ sᴇ ᴇɴᴄᴜᴇɴᴛʀᴀ ᴇɴ ᴍɪ ʙᴀsᴇ ᴅᴇ ᴅᴀᴛᴏs`)  
 let name = conn.getName(m.sender)
 let warn = global.db.data.users[who].warn
@@ -252,7 +252,7 @@ if (!isGroupAdmins) return m.reply(info.admin)
 let who 
 if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false
 else who = m.chat
-if (!who) return m.reply(`[ ⚠️ ] ᴇᴛɪǫᴜᴇᴛᴀ ᴏ ᴍᴇɴᴄɪᴏɴᴀ ᴀ ᴀʟɢᴜɪᴇɴ`) 
+if (!who) return m.reply(`[ ⚠️ ] ᴇᴛɪǫᴜᴇᴛᴀ/ᴍᴇɴᴄɪᴏɴᴀ ᴀ ᴀʟɢᴜɪᴇɴ`) 
 if (!(who in global.db.data.users)) return m.reply(`✳️ ᴇʟ ᴜsᴜᴀʀɪᴏ ɴᴏ sᴇ ᴇɴᴄᴜᴇɴᴛʀᴀ ᴇɴ ᴍɪ ʙᴀsᴇ ᴅᴇ ᴅᴀᴛᴏs`) 
 let warn = global.db.data.users[who].warn
 if (warn > 0) {
