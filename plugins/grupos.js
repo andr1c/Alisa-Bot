@@ -182,7 +182,7 @@ async function infogr(conn, participants, groupMetadata, fkontak, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (!m.isGroup) return m.reply(info.group);  
 const pp = await conn.profilePictureUrl(m.chat, 'image').catch((_) => null) || './src/avatar_contact.png';
-const {welcome, antilink, antifake} = global.db.data.chats[m.chat];
+const {welcome, antilink, antiFake, antiArabe, detect, autosticker, antiNsfw, modeadmin} = global.db.data.chats[m.chat];
 const groupAdmins = participants.filter((p) => p.admin);
 const listAdmin = groupAdmins.map((v, i) => `${i + 1} @${v.id.split('@')[0]}`).join('\n ');
 const owner = groupMetadata.owner || groupAdmins.find((p) => p.admin === 'superadmin')?.id || m.chat.split`-`[0] + '@s.whatsapp.net';
@@ -204,8 +204,13 @@ const text = `╭━━[ .⋅ ɪɴғᴏ ᴅᴇ ɢʀᴜᴘᴏ ⋅]━━━⬣
 
 *🔸️ ᴄᴏɴғɪɢᴜʀᴀᴄɪᴏɴ ᴅᴇʟ ɢʀᴜᴘᴏ:*
 • Welcome: ${welcome ? '✅' : '❌'}
-• Antilink ${antilink ? '✅' : '❌'}
-• Antifake ${antifake ? '✅' : '❌'}
+• Antilink: ${antilink ? '✅' : '❌'}
+• Antifake: ${antiFake ? '✅' : '❌'}
+• Antiarabe : ${antiArabe ? '✅' : '❌'}
+• Detect: ${detect ? '✅' : '❌'}
+• Autostickers: ${autosticker ? '✅' : '❌'}
+• modocaliente: ${antiNsfw ? '✅' : '❌'}
+• modoadmins: ${modeadmin ? '✅' : '❌'}
 
 *🔸️ ᴅᴇsᴄʀɪᴘᴄɪᴏɴ* :
 • ${groupMetadata.desc?.toString() || 'desconocido'}`.trim();
@@ -288,70 +293,7 @@ const caption = `⚠️ 𝚄𝚂𝚄𝙰𝚁𝙸𝙾𝚂 𝙰𝙳𝚅𝙴𝚁�
 ╚══════════════════·•`;
 conn.sendMessage(m.chat, {text: caption, contextInfo:{ mentionedJid: [...caption.matchAll(/@(\d{0,16})/g)].map(v => v[1] + '@s.whatsapp.net')}}, {quoted: m})}
 
-async function on(conn, m, isBotAdmins, isGroupAdmins, text, prefix, command, args){   
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (!m.isGroup) return m.reply(info.group)
-if (!isBotAdmins) return m.reply(info.botAdmin)
-if (!isGroupAdmins) return m.reply(info.admin)
-if (!text) return m.reply(`*Use de esta forma ejemplo:*\n*${prefix + command} on*\n*${prefix + command} off*`)
-if (args[0] === "on") {
-if (!global.db.data.chats[m.chat].detect) 
-if (!global.db.data.chats[m.chat].antilink) 
-if (!global.db.data.chats[m.chat].audios) 
-if (!global.db.data.chats[m.chat].welcome)
-if (!global.db.data.chats[m.chat].modeadmin)
-if (!global.db.data.chats[m.chat].antifake)
-if (!global.db.data.chats[m.chat].antiarabe)
-if (!global.db.data.chats[m.chat].autosticker)
-global.db.data.chats[m.chat].detect = true
-global.db.data.chats[m.chat].antilink = true
-global.db.data.chats[m.chat].audios = true
-global.db.data.chats[m.chat].welcome = true
-global.db.data.chats[m.chat].modeadmin = true
-global.db.data.chats[m.chat].antifake = true
-global.db.data.chats[m.chat].antiarabe = true
-global.db.data.chats[m.chat].autosticker = true
-m.reply(`*✅El ${command} se activo con exito*`)
-} else if (args[0] === "off") {
-if (!global.db.data.chats[m.chat].detect) 
-if (!global.db.data.chats[m.chat].antilink)
-if (!global.db.data.chats[m.chat].audios) 
-if (!global.db.data.chats[m.chat].welcome) 
-if (!global.db.data.chats[m.chat].modeadmin)
-if (!global.db.data.chats[m.chat].antifake)
-if (!global.db.data.chats[m.chat].antiarabe)
-if (!global.db.data.chats[m.chat].autosticker)
-global.db.data.chats[m.chat].detect = false
-global.db.data.chats[m.chat].antilink = false
-global.db.data.chats[m.chat].audios = false
-global.db.data.chats[m.chat].welcome = false
-global.db.data.chats[m.chat].modeadmin = false
-global.db.data.chats[m.chat].antifake = false
-global.db.data.chats[m.chat].antiarabe = false
-global.db.data.chats[m.chat].autosticker = false
-m.reply(`*${command} desactivado!*`)}}
-
-async function on2(conn, m, isCreator, text, prefix, command, args){   
-if (!isCreator) return m.reply(info.owner)
-if (!text) return m.reply(`*Use de esta forma ejemplo:*\n*${prefix + command} on*\n*${prefix + command} off*`)
-if (args[0] === "on") {
-if (db.data.chats[m.chat].modojadibot)
-if (db.data.settings[numBot].anticall)
-if (db.data.settings[numBot].antiprivado)
-db.data.chats[m.chat].modojadibot = true
-db.data.settings[numBot].anticall = true
-db.data.settings[numBot].antiprivado = true
-m.reply(`*✅El ${command} se activo con exito*`)
-} else if (args[0] === "off") {
-if (db.data.chats[m.chat].modojadibot)
-if (db.data.settings[numBot].anticall)
-if (db.data.settings[numBot].antiprivado)
-db.data.settings[numBot].anticall = false
-db.data.chats[m.chat].modojadibot = false
-db.data.settings[numBot].antiprivado = false
-m.reply(`*${command} desactivado!*`)}}
-
-module.exports = {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, on, on2, adm, infogr, warn1, warn2, online, listw}
+module.exports = {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, adm, infogr, warn1, warn2, online, listw}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {

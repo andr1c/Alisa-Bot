@@ -6,9 +6,9 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('../libs/fuctions.js'); 
 
-async function play(conn, text, m) {
+async function play(conn, text, command, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (!text) return conn.sendMessage(m.chat, { text: `*ingrese nombre de alguna cancion*` }, { quoted: m })
+if (!text) return conn.sendMessage(m.chat, { text: `*Que esta buscado? ingrese el nombre del tema*\n\nEjemplo: *${prefix + command}* ozuna` }, { quoted: m })
 let yts = require("youtube-yts")
 let search = await yts(text)
 let anup3k = search.videos[0]
@@ -33,7 +33,7 @@ m.reply(info.limit)}
 
 async function mp3(conn, args, text, command, fkontak, ytplayvid, m) {
 const mp = require('../libs/ytdl2')
-if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return m.reply(`*Ejemplo:*\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
+if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return m.reply(`*Que esta buscado?*\n\n*Ejemplo:*\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
 conn.sendMessage(m.chat, { text: `*Aguarde un momento*\n\nᴱˡ ᴬᵘᵈᶦᵒ ᵖᵘᵉᵈᵉ ᵗᵃʳᵈᵃ ᵉⁿᵗʳᵉ ⁵ ᵒ ¹⁰ ᵐᶦⁿᵘᵗᵒˢ ᵉˡ ᵉⁿᵛᶦᵃˢᵉ ᵗᵉⁿᵈʳᵃ́ ᵖᵃᶜᶦᵉⁿᶜᶦᵃ` }, { quoted: fkontak });    
 let mediaa = await ytplayvid(text)
 const audio = await mp.mp3(text)
@@ -65,7 +65,7 @@ m.reply(info.limit)}
 
 async function git(conn, args, command, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (!args[0]) return m.reply(`*Ejemplo :*\n${prefix + command} ${md}`)
+if (!args[0]) return m.reply(`*Donde esta el link del github?*\n\n*Ejemplo :*\n${prefix + command} ${md}`)
 if (!isUrl(args[0]) && !args[0].includes('github.com')) return m.reply(`Link invalido!!`)
 conn.sendMessage(m.chat, { text: `*𝘈𝘎𝘜𝘈𝘙𝘋𝘌 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖...*\n\nˢᶦ ᵉˡ ᵃʳᶜʰᶦᵛᵒ ⁿᵒ ˡˡᵉᵍᵃ ᵉˢ ᵠᵘᵉ ʳᵉᵖᵒˢᶦᵗᵒʳᶦᵒ ᵉˢ ᵐᵘʸ ᵖᵉˢᵃᵈᵒ` }, { quoted: m })
 try {

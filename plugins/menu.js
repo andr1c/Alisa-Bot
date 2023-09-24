@@ -61,10 +61,13 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ _(para vez tu numero del serie)_
 ├❥ᰰຼ ❏ ${prefix}estado 
 ├❥ᰰຼ _(comprueba el estado del bot)_
+├❥ᰰຼ ❏ ${prefix}menu2
+├❥ᰰຼ ❏ ${prefix}audios
 ├❥ᰰຼ ❏ ${prefix}ping 
 ├❥ _(Velocidad del bot)_
 ├❥ᰰຼ ❏ ${prefix}grupos 
 ├❥ _(unirte al los grupos oficiales y divirte con el bot 😸)_
+├❥ᰰຼ ❏ ${prefix}join _(solicita un bot para tu grupo)_
 ├❥ᰰຼ ❏ ${prefix}owner
 ├❥ᰰຼ ❏ ${prefix}creador
 ├❥ᰰຼ _(te envia los contactos del mi creador)_
@@ -115,12 +118,18 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
 
 *╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*🔰⃐ＧＲＵＰＯＳ*️⃟ᬽ፝֟━*
+├❥ᰰຼ ❏ ${prefix}welcome _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}antilink _(on/off)_
+├❥ᰰຼ ❏ ${prefix}antienlace _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}antifake _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}antiarabe _(on/off)_
-├❥ᰰຼ ❏ ${prefix}welcome _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}autosticker _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}detect _(on/off)_
+├❥ᰰຼ ❏ ${prefix}autodetect _(on/off)_
+├❥ᰰຼ ❏ ${prefix}antinsfw _(on/off)_
+├❥ᰰຼ ❏ ${prefix}modocaliente _(on/off)_
+├❥ᰰຼ ❏ ${prefix}autosticker _(on/off)_
+├❥ᰰຼ ❏ ${prefix}modoadmin _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}kick _(@tag)_
 ├❥ᰰຼ ❏ ${prefix}add _(@tag)_
 ├❥ᰰຼ ❏ ${prefix}invita _(@tag)_
@@ -128,7 +137,7 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}demote _(@tag)_
 ├❥ᰰຼ ❏ ${prefix}infogrupo
 ├❥ᰰຼ ❏ ${prefix}groupinfo
-├❥ᰰຼ ❏ ${prefix}admins
+├❥ᰰຼ ❏ ${prefix}admins _(llama a los admins)_
 ├❥ᰰຼ ❏ ${prefix}grupo close/open 
 ├❥ᰰຼ ❏ ${prefix}warn _(@tag)_
 ├❥ᰰຼ ❏ ${prefix}advertencia _(@tag)_
@@ -137,6 +146,8 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}setppname _(cambia el nombre del grupo)_
 ├❥ᰰຼ ❏ ${prefix}setdesc _(cambia la descripción del Grupo)_
 ├❥ᰰຼ ❏ ${prefix}setppgroup _(cambia la foto del Grupo)_
+├❥ᰰຼ ❏ ${prefix}anularlink 
+├❥ᰰຼ ❏ ${prefix}resetlink _(restablecer el link del grupo)_
 ├❥ᰰຼ ❏ ${prefix}hidetag _(etiqueta a todos el un mensaje)_
 ├❥ᰰຼ ❏ ${prefix}tagall _(etiqueta a todos el una listas)_
 ├❥ᰰຼ ❏ ${prefix}listonline _(etiquetas a los usuarios que esta activo|online)_
@@ -320,12 +331,14 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 *╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*⃐👑ＯＷＮＥＲ*️⃟ᬽ፝֟━*
 ├❥ _(Comando explusivo para propietario/owner del bot)_
 ├ *✧･ﾟ: *✧･ﾟ:*✧･ﾟ: *✧･ﾟ:*✧･ﾟ: *✧･ﾟ:
-├❥ᰰຼ ❏ ${prefix}anticall
-├❥ᰰຼ ❏ ${prefix}modojadibot
+├❥ᰰຼ ❏ ${prefix}anticall _(on/off)_
+├❥ᰰຼ ❏ ${prefix}antillamada _(on/off)_
+├❥ᰰຼ ❏ ${prefix}antipv _(on/off)_
+├❥ᰰຼ ❏ ${prefix}antiprivado _(on/off)_
+├❥ᰰຼ ❏ ${prefix}modojadibot _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}autoadmin 
 ├❥ᰰຼ ❏ ${prefix}bc (difusión a todos los chat)
 ├❥ᰰຼ ❏ ${prefix}bcgc (difusión solo a grupos)
-├❥ᰰຼ ❏ ${prefix}join 
 ├❥ᰰຼ ❏ ${prefix}setpp (cambia la foto del bot) 
 ├❥ᰰຼ ❏ ${prefix}public (modo público) 
 ├❥ᰰຼ ❏ ${prefix}privado (modo privado) 
@@ -355,7 +368,67 @@ mentionedJid:[sender],
 }}}, { quoted: fkontak }) 
 }
 
-module.exports = { menu }
+const menu2 = (conn, pushname, m, fkontak) => {
+
+let menu2 = `*Palabras especificas para que el bot interactue con ustedes*
+
+a
+Feliz cumpleaños
+Pasa pack
+Uwu
+Siuuu
+Vete a la verga
+Pasen porno
+Hora del sexito
+Pongan cuties
+Fiesta del admin
+Admin party
+Viernes
+GOOOOD
+Alto temazo
+Todo bien
+Buenos dias
+Bot gay
+Gracias
+Hola
+Fua
+Corte
+Gaspi buenos dias 
+Gaspi me saludas
+Gaspi y las minitas
+Gaspi todo bien
+Me quiero suicidar
+Gaspi ya no aguanto
+Contate algo bot
+Sexo
+Momento epico
+El bot del orto no funciona
+Epicardo
+Insta de la minita
+Una mierda de bot
+Ultimo momento
+Nefasto
+Paraguayo
+Bot de mierda
+Venezolano
+Gaspi corte
+Ya me voy a dormir
+Calefon
+Apurate bot
+Un chino
+No funciona
+Boliviano
+Enano
+Quien es tu sempai botsito
+Me gimes 7u7
+Te amo botsito uwu
+Onichan
+La toca 7w7
+
+_*Ojito escribe tal y como esta en el mensaje*_`
+conn.sendMessage(m.chat, { text: menu2}, { quoted: fkontak })}
+
+module.exports = { menu, menu2}
 
  let file = require.resolve(__filename)
 fs.watchFile(file, () => {

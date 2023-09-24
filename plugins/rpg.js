@@ -51,24 +51,8 @@ const time = moment.tz('America/Argentina/Buenos_Aires').format('LT')
 let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length
 global.db.data.users[m.sender].limit += 2
 global.db.data.users[m.sender].exp += 200
-conn.sendMessage(m.chat, { text: `[ ✅ REGISTRO COMPLETADO ]
-
- ◉ *Nombre:* ${name}
- ◉ *Edad:* ${age} años
- ◉ *Hora:* ${time}
- ◉ *Fecha:* ${date}
- ◉ *Número:* wa.me/${sender.split("@")[0]}
- ◉ *Numero del serie* 
- ⤷ ${sn}
- 
- 🎁 *Recompensa:*
- ⤷ 2 diamante 💎
- ⤷ 200 exp
-
- *◉ Para ver los comandos del bot usar:*
- ${prefix}menu
- 
- ◉ *Total de usuários registrados:* ${rtotalreg}`,
+conn.sendMessage(m.chat, { text: `[ ✅ REGISTRO COMPLETADO ]\n\n ◉ *Nombre:* ${name}\n ◉ *Edad:* ${age} años\n ◉ *Hora:* ${time}\n ◉ *Fecha:* ${date}\n ◉ *Número:* wa.me/${sender.split("@")[0]}\n ◉ *Numero del serie*\n ⤷ ${sn}\n\n 🎁 *Recompensa:*\n ⤷ 2 diamante 💎\n ⤷ 200 exp\n\n *◉ Para ver los comandos del bot usar:*
+ ${prefix}menu\n\n ◉ *Total de usuários registrados:* ${rtotalreg}`,
 contextInfo:{
 mentionedJid:[name],
 forwardingScore: 9999999,
@@ -216,19 +200,19 @@ async function perfil(conn, who, sender, pushname, fkontak, m) {
 avatar = await conn.profilePictureUrl(who, 'image').catch((_) => 'https://telegra.ph/file/24fa902ead26340f3df2c.png')
 let { money, exp, role, limit, level, registered, age} = global.db.data.users[m.sender]
 conn.sendMessage(m.chat, { image: { url: avatar }, caption: `┏─━─━─━∞◆∞━─━─━─┓
-│🔸 ️🔖 ɴᴏᴍʙʀᴇ: ${pushname} ${registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''}
+│🔖 ɴᴏᴍʙʀᴇ: ${pushname} ${registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''}
 │——————«•»——————
-│🔸️ 📱ɴᴜᴍᴇʀᴏ: wa.me/${sender.split("@")[0]} ${registered ? '\n│——————«•»——————\n│🔸 ️ᴇᴅᴀᴅ: ' + age + ' años' : ''}
+│📱ɴᴜᴍᴇʀᴏ: wa.me/${sender.split("@")[0]} ${registered ? '\n│——————«•»——————\n│🔸 ️ᴇᴅᴀᴅ: ' + age + ' años' : ''}
 │——————«•»——————
-│🔸 ️💎 ᴅɪᴀᴍᴀɴᴛᴇs : ${limit}
+│️💎 ᴅɪᴀᴍᴀɴᴛᴇs : ${limit}
 │——————«•»——————
-│🔸 ️🆙 ɴɪᴠᴇʟ : ${level}
+│🆙 ɴɪᴠᴇʟ : ${level}
 │——————«•»——————
-│🔸 ️⬆️ xᴘ : ${exp}
+│️⬆️ xᴘ : ${exp}
 │——————«•»——————
-│🔸 ️🏆ʀᴀɴɢᴏ: ${role}
+│🏆ʀᴀɴɢᴏ: ${role}
 │——————«•»——————
-│🔸 ️📇 ʀᴇɢɪsᴛʀᴀᴅᴏs : ${registered ? 'Si': 'No'}
+│📇 ʀᴇɢɪsᴛʀᴀᴅᴏs : ${registered ? 'Si': 'No'}
 ┗─━─━─━∞◆∞━─━─━─┛`}, { quoted: fkontak })}
 
 async function nivel(conn, sender, canLevelUp, xpRange, m, pushname) {
@@ -236,28 +220,31 @@ let name = conn.getName(m.sender);
 let user = global.db.data.users[m.sender]; 
 if (!canLevelUp(user.level, user.exp, global.multiplier)) { 
 let {min, xp, max} = xpRange(user.level, global.multiplier); 
-return m.reply(`*[ TUS ESTADISTICAS 🆙 ]*
+return m.reply(`╭╌「 *TUS ESTADISTICAS 🆙* 」
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+├『 Tus estadisticas en tiempo real 🕐 』
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+├─ ❏ *NOMBRE:* ${pushname}
+├─ ❏ *XP 🆙:* ${user.exp - min}/${xp}
+├─ ❏ *NIVEL:* ${user.level}
+├─ ❏ *RANGO:* ${user.role}
+╰╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
-Tus estadisticas en tiempo real 🕐
-
-├─ ❏ *NOMBRE:* *${pushname}*
-├─ ❏ *XP 🆙:* *${user.exp - min}/${xp}*
-└─ ❏ *NIVEL:* *${user.level}*
-└─ ❏ *RANGO:* *${user.role}*
-
-ᴛᴇ ғᴀʟᴛᴀ *${max - user.exp}* ᴅᴇ *XP* ᴘᴀʀᴀ sᴜʙɪʀ ᴅᴇ ɴɪᴠᴇʟ`)} 
+𝘛𝘦 𝘧𝘢𝘭𝘵𝘢 *${max - user.exp}* 𝘥𝘦 *XP* 𝘱𝘢𝘳𝘢 𝘴𝘶𝘣𝘪𝘳 𝘥𝘦 𝘯𝘪𝘷𝘦𝘭`)} 
 const before = user.level * 1; 
 while (canLevelUp(user.level, user.exp, global.multiplier)) user.level++; 
 if (before !== user.level) {
-const str = `*[ LEVEL UP 🎊 ]* 
-
-🥳 ${pushname} ғᴇʟɪᴄɪᴅᴀᴅᴇs ʟʟᴇɢᴀsᴛᴇ ᴀ ᴜɴ ɴᴜᴇᴠᴏ ɴɪᴠᴇʟ
-
+const str = `╭╌「 *LEVEL UP 🎊* 」
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+├『 🥳 ${pushname} 𝘍𝘦𝘭𝘪𝘤𝘪𝘥𝘢𝘥𝘦𝘴
+├ 𝘭𝘭𝘦𝘨𝘢𝘴𝘵𝘦 𝘢 𝘶𝘯 𝘯𝘶𝘦𝘷𝘰 𝘯𝘪𝘷𝘦𝘭 』
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 ├─ ❏ *NIVEL ANTERIOR:* ${before}
 ├─ ❏ *NIVEL ACTUAL:* ${user.level}
 ├─ ❏ *RANGO:* ${user.role}
+╰╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
-*_ᴄᴜᴀɴᴛᴏ ᴍᴀs ɪɴᴛᴇʀᴀᴄᴛᴜᴇs ᴄᴏɴ ʟᴏs ʙᴏᴛs, ᴍᴀʏᴏʀ sᴇʀᴀ ᴛᴜ ɴɪᴠᴇʟ_*`.trim()
+*𝘊𝘶𝘢𝘯𝘵𝘰 𝘮𝘢𝘴 𝘪𝘯𝘵𝘦𝘳𝘢𝘤𝘵𝘶𝘦𝘴 𝘤𝘰𝘯 𝘭𝘰𝘴 𝘣𝘰𝘵𝘴, 𝘮𝘢𝘺𝘰𝘳 𝘴𝘦𝘳𝘢 𝘵𝘶 𝘯𝘪𝘷𝘦𝘭*`.trim()
 return m.reply(str)}}
 
 async function cofre(conn, sender, m) {
