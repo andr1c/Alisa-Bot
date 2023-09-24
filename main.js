@@ -1,8 +1,8 @@
 //Código desde cero y comentarios hecho por: 
 // @gata_dios
 // @Skidy89
-// @elrebelde21   
-  
+// @elrebelde21 
+
 //═════════[ Importaciones ]═════════ 
 const baileys = require('@whiskeysockets/baileys'); // trabajar a través de descargas por Whatsapp 
 const { WaMessageStubType, areJidsSameUser, downloadContentFromMessage, generateWAMessageContent, generateWAMessageFromContent, generateWAMessage, prepareWAMessageMedia, relayMessage} = require('@whiskeysockets/baileys'); // Importa los objetos 'makeWASocket' y 'proto' desde el módulo '@whiskeysockets/baileys'   
@@ -28,6 +28,7 @@ const scp1 = require('./libs/scraper')
 const { File } = require("megajs")
 const speed = require("performance-now")
 const ffmpeg = require("fluent-ffmpeg")
+const similarity = require('similarity') 
 const { TelegraPh, UploadFileUgu, webp2mp4File, floNime } = require('./libs/uploader.js')
 const { toAudio, toPTT, toVideo } = require('./libs/converter.js')
 const { canLevelUp, xpRange } = require('./libs/levelling.js')
@@ -36,18 +37,19 @@ const { ytmp4, ytmp3, ytplay, ytplayvid } = require('./libs/youtube')
 const { mediafireDl } = require('./libs/mediafire.js') 
 const {jadibot, listJadibot, killJadibot} = require('./serbot.js')  
 const { jadibot2} = require('./serbot2.js')
-const { menu } = require('./plugins/menu.js')
+const { menu, menu2} = require('./plugins/menu.js')
 const { state, owner, grupo, instalar, ping, report, ow} = require('./plugins/info.js')
 const {rob, bal, reg, reg1, reg2, work, mine, buy, afk, claim, perfil, nivel, cofre, lb} = require('./plugins/rpg.js') 
 const {game, game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, game13, game14, game15} = require('./plugins/juegos.js') 
 const {yt, acortar, google, imagen, tran, tts, ia, ssw, wall} = require('./plugins/buscadores.js')
 const {efec, url, tomp3, toimg} = require('./plugins/convertidores.js') 
-const {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, adm, infogr, warn1, warn2, online, listw, on, on2} = require('./plugins/grupos.js')
+const {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, adm, infogr, warn1, warn2, online, listw} = require('./plugins/grupos.js')
 const {nsfw1, nsfw2, nsfw3, nsfw4, nsfw5} = require('./plugins/nsfw.js')
 const {randow1, randow2, randow3, randow4, randow5, randow6, randow7, randow8, randow9} = require('./plugins/randow.js') 
 const {play, mp3, mp4, git, tiktok, letra, mediafire, fb, ig, ig2, apk} = require('./plugins/descargas.js')  
 const {s, wm, attp, dado} = require('./plugins/stickers.js') 
 const {owner1, owner2, owner3, owner4, owner5, owner6, owner7, owner8, owner9} = require('./plugins/propietario.js')  
+const {on, on1, on2, on3, on4, on5, on6, on7, on8, on9, on10, on11} = require('./plugins/enable.js') 
 
 const msgs = (message) => { 
 if (message.length >= 10) { 
@@ -169,10 +171,13 @@ if (global.db.data.settings[numBot].autobio) {
 let setting = global.db.data.settings[numBot]
 if (new Date() * 1 - setting.status > 1000) {
 let uptime = await runtime(process.uptime())
+try {
 const bio = `ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ | ᴀᴄᴛɪᴠᴏ ✅️: ${runtime(process.uptime())}\n\nᴘᴀʀᴀ ᴠᴇᴢ ᴍɪ ʟɪsᴛᴀ ᴅᴇ ᴄᴏᴍᴀɴᴅᴏ ᴜsᴀʀ #menu`
 await conn.updateProfileStatus(bio)
 setting.status = new Date() * 1
-}} 
+} catch {
+console.log('⚠️ No se logró actualizar la bio') 
+}}}
   
 //autoread
 if (m.message) {
@@ -312,9 +317,12 @@ break
 case 'estado':
 state(conn, m, speed, sender, fkontak) 
 break
-case 'menu':  
+case 'menu': case 'help': case 'menucompleto':
 menu(conn, prefix, pushname, sender, m, fkontak)
 break  
+case 'menu2': case 'audios':
+menu2(conn, pushname, m, fkontak)
+break
 case 'owner': case 'creador': 
 owner(conn, m, sender) 
 break 
@@ -347,11 +355,32 @@ let { stdout, stderr } = o
 if (stdout.trim()) m.reply(stdout)
 if (stderr.trim()) m.reply(stderr)}}
 break
-//grupo
-case 'welcome': case 'audios': case 'modeadmin': case 'antifake': case 'antinternacional': case 'antiarabe': case 'detect': case 'antilink': case 'autosticker': await on(conn, m, isBotAdmins, isGroupAdmins, text, prefix, command, args)
+//opción activa/desartiva
+case 'welcome': on(isGroupAdmins, text, command, args, m) 
 break
-case 'modojadibot': case 'anticall': case 'antiprivado': await on2(conn, m, isCreator, text, prefix, command, args)
+case 'antilink': case 'antienlace': on1(isBotAdmins, isGroupAdmins, text, command, args, m)
+break
+case 'antifake': case 'antiFake': on2(isBotAdmins, isGroupAdmins, text, command, args, m)
+break
+case 'antiarabe': case 'antiArabe': on3(isBotAdmins, isGroupAdmins, text, command, args, m)
+break
+case 'autodetect': case 'detect': on4(isBotAdmins, isGroupAdmins, text, command, args, m)
+break
+case 'audios': on5(text, command, args, m) 
+break
+case 'autosticker': case 'stickers': on6(text, command, args, m) 
+break
+case 'modocaliente': case 'antinsfw': on7(isGroupAdmins, text, command, args, m) 
+break
+case 'modoadmin': case 'modoadmins': on8(isBotAdmins, isGroupAdmins, text, command, args, m) 
+break
+case 'antiprivado': case 'antipv': on9(isCreator, text, command, args, m) 
+break
+case 'antiCall': case 'antillamada': on10(isCreator, text, command, args, m) 
 break            
+case 'modojadibot': case 'jadibot': on11(isCreator, text, command, args, m) 
+break
+//Grupo
 case 'grupo': grup(conn, m, args, isBotAdmins, isGroupAdmins, command, prefix, text)
 break
 case 'delete': case 'del': 
@@ -371,6 +400,10 @@ setde(conn, m, isBotAdmins, isGroupAdmins, text)
 break
 case 'setppgroup': case 'setpp': 
 setpp(conn, m, isBotAdmins, isGroupAdmins, quoted, prefix, command, mime, args, from)
+break
+case 'anularlink': case 'resetlink': case 'revoke':
+let res = conn.groupRevokeInvite(m.chat)
+//reply(`✅ El enlace de grupo se ha restablecido correctamente\n\n• Enlace nuevo:\nhttps://chat.whatsapp.com/${res}`)
 break
 case 'add': case 'agregar': case 'invitar': 
 add(conn, m, isBotAdmins, isGroupAdmins, text, sender, prefix)
@@ -460,13 +493,6 @@ break
 case 'racista':
 game15(m, body)  
 break
-//audios 
-case "a":   
-if (!global.db.data.chats[m.chat].audios) return
-let vn = './media/a.mp3'
-await conn.sendPresenceUpdate('recording', m.chat)
-conn.sendMessage(m.chat, { audio: { url: vn }, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": md, "showAdAttribution": true}}, seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, { quoted: m }) 
-break  
 //convertidores
 case 'bass': case 'blown': case 'deep': case 'earrape': case 'fast': case 'fat': case 'nightcore': case 'reverse': case 'robot': case 'slow': case 'smooth': case 'squirrel': 
 efec(conn, command, mime, quoted, exec, prefix, m, from) 
@@ -474,7 +500,7 @@ break
 case 'toaudio': case 'tomp3': 
 tomp3(conn, mime, quoted, m) 
 break
-case 'toimg': 
+case 'toimg': case 'toimagen':
 toimg(conn, mime, quoted, exec, m) 
 break
 case 'tourl': 
@@ -529,7 +555,7 @@ sendImageAsUrl("https://delirius-image-random.vercel.app/api/all");
 break
 //descargas		    
 case 'play':
-play(conn, text, m) 
+play(conn, text, command, m) 
 break 
 case "ytmp3": case "ytaudio": 
 mp3(conn, args, text, command, fkontak, ytplayvid, m)
@@ -558,11 +584,11 @@ break
 case 'igstalk':
 ig2(conn, args, command, m) 
 break
-case 'apk': 
+case 'apk': case 'modoapk':
 apk(conn, text, m)  
 break
 //rpg
-case 'reg': 
+case 'reg': case 'verificar':
 await reg(conn, m, sender, text, fkontak, delay)
 break            
 case 'unreg': 
@@ -686,8 +712,182 @@ break
 function pickRandom(list) {
 return list[Math.floor(list.length * Math.random())]
 }
- 
+
 default:
+if (budy.includes(`Todo bien`)) {
+reply(`Si amigo todo bien, vite`)}
+if (budy.includes(`Buenos dias`)) {
+reply(`Buenos Dias trolos de mierda`)}
+if (budy.includes(`Bot gay`)) {
+reply(`Miren a este boludito`)}
+if (budy.includes(`Che messi vo le preguntaste?`)) {
+reply(`No`)}
+if (budy.includes(`Opa`)) {
+reply(`opaaaaa`)}
+if (budy.includes(`Fua`)) {
+reply(`el diegote pa`)}
+if (budy.startsWith(`a`)) {
+if (!global.db.data.chats[m.chat].audios) return
+let vn = './media/a.mp3'
+await conn.sendPresenceUpdate('recording', m.chat)
+conn.sendMessage(m.chat, { audio: { url: vn }, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": md, "showAdAttribution": true}}, seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, { quoted: m })}
+if (budy.startsWith(`Feliz cumpleaños`)) {
+const vn = './media/Feliz cumple.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Vete a la verga`)) {
+const vn = './media/vete a la verga.mp3';
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Uwu`)) {
+const vn = './media/UwU.mp3';
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Siuuu`)) {
+const vn = './media/siu.mp3';
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Pasa pack`)) {
+const vn = './media/Elmo.mp3';
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Audio hentai`)) {
+const vn = './media/hentai.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Pasen porno`)) {
+const vn = './media/maau2.mp3'
+conn.sendAudio(m.chat, vn, m)}			
+if (budy.startsWith(`VAMOOO`)) {
+const vn = './media/vamo.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Hora del sexito`)) {
+const vn = './media/maau1.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Cuentate un chiste`)) {
+const vn = './media/dylan2.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Admin party`)) {
+const vn = './media/fiesta.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Fiesta del admin`)) {
+const vn = './media/admin.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Viernes`)) {
+const vn = './media/viernes.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`:v`)) {
+const vn = './media/viejo1.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`La toca 7w7`)) {
+const vn = './media/anime5.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Quien es tu sempai botsito`)) {
+const vn = './media/anime4.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Me gimes 7u7`)) {
+const vn = './media/anime3.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Te amo botsito uwu`)) {
+const vn = './media/anime2.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Onichan`)) {
+const vn = './media/anime1.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Pasen sexo`)) {
+const vn = './media/fernan.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Paraguayo`)) {
+const vn = './media/gaspi11.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Venezolano`)) {
+const vn = './media/gaspi10.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Gaspi corte`)) {
+const vn = './media/gaspi12.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Gaspi buenos dias`)) {
+const vn = './media/gaspi13.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Enano`)) {
+const vn = './media/gaspi14.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Buenas noches`)) {
+const vn = './media/gaspi15.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Peruano`)) {
+const vn = './media/gaspi16.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Alto temazo`)) {
+const vn = './media/sombare14.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`GOOOOD`)) {
+const vn = './media/sombare13.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Ya me voy a dormir`)) {
+const vn = './media/sombare12.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Calefon`)) {
+const vn = './media/sombare11.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Bot de mierda`)) {
+const vn = './media/sombare10.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Apurate bot`)) {
+const vn = './media/sombare9.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Un chino`)) {
+const vn = './media/sombare7.mp3'
+conn.sendAudio(m.chat, vn, m)}				
+if (budy.startsWith(`No funciona`)) {
+const vn = './media/sombare8.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Boliviano`)) {
+const vn = './media/gaspi3.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Corte`)) {
+const vn = './media/gaspi2.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Gaspi me saludas`)) {
+const vn = './media/gaspi4.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Gaspi y las minitas`)) {
+const vn = './media/gaspi6.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Gaspi todo bien`)) {
+const vn = './media/gaspi7.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Me quiero suicidar`)) {
+const vn = './media/gaspi81.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Gaspi ya no aguanto`)) {
+const vn = './media/gaspi9.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Contate algo bot`)) {
+const vn = './media/gaspi5.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Sexo`)) { 
+const vn = './media/sexo.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Pongan cuties`)) { 
+const vn = './media/neymar1.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Momento epico`)) {
+const vn = './media/sombare1.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`El bot del orto no funciona`)) {
+const vn = './media/sombare2.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Epicardo`)) {
+const vn = './media/sombare3.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Insta de la minita`)) {
+const vn = './media/sombare4.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Una mierda de bot`)) {
+const vn = './media/sombare5.mp3'
+conn.sendAudio(m.chat, vn, m)}
+if (budy.startsWith(`Ultimo momento`)) {
+const vn = './media/sombare6.mp3'
+conn.sendAudio(m.chat, vn, m)}			
+if (budy.startsWith(`Nefasto`)) {
+const vn = './media/gaspi1.mp3'
+conn.sendAudio(m.chat, vn, m)}
+                  
 if (budy.startsWith('>')) {
 if (!isCreator) return
 try {

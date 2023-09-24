@@ -255,7 +255,7 @@ ppgroup = await sock.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `*¡Ahora solo los administradores pueden enviar mensajes!*`
+let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*¡Ahora solo los administradores pueden enviar mensajes!*`
 sock.sendMessage(res.id, {text: text,  
 contextInfo:{  
 forwardingScore: 9999999,  
@@ -278,7 +278,7 @@ ppgroup = await sock.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `*Ahora todos los participantes pueden mandar mensajes 🗣️*`
+let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*Ahora todos los participantes pueden mandar mensajes 🗣️*`
 sock.sendMessage(res.id, {   
 text: text,  
 contextInfo:{  
@@ -302,7 +302,7 @@ ppgroup = await sock.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `*ᴀʜᴏʀᴀ sᴏʟᴏ ʟᴏs ᴀᴅᴍɪɴɪsᴛʀᴀᴅᴏʀᴇs ᴘᴜᴇᴅᴇ ᴇᴅɪᴛᴀʀ ʟᴏs ᴀᴊᴜsᴛᴇ ᴅᴇʟ ɢʀᴜᴘᴏ*`
+let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*ᴀʜᴏʀᴀ sᴏʟᴏ ʟᴏs ᴀᴅᴍɪɴɪsᴛʀᴀᴅᴏʀᴇs ᴘᴜᴇᴅᴇ ᴇᴅɪᴛᴀʀ ʟᴏs ᴀᴊᴜsᴛᴇ ᴅᴇʟ ɢʀᴜᴘᴏ*`
 sock.sendMessage(res.id, {text: text,  
 contextInfo:{  
 forwardingScore: 9999999,  
@@ -312,7 +312,7 @@ mentionedJid:[m.sender],
 "showAdAttribution": true,  
 "containsAutoReply": false,
 "renderLargerThumbnail": false,  
-"title": '「 ＡＪＵＳＴＥＳ ＤＥＬ ＧＲＵＰＯ 」', 
+"title": wm, 
 "mediaType": 1,   
 "thumbnail": imagen1, 
 "mediaUrl": md, 
@@ -325,7 +325,7 @@ ppgroup = await sock.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `*ᴀʜᴏʀᴀ ᴛᴏᴅᴏs ʟᴏs ᴘᴀʀᴛɪᴄɪᴘᴀʀᴛᴇ ᴘᴜᴇᴅᴇ ᴇᴅɪᴛᴀʀ ʟᴏs ᴀᴊᴜsᴛᴇ ᴅᴇʟ ɢʀᴜᴘᴏ*`
+let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*ᴀʜᴏʀᴀ ᴛᴏᴅᴏs ʟᴏs ᴘᴀʀᴛɪᴄɪᴘᴀʀᴛᴇ ᴘᴜᴇᴅᴇ ᴇᴅɪᴛᴀʀ ʟᴏs ᴀᴊᴜsᴛᴇ ᴅᴇʟ ɢʀᴜᴘᴏ*`
 sock.sendMessage(res.id, {text: text,  
 contextInfo:{  
 forwardingScore: 9999999,  
@@ -335,7 +335,7 @@ mentionedJid:[m.sender],
 "showAdAttribution": true,  
 "containsAutoReply": false,
 "renderLargerThumbnail": false,  
-"title": '「 ＡＪＵＳＴＥＳ ＤＥＬ ＧＲＵＰＯ 」', 
+"title": wm, 
 "mediaType": 1,   
 "thumbnail": imagen1, 
 "mediaUrl": md, 
@@ -348,7 +348,7 @@ ppgroup = await sock.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `*La descripción del grupo fue cambiada nueva descripción es *\n${res.desc}`
+let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*La descripción del grupo fue cambiada nueva descripción es *\n${res.desc}`
 sock.sendMessage(res.id, {text: text,  
 contextInfo:{  
 forwardingScore: 9999999,  
@@ -358,7 +358,7 @@ mentionedJid:[m.sender],
 "showAdAttribution": true,  
 "containsAutoReply": false,
 "renderLargerThumbnail": false,  
-"title": '「 ＡＪＵＳＴＥＳ ＤＥＬ ＧＲＵＰＯ 」', 
+"title": wm, 
 "mediaType": 1,   
 "thumbnail": imagen1, 
 "mediaUrl": md,  
@@ -371,7 +371,7 @@ ppgroup = await sock.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `*El nombre del grupo fue cambiado nuevos nombre es :*\n${res.subject}`
+let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*El nombre del grupo fue cambiado nuevos nombre es :*\n${res.subject}`
 sock.sendMessage(res.id, {text: text,  
 contextInfo:{  
 forwardingScore: 9999999,  
@@ -381,7 +381,7 @@ mentionedJid:[m.sender],
 "showAdAttribution": true,  
 "containsAutoReply": false,
 "renderLargerThumbnail": false,  
-"title": '「 ＡＪＵＳＴＥＳ ＤＥＬ ＧＲＵＰＯ 」', 
+"title": wm, 
 "mediaType": 1,   
 "thumbnail": imagen1, 
 "mediaUrl": md,  
@@ -391,8 +391,8 @@ mentionedJid:[m.sender],
 
 //Welcome adaptado
 sock.ev.on('group-participants.update', async (anu) => {
-let welcome = global.db.data.chats[anu.id].welcome
-if (!welcome) return
+let isWelcome = global.db.data.chats[anu.id].welcome
+if(!isWelcome) return
 console.log(anu)
 try {
 let metadata = await sock.groupMetadata(anu.id)

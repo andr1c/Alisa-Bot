@@ -116,18 +116,18 @@ console.log(reason)
 if (reason == 405) {
 await fs.unlinkSync(path.join(__dirname, `./jadibts/${m.sender.split("@")[0]}/creds.json`))
 //thank you aiden_notLogic
-return await reply(`*[ ⚠️ ] Reenvia el comando*`)
+return await reply(`*⚠️ Reenvia el comando....*`)
 }
 if (reason === DisconnectReason.restartRequired) {
 skBot()
-return console.log('[ ⚠️ ]Reinicio requerido, Reiniciando....'); 
+return console.log('[ ⚠️ ] Reinicio requerido, Reiniciando....'); 
 // reply(`*⚠️ Reinicio requerido,*\n*Reiniciando...*`)
 } else if (reason === DisconnectReason.loggedOut) {
 sleep(4000)
-return reply(`*[ ⚠️ ] Dispositivo desconectado*\n\n*Tendras que volver a iniciar sesion (usa .deljadibot)*`)
+return reply(`*⚠️ Dispositivo desconectado*\n\n*Tendras que volver a iniciar sesion (usa .deljadibot)*`)
 } else if (reason == 428) {
 await endSesion(false)
-return reply(`*[ ⚠️ ] Conexion cerrada*\n*intenta reconectarte con #sercode*`)
+return reply(`*⚠️ Conexion cerrada*\n*Intenta reconectarte con #sercode*`)
 } else if (reason === DisconnectReason.connectionLost) {
 await skBot()
 return console.log('[ ⚠️ ] Conexion perdida del servidor reconexion Forzada'); 
@@ -138,7 +138,7 @@ return await reply(`*[ ⚠️ ] Tu conexion es invalida*\n*no se te reconectara*
 await endSesion(false)
 return reply(`*[ ⚠️ ] Se agoto el tiempo de conexión...*`)
 } else {
-console.log(`⚠️ Error desconocido :\n${reason || ''}: ${connection || ''}`); 
+console.log(`[ ⚠️ ] Error desconocido:\n${reason || ''}: ${connection || ''}`); 
 //reply(`*⚠️ error desconocido*\n${reason || ''}: ${connection || ''}\n*Reportalo al creador*`) // also aiden lol
 }
 let i = global.listJadibot.indexOf(skmod)
@@ -172,7 +172,7 @@ ppgroup = await skmod.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `*¡Ahora solo los administradores pueden enviar mensajes!*`
+let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*¡Ahora solo los administradores pueden enviar mensajes!*`
 skmod.sendMessage(res.id, {text: text,  
 contextInfo:{forwardingScore: 9999999,  
 isForwarded: true,   
@@ -194,7 +194,7 @@ ppgroup = await skmod.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `*Ahora todos los participantes pueden mandar mensajes 🗣️*`
+let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*Ahora todos los participantes pueden mandar mensajes 🗣️*`
 skmod.sendMessage(res.id, {text: text,  
 contextInfo:{forwardingScore: 9999999,  
 isForwarded: true,   
@@ -216,7 +216,7 @@ ppgroup = await skmod.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `*ᴀʜᴏʀᴀ sᴏʟᴏ ʟᴏs ᴀᴅᴍɪɴɪsᴛʀᴀᴅᴏʀᴇs ᴘᴜᴇᴅᴇ ᴇᴅɪᴛᴀʀ ʟᴏs ᴀᴊᴜsᴛᴇ ᴅᴇʟ ɢʀᴜᴘᴏ*`
+let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*ᴀʜᴏʀᴀ sᴏʟᴏ ʟᴏs ᴀᴅᴍɪɴɪsᴛʀᴀᴅᴏʀᴇs ᴘᴜᴇᴅᴇ ᴇᴅɪᴛᴀʀ ʟᴏs ᴀᴊᴜsᴛᴇ ᴅᴇʟ ɢʀᴜᴘᴏ*`
 skmod.sendMessage(res.id, {text: text,  
 contextInfo:{forwardingScore: 9999999,  
 isForwarded: true,   
@@ -238,7 +238,7 @@ ppgroup = await skmod.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `*ᴀʜᴏʀᴀ ᴛᴏᴅᴏs ʟᴏs ᴘᴀʀᴛɪᴄɪᴘᴀʀᴛᴇ ᴘᴜᴇᴅᴇ ᴇᴅɪᴛᴀʀ ʟᴏs ᴀᴊᴜsᴛᴇ ᴅᴇʟ ɢʀᴜᴘᴏ*`
+let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*ᴀʜᴏʀᴀ ᴛᴏᴅᴏs ʟᴏs ᴘᴀʀᴛɪᴄɪᴘᴀʀᴛᴇ ᴘᴜᴇᴅᴇ ᴇᴅɪᴛᴀʀ ʟᴏs ᴀᴊᴜsᴛᴇ ᴅᴇʟ ɢʀᴜᴘᴏ*`
 skmod.sendMessage(res.id, {text: text,  
 contextInfo:{forwardingScore: 9999999,  
 isForwarded: true,   
@@ -260,7 +260,7 @@ ppgroup = await skmod.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `*La descripción del grupo fue cambiada nueva descripción es *\n${res.desc}`
+let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*La descripción del grupo fue cambiada nueva descripción es *\n${res.desc}`
 skmod.sendMessage(res.id, {text: text,  
 contextInfo:{forwardingScore: 9999999,  
 isForwarded: true,   
@@ -282,7 +282,7 @@ ppgroup = await skmod.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `*El nombre del grupo fue cambiado nuevos nombre es :*\n${res.subject}`
+let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*El nombre del grupo fue cambiado nuevos nombre es :*\n${res.subject}`
 skmod.sendMessage(res.id, {text: text,  
 contextInfo:{forwardingScore: 9999999,  
 isForwarded: true,   
@@ -322,13 +322,56 @@ ppgroup = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-
 }
 
 if (anu.action == 'add') {
-skmod.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `┏─━─━─━∞◆∞━─━─━─┓\n┆ ｡･ﾟ♡ﾟ･｡🍓｡･ﾟ♡ﾟ･｡🍒\n┆ Hola @${num.split("@")[0]} ¿COMO ESTAS?😃\n┆——————«•»——————\n┆ Bienvenido a ${metadata.subject}\n┆——————«•»——————\n┆un gusto conocerte amig@ 🤗\n┆Recuerda leer las reglas del grupo\n┆para no tener ningun problema 🧐\n┖━─━─━─━─━─━─━─━─━┚\n\n${metadata.desc}`})
+skmod.sendMessage(anu.id, { text: `┏─━─━─━∞◆∞━─━─━─┓\n┆ ｡･ﾟ♡ﾟ･｡🍓｡･ﾟ♡ﾟ･｡🍒\n┆ Hola @${num.split("@")[0]} ¿COMO ESTAS?😃\n┆——————«•»——————\n┆ Bienvenido a ${metadata.subject}\n┆——————«•»——————\n┆un gusto conocerte amig@ 🤗\n┆Recuerda leer las reglas del grupo\n┆para no tener ningun problema 🧐\n┖━─━─━─━─━─━─━─━─━\n\n${metadata.desc}`, contextInfo:{
+forwardingScore: 9999999,
+isForwarded: true, 
+mentionedJid:[num],
+"externalAdReply": {"showAdAttribution": true,
+"containsAutoReply": true,
+"title": `乂 ＷＥＬＣＯＭＥ 乂`,
+body: `${metadata.subject}`,
+"previewType": "PHOTO",
+"thumbnailUrl": ``,
+"thumbnail": ppuser,
+"sourceUrl": md}}}) 
 } else if (anu.action == 'remove') {
-skmod.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `┏─━─━─━∞◆∞━─━─━─┓\n┆ ｡･ﾟ♡ﾟ･｡🍓｡･ﾟ♡ﾟ･｡🍒\n┆ adiós @${num.split("@")[0]} se fue\n┆ un fan del bts\n  ┖━─━─━─━─━─━─━─━─━┚`})
+skmod.sendMessage(anu.id, { text: `┏─━─━─━∞◆∞━─━─━─┓\n┆ ｡･ﾟ♡ﾟ･｡🍓｡･ﾟ♡ﾟ･｡🍒\n┆ adiós @${num.split("@")[0]} se fue\n┆ un fan del bts\n  ┖━─━─━─━─━─━─━─━─━┚`,
+contextInfo:{
+forwardingScore: 9999999,
+isForwarded: true, 
+mentionedJid:[num],
+"externalAdReply": {"showAdAttribution": true,
+"containsAutoReply": true,
+"title": '乂 ＡＤＩＯ́Ｓ 乂', 
+body: `Esperemos que no vuelva -_-`,
+"previewType": "PHOTO",
+"thumbnailUrl": ``,
+"thumbnail": ppuser,
+"sourceUrl": md}}}) 
 } else if (anu.action == 'promote') {
-skmod.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `*@${num.split('@')[0]} Ahora eres admin 🎉*`})
+skmod.sendMessage(anu.id, { text: `*Hey @${num.split('@')[0]} Ahora eres admin del grupo 🥳`, 
+ contextInfo:{
+ mentionedJid:[num],
+ "externalAdReply": {"showAdAttribution": true,
+ "containsAutoReply": true,
+ "title": `乂 ＮＵＥＶＯ ＡＤＭＩＮ 乂`,
+"body": botname,
+ "previewType": "PHOTO",
+"thumbnailUrl": ``,
+"thumbnail": ppuser, 
+"sourceUrl": md}}})
 } else if (anu.action == 'demote') {
-skmod.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `*@${num.split('@')[0]} ya no eres admin jjj 😑*`})
+skmod.sendMessage(anu.id, { text: `Hey @${num.split('@')[0]} ya no eres admins 🥲`,
+ contextInfo:{
+ mentionedJid:[num],
+ "externalAdReply": {"showAdAttribution": true,
+ "containsAutoReply": true,
+ "title": `乂 ＵＮ ＡＤＭＩＮ ＭＥＮＯＳ  乂`,
+"body": botname, 
+ "previewType": "PHOTO",
+"thumbnailUrl": ``,
+"thumbnail": ppuser,
+"sourceUrl": md}}})
 }}} catch (err) {
 console.log(err)
 }})
