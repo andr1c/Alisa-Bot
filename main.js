@@ -309,7 +309,7 @@ y = await conn.decodeJid(i.id)
 te += " ❑ Usuario : @" + y.split("@")[0] + "\n" 
 te += " ❑ Nombre : " + i.name + "\n\n" 
 } 
-conn.sendMessage(m.chat, { text: te, contextInfo:{ mentionedJid:[y]}}, { quoted: m })}
+conn.sendMessage(m.chat, { text: te, contextInfo:{ mentionedJid:[y]}}, { quoted: m })
 //conn.sendMessage(from ,{text: te, mentionedJid: [y], },{quoted: m}) 
 } catch (err) { 
 reply(`*NO HAY SUBBOT CONECTADO, INTENTE MAS TARDES*`)} 
