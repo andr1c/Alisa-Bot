@@ -262,7 +262,7 @@ await conn.sendPresenceUpdate('composing', m.chat)
 
 //ARRANCA LA DIVERSIÓN
 switch (command) { 
-case 'yts':
+case 'yts': case 'ytsearch':
 yt(conn, m, text, from, command, fkontak, prefix)  
 break
 case 'acortar': 
@@ -294,21 +294,23 @@ case 'serbot': case 'qr':
 jadibot(conn, m, from, command, prefix)  
 break  
 case 'jadibot': case 'sercode':
-jadibot2(conn, m, command, text)
+jadibot2(conn, m, command, text, args)
 break
 case 'deljadibot': case 'stop':
 killJadibot(conn, m, prefix, command)
 break 
 case 'bots': case 'listbots': 
 try { 
-let user = [... new Set([...global.listJadibot.filter(conn => conn.user).map(conn => conn.user)])] 
+const user = [...new Set([...global.listJadibot.filter((conn) => conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED).map((conn) => conn)])];
+//let user = [... new Set([...global.listJadibot.filter(conn => conn.user).map(conn => conn.user)])] 
 te = `*SUBBOT CONECTADO :* ${user.length}\n\n`
 for (let i of user){ 
 y = await conn.decodeJid(i.id) 
 te += " ❑ Usuario : @" + y.split("@")[0] + "\n" 
 te += " ❑ Nombre : " + i.name + "\n\n" 
 } 
-conn.sendMessage(from ,{text: te, mentions: [y], },{quoted: m}) 
+conn.sendMessage(m.chat, { text: te, contextInfo:{ mentionedJid:[y]}}, { quoted: m })}
+//conn.sendMessage(from ,{text: te, mentionedJid: [y], },{quoted: m}) 
 } catch (err) { 
 reply(`*NO HAY SUBBOT CONECTADO, INTENTE MAS TARDES*`)} 
 break
@@ -376,11 +378,11 @@ case 'modoadmin': case 'modoadmins': on8(isBotAdmins, isGroupAdmins, text, comma
 break
 case 'antiprivado': case 'antipv': on9(isCreator, text, command, args, m) 
 break
-case 'antiCall': case 'antillamada': on10(isCreator, text, command, args, m) 
+case 'anticall': case 'antillamada': on10(isCreator, text, command, args, m) 
 break            
 case 'modojadibot': case 'jadibot': on11(isCreator, text, command, args, m) 
 break
-//Grupo
+//Grupo 
 case 'grupo': grup(conn, m, args, isBotAdmins, isGroupAdmins, command, prefix, text)
 break
 case 'delete': case 'del': 
@@ -403,7 +405,6 @@ setpp(conn, m, isBotAdmins, isGroupAdmins, quoted, prefix, command, mime, args, 
 break
 case 'anularlink': case 'resetlink': case 'revoke':
 let res = conn.groupRevokeInvite(m.chat)
-//reply(`✅ El enlace de grupo se ha restablecido correctamente\n\n• Enlace nuevo:\nhttps://chat.whatsapp.com/${res}`)
 break
 case 'add': case 'agregar': case 'invitar': 
 add(conn, m, isBotAdmins, isGroupAdmins, text, sender, prefix)
@@ -445,13 +446,13 @@ case 'listonline': case 'liston':
 online(conn, sender, args, store, m) 
 break
 //juegos
-case 'simi': case 'bot': {
-await game(conn, m, text, pushname, quoted)}
+case 'simi': case 'bot': 
+await game(conn, m, text, pushname, command, quoted)
 break 
-case 'gay': { 
-await game1(conn, m, participants, sender, who)}
+case 'gay': 
+await game1(conn, m, participants, sender, who)
 break            
-case 'pareja':
+case 'pareja': 
 await game2(conn, m, pushname, participants, sender)
 break
 case 'fake': {
@@ -464,7 +465,7 @@ case 'ppt':
 game5(conn, m, pushname, text, sender)
 break
 case 'pregunta':
-game6(text, m)  
+game6(text, command, m)  
 break   
 case 'doxear': case 'doxxeo': 
 game7(conn, pickRandom, text) 
