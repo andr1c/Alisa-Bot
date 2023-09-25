@@ -19,6 +19,30 @@ const os = require('os') // Proporciona información del sistema operativo
 const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
 const PhoneNumber = require('awesome-phonenumber')
 
+function convertirMsADiasHorasMinutosSegundos(ms) {
+var segundos = Math.floor(ms / 1000);
+var minutos = Math.floor(segundos / 60);
+var horas = Math.floor(minutos / 60);
+var días = Math.floor(horas / 24);
+segundos %= 60;
+minutos %= 60;
+horas %= 24;
+var resultado = "";
+if (días !== 0) {
+resultado += días + " días, ";
+}
+if (horas !== 0) {
+resultado += horas + " horas, ";
+}
+if (minutos !== 0) {
+resultado += minutos + " minutos, ";
+}
+if (segundos !== 0) {
+resultado += segundos + " segundos";
+}
+return resultado;
+}
+
 // Tiempo de Actividad del bot
 const used = process.memoryUsage()
 const cpus = os.cpus().map(cpu => {
@@ -482,13 +506,13 @@ if (!isNumber(user.regTime)) user.regTime = -1
   if (!isNumber(setting.status)) setting.status = 0  
   if (!('autobio' in setting)) setting.autobio = true
   if (!('jadibot' in setting)) setting.jadibot = true 
-  if (!('antiCall' in setting)) setting.antiCall = true
+  if (!('anticall' in setting)) setting.anticall = true
   if (!('antiprivado' in setting)) setting.antiprivado = false
   } else global.db.data.settings[conn.user.jid] = {  
   status: 0,  
   autobio: true,
   jadibot: true,
-  antiCall: true, 
+  anticall: true, 
   antiprivado: false
   } 
 
