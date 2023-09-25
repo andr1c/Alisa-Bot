@@ -301,15 +301,15 @@ killJadibot(conn, m, prefix, command)
 break 
 case 'bots': case 'listbots': 
 try { 
-//const user = [...new Set([...global.listJadibot.filter((conn) => conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED).map((conn) => conn)])];
-let user = [... new Set([...global.listJadibot.filter(conn => conn.user).map(conn => conn.user)])] 
+const user = [...new Set([...global.listJadibot.filter((conn) => conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED).map((conn) => conn)])];
+//let user = [... new Set([...global.listJadibot.filter(conn => conn.user).map(conn => conn.user)])] 
 te = `*SUBBOT CONECTADO :* ${user.length}\n\n`
 for (let i of user){ 
 y = await conn.decodeJid(i.id) 
 te += " ❑ Usuario : @" + y.split("@")[0] + "\n" 
 te += " ❑ Nombre : " + i.name + "\n\n" 
 } 
-conn.sendMessage(m.chat, { text: te, contextInfo:{ mentionedJid:[y]}}, { quoted: m })
+conn.sendMessage(from, { text: te, contextInfo:{ mentionedJid:[y]}}, { quoted: m })
 //conn.sendMessage(from ,{text: te, mentionedJid: [y], },{quoted: m}) 
 } catch (err) { 
 reply(`*NO HAY SUBBOT CONECTADO, INTENTE MAS TARDES*`)} 
