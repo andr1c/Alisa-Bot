@@ -11,9 +11,9 @@ const cheerio = require('cheerio')
 const Jimp = require('jimp')
 const os = require('os')
 
-async function game(conn, m, text, pushname, quoted) {
+async function game(conn, m, text, pushname, command, quoted) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (!text) return conn.sendMessage(m.chat, { text: `Hola 👋 *${pushname}* Quieres hablar un rato? conmigo usar de esta forma\n\nEjemplo : #simi Hola bot` }, { quoted: m })
+if (!text) return conn.sendMessage(m.chat, { text: `Hola 👋 *${pushname}* Quieres hablar un rato? conmigo usar de esta forma\n\nEjemplo: ${prefix + command}Hola` }, { quoted: m })
 await conn.sendPresenceUpdate('composing', m.chat)
 let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${text}&lc=es&cf=false`)
 let res = anu.success;
@@ -82,7 +82,7 @@ quoted: quotedMessage
 };
 conn.sendMessage(m.chat, sendMessageOptions, { quoted: quotedMessage });
 } else {
-conn.sendMessage(m.chat, { text: `Ejemplo: ${prefix + command} @tag|puto|😯`}, { quoted: m })
+conn.sendMessage(m.chat, { text: `*Ejemplo:* ${prefix + command} @tag|puto|😯`}, { quoted: m })
 }}
 
 async function game4(conn, m, pushname, text, sender) {
@@ -96,9 +96,9 @@ conn.sendMessage(m.chat, { text: `🤤👅🥵 *𝐀𝐂𝐀𝐁𝐀𝐒 𝐃�
 ${text}
 🤤🥵 *¡𝐘𝐀 𝐓𝐄 𝐇𝐀𝐍 𝐅𝐎𝐋𝐋𝐀𝐃𝐎!* 🥵🤤`, mentions: [m.sender, text.replace('@', '') + '@s.whatsapp.net']}, { quoted: m})}
 
-async function game5(conn, m, pushname, text, astro, sender, prefix, command) {
+async function game5(conn, m, pushname, text, astro, sender, command) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (!text) return m.reply(`🥌ᴘɪᴇᴅʀᴀ, 📄ᴘᴀᴘᴇʟ, ᴏ ✂️ᴛɪᴊᴇʀᴀ\nᴘᴜᴇᴅᴇ ᴜsᴀʀ ᴇsᴛᴏs ᴄᴏᴍᴀɴᴅᴏ\n🥌.ppt piedra\n📄 .ppt papel\n✂️.ppt tijera\n\nᴜsᴇ ᴇɴ ᴍɪɴᴜsᴄᴜʟᴀs\n\n*Ejemplo :* #ppt papel\n`) 
+if (!text) return m.reply(`🥌ᴘɪᴇᴅʀᴀ 📄ᴘᴀᴘᴇʟ ✂️ᴛɪᴊᴇʀᴀ\n\n• ᴘᴜᴇᴅᴇ ᴜsᴀʀ ᴇsᴛᴏs ᴄᴏᴍᴀɴᴅᴏ:\n🥌${prefix}ppt piedra\n📄${prefix}ppt papel\n✂️${prefix}ppt tijera\n\n• ᴜsᴇ ᴇɴ ᴍɪɴᴜsᴄᴜʟᴀs\n*Ejemplo:* ${prefix}ppt papel`) 
 var astro = Math.random()
 if (astro < 0.34) {
 astro = 'piedra' 
@@ -151,9 +151,9 @@ global.db.data.users[m.sender].exp -= 300
 m.reply(`HA PERDIDO! 🤡\n\n👉🏻 TU: ${text}\n👉🏻 EL BOT: ${astro}\n❌ PREMIO -300 XP`)
 }}}
 
-async function game6(text, m) {
+async function game6(text, command, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (!text) return m.reply('*Hey y la pregunta?*\n*Ejemplo:* #pregunta mañana llover?')
+if (!text) return m.reply(`*Hey y la pregunta?*\n*Ejemplo:* ${prefix + command}mañana llover?`)
 let pr = ['no', 'si', 'nose', 'puede ser', 'no creo', 'olvio', 'Que pregunta mas boluda', 'A']
 let preg = pr[Math.floor(Math.random() * pr.length)]
 m.reply(`*🔸️ Pregunta:* ${text}

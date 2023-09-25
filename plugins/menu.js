@@ -32,7 +32,7 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ║✾ ᴜsᴜᴀʀɪᴏ : ${Object.keys(global.db.data.users).length}
 ║✾ ᴀᴄᴛɪᴠɪᴅᴀᴅ : ${runtime(process.uptime())}
 ║✾ ᴍᴏᴅᴏ : ${conn.public ? 'publico' : 'privado'}
-║✾ Bot ofc : ${conn.user.id == global.numBot2 ? 'Este es el bot ofc' : `Soy un (Subbot) de wa.me/${global.numBot.split`@`[0]}`}
+║✾ ${conn.user.id == global.numBot2 ? 'Bot ofc : Este es el bot ofc' : `Soy un Subbot de: wa.me/${global.numBot.split`@`[0]}`}
 ║
 ║✾ ʟɪᴍɪᴛᴇ : ${user.limit}
 ║✾ ɴɪᴠᴇʟ : ${user.level}
@@ -82,7 +82,7 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}serbot
 ├❥ᰰຼ ❏ ${prefix}qr
 ├❥ _(General un qr para convertirte el un sub bot)_
-├❥ᰰຼ ❏ ${prefix}jadibot
+├❥ᰰຼ ❏ ${prefix}jadibot --code
 ├❥ᰰຼ ❏ ${prefix}sercode
 ├❥ _(Nueva forma de hacerte un subbot beta)_
 ├❥ᰰຼ ❏ ${prefix}bots

@@ -118,10 +118,10 @@ async function on10(isCreator, text, command, args, m) {
 if (!isCreator) return m.reply(info.owner)
 if (!text) return m.reply(`*Use de esta forma ejemplo:*\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
 if (args[0] === "on") {
-global.db.data.chats[m.chat].antiCall = true
+global.db.data.chats[m.chat].anticall = true
 m.reply(`*✅ ${command} se activó con éxito*`)
 } else if (args[0] === "off") {
-global.db.data.chats[m.chat].antiCall = false
+global.db.data.chats[m.chat].anticall = false
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
 
 async function on11(isCreator, text, command, args, m) {
