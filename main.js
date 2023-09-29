@@ -176,7 +176,7 @@ const bio = `ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ | ᴀᴄᴛɪᴠᴏ ✅️: ${runtime(pr
 await conn.updateProfileStatus(bio)
 setting.status = new Date() * 1
 } catch {
-console.log('⚠️ No se logró actualizar la bio') 
+//console.log('⚠️ No se logró actualizar la bio') 
 }}}
   
 //autoread

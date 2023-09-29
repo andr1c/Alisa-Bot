@@ -84,8 +84,8 @@ if (!mek.message) return
 mek.message = (Object.keys(mek.message)[0] === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message   
 if (mek.key && mek.key.remoteJid === 'status@broadcast') return   
 if (!chatUpdate.type === 'notify') return   
-m = smsg(skmod, mek)   
-require("./main")(skmod, m, chatUpdate, mek)   
+m = smsg(conn, mek)   
+require("./main")(conn, m, chatUpdate, mek)   
 } catch (e) {   
 console.log(e)   
 }})} catch (err) {   
