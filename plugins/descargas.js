@@ -8,6 +8,7 @@ const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, slee
 
 async function play(conn, text, command, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (!text) return conn.sendMessage(m.chat, { text: `*Que esta buscado? ingrese el nombre del tema*\n\nEjemplo: *${prefix + command}* ozuna` }, { quoted: m })
 let yts = require("youtube-yts")
 let search = await yts(text)
@@ -32,6 +33,7 @@ db.data.users[m.sender].limit -= 1
 m.reply(info.limit)}
 
 async function mp3(conn, args, text, command, fkontak, ytplayvid, m) {
+if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 const mp = require('../libs/ytdl2')
 if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return m.reply(`*Que esta buscado?*\n\n*Ejemplo:*\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
 conn.sendMessage(m.chat, { text: `*Aguarde un momento*\n\nᴱˡ ᴬᵘᵈᶦᵒ ᵖᵘᵉᵈᵉ ᵗᵃʳᵈᵃ ᵉⁿᵗʳᵉ ⁵ ᵒ ¹⁰ ᵐᶦⁿᵘᵗᵒˢ ᵉˡ ᵉⁿᵛᶦᵃˢᵉ ᵗᵉⁿᵈʳᵃ́ ᵖᵃᶜᶦᵉⁿᶜᶦᵃ` }, { quoted: fkontak });    
@@ -51,6 +53,7 @@ db.data.users[m.sender].limit -= 1
 m.reply(info.limit)}
 
 async function mp4(conn, args, text, command, fkontak, m) {
+if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 const mp = require('../libs/ytdl2')
 if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return m.reply(`*Que esta buscado?*\n\n*Ejemplo:*\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
 conn.sendMessage(m.chat, { text: `*Aguarde un momento*\n\nᴱˡ ᵛᶦᵈᵉᵒ ᵖᵘᵉᵈᵉ ᵗᵃʳᵈᵃ ᵉⁿᵗʳᵉ ⁵ ᵒ ¹⁰ ᵐᶦⁿᵘᵗᵒˢ ᵉˡ ᵉⁿᵛᶦᵃˢᵉ ᵗᵉⁿᵈʳᵃ́ ᵖᵃᶜᶦᵉⁿᶜᶦᵃ` }, { quoted: fkontak });    
@@ -65,6 +68,7 @@ m.reply(info.limit)}
 
 async function git(conn, args, command, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (!args[0]) return m.reply(`*Donde esta el link del github?*\n\n*Ejemplo :*\n${prefix + command} ${md}`)
 if (!isUrl(args[0]) && !args[0].includes('github.com')) return m.reply(`Link invalido!!`)
 conn.sendMessage(m.chat, { text: `*𝘈𝘎𝘜𝘈𝘙𝘋𝘌 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖...*\n\nˢᶦ ᵉˡ ᵃʳᶜʰᶦᵛᵒ ⁿᵒ ˡˡᵉᵍᵃ ᵉˢ ᵠᵘᵉ ʳᵉᵖᵒˢᶦᵗᵒʳᶦᵒ ᵉˢ ᵐᵘʸ ᵖᵉˢᵃᵈᵒ` }, { quoted: m })
@@ -82,6 +86,7 @@ m.reply(info.error)}}
 
 async function tiktok(conn, text, command, q, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (!text) return m.reply(`*Ejemplo:*\n${prefix + command} https://vm.tiktok.com/ZMjdrFCtg/`)
 if (!q.includes('tiktok')) return m.reply(`*link invalido!*`)
 //await loading ()
@@ -97,6 +102,7 @@ m.reply(info.error)}}
 
 async function letra(conn, text, command, fkontak, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (!text) return m.reply(`*Que esta buscado? ingresa el titulo/nombre de la canción*\n*Ejemplo:* ${prefix + command} ozuna`)
 const { lyrics, lyricsv2 } = require('@bochilteam/scraper')
 const result = await lyricsv2(text).catch(async _ => await lyrics(text))
@@ -106,6 +112,7 @@ m.reply(info.limit)}
 
 async function mediafire(conn, text, command, mediafireDl, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (!text) return m.reply(`*Ejemplo:*\n${prefix + command} https://www.mediafire.com/file/admrdma1ff3cq10/Siete-Ocho.zip/file`) 
 const baby1 = await mediafireDl(text)
 if (baby1[0].size.split('MB')[0] >= 1500) return reply('No puedo descarga el archivo supera el limite 900 MB ' + util.format(baby1))
@@ -128,10 +135,11 @@ m.reply(`${result4}`)
    mediaUrl: md,  
  sourceUrl: md }}}, {quoted: m})
  db.data.users[m.sender].limit -= 2
-m.reply(info.limit)}
+m.reply('*2 ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴜsᴀᴅᴏ*')}
 
 async function fb(conn, text, command, lolkeysapi, args, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (!text) return m.reply(`*Ejemplo:*\n${prefix + command} https://fb.watch/ncowLHMp-x/?mibextid=rS40aB7S9Ucbxw6v`)
 conn.fakeReply(m.chat, `⏳ *Aguarde un momento....*`, '0@s.whatsapp.net', 'No haga spam')
 try {
@@ -147,6 +155,7 @@ m.reply(info.error)}}
 
 async function ig(conn, text, command, lolkeysapi, args, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (!text) return m.reply(`*Ejemplo:*\n${prefix + command} https://www.instagram.com/p/CCoI4DQBGVQ/?igshid=YmMyMTA2M2Y=`)
 conn.fakeReply(m.chat, `⏳ *Aguarde un momento....*`, '0@s.whatsapp.net', 'No haga spam')
 try {
@@ -184,6 +193,7 @@ m.reply(info.error)}}
 
 async function apk(conn, text, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 let { search, download } = require('aptoide-scraper')
 if (!text) return m.reply('*[ ⚠️ ] Que apk esta buscando?*') 
 try {     
@@ -195,7 +205,7 @@ if (data5.size.includes('GB') || data5.size.replace(' MB', '') > 999) {
 return await conn.sendMessage(m.chat, {text: '*[ ⛔ ] El archivo es demasiado pesado por lo que no se enviará.*'}, {quoted: m})} 
 await conn.sendMessage(m.chat, {document: {url: data5.dllink}, mimetype: 'application/vnd.android.package-archive', fileName: data5.name + '.apk', caption: null}, {quoted: m}); 
 db.data.users[m.sender].limit -= 3
-m.reply(info.limit)
+m.reply('*3 ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴜsᴀᴅᴏ*')
 } catch { 
 return m.reply(`*[ ⚠️ ] Error, no se encontrarón resultados para su búsqueda.*`)}}
 

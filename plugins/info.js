@@ -40,7 +40,7 @@ let stateRun = `┏━━━━❰･𝐄𝐒𝐓𝐀𝐃𝐎 𝐃𝐄𝐋 𝐁�
 ┃➢ 𝙰𝙲𝚃𝙸𝚅𝙾 : ${runtime(process.uptime())} 
 ┃➢ 𝙼𝙾𝙳𝙾 : ${conn.public ? 'Público' : `Privado`}
 ┃➢ 𝙱𝙾𝚃 𝚂𝙴𝙲𝚄𝙽𝙳𝙰𝚁𝙸𝙾𝚂 𝙰𝙲𝚃𝙸𝚅𝙾𝚂 : ${user.length}
-┗━━━━━━━━━━━━━`.trim()
+┗━━━━━━━━━━━━━ ${conn.user.id == global.numBot2 ? '' : `\n\n➢ 𝐒𝐨𝐲 𝐮𝐧 𝐒𝐮𝐛𝐁𝐨𝐭 𝐝𝐞 : wa.me/${global.numBot.split`@`[0]}`}`.trim()
 let ments = [me]      
 await conn.sendMessage(m.chat, {image: imagen1, caption: stateRun, contextInfo:{ mentionedJid:[sender]}}, { quoted: fkontak })
 }

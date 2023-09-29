@@ -46,7 +46,7 @@ await delay(3 * 3000)
 let res = await conn.groupAcceptInvite(code).then((code) => m.reply(jsonformat(code))).catch((err) => m.reply(jsonformat(err)))
 //await conn.groupAcceptInvite(code)
 } else {
-const data = global.owner.filter(([id]) => id)
+const data = global.owner.filter(([number, _, isDeveloper]) => isDeveloper && number)
 await delay(5 * 5000)
 for (let jid of data.map(([id]) => [id] + '@s.whatsapp.net').filter(v => v != conn.user.jid)) m.reply(`📧 *ＳＯＬＩＣＩＴＵＤ ＰＡＲＡ ＵＮ ＧＲＵＰＯ*\n\n*👤 ＳＯＬＩＣＩＮＴＥ*\nwa.me/${m.sender.split('@')[0]}\n\n*🔮 ＥＮＬＡＣＥ*\n${link}`, jid)
 

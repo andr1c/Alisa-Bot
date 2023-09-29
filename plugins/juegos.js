@@ -13,11 +13,14 @@ const os = require('os')
 
 async function game(conn, m, text, pushname, command, quoted) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (!text) return conn.sendMessage(m.chat, { text: `Hola 👋 *${pushname}* Quieres hablar un rato? conmigo usar de esta forma\n\nEjemplo: ${prefix + command}Hola` }, { quoted: m })
+if (!text) return conn.sendMessage(m.chat, { text: `Hola 👋 *${pushname}* Quieres hablar un rato? conmigo usar de esta forma\n\nEjemplo: ${prefix + command} Hola` }, { quoted: m })
+try {     
 await conn.sendPresenceUpdate('composing', m.chat)
 let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${text}&lc=es&cf=false`)
 let res = anu.success;
-m.reply(res)}
+m.reply(res)
+} catch { 
+return m.reply(`*Api simsimi caida vuelva mas tardes*`)}}
 
 async function game1(conn, m, participants, sender, who) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
@@ -222,8 +225,8 @@ conn.sendMessage(m.chat, {text: doxeo, edit: key})}
 
 async function game8(conn, text, pickRandom, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (!text) return m.reply('Ingrese un nombre?')
-let personalidad = `┏━━°❀❬ *PERSONALIDAD}* ❭❀°━━┓
+if (!text) return m.reply('*Ingrese un nombre?*')
+let personalidad = `┏━━°❀❬ *PERSONALIDAD* ❭❀°━━┓
 *┃*
 *┃• Nombre* : ${text}
 *┃• Buena Moral* : ${pickRandom(['6%','12%','20%','27%','35%','41%','49%','54%','60%','66%','73%','78%','84%','92%','93%','94%','96%','98,3%','99,7%','99,9%','1%','2,9%','0%','0,4%'])}
@@ -284,13 +287,13 @@ return m.reply(`*✳️ 𝙽𝚘 𝚝𝚒𝚎𝚗𝚎𝚜 𝚜𝚞𝚏𝚒𝚌�
     users.exp -= apuesta;
   }
   users.lastslot = new Date * 1;
-  return await m.reply(`*🎰| SLOTS |🎰*
+  return await m.reply(`*🎰 | SLOTS | 🎰*
 ╲╱❀╲╱╲╱❀╲╱╲╱❀╲╱
 ${x[0]} : ${y[0]} : ${z[0]}
 ${x[1]} : ${y[1]} : ${z[1]}
 ${x[2]} : ${y[2]} : ${z[2]}
 ╲╱❀╲╱╲╱❀╲╱╲╱❀╲╱
-*🎰| SLOTS |🎰*\n\n${end}`)} 
+*🎰 | SLOTS | 🎰*\n\n${end}`)} 
 
 async function game10(sendImageAsUrl, pickRandom) {
 sendImageAsUrl('https://telegra.ph/file/2a2a3b03697dd33bfbb95.jpg', `𝘏𝘢𝘴 𝘦𝘴𝘤𝘰𝘨𝘪𝘥𝘰 *𝘝𝘌𝘙𝘋𝘈𝘋*\n\n╱╲❀╱╲╱╲❀╱╲╱╲❀╱╲\n◆ ${pickRandom(global.verdad)}\n╲╱❀╲╱╲╱❀╲╱╲╱❀╲╱`)}
@@ -300,7 +303,7 @@ sendImageAsUrl('https://i.ibb.co/gzfDZLv/unnamed.jpg', `𝘏𝘢𝘴 𝘦𝘴�
 
 async function game12(conn, text, participants, pickRandom, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (!text) return m.reply(`Ejemplo de uso:\n.top *texto*`) 
+if (!text) return m.reply(`*Ejemplo de uso:*\n.top *texto*`) 
 let member = participants.map(u => u.id)
 let me = m.sender
 let a = member[Math.floor(Math.random() * member.length)]

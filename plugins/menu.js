@@ -32,7 +32,7 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ║✾ ᴜsᴜᴀʀɪᴏ : ${Object.keys(global.db.data.users).length}
 ║✾ ᴀᴄᴛɪᴠɪᴅᴀᴅ : ${runtime(process.uptime())}
 ║✾ ᴍᴏᴅᴏ : ${conn.public ? 'publico' : 'privado'}
-║✾ ${conn.user.id == global.numBot2 ? 'Bot ofc : Este es el bot ofc' : `Soy un Subbot de: wa.me/${global.numBot.split`@`[0]}`}
+║✾ ${conn.user.id == global.numBot2 ? '' : `sᴏʏ ᴜɴ sᴜʙʙᴏᴛ ᴅᴇ : wa.me/${global.numBot.split`@`[0]}`}
 ║
 ║✾ ʟɪᴍɪᴛᴇ : ${user.limit}
 ║✾ ɴɪᴠᴇʟ : ${user.level}
