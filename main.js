@@ -1,8 +1,8 @@
 //Código desde cero y comentarios hecho por: 
 // @gata_dios
 // @Skidy89
-// @elrebelde21 
-
+// @elrebelde21  
+ 
 //═════════[ Importaciones ]═════════ 
 const baileys = require('@whiskeysockets/baileys'); // trabajar a través de descargas por Whatsapp 
 const { WaMessageStubType, areJidsSameUser, downloadContentFromMessage, generateWAMessageContent, generateWAMessageFromContent, generateWAMessage, prepareWAMessageMedia, relayMessage} = require('@whiskeysockets/baileys'); // Importa los objetos 'makeWASocket' y 'proto' desde el módulo '@whiskeysockets/baileys'   
@@ -70,15 +70,15 @@ var budy = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == '
 // ‿︵‿︵ʚɞ『 ATRIBUTOS 』ʚɞ‿︵‿︵     
 if (m.key.id.startsWith("BAE5")) return  
 var body = (typeof m.text == 'string' ? m.text : '') 
-var _prefix = /^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi.test(body) ? body.match(/^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi)[0] : ""
+var _prefix = /^[°•π÷×¶∆¢¥®™+✓_=|~!?@#%^&.©^]/gi.test(body) ? body.match(/^[°•π÷×¶∆¢¥®™+✓_=|~!?@#%^&.©^]/gi)[0] : ""
 global.prefix = _prefix
 const isCmd = body.startsWith(prefix)   
 const from = m.chat 
-const msg = JSON.parse(JSON.stringify(mek, undefined, 2)) 
+const msg = JSON.parse(JSON.stringify(m, undefined, 2)) 
 const content = JSON.stringify(m.message) 
 const type = m.mtype 
 const arg = body.substring(body.indexOf(' ') + 1) 
-const command = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase() 
+const command = isCmd ? body.slice(1).trim().split(/ +/).shift().toLocaleLowerCase() : null
 const args = body.trim().split(/ +/).slice(1) 
 const q = args.join(" ") 
 let t = m.messageTimestamp 
@@ -300,19 +300,12 @@ case 'deljadibot': case 'stop':
 killJadibot(conn, m, prefix, command)
 break 
 case 'bots': case 'listbots': 
-try { 
-//const user = [...new Set([...global.listJadibot.filter((conn) => conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED).map((conn) => conn)])];
-let user = [... new Set([...global.listJadibot.filter(conn => conn.user).map(conn => conn.user)])] 
-te = `*SUBBOT CONECTADO :* ${user.length}\n\n`
-for (let i of user){ 
-y = await conn.decodeJid(i.id) 
-te += " ❑ Usuario : @" + y.split("@")[0] + "\n" 
-te += " ❑ Nombre : " + i.name + "\n\n" 
-} 
-conn.sendMessage(from, { text: te, contextInfo:{ mentionedJid:[y]}}, { quoted: m })
-//conn.sendMessage(from ,{text: te, mentionedJid: [y], },{quoted: m}) 
-} catch (err) { 
-reply(`*NO HAY SUBBOT CONECTADO, INTENTE MAS TARDES*`)} 
+const user = [...new Set([...global.listJadibot.filter((conn) => conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED).map((conn) => conn)])];
+const message = user.map((v, index) => `[${index + 1}] ${v.user.name || '-'}\nwa.me/${v.user.jid.replace(/[^0-9]/g, '')}?text=${prefix}estado`).join('\n\n');
+const replyMessage = message.length === 0 ? '' : message;
+const totalUsers = user.length;
+const responseMessage = `*𝘚𝘜𝘉𝘉𝘖𝘛𝘚 𝘊𝘖𝘕𝘌𝘊𝘛𝘈𝘋𝘖𝘚:* ${totalUsers || '0'}\n\n${replyMessage.trim()}`.trim();
+await conn.sendMessage(m.chat, {text: responseMessage, mentions: conn.parseMention(responseMessage)}, {quoted: m});
 break
 
 //info
@@ -379,7 +372,7 @@ break
 case 'antiprivado': case 'antipv': on9(isCreator, text, command, args, m) 
 break
 case 'anticall': case 'antillamada': on10(isCreator, text, command, args, m) 
-break            
+break           
 case 'modojadibot': case 'jadibot': on11(isCreator, text, command, args, m) 
 break
 //Grupo 

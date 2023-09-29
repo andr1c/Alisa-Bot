@@ -92,7 +92,7 @@ skmod.ev.removeAllListeners()
 } else {
 try {
 const sendQR = await sendImage(m.sender, 
-await qrcode.toDataURL(up.qr, { scale: 8 }), '*Escanea este QR para convertirte en Sub Bot*\njadibot hecho por @Skidy89', m); 
+await qrcode.toDataURL(up.qr, { scale: 8 }), 'Escanea este QR para convertirte en un bot temporal\n\n1) Haz clic en los tres puntos en la esquina superior derecha\n2) Toca WhatsApp Web\n3) Escanea este QR\n\n*El QR expira a los 30 segundos*\njadibot hecho por @Skidy89', m); 
 if (chatQR) {
 await sendMessage(m.sender, { delete: chatQR.key })
 }
@@ -138,8 +138,8 @@ global.listJadibot.splice(u, 1)
 skmod.ev.on("groups.update", async (json) => {
 console.log(json)
 const res = json[0];
-let autoDetect = global.db.data.chats[res.id].autoDetect
-if (!autoDetect) return
+let detect = global.db.data.chats[res.id].detect
+if (!detect) return
 if (res.announce == true) {
 await sleep(2000)
 try {
@@ -297,56 +297,13 @@ ppgroup = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-
 }
 
 if (anu.action == 'add') {
-skmod.sendMessage(anu.id, { text: `┏─━─━─━∞◆∞━─━─━─┓\n┆ ｡･ﾟ♡ﾟ･｡🍓｡･ﾟ♡ﾟ･｡🍒\n┆ Hola @${num.split("@")[0]} ¿COMO ESTAS?😃\n┆——————«•»——————\n┆ Bienvenido a ${metadata.subject}\n┆——————«•»——————\n┆un gusto conocerte amig@ 🤗\n┆Recuerda leer las reglas del grupo\n┆para no tener ningun problema 🧐\n┖━─━─━─━─━─━─━─━─━\n\n${metadata.desc}`, contextInfo:{
-forwardingScore: 9999999,
-isForwarded: true, 
-mentionedJid:[num],
-"externalAdReply": {"showAdAttribution": true,
-"containsAutoReply": true,
-"title": `乂 ＷＥＬＣＯＭＥ 乂`,
-body: `${metadata.subject}`,
-"previewType": "PHOTO",
-"thumbnailUrl": ``,
-"thumbnail": ppuser,
-"sourceUrl": md}}}) 
+skmod.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `┏─━─━─━∞◆∞━─━─━─┓\n┆ ｡･ﾟ♡ﾟ･｡🍓｡･ﾟ♡ﾟ･｡🍒\n┆ Hola @${num.split("@")[0]} ¿COMO ESTAS?😃\n┆——————«•»——————\n┆ Bienvenido a ${metadata.subject}\n┆——————«•»——————\n┆un gusto conocerte amig@ 🤗\n┆Recuerda leer las reglas del grupo\n┆para no tener ningun problema 🧐\n┖━─━─━─━─━─━─━─━─━\n\n${metadata.desc}`})
 } else if (anu.action == 'remove') {
-skmod.sendMessage(anu.id, { text: `┏─━─━─━∞◆∞━─━─━─┓\n┆ ｡･ﾟ♡ﾟ･｡🍓｡･ﾟ♡ﾟ･｡🍒\n┆ adiós @${num.split("@")[0]} se fue\n┆ un fan del bts\n  ┖━─━─━─━─━─━─━─━─━┚`,
-contextInfo:{
-forwardingScore: 9999999,
-isForwarded: true, 
-mentionedJid:[num],
-"externalAdReply": {"showAdAttribution": true,
-"containsAutoReply": true,
-"title": '乂 ＡＤＩＯ́Ｓ 乂', 
-body: `Esperemos que no vuelva -_-`,
-"previewType": "PHOTO",
-"thumbnailUrl": ``,
-"thumbnail": ppuser,
-"sourceUrl": md}}}) 
+skmod.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `┏─━─━─━∞◆∞━─━─━─┓\n┆ ｡･ﾟ♡ﾟ･｡🍓｡･ﾟ♡ﾟ･｡🍒\n┆ adiós @${num.split("@")[0]} se fue\n┆ un fan del bts\n┖━─━─━─━─━─━─━─━─━┚`})
 } else if (anu.action == 'promote') {
-skmod.sendMessage(anu.id, { text: `*Hey @${num.split('@')[0]} Ahora eres admin del grupo 🥳`, 
- contextInfo:{
- mentionedJid:[num],
- "externalAdReply": {"showAdAttribution": true,
- "containsAutoReply": true,
- "title": `乂 ＮＵＥＶＯ ＡＤＭＩＮ 乂`,
-"body": botname,
- "previewType": "PHOTO",
-"thumbnailUrl": ``,
-"thumbnail": ppuser, 
-"sourceUrl": md}}})
+skmod.sendMessage(anu.id, { text: `*Hey @${num.split('@')[0]} Ahora eres admin del grupo 🥳*`, mentions: [num]})
 } else if (anu.action == 'demote') {
-skmod.sendMessage(anu.id, { text: `Hey @${num.split('@')[0]} ya no eres admins 🥲`,
- contextInfo:{
- mentionedJid:[num],
- "externalAdReply": {"showAdAttribution": true,
- "containsAutoReply": true,
- "title": `乂 ＵＮ ＡＤＭＩＮ ＭＥＮＯＳ  乂`,
-"body": botname, 
- "previewType": "PHOTO",
-"thumbnailUrl": ``,
-"thumbnail": ppuser,
-"sourceUrl": md}}})
+skmod.sendMessage(anu.id, { text: `*Hey @${num.split('@')[0]} ya no eres admins 🥲*`, mentions: [num]})
 }}} catch (err) {
 console.log(err)
 }})

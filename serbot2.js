@@ -25,7 +25,7 @@ const drmer = Buffer.from(crm9, `base64`)
 const mcode = args[0] && args[0].includes("--code") ? true : args[1] && args[1].includes("--code") ? true : false // stoled from aiden hehe
 //const { state, saveCreds, saveState } = await useMultiFileAuthState(path.join(__dirname, `./jadibts/${m.sender.split("@")[0]}`), pino({ level: "silent" }));   
 let _text = text
-let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? parentw.user.jid : m.sender
+let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
 let id = `${who.split`@`[0]}`  
 
 if (mcode) {
@@ -118,7 +118,8 @@ const endSesion = async (loaded) => {
 if (!loaded) {
 try {
 skmod.ws.close()
-} catch {
+} catch (error) {
+m.reply(util.format(error))
 }
 skmod.ev.removeAllListeners()
 let i = global.listJadibot.indexOf(skmod)
@@ -130,8 +131,9 @@ global.listJadibot.splice(i, 1)
 if (global.db.data == null) return loadDatabase()
 if (connection == 'open') {
 conn.isInit = true
+let usuario = await conn.user.jid
 global.listJadibot.push(conn)
-await sendMessage(m.chat, {text : args[0] ? "*⚠️ Reconectado con éxito!!*" : `*✅ Conectado con exito*\n*Si tu bot fue desconectado usa ${prefix + command}*`}, { quoted: m })
+await sendMessage(m.chat, {text : args[0] ? "*⚠️ Reconectado con éxito!!*" : `*Conectado con exito*\n\n× Usuario: ${skmod.user.name}\n× ID : ${conn.user.jid}\n\n*NOTA:* el bot se puede reiniciar si deja de recibir comandos use: ${prefix + command} para volver a conectarte`}, { quoted: m })
 if (connection === 'open') {
 sendMessage(m.chat, {text: `*✅ Ya estas conectado, sea paciente, los mensajes se estan cargando...*`}, { quoted: m }) 
 }
@@ -192,8 +194,8 @@ global.listJadibot.splice(i, 1)
 skmod.ev.on("groups.update", async (json) => {
 console.log(json)
 const res = json[0];
-let autoDetect = global.db.data.chats[res.id].autoDetect
-if (!autoDetect) return
+let detect = global.db.data.chats[res.id].detect
+if (!detect) return
 if (res.announce == true) {
 await sleep(2000)
 try {
@@ -351,56 +353,13 @@ ppgroup = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-
 }
 
 if (anu.action == 'add') {
-skmod.sendMessage(anu.id, { text: `┏─━─━─━∞◆∞━─━─━─┓\n┆ ｡･ﾟ♡ﾟ･｡🍓｡･ﾟ♡ﾟ･｡🍒\n┆ Hola @${num.split("@")[0]} ¿COMO ESTAS?😃\n┆——————«•»——————\n┆ Bienvenido a ${metadata.subject}\n┆——————«•»——————\n┆un gusto conocerte amig@ 🤗\n┆Recuerda leer las reglas del grupo\n┆para no tener ningun problema 🧐\n┖━─━─━─━─━─━─━─━─━\n\n${metadata.desc}`, contextInfo:{
-forwardingScore: 9999999,
-isForwarded: true, 
-mentionedJid:[num],
-"externalAdReply": {"showAdAttribution": true,
-"containsAutoReply": true,
-"title": `乂 ＷＥＬＣＯＭＥ 乂`,
-body: `${metadata.subject}`,
-"previewType": "PHOTO",
-"thumbnailUrl": ``,
-"thumbnail": ppuser,
-"sourceUrl": md}}}) 
+skmod.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `┏─━─━─━∞◆∞━─━─━─┓\n┆ ｡･ﾟ♡ﾟ･｡🍓｡･ﾟ♡ﾟ･｡🍒\n┆ Hola @${num.split("@")[0]} ¿COMO ESTAS?😃\n┆——————«•»——————\n┆ Bienvenido a ${metadata.subject}\n┆——————«•»——————\n┆un gusto conocerte amig@ 🤗\n┆Recuerda leer las reglas del grupo\n┆para no tener ningun problema 🧐\n┖━─━─━─━─━─━─━─━─━\n\n${metadata.desc}`})
 } else if (anu.action == 'remove') {
-skmod.sendMessage(anu.id, { text: `┏─━─━─━∞◆∞━─━─━─┓\n┆ ｡･ﾟ♡ﾟ･｡🍓｡･ﾟ♡ﾟ･｡🍒\n┆ adiós @${num.split("@")[0]} se fue\n┆ un fan del bts\n  ┖━─━─━─━─━─━─━─━─━┚`,
-contextInfo:{
-forwardingScore: 9999999,
-isForwarded: true, 
-mentionedJid:[num],
-"externalAdReply": {"showAdAttribution": true,
-"containsAutoReply": true,
-"title": '乂 ＡＤＩＯ́Ｓ 乂', 
-body: `Esperemos que no vuelva -_-`,
-"previewType": "PHOTO",
-"thumbnailUrl": ``,
-"thumbnail": ppuser,
-"sourceUrl": md}}}) 
+skmod.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `┏─━─━─━∞◆∞━─━─━─┓\n┆ ｡･ﾟ♡ﾟ･｡🍓｡･ﾟ♡ﾟ･｡🍒\n┆ adiós @${num.split("@")[0]} se fue\n┆ un fan del bts\n┖━─━─━─━─━─━─━─━─━┚`})
 } else if (anu.action == 'promote') {
-skmod.sendMessage(anu.id, { text: `*Hey @${num.split('@')[0]} Ahora eres admin del grupo 🥳`, 
- contextInfo:{
- mentionedJid:[num],
- "externalAdReply": {"showAdAttribution": true,
- "containsAutoReply": true,
- "title": `乂 ＮＵＥＶＯ ＡＤＭＩＮ 乂`,
-"body": botname,
- "previewType": "PHOTO",
-"thumbnailUrl": ``,
-"thumbnail": ppuser, 
-"sourceUrl": md}}})
+skmod.sendMessage(anu.id, { text: `*Hey @${num.split('@')[0]} Ahora eres admin del grupo 🥳*`, mentions: [num]})
 } else if (anu.action == 'demote') {
-skmod.sendMessage(anu.id, { text: `Hey @${num.split('@')[0]} ya no eres admins 🥲`,
- contextInfo:{
- mentionedJid:[num],
- "externalAdReply": {"showAdAttribution": true,
- "containsAutoReply": true,
- "title": `乂 ＵＮ ＡＤＭＩＮ ＭＥＮＯＳ  乂`,
-"body": botname, 
- "previewType": "PHOTO",
-"thumbnailUrl": ``,
-"thumbnail": ppuser,
-"sourceUrl": md}}})
+skmod.sendMessage(anu.id, { text: `*Hey @${num.split('@')[0]} ya no eres admins 🥲*`, mentions: [num]})
 }}} catch (err) {
 console.log(err)
 }})
