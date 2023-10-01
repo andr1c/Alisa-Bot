@@ -70,7 +70,7 @@ var budy = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == '
 // ‿︵‿︵ʚɞ『 ATRIBUTOS 』ʚɞ‿︵‿︵     
 if (m.key.id.startsWith("BAE5")) return  
 var body = (typeof m.text == 'string' ? m.text : '') 
-var _prefix = /^[°•π÷×¶∆¢¥®™+✓_=|~!?@#%^&.©^]/gi.test(body) ? body.match(/^[°•π÷×¶∆¢¥®™+✓_=|~!?@#%^&.©^]/gi)[0] : ""
+var _prefix = /^[°•÷×™+✓_=|~!?@#%^.©^]/gi.test(body) ? body.match(/^[°•÷×™+✓_=|~!?@#%^.©^]/gi)[0] : ""
 global.prefix = _prefix
 const isCmd = body.startsWith(prefix)   
 const from = m.chat 
@@ -301,7 +301,7 @@ killJadibot(conn, m, prefix, command)
 break 
 case 'bots': case 'listbots': 
 const user = [...new Set([...global.listJadibot.filter((conn) => conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED).map((conn) => conn)])];
-const message = user.map((v, index) => `[${index + 1}] ${v.user.name || '-'}\nwa.me/${v.user.jid.replace(/[^0-9]/g, '')}?text=${prefix}estado`).join('\n\n');
+const message = user.map((v, index) => `[${index + 1}] ${v.user.name || '•'}\nwa.me/${v.user.jid.replace(/[^0-9]/g, '')}?text=${prefix}estado`).join('\n\n');
 const replyMessage = message.length === 0 ? '' : message;
 const totalUsers = user.length;
 const responseMessage = `*𝘚𝘜𝘉𝘉𝘖𝘛𝘚 𝘊𝘖𝘕𝘌𝘊𝘛𝘈𝘋𝘖𝘚:* ${totalUsers || '0'}\n\n${replyMessage.trim()}`.trim();
@@ -551,6 +551,29 @@ break
 case 'play':
 play(conn, text, command, m) 
 break 
+case 'play2':
+if (!text) return conn.sendMessage(m.chat, { text: `*Que esta buscado? ingrese el nombre del tema*\n\nEjemplo: *${prefix + command}* ozuna` }, { quoted: m })
+let yts = require("youtube-yts")
+let search = await yts(text)
+let anup3k = search.videos[0]
+let anu = search.videos[Math.floor(Math.random() * search.videos.length)] 
+eek = await getBuffer(anu.thumbnail) 
+conn.sendMessage(m.chat, { image : eek, caption:  `╭───≪~*╌◌ᰱ•••⃙❨͟͞P̸͟͞L̸͟A̸͟͞Y̸͟͞❩⃘•••ᰱ◌╌*~*
+│║📌 *Título* : ${anu.title}
+│║📆 *Publicado:* ${anu.ago}
+│║⌚ *Duración:* ${anu.timestamp}
+│║👤 *Autor:* ${anu.author.name}
+│║👀 *Vistas:*  ${anu.views}
+│║
+│║  *si el video no fue enviado usar:*
+│║ #ytvideo ${anu.url}
+╰─•┈┈┈•••✦𝒟ℳ✦•••┈┈┈•─╯⟤` }, { quoted: m})
+const playmp3 = require('./libs/ytdl2')
+const pl= await playmp3.mp3(anup3k.url)
+conn.sendMessage(m.chat, {video: {url : fs.readFileSync(pl.path)}, caption: 'aqui' }, {quoted:m})
+//await conn.sendMessage(m.chat, { audio: fs.readFileSync(pl.path), fileName: `error.mp3`, mimetype: 'audio/mp4' }, { quoted: m }); 
+await fs.unlinkSync(pl.path)
+break
 case "ytmp3": case "ytaudio": 
 mp3(conn, args, text, command, fkontak, ytplayvid, m)
 break 
@@ -569,10 +592,10 @@ break
 case 'mediafire': 
 mediafire(conn, text, command, mediafireDl, m) 
 break 
-case 'facebook':
+case 'facebook': case 'fb':
 fb(conn, text, command, lolkeysapi, args, m) 
 break
-case 'instagram':
+case 'instagram': case 'ig':
 ig(conn, text, command, lolkeysapi, args, m) 
 break
 case 'igstalk':

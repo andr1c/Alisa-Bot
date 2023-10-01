@@ -14,13 +14,13 @@ const ws = require('ws')
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('./libs/fuctions')   
    const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'storeV2' }) })   
 const crm9 ='SmFkaWJvdCBoZWNobyBwb3IgQFNraWR5ODkNCmh0dHBzOi8vd3d3LmdpdGh1Yi5jb20vU2tpZHk4OQ=='
-let rtx = `Escanea este QR para convertirte en un bot temporal\n\n1) Haz clic en los tres puntos en la esquina superior derecha\n2) Toca WhatsApp Web\n3) Escanea este QR\n\n*El QR expira a los 30 segundos*\n\n`
+let rtx = `Escanea este QR para convertirte en un bot temporal\n\n1) Haz clic en los tres puntos en la esquina superior derecha\n2) Toca WhatsApp Web\n3) Escanea este QR\n*El QR expira a los 45 segundos*\n\n`
 let rtx2 = `NUEVO FORMA DE HACERTE UN SUB BOT\n\n1) Haz clic en los tres puntos en la esquina superior derecha\n2) Toca WhatsApp Web\n3) da click en vincular con codigo de teléfono\n4) pega el codigo a continuación\n\n`
 const jadibot2 = async (conn, m, command, text, args) => {
 const { sendImage, sendMessage, decodeJid, getName } = conn
 const { reply } = m
 if (!global.db.data.settings[conn.user.jid].jadibot) return m.reply(`*⚠️ Este comando fue desabilitado por el creador*`)
-if (conn.user.jid !== global.numBot) return m.reply(`*⚠️ Este comando solo puede ser usado en un Bot principa*\n\n👉🏻 https://api.whatsapp.com/send/?phone=${global.numBot.split`@`[0]}&text=${prefix + command}&type=phone_number&app_absent=0`) 
+//if (conn.user.jid !== global.numBot) return m.reply(`*⚠️ No se puede hacer un bot dentro de un sub bot!*\n*✳️ Mande el comando ${prefix + command} al numero oficial/principal del Bot*\n\n👉🏻 https://api.whatsapp.com/send/?phone=${global.numBot.split`@`[0]}&text=${prefix + command}&type=phone_number&app_absent=0`) 
 const drmer = Buffer.from(crm9, `base64`)
 const mcode = args[0] && args[0].includes("--code") ? true : args[1] && args[1].includes("--code") ? true : false // stoled from aiden hehe
 //const { state, saveCreds, saveState } = await useMultiFileAuthState(path.join(__dirname, `./jadibts/${m.sender.split("@")[0]}`), pino({ level: "silent" }));   
@@ -95,7 +95,7 @@ console.log(err)
 skmod.ev.on('connection.update', async (up) => {     
 const { connection, lastDisconnect, isNewLogin, qr } = up
 if (connection == 'connecting') return
-console.log('Ejecutar setcode (jadibot)....'); 
+console.log('Ejecutar (jadibot)....'); 
 if (connection) { 
 if (connection != 'connecting')  
 console.log('Connectando....')
@@ -353,9 +353,9 @@ ppgroup = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-
 }
 
 if (anu.action == 'add') {
-skmod.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `┏─━─━─━∞◆∞━─━─━─┓\n┆ ｡･ﾟ♡ﾟ･｡🍓｡･ﾟ♡ﾟ･｡🍒\n┆ Hola @${num.split("@")[0]} ¿COMO ESTAS?😃\n┆——————«•»——————\n┆ Bienvenido a ${metadata.subject}\n┆——————«•»——————\n┆un gusto conocerte amig@ 🤗\n┆Recuerda leer las reglas del grupo\n┆para no tener ningun problema 🧐\n┖━─━─━─━─━─━─━─━─━\n\n${metadata.desc}`})
+skmod.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `┏━━〘 🆆🅴🅻🅲🅾🅼🅴 〙━━\n┃ ｡･ﾟ♡ﾟ･｡🍓｡･ﾟ♡ﾟ･｡🍒\n┃ Hola @${num.split("@")[0]} ¿COMO ESTAS?😃\n┃——————«•»———————\n┃ Bienvenido a ${metadata.subject}\n┃——————«•»———————\n┃un gusto conocerte amig@ 🤗\n┃Recuerda leer las reglas del grupo\n┃para no tener ningun problema 🧐\n┖━─━─━─━─━─━─━─━━\n\n${metadata.desc}`})
 } else if (anu.action == 'remove') {
-skmod.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `┏─━─━─━∞◆∞━─━─━─┓\n┆ ｡･ﾟ♡ﾟ･｡🍓｡･ﾟ♡ﾟ･｡🍒\n┆ adiós @${num.split("@")[0]} se fue\n┆ un fan del bts\n┖━─━─━─━─━─━─━─━─━┚`})
+skmod.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `┏━━〘 🅰🅳🅸🅾🆂 〙━━\n┃ ｡･ﾟ♡ﾟ･｡🍓｡･ﾟ♡ﾟ･｡🍒\n┃ adiós @${num.split("@")[0]} se fue\n┃ un fan del bts\n┖━─━─━─━─━─━─━─━`})
 } else if (anu.action == 'promote') {
 skmod.sendMessage(anu.id, { text: `*Hey @${num.split('@')[0]} Ahora eres admin del grupo 🥳*`, mentions: [num]})
 } else if (anu.action == 'demote') {
@@ -375,10 +375,10 @@ m.reply(util.format(e))
 
 const killJadibot = async (conn, m, command) => {
 try {
-if (!fs.existsSync(path.join(__dirname, `./jadibts/${m.sender.split("@")[0]}`))) {
+if (!fs.existsSync(path.join(__dirname, `./jadibts/${id}`))) {
 return m.reply(`*USTED NO TIENE UNA SESIÓN, PUEDE CREAR UNA USANDO:*\n*${prefix}jadibot*`)
 } else {
-fs.rmdirSync(path.join(__dirname, `./jadibts/${m.sender.split("@")[0]}`), { recursive: true })
+fs.rmdirSync(path.join(__dirname, `./jadibts/${id}`), { recursive: true })
 return m.reply(`*HA CERRADO SESIÓN Y BORRADO TODO RASTRO*`)
 }} catch (e) {
 m.reply(util.format(e))

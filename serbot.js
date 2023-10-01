@@ -12,7 +12,7 @@ const NodeCache = require('node-cache')
 const util = require('util')
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('./libs/fuctions')   
 const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'storeV2' }) })   
-const crm1 = 'SmFkaWJvdCBoZWNobyBwb3IgQHNraWR5ODkgcGFyYSBza2lkIGJvdCB5IGdhdGFwbHVz'
+const crm1 = 'amFkaWJvdCBoZWNobyBwb3IgQFNraWR5ODk='
 const crm2 = Buffer.from(crm1, 'base64')
 const crm3 = crm2.toString('utf-8')
 if (global.listJadibot instanceof Array) console.log()   
@@ -21,7 +21,7 @@ else global.listJadibot = []
 const jadibot = async (conn, m, command) => {
 const { sendImage, sendMessage, decodeJid, getName } = conn
 if (!global.db.data.settings[conn.user.jid].jadibot) return m.reply(`*⚠️ Este comando fue desabilitado por el creador*`)
-if (conn.user.jid !== global.numBot) return m.reply(`*⚠️ Este comando solo puede ser usado en un Bot principa*\n\n👉🏻 https://api.whatsapp.com/send/?phone=${global.numBot.split`@`[0]}&text=${prefix}jadibot&type=phone_number&app_absent=0`) 
+if (conn.user.jid !== global.numBot) return m.reply(`*⚠️ No se puede hacer un bot dentro de un sub bot!*\n*✳️ Mande el comando ${prefix + command} al numero oficial/principal del Bot*\n\n👉🏻 wa.me/${global.numBot.split`@`[0]}&text=${prefix}jadibot`) 
 const { state, saveCreds, saveState } = await useMultiFileAuthState(path.join(__dirname, `./jadibts/${m.sender.split("@")[0]}`), pino({ level: "silent" }));   
 try {
 async function skBot() {
@@ -92,7 +92,7 @@ skmod.ev.removeAllListeners()
 } else {
 try {
 const sendQR = await sendImage(m.sender, 
-await qrcode.toDataURL(up.qr, { scale: 8 }), 'Escanea este QR para convertirte en un bot temporal\n\n1) Haz clic en los tres puntos en la esquina superior derecha\n2) Toca WhatsApp Web\n3) Escanea este QR\n\n*El QR expira a los 30 segundos*\njadibot hecho por @Skidy89', m); 
+await qrcode.toDataURL(up.qr, { scale: 8 }), '*🔰 The LoliBot-MD 🔰*\n          *Ser sub bot*\n\n*Con otro telefono que tengas o en la PC escanea este QR para convertirte en un sub bot*\n\n*1. Haga clic en los tres puntos en la esquina superior derecha*\n*2. Toca WhatsApp Web*\n*3. Escanee este codigo QR*\n*Este código QR expira en 60 segundos!*\n\n*⚠️ No nos hacemos responsable del mal uso que se le pueda dar o si el numero se manda a soporte.. ustedes tienen el deber se seguir al pie de la letra los terminos y condiciones y privacidad (escribe eso y te los dará)*\njadibot hecho por @Skidy89', m); 
 if (chatQR) {
 await sendMessage(m.sender, { delete: chatQR.key })
 }
@@ -297,9 +297,9 @@ ppgroup = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-
 }
 
 if (anu.action == 'add') {
-skmod.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `┏─━─━─━∞◆∞━─━─━─┓\n┆ ｡･ﾟ♡ﾟ･｡🍓｡･ﾟ♡ﾟ･｡🍒\n┆ Hola @${num.split("@")[0]} ¿COMO ESTAS?😃\n┆——————«•»——————\n┆ Bienvenido a ${metadata.subject}\n┆——————«•»——————\n┆un gusto conocerte amig@ 🤗\n┆Recuerda leer las reglas del grupo\n┆para no tener ningun problema 🧐\n┖━─━─━─━─━─━─━─━─━\n\n${metadata.desc}`})
+skmod.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `┏━━〘 🆆🅴🅻🅲🅾🅼🅴 〙━━\n┃ ｡･ﾟ♡ﾟ･｡🍓｡･ﾟ♡ﾟ･｡🍒\n┃ Hola @${num.split("@")[0]} ¿COMO ESTAS?😃\n┃——————«•»———————\n┃ Bienvenido a ${metadata.subject}\n┃——————«•»———————\n┃un gusto conocerte amig@ 🤗\n┃Recuerda leer las reglas del grupo\n┃para no tener ningun problema 🧐\n┖━─━─━─━─━─━─━─━━\n\n${metadata.desc}`})
 } else if (anu.action == 'remove') {
-skmod.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `┏─━─━─━∞◆∞━─━─━─┓\n┆ ｡･ﾟ♡ﾟ･｡🍓｡･ﾟ♡ﾟ･｡🍒\n┆ adiós @${num.split("@")[0]} se fue\n┆ un fan del bts\n┖━─━─━─━─━─━─━─━─━┚`})
+skmod.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `┏━━〘 🅰🅳🅸🅾🆂 〙━━\n┃ ｡･ﾟ♡ﾟ･｡🍓｡･ﾟ♡ﾟ･｡🍒\n┃ adiós @${num.split("@")[0]} se fue\n┃ un fan del bts\n┖━─━─━─━─━─━─━─━`})
 } else if (anu.action == 'promote') {
 skmod.sendMessage(anu.id, { text: `*Hey @${num.split('@')[0]} Ahora eres admin del grupo 🥳*`, mentions: [num]})
 } else if (anu.action == 'demote') {
