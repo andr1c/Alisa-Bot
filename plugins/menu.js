@@ -110,8 +110,10 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}igstalk
 ├❥ᰰຼ _(Buscar algun usuarios de Instagram para vez sus perfil)_
 ├❥ᰰຼ ❏ ${prefix}facebook
+├❥ᰰຼ ❏ ${prefix}fb
 ├❥ᰰຼ _(descarga video de Facebook)_
 ├❥ᰰຼ ❏ ${prefix}instagram
+├❥ᰰຼ ❏ ${prefix}ig
 ├❥ᰰຼ _(descarga video de Instagram)_
 ├❥ᰰຼ ❏ ${prefix}mediafire
 ├❥ᰰຼ (descarga archivo de mediafire)_
