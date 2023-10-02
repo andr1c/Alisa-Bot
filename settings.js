@@ -99,7 +99,7 @@ advertencia: `[ ⚠️ ＡＤＶＥＲＴＥＮＣＩＡ ]`,
 registra: `*[ 🔴 HEY ALTO NO ESTAS REGISTRADO 🔴 ]*\n\nNO APARECES EN MI BASE DE DATOS ✋\n\nPara poder usar el bot necesita esta registrado:\n\n#reg nombre.edad`,  
 limit: '*1 ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴜsᴀᴅᴏ*', 
 AntiNsfw: `*Los comando +18 esta desactivado*\nSi eres admin y quiere activarlos usar:\nantiNsfs on`, 
-endLimit: 'Uff esta pobres no tener mas 💎',
+endLimit: '𝘜𝘧𝘧𝘧 𝘲𝘶𝘦 𝘲𝘶𝘦𝘥𝘢𝘳𝘵𝘦 𝘴𝘪𝘯 𝘭𝘪𝘮𝘪𝘵𝘦 💎, 𝘶𝘴𝘢𝘳 𝘦𝘭 𝘤𝘰𝘮𝘢𝘯𝘥𝘰 /buy 𝘱𝘢𝘳𝘢 𝘤𝘰𝘮𝘱𝘳𝘢𝘳 𝘮𝘢𝘴 𝘥𝘪𝘢𝘮𝘢𝘯𝘵𝘦',
 }
 
 //---------------[ NIVELES, ADVERTENCIA ]----------------
