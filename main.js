@@ -204,7 +204,7 @@ if (budy.match(`chat.whatsapp.com`)) {
 let delet = m.key.participant
 let bang = m.key.id
 user = m.sender
-conn.sendMessage(m.chat, {text: `\`\`\`「 ANTILINK DETECTADO 」\`\`\`\n\n@${user.split("@")[0]} eso no esta permitido rata 🤨, Sera expulsado del grupo....`, mentions: [user], },{quoted: m}) 
+conn.sendMessage(m.chat, {text: `\`\`\`「 ANTILINK DETECTADO 」\`\`\`\n\n@${user.split("@")[0]} 🤨 eso no esta permitido rata, Sera expulsado del grupo....`, mentions: [user], },{quoted: m}) 
 if (!isBotAdmins) return reply(`Te salvarte puto no soy admins 🙄`)
 let gclink = (`https://chat.whatsapp.com/`+await conn.groupInviteCode(m.chat))
 let isLinkThisGc = new RegExp(gclink, 'i')

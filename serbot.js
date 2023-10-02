@@ -21,7 +21,7 @@ else global.listJadibot = []
 const jadibot = async (conn, m, command) => {
 const { sendImage, sendMessage, decodeJid, getName } = conn
 if (!global.db.data.settings[conn.user.jid].jadibot) return m.reply(`*⚠️ Este comando fue desabilitado por el creador*`)
-if (conn.user.jid !== global.numBot) return m.reply(`*⚠️ No se puede hacer un bot dentro de un sub bot!*\n*✳️ Mande el comando ${prefix + command} al numero oficial/principal del Bot*\n\n👉🏻 wa.me/${global.numBot.split`@`[0]}&text=${prefix}jadibot`) 
+if (conn.user.jid !== global.numBot) return m.reply(`*⚠️ No se puede hacer un bot dentro de un sub bot!*\n*✳️ Mande el comando ${command} al numero oficial/principal del Bot*\n\n👉🏻 wa.me/${global.numBot.split`@`[0]}?text=${prefix + command}`) 
 const { state, saveCreds, saveState } = await useMultiFileAuthState(path.join(__dirname, `./jadibts/${m.sender.split("@")[0]}`), pino({ level: "silent" }));   
 try {
 async function skBot() {

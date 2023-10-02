@@ -20,7 +20,7 @@ const jadibot2 = async (conn, m, command, text, args) => {
 const { sendImage, sendMessage, decodeJid, getName } = conn
 const { reply } = m
 if (!global.db.data.settings[conn.user.jid].jadibot) return m.reply(`*⚠️ Este comando fue desabilitado por el creador*`)
-//if (conn.user.jid !== global.numBot) return m.reply(`*⚠️ No se puede hacer un bot dentro de un sub bot!*\n*✳️ Mande el comando ${prefix + command} al numero oficial/principal del Bot*\n\n👉🏻 https://api.whatsapp.com/send/?phone=${global.numBot.split`@`[0]}&text=${prefix + command}&type=phone_number&app_absent=0`) 
+//if (conn.user.jid !== global.numBot) return m.reply(`*⚠️ No se puede hacer un bot dentro de un sub bot!*\n*✳️ Mande el comando ${command} al numero oficial/principal del Bot*\n\n👉🏻 https://api.whatsapp.com/send/?phone=${global.numBot.split`@`[0]}?text=${prefix + command}&type=phone_number&app_absent=0`) 
 const drmer = Buffer.from(crm9, `base64`)
 const mcode = args[0] && args[0].includes("--code") ? true : args[1] && args[1].includes("--code") ? true : false // stoled from aiden hehe
 //const { state, saveCreds, saveState } = await useMultiFileAuthState(path.join(__dirname, `./jadibts/${m.sender.split("@")[0]}`), pino({ level: "silent" }));   
