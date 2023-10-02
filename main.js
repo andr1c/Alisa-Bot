@@ -291,7 +291,7 @@ wall(conn, text, command, m)
 break 
  
 case 'serbot': case 'qr':
-jadibot(conn, m, from, command, prefix)  
+jadibot(conn, m, command)  
 break  
 case 'jadibot': case 'sercode':
 jadibot2(conn, m, command, text, args)
