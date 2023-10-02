@@ -1,6 +1,6 @@
 ### Bot el desarrollo 💫
 
-# `EDITOR Y PROPIETARIO DEL BOT`
+## `EDITOR Y PROPIETARIO DEL BOT`
 
 [![elrebelde21](https://github.com/elrebelde21.png?size=100)](https://github.com/elrebelde21) 
 
