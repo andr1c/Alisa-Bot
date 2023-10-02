@@ -78,7 +78,7 @@ global.md = 'https://github.com/elrebelde21'
 global.yt = 'https://www.youtube.com/@LoliBot'
 global.nna = 'https://chat.whatsapp.com/KlqNmoUcVnsGJxIfATIDrK' //Update 
 global.nn = 'https://chat.whatsapp.com/H4hxytyGvucIF1k0UAR7es'
-global.nna2 = 'DTfzshW01Jt943BfCw3wov'
+global.nna2 = 'CKnomE19yR0IEmM571RvRm'
 
 //---------[ INFO ]---------
 global.info = {
