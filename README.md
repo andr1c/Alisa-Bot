@@ -2,7 +2,7 @@
 
 ## `EDITOR Y PROPIETARIO DEL BOT`
 
-[![elrebelde21](https://github.com/elrebelde21.png?size=100)](https://github.com/elrebelde21) 
+<a href="https://github.com/elrebelde21"><img src="https://github.com/elrebelde21.png" width="250" height="250" alt="elrebelde21"/></a>
 
 ## `AGRADECIMIENTOS & CREDITOS` 
 <a href="https://github.com/ferhacks"><img src="https://github.com/ferhacks.png" width="150" height="150" alt="ferhacks"/></a>
