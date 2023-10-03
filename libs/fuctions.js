@@ -471,8 +471,7 @@ if (!isNumber(user.regTime)) user.regTime = -1
   iron: 0,
   trash: 0,
   }  
-  
-  let chats = global.db.data.chats[m.chat]  
+let chats = global.db.data.chats[m.chat]  
   if (typeof chats !== 'object') global.db.data.chats[m.chat] = {}  
   if (chats) {  
   if (!('antilink' in chats)) chats.antilink = false  
@@ -486,6 +485,7 @@ if (!isNumber(user.regTime)) user.regTime = -1
   if (!('antiArabe' in chats)) chats.antiArabe = false
   if (!('autosticker' in chats)) chats.autosticker = false
   if (!('detect' in chats)) chats.detect = true
+  if (!('autoread' in chats)) chats.autoread = true
   } else global.db.data.chats[m.chat] = {  
   antilink: false,  
   ban: false,   
@@ -497,7 +497,8 @@ if (!isNumber(user.regTime)) user.regTime = -1
   antiFake: false,
   antiArabe: false,
   autosticker: false, 
-  Detect: true, 
+  detect: true, 
+  autoread: false
   }
   
   let setting = global.db.data.settings[conn.user.jid]
@@ -508,12 +509,14 @@ if (!isNumber(user.regTime)) user.regTime = -1
   if (!('jadibot' in setting)) setting.jadibot = true 
   if (!('anticall' in setting)) setting.anticall = true
   if (!('antiprivado' in setting)) setting.antiprivado = false
+//  if (!('autoread' in setting)) setting.autoread = false
   } else global.db.data.settings[conn.user.jid] = {  
   status: 0,  
   autobio: true,
   jadibot: true,
   anticall: true, 
   antiprivado: false
+ // autoread: false
   } 
 
 global.db.data.sticker = global.db.data.sticker || {} // sticker for addcmd
