@@ -37,6 +37,7 @@ if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 const mp = require('../libs/ytdl2')
 if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return m.reply(`*Que esta buscado?*\n\n*Ejemplo:*\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
 conn.sendMessage(m.chat, { text: `*Aguarde un momento*\n\nᴱˡ ᴬᵘᵈᶦᵒ ᵖᵘᵉᵈᵉ ᵗᵃʳᵈᵃ ᵉⁿᵗʳᵉ ⁵ ᵒ ¹⁰ ᵐᶦⁿᵘᵗᵒˢ ᵉˡ ᵉⁿᵛᶦᵃˢᵉ ᵗᵉⁿᵈʳᵃ́ ᵖᵃᶜᶦᵉⁿᶜᶦᵃ` }, { quoted: fkontak });    
+try {
 let mediaa = await ytplayvid(text)
 const audio = await mp.mp3(text)
 await conn.sendMessage(m.chat, {audio: fs.readFileSync(audio.path), mimetype: 'audio/mp4',
@@ -50,21 +51,30 @@ mediaUrl:text,
 }}}, {quoted:m}) 
 await fs.unlinkSync(audio.path)
 db.data.users[m.sender].limit -= 1
-m.reply(info.limit)}
+m.reply(info.limit)
+} catch {
+m.reply(info.error)}}
 
 async function mp4(conn, args, text, command, fkontak, m) {
 if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 const mp = require('../libs/ytdl2')
-if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return m.reply(`*Que esta buscado?*\n\n*Ejemplo:*\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
-conn.sendMessage(m.chat, { text: `*Aguarde un momento*\n\nᴱˡ ᵛᶦᵈᵉᵒ ᵖᵘᵉᵈᵉ ᵗᵃʳᵈᵃ ᵉⁿᵗʳᵉ ⁵ ᵒ ¹⁰ ᵐᶦⁿᵘᵗᵒˢ ᵉˡ ᵉⁿᵛᶦᵃˢᵉ ᵗᵉⁿᵈʳᵃ́ ᵖᵃᶜᶦᵉⁿᶜᶦᵃ` }, { quoted: fkontak });    
 const vid = await mp.mp4(text)
+if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return m.reply(`*Que esta buscado?*\n\n*Ejemplo:*\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
+conn.sendMessage(m.chat, { text: `         *⌜Video Encontrado ✅⌟*
+
+• *Título:* ${vid.title}
+
+*ESPERE ENVIANDO SU ARCHIVO MP4 ⚠*` }, { quoted: fkontak });    
+try {
 const ytc = `*❏ Título :* ${vid.title} 
 *❏ Duración :* ${vid.duration}
 *❏ Subido :* ${vid.date}
 *❏ calidad :* ${vid.quality}`
 await conn.sendMessage(m.chat, {video: {url : vid.videoUrl}, caption: ytc }, {quoted:m})
 db.data.users[m.sender].limit -= 1
-m.reply(info.limit)}
+m.reply(info.limit)
+} catch {
+m.reply(info.error)}}
 
 async function git(conn, args, command, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)

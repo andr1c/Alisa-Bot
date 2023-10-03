@@ -54,7 +54,7 @@ await conn.sendMessage(m.chat, { text : `Hola @${sender.split("@")[0]}, este bot
 
 async function grupo(conn, m, sender) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-conn.sendMessage(m.chat, { text: `*BOT EL DESARROLLO*\n\n*Te puede unirte al grupo para proba el bot y sus funciones 😼*\n\n${nnn}` }, { quoted: m })
+conn.sendMessage(m.chat, { text: `*BOT EL DESARROLLO*\n\n*Te puede unirte al grupo para proba el bot y sus funciones 😼*\n\n${nn}` }, { quoted: m })
 }
 
 async function instalar(conn, m, pushname, sender) {

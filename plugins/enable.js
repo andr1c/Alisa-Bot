@@ -134,7 +134,17 @@ m.reply(`*✅ ${command} se activó con éxito*`)
 global.db.data.chats[m.chat].jadibot = false
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
 
-module.exports = {on, on1, on2, on3, on4, on5, on6, on7, on8, on9, on10, on11}
+async function on12(isCreator, text, command, args, m, conn) {
+if (!isCreator) return m.reply(info.owner)
+if (!text) return m.reply(`*Use de esta forma ejemplo:*\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
+if (args[0] === "on") {
+conn.autoread = false
+m.reply(`*✅ ${command} se activó con éxito*`)
+} else if (args[0] === "off") {
+conn.autoread = true
+m.reply(`*🟢 ${command} esta desactivado!*`)}}
+
+module.exports = {on, on1, on2, on3, on4, on5, on6, on7, on8, on9, on10, on11, on12}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {

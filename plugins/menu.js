@@ -94,9 +94,8 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 
 *╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*⃐🔄ＤＥＳＣＡＲＧＡ*️⃟ᬽ፝֟━*
 ├❥ᰰຼ ❏ ${prefix}play 
+├❥ᰰຼ ❏ ${prefix}play2 
 ├❥ᰰຼ _(Titulo/nombre de la canción para descargar el audio)_
-├❥ᰰຼ ❏ ${prefix}play2
-├❥ᰰຼ  _(Titulo/nonbre de la canción para descarga el video)_
 ├❥ᰰຼ ❏ ${prefix}yts 
 ├❥ᰰຼ  _(buscar los links para descarga el video)_
 ├❥ᰰຼ ❏ ${prefix}ytmp3
@@ -337,6 +336,7 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}antillamada _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}antipv _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}antiprivado _(on/off)_
+├❥ᰰຼ ❏ ${prefix}autoread _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}modojadibot _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}autoadmin 
 ├❥ᰰຼ ❏ ${prefix}bc (difusión a todos los chat)
