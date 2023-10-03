@@ -16,7 +16,7 @@ const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, slee
 const crm9 ='SmFkaWJvdCBoZWNobyBwb3IgQFNraWR5ODkNCmh0dHBzOi8vd3d3LmdpdGh1Yi5jb20vU2tpZHk4OQ=='
 let rtx = `Escanea este QR para convertirte en un bot temporal\n\n1) Haz clic en los tres puntos en la esquina superior derecha\n2) Toca WhatsApp Web\n3) Escanea este QR\n*El QR expira a los 45 segundos*\n\n`
 let rtx2 = `NUEVO FORMA DE HACERTE UN SUB BOT\n\n1) Haz clic en los tres puntos en la esquina superior derecha\n2) Toca WhatsApp Web\n3) da click en vincular con codigo de teléfono\n4) pega el codigo a continuación\n\n`
-const jadibot2 = async (conn, m, command, text, args) => {
+const jadibot2 = async (conn, m, command, text, args, sender) => {
 const { sendImage, sendMessage, decodeJid, getName } = conn
 const { reply } = m
 if (!global.db.data.settings[conn.user.jid].jadibot) return m.reply(`*⚠️ Este comando fue desabilitado por el creador*`)
@@ -133,10 +133,9 @@ if (connection == 'open') {
 conn.isInit = true
 let usuario = await conn.user.jid
 global.listJadibot.push(conn)
-await sendMessage(m.chat, {text : args[0] ? "*⚠️ Reconectado con éxito!!*" : `*Conectado con exito*\n\n× Usuario: ${skmod.user.name}\n× ID : ${conn.user.jid}\n\n*NOTA:* el bot se puede reiniciar si deja de recibir comandos use: ${prefix + command} para volver a conectarte`}, { quoted: m })
-if (connection === 'open') {
-sendMessage(m.chat, {text: `*✅ Ya estas conectado, sea paciente, los mensajes se estan cargando...*`}, { quoted: m }) 
-}
+await sendMessage(m.chat, {text : args[0] ? "*✅ Ya estas conectado, sea paciente, los mensajes se estan cargando...*" : `*Conectado con exito*\n\n× Bot : ${usuario}\n× Dueño : +${sender.split("@")[0]}\n\n*NOTA:* el bot se puede reiniciar si deja de recibir comandos use: ${prefix + command} para volver a conectarte`}, { quoted: m })
+//if (connection === 'open') {
+//sendMessage(m.chat, {text: `*✅ Ya estas conectado, sea paciente, los mensajes se estan cargando...*`}, { quoted: m })}
 await sleep(5000)
 if (!args[0]) sendMessage(m.chat, {text: prefix + command + " " + Buffer.from(fs.readFileSync("./jadibts/" + id + "/creds.json"), "utf-8").toString("base64")}, { quoted: m })
 }

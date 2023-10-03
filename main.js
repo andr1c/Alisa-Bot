@@ -1,7 +1,7 @@
 //Código desde cero y comentarios hecho por: 
 // @gata_dios
 // @Skidy89
-// @elrebelde21  
+// @elrebelde21 
  
 //═════════[ Importaciones ]═════════ 
 const baileys = require('@whiskeysockets/baileys'); // trabajar a través de descargas por Whatsapp 
@@ -49,7 +49,7 @@ const {randow1, randow2, randow3, randow4, randow5, randow6, randow7, randow8, r
 const {play, mp3, mp4, git, tiktok, letra, mediafire, fb, ig, ig2, apk} = require('./plugins/descargas.js')  
 const {s, wm, attp, dado} = require('./plugins/stickers.js') 
 const {owner1, owner2, owner3, owner4, owner5, owner6, owner7, owner8, owner9} = require('./plugins/propietario.js')  
-const {on, on1, on2, on3, on4, on5, on6, on7, on8, on9, on10, on11} = require('./plugins/enable.js') 
+const {on, on1, on2, on3, on4, on5, on6, on7, on8, on9, on10, on11, on12} = require('./plugins/enable.js') 
 
 const msgs = (message) => { 
 if (message.length >= 10) { 
@@ -153,7 +153,7 @@ let msg = {...chatUpdate, messages: [proto.WebMessageInfo.fromObject(messages)],
 type: 'append'
 }
 conn.ev.emit('messages.upsert', msg)}
-          
+
 // ‿︵‿︵ʚɞ『 INFO CONSOLE 』ʚɞ‿︵‿︵	
 if (m.message) {
 console.log(chalk.bold.cyanBright(`▣────────────···\n│${botname} ${conn.user.id == global.numBot2 ? '' : '(SubBot)'}`), 
@@ -164,7 +164,7 @@ chalk.bold.cyan('\n│📊USUARIO: ') + chalk.cyanBright(pushname) + ' ➜', gra
 m.isGroup ? chalk.bold.greenBright('\n│📤GRUPO: ') + chalk.greenBright(groupName) + ' ➜ ' + gradient.rainbow(from) : chalk.bold.greenBright('\n│📥PRIVADO'), 
 //chalk.bold.red('\nETIQUETA: ') + chalk.redBright(`[${isBaneed ? 'Banned' : ''}]`),
 chalk.bold.white('\n│💬MENSAJE: ') + chalk.whiteBright(`\n▣────────────···\n${msgs(m.text)}\n`))
-)}
+)}          
 
 //autobio
 if (global.db.data.settings[numBot].autobio) {
@@ -176,11 +176,12 @@ const bio = `ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ | ᴀᴄᴛɪᴠᴏ ✅️: ${runtime(pr
 await conn.updateProfileStatus(bio)
 setting.status = new Date() * 1
 } catch {
-//console.log('⚠️ No se logró actualizar la bio') 
+console.log('[Update]') 
 }}}
   
 //autoread
-if (m.message) {
+if (!conn.autoread && m.message) {
+await conn.sendPresenceUpdate('composing', m.chat)
 conn.readMessages([m.key])}
             
 //antifake
@@ -230,6 +231,7 @@ return
 //autosticker
 if (global.db.data.chats[m.chat].autosticker) {  
 if (/image/.test(mime)) {  
+await conn.sendPresenceUpdate('composing', m.chat)
 m.reply(`_Calma crack estoy haciendo tu sticker 👏_\n\n_*Autosticker esta activado*_`)   
 media = await quoted.download()  
 let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: botname, body: `h`, mediaType: 2, sourceUrl: nn, thumbnail: imagen1}}}, { quoted: m })
@@ -254,11 +256,6 @@ await conn.sendMessage(m.chat, {text: `*ʜᴏʟᴀ @${sender.split`@`[0]}, ᴇs�
 await conn.updateBlockStatus(m.chat, 'block')}
 return !1;
 }
-
-//Marcar como (Escribiendo...) 
-/*if (command) {
-await conn.sendPresenceUpdate('composing', m.chat)
-}*///Para que le guste :v
 
 //ARRANCA LA DIVERSIÓN
 switch (command) { 
@@ -294,7 +291,7 @@ case 'serbot': case 'qr':
 jadibot(conn, m, command)  
 break  
 case 'jadibot': case 'sercode':
-jadibot2(conn, m, command, text, args)
+jadibot2(conn, m, command, text, args, sender)
 break
 case 'deljadibot': case 'stop':
 killJadibot(conn, m, prefix, command)
@@ -374,6 +371,9 @@ break
 case 'anticall': case 'antillamada': on10(isCreator, text, command, args, m) 
 break           
 case 'modojadibot': case 'jadibot': on11(isCreator, text, command, args, m) 
+break
+case 'autoread': case 'autovisto':
+on12(isCreator, text, command, args, m, conn) 
 break
 //Grupo 
 case 'grupo': grup(conn, m, args, isBotAdmins, isGroupAdmins, command, prefix, text)
@@ -548,32 +548,9 @@ case 'blackpink':
 sendImageAsUrl("https://delirius-image-random.vercel.app/api/all");
 break
 //descargas		    
-case 'play':
+case 'play': case 'play2':
 play(conn, text, command, m) 
 break 
-case 'play2':
-if (!text) return conn.sendMessage(m.chat, { text: `*Que esta buscado? ingrese el nombre del tema*\n\nEjemplo: *${prefix + command}* ozuna` }, { quoted: m })
-let yts = require("youtube-yts")
-let search = await yts(text)
-let anup3k = search.videos[0]
-let anu = search.videos[Math.floor(Math.random() * search.videos.length)] 
-eek = await getBuffer(anu.thumbnail) 
-conn.sendMessage(m.chat, { image : eek, caption:  `╭───≪~*╌◌ᰱ•••⃙❨͟͞P̸͟͞L̸͟A̸͟͞Y̸͟͞❩⃘•••ᰱ◌╌*~*
-│║📌 *Título* : ${anu.title}
-│║📆 *Publicado:* ${anu.ago}
-│║⌚ *Duración:* ${anu.timestamp}
-│║👤 *Autor:* ${anu.author.name}
-│║👀 *Vistas:*  ${anu.views}
-│║
-│║  *si el video no fue enviado usar:*
-│║ #ytvideo ${anu.url}
-╰─•┈┈┈•••✦𝒟ℳ✦•••┈┈┈•─╯⟤` }, { quoted: m})
-const playmp3 = require('./libs/ytdl2')
-const pl= await playmp3.mp3(anup3k.url)
-conn.sendMessage(m.chat, {video: {url : fs.readFileSync(pl.path)}, caption: 'aqui' }, {quoted:m})
-//await conn.sendMessage(m.chat, { audio: fs.readFileSync(pl.path), fileName: `error.mp3`, mimetype: 'audio/mp4' }, { quoted: m }); 
-await fs.unlinkSync(pl.path)
-break
 case "ytmp3": case "ytaudio": 
 mp3(conn, args, text, command, fkontak, ytplayvid, m)
 break 
@@ -614,8 +591,8 @@ break
 case 'myns':
 reg2(sender, m)
 break 
-case 'afk': {
-await afk(conn, m, args, sender, pushname)}
+case 'afk': 
+await afk(m, sender, text, pushname)
 break             
 case 'buy': case 'buyall': {
 await buy(conn, m, sender, args, command, text, fkontak)}
