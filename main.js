@@ -720,6 +720,10 @@ if (budy.includes(`Opa`)) {
 reply(`opaaaaa`)}
 if (budy.includes(`Fua`)) {
 reply(`el diegote pa`)}
+if (budy.includes(`Bot`)) {
+let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${budy}&lc=es&cf=false`)
+let res = anu.success;
+m.reply(res)}
 if (budy.startsWith(`a`)) {
 if (!global.db.data.chats[m.chat].audios) return
 let vn = './media/a.mp3'
