@@ -13,7 +13,7 @@ const util = require('util')
 const ws = require('ws')
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('./libs/fuctions')   
    const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'storeV2' }) })   
-const crm9 ='SmFkaWJvdCBoZWNobyBwb3IgQFNraWR5ODkNCmh0dHBzOi8vd3d3LmdpdGh1Yi5jb20vU2tpZHk4OQ=='
+const crm9 ='SmFkaWJvdCBoZWNobyBwb3I6IEBTa2lkeTg5'
 let rtx = `Escanea este QR para convertirte en un bot temporal\n\n1) Haz clic en los tres puntos en la esquina superior derecha\n2) Toca WhatsApp Web\n3) Escanea este QR\n*El QR expira a los 45 segundos*\n\n`
 let rtx2 = `NUEVO FORMA DE HACERTE UN SUB BOT\n\n1) Haz clic en los tres puntos en la esquina superior derecha\n2) Toca WhatsApp Web\n3) da click en vincular con codigo de teléfono\n4) pega el codigo a continuación\n\n`
 const jadibot2 = async (conn, m, command, text, args, sender) => {
@@ -142,6 +142,9 @@ if (!args[0]) sendMessage(m.chat, {text: prefix + command + " " + Buffer.from(fs
 const reason = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode
 if (connection === 'close') {
 console.log(reason)
+if (reason == 401) {
+fs.rmdirSync(`./jadibts/` + id, { recursive: true })
+return m.reply(`*⚠️ Dispositivo desconectado tendra que volver a conectarte con #jadibot*`)}
 if (reason == 405) {
 await fs.unlinkSync("./jadibts/" + id + "/creds.json")
 //thank you aiden_notLogic

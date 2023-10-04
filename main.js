@@ -2,7 +2,7 @@
 // @gata_dios
 // @Skidy89
 // @elrebelde21 
- 
+  
 //═════════[ Importaciones ]═════════ 
 const baileys = require('@whiskeysockets/baileys'); // trabajar a través de descargas por Whatsapp 
 const { WaMessageStubType, areJidsSameUser, downloadContentFromMessage, generateWAMessageContent, generateWAMessageFromContent, generateWAMessage, prepareWAMessageMedia, relayMessage} = require('@whiskeysockets/baileys'); // Importa los objetos 'makeWASocket' y 'proto' desde el módulo '@whiskeysockets/baileys'   
@@ -293,7 +293,7 @@ break
 case 'jadibot': case 'sercode':
 jadibot2(conn, m, command, text, args, sender)
 break
-case 'deljadibot': case 'stop':
+case 'deljadibot': case 'stop': 
 killJadibot(conn, m, prefix, command)
 break 
 case 'bots': case 'listbots': 
