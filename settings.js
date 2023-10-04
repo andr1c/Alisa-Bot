@@ -80,26 +80,26 @@ global.nna = 'https://chat.whatsapp.com/KlqNmoUcVnsGJxIfATIDrK' //Update
 global.nn = 'https://chat.whatsapp.com/CKnomE19yR0IEmM571RvRm'
 global.nna2 = 'CKnomE19yR0IEmM571RvRm'
 
-//---------[ INFO ]---------
+//---------[ INFO ]--------- 
 global.info = {
-wait: '*⌛ _Cargando | Charging..._ ▬▭▭▭▭▭▭*', 
-waitt: '*⌛ _Cargando | Charging..._ ▬▬▭▭▭*', 
-waittt: '*⌛ _Cargando | Charging..._ ▬▬▬▬▭▭*', 
-waitttt: '*⌛ _Cargando | Charging..._ ▬▬▬▬▬▬▭*', 
-waittttt: '*⌛ _Cargando | Charging..._ ▬▬▬▬▬▬▬*', 
+wait: '*⌛ _Cargando..._ ▬▭▭▭▭▭▭*', 
+waitt: '*⌛ _Cargando..._ ▬▬▭▭▭*', 
+waittt: '*⌛ _Cargando..._ ▬▬▬▬▭▭*', 
+waitttt: '*⌛ _Cargando..._ ▬▬▬▬▬▬▭*', 
+waittttt: '*⌛ _Cargando..._ ▬▬▬▬▬▬▬*', 
 result: '*✅ Listo*',
-admin: '*[ ⚠️ ] TU NO ERES ADMINS 🤡 ESTE COMANDO SOLO ES PARA LOS ADMINS DEL GRUPO*',
-botAdmin: '[ ⚠️ ] *Hey primero el bot (yo) necesito admin para usar este comando*',
-owner: '*[ ⚠️ ] ESTE COMANDO ES PARA MI JEFE*',
-group: '[ ⚠️ ] *ESTE COMANDO SOLO SE PUEDE USAR EL GRUPO*',
-private: '*[ ⚠️ ] ESTE COMANDO SOLO SE PUEDE USAR AL CHAT PRIVADO*',
-bot: '*[ ⚠️ ] ESTE COMANDO SOLO YO LOS PUEDE USAR*',
-error: '*[ ⚠️ ERROR ]*', 
+admin: '*[ ⚠️ ] 𝘛𝘜 𝘕𝘖 𝘌𝘙𝘌𝘚 𝘈𝘋𝘔𝘐𝘕𝘚 🤡 𝘌𝘚𝘛𝘌 𝘊𝘖𝘔𝘈𝘕𝘋𝘖 𝘚𝘖𝘓𝘖 𝘌𝘚 𝘗𝘈𝘙𝘈 𝘓𝘖𝘚 𝘈𝘋𝘔𝘐𝘕𝘚 𝘋𝘌𝘓 𝘎𝘙𝘜𝘗𝘖*',
+botAdmin: '[ ⚠️ ] *𝘏𝘌𝘠 𝘗𝘙𝘐𝘔𝘌𝘙𝘖 𝘌𝘓 𝘉𝘖𝘛 (𝘠𝘖) 𝘕𝘌𝘊𝘌𝘚𝘐𝘛𝘖 𝘚𝘌𝘙 𝘈𝘋𝘔𝘐𝘕𝘚 𝘗𝘈𝘙𝘈 𝘜𝘚𝘈𝘙 𝘌𝘚𝘛𝘌 𝘊𝘖𝘔𝘈𝘕𝘋𝘖*',
+owner: '*[ ⚠️ ] 𝘌𝘚𝘛𝘌 𝘊𝘖𝘔𝘈𝘕𝘋𝘖 𝘌𝘚 𝘗𝘈𝘙𝘈 𝘔𝘐 𝘑𝘌𝘍𝘌*',
+group: '[ ⚠️ ] *𝘌𝘚𝘛𝘌 𝘊𝘖𝘔𝘈𝘕𝘋𝘖 𝘚𝘖𝘓𝘖 𝘚𝘌 𝘗𝘜𝘌𝘋𝘌 𝘜𝘚𝘈𝘙 𝘌𝘓 𝘎𝘙𝘜𝘗𝘖*',
+private: '*[ ⚠️ ] 𝘌𝘚𝘛𝘌 𝘊𝘖𝘔𝘈𝘕𝘋𝘖 𝘚𝘖𝘓𝘖 𝘚𝘌 𝘗𝘜𝘌𝘋𝘌 𝘜𝘚𝘈𝘙 𝘈𝘓 𝘊𝘏𝘈𝘛 𝘗𝘙𝘐𝘝𝘈𝘋𝘖*',
+bot: '*[ ⚠️ ] 𝘌𝘚𝘛𝘌 𝘊𝘖𝘔𝘈𝘕𝘋𝘖 𝘚𝘖𝘓𝘖 𝘠𝘖 𝘓𝘖𝘚 𝘗𝘜𝘌𝘋𝘌 𝘜𝘚𝘈𝘙*',
+error: '*[ ⚠️ 𝘌𝘙𝘙𝘖𝘙 ]*', 
 advertencia: `[ ⚠️ ＡＤＶＥＲＴＥＮＣＩＡ ]`, 
 registra: `*[ 🔴 HEY ALTO NO ESTAS REGISTRADO 🔴 ]*\n\nNO APARECES EN MI BASE DE DATOS ✋\n\nPara poder usar el bot necesita esta registrado:\n\n#reg nombre.edad`,  
 limit: '*1 ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴜsᴀᴅᴏ*', 
-AntiNsfw: `*Los comando +18 esta desactivado*\nSi eres admin y quiere activarlos usar:\nantiNsfs on`, 
-endLimit: '𝘜𝘧𝘧𝘧 𝘲𝘶𝘦 𝘲𝘶𝘦𝘥𝘢𝘳𝘵𝘦 𝘴𝘪𝘯 𝘭𝘪𝘮𝘪𝘵𝘦 💎, 𝘶𝘴𝘢𝘳 𝘦𝘭 𝘤𝘰𝘮𝘢𝘯𝘥𝘰 /buy 𝘱𝘢𝘳𝘢 𝘤𝘰𝘮𝘱𝘳𝘢𝘳 𝘮𝘢𝘴 𝘥𝘪𝘢𝘮𝘢𝘯𝘵𝘦',
+AntiNsfw: `*Los comando +18 esta desactivado*\nSi eres admin y quiere activarlos usar:\nmodocaliente on`, 
+endLimit: 'ɴᴏ ᴛɪᴇɴᴇ ᴍᴀs ʟɪᴍɪᴛᴇ 💎, ᴘᴜᴇᴅᴇ ᴄᴏᴍᴘʀᴀʀ ᴍᴀs ᴜsᴀɴᴅᴏ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ #buy',
 }
 
 //---------------[ NIVELES, ADVERTENCIA ]----------------
