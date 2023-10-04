@@ -21,7 +21,7 @@ var latensi = speed() - timestamp
 let getGroups = await conn.groupFetchAllParticipating()
 let groups = Object.entries(getGroups).slice(0).map(entry => entry[1])
 let anu = groups.map(v => v.id)
-let user = [... new Set([...global.listJadibot.filter(conn => conn.user).map(conn => conn.user)])] 
+let user = [...new Set([...global.listJadibot.filter((conn) => conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED).map((conn) => conn)])];
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 let stateRun = `┏━━━━❰･𝐄𝐒𝐓𝐀𝐃𝐎 𝐃𝐄𝐋 𝐁𝐎𝐓･❱━━━━
 ┃
