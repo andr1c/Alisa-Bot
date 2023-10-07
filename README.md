@@ -3,8 +3,6 @@
   <a href="https://github.com/elrebelde21"><img src="http://readme-typing-svg.herokuapp.com?font=mono&size=17&duration=4000&color=F7B11B&center=falso&vCenter=falso&lines=Nova-Bot-MD++%F0%9F%92%96;Gracias+por+visitar+este+repositorio+El+bot+esta+el+desarrollo%F0%9F%92%96" height="90px"
 </p>
 
--------
-
 ### `👑 DUDAS SOBRE EL BOT?, CONTACTAME 👑`
 <p align="center">
 <a href="https://github.com/elrebelde21"><img src="http://readme-typing-svg.herokuapp.com?font=mono&size=14&duration=3000&color=ABF7BB&center=verdadero&vCenter=verdadero&lines=Solo+escr%C3%ADba+si+tiene+dudas." height="40px"
@@ -12,7 +10,7 @@
     
 <a href="wa.me/595975740803" target="blank"><img src="https://img.shields.io/badge/Creador-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" /></a>
 
-## Quiere probar la funciones del bot, antes de instalar, probar el bot aquí
+### Quiere probar la funciones del bot, antes de instalar, probar el bot aquí
 
 [![Grupos](https://img.shields.io/badge/Grupos-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/CKnomE19yR0IEmM571RvRm) 
 
