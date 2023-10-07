@@ -38,7 +38,9 @@ Pd: no vayan a poner npm start que no van funciona, ponerlo asi como esta (node 
 
 ## Realizas estos pasos como en el video de acontinuacion 
 
-![Output sample](https://github.com/elrebelde21/NovaBot-MD/blob/main/temples/https://a.uguu.se/cslgSVuB.gif)
+<p align="center">
+<a href="#"><img title="NovaBot-MD" src="https://a.uguu.se/cslgSVuB.gif/badge/a -purple?colorA=%cc33ff&colorB=%cc33ff&style=for-the-badge"></a>
+</p>
 
 ## `EDITOR Y PROPIETARIO DEL BOT`
 
