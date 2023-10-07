@@ -1,6 +1,6 @@
 const fs = require("fs")
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('../libs/fuctions.js'); 
-const path = require("path")
+const path = require("path") 
 const chalk = require("chalk");
 const moment = require('moment-timezone') 
 const gradient = require('gradient-string') 
@@ -150,7 +150,8 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}anularlink 
 ├❥ᰰຼ ❏ ${prefix}resetlink _(restablecer el link del grupo)_
 ├❥ᰰຼ ❏ ${prefix}hidetag _(etiqueta a todos el un mensaje)_
-├❥ᰰຼ ❏ ${prefix}tagall _(etiqueta a todos el una listas)_
+├❥ᰰຼ ❏ ${prefix}tagall 
+├❥ᰰຼ ❏ ${prefix}invocar _(etiqueta a todos el una listas)_
 ├❥ᰰຼ ❏ ${prefix}listonline _(etiquetas a los usuarios que esta activo|online)_
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
 

@@ -1,5 +1,5 @@
 require('../main.js') 
-const fs = require("fs")
+const fs = require("fs") 
 const path = require("path")
 const chalk = require("chalk");
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('../libs/fuctions.js'); 
@@ -138,13 +138,24 @@ async function on12(isCreator, text, command, args, m, conn) {
 if (!isCreator) return m.reply(info.owner)
 if (!text) return m.reply(`*Use de esta forma ejemplo:*\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
 if (args[0] === "on") {
-conn.autoread = false
+global.db.data.settings[conn.user.jid].autoread = false
+//conn.autoread = false
 m.reply(`*✅ ${command} se activó con éxito*`)
 } else if (args[0] === "off") {
-conn.autoread = true
+global.db.data.settings[conn.user.jid].autoread = true
+//conn.autoread = true
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
 
-module.exports = {on, on1, on2, on3, on4, on5, on6, on7, on8, on9, on10, on11, on12}
+async function onn(text, command, args, m) {
+if (!text) return m.reply(`*Use de esta forma ejemplo:*\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
+if (args[0] === "on") {
+global.db.data.chats[m.chat].antispam = true
+m.reply(`*✅ ${command} se activó con éxito*`)
+} else if (args[0] === "off") {
+global.db.data.chats[m.chat].antispam = false
+m.reply(`*🟢 ${command} esta desactivado!*`)}}
+
+module.exports = {on, on1, on2, on3, on4, on5, on6, on7, on8, on9, on10, on11, on12, onn}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
