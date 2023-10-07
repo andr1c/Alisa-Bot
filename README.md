@@ -1,8 +1,5 @@
 ### Bot el desarrollo 💫
 <p align="center">
-<img src="https://github.com/elrebelde21/NovaBot-MD/blob/main/temples/https://telegra.ph/file/34944ce94e05a186c3a88.jpg" alt="GIF" width="500" height="281"/>
-</p>
-<p align="center">
 <a href="#"><img title="NovaBot" src="https://telegra.ph/file/34944ce94e05a186c3a88.jpg/badge/a -purple?colorA=%cc33ff&colorB=%cc33ff&style=for-the-badge"></a>
 </p>
 
