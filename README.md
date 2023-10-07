@@ -1,6 +1,9 @@
 ### Bot el desarrollo 💫
-<p align="center"> 
-  <a href="https://github.com/elrebelde21"><img src="http://readme-typing-svg.herokuapp.com?font=mono&size=17&duration=4000&color=F7B11B&center=falso&vCenter=falso&lines=Nova-Bot-MD++%F0%9F%92%96;Gracias+por+visitar+este+repositorio+El+bot+esta+el+desarrollo%F0%9F%92%96" height="90px"
+<p align="center">
+<img src="https://github.com/shanduy/ShanBot/blob/main/temples/ezgif-4-5e4fce2c4bbe.gif" alt="GIF" width="500" height="281"/>
+</p>
+<p align="center">
+<a href="#"><img title="ShanBot" src="https://img.shields.io/badge/ShanBot -purple?colorA=%cc33ff&colorB=%cc33ff&style=for-the-badge"></a>
 </p>
 
 ### `👑 DUDAS SOBRE EL BOT?, CONTACTAME 👑`
