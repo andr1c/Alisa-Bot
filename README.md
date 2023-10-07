@@ -14,7 +14,7 @@
 
 ### En caso de duda, antes de instalar el bot, probar el bot aquí
 
-[![Grupos](https://img.shields.io/badge/NovaBot-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/CKnomE19yR0IEmM571RvRm) 
+[![Grupos](https://img.shields.io/badge/Grupos-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/CKnomE19yR0IEmM571RvRm) 
 
 ## 𝙰𝚌𝚝𝚒𝚟𝚊 𝚎𝚕 𝚝𝚎𝚛𝚖𝚞𝚡
 ```bash
