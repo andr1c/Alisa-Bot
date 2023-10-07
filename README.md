@@ -1,6 +1,6 @@
 ### Bot el desarrollo 💫
 <p align="center">
-<a href="#"><img title="NovaBot" src="https://telegra.ph/file/34944ce94e05a186c3a88.jpg/badge/a -purple?colorA=%cc33ff&colorB=%cc33ff&style=for-the-badge"></a>
+<a href="#"><img title="NovaBot-MD" src="https://telegra.ph/file/343e60521da533ea8a2d3.jpg/badge/a -purple?colorA=%cc33ff&colorB=%cc33ff&style=for-the-badge"></a>
 </p>
 
 ### `👑 DUDAS SOBRE EL BOT?, CONTACTAME 👑`
