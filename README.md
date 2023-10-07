@@ -1,5 +1,12 @@
 ### Bot el desarrollo 💫
 
+### `👑 DUDAS SOBRE EL BOT?, CONTACTAME 👑`
+<p align="center">
+<a href="https://github.com/elrebelde21"><img src="http://readme-typing-svg.herokuapp.com?font=mono&size=14&duration=3000&color=ABF7BB&center=verdadero&vCenter=verdadero&lines=Solo+escr%C3%ADba+si+tiene+dudas." height="40px"
+</p>
+    
+<a href="wa.me/595975740803" target="blank"><img src="https://img.shields.io/badge/Creador-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" /></a>
+
 ## 𝙰𝚌𝚝𝚒𝚟𝚊 𝚎𝚕 𝚝𝚎𝚛𝚖𝚞𝚡
 ```bash
 termux-setup-storage
