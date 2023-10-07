@@ -74,7 +74,7 @@ global.imagen3 = fs.readFileSync('./media/menu3.jpg')
 global.noperfil = fs.readFileSync('./media/sinfoto.jpg')
 
 //---------[ ENLACE ]---------
-global.md = 'https://github.com/elrebelde21'
+global.md = 'https://github.com/elrebelde21/NovaBot-MD'
 global.yt = 'https://www.youtube.com/@LoliBot'
 global.nna = 'https://chat.whatsapp.com/KlqNmoUcVnsGJxIfATIDrK' //Update 
 global.nn = 'https://chat.whatsapp.com/CKnomE19yR0IEmM571RvRm'
