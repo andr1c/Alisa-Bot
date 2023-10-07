@@ -1,6 +1,6 @@
 ### Bot el desarrollo 💫
 <p align="center"> 
-  <a href="https://github.com/elrebelde21"><img src="http://readme-typing-svg.herokuapp.com?font=mono&size=17&duration=4000&color=F7B11B&center=falso&vCenter=falso&lines=NOVA-BOT-MD++%F0%9F%92%96;Gracias+por+visitar+este+repositorio.+%F0%9F%92%96" height="90px"
+  <a href="https://github.com/elrebelde21"><img src="http://readme-typing-svg.herokuapp.com?font=mono&size=17&duration=4000&color=F7B11B&center=falso&vCenter=falso&lines=Nova-Bot-MD++%F0%9F%92%96;Gracias+por+visitar+este+repositorio,+El+bot+esta+el+desarrollo%F0%9F%92%96" height="90px"
 </p>
 
 -------
