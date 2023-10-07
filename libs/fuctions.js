@@ -420,6 +420,7 @@ if (!isNumber(user.regTime)) user.regTime = -1
   if(!isNumber(user.copper)) user.copper = 0
   if (!isNumber(user.lastmiming)) user.lastmiming = 0
   if (!isNumber(user.robs)) user.robs = 0
+  if (!isNumber(user.spam)) user.spam = 0
   if (!isNumber(user.lastclaim)) user.lastclaim = 0
   if (!isNumber(user.lastslot)) user.lastslot= 0
   if (!isNumber(user.lastcofre)) user.lastcofre = 0
@@ -485,6 +486,7 @@ let chats = global.db.data.chats[m.chat]
   if (!('antiArabe' in chats)) chats.antiArabe = false
   if (!('autosticker' in chats)) chats.autosticker = false
   if (!('detect' in chats)) chats.detect = true
+  if (!('antispam' in chats)) chats.antispam = true
   if (!('autoread' in chats)) chats.autoread = true
   } else global.db.data.chats[m.chat] = {  
   antilink: false,  
@@ -498,6 +500,7 @@ let chats = global.db.data.chats[m.chat]
   antiArabe: false,
   autosticker: false, 
   detect: true, 
+  antispam: true, 
   autoread: false
   }
   
