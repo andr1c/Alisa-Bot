@@ -486,7 +486,6 @@ let chats = global.db.data.chats[m.chat]
   if (!('antiArabe' in chats)) chats.antiArabe = false
   if (!('autosticker' in chats)) chats.autosticker = false
   if (!('detect' in chats)) chats.detect = true
-  if (!('antispam' in chats)) chats.antispam = true
   if (!('autoread' in chats)) chats.autoread = true
   } else global.db.data.chats[m.chat] = {  
   antilink: false,  
@@ -500,7 +499,6 @@ let chats = global.db.data.chats[m.chat]
   antiArabe: false,
   autosticker: false, 
   detect: true, 
-  antispam: true, 
   autoread: false
   }
   
@@ -512,14 +510,12 @@ let chats = global.db.data.chats[m.chat]
   if (!('jadibot' in setting)) setting.jadibot = true 
   if (!('anticall' in setting)) setting.anticall = true
   if (!('antiprivado' in setting)) setting.antiprivado = false
-//  if (!('autoread' in setting)) setting.autoread = false
   } else global.db.data.settings[conn.user.jid] = {  
   status: 0,  
   autobio: true,
   jadibot: true,
   anticall: true, 
   antiprivado: false
- // autoread: false
   } 
 
 global.db.data.sticker = global.db.data.sticker || {} // sticker for addcmd
