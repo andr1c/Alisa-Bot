@@ -23,8 +23,9 @@ Pd: no vayan a poner npm start que no van funciona, ponerlo asi como esta (node 
 
 <a href="https://github.com/elrebelde21"><img src="https://github.com/elrebelde21.png" width="250" height="250" alt="elrebelde21"/></a>
 
-# `👑Colaboradores👑`
+## `👑Colaboradores👑`
 
+[![GataNina-Li](https://github.com/GataNina-Li.png?size=100)](https://github.com/GataNina-Li) 
 [![Skidy89](https://github.com/Skidy89.png?size=100)](https://github.com/Skidy89) 
   
 ## `AGRADECIMIENTOS & CREDITOS` 
