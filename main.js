@@ -49,7 +49,7 @@ const {randow1, randow2, randow3, randow4, randow5, randow6, randow7, randow8, r
 const {play, mp3, mp4, git, tiktok, letra, mediafire, fb, ig, ig2, apk} = require('./plugins/descargas.js')  
 const {s, wm, attp, dado} = require('./plugins/stickers.js') 
 const {owner1, owner2, owner3, owner4, owner5, owner6, owner7, owner8, owner9} = require('./plugins/propietario.js')  
-const {on, on1, on2, on3, on4, on5, on6, on7, on8, on9, on10, on11, on12} = require('./plugins/enable.js') 
+const {on, on1, on2, on3, on4, on5, on6, on7, on8, on9, on10, on11, on12, onn} = require('./plugins/enable.js') 
 
 const msgs = (message) => { 
 if (message.length >= 10) { 
@@ -183,6 +183,13 @@ console.log('[Update]')
 if (!conn.autoread && m.message) {
 await conn.sendPresenceUpdate('composing', m.chat)
 conn.readMessages([m.key])}
+
+//antispam
+if (global.db.data.chats[m.chat].antispam && m.message && command) {
+const date = global.db.data.users[m.sender].spam + 5000; //5 seg
+if (new Date - global.db.data.users[m.sender].spam < 5000) return conn.sendMessage(m.chat, {text: `_Espere unos segundos antes de usar otro comando..._ ✓`, mentions: [sender], },{quoted: m}) 
+global.db.data.users[m.sender].spam = new Date * 1
+}
             
 //antifake
 if (global.db.data.chats[m.chat].antifake && !isGroupAdmins) {	
@@ -375,6 +382,8 @@ break
 case 'autoread': case 'autovisto':
 on12(isCreator, text, command, args, m, conn) 
 break
+case 'antispam': onn(text, command, args, m) 
+break
 //Grupo 
 case 'grupo': grup(conn, m, args, isBotAdmins, isGroupAdmins, command, prefix, text)
 break
@@ -417,7 +426,7 @@ break
 case 'banchat': 
 ban(conn, m, isBotAdmins, isGroupAdmins, text, args, prefix, command)
 break              
-case 'tagall':  
+case 'tagall': case 'invocar': case 'todos':
 tag(conn, m, isBotAdmins, isGroupAdmins, participants, q)
 break            
 case 'admins': case 'administradores': 
