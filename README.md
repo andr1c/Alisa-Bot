@@ -36,10 +36,6 @@ Si despues que ya instalastes tu bot y termux te salta en blanco, se fue tu inte
 Pd: no vayan a poner npm start que no van funciona, ponerlo asi como esta (node .) 
 ```
 
-## Realizas estos pasos como en el video de acontinuacion 
-<p align="center"> 
-<src="https://a.uguu.se/cslgSVuB.mp4" alt="NovaBot-MD" width="500"/>
-
 ## `EDITOR Y PROPIETARIO DEL BOT`
 
 <a href="https://github.com/elrebelde21"><img src="https://github.com/elrebelde21.png" width="250" height="250" alt="elrebelde21"/></a>
