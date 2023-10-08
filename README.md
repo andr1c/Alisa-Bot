@@ -38,7 +38,7 @@ Pd: no vayan a poner npm start que no van funciona, ponerlo asi como esta (node 
 
 ## Realizas estos pasos como en el video de acontinuacion 
 
-![Output sample](https://github.com/elrebelde21/NovaBot-MD/blob/main/temples/termux.mp4)
+![bot](https://github.com/elrebelde21/NovaBot-MD/blob/main/src/termux.mp4)
 
 ## `EDITOR Y PROPIETARIO DEL BOT`
 
