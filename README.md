@@ -25,15 +25,14 @@ apt update && apt upgrade && pkg update && pkg upgrade && pkg install bash && pk
 git clone https://github.com/elrebelde21/NovaBot-MD && cd NovaBot-MD && yarn && npm install
 ```
 ```bash
-node .
+npm start
 ```
 
 ## Soluciones A Errores
 Si despues que ya instalastes tu bot y termux te salta en blanco, se fue tu internet o reiniciaste tu celular, solo realizaras estos pasos
 ```bash
 > cd NovaBot-MD
-> node . 
-Pd: no vayan a poner npm start que no van funciona, ponerlo asi como esta (node .) 
+> npm start
 ```
 
 ## `EDITOR Y PROPIETARIO DEL BOT`
