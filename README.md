@@ -38,7 +38,7 @@ Pd: no vayan a poner npm start que no van funciona, ponerlo asi como esta (node 
 
 ## Realizas estos pasos como en el video de acontinuacion 
 <p align="center"> 
-<vid src="https://a.uguu.se/cslgSVuB.mp4" alt="NovaBot-MD" width="500"/>
+<mp4 src="https://a.uguu.se/cslgSVuB.mp4" alt="NovaBot-MD" width="500"/>
 
 ## `EDITOR Y PROPIETARIO DEL BOT`
 
