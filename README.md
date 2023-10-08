@@ -38,9 +38,7 @@ Pd: no vayan a poner npm start que no van funciona, ponerlo asi como esta (node 
 
 ## Realizas estos pasos como en el video de acontinuacion 
 
-<p align="center">
-<a href="#"><vid title="NovaBot-MD" src="https://a.uguu.se/cslgSVuB.mp4/badge/a -purple?colorA=%cc33ff&colorB=%cc33ff&style=for-the-badge"></a>
-</p>
+![Output sample](https://github.com/elrebelde21/NovaBot-MD/blob/main/temples/termux.mp4)
 
 ## `EDITOR Y PROPIETARIO DEL BOT`
 
