@@ -60,9 +60,9 @@ conn.sendMessage(m.chat, { text: `*BOT EL DESARROLLO*\n\n*Te puede unirte al gru
 async function instalar(conn, m, pushname, sender) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 conn.sendMessage(m.chat, { text: `╭─────────────┈⊷
-│ *INSTALACION NOVABOT-MD*
+│ \`\`\`COMO INSTALAR ESTE BOT?\`\`\`
 ╰┬────────────┈⊷
-┌┤📌 *REQUISITOS PARA LAS INSTALACION*
+┌┤ \`\`\`📌 REQUISITOS PARA LAS INSTALACION \`\`\`
 ┌┤❇️ _Dudas: wa.me/595975740803_
 ┌┤❇️ _Tutoríal: pronto_
 ┌┤❇️ _1 GB de almacenamiento_
@@ -71,13 +71,18 @@ conn.sendMessage(m.chat, { text: `╭─────────────┈�
 ┌┤❇️ _un whatsapp inmune (secundario)_
 ┌┤❇️ _un número victual (otro numero)_
 ┌┤❇️ _2 dispositivo o una PC para escanear_
-╰┬────────────┈⊷
-  │📌 *COMANDO DE INSTALACION TERMUX*
-  │> termux-setup-storage
-  │> apt update && apt upgrade && pkg update && pkg upgrade && pkg install bash && pkg install libwebp && pkg install git -y && pkg install nodejs -y && pkg install ffmpeg -y && pkg install wget && pkg install imagemagick -y && pkg install yarn
-  │> git clone https://github.com/elrebelde21/NovaBot-MD && cd NovaBot-MD && yarn && npm install
-  │> npm start
-  ╰────────────┈⊷`,
+╰────────────┈⊷
+
+ \`\`\`📌 COMANDO DE INSTALACION TERMUX\`\`\`
+
+> termux-setup-storage
+
+> apt update && apt upgrade && pkg update && pkg upgrade && pkg install bash && pkg install libwebp && pkg install git -y && pkg install nodejs -y && pkg install ffmpeg -y && pkg install wget && pkg install imagemagick -y && pkg install yarn
+
+> git clone https://github.com/elrebelde21/NovaBot-MD && cd NovaBot-MD && yarn && npm install
+
+> npm start
+(ʏ ᴀᴄᴀ ǫᴜᴇ ᴠᴀɴ ᴍᴀɴᴅᴀ ᴇʟ ǫʀ ᴛᴇɴᴇʀ ʟᴀ ᴏᴘᴄɪᴏɴ sᴀᴄᴀ ᴜɴᴀ ᴄᴀʀᴛᴜʀᴀ ʏ ᴍᴀɴᴅᴀʟᴀ ᴀ ᴛᴜ ᴏᴛʀᴏ ᴄᴇʟᴜʟᴀʀ ʏ ᴇsᴄᴀɴᴇᴀ ʀᴀᴘɪᴅᴏ)`,
 contextInfo:{
 mentions: [sender], 
 forwardingScore: 9999999,
