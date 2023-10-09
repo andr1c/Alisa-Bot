@@ -147,11 +147,11 @@ async function ban(m, text, command, args){
 if (!text) return m.reply(`*Accion mal usaba*\n\n*Use de esta forma:*\n*${prefix + command} on*\n*${prefix + command} off*`)
 if (args[0] === "on") {
 //if (global.db.data.chats[m.chat].ban) return m.reply(`*Ya esta baneado este chat*`)
-global.db.data.chats[m.chat].ban = true
+global.db.data.chats[m.chat].isBanned = true
 m.reply(`*BOT OFF*`)
 } else if (args[0] === "off") {  
 //if (!global.db.data.chats[m.chat].ban) return m.reply(`*Este chat no esta baneado*`)
-global.db.data.chats[m.chat].ban = false
+global.db.data.chats[m.chat].isBanned = false
 m.reply(`*BOT ONLINE YA ESTOY DISPONIBLE ✅*`)}}
 
 async function tag(conn, m, isBotAdmins, isGroupAdmins, participants, q){   
