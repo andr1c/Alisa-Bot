@@ -150,8 +150,9 @@ if (db.data.chats[m.chat].ban) return m.reply(`*Ya esta baneado este chat*`)
 db.data.chats[m.chat].ban = true
 m.reply(`*BOT OFF*`)
 } else if (args[0] === "off") {
+db.data.chats[m.chat].ban = false      
 if (!db.data.chats[m.chat].ban) return m.reply(`*Este chat no esta baneado*`)
-db.data.chats[m.chat].ban = false
+//db.data.chats[m.chat].ban = false
 m.reply(`*BOT ONLINE YA ESTOY DISPONIBLE ✅*`)}}
 
 async function tag(conn, m, isBotAdmins, isGroupAdmins, participants, q){   
