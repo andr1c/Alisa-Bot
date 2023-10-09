@@ -1,5 +1,5 @@
 //Código desde cero y comentarios hecho por: 
-// @gata_dios
+// @gata_dios 
 // @Skidy89
 // @elrebelde21 
   
