@@ -146,11 +146,11 @@ async function ban(m, text, command, args){
 //if (!isGroupAdmins) return m.reply(info.admin)
 if (!text) return m.reply(`*Accion mal usaba*\n\n*Use de esta forma:*\n*${prefix + command} on*\n*${prefix + command} off*`)
 if (args[0] === "on") {
-if (global.db.data.chats[m.chat].ban) return m.reply(`*Ya esta baneado este chat*`)
+//if (global.db.data.chats[m.chat].ban) return m.reply(`*Ya esta baneado este chat*`)
 global.db.data.chats[m.chat].ban = true
 m.reply(`*BOT OFF*`)
 } else if (args[0] === "off") {  
-if (!global.db.data.chats[m.chat].ban) return m.reply(`*Este chat no esta baneado*`)
+//if (!global.db.data.chats[m.chat].ban) return m.reply(`*Este chat no esta baneado*`)
 global.db.data.chats[m.chat].ban = false
 m.reply(`*BOT ONLINE YA ESTOY DISPONIBLE ✅*`)}}
 
@@ -174,8 +174,8 @@ const groupAdmins = participants.filter((p) => p.admin);
 const listAdmin = groupAdmins.map((v, i) => `${i + 1}. @${v.id.split('@')[0]}`).join('\n➥ ');
 const owner = groupMetadata.owner || groupAdmins.find((p) => p.admin === 'superadmin')?.id || m.chat.split`-`[0] + '@s.whatsapp.net';
 const pesan = args.join` `;
-const oi = `*Ｍｅｎｓａｊｅ:* ${pesan}`;
-const text = `═✪〘 *ＩＮＶＯＣＡＮＤＯ ＡＤＭＩＮＳ* 〙✪═\n\n• *Ｇｒｕｐｏ :* [ ${groupMetadata.subject} ]\n\n• ${oi}\n\n• *Ａｄｍｉｎｓ :*\n➥ ${listAdmin}\n\n*[ ⚠ ️] ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ sᴏʟᴏ ᴄᴜᴀɴᴅᴏ sᴇ ᴛʀᴀᴛᴇ ᴅᴇ ᴜɴᴀ ᴇᴍᴇʀɢᴇɴᴄɪᴀ*`.trim();
+const oi = `*ᴍᴇɴsᴀᴊᴇ:* ${pesan}`;
+const text = `═✪〘 *ＩＮＶＯＣＡＮＤＯ ＡＤＭＩＮＳ* 〙✪═\n\n• *ɢʀᴜᴘᴏ:* [ ${groupMetadata.subject} ]\n\n• ${oi}\n\n• *ᴀᴅᴍɪɴs:*\n➥ ${listAdmin}\n\n*[ ⚠ ️] ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ sᴏʟᴏ ᴄᴜᴀɴᴅᴏ sᴇ ᴛʀᴀᴛᴇ ᴅᴇ ᴜɴᴀ ᴇᴍᴇʀɢᴇɴᴄɪᴀ*`.trim();
 conn.sendMessage(m.chat, { text: text, mentions: participants.map(a => a.id) }, { quoted: m })}
 
 async function infogr(conn, participants, groupMetadata, fkontak, m) {
