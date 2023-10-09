@@ -185,7 +185,7 @@ await conn.sendPresenceUpdate('composing', m.chat)
 conn.readMessages([m.key])}
 
 //antispam
-if (global.db.data.chats[m.chat].antispam && command) {
+if (global.db.data.chats[m.chat].antispam && prefix) {
 const date = global.db.data.users[m.sender].spam + 5000; //5 seg
 if (new Date - global.db.data.users[m.sender].spam < 5000) return conn.sendMessage(m.chat, {text: `_*Espere unos segundos antes de usar otro comando...*_ ✓`, mentions: [sender], },{quoted: m}) 
 global.db.data.users[m.sender].spam = new Date * 1
