@@ -227,7 +227,7 @@ if (!conn.public && !isCreator) {
 if (!m.key.fromMe) return
 }        	
 //Banea chat
-if (global.db.data.chats[m.chat].ban && !isCreator) {
+if (global.db.data.chats[m.chat].isBanned) {
 return
 }
 //modoadmin
