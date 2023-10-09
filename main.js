@@ -1,6 +1,6 @@
 //Código desde cero y comentarios hecho por: 
 // @gata_dios
-// @Skidy89
+// @Skidy89 
 // @elrebelde21 
   
 //═════════[ Importaciones ]═════════ 
