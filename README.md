@@ -41,6 +41,11 @@ Si despues que ya instalastes tu bot y termux te salta en blanco, se fue tu inte
 > npm start
 ```
 
+## `𝙿𝙰𝚁𝙰 𝙰𝙲𝚃𝙸𝚅𝙰𝚁 𝟸𝟺/𝟽 (𝚃𝙴𝚁𝙼𝚄𝚇)`
+```bash
+npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
+```
+
 ## `EDITOR Y PROPIETARIO DEL BOT`
 
 <a href="https://github.com/elrebelde21"><img src="https://github.com/elrebelde21.png" width="250" height="250" alt="elrebelde21"/></a>
