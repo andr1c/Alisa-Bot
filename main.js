@@ -187,8 +187,7 @@ conn.readMessages([m.key])}
 //antispam
 if (global.db.data.chats[m.chat].antispam && command) {
 const date = global.db.data.users[m.sender].spam + 5000; //5 seg
-if (new Date - global.db.data.users[m.sender].spam < 5000) return conn.fakeReply(m.chat, `_Espere unos segundos antes de usar otro comando..._ ✓`, '0@s.whatsapp.net', 'No haga spam')
-//conn.sendMessage(m.chat, {text: `_Espere unos segundos antes de usar otro comando..._ ✓`, mentions: [sender], },{quoted: m}) 
+if (new Date - global.db.data.users[m.sender].spam < 5000) return conn.sendMessage(m.chat, {text: `_*Espere unos segundos antes de usar otro comando...*_ ✓`, mentions: [sender], },{quoted: m}) 
 global.db.data.users[m.sender].spam = new Date * 1
 }
             
@@ -425,7 +424,7 @@ case 'link': case 'linkgc':
 link(conn, m, isBotAdmins)
 break                        		
 case 'banchat': 
-ban(conn, m, isBotAdmins, isGroupAdmins, text, args, prefix, command)
+ban(m, text, command, args)
 break              
 case 'tagall': case 'invocar': case 'todos':
 tag(conn, m, isBotAdmins, isGroupAdmins, participants, q)
