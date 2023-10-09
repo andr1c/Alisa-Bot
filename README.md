@@ -36,7 +36,7 @@ git clone https://github.com/elrebelde21/NovaBot-MD && cd NovaBot-MD && yarn && 
 npm start
 ```
 
-## Soluciones A Errores
+## 𝚂𝚘𝚕𝚞𝚌𝚒𝚘𝚗𝚎𝚜 𝙰 𝙴𝚛𝚛𝚘𝚛𝚎𝚜
 Si despues que ya instalastes tu bot y termux te salta en blanco, se fue tu internet o reiniciaste tu celular, solo realizaras estos pasos
 ```bash
 > cd NovaBot-MD
@@ -50,15 +50,15 @@ npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
 
 ------------------ 
 
-## `EDITOR Y PROPIETARIO DEL BOT`
+## `𝙴𝙳𝙸𝚃𝙾𝚁 𝚈 𝙿𝚁𝙾𝙿𝙸𝙴𝚃𝙰𝚁𝙸𝙾 𝙳𝙴𝙻 𝙱𝙾𝚃`
 
 <a href="https://github.com/elrebelde21"><img src="https://github.com/elrebelde21.png" width="250" height="250" alt="elrebelde21"/></a>
 
-## `👑Colaboradores👑`
+## `👑 𝙲𝙾𝙻𝙰𝙱𝙾𝚁𝙰𝙳𝙾𝚁𝙴𝚂 👑`
 
 [![GataNina-Li](https://github.com/GataNina-Li.png?size=100)](https://github.com/GataNina-Li) 
 [![Skidy89](https://github.com/Skidy89.png?size=100)](https://github.com/Skidy89) 
   
-## `AGRADECIMIENTOS & CREDITOS` 
+## `𝙰𝙶𝚁𝙰𝙳𝙴𝙲𝙸𝙼𝙸𝙴𝙽𝚃𝙾𝚂 & 𝙲𝚁𝙴𝙳𝙸𝚃𝙾𝚂` 
 <a href="https://github.com/ferhacks"><img src="https://github.com/ferhacks.png" width="150" height="150" alt="ferhacks"/></a>
 <a href="https://github.com/WhiskeySockets/Baileys"><img src="https://github.com/WhiskeySockets.png" width="150" height="150" alt="adiwajshing"/></a>
