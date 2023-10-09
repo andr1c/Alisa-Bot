@@ -476,7 +476,7 @@ let chats = global.db.data.chats[m.chat]
   if (typeof chats !== 'object') global.db.data.chats[m.chat] = {}  
   if (chats) {  
   if (!('antilink' in chats)) chats.antilink = false  
-  if (!('ban' in chats)) chats.ban = false  
+  if (!('isBanned' in chats)) chats.isBanned = false
   if (!('modeadmin' in chats)) chats.modeadmin = false  
   if (!('welcome' in chats)) chats.welcome = true
   if (!('audios' in chats)) chats.audios = true
@@ -489,7 +489,7 @@ let chats = global.db.data.chats[m.chat]
   if (!('autoread' in chats)) chats.autoread = true
   } else global.db.data.chats[m.chat] = {  
   antilink: false,  
-  ban: false,   
+  isBanned: false,   
   modeAdmin: false,  
   welcome: true, 
   audios: true, 
