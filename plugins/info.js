@@ -59,13 +59,25 @@ conn.sendMessage(m.chat, { text: `*BOT EL DESARROLLO*\n\n*Te puede unirte al gru
 
 async function instalar(conn, m, pushname, sender) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-conn.sendMessage(m.chat, { text: `┎┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-\`\`\`COMO INSTALAR ESTE BOT?\`\`\`
-\`\`\`Este bot es nuevo todavía no se puede instalar si quiere probar sus funciones entra al grupo del bot\`\`\`
-*Escribe: ${prefix}grupos*
-
-\`\`\`o puede probar las funcion de hacerte un sub bot Escribe: ${prefix}serbot\`\`\`
-┖┈┈┈┈┈┈┈┈┈┈┈┈┈┈`,
+conn.sendMessage(m.chat, { text: `╭─────────────┈⊷
+│ *INSTALACION NOVABOT-MD*
+╰┬────────────┈⊷
+┌┤📌 *REQUISITOS PARA LAS INSTALACION*
+┌┤❇️ _Dudas: wa.me/595975740803_
+┌┤❇️ _Tutoríal: pronto_
+┌┤❇️ _1 GB de almacenamiento_
+┌┤❇️ _Termux: https://www.mediafire.com/file/3hsvi3xkpq3a64o/termux_118.apk/file_
+┌┤❇️ _GitHub: ${md}_
+┌┤❇️ _un whatsapp inmune (secundario)_
+┌┤❇️ _un número victual (otro numero)_
+┌┤❇️ _2 dispositivo o una PC para escanear_
+╰┬────────────┈⊷
+  │📌 *COMANDO DE INSTALACION TERMUX*
+  │> termux-setup-storage
+  │> apt update && apt upgrade && pkg update && pkg upgrade && pkg install bash && pkg install libwebp && pkg install git -y && pkg install nodejs -y && pkg install ffmpeg -y && pkg install wget && pkg install imagemagick -y && pkg install yarn
+  │> git clone https://github.com/elrebelde21/NovaBot-MD && cd NovaBot-MD && yarn && npm install
+  │> npm start
+  ╰────────────┈⊷`,
 contextInfo:{
 mentions: [sender], 
 forwardingScore: 9999999,
