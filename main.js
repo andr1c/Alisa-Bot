@@ -1,7 +1,7 @@
 //Código desde cero y comentarios hecho por: 
 // @gata_dios  
 // @Skidy89 
-// @elrebelde21 
+// @elrebelde21  
      
 //═════════[ Importaciones ]═════════ 
 const baileys = require('@whiskeysockets/baileys'); // trabajar a través de descargas por Whatsapp 
@@ -86,7 +86,10 @@ const pushname = m.pushName || "Sin nombre"
 const botnm = conn.user.id.split(":")[0] + "@s.whatsapp.net"  
 const _isBot = conn.user.jid
 const userSender = m.key.fromMe ? botnm : m.isGroup && m.key.participant.includes(":") ? m.key.participant.split(":")[0] + "@s.whatsapp.net" : m.key.remoteJid.includes(":") ? m.key.remoteJid.split(":")[0] + "@s.whatsapp.net" : m.key.fromMe ? botnm : m.isGroup ? m.key.participant : m.key.remoteJid  
-const isCreator = global.owner.map(([numero]) => numero.replace(/[^\d\s().+:]/g, '').replace(/\s/g, '') + '@s.whatsapp.net').includes(userSender) 
+const isCreator = [conn.decodeJid(conn.user.id), ...global.owner.map(([numero]) => numero)].map((v) => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender);
+const isOwner = isCreator || m.fromMe;
+const isMods = isOwner || global.mods.map((v) => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender);
+//const isCreator = global.owner.map(([numero]) => numero.replace(/[^\d\s().+:]/g, '').replace(/\s/g, '') + '@s.whatsapp.net').includes(userSender) 
 const itsMe = m.sender == conn.user.id ? true : false 
 const text = args.join(" ") 
 const quoted = m.quoted ? m.quoted : m 
@@ -153,11 +156,11 @@ let msg = {...chatUpdate, messages: [proto.WebMessageInfo.fromObject(messages)],
 type: 'append'
 }
 conn.ev.emit('messages.upsert', msg)}
-
+ 
 // ‿︵‿︵ʚɞ『 INFO CONSOLE 』ʚɞ‿︵‿︵	
 if (m.message) {
-console.log(chalk.bold.cyanBright(`▣────────────···\n│${botname} ${conn.user.id == global.numBot2 ? '' : '(SubBot)'}`), 
-chalk.bold.magenta('\n│⏰HORARIO: ') + chalk.magentaBright(moment(t * 1000).tz(place).format('DD/MM/YY HH:mm:ss'),
+console.log(chalk.bold.cyanBright(`▣────────────···\n│+${conn.user.jid.split`@`[0]} ➢ ${botname} ${conn.user.id == global.numBot2 ? '' : '(SubBot)'}`), 
+chalk.bold.magenta('\n│────────────\n│⏰HORARIO: ') + chalk.magentaBright(moment(t * 1000).tz(place).format('DD/MM/YY HH:mm:ss'),
 chalk.bold.red('\n️│🏷️ TAGS: ') + chalk.bold.white(`[${conn.public ? 'Publico' : 'Privado'}]`), 
 chalk.bold.yellow('\n│📑TIPO (SMS): ') + chalk.yellowBright(`${type}`), 
 chalk.bold.cyan('\n│📊USUARIO: ') + chalk.cyanBright(pushname) + ' ➜', gradient.rainbow(userSender), 
@@ -252,16 +255,15 @@ await new Promise((resolve) => setTimeout(resolve, 2000));
 await fs.unlinkSync(encmedia)  
 }}
 
-if (global.db.data.settings[conn.user.jid].antiprivado && !isCreator) {
+if (global.db.data.chats[m.chat].antiprivado && !isCreator) {
 if (m.isBaileys && m.fromMe) return !0;
 if (m.isGroup) return !1;
 if (!m.message) return !0;
 if (m.text.includes('PIEDRA') || m.text.includes('PAPEL') || m.text.includes('TIJERA') ||  m.text.includes('menu') ||  m.text.includes('estado') || m.text.includes('bots') ||  m.text.includes('serbot') || m.text.includes('jadibot')) return !0
 const chat = global.db.data.chats[m.chat];
-const bot = global.db.data.settings[conn.user.jid] || {};
-if (bot.antiprivado && !isCreator) {
-await conn.sendMessage(m.chat, {text: `*ʜᴏʟᴀ @${sender.split`@`[0]}, ᴇsᴛᴀ ᴘʀᴏʜɪʙɪᴅᴏ ʜᴀʙʟᴀʀ ᴀʟ ᴘʀɪᴠᴀᴅᴏ ᴅᴇʟ ʙᴏᴛ ᴘᴏʀ ʟᴏ ᴄᴜᴀʟ sᴇʀᴀs ʙʟᴏϙᴜᴇᴀᴅᴏ.*\n*ᴘᴀʀᴀ ᴜsᴀʀ ᴇʟ ʙᴏᴛ ᴜɴɪʀᴛᴇ ᴀʟ ɢʀᴜᴘᴏ ᴅᴇʟ ʙᴏᴛ*\n\n${nn}`, mentions: [sender], },{quoted: m}) 
-await conn.updateBlockStatus(m.chat, 'block')}
+const bot = global.db.data.settings[numBot]
+await conn.sendMessage(m.chat, {text: `*ʜᴏʟᴀ @${sender.split`@`[0]}, ᴇsᴛᴀ ᴘʀᴏʜɪʙɪᴅᴏ ʜᴀʙʟᴀʀ ᴀʟ ᴘʀɪᴠᴀᴅᴏ ᴅᴇʟ ʙᴏᴛ ᴘᴏʀ ʟᴏ ᴄᴜᴀʟ sᴇʀᴀs ʙʟᴏϙᴜᴇᴀᴅᴏ.*\n*ᴘᴀʀᴀ ᴜsᴀʀ ᴇʟ ʙᴏᴛ ᴜɴɪʀᴛᴇ ᴀʟ ɢʀᴜᴘᴏ ᴅᴇʟ ʙᴏᴛ*\n\n${nn2}`, mentions: [sender], },{quoted: m})
+await conn.updateBlockStatus(m.chat, 'block')
 return !1;
 }
 
@@ -383,7 +385,7 @@ break
 case 'autoread': case 'autovisto':
 on12(isCreator, text, command, args, m, conn) 
 break
-case 'antispam': onn(text, command, args, m) 
+case 'antispam': onn(isCreator, text, command, args, m) 
 break
 //Grupo 
 case 'grupo': grup(conn, m, args, isBotAdmins, isGroupAdmins, command, prefix, text)
