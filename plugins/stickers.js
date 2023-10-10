@@ -54,12 +54,12 @@ if (global.db.data.users[m.sender].registered < true) return m.reply(info.regist
 let dir = `https://api.lolhuman.xyz/api/sticker/dadu?apikey=${lolkeysapi}`
 conn.sendMessage(m.chat, { sticker: { url: dir } }, { quoted: fkontak})}
 
-module.exports = {s, wm, attp, dado}
-
 function getRandom() {
     if (Array.isArray(this) || this instanceof String) return this[Math.floor(Math.random() * this.length)]
     return Math.floor(Math.random() * this)
 }
+
+module.exports = {s, wm, attp, dado}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
