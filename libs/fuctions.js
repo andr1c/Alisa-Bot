@@ -153,7 +153,7 @@ exports.processTime = (timestamp, now) => {
 }
 
 exports.getRandom = (ext) => {
-    return `${Math.floor(Math.random() * 10000)}${ext}`
+return `${Math.floor(Math.random() * 10000)}${ext}`
 }
 
 exports.fetchBuffer = async (url, options) => {
