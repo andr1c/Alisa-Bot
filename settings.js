@@ -11,6 +11,10 @@ global.owner = [
 ["595992302861"], 
 ["5492266613038"]]
 
+global.mods = []
+global.premium = []  
+global.blockList = []  
+
 //---------[ NOMBRE/INFO ]---------
 global.botname = "𝐍𝐨𝐯𝐚𝐁𝐨𝐭-𝐌𝐃"
 global.wm = 'Ｎ Ｏ Ｖ Ａ Ｂ Ｏ Ｔ- Ｍ Ｄ 💫'
@@ -115,11 +119,7 @@ endLimit: 'ɴᴏ ᴛɪᴇɴᴇ ᴍᴀs ʟɪᴍɪᴛᴇ 💎, ᴘᴜᴇᴅᴇ ᴄ
 
 //---------------[ NIVELES, ADVERTENCIA ]----------------
 global.multiplier = 90 // Cuanto más alto, más difícil subir de nivel 
-global.maxwarn = '4' // máxima advertencias
-
-//---------[ BLOQUEO, PREMIUM ]----------------
-global.blockList = []  
-global.premium = []  
+global.maxwarn = '4' // máxima advertencias 
 
 //----------------------------------------------------
 
