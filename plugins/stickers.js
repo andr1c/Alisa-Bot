@@ -6,7 +6,7 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('../libs/fuctions.js'); 
 
-async function s(conn, mime, quoted, m, getRandom) {
+async function s(conn, mime, quoted, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (/image/.test(mime)) {  
 conn.fakeReply(m.chat, `⏳ *Aguarde un momento estoy creando tu stickers....*`, '0@s.whatsapp.net', 'No haga spam')
@@ -53,6 +53,10 @@ async function dado(conn, lolkeysapi, fkontak, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 let dir = `https://api.lolhuman.xyz/api/sticker/dadu?apikey=${lolkeysapi}`
 conn.sendMessage(m.chat, { sticker: { url: dir } }, { quoted: fkontak})}
+
+function getRandom(ext) {
+return `${Math.floor(Math.random() * 10000)}${ext}`
+}
 
 module.exports = {s, wm, attp, dado}
 
