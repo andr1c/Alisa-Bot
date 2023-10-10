@@ -11,18 +11,18 @@ if (global.db.data.users[m.sender].registered < true) return m.reply(info.regist
 if (/image/.test(mime)) {  
 conn.fakeReply(m.chat, `⏳ *Aguarde un momento estoy creando tu stickers....*`, '0@s.whatsapp.net', 'No haga spam')
 media = await quoted.download()  
-let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: botname, body: `h`, mediaType: 2, sourceUrl: nn, thumbnail: imagen1}}}, { quoted: m })
+let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: botname, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}})
 await fs.unlinkSync(encmedia)  
 } else if (/video/.test(mime)) {  
-if ((quoted.msg || quoted).seconds > 20) return m. reply('¡Máximo 20 segundos!')  
+if ((quoted.msg || quoted).seconds > 20) return m. reply('_[ ❌ ] Máximo 20 segundos!_')  
 media = await quoted.download()  
-let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: global.author, author: global.packname, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: wm, body: `h`, mediaType: 2, sourceUrl: nn, thumbnail: imagen1}}}, { quoted: m })
+let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: botname, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}})
 await new Promise((resolve) => setTimeout(resolve, 2000));
 await fs.unlinkSync(encmedia)  
 } else {  
 m.reply(`*Y LA IMAGEN?*`)}}  
 
-async function wm(conn, args, quoted, mime, m) {
+async function wm2(conn, args, quoted, mime, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (!args.join(" ")) return m.reply(`*Responda un sticker para robar*`)
 conn.fakeReply(m.chat, `⏳ *Aguarde un momento....*`, '0@s.whatsapp.net', 'No haga spam')
@@ -34,11 +34,11 @@ conn.downloadAndSaveMediaMessage(quoted, "gifee")
 conn.sendMessage(from, {sticker:fs.readFileSync("gifee.webp")},{quoted:m})
 } else if (/image/.test(mime)) {
 let media = await quoted.download()
-let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: pcknm, author: atnm, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: botname, body: `h`, mediaType: 2, sourceUrl: nn, thumbnail: imagen1}}}, { quoted: m })
+let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: pcknm, author: atnm, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: botname, body: `h`, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}}, { quoted: m })
 } else if (/video/.test(mime)) {
 if ((quoted.msg || quoted).seconds > 11) return m. reply('Maximum 10 Seconds!')
 let media = await quoted.download()
-let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: pcknm, author: atnm, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: wm, body: `h`, mediaType: 2, sourceUrl: nn, thumbnail: imagen1}}}, { quoted: m })
+let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: pcknm, author: atnm, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: wm, body: `h`, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}}, { quoted: m })
 } else {
 m.reply(`Y la imagen?`)}}
 
@@ -54,7 +54,7 @@ if (global.db.data.users[m.sender].registered < true) return m.reply(info.regist
 let dir = `https://api.lolhuman.xyz/api/sticker/dadu?apikey=${lolkeysapi}`
 conn.sendMessage(m.chat, { sticker: { url: dir } }, { quoted: fkontak})}
 
-module.exports = {s, wm, attp, dado}
+module.exports = {s, wm2, attp, dado}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
