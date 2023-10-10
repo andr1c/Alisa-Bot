@@ -11,12 +11,12 @@ if (global.db.data.users[m.sender].registered < true) return m.reply(info.regist
 if (/image/.test(mime)) {  
 conn.fakeReply(m.chat, `⏳ *Aguarde un momento estoy creando tu stickers....*`, '0@s.whatsapp.net', 'No haga spam')
 media = await quoted.download()  
-let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: botname, body: `h`, mediaType: 2, sourceUrl: [md, nna, yt, faceb, tiktok, nn, nn2, nn6, nn8].getRandom(), thumbnail: imagen1}}}, { quoted: m })
+let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: botname, body: `h`, mediaType: 2, sourceUrl: nn, thumbnail: imagen1}}}, { quoted: m })
 await fs.unlinkSync(encmedia)  
 } else if (/video/.test(mime)) {  
 if ((quoted.msg || quoted).seconds > 20) return m. reply('¡Máximo 20 segundos!')  
 media = await quoted.download()  
-let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: global.author, author: global.packname, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: wm, body: `h`, mediaType: 2, sourceUrl: [md, nna, yt, faceb, tiktok, nn, nn2, nn6, nn8].getRandom(), thumbnail: imagen1}}}, { quoted: m })
+let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: global.author, author: global.packname, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: wm, body: `h`, mediaType: 2, sourceUrl: nn, thumbnail: imagen1}}}, { quoted: m })
 await new Promise((resolve) => setTimeout(resolve, 2000));
 await fs.unlinkSync(encmedia)  
 } else {  
@@ -53,10 +53,6 @@ async function dado(conn, lolkeysapi, fkontak, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 let dir = `https://api.lolhuman.xyz/api/sticker/dadu?apikey=${lolkeysapi}`
 conn.sendMessage(m.chat, { sticker: { url: dir } }, { quoted: fkontak})}
-
-function getRandom(ext) {
-return `${Math.floor(Math.random() * 10000)}${ext}`
-}
 
 module.exports = {s, wm, attp, dado}
 
