@@ -146,7 +146,8 @@ global.db.data.settings[conn.user.jid].autoread = true
 //conn.autoread = true
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
 
-async function onn(text, command, args, m) {
+async function onn(isCreator, text, command, args, m) {
+if (!isCreator) return m.reply(info.owner)
 if (!text) return m.reply(`*Use de esta forma ejemplo:*\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
 if (args[0] === "on") {
 global.db.data.chats[m.chat].antispam = true

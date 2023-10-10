@@ -24,7 +24,7 @@ let wa = m.key.id.length > 21 ? 'Android' : m.key.id.substring(0, 2) == '3A' ? '
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
-║✾ Hola @${sender.split("@")[0]} 👋🏻
+║✾ Hola @${sender.split("@")[0]} ${registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''} 👋🏻
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
 ║✾ ᴘʀᴇғɪᴊᴏ: [ ${prefix} ]
 ║✾ ғᴇᴄʜᴀ: ${date}
@@ -32,7 +32,7 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ║✾ ᴜsᴜᴀʀɪᴏ : ${Object.keys(global.db.data.users).length}
 ║✾ ᴀᴄᴛɪᴠɪᴅᴀᴅ : ${runtime(process.uptime())}
 ║✾ ᴍᴏᴅᴏ : ${conn.public ? 'publico' : 'privado'}
-║✾ ${conn.user.id == global.numBot2 ? 'ʙᴏᴛ ᴏғᴄ : ᴇsᴛᴇ ᴇs ᴇʟ ʙᴏᴛ ᴏғᴄ' : `sᴏʏ ᴜɴ sᴜʙʙᴏᴛ ᴅᴇ : wa.me/${global.numBot.split`@`[0]}`}
+║✾ ${conn.user.id == global.numBot2 ? 'ʙᴏᴛ ᴏғᴄ : ᴇsᴛᴇ ᴇs ᴇʟ ʙᴏᴛ ᴏғᴄ' : `sᴏʏ ᴜɴ sᴜʙʙᴏᴛ ᴅᴇ : @${global.numBot.split`@`[0]}`}
 ║
 ║✾ ʟɪᴍɪᴛᴇ : ${user.limit}
 ║✾ ɴɪᴠᴇʟ : ${user.level}

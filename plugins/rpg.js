@@ -40,7 +40,7 @@ age = parseInt(age)
 if (age > 100) return m.reply('Esta Viejo (。-`ω´-)') 
 if (age < 6) return m.reply('🚼  Basado, los bebes saber escribir.✍️😳') 
 if (name.length >= 30) return m.reply('🐈 Fua que basado, el nombre es muy largo que quiere un puente como nombre😹') 
-user.name = name.trim()
+user.name = name + 'ͧͧͧͦꙶͣͤ✓'.trim()
 user.age = age
 user.regTime = + new Date
 user.registered = true
@@ -51,7 +51,7 @@ const time = moment.tz('America/Argentina/Buenos_Aires').format('LT')
 let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length
 global.db.data.users[m.sender].limit += 2
 global.db.data.users[m.sender].exp += 200
-conn.sendMessage(m.chat, { text: `[ ✅ REGISTRO COMPLETADO ]\n\n ◉ *Nombre:* ${name}\n ◉ *Edad:* ${age} años\n ◉ *Hora:* ${time}\n ◉ *Fecha:* ${date}\n ◉ *Número:* wa.me/${sender.split("@")[0]}\n ◉ *Numero del serie*\n ⤷ ${sn}\n\n 🎁 *Recompensa:*\n ⤷ 2 diamante 💎\n ⤷ 200 exp\n\n *◉ Para ver los comandos del bot usar:*
+conn.sendMessage(m.chat, { text: `[ ✅ REGISTRO COMPLETADO ]\n\n ◉ *Nombre:* ${name} ${registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''}\n ◉ *Edad:* ${age} años\n ◉ *Hora:* ${time}\n ◉ *Fecha:* ${date}\n ◉ *Número:* wa.me/${sender.split("@")[0]}\n ◉ *Numero del serie*\n ⤷ ${sn}\n\n 🎁 *Recompensa:*\n ⤷ 2 diamante 💎\n ⤷ 200 exp\n\n *◉ Para ver los comandos del bot usar:*
  ${prefix}menu\n\n ◉ *Total de usuários registrados:* ${rtotalreg}`,
 contextInfo:{
 mentionedJid:[name],
@@ -118,7 +118,7 @@ let who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.m
 let user = global.db.data.users[who]
 if (!(who in global.db.data.users)) return m.reply(`✳️ ᴇʟ ᴜsᴜᴀʀɪᴏ ɴᴏ sᴇ ᴇɴᴄᴜᴇɴᴛʀᴀ ᴇɴ ᴍɪ ʙᴀsᴇ ᴅᴇ ᴅᴀᴛᴏs`) 
 conn.sendMessage(m.chat, {text: `╔════≪ 𝙱𝙰𝙻𝙰𝙽𝙲𝙴 ≫════╗
-║ • *📌𝙽𝙾𝙼𝙱𝚁𝙴 :* @${who.split('@')[0]}
+║ • *📌𝙽𝙾𝙼𝙱𝚁𝙴 :* @${who.split('@')[0]} *${registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''}
 ║ • *💎𝙳𝙸𝙰𝙼𝙰𝙽𝚃𝙴 :* ${user.limit}
 ║ • *⬆️𝙴𝚇𝙿 :* ${user.exp}
 ║ • *🪙𝙲𝙾𝙸𝙽𝚂 :* ${user.money}
