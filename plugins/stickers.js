@@ -56,6 +56,11 @@ conn.sendMessage(m.chat, { sticker: { url: dir } }, { quoted: fkontak})}
 
 module.exports = {s, wm, attp, dado}
 
+function getRandom() {
+    if (Array.isArray(this) || this instanceof String) return this[Math.floor(Math.random() * this.length)]
+    return Math.floor(Math.random() * this)
+}
+
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
 fs.unwatchFile(file)
