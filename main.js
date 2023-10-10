@@ -635,7 +635,7 @@ lb(conn, participants, args, m)
 break
 //stickers
 case 's': case 'sticker':  
-s(conn, mime, quoted, m, getRandom) 
+s(conn, mime, quoted, m) 
 break; 
 case 'wm': case 'take': 
 wm(conn, args, quoted, mime, m) 
