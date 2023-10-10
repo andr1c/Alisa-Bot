@@ -2,7 +2,7 @@
 // @gata_dios  
 // @Skidy89 
 // @elrebelde21 
-  
+     
 //═════════[ Importaciones ]═════════ 
 const baileys = require('@whiskeysockets/baileys'); // trabajar a través de descargas por Whatsapp 
 const { WaMessageStubType, areJidsSameUser, downloadContentFromMessage, generateWAMessageContent, generateWAMessageFromContent, generateWAMessage, prepareWAMessageMedia, relayMessage} = require('@whiskeysockets/baileys'); // Importa los objetos 'makeWASocket' y 'proto' desde el módulo '@whiskeysockets/baileys'   
@@ -47,7 +47,7 @@ const {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag,
 const {nsfw1, nsfw2, nsfw3, nsfw4, nsfw5} = require('./plugins/nsfw.js')
 const {randow1, randow2, randow3, randow4, randow5, randow6, randow7, randow8, randow9} = require('./plugins/randow.js') 
 const {play, mp3, mp4, git, tiktok, letra, mediafire, fb, ig, ig2, apk} = require('./plugins/descargas.js')  
-const {s, wm, attp, dado} = require('./plugins/stickers.js') 
+const {s, wm2, attp, dado} = require('./plugins/stickers.js') 
 const {owner1, owner2, owner3, owner4, owner5, owner6, owner7, owner8, owner9} = require('./plugins/propietario.js')  
 const {on, on1, on2, on3, on4, on5, on6, on7, on8, on9, on10, on11, on12, onn} = require('./plugins/enable.js') 
 
@@ -180,14 +180,15 @@ console.log('[Update]')
 }}}
   
 //autoread
-if (!conn.autoread && m.message) {
+if (!conn.autoread && m.message && prefix) {
 await conn.sendPresenceUpdate('composing', m.chat)
 conn.readMessages([m.key])}
 
 //antispam
 if (global.db.data.chats[m.chat].antispam && prefix) {
-const date = global.db.data.users[m.sender].spam + 5000; //5 seg
-if (new Date - global.db.data.users[m.sender].spam < 5000) return conn.sendMessage(m.chat, {text: `_*Espere unos segundos antes de usar otro comando...*_ ✓`, mentions: [sender], },{quoted: m}) 
+const date = global.db.data.users[m.sender].spam + 3000; //5 seg
+if (new Date - global.db.data.users[m.sender].spam < 3000) return console.log('[SPAM]') 
+//conn.sendMessage(m.chat, {text: `_*Espere unos segundos antes de usar otro comando...*_ ✓`, mentions: [sender], },{quoted: m}) 
 global.db.data.users[m.sender].spam = new Date * 1
 }
             
@@ -638,7 +639,7 @@ case 's': case 'sticker':
 s(conn, mime, quoted, m) 
 break; 
 case 'wm': case 'take': 
-wm(conn, args, quoted, mime, m) 
+wm2(conn, args, quoted, mime, m) 
 break 
 case 'attp': 
 attp(conn, text, lolkeysapi, fkontak, m) 
