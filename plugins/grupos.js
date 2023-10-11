@@ -13,6 +13,7 @@ const Jimp = require('jimp')
 const os = require('os')
       
 async function grup(conn, m, args, isBotAdmins, isGroupAdmins, prefix, command, text) {
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (!m.isGroup) return m.reply(info.group);  
 if (!isBotAdmins) return m.reply(info.botAdmin);  
 if (!isGroupAdmins) return m.reply(info.admin)
@@ -39,6 +40,7 @@ async function join(conn, m, isCreator, text, delay, args, sender) {
 let linkRegex = /chat.whatsapp.com\/([0-9A-Za-z]{20,24})/i
 let link = (m.quoted ? m.quoted.text ? m.quoted.text : text : text) || text
 let [_, code] = link.match(linkRegex) || []
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (!code) return m.reply(`*INGRESE ENLACE DEL GRUPO*\n\n*📌 EJEMPLO*\n*#join ${nn}*`) 
 if ( isCreator || m.fromMe) {
 m.reply(`*YA ME UNIR 😼*`)
@@ -54,6 +56,7 @@ m.reply(`*✅ 𝘚𝘶 𝘦𝘯𝘭𝘢𝘤𝘦 𝘴𝘦 𝘦𝘯𝘷𝘪𝘰�
 }
 
 async function setpp(conn, m, isBotAdmins, isGroupAdmins, quoted, prefix, command, mime, args, from) {   
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (!m.isGroup) return m.reply(info.group) 
 if (!isBotAdmins) return m.reply(info.botAdmin)
 if (!isGroupAdmins) return m.reply(info.admin)
@@ -72,6 +75,7 @@ fs.unlinkSync(mediz)
 m.reply(`*✅Exito*`)}}
 
 async function hide(conn, m, isBotAdmins, isGroupAdmins, q, participants) {   
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (!m.isGroup) return m.reply(info.group) 
 if (!isBotAdmins) return m.reply(info.botAdmin)
 if (!isGroupAdmins) return m.reply(info.admin)
@@ -79,6 +83,7 @@ if (!q) return conn.sendMessage(m.chat, { text: `*Y el texto?*` }, { quoted: m }
 conn.sendMessage(m.chat, { text : q ? q : '' , mentions: participants.map(a => a.id)}, { quoted: m })}
 
 async function setna(conn, m, isBotAdmins, isGroupAdmins, text) {   
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (!m.isGroup) return m.reply(info.group) 
 if (!isBotAdmins) return m.reply(info.botAdmin)
 if (!isGroupAdmins) return m.reply(info.admin)
@@ -87,6 +92,7 @@ await conn.groupUpdateSubject(m.chat, text)
 await m.reply(`*✅El nombre del grupo se cambio correctamente*`)}
 
 async function setde(conn, m, isBotAdmins, isGroupAdmins, text) {   
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (!m.isGroup) return m.reply(info.group) 
 if (!isBotAdmins) return m.reply(info.botAdmin)
 if (!isGroupAdmins) return m.reply(info.admin)
@@ -95,6 +101,7 @@ await conn.groupUpdateDescription(m.chat, text)
 await m.reply(`*✅La descripción del grupo se cambio con éxito*`)}
 
 async function add(conn, m, isBotAdmins, isGroupAdmins, text, sender, prefix) {   
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (!m.isGroup) return m.reply(info.group);  
 if (!isBotAdmins) return m.reply(info.botAdmin)

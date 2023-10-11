@@ -33,7 +33,7 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ║✾ ᴀᴄᴛɪᴠɪᴅᴀᴅ : ${runtime(process.uptime())}
 ║✾ ᴍᴏᴅᴏ : ${conn.public ? 'publico' : 'privado'}
 ║✾ ${conn.user.id == global.numBot2 ? 'ʙᴏᴛ ᴏғᴄ : ᴇsᴛᴇ ᴇs ᴇʟ ʙᴏᴛ ᴏғᴄ' : `sᴏʏ ᴜɴ sᴜʙʙᴏᴛ ᴅᴇ : @${global.numBot.split`@`[0]}`}
-║
+║ 
 ║✾ ʟɪᴍɪᴛᴇ : ${user.limit}
 ║✾ ɴɪᴠᴇʟ : ${user.level}
 ║✾ ʀᴀɴɢᴏ : ${user.role}
@@ -62,6 +62,10 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}estado 
 ├❥ᰰຼ _(comprueba el estado del bot)_
 ├❥ᰰຼ ❏ ${prefix}menu2
+├❥ᰰຼ ❏ ${prefix}nuevo 
+├❥ᰰຼ _(Para informate sobre nuevo comando)_
+├❥ᰰຼ ❏ ${prefix}reglas
+├❥ᰰຼ _(Leer las reglas)_
 ├❥ᰰຼ ❏ ${prefix}audios
 ├❥ᰰຼ ❏ ${prefix}ping 
 ├❥ _(Velocidad del bot)_
@@ -131,6 +135,8 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}modocaliente _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}autosticker _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}modoadmin _(on/off)_
+├❥ᰰຼ ❏ ${prefix}audios _(on/off)_
+├❥ᰰຼ ❏ ${prefix}chatbot _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}kick _(@tag)_
 ├❥ᰰຼ ❏ ${prefix}add _(@tag)_
 ├❥ᰰຼ ❏ ${prefix}invita _(@tag)_
@@ -358,7 +364,7 @@ conn.sendMessage(m.chat, { text: menu,
 contextInfo:{  
 forwardingScore: 9999999,  
 isForwarded: true,   
-mentionedJid:[sender, global.numBot.split],  
+mentionedJid:[sender, numBot],  
 "externalAdReply": {  
 "showAdAttribution": true,  
 "renderLargerThumbnail": true,  
@@ -431,7 +437,37 @@ La toca 7w7
 _*Ojito escribe tal y como esta en el mensaje*_`
 conn.sendMessage(m.chat, { text: menu2}, { quoted: fkontak })}
 
-module.exports = { menu, menu2}
+const nuevo = (conn, m, fkontak) => {
+conn.sendMessage(m.chat, { text: `🤔 *Que hay de nuevo?* 🤗
+
+*🌐 Version del bot:* [ ${vs} ] 
+
+*Nuevo comando:*
+💬 Chatbot automatico activa con:
+${prefix}chatbot on
+💠 Nivel automatico activa con: 
+${prefix}autonivel on
+🤖 Mejorar para los usuarios que son sub bot 💫
+🔰 Ya se puede instalar este bot usar el comando: 
+${prefix}instalarbot 
+❗un antispam de comando usar los comando cada 3 seg evitar satura al bot.`}, { quoted: fkontak })}
+
+const regla = (conn, m, fkontak) => {
+conn.sendMessage(m.chat, { text: `*🌐 REGLAS DEL BOT 🌐*
+
+*• No hacer spam de comandos*
+
+Usar los comando cada 5 segundos, de lo contrario el bot se puede satura, o numero del bot puede irse a support por spam.
+
+*• No estar enviando link del grupos al bot para que se una*
+
+Hablar con mi creador y el lo une a tu grupo
+
+*• No llamar al bot, ni al creador*
+
+Si lo haces, seras baneado del bot y bloqueado`}, { quoted: fkontak })}
+
+module.exports = { menu, menu2, nuevo, regla}
 
  let file = require.resolve(__filename)
 fs.watchFile(file, () => {

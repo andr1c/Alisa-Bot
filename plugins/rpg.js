@@ -85,7 +85,7 @@ m.reply(`*✅ ᴿᵉᵍᶦˢᵗʳᵒ ᵉˡᶦᵐᶦⁿᵃᵈᵒ*`)}
 async function reg2(sender, m) { 
 const {createHash} = require('crypto') 
 let sn = createHash('md5').update(m.sender).digest('hex')
-m.reply(`*👇 ᴱˢᵗᵉ ᵉˢ ˢᵘˢ ⁿᵘᵐᵉʳᵒ ᵈᵉˡ ˢᵉʳᶦᵉ :*\n${sn}`)}
+m.reply(`*👇 ᴱˢᵗᵉ ᵉˢ ˢᵘˢ ⁿᵘᵐᵉʳᵒ ᵈᵉˡ ˢᵉʳᶦᵉ :*\n\n${sn}`)}
 
 async function rob(conn, m, sender, fkontak) {
 const user = global.db.data.users[m.sender]
@@ -180,11 +180,11 @@ m.reply(`╭━─━─━─≪ 𝙰𝙺𝙵 ≫─━─━─━╮
 ╰━─━─━─≪ ${vs} ≫─━─━─━╯`)}
 
 async function claim(conn, m, sender) {
-let time = global.db.data.users[m.sender].lastclaim + 86400000
-if (new Date - global.db.data.users[m.sender].lastclaim < 86400000) return m.reply(`🎁 *ʏᴀ ʀᴇᴄᴏɢɪsᴛᴇ ᴛᴜ ʀᴇᴄᴏᴍᴘᴇɴsᴀ ᴅɪᴀʀɪᴀ*\n\n🕚 ᴠᴜᴇʟᴠᴇ ᴇɴ ${msToTime(time - new Date())}`) 
-const exp = Math.floor(Math.random() * 200)
-const limit = Math.floor(Math.random() * 10)
-const money = Math.floor(Math.random() * 100)
+let time = global.db.data.users[m.sender].lastclaim + 7200000
+if (new Date - global.db.data.users[m.sender].lastclaim < 7200000) return m.reply(`🎁 *ʏᴀ ʀᴇᴄᴏɢɪsᴛᴇ ᴛᴜ ʀᴇᴄᴏᴍᴘᴇɴsᴀ ᴅɪᴀʀɪᴀ*\n\n🕚 ᴠᴜᴇʟᴠᴇ ᴇɴ ${msToTime(time - new Date())}`) 
+const exp = Math.floor(Math.random() * 600)
+const limit = Math.floor(Math.random() * 15)
+const money = Math.floor(Math.random() * 300)
 global.db.data.users[m.sender].limit += limit;
 global.db.data.users[m.sender].money += money
 global.db.data.users[m.sender].exp += exp
@@ -252,18 +252,18 @@ async function cofre(conn, sender, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (global.db.data.users[m.sender].level < 9) return m.reply(`[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀ ᴇʟ ɴɪᴠᴇʟ 9 ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ .nivel`) 
 const date = global.db.data.users[m.sender].lastcofre + 86400000; //10 hs
-if (new Date - global.db.data.users[m.sender].lastcofre < 86400000) return m.reply(`*𝚈𝙰 𝚁𝙴𝙲𝙾𝙶𝙸𝚂𝚃𝙴 𝚃𝚄 𝙲𝙾𝙵𝚁𝙴 𝚅𝚄𝙴𝙻𝚅𝙴 𝙴𝙻 ${msToTime(date - new Date())}*`) 
-exp = Math.floor(Math.random() * 3000)
-limit = Math.floor(Math.random() * 30)
-trash = Math.floor(Math.random() * 200)
-potion = Math.floor(Math.random() * 10)
-money = Math.floor(Math.random() * 500)
+if (new Date - global.db.data.users[m.sender].lastcofre < 86400000) return m.reply(`*🎁 𝚈𝙰 𝚁𝙴𝙲𝙾𝙶𝙸𝚂𝚃𝙴 𝚃𝚄 𝙲𝙾𝙵𝚁𝙴*\n🕚 𝚅𝚄𝙴𝙻𝚅𝙴 𝙴𝙻: ${msToTime(date - new Date())}`) 
+exp = Math.floor(Math.random() * 9000)
+limit = Math.floor(Math.random() * 60)
+trash = Math.floor(Math.random() * 400)
+potion = Math.floor(Math.random() * 60)
+money = Math.floor(Math.random() * 6500)
 global.db.data.users[m.sender].exp += exp
 global.db.data.users[m.sender].limit += limit
 global.db.data.users[m.sender].trash += trash
 global.db.data.users[m.sender].potion += potion
 global.db.data.users[m.sender].money += money
-m.reply(`╔══🎉═🎉═🎉══⬣\n║🛒 𝙾𝙱𝚃𝙸𝙴𝙽𝙴𝚂 𝚄𝙽 𝙲𝙾𝙵𝚁𝙴\n║┈┈┈┈┈┈┈┈┈┈┈┈┈\n║⚡${exp} 𝙴𝚇𝙿\n║💎 ${limit} 𝙳𝙸𝙰𝙼𝙰𝙽𝚃𝙴\n║🗑️ ${trash} 𝙱𝙰𝚂𝚄𝚁𝙰\n🥤 ${potion} 𝙿𝙾𝙲𝙸𝙾𝙽𝙴𝚂\n║🪙 ${money} 𝙲𝙾𝙸𝙽𝚂\n╚═════════════════⬣`)
+m.reply(`╔══🎉═🎉═🎉══⬣\n║🛒 𝙾𝙱𝚃𝙸𝙴𝙽𝙴𝚂 𝚄𝙽 𝙲𝙾𝙵𝚁𝙴\n║┈┈┈┈┈┈┈┈┈┈┈┈┈\n║⚡${exp} 𝙴𝚇𝙿\n║💎 ${limit} 𝙳𝙸𝙰𝙼𝙰𝙽𝚃𝙴\n║🗑️ ${trash} 𝙱𝙰𝚂𝚄𝚁𝙰\n║🥤 ${potion} 𝙿𝙾𝙲𝙸𝙾𝙽𝙴𝚂\n║🪙 ${money} 𝙲𝙾𝙸𝙽𝚂\n╚═════════════════⬣`)
 global.db.data.users[m.sender].lastcofre = new Date * 1;
 }
 
@@ -321,15 +321,17 @@ function enumGetKey(a) {
 }
 
 //temporarily
-function msToTime(duration) { 
-   var milliseconds = parseInt((duration % 1000) / 100), 
-   seconds = Math.floor((duration / 1000) % 60), 
-   minutes = Math.floor((duration / (1000 * 60)) % 60), 
-   hours = Math.floor((duration / (1000 * 60 * 60)) % 24); 
-   hours = hours < 10 ? "0" + hours : hours; 
-   minutes = minutes < 10 ? "0" + minutes : minutes; 
-   seconds = seconds < 10 ? "0" + seconds : seconds; 
-   return minutes + " m y " + seconds + " s "; 
+function msToTime(duration) {
+  var milliseconds = parseInt((duration % 1000) / 100),
+    seconds = Math.floor((duration / 1000) % 60),
+    minutes = Math.floor((duration / (1000 * 60)) % 60),
+    hours = Math.floor((duration / (1000 * 60 * 60)) % 24)
+
+  hours = (hours < 10) ? "0" + hours : hours
+  minutes = (minutes < 10) ? "0" + minutes : minutes
+  seconds = (seconds < 10) ? "0" + seconds : seconds
+
+  return hours + " Horas " + minutes + " Minutos"
 }
 module.exports = { rob, reg, reg1, reg2, bal, work, mine, afk, buy, claim, perfil, nivel, cofre, lb}
 

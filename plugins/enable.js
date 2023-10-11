@@ -146,7 +146,7 @@ global.db.data.settings[conn.user.jid].autoread = true
 //conn.autoread = true
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
 
-async function onn(isCreator, text, command, args, m) {
+async function on13(isCreator, text, command, args, m) {
 if (!isCreator) return m.reply(info.owner)
 if (!text) return m.reply(`*Use de esta forma ejemplo:*\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
 if (args[0] === "on") {
@@ -156,7 +156,26 @@ m.reply(`*✅ ${command} se activó con éxito*`)
 global.db.data.chats[m.chat].antispam = false
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
 
-module.exports = {on, on1, on2, on3, on4, on5, on6, on7, on8, on9, on10, on11, on12, onn}
+async function on14(text, command, args, m) {
+if (!text) return m.reply(`*Use de esta forma ejemplo:*\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
+if (args[0] === "on") {
+global.db.data.chats[m.chat].simi = true
+m.reply(`*✅ ${command} se activó con éxito*`)
+} else if (args[0] === "off") {
+global.db.data.chats[m.chat].simi = false
+m.reply(`*🟢 ${command} esta desactivado!*`)}}
+
+async function on15(text, command, args, m) {
+if (!m.isGroup) return m.reply(info.group)
+if (!text) return m.reply(`*Use de esta forma ejemplo:*\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
+if (args[0] === "on") {
+global.db.data.chats[m.chat].autolevelup = true
+m.reply(`*✅ ${command} se activó con éxito*`)
+} else if (args[0] === "off") {
+global.db.data.chats[m.chat].autolevelup = false
+m.reply(`*🟢 ${command} esta desactivado!*`)}}
+
+module.exports = {on, on1, on2, on3, on4, on5, on6, on7, on8, on9, on10, on11, on12, on13, on14, on15}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
