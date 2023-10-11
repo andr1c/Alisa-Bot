@@ -24,7 +24,7 @@ let wa = m.key.id.length > 21 ? 'Android' : m.key.id.substring(0, 2) == '3A' ? '
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
-║✾ Hola @${sender.split("@")[0]} ${registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''} 👋🏻
+║✾ Hola @${sender.split("@")[0]} ${user.registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''} 👋🏻
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
 ║✾ ᴘʀᴇғɪᴊᴏ: [ ${prefix} ]
 ║✾ ғᴇᴄʜᴀ: ${date}

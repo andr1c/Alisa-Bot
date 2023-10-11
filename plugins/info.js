@@ -25,7 +25,7 @@ let user = [...new Set([...global.listJadibot.filter((conn) => conn.user && conn
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 let stateRun = `┏━━━━❰･𝐄𝐒𝐓𝐀𝐃𝐎 𝐃𝐄𝐋 𝐁𝐎𝐓･❱━━━━
 ┃
-┃웃 Hola @${sender.split("@")[0]} ${registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''}
+┃웃 Hola @${sender.split("@")[0]} ${user.registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''} 
 ┃
 ┃╍╍╍╍╍╍╍╍╍╍╍╍╍
 ┃
