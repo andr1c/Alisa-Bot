@@ -1,7 +1,7 @@
 //Código desde cero y comentarios hecho por: 
 // @gata_dios   
 // @Skidy89  
-// @elrebelde21  
+// @elrebelde21 
      
 //═════════[ Importaciones ]═════════ 
 const baileys = require('@whiskeysockets/baileys'); // trabajar a través de descargas por Whatsapp 
@@ -33,11 +33,11 @@ const { TelegraPh, UploadFileUgu, webp2mp4File, floNime } = require('./libs/uplo
 const { toAudio, toPTT, toVideo } = require('./libs/converter.js')
 const { canLevelUp, xpRange } = require('./libs/levelling.js')
 const { smsg, fetchBuffer, getBuffer, buffergif, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom, msToTime, downloadMediaMessage } = require('./libs/fuctions')
-const { ytmp4, ytmp3, ytplay, ytplayvid } = require('./libs/youtube')
+const { ytmp4, ytmp3, ytplay, ytplayvid } = require('./libs/youtube') 
 const { mediafireDl } = require('./libs/mediafire.js') 
 const {jadibot, listJadibot, killJadibot} = require('./serbot.js')  
 const { jadibot2} = require('./serbot2.js')
-const { menu, menu2} = require('./plugins/menu.js')
+const { menu, menu2, nuevo, regla} = require('./plugins/menu.js')
 const { state, owner, grupo, instalar, ping, report, ow} = require('./plugins/info.js')
 const {rob, bal, reg, reg1, reg2, work, mine, buy, afk, claim, perfil, nivel, cofre, lb} = require('./plugins/rpg.js') 
 const {game, game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, game13, game14, game15} = require('./plugins/juegos.js') 
@@ -49,7 +49,7 @@ const {randow1, randow2, randow3, randow4, randow5, randow6, randow7, randow8, r
 const {play, mp3, mp4, git, tiktok, letra, mediafire, fb, ig, ig2, apk} = require('./plugins/descargas.js')  
 const {s, wm2, attp, dado} = require('./plugins/stickers.js') 
 const {owner1, owner2, owner3, owner4, owner5, owner6, owner7, owner8, owner9} = require('./plugins/propietario.js')  
-const {on, on1, on2, on3, on4, on5, on6, on7, on8, on9, on10, on11, on12, onn} = require('./plugins/enable.js') 
+const {on, on1, on2, on3, on4, on5, on6, on7, on8, on9, on10, on11, on12, on13, on14, on15} = require('./plugins/enable.js')
 
 const msgs = (message) => { 
 if (message.length >= 10) { 
@@ -180,7 +180,7 @@ await conn.updateProfileStatus(bio)
 setting.status = new Date() * 1
 } catch {
 console.log('[Update]') 
-}}}
+}}} 
   
 //autoread
 if (!conn.autoread && m.message && prefix) {
@@ -190,7 +190,7 @@ conn.readMessages([m.key])}
 //antispam
 if (global.db.data.chats[m.chat].antispam && prefix) {
 const date = global.db.data.users[m.sender].spam + 3000; //5 seg
-if (new Date - global.db.data.users[m.sender].spam < 3000) return console.log('[SPAM]') 
+if (new Date - global.db.data.users[m.sender].spam < 3000) return console.log(`[SPAM] el usuario: ${pushname} esta haciendo spam parece que quiere satura al bot :v pero conmigo se jodio 😂`) 
 //conn.sendMessage(m.chat, {text: `_*Espere unos segundos antes de usar otro comando...*_ ✓`, mentions: [sender], },{quoted: m}) 
 global.db.data.users[m.sender].spam = new Date * 1
 }
@@ -245,15 +245,29 @@ if (/image/.test(mime)) {
 await conn.sendPresenceUpdate('composing', m.chat)
 m.reply(`_Calma crack estoy haciendo tu sticker 👏_\n\n_*Autosticker esta activado*_`)   
 media = await quoted.download()  
-let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: botname, body: `h`, mediaType: 2, sourceUrl: nn, thumbnail: imagen1}}}, { quoted: m })
-await fs.unlinkSync(encmedia)  
+let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: botname, body: `h`, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}}, { quoted: m })
+await fs.unlinkSync(encmedia)   
 } else if (/video/.test(mime)) {  
 if ((quoted.msg || quoted).seconds > 40) return reply('¡Máximo 40 segundos!')  
 media = await quoted.download()  
-let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: goblal.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: wm, body: `h`, mediaType: 2, sourceUrl: nn, thumbnail: imagen1}}}, { quoted: m })
+let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: goblal.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: wm, body: `h`, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}}, { quoted: m })
 await new Promise((resolve) => setTimeout(resolve, 2000));   
 await fs.unlinkSync(encmedia)  
 }}
+
+if (global.db.data.users[m.sender].autolevelup) {	
+if (!m.message) return !0;
+if (m.isGroup) return !1;
+let user = global.db.data.users[m.sender]
+if (!user.autolevelup)
+return !0
+let before = user.level * 1
+while (canLevelUp(user.level, user.exp, global.multiplier))
+user.level++
+//user.role = global.rpg.role(user.level).name
+if (before !== user.level) {
+const str = `『 🥳 FELICIDADES @${sender.split`@`[0]} 👏 HAS ALCANZADO UN NUEVO NIVEL 』\n\n╭─────────────────\n│✏ NIVEL ANTERIOR: ${before}\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌\n│✏ NIVEL ACTUAL: ${user.level}\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌\n│✏ RANGO : ${user.role}\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌\n│✏ FECHA: ${new Date().toLocaleString('id-ID')}\n╰─────────────────`.trim()
+return m.reply(str)}}
 
 if (global.db.data.chats[m.chat].antiprivado && !isCreator) {
 if (m.isBaileys && m.fromMe) return !0;
@@ -266,6 +280,30 @@ await conn.sendMessage(m.chat, {text: `*ʜᴏʟᴀ @${sender.split`@`[0]}, ᴇs�
 await conn.updateBlockStatus(m.chat, 'block')
 return !1;
 }
+
+if (m.chat.endsWith('broadcast') || m.fromMe || m.isGroup) return 
+let user = global.db.data.users[m.sender]
+if (new Date() - user.pc < 21600000) return
+conn.sendMessage(m.chat, { text: `*Hola @${sender.split`@`[0]} 👋😄 Bienvenido gracias por usar mi bot ❤*
+
+*🔰 Mi creador es:* mario (elrebelde) 
+*🌐 ${conn.user.id == global.numBot2 ? 'Mi Nombre es:* NovaBot-MD' : 'Yo soy un SubBot de : wa.me/${global.numBot.split`@`[0]}'}
+*👥 Usuarios:* ${Object.keys(global.db.data.users).length}
+*🤖 Tiempo activo:* ${runtime(process.uptime())}
+*⚠️ Nota:* No hagan spam del comando
+  
+• *PORFAVOR LEE LAS REGLAS:*
+${prefix}reglas
+
+• *QUIERES VER QUE HAY DE NUEVO?*
+*Escribe: ${prefix}nuevo*
+
+*💫 ¿Quieres apoyar este proyecto para que siga actualizándose? subscriberte a nuestro canal del youtube*
+${global.yt}
+
+*💕 visitar nuestro repositorio oficial para mas infomarcion*
+${md}`, contextInfo:{mentionedJid:[sender]}}, { quoted: fkontak })
+user.pc = new Date * 1
 
 //ARRANCA LA DIVERSIÓN
 switch (command) { 
@@ -324,6 +362,12 @@ menu(conn, prefix, pushname, sender, m, fkontak)
 break  
 case 'menu2': case 'audios':
 menu2(conn, pushname, m, fkontak)
+break
+case 'nuevo':
+nuevo(conn, m, fkontak) 
+break
+case 'reglas':
+regla(conn, m, fkontak) 
 break
 case 'owner': case 'creador': 
 owner(conn, m, sender) 
@@ -385,7 +429,13 @@ break
 case 'autoread': case 'autovisto':
 on12(isCreator, text, command, args, m, conn) 
 break
-case 'antispam': onn(isCreator, text, command, args, m) 
+case 'antispam': on13(isCreator, text, command, args, m) 
+break
+case 'chatbot': case 'simi':
+on14(text, command, args, m) 
+break
+case 'autolevelup': case 'autonivel':
+on15(text, command, args, m) 
 break
 //Grupo 
 case 'grupo': grup(conn, m, args, isBotAdmins, isGroupAdmins, command, prefix, text)
@@ -612,7 +662,7 @@ break
 case 'minar': case 'mine':
 await mine(conn, m, sender, fkontak)
 break 
-case 'trabajar': case 'work': {
+case 'trabajar': case 'work': case 'w': {
 await work(conn, m, sender, fkontak)}
 break
 case 'rob': case 'robar': { 
@@ -688,7 +738,8 @@ conn.public = false
 reply('✅Cambio con exitoso a uso privado')}
 break	
 case 'autoadmin': case 'tenerpoder': {
-if (!m.isGroup) return reply(info.group)
+if (!m.isGroup) return m.reply(info.group)
+if (!isBotAdmins) return m.reply(info.botAdmin)
 if (!isCreator) return reply(info.owner)
 m.reply('Ya eres admin mi jefe 😎') 
 await conn.groupParticipantsUpdate(m.chat, [m.sender], "promote")} 
@@ -736,6 +787,15 @@ if (budy.includes(`Bot`)) {
 let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${budy}&lc=es&cf=false`)
 let res = anu.success;
 m.reply(res)}
+if (budy.includes(``)) {
+if (!global.db.data.chats[m.chat].simi) return
+try {     
+await conn.sendPresenceUpdate('composing', m.chat)
+let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${budy}&lc=es&cf=false`)
+let res = anu.success;
+m.reply(res)
+} catch { 
+return m.reply(`*Api simsimi caida, desactive el ChatBot con:*\n#chatbot off`)}}
 if (budy.startsWith(`a`)) {
 if (!global.db.data.chats[m.chat].audios) return
 let vn = './media/a.mp3'
