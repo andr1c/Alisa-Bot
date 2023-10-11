@@ -358,7 +358,7 @@ conn.sendMessage(m.chat, { text: menu,
 contextInfo:{  
 forwardingScore: 9999999,  
 isForwarded: true,   
-mentionedJid:[sender, global.numBot.split],  
+mentions:[sender, global.numBot.split],  
 "externalAdReply": {  
 "showAdAttribution": true,  
 "renderLargerThumbnail": true,  
