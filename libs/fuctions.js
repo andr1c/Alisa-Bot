@@ -126,18 +126,18 @@ const unixTimestampSeconds = (date = new Date()) => Math.floor(date.getTime() / 
 
 exports.unixTimestampSeconds = unixTimestampSeconds
 
-function msToTime(duration) { 
-   var milliseconds = parseInt((duration % 1000) / 100), 
-     seconds = Math.floor((duration / 1000) % 60), 
-     minutes = Math.floor((duration / (1000 * 60)) % 60), 
-     hours = Math.floor((duration / (1000 * 60 * 60)) % 24); 
-  
-   hours = hours < 10 ? "0" + hours : hours; 
-   minutes = minutes < 10 ? "0" + minutes : minutes; 
-   seconds = seconds < 10 ? "0" + seconds : seconds; 
-  
-   return minutes + " m y " + seconds + " s "; 
- }
+function msToTime(duration) {
+  var milliseconds = parseInt((duration % 1000) / 100),
+    seconds = Math.floor((duration / 1000) % 60),
+    minutes = Math.floor((duration / (1000 * 60)) % 60),
+    hours = Math.floor((duration / (1000 * 60 * 60)) % 24)
+
+  hours = (hours < 10) ? "0" + hours : hours
+  minutes = (minutes < 10) ? "0" + minutes : minutes
+  seconds = (seconds < 10) ? "0" + seconds : seconds
+
+  return hours + " Horas " + minutes + " Minutos"
+}
 
 exports.msToTime = msToTime
 
@@ -410,6 +410,7 @@ if (!isNumber(user.regTime)) user.regTime = -1
   if(!isNumber(user.warn)) user.warn = 0  
   if(!isNumber(user.exp)) user.exp = 0
   if(!isNumber(user.role)) user.role = 'Novato I'
+  if (!('autolevelup' in user)) user.autolevelup = true
   if(!isNumber(user.level)) user.level = 0
   if(!isNumber(user.armor)) user.armor = 0
   if(!isNumber(user.sword)) user.sword = 0
@@ -453,6 +454,7 @@ if (!isNumber(user.regTime)) user.regTime = -1
   warn: 0, 
   exp: 0,
   role: 'Novato I',
+  autolevelup: true, 
   level: 1,
   armor: 0,
   sword: 0,
@@ -480,6 +482,7 @@ let chats = global.db.data.chats[m.chat]
   if (!('modeadmin' in chats)) chats.modeadmin = false  
   if (!('welcome' in chats)) chats.welcome = true
   if (!('audios' in chats)) chats.audios = true
+  if (!('simi' in chats)) chats.simi = false
   if (!('antiNsfw' in chats)) chats.antiNsfw = true
   if (!('antispam' in chats)) chats.antispam = true
   if (!('antiFake' in chats)) chats.antiFake = false
@@ -493,6 +496,7 @@ let chats = global.db.data.chats[m.chat]
   modeAdmin: false,  
   welcome: true, 
   audios: true, 
+  simi: false, 
   antiNsfw: true, 
   antispam: true, 
   antiFake: false,
