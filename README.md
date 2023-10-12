@@ -1,6 +1,7 @@
 ### 🚀 Version 1.0.0
 > <b> Bot el desarrollo 💫 </b>
 
+
 <p align="center">
 <a href="#"><img title="NovaBot-MD" src="https://telegra.ph/file/343e60521da533ea8a2d3.jpg/badge/a -purple?colorA=%cc33ff&colorB=%cc33ff&style=for-the-badge"></a>
 </p>
