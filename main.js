@@ -190,8 +190,7 @@ conn.readMessages([m.key])}
 //antispam
 if (global.db.data.chats[m.chat].antispam && prefix) {
 const date = global.db.data.users[m.sender].spam + 3000; //5 seg
-if (new Date - global.db.data.users[m.sender].spam < 3000) return console.log(`[SPAM] el usuario: ${pushname} esta haciendo spam parece que quiere satura al bot :v pero conmigo se jodio 😂`) 
-//conn.sendMessage(m.chat, {text: `_*Espere unos segundos antes de usar otro comando...*_ ✓`, mentions: [sender], },{quoted: m}) 
+if (new Date - global.db.data.users[m.sender].spam < 3000) return //conn.sendMessage(m.chat, {text: `_*Espere unos segundos antes de usar otro comando...*_ ✓`, mentions: [sender], },{quoted: m}) 
 global.db.data.users[m.sender].spam = new Date * 1
 }
             
@@ -255,6 +254,7 @@ await new Promise((resolve) => setTimeout(resolve, 2000));
 await fs.unlinkSync(encmedia)  
 }}
 
+//autolevelup
 if (global.db.data.users[m.sender].autolevelup) {	
 let user = global.db.data.users[m.sender]
 if (!user.autolevelup)
@@ -267,6 +267,7 @@ if (before !== user.level) {
 const str = `『 🥳 FELICIDADES @${sender.split`@`[0]} 👏 HAS ALCANZADO UN NUEVO NIVEL 』\n\n╭─────────────────\n│✏ NIVEL ANTERIOR: ${before}\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌\n│✏ NIVEL ACTUAL: ${user.level}\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌\n│✏ RANGO : ${user.role}\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌\n│✏ FECHA: ${new Date().toLocaleString('id-ID')}\n╰─────────────────`.trim()
 return conn.sendMessage(m.chat, { text: str, contextInfo:{mentionedJid:[sender]}}, { quoted: fkontak })}}
 
+//antiprivado
 if (global.db.data.chats[m.chat].antiprivado && !isCreator) {
 if (m.isBaileys && m.fromMe) return !0;
 if (m.isGroup) return !1;
@@ -278,30 +279,6 @@ await conn.sendMessage(m.chat, {text: `*ʜᴏʟᴀ @${sender.split`@`[0]}, ᴇs�
 await conn.updateBlockStatus(m.chat, 'block')
 return !1;
 }
-
-/*if (m.chat.endsWith('broadcast') || m.fromMe || m.isGroup) return 
-let user = global.db.data.users[m.sender]
-if (new Date() - user.pc < 21600000) return
-conn.sendMessage(m.chat, { text: `*Hola @${sender.split`@`[0]} 👋😄 Bienvenido gracias por usar mi bot ❤*
-
-*🔰 Mi creador es:* mario (elrebelde) 
-*🌐 ${conn.user.id == global.numBot2 ? 'Mi Nombre es:* NovaBot-MD' : 'Yo soy un SubBot de : wa.me/${global.numBot.split`@`[0]}'}
-*👥 Usuarios:* ${Object.keys(global.db.data.users).length}
-*🤖 Tiempo activo:* ${runtime(process.uptime())}
-*⚠️ Nota:* No hagan spam del comando
-  
-• *PORFAVOR LEE LAS REGLAS:*
-${prefix}reglas
-
-• *QUIERES VER QUE HAY DE NUEVO?*
-*Escribe: ${prefix}nuevo*
-
-*💫 ¿Quieres apoyar este proyecto para que siga actualizándose? subscriberte a nuestro canal del youtube*
-${global.yt}
-
-*💕 visitar nuestro repositorio oficial para mas infomarcion*
-${md}`, contextInfo:{mentionedJid:[sender]}}, { quoted: fkontak })
-user.pc = new Date * 1*/
 
 //ARRANCA LA DIVERSIÓN
 switch (command) { 
@@ -967,7 +944,7 @@ reply(e)
 if (budy.startsWith('=>')) {
 if (!isCreator) return
 try {
-return  reply(JSON.stringify(eval(`(async () => { ${budy.slice(3)} })()`), null, '\t'))  //gata.sendMessage(from, JSON.stringify(eval(`(async () => { ${budy.slice(3)} })()`), null, '\t'), text, { quoted: msg })
+return reply(JSON.stringify(eval(`(async () => { ${budy.slice(3)} })()`), null, '\t'))  
 } catch (e) {
 e = String(e)
 reply(e)
