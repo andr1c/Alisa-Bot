@@ -256,8 +256,6 @@ await fs.unlinkSync(encmedia)
 }}
 
 if (global.db.data.users[m.sender].autolevelup) {	
-if (!m.message) return !0;
-if (m.isGroup) return !1;
 let user = global.db.data.users[m.sender]
 if (!user.autolevelup)
 return !0
