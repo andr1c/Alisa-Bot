@@ -281,7 +281,7 @@ await conn.updateBlockStatus(m.chat, 'block')
 return !1;
 }
 
-if (m.chat.endsWith('broadcast') || m.fromMe || m.isGroup) return 
+/*if (m.chat.endsWith('broadcast') || m.fromMe || m.isGroup) return 
 let user = global.db.data.users[m.sender]
 if (new Date() - user.pc < 21600000) return
 conn.sendMessage(m.chat, { text: `*Hola @${sender.split`@`[0]} 👋😄 Bienvenido gracias por usar mi bot ❤*
@@ -303,7 +303,7 @@ ${global.yt}
 
 *💕 visitar nuestro repositorio oficial para mas infomarcion*
 ${md}`, contextInfo:{mentionedJid:[sender]}}, { quoted: fkontak })
-user.pc = new Date * 1
+user.pc = new Date * 1*/
 
 //ARRANCA LA DIVERSIÓN
 switch (command) { 
