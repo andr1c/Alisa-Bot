@@ -1,5 +1,5 @@
-### 🚀 Version 1.0.0
-> <b> Bot el desarrollo 💫 </b>
+### Bot el desarrollo 💫
+> <b>  🚀 Version 1.0.0 </b>
 
 
 <p align="center">
