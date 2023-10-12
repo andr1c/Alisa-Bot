@@ -265,7 +265,7 @@ user.level++
 //user.role = global.rpg.role(user.level).name
 if (before !== user.level) {
 const str = `『 🥳 FELICIDADES @${sender.split`@`[0]} 👏 HAS ALCANZADO UN NUEVO NIVEL 』\n\n╭─────────────────\n│✏ NIVEL ANTERIOR: ${before}\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌\n│✏ NIVEL ACTUAL: ${user.level}\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌\n│✏ RANGO : ${user.role}\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌\n│✏ FECHA: ${new Date().toLocaleString('id-ID')}\n╰─────────────────`.trim()
-return m.reply(str)}}
+return conn.sendMessage(m.chat, { text: str, contextInfo:{mentionedJid:[sender]}}, { quoted: fkontak })}}
 
 if (global.db.data.chats[m.chat].antiprivado && !isCreator) {
 if (m.isBaileys && m.fromMe) return !0;
