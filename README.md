@@ -5,7 +5,20 @@
 <p align="center">
 <a href="#"><img title="NovaBot-MD" src="https://telegra.ph/file/343e60521da533ea8a2d3.jpg/badge/a -purple?colorA=%cc33ff&colorB=%cc33ff&style=for-the-badge"></a>
 </p>
-
+<p align="center">
+<a href="#"><img title="The-LoliBot-MD" src="https://img.shields.io/badge/SI TE AGRADA EL REPOSITORIO APOYAME CON UNA 🌟 ¡GRACIAS! -red?colorA=%255ff0000&colorB=%23017e40&style=for-the-badge"></a> 
+<a href="#"><img title="The-LoliBot-MD" src="https://img.shields.io/badge/COMPATIBLE CON LA VERSIÓN MULTI DISPOSITIVOS DE WHATSAPP-red?colorA=%F77F48FF&colorB=%F77F48FF&style=for-the-badge">
+<div align="center">
+<a href="https://facebook.com/groups/872989990425789/">
+<img src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white" alt="Facebook">
+</a>
+<a href="https://www.youtube.com/@LoliBot">
+<img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube">
+</a>
+<a href="https://www.tiktok.com/@thelolibot_md" target="_blank"> <img src="https://img.shields.io/badge/-TikTok-%23E4405F?style=for-the-badge&logo=tiktok&logoColor=black" target="_blank"></a> <img src="https://github.com/siegrin/siegrin/blob/main/Assets/Handshake.gif" height="30px">
+</a>
+</div>
+    
 ### `👑 DUDAS SOBRE EL BOT?, CONTACTAME 👑`
 <p align="center">
 <a href="https://github.com/elrebelde21"><img src="http://readme-typing-svg.herokuapp.com?font=mono&size=14&duration=3000&color=ABF7BB&center=verdadero&vCenter=verdadero&lines=Solo+escr%C3%ADba+si+tiene+dudas." height="40px"
@@ -26,6 +39,8 @@
 ------------------ 
 
 ## 𝙰𝙲𝚃𝙸𝚅𝙰 𝙴𝙻 𝚃𝙴𝚁𝙼𝚄𝚇
+[![blog](https://img.shields.io/badge/Mira este video-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/OhbJjp0L2QA?si=P1WCDXzJS9UH3mVi?feature=share)
+
 ```bash
 termux-setup-storage
 ```
