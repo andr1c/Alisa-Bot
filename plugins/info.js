@@ -64,7 +64,7 @@ conn.sendMessage(m.chat, { text: `╭─────────────┈�
 ╰┬────────────┈⊷
 ┌┤ \`\`\`📌 REQUISITOS PARA LAS INSTALACION \`\`\`
 ┌┤❇️ _Dudas: wa.me/595975740803_
-┌┤❇️ _Tutoríal: pronto_
+┌┤❇️ _Tutoríal: https://youtu.be/OhbJjp0L2QA?si=l4k6qUcz0aLMzZDJ_
 ┌┤❇️ _1 GB de almacenamiento_
 ┌┤❇️ _Termux: https://www.mediafire.com/file/3hsvi3xkpq3a64o/termux_118.apk/file_
 ┌┤❇️ _GitHub: ${md}_
