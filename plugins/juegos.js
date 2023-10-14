@@ -20,7 +20,7 @@ let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${text}&lc=es&cf=fal
 let res = anu.success;
 m.reply(res)
 } catch { 
-return m.reply(`*Api simsimi caida vuelva mas tardes*`)}}
+return m.reply(`*Api simsimi caida, vuelva mas tarde*`)}}
 
 async function game1(conn, m, participants, sender, who) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
