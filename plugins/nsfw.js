@@ -38,6 +38,7 @@ if (global.db.data.users[m.sender].registered < true) return m.reply(info.regist
 if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (!global.db.data.chats[m.chat].antiNsfw) return m.reply(info.nsfw)
 if (!m.isGroup) return m.reply(info.group) 
+if (global.db.data.users[m.sender].level < 3) return m.reply(`[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀ ᴇʟ ɴɪᴠᴇʟ 3 ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ .nivel`) 
 sendImageAsUrl(`https://api.lolhuman.xyz/api/random2/${command}?apikey=${lolkeysapi}`, `*🔥 ${command} 🔥*`)
 db.data.users[m.sender].limit -= 3
 m.reply(info.limit)}
@@ -46,6 +47,7 @@ async function nsfw4(sendImageAsUrl, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (!global.db.data.chats[m.chat].antiNsfw) return m.reply(info.nsfw)
+if (global.db.data.users[m.sender].level < 3) return m.reply(`[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀ ᴇʟ ɴɪᴠᴇʟ 3 ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ .nivel`) 
 sendImageAsUrl("https://delirius-nsfw.onrender.com/media/h/bdsm", '🥵')
 db.data.users[m.sender].limit -= 1
 m.reply(info.limit)}

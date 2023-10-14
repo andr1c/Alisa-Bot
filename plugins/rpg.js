@@ -91,7 +91,7 @@ async function rob(conn, m, sender, fkontak) {
 const user = global.db.data.users[m.sender]
 const date = global.db.data.users[m.sender].robs + 600000; //600000
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (new Date - global.db.data.users[m.sender].robs < 600000) return m.reply(`*🚓 Regresa el ${msToTime(date - new Date())} minutos*`) 
+if (new Date - global.db.data.users[m.sender].robs < 600000) return m.reply(`*🚓 Regresa el ${msToTime(date - new Date())}*`) 
 if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false;
 else who = m.chat;
 if (!who) return m.reply(`*⚠️ ETIQUETA A LA PERSONA BOBO*`)
@@ -101,8 +101,8 @@ const users = global.db.data.users[who];
 let exp = Math.floor(Math.random() * 15) + 10;
 let limit = Math.floor(Math.random() * 5) + 3;
 const rob = Math.floor(Math.random() * 500);
-if (users.limit < 15) return m.reply("*Este tiene menos del 15 diamante no le robe a un pobre*");
-if (users.exp < 10) return m.reply(`*Este usuario esta pobre tiene menos del 10 XP*`);
+if (users.limit < 15) return m.reply(`😔 ᴇʟ ᴜsᴜᴀʀɪᴏ @${who.split`@`[0]} ᴛɪᴇɴᴇ ᴍᴇɴᴏs ᴅᴇ 15 ᴅɪᴀᴍᴀɴᴛᴇ*\nɴᴏ ʀᴏʙᴇs ᴀ ᴜɴ ᴘᴏᴅʀᴇ v":`, null, { mentions: [who] })    
+if (users.exp < 10) return m.reply(`😔 ᴇʟ ᴜsᴜᴀʀɪᴏ @${who.split`@`[0]} ᴛɪᴇɴᴇ ᴍᴇɴᴏs ᴅᴇ 10 ᴇxᴘ*\nɴᴏ ʀᴏʙᴇs ᴀ ᴜɴ ᴘᴏᴅʀᴇ v":`, null, { mentions: [who] })    
 global.db.data.users[m.sender].exp += exp * 1;
 global.db.data.users[m.sender].limit += limit * 1;
 global.db.data.users[who].exp -= exp * 1;
@@ -135,7 +135,7 @@ async function work(conn, m, sender, fkontak) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 let hasil = Math.floor(Math.random() * 2000)
 let time = global.db.data.users[m.sender].lastwork + 3600000
-if (new Date - global.db.data.users[m.sender].lastwork < 3600000) return m.reply(`ᴇsᴛᴀ ᴄᴀɴsᴀᴅᴏ, ᴇsᴘᴇʀᴀs ${msToTime(time - new Date())} ᴘᴀʀᴀ ᴠᴏʟᴠᴇʀ ᴀ ᴛʀᴀʙᴀᴊᴀ!`) 
+if (new Date - global.db.data.users[m.sender].lastwork < 3600000) return m.reply(`🕔 ᴇsᴛᴀ ᴄᴀɴsᴀᴅᴏ, ᴇsᴘᴇʀᴀs ${msToTime(time - new Date())} ᴘᴀʀᴀ ᴠᴏʟᴠᴇʀ ᴀ ᴛʀᴀʙᴀᴊᴀ!`) 
 let anu = (await axios.get('https://raw.githubusercontent.com/fgmods/fg-team/main/games/work.json')).data
 let res = pickRandom(anu)
 global.db.data.users[m.sender].exp += hasil
@@ -146,10 +146,10 @@ global.db.data.users[m.sender].lastwork = new Date * 1
 async function mine(conn, m, sender, fkontak) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 const date = global.db.data.users[m.sender].lastmiming + 600000;
-if (new Date - global.db.data.users[m.sender].lastmiming < 600000) return m.reply(`*[ ⏳ ] Espera ${msToTime(date - new Date())} min para volver a minar*`) 
+if (new Date - global.db.data.users[m.sender].lastmiming < 600000) return m.reply(`*[ ⏳ ] Espera ${msToTime(date - new Date())} para volver a minar*`) 
 const exp = Math.floor(Math.random() * 1000)
 global.db.data.users[m.sender].exp += exp;
-m.reply(`*Genial minaste ${exp} XP*`)
+m.reply(`*⚒️ Genial minaste ${exp} XP*`)
 global.db.data.users[m.sender].lastmiming = new Date * 1;
 }
 

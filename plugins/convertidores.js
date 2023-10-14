@@ -53,6 +53,7 @@ await fs.unlinkSync(media)
 }
 
 async function tomp3(conn, mime, quoted, m) {
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (!/video/.test(mime) && !/audio/.test(mime)) return m.reply(`*[ ⚠️ ] Responda a un audio*`) 
 if (!quoted) return m.reply(`*[ ⚠️ ] Responda a un audio*`) 
 let { toAudio } = require('../libs/converter.js')
@@ -61,6 +62,7 @@ let audio = await toAudio(media, 'mp4')
 await conn.sendMessage(m.chat, {audio: audio, mimetype: 'audio/mpeg', contextInfo:{  externalAdReply: { showAdAttribution: true, mediaType:  1, mediaUrl: md, title: global.botname, sourceUrl: md, thumbnail: imagen1 }}}, { quoted: m })}
 
 async function toimg(conn, mime, quoted, exec, m) {
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (!m.quoted) return m.reply('*Y el sticker?*\n*Responde a un stickers capo*') 
 if (!/webp/.test(mime)) return m.reply('*Y el sticker? Responde a un stickers capo*') 
 let media = await conn.downloadAndSaveMediaMessage(m.quoted)
@@ -72,7 +74,21 @@ let buffer = fs.readFileSync(ran)
 conn.sendMessage(m.chat, { image: buffer }, { quoted: m})
 fs.unlinkSync(ran)})}
 
-module.exports = {efec, url, tomp3, toimg}
+async function toanime(conn, mime, quoted, lolkeysapi, m) { 
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (/image/.test(mime)) {
+let media = await conn.downloadAndSaveMediaMessage(quoted)
+let _upload = await TelegraPh(media)
+try {
+let anime = await `https://api.lolhuman.xyz/api/imagetoanime?apikey=${lolkeysapi}&img=${_upload}`
+m.reply('*🕔 𝘈𝘎𝘜𝘈𝘙𝘋𝘌 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖....*\n𝘌𝘴𝘵𝘰𝘺 𝘤𝘰𝘯𝘷𝘪𝘦𝘳𝘵𝘪𝘥𝘰 𝘪𝘮𝘢𝘨𝘦𝘯 𝘢 𝘥𝘪𝘴𝘦𝘯̃𝘰 𝘢𝘯𝘪𝘮𝘦, 𝘴𝘦𝘢 𝘱𝘢𝘤𝘪𝘦𝘯𝘵𝘦 𝘦𝘯 𝘭𝘰 𝘲𝘶𝘦 𝘦𝘯𝘷𝘪𝘰 𝘦𝘭 𝘳𝘦𝘴𝘶𝘭𝘵𝘢𝘥𝘰');
+await conn.sendFile(m.chat, anime, 'error.jpg', null, m) 
+} catch (e) {
+throw m.reply(`*${info.error}*\n\n*ᴠᴇʀɪғɪǫᴜᴇ ǫᴜᴇ ᴇɴ ʟᴀ ɪᴍᴀɢᴇɴ sᴇᴀ ᴠɪsɪʙʟᴇ ᴇʟ ʀᴏsᴛʀᴏ ᴅᴇ ᴜɴᴀ ᴘᴇʀsᴏɴᴀ*`)}
+} else { 
+m.reply(`*𝘠 𝘭𝘢 𝘪𝘮𝘢𝘨𝘦𝘯? 𝘙𝘦𝘴𝘱𝘰𝘯𝘥𝘦 𝘰 𝘦𝘵𝘪𝘲𝘶𝘦𝘵𝘦 𝘢 𝘶𝘯𝘢 𝘪𝘮𝘢𝘨𝘦𝘯*`)}}
+
+module.exports = {efec, url, tomp3, toimg, toanime}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {

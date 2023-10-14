@@ -223,6 +223,7 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}tomp3
 ├❥ᰰຼ ❏ ${prefix}toimg
 ├❥ᰰຼ ❏ ${prefix}toaudio
+├❥ᰰຼ ❏ ${prefix}toanime
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫* 	
 
 *╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*⃐🥵COMANDO +18*️⃟ᬽ፝֟━*
@@ -443,6 +444,8 @@ conn.sendMessage(m.chat, { text: `🤔 *Que hay de nuevo?* 🤗
 *🌐 Version del bot:* [ ${vs} ] 
 
 *Nuevo comando:*
+💥 se que gusta el anime o no? encose prueba el que anime que parece con el comando:
+${prefix}toanime
 💬 Chatbot automatico activa con:
 ${prefix}chatbot on
 💠 Nivel automatico activa con: 
@@ -450,7 +453,7 @@ ${prefix}autonivel on
 🤖 Mejorar para los usuarios que son sub bot 💫
 🔰 Ya se puede instalar este bot usar el comando: 
 ${prefix}instalarbot 
-❗un antispam de comando usar los comando cada 3 seg evitar satura al bot.`}, { quoted: fkontak })}
+⚠️ Un antispam de comando usar los comando cada 3 seg evitar satura al bot.`}, { quoted: fkontak })}
 
 const regla = (conn, m, fkontak) => {
 conn.sendMessage(m.chat, { text: `*🌐 REGLAS DEL BOT 🌐*

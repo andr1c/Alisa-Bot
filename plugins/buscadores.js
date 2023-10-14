@@ -14,6 +14,7 @@ const os = require('os')
 async function yt(conn, m, text, from, command, fkontak, prefix) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (!text) return m.reply(`*Ejemplo:*\n${prefix + command} anime`)
+if (global.db.data.users[m.sender].level < 2) return m.reply(`[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀ ᴇʟ ɴɪᴠᴇʟ 2 ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ .nivel`) 
 const yts = require("youtube-yts");
 const search = await yts(text);
 const {key} = await conn.sendMessage(from, {text: info.wait}, { quoted: fkontak })
@@ -32,6 +33,7 @@ await conn.sendMessage(from, {text: info.result, edit: key}, { quoted: fkontak }
 
 async function acortar(conn, m, text, args, command) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].level < 2) return m.reply(`[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀ ᴇʟ ɴɪᴠᴇʟ 2 ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ .nivel`) 
  if (!text) return m.reply(`*Ingresa un link para acortar!*`)
 let shortUrl1 = await (await fetch(`https://tinyurl.com/api-create.php?url=${args[0]}`)).text()  
 if (!shortUrl1) return m.reply(`*⚠️ ERROR*`)
@@ -110,6 +112,7 @@ conn.sendMessage(m.chat, {image:krt.result, caption: info.result}, {quoted:m})}
 
 async function wall(conn, text, command, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].level < 3) return m.reply(`[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀ ᴇʟ ɴɪᴠᴇʟ 3 ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ .nivel`) 
 if (!text) return m.reply(`*[ ⚠️ ] Ejemplo: ${prefix + command} anime*`) 
 let { wallpaper, wallpaperv2 } = require('@bochilteam/scraper')
 let _res = await (/2/.test(command) ? wallpaperv2 : wallpaper)(text) 
