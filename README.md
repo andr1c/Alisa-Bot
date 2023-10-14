@@ -40,7 +40,10 @@
 
 ## 𝙰𝙲𝚃𝙸𝚅𝙰 𝙴𝙻 𝚃𝙴𝚁𝙼𝚄𝚇
 👇 Pasos para instalar el bot via termux 👇
-(https://img.shields.io/badge/Mira-Este-Video-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/OhbJjp0L2QA?si=LUTw6tIkQmP7XOhp?feature=share)
+
+<a href="https://youtu.be/OhbJjp0L2QA?si=LUTw6tIkQmP7XOhp">
+<img src="https://img.shields.io/badge/Tutorial-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Tutorial">
+</a>
 
 ```bash
 termux-setup-storage
