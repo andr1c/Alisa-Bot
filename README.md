@@ -67,14 +67,14 @@ Si despues que ya instalastes tu bot y termux te salta en blanco, se fue tu inte
 > npm start
 ```
 ### `🟢 𝙾𝙱𝚃𝙴𝙽𝙴𝚁 𝙾𝚃𝚁𝙾 𝙲𝙾𝙳𝙸𝙶𝙾 𝚀𝚁 𝙴𝙽 𝚃𝙴𝚁𝙼𝚄𝚇`
-- Detener el bot apretado CTRL y aplastas Z en tu teclado, darle enter y escribe:
+Detener el bot apretado CTRL y aplastas Z en tu teclado, darle enter y escribe:
 ```bash
 > cd 
 > cd NovaBot-MD
 > rm -rf sessions
 > npm start
 ```
-
+--
 ## `🤖 𝙿𝙰𝚁𝙰 𝙰𝙲𝚃𝙸𝚅𝙰𝚁 𝟸𝟺/𝟽 (𝚃𝙴𝚁𝙼𝚄𝚇)`
 ```bash
 npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
