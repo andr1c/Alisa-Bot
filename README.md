@@ -60,7 +60,7 @@ git clone https://github.com/elrebelde21/NovaBot-MD && cd NovaBot-MD && yarn && 
 npm start
 ```
 
-## 🟢 𝙰𝙲𝚃𝙸𝚅𝙰𝚁 𝙴𝙽 𝙲𝙰𝚂𝙾 𝙳𝙴 𝙳𝙴𝚃𝙴𝙽𝙴𝚁𝚂𝙴 𝙴𝙽 𝚃𝙴𝚁𝙼𝚄𝚇
+### 🟢 𝙰𝙲𝚃𝙸𝚅𝙰𝚁 𝙴𝙽 𝙲𝙰𝚂𝙾 𝙳𝙴 𝙳𝙴𝚃𝙴𝙽𝙴𝚁𝚂𝙴 𝙴𝙽 𝚃𝙴𝚁𝙼𝚄𝚇
 Si despues que ya instalastes tu bot y termux te salta en blanco, se fue tu internet o reiniciaste tu celular, solo realizaras estos pasos
 ```bash
 > cd NovaBot-MD
@@ -74,7 +74,6 @@ Detener el bot apretado CTRL y aplastas Z en tu teclado, darle enter y escribe:
 > rm -rf sessions
 > npm start
 ```
---
 ## `🤖 𝙿𝙰𝚁𝙰 𝙰𝙲𝚃𝙸𝚅𝙰𝚁 𝟸𝟺/𝟽 (𝚃𝙴𝚁𝙼𝚄𝚇)`
 ```bash
 npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
