@@ -39,7 +39,9 @@
 ------------------ 
 
 ## 𝙰𝙲𝚃𝙸𝚅𝙰 𝙴𝙻 𝚃𝙴𝚁𝙼𝚄𝚇
-[![blog](https://img.shields.io/badge/Mira este video-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/OhbJjp0L2QA?si=P1WCDXzJS9UH3mVi?feature=share)
+👇 Pasos para instalar el bot via termux 👇
+
+https://youtu.be/OhbJjp0L2QA?si=P1WCDXzJS9UH3mVi
 
 ```bash
 termux-setup-storage
