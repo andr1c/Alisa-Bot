@@ -1,8 +1,8 @@
 //Código desde cero y comentarios hecho por: 
 // @gata_dios   
 // @Skidy89  
-// @elrebelde21 
-     
+// @elrebelde21
+  
 //═════════[ Importaciones ]═════════ 
 const baileys = require('@whiskeysockets/baileys'); // trabajar a través de descargas por Whatsapp 
 const { WaMessageStubType, areJidsSameUser, downloadContentFromMessage, generateWAMessageContent, generateWAMessageFromContent, generateWAMessage, prepareWAMessageMedia, relayMessage} = require('@whiskeysockets/baileys'); // Importa los objetos 'makeWASocket' y 'proto' desde el módulo '@whiskeysockets/baileys'   
@@ -35,14 +35,14 @@ const { canLevelUp, xpRange } = require('./libs/levelling.js')
 const { smsg, fetchBuffer, getBuffer, buffergif, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom, msToTime, downloadMediaMessage } = require('./libs/fuctions')
 const { ytmp4, ytmp3, ytplay, ytplayvid } = require('./libs/youtube') 
 const { mediafireDl } = require('./libs/mediafire.js') 
-const {jadibot, listJadibot, killJadibot} = require('./serbot.js')  
+const {jadibot, listJadibot, killJadibot} = require('./serbot.js')   
 const { jadibot2} = require('./serbot2.js')
 const { menu, menu2, nuevo, regla} = require('./plugins/menu.js')
 const { state, owner, grupo, instalar, ping, report, ow} = require('./plugins/info.js')
 const {rob, bal, reg, reg1, reg2, work, mine, buy, afk, claim, perfil, nivel, cofre, lb} = require('./plugins/rpg.js') 
 const {game, game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, game13, game14, game15} = require('./plugins/juegos.js') 
 const {yt, acortar, google, imagen, tran, tts, ia, ssw, wall} = require('./plugins/buscadores.js')
-const {efec, url, tomp3, toimg} = require('./plugins/convertidores.js') 
+const {efec, url, tomp3, toimg, toanime} = require('./plugins/convertidores.js') 
 const {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, adm, infogr, warn1, warn2, online, listw} = require('./plugins/grupos.js')
 const {nsfw1, nsfw2, nsfw3, nsfw4, nsfw5} = require('./plugins/nsfw.js')
 const {randow1, randow2, randow3, randow4, randow5, randow6, randow7, randow8, randow9} = require('./plugins/randow.js') 
@@ -264,8 +264,7 @@ while (canLevelUp(user.level, user.exp, global.multiplier))
 user.level++
 //user.role = global.rpg.role(user.level).name
 if (before !== user.level) {
-const str = `*「 FELICIDADES LEVEL UP 🆙🥳 」*\n\n🥳 Felicidades @${sender.split`@`[0]} 👏 subiste de nivel sigue asi 👏\n\n*NIVEL :* ${before} ⟿ ${user.level}\n*RANGO :* ${user.role}\n*FECHA :* ${new Date().toLocaleString('id-ID')}\n\n_*Para saber cual es tu puerto del top, coloca el comando*_
-${prefix}lb`.trim()
+const str = `*「 FELICIDADES LEVEL UP 🆙🥳 」*\n\n🥳 Felicidades @${sender.split`@`[0]} 👏 subiste de nivel sigue asi 👏\n\n*NIVEL :* ${before} ⟿ ${user.level}\n*RANGO :* ${user.role}\n*FECHA :* ${new Date().toLocaleString('id-ID')}\n\n_*Para saber cual es tu puerto del top, coloca el comando #lb*_`.trim()
 return conn.sendMessage(m.chat, { text: str, contextInfo:{mentionedJid:[sender]}}, { quoted: fkontak })}}
 
 //antiprivado
@@ -537,6 +536,9 @@ toimg(conn, mime, quoted, exec, m)
 break
 case 'tourl': 
 url(conn, mime, quoted, util, m) 
+break
+case 'toanime': 
+toanime(conn, mime, quoted, lolkeysapi, m) 
 break
 //nsfw
 case 'hentai': 
