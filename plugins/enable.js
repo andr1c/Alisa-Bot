@@ -22,7 +22,7 @@ if (!isGroupAdmins) return m.reply(info.admin)
 if (!text) return m.reply(`*Use de esta forma ejemplo:*\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
 if (args[0] === "on") {
 global.db.data.chats[m.chat].antilink = true
-m.reply(`*Atención a todos los miembros activos de este grupo 📣*\n\n*El antilink esta activo*\n\n*Y solo los admins de este grupo podran pasar el enlace*\n\nSi algun participante que no es admin envía un enlace de otro grupo sera expulsado de este grupo de inmediato`)
+m.reply(`*Atención a todos los miembros activos de este grupo 📣*\n\n*El antilink esta activo*\n\n*Y solo los admins de este grupo podran enviar enlaces*\n\nSi algun participante que no es admin envía un enlace de otro grupo sera expulsado de este grupo de inmediato`)
 } else if (args[0] === "off") {
 global.db.data.chats[m.chat].antilink = false
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
@@ -34,7 +34,7 @@ if (!isGroupAdmins) return m.reply(info.admin)
 if (!text) return m.reply(`*Use de esta forma ejemplo:*\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
 if (args[0] === "on") {
 global.db.data.chats[m.chat].antiFake = true
-m.reply(`*Atención a todos los miembros activos de este grupo 📣*\n\n*El ${command} esta activo*\n\n⚠️ *Los cual el grupo no esta permitido ingreso de numero fake (virtuales), seran explusado automáticamente del Grupo...*`)
+m.reply(`*Atención a todos los miembros activos de este grupo 📣*\n\n*El ${command} esta activo*\n\n⚠️ *Los cual el grupo no esta permitido ingreso de numeros virtuales (fakes)*\n cualquiera con un numero sospechoso será *explusado automáticamente del Grupo...*`)
 } else if (args[0] === "off") {
 global.db.data.chats[m.chat].antiFake = false
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
@@ -46,7 +46,7 @@ if (!isGroupAdmins) return m.reply(info.admin)
 if (!text) return m.reply(`*Use de esta forma ejemplo:*\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
 if (args[0] === "on") {
 global.db.data.chats[m.chat].antiArabe = true
-m.reply(`*Atención a todos los miembros activos de este grupo 📣*\n\n*El ${command} esta activo*\n\n⚠️ *Los cual el grupo no esta permitido ingreso de numero arabe (+212, +91, +92, etc), seran explusado automáticamente del Grupo...*`)
+m.reply(`*Atención a todos los miembros activos de este grupo 📣*\n\n*El ${command} esta activo*\n\n⚠️ *Los cual el grupo no esta permitido ingreso de numeros arabez (+212, +91, +92, etc), seran expulsados automáticamente del Grupo...*`)
 } else if (args[0] === "off") {
 global.db.data.chats[m.chat].antiArabe = false
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
