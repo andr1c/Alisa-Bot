@@ -68,6 +68,7 @@ Si despues que ya instalastes tu bot y termux te salta en blanco, se fue tu inte
 ```
 ### `🟢 𝙾𝙱𝚃𝙴𝙽𝙴𝚁 𝙾𝚃𝚁𝙾 𝙲𝙾𝙳𝙸𝙶𝙾 𝚀𝚁 𝙴𝙽 𝚃𝙴𝚁𝙼𝚄𝚇`
 - Detener el bot apretado CTRL y aplastas Z en tu teclado, darle enter y escribe:
+```bash
 > cd 
 > cd NovaBot-MD
 > rm -rf sessions
