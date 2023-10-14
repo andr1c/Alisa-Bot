@@ -1,4 +1,4 @@
-### Bot el desarrollo 💫
+### Bot en desarrollo 💫
 > <b>  🚀 Version 1.0.0 </b>
 
 
