@@ -335,7 +335,7 @@ break
 case 'menu': case 'help': case 'menucompleto':
 menu(conn, prefix, pushname, sender, m, fkontak)
 break  
-case 'menu2': case 'audios':
+case 'menu2': case 'audio':
 menu2(conn, pushname, m, fkontak)
 break
 case 'nuevo':
