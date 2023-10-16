@@ -101,8 +101,8 @@ const users = global.db.data.users[who];
 let exp = Math.floor(Math.random() * 15) + 10;
 let limit = Math.floor(Math.random() * 5) + 3;
 const rob = Math.floor(Math.random() * 500);
-if (users.limit < 15) return m.reply(`😔 ᴇʟ ᴜsᴜᴀʀɪᴏ @${who.split`@`[0]} ᴛɪᴇɴᴇ ᴍᴇɴᴏs ᴅᴇ 15 ᴅɪᴀᴍᴀɴᴛᴇ*\nɴᴏ ʀᴏʙᴇs ᴀ ᴜɴ ᴘᴏᴅʀᴇ v":`, null, { mentions: [who] })    
-if (users.exp < 10) return m.reply(`😔 ᴇʟ ᴜsᴜᴀʀɪᴏ @${who.split`@`[0]} ᴛɪᴇɴᴇ ᴍᴇɴᴏs ᴅᴇ 10 ᴇxᴘ*\nɴᴏ ʀᴏʙᴇs ᴀ ᴜɴ ᴘᴏᴅʀᴇ v":`, null, { mentions: [who] })    
+if (users.limit < 15) return conn.sendMessage(m.chat, {text: `*😔 ᴇʟ ᴜsᴜᴀʀɪᴏ @${who.split`@`[0]} ᴛɪᴇɴᴇ ᴍᴇɴᴏs ᴅᴇ 15 ᴅɪᴀᴍᴀɴᴛᴇ ɴᴏ ʀᴏʙᴇs ᴀ ᴜɴ ᴘᴏᴅʀᴇ* v:`, mentions: [who]}, {quoted: m});  
+if (users.exp < 10) return conn.sendMessage(m.chat, {text: `*😔 ᴇʟ ᴜsᴜᴀʀɪᴏ @${who.split`@`[0]} ᴛɪᴇɴᴇ ᴍᴇɴᴏs ᴅᴇ 10 ᴇxᴘ*\nɴᴏ ʀᴏʙᴇs ᴀ ᴜɴ ᴘᴏᴅʀᴇ* v:`, mentions: [who]}, {quoted: m});   
 global.db.data.users[m.sender].exp += exp * 1;
 global.db.data.users[m.sender].limit += limit * 1;
 global.db.data.users[who].exp -= exp * 1;
