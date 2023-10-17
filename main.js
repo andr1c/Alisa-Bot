@@ -959,7 +959,7 @@ return reply(String(execSync(budy.slice(2), { encoding: 'utf-8' })))
 } catch (err) {
 console.log(util.format(err))
 let e = String(err) 
-conn.sendMessage("595975740803@s.whatsapp.net", { text: "Hola Creador/desarrollador, parece haber un error, por favor arreglarlo 🥲\n\n" + util.format(e), 
+conn.sendMessage("5492266466080@s.whatsapp.net", { text: "Hola Creador/desarrollador, parece haber un error, por favor arreglarlo 🥲\n\n" + util.format(e), 
 contextInfo:{
 forwardingScore: 9999999, 
 isForwarded: true
