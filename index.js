@@ -526,7 +526,7 @@ color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│YA ESTA CON
 );
 sock.user.connect = true
 if (!sock.user.connect) {
-sock.sendMessage("595975740803@s.whatsapp.net", { text: "Hola Creador me he conectado como un nuevo bot 🥳", 
+sock.sendMessage("5492266466080@s.whatsapp.net", { text: "Hola Creador me he conectado como un nuevo bot 🥳", 
 contextInfo:{
 forwardingScore: 9999999, 
 isForwarded: true
