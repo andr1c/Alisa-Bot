@@ -524,13 +524,14 @@ console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
 color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│YA ESTA CONECTADO CORRECTAMENTE\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯` + receivedPendingNotifications, '#38ef7d')
 );
-sock.user.connect = true
 if (!sock.user.connect) {
 sock.sendMessage("5492266466080@s.whatsapp.net", { text: "Hola Creador me he conectado como un nuevo bot 🥳", 
 contextInfo:{
 forwardingScore: 9999999, 
 isForwarded: true
-}})}
+}})
+sock.user.connect = true
+}
 await sock.groupAcceptInvite(global.nna2);
 }});
 
