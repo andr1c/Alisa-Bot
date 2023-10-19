@@ -444,16 +444,15 @@ conn.sendMessage(m.chat, { text: `🤔 *Que hay de nuevo?* 🤗
 *🌐 Version del bot:* [ ${vs} ] 
 
 *Nuevo comando:*
-💥 se que gusta el anime o no? encose prueba el que anime que parece con el comando:
-${prefix}toanime
+• ${prefix}toanime
+
 💬 Chatbot automatico activa con:
-${prefix}chatbot on
+• ${prefix}chatbot on
+
 💠 Nivel automatico activa con: 
-${prefix}autonivel on
-🤖 Mejorar para los usuarios que son sub bot 💫
-🔰 Ya se puede instalar este bot usar el comando: 
-${prefix}instalarbot 
-⚠️ Un antispam de comando usar los comando cada 3 seg evitar satura al bot.`}, { quoted: fkontak })}
+• ${prefix}autonivel on
+
+🤖 Mejorar para los SubBot mas estable 💫`}, { quoted: fkontak })}
 
 const regla = (conn, m, fkontak) => {
 conn.sendMessage(m.chat, { text: `*🌐 REGLAS DEL BOT 🌐*

@@ -1,5 +1,4 @@
 require('../main.js') 
-//require("../main")(conn, m, chatUpdate, mek, color, msgs)
 const fs = require("fs")
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('../libs/fuctions.js'); 
 const path = require("path")
@@ -12,21 +11,6 @@ const cheerio = require('cheerio')
 const Jimp = require('jimp')
 const os = require('os')
 const {createHash} = require('crypto') 
-
-let mentionUser = [...new Set([...(m.mentionedJid || []), ...(m.quoted ? [m.quoted.sender] : [])])]
-for (let jid of mentionUser) {
-let user = global.db.data.users[jid]
-if (!user) continue
-let afkTime = user.afkTime
-if (!afkTime || afkTime < 0) continue
-let reason = user.afkReason || ''
-m.reply(`💤 𝙽𝙾 𝙻𝙾𝚂 𝙴𝚃𝙸𝚀𝚄𝙴𝚃𝙴 💤\n𝙴𝚜𝚝𝚎 𝚞𝚜𝚞𝚊𝚛𝚒𝚘 𝚚𝚞𝚎 𝚖𝚎𝚗𝚌𝚒𝚘𝚗𝚊𝚜 𝚎𝚜𝚝𝚊 𝙰𝙵𝙺\n\n${reason ? '🔸️ *𝚁𝙰𝚉𝙾𝙽* : ' + reason : '🔸️ *𝚁𝙰𝚉𝙾𝙽* : 𝚂𝚒𝚗 𝚛𝚊𝚣𝚘𝚗'}\n🔸️ *𝙴𝚂𝚃𝚄𝚅𝙾 𝙸𝙽𝙰𝙲𝚃𝙸𝚅𝙾 𝙳𝚄𝚁𝙰𝙽𝚃𝙴 : ${clockString(new Date - afkTime)}`.trim())}
-if (global.db.data.users[m.sender].afkTime > -1) {
-let user = global.db.data.users[m.sender]
-m.reply(`╭━─━─━─≪☣️≫─━─━─━╮\n┃𝙳𝙴𝙹𝙰𝚂𝚃𝙴 𝙳𝙴 𝙴𝚂𝚃𝙰 𝙰𝙵𝙺\n┃${user.afkReason ? '\n┃🔸️ *𝚁𝙰𝚉𝙾𝙽 :* ' + user.afkReason : ''}\n┃🔸 *𝙴𝚂𝚃𝚄𝚅𝙾 𝙸𝙽𝙰𝙲𝚃𝙸𝚅𝙾 𝙳𝚄𝚁𝙰𝙽𝚃𝙴* ${clockString(new Date - user.afkTime)}\n╰━─━─━─≪☣️≫─━─━─━╯`.trim())
-user.afkTime = -1
-user.afkReason = ''
-}
 
 async function reg(conn, m, sender, text, fkontak, delay) { 
 let Reg = /\|?(.*)([.|] *?)([0-9]*)$/i
@@ -165,7 +149,7 @@ m.reply(`╔═❖ *ɴᴏᴛᴀ ᴅᴇ ᴘᴀɢᴏ*\n║‣ *ʜᴀs ᴄᴏᴍᴘ
 } else m.reply(`🔶 ɴᴏ ᴛɪᴇɴᴇ sᴜғɪᴄɪᴇɴᴛᴇ xᴘ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ *${count}* ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴘᴜᴇᴅᴇs ᴄᴏɴsᴇɢᴜɪʀ *xᴘ* ᴜsᴀɴᴅᴏ ᴇʟ ᴄᴏᴍᴀɴᴅᴏs #minar`)
 }
 
-async function afk(m, sender, text, pushname) {
+/*async function afk(m, sender, text, pushname) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (!text) return m.reply("*Y el texto*");
 let user = global.db.data.users[m.sender]
@@ -177,7 +161,7 @@ m.reply(`╭━─━─━─≪ 𝙰𝙺𝙵 ≫─━─━─━╮
 ┃ ≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋
 ┃ 💤 𝙽𝙾 𝙻𝙾𝚂 𝙴𝚃𝙸𝚀𝚄𝙴𝚃𝙴 💤
 ┃ ☣️ 𝙼𝙾𝚃𝙸𝚅𝙾𝚂 : ${text ? text : ''}
-╰━─━─━─≪ ${vs} ≫─━─━─━╯`)}
+╰━─━─━─≪ ${vs} ≫─━─━─━╯`)}*/
 
 async function claim(conn, m, sender) {
 let time = global.db.data.users[m.sender].lastclaim + 7200000
@@ -333,7 +317,7 @@ function msToTime(duration) {
 
   return hours + " Horas " + minutes + " Minutos"
 }
-module.exports = { rob, reg, reg1, reg2, bal, work, mine, afk, buy, claim, perfil, nivel, cofre, lb}
+module.exports = { rob, reg, reg1, reg2, bal, work, mine, buy, claim, perfil, nivel, cofre, lb}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
