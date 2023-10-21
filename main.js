@@ -38,8 +38,8 @@ const { canLevelUp, xpRange } = require('./libs/levelling.js')
 const { smsg, fetchBuffer, getBuffer, buffergif, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom, msToTime, downloadMediaMessage, convertirMsADiasHorasMinutosSegundos} = require('./libs/fuctions')
 const { ytmp4, ytmp3, ytplay, ytplayvid } = require('./libs/youtube') 
 const { mediafireDl } = require('./libs/mediafire.js') 
-const {jadibot, listJadibot, killJadibot} = require('./serbot.js')   
-const { jadibot2} = require('./serbot2.js')
+const {jadibot, listJadibot, killJadibot} = require('./plugins/serbot.js')   
+//const { jadibot2} = require('./plugins/serbot2.js')
 const { menu, menu2, nuevo, regla} = require('./plugins/menu.js')
 const { state, owner, grupo, instalar, ping, report, ow} = require('./plugins/info.js')
 const {rob, bal, reg, reg1, reg2, work, mine, buy, claim, perfil, nivel, cofre, lb} = require('./plugins/rpg.js') 
@@ -338,12 +338,9 @@ case 'wallpaper':
 wall(conn, text, command, m) 
 break 
  
-case 'serbot': case 'qr':
-jadibot(conn, m, command)  
+case 'serbot': case 'jadibot': case 'qr':
+jadibot(conn, m, command, text, args, sender)
 break  
-case 'jadibot': case 'sercode':
-jadibot2(conn, m, command, text, args, sender)
-break
 case 'deljadibot': case 'stop': 
 killJadibot(conn, m, prefix, command)
 break 
