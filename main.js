@@ -337,7 +337,7 @@ break
 case 'wallpaper':
 wall(conn, text, command, m) 
 break 
- 
+  
 case 'serbot': case 'jadibot': case 'qr':
 jadibot(conn, m, command, text, args, sender)
 break  
