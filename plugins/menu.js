@@ -1,5 +1,5 @@
 const fs = require("fs")
-const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('../libs/fuctions.js'); 
+const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom} = require('../libs/fuctions.js'); 
 const path = require("path") 
 const chalk = require("chalk");
 const moment = require('moment-timezone') 
@@ -438,7 +438,7 @@ La toca 7w7
 _*Ojito escribe tal y como esta en el mensaje*_`
 conn.sendMessage(m.chat, { text: menu2}, { quoted: fkontak })}
 
-const nuevo = (conn, m, fkontak) => {
+const nuevo = (conn, m, sender, pickRandom, fkontak) => {
 conn.sendMessage(m.chat, { text: `🤔 *Que hay de nuevo?* 🤗
 
 *🌐 Version del bot:* [ ${vs} ] 
@@ -452,9 +452,10 @@ conn.sendMessage(m.chat, { text: `🤔 *Que hay de nuevo?* 🤗
 💠 Nivel automatico activa con: 
 • ${prefix}autonivel on
 
-🤖 Mejorar para los SubBot mas estable 💫`}, { quoted: fkontak })}
+🤖 Mejorar para los SubBot mas estable 💫`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn, md, yt])}`}}}, { quoted: fkontak})}
 
-const regla = (conn, m, fkontak) => {
+const regla = (conn, m, sender, pickRandom, fkontak) => {
+//let Grupos = `${pickRandom([nna, nn2, md, yt, tiktok])}`;
 conn.sendMessage(m.chat, { text: `*🌐 REGLAS DEL BOT 🌐*
 
 *• No hacer spam de comandos*
@@ -467,7 +468,7 @@ Hablar con mi creador y el lo une a tu grupo
 
 *• No llamar al bot, ni al creador*
 
-Si lo haces, seras baneado del bot y bloqueado`}, { quoted: fkontak })}
+Si lo haces, seras baneado del bot y bloqueado`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn, md, yt])}`}}}, { quoted: fkontak})}
 
 module.exports = { menu, menu2, nuevo, regla}
 

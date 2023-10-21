@@ -45,25 +45,28 @@ let ments = [me]
 conn.sendMessage(m.chat, {image: imagen1, caption: stateRun, contextInfo:{ mentionedJid:[sender]}}, { quoted: fkontak })
 }
 
-const owner = (conn, m, sender) => {
+async function owner(conn, m, sender) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-let vcard = `BEGIN:VCARD\nVERSION:3.0\nN:;OWNER 👑;;;\nFN:OWNER\nORG:OWNER 👑\nTITLE:\nitem1.TEL;waid=5492266466080:+54 9 2266 46-6080\nitem1.X-ABLabel:PROPIETARIO/OWNER DEL BOT👑\nX-WA-BIZ-DESCRIPTION:ᴇsᴄʀɪʙɪ sᴏʟᴏ ᴘᴏʀ ᴄᴏsᴀs ᴅᴇʟ ʙᴏᴛ.\nX-WA-BIZ-NAME:Owner 👑\nEND:VCARD`
-let a = conn.sendMessage(m.chat, { contacts: { displayName: 'ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ 👑', contacts: [{ vcard }] }}, {quoted: m})
-conn.sendMessage(m.chat, { text : `Hola @${sender.split("@")[0]}, este bot esta desarrollo si quiere contacta con mi creador aqui te dejo sus número`, mentions: [sender]}, { quoted: a })
+let vcard = `BEGIN:VCARD\nVERSION:3.0\nN:;PROPIETARIO/OWNER DEL BOT 👑;;;\nFN:OWNER\nORG:PROPIETARIO/OWNER DEL BOT 👑\nTITLE:\nitem1.TEL;waid=5492266466080:+54 9 2266 46-6080\nitem1.X-ABLabel:PROPIETARIO/OWNER DEL BOT👑\nX-WA-BIZ-DESCRIPTION:ᴇsᴄʀɪʙɪ sᴏʟᴏ ᴘᴏʀ ᴄᴏsᴀs ᴅᴇʟ ʙᴏᴛ.\nX-WA-BIZ-NAME:PROPIETARIO/OWNER DEL BOT 👑\nEND:VCARD`
+let a = await conn.sendMessage(m.chat, { contacts: { displayName: 'ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ 👑', contacts: [{ vcard }] }}, {quoted: m})
+await conn.sendMessage(m.chat, { text : `Hola @${sender.split("@")[0]}, este bot esta desarrollo si quiere contacta con mi creador aqui te dejo sus número`, mentions: [sender]}, { quoted: a })
 }
 
-const grupo = (conn, m, sender) => {
+const grupo = (conn, m, sender, pickRandom) => {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-conn.sendMessage(m.chat, { text: `*ʜᴏʟᴀ ᴇsᴛɪᴍᴀᴅᴏs ᴜsᴜᴀʀɪᴏs 👋🏻, ᴛᴇ ɪɴᴠɪᴛᴏ ᴀ ᴜɴɪʀᴛᴇ ᴀ ʟᴏs ɢʀᴜᴘᴏs ᴏғɪᴄɪᴀʟᴇs ᴅᴇ ʟᴀs ғᴀᴍɪʟᴀs ᴛʜᴇ ʟᴏʟɪʙᴏᴛ-ᴍᴅ ʏ ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ, ᴘᴀʀᴀ ᴄᴏɴᴠɪᴠɪʀ ᴄᴏɴ ʟᴀ ᴄᴏᴍᴜɴɪᴅᴀᴅ :ᴠ*\n\n*➤ ɢʀᴜᴘᴏs ᴏғɪᴄɪᴀʟᴇs ᴅᴇʟ ʙᴏᴛ:*\n1) ${nn}\n\n2) ${nn2}\n\n*➤ ɢʀᴜᴘᴏ ᴅᴇʟ ᴄᴏʟᴀʙᴏʀᴀᴄɪᴏɴ:*\n• ${nn3}\n\n• ${nn4}\n\n• ${nn5}\n\n*➤ ɢʀᴜᴘᴏs ᴛᴇsᴛ ᴘᴀʀᴀ ᴘʀᴜᴇʙᴀ ᴅᴇʟ ʙᴏᴛ:*\n• ${nn6}\n\n*➤ ɪɴғᴏᴍᴀʀᴛᴇ sᴏʙʀᴇ ʟᴀs ɴᴜᴇᴠᴀs ᴀᴄᴛᴜᴀʟɪᴢᴀᴄɪᴏɴᴇs ᴅᴇʟ ʙᴏᴛ ᴀǫᴜɪ:*\n• ${nna}\n\n*➤ ɢʀᴜᴘᴏ ᴅᴇʟ ᴀʏᴜᴅᴀ sᴏʙʀᴇ ᴇʟ ʙᴏᴛ:*\n• ${nn7}\n\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n• ɢʀᴜᴘᴏs ᴅᴇʟ ᴀᴍɪsᴛᴀᴅᴇs ᴅᴏɴᴅᴇ ᴇsᴛᴀ ᴇʟ ʙᴏᴛ\n\n*⇶⃤꙰𝑬𝒏𝒍𝒂𝒄𝒆 𝒍𝒐𝒍𝒊𝒃𝒐𝒕ꦿ⃟⃢*\n${nn8}\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n\nsɪ ǫᴜɪᴇʀᴇs ǫᴜᴇ ᴛᴜ ɢʀᴜᴘᴏ ᴀᴘᴀʀᴇᴢᴄᴀɴ ᴀᴄᴀ ʜᴀʙʟᴀ ᴄᴏɴ ᴇʟ ᴀᴅᴍɪɴ ᴏғᴄ ᴅᴇʟ ʙᴏᴛ`}, { quoted: m })
-}
+//const grupp = Math.floor(Math.random() * 70);
+let a = `${pickRandom([nn, nn2, nn3, nn4, nn5, nn6, nna, nn7, nn8])}`;
+let imagen = `${pickRandom([imagen1, imagen2, imagen3])}`;
+conn.sendMessage(m.chat, { text: `*ʜᴏʟᴀ ᴇsᴛɪᴍᴀᴅᴏs ᴜsᴜᴀʀɪᴏs 👋🏻, ᴛᴇ ɪɴᴠɪᴛᴏ ᴀ ᴜɴɪʀᴛᴇ ᴀ ʟᴏs ɢʀᴜᴘᴏs ᴏғɪᴄɪᴀʟᴇs ᴅᴇ ʟᴀs ғᴀᴍɪʟᴀs ᴛʜᴇ ʟᴏʟɪʙᴏᴛ-ᴍᴅ ʏ ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ, ᴘᴀʀᴀ ᴄᴏɴᴠɪᴠɪʀ ᴄᴏɴ ʟᴀ ᴄᴏᴍᴜɴɪᴅᴀᴅ :ᴠ*\n\n*➤ ɢʀᴜᴘᴏs ᴏғɪᴄɪᴀʟᴇs ᴅᴇʟ ʙᴏᴛ:*\n1) ${nn}\n\n2) ${nn2}\n\n*➤ ɢʀᴜᴘᴏ ᴅᴇʟ ᴄᴏʟᴀʙᴏʀᴀᴄɪᴏɴ:*\n• ${nn3}\n\n• ${nn4}\n\n• ${nn5}\n\n*➤ ɢʀᴜᴘᴏs ᴛᴇsᴛ ᴘᴀʀᴀ ᴘʀᴜᴇʙᴀ ᴅᴇʟ ʙᴏᴛ:*\n• ${nn6}\n\n*➤ ɪɴғᴏᴍᴀʀᴛᴇ sᴏʙʀᴇ ʟᴀs ɴᴜᴇᴠᴀs ᴀᴄᴛᴜᴀʟɪᴢᴀᴄɪᴏɴᴇs ᴅᴇʟ ʙᴏᴛ ᴀǫᴜɪ:*\n• ${nna}\n\n*➤ ɢʀᴜᴘᴏ ᴅᴇʟ ᴀʏᴜᴅᴀ sᴏʙʀᴇ ᴇʟ ʙᴏᴛ:*\n• ${nn7}\n\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n• ɢʀᴜᴘᴏs ᴅᴇʟ ᴀᴍɪsᴛᴀᴅᴇs ᴅᴏɴᴅᴇ ᴇsᴛᴀ ᴇʟ ʙᴏᴛ\n\n*⇶⃤꙰𝑬𝒏𝒍𝒂𝒄𝒆 𝒍𝒐𝒍𝒊𝒃𝒐𝒕ꦿ⃟⃢*\n${nn8}\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n\nsɪ ǫᴜɪᴇʀᴇs ǫᴜᴇ ᴛᴜ ɢʀᴜᴘᴏ ᴀᴘᴀʀᴇᴢᴄᴀɴ ᴀᴄᴀ ʜᴀʙʟᴀ ᴄᴏɴ ᴇʟ ᴀᴅᴍɪɴ ᴏғᴄ ᴅᴇʟ ʙᴏᴛ`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: a}}}, { quoted: m})}
 
 const instalar = (conn, m, pushname, sender) => {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-conn.sendMessage(m.chat, { text: `╭─────────────┈⊷
+conn.sendMessage(m.chat, { text: `
+╭─────────────┈⊷
 │ \`\`\`COMO INSTALAR ESTE BOT?\`\`\`
 ╰┬────────────┈⊷
-┌┤ \`\`\`📌 REQUISITOS PARA LAS INSTALACION \`\`\`
-┌┤❇️ _Dudas: wa.me/595975740803_
+┌┤\`\`\`📌 REQUISITOS PARA LAS INSTALACION \`\`\`
+┌┤❇️ _Dudas: wa.me/5492266466080_
 ┌┤❇️ _Tutoríal: https://youtu.be/OhbJjp0L2QA?si=ZqRgG3SGTRFSW6CH_
 ┌┤❇️ _1 GB de almacenamiento_
 ┌┤❇️ _Termux: https://www.mediafire.com/file/3hsvi3xkpq3a64o/termux_118.apk/file_
@@ -82,7 +85,8 @@ conn.sendMessage(m.chat, { text: `╭─────────────┈�
 > git clone https://github.com/elrebelde21/NovaBot-MD && cd NovaBot-MD && yarn && npm install
 
 > npm start
-(ʏ ᴀᴄᴀ ǫᴜᴇ ᴠᴀɴ ᴍᴀɴᴅᴀ ᴇʟ ǫʀ ᴛᴇɴᴇʀ ʟᴀ ᴏᴘᴄɪᴏɴ sᴀᴄᴀ ᴜɴᴀ ᴄᴀʀᴛᴜʀᴀ ʏ ᴍᴀɴᴅᴀʟᴀ ᴀ ᴛᴜ ᴏᴛʀᴏ ᴄᴇʟᴜʟᴀʀ ʏ ᴇsᴄᴀɴᴇᴀ ʀᴀᴘɪᴅᴏ)`,
+
+(𝘌𝘴𝘤𝘢𝘯𝘦𝘢𝘳 𝘦𝘭 𝘘𝘙, 𝘙𝘢𝘱𝘪𝘥𝘰)`,
 contextInfo:{
 mentions: [sender], 
 forwardingScore: 9999999,

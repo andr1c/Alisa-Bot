@@ -384,7 +384,7 @@ await conn.sendMessage(m.chat, { audio: { url: vn }, fileName: 'error.mp3', mime
 async function game14(m, pickRandom) {
 m.reply(`╱╲❀╱╲╱╲❀╱╲╱╲❀╱╲\n◆ ${pickRandom(global.piropo)}\n╲╱❀╲╱╲╱❀╲╱╲╱❀╲╱`)}
 
-async function game15(m, body) {
+async function game15(m, body, ra) {
 rate = body.slice(9)
 random = `${Math.floor(Math.random() * 100)}`
 racista = random

@@ -8,6 +8,7 @@ const gradient = require('gradient-string')
 const fetch = require('node-fetch') 
 const axios = require('axios')
 const cheerio = require('cheerio')
+const {googleImage} = require('@bochilteam/scraper') 
 const Jimp = require('jimp')
 const os = require('os')
 
@@ -58,11 +59,17 @@ m.reply(teks)})
 async function imagen(conn, m, text, command) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (!text) return m.reply(`*Que esta buscado?*\n*Ejemplo:*\n${prefix + command} gatito`)
+try {  
 image = await fetchJson(`https://api.akuari.my.id/search/googleimage?query=${text}`)
 n = image.result
 images = n[Math.floor(Math.random() * n.length)]
 conn.sendMessage(m.chat, { image: { url: images}, caption: `*💫 𝘙𝘌𝘚𝘜𝘓𝘛𝘈𝘋𝘖𝘚 𝘋𝘌 :* ${text}`}, { quoted: m })
-}
+} catch {  
+const res = await googleImage(text);
+const image = res[Math.floor(Math.random() * res.length)]
+const link = imagen;
+conn.sendFile(m.chat, link, 'error.jpg', `*💫 𝘙𝘌𝘚𝘜𝘓𝘛𝘈𝘋𝘖𝘚 𝘋𝘌 :* ${text}`, m);
+}}
 
 async function tran(conn, m, args, quoted, prefix, command) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
@@ -120,6 +127,10 @@ let _img = _res[Math.floor(Math.random() * _res.length)]
 conn.sendMessage(m.chat, { image: { url: _img }, caption: `_*ＲＥＳＵＬＴＡＤＯＳ ＤＥ : ${text}*_`}, { quoted: m })}
 
 module.exports = {yt, acortar, google, imagen, tran, tts, ia, ssw, wall}
+
+exports.getRandom = (ext) => {
+return `${Math.floor(Math.random() * 10000)}${ext}`
+}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
