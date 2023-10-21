@@ -1,11 +1,11 @@
 //Código desde cero y comentarios hecho por: 
 // @gata_dios   
 // @Skidy89  
-// @elrebelde21
-  
+// @elrebelde21 
+           
 //═════════[ Importaciones ]═════════ 
 const baileys = require('@whiskeysockets/baileys'); // trabajar a través de descargas por Whatsapp 
-const { WaMessageStubType, areJidsSameUser, downloadContentFromMessage, generateWAMessageContent, generateWAMessageFromContent, generateWAMessage, prepareWAMessageMedia, relayMessage} = require('@whiskeysockets/baileys'); // Importa los objetos 'makeWASocket' y 'proto' desde el módulo '@whiskeysockets/baileys'   
+const { WaMessageStubType, areJidsSameUser, downloadContentFromMessage, generateWAMessageContent, generateWAMessageFromContent, generateWAMessage, prepareWAMessageMedia, relayMessage} = require('@whiskeysockets/baileys'); // Importa los objetos 'makeWASocket' y 'proto' desde el módulo '@whiskeysockets/baileys'  
 const { default: makeWASocket, proto } = require("@whiskeysockets/baileys") 
 const moment = require('moment-timezone') // Trabajar con fechas y horas en diferentes zonas horarias
 const gradient = require('gradient-string') // Aplicar gradientes de color al texto   
@@ -29,10 +29,15 @@ const { File } = require("megajs")
 const speed = require("performance-now")
 const ffmpeg = require("fluent-ffmpeg")
 const similarity = require('similarity') 
+
+const Spotify = require('spotifydl-x') 
+const NodeID3 = require('node-id3') 
+const {find_lyrics} = import('@brandond/findthelyrics') 
+
 const { TelegraPh, UploadFileUgu, webp2mp4File, floNime } = require('./libs/uploader.js')
-const { toAudio, toPTT, toVideo } = require('./libs/converter.js')
+const { toAudio, toPTT, toVideo } = require('./libs/converter.js') 
 const { canLevelUp, xpRange } = require('./libs/levelling.js')
-const { smsg, fetchBuffer, getBuffer, buffergif, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom, msToTime, downloadMediaMessage } = require('./libs/fuctions')
+const { smsg, fetchBuffer, getBuffer, buffergif, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom, msToTime, downloadMediaMessage, Randow2, spotifydl, convertirMsADiasHorasMinutosSegundos} = require('./libs/fuctions')
 const { ytmp4, ytmp3, ytplay, ytplayvid } = require('./libs/youtube') 
 const { mediafireDl } = require('./libs/mediafire.js') 
 const {jadibot, listJadibot, killJadibot} = require('./serbot.js')   
@@ -224,7 +229,7 @@ if (isgclink) return reply(`Te salvarte el link enviado es de este grupo`)
 if (isGroupAdmins) return reply(`Te salvarte por que eres un admins :v`)
 conn.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: bang, participant: delet }})
 conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')}}
-
+ 
 //modo public & privado
 if (!conn.public && !isCreator) {
 if (!m.key.fromMe) return
@@ -267,6 +272,16 @@ if (before !== user.level) {
 const str = `*「 FELICIDADES LEVEL UP 🆙🥳 」*\n\n🥳 Felicidades @${sender.split`@`[0]} 👏 subiste de nivel sigue asi 👏\n\n*NIVEL :* ${before} ⟿ ${user.level}\n*RANGO :* ${user.role}\n*FECHA :* ${new Date().toLocaleString('id-ID')}\n\n_*Para saber cual es tu puerto del top, coloca el comando #lb*_`.trim()
 return conn.sendMessage(m.chat, { text: str, contextInfo:{mentionedJid:[sender]}}, { quoted: fkontak })}}
 
+//Chatbot
+if (global.db.data.chats[m.chat].simi && prefix) {
+try {     
+await conn.sendPresenceUpdate('composing', m.chat)
+let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${budy}&lc=es&cf=false`)
+let res = anu.success;
+m.reply(res)
+} catch { 
+return m.reply(`*Api simsimi caida, desactive el ChatBot con:*\n#chatbot off`)}}
+
 //antiprivado
 if (global.db.data.chats[m.chat].antiprivado && !isCreator) {
 if (m.isBaileys && m.fromMe) return !0;
@@ -290,12 +305,11 @@ let reason = user.afkReason || ''
 m.reply(`[ 💤 𝙽𝙾 𝙻𝙾𝚂 𝙴𝚃𝙸𝚀𝚄𝙴𝚃𝙴 💤 ]\n\n𝙴𝚜𝚝𝚎 𝚞𝚜𝚞𝚊𝚛𝚒𝚘 𝚚𝚞𝚎 𝚖𝚎𝚗𝚌𝚒𝚘𝚗𝚊𝚜 𝚎𝚜𝚝𝚊 𝙰𝙵𝙺\n\n${reason ? '🔸️ *𝚁𝙰𝚉𝙾𝙽* : ' + reason : '🔸️ *𝚁𝙰𝚉𝙾𝙽* : 𝚂𝚒𝚗 𝚛𝚊𝚣𝚘𝚗'}\n🔸️ *𝙴𝚂𝚃𝚄𝚅𝙾 𝙸𝙽𝙰𝙲𝚃𝙸𝚅𝙾 𝙳𝚄𝚁𝙰𝙽𝚃𝙴 : ${clockString(new Date - afkTime)}`.trim())}
 if (global.db.data.users[m.sender].afkTime > -1) {
 let user = global.db.data.users[m.sender]
-m.reply(`*🕔 𝙳𝙴𝙹𝙰𝚂𝚃𝙴 𝙳𝙴 𝙴𝚂𝚃𝙰 𝙰𝙵𝙺 🕔*
-${user.afkReason ? '\n*𝚁𝙰𝚉𝙾𝙽 :* ' + user.afkReason : ''}\n*𝙴𝚂𝚃𝚄𝚅𝙾 𝙸𝙽𝙰𝙲𝚃𝙸𝚅𝙾 𝙳𝚄𝚁𝙰𝙽𝚃𝙴 :* ${clockString(new Date - user.afkTime)}`.trim())
+m.reply(`*🕔 𝙳𝙴𝙹𝙰𝚂𝚃𝙴 𝙳𝙴 𝙴𝚂𝚃𝙰 𝙰𝙵𝙺 🕔*\n${user.afkReason ? '\n*𝚁𝙰𝚉𝙾𝙽 :* ' + user.afkReason : ''}\n*𝙴𝚂𝚃𝚄𝚅𝙾 𝙸𝙽𝙰𝙲𝚃𝙸𝚅𝙾 𝙳𝚄𝚁𝙰𝙽𝚃𝙴 :* ${clockString(new Date - user.afkTime)}`.trim())
 user.afkTime = -1
 user.afkReason = ''
 }
-
+ 
 //ARRANCA LA DIVERSIÓN
 switch (command) { 
 case 'yts': case 'ytsearch':
@@ -305,8 +319,8 @@ case 'acortar':
 acortar(conn, m, text, args, command)  
 break
 case 'google': {      
-google(conn, m, text, command)}
-break 
+google(conn, m, text, command)} 
+break  
 case 'imagen': {
 imagen(conn, m, text, command)}
 break
@@ -351,22 +365,22 @@ break
 case 'menu': case 'help': case 'menucompleto':
 menu(conn, prefix, pushname, sender, m, fkontak)
 break  
-case 'menu2': case 'audio':
+case 'menu2': case 'audio': 
 menu2(conn, pushname, m, fkontak)
 break
 case 'nuevo':
-nuevo(conn, m, fkontak) 
-break
-case 'reglas':
-regla(conn, m, fkontak) 
-break
-case 'owner': case 'creador': 
-owner(conn, m, sender) 
+nuevo(conn, m, sender, pickRandom, fkontak)    
+break   
+case 'reglas':    
+regla(conn, m, sender, pickRandom, fkontak)   
+break  
+case 'owner': case 'creador': case 'contacto':
+owner(conn, m, sender)  
 break 
 case 'grupos': case 'grupoficiales': 
-grupo(conn, m, sender) 
+grupo(conn, m, sender, pickRandom) 
 break
-case 'instalarbot': case 'crearbot': 
+case 'instalarbot': case 'crearbot':
 instalar(conn, m, pushname, sender) 
 break
 case '5492266613038': case '593980586516': case '595975740803': await ow(conn, args, m) 
@@ -774,6 +788,11 @@ function pickRandom(list) {
 return list[Math.floor(list.length * Math.random())]
 }
 
+function getRandom() {
+  if (Array.isArray(this) || this instanceof String) return this[Math.floor(Math.random() * this.length)];
+  return Math.floor(Math.random() * this);
+}
+
 default:
 if (budy.includes(`Todo bien`)) {
 reply(`Si amigo todo bien, vite`)}
@@ -791,15 +810,6 @@ if (budy.includes(`Bot`)) {
 let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${budy}&lc=es&cf=false`)
 let res = anu.success;
 m.reply(res)}
-if (budy.includes(``)) {
-if (!global.db.data.chats[m.chat].simi) return
-try {     
-await conn.sendPresenceUpdate('composing', m.chat)
-let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${budy}&lc=es&cf=false`)
-let res = anu.success;
-m.reply(res)
-} catch { 
-return m.reply(`*Api simsimi caida, desactive el ChatBot con:*\n#chatbot off`)}}
 if (budy.startsWith(`a`)) {
 if (!global.db.data.chats[m.chat].audios) return
 let vn = './media/a.mp3'
