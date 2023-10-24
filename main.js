@@ -29,9 +29,11 @@ const { File } = require("megajs")
 const speed = require("performance-now")
 const ffmpeg = require("fluent-ffmpeg")
 const similarity = require('similarity') 
-/*const Spotify = require('spotifydl-x') 
+
+const Spotify = require('spotifydl-x') 
 const NodeID3 = require('node-id3') 
-const {find_lyrics} = import('@brandond/findthelyrics') */
+const {find_lyrics} = import('@brandond/findthelyrics') 
+
 const { TelegraPh, UploadFileUgu, webp2mp4File, floNime } = require('./libs/uploader.js')
 const { toAudio, toPTT, toVideo } = require('./libs/converter.js') 
 const { canLevelUp, xpRange } = require('./libs/levelling.js')
@@ -49,7 +51,7 @@ const {efec, url, tomp3, toimg, toanime} = require('./plugins/convertidores.js')
 const {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, adm, infogr, warn1, warn2, online, listw} = require('./plugins/grupos.js')
 const {nsfw1, nsfw2, nsfw3, nsfw4, nsfw5} = require('./plugins/nsfw.js')
 const {randow1, randow2, randow3, randow4, randow5, randow6, randow7, randow8, randow9} = require('./plugins/randow.js') 
-const {play, mp3, mp4, git, tiktok, letra, mediafire, fb, ig, ig2, apk} = require('./plugins/descargas.js')  
+const {play, mp3, mp4, git, tiktok, letra, mediafire, fb, ig, ig2, apk, spoti} = require('./plugins/descargas.js')  
 const {s, wm2, attp, dado} = require('./plugins/stickers.js') 
 const {owner1, owner2, owner3, owner4, owner5, owner6, owner7, owner8, owner9} = require('./plugins/propietario.js')  
 const {on, on1, on2, on3, on4, on5, on6, on7, on8, on9, on10, on11, on12, on13, on14, on15} = require('./plugins/enable.js')
@@ -72,17 +74,16 @@ var budy = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == '
   
 // ‿︵‿︵ʚɞ『 ATRIBUTOS 』ʚɞ‿︵‿︵     
 if (m.key.id.startsWith("BAE5")) return  
-var body = (typeof m.text == 'string' ? m.text : '') 
+var body = (typeof m.text == 'string' ? m.text : '')
 var _prefix = /^[°•÷×™+✓_=|~!?@#%^.©^]/gi.test(body) ? body.match(/^[°•÷×™+✓_=|~!?@#%^.©^]/gi)[0] : ""
 global.prefix = _prefix
-const isCmd = body.startsWith(prefix)   
+const isCmd = body.startsWith(prefix)  
 const from = m.chat 
 const msg = JSON.parse(JSON.stringify(m, undefined, 2)) 
 const content = JSON.stringify(m.message) 
 const type = m.mtype 
-const arg = body.substring(body.indexOf(' ') + 1) 
 const command = isCmd ? body.slice(1).trim().split(/ +/).shift().toLocaleLowerCase() : null
-const args = body.trim().split(/ +/).slice(1) 
+  const args = body.trim().split(/ +/).slice(1) 
 const q = args.join(" ") 
 let t = m.messageTimestamp 
 const pushname = m.pushName || "Sin nombre" 
@@ -250,7 +251,7 @@ media = await quoted.download()
 let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: botname, body: `h`, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}}, { quoted: m })
 await fs.unlinkSync(encmedia)   
 } else if (/video/.test(mime)) {  
-if ((quoted.msg || quoted).seconds > 40) return reply('¡Máximo 40 segundos!')  
+if ((quoted.msg || quoted).seconds > 25) return reply('🤡 Hey Donde carajo viste un stickes que dure tanto bobo 🤣. (Máximo 25 segundos)')  
 media = await quoted.download()  
 let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: goblal.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: wm, body: `h`, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}}, { quoted: m })
 await new Promise((resolve) => setTimeout(resolve, 2000));   
@@ -615,13 +616,16 @@ break
 //descargas		    
 case 'play': case 'play2':
 play(conn, text, command, m) 
-break 
+break  
 case "ytmp3": case "ytaudio": 
 mp3(conn, args, text, command, fkontak, ytplayvid, m)
 break 
 case 'ytmp4': case 'ytvideo': 
 mp4(conn, args, text, command, fkontak, m)
 break   
+case 'music': case 'spotify':
+spoti(conn, text, m, from) 
+break
 case 'gitclone':
 git(conn, args, command, m) 
 break
@@ -783,24 +787,11 @@ function pickRandom(list) {
 return list[Math.floor(list.length * Math.random())]
 }
 
-function getRandom() {
-  if (Array.isArray(this) || this instanceof String) return this[Math.floor(Math.random() * this.length)];
-  return Math.floor(Math.random() * this);
-}
-
 default:
 if (budy.includes(`Todo bien`)) {
 reply(`Si amigo todo bien, vite`)}
 if (budy.includes(`Buenos dias`)) {
 reply(`Buenos Dias trolos de mierda`)}
-if (budy.includes(`Bot gay`)) {
-reply(`Miren a este boludito`)}
-if (budy.includes(`Che messi vo le preguntaste?`)) {
-reply(`No`)}
-if (budy.includes(`Opa`)) {
-reply(`opaaaaa`)}
-if (budy.includes(`Fua`)) {
-reply(`el diegote pa`)}
 if (budy.includes(`Bot`)) {
 let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${budy}&lc=es&cf=false`)
 let res = anu.success;
