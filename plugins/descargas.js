@@ -98,7 +98,7 @@ await conn.sendMessage(m.chat, {text: spotifyi.trim(), contextInfo: {forwardingS
 await conn.sendMessage(m.chat, {audio: music.data, fileName: `${spty.name}.mp3`, mimetype: 'audio/mpeg'}, {quoted: m});
 } catch (error) {
 console.error(error);
-return m.reply(info.error, + 'No fue posible descarga el audio (api caida 🤡)')}}
+return m.reply(`${info.error}\nNo fue posible descarga el audio (api caida 🤡)`)}}
 
 async function git(conn, args, command, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
