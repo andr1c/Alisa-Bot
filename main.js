@@ -231,7 +231,7 @@ if (!conn.public && !isCreator) {
 if (!m.key.fromMe) return
 }        	
 //Banea chat
-if (global.db.data.chats[m.chat].isBanned && isCreator && isGroupAdmins) {
+if (global.db.data.chats[m.chat].isBanned && isCreator) {
 return
 }
 //modoadmin
@@ -475,7 +475,7 @@ case 'link': case 'linkgc':
 link(conn, m, isBotAdmins)
 break                        		
 case 'banchat': 
-ban(m, isGroupAdmins, isCreator, text, command, args)
+ban(m, isCreator, text, command, args)
 break              
 case 'tagall': case 'invocar': case 'todos':
 tag(conn, m, isBotAdmins, isGroupAdmins, participants, q)
