@@ -147,9 +147,8 @@ if (!isBotAdmins) return m.reply(info.botAdmin)
 let response = await conn.groupInviteCode(m.chat)
 conn.sendText(m.chat, `https://chat.whatsapp.com/${response}`, m, { detectLink: true })}
 
-async function ban(m, isGroupAdmins, isCreator, text, command, args){   
+async function ban(m, isCreator, text, command, args){   
 if (!m.isGroup) return m.reply(info.group) 
-if (!isGroupAdmins) return m.reply(info.admin)
 if (!isCreator) return conn.sendMessage(m.chat, { text: info.owner }, { quoted: m });   
 if (!text) return m.reply(`*Accion mal usaba*\n\n*Use de esta forma:*\n*${prefix + command} on*\n*${prefix + command} off*`)
 if (args[0] === "on") {
