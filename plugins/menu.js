@@ -106,6 +106,9 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ _(ingresa el link para descargar el audio)_
 ├❥ᰰຼ ❏ ${prefix}ytmp4
 ├❥ᰰຼ _(ingresa el link para descargar el video)_
+├❥ᰰຼ ❏ ${prefix}spotify
+├❥ᰰຼ ❏ ${prefix}music
+├❥ᰰຼ _(Descarga musica de Spotify)_
 ├❥ᰰຼ ❏ ${prefix}gitclone
 ├❥ᰰຼ _(ingresa el link del GitHub para descargar el repositorio)_
 ├❥ᰰຼ ❏ ${prefix}tiktok
@@ -444,7 +447,9 @@ conn.sendMessage(m.chat, { text: `🤔 *Que hay de nuevo?* 🤗
 *🌐 Version del bot:* [ ${vs} ] 
 
 *Nuevo comando:*
-• ${prefix}toanime
+🚀 Descarga musica de spotify
+• ${prefix}spotify
+• ${prefix}music
 
 💬 Chatbot automatico activa con:
 • ${prefix}chatbot on

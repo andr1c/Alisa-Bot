@@ -4,7 +4,7 @@ const path = require("path")
 const chalk = require("chalk");
 const axios = require('axios')
 const cheerio = require('cheerio')
-const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('../libs/fuctions.js'); 
+const { smsg, fetchBuffer, getBuffer, buffergif, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getFile, getRandom, msToTime, downloadMediaMessage, convertirMsADiasHorasMinutosSegundos} = require('../libs/fuctions')
 
 async function play(conn, text, command, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
@@ -75,6 +75,30 @@ db.data.users[m.sender].limit -= 1
 m.reply(info.limit)
 } catch {
 m.reply(info.error)}}
+
+async function spoti(conn, text, m, from, buffer, getFile) {
+if (!text) return m.reply(`*Que esta buscados? ingrese el nombre de alguna canción de spotify.*`) 
+try { 
+m.reply('*🕔 𝘈𝘎𝘜𝘈𝘙𝘋𝘌 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖....*') 
+const res = await fetch(global.API('ApiEmpire', '/api/spotifysearch?text=' + text))
+const data = await res.json()
+const linkDL = data.spty.resultado[0].link;
+const musics = await fetch(global.API('ApiEmpire', '/api/spotifydl?text=' + linkDL))
+const music = await conn.getFile(musics.url)
+const infos = await fetch(global.API('ApiEmpire', '/api/spotifyinfo?text=' + linkDL))
+const info = await infos.json()
+const spty = info.spty.resultado
+const img = await (await fetch(`${spty.thumbnail}`)).buffer()  
+let spotifyi = `◦  *𝘛𝘐𝘛𝘜𝘓𝘖:* ${spty.title}\n`
+spotifyi += `◦  *𝘈𝘙𝘛𝘐𝘚𝘛𝘈:* ${spty.artist}\n`
+spotifyi += `◦  *𝘈𝘓𝘉𝘜𝘔:* ${spty.album}\n`          
+spotifyi += `◦  *𝘗𝘜𝘉𝘓𝘐𝘊𝘈𝘋𝘖:* ${spty.year}\n\n`   
+spotifyi += `𝘋𝘦𝘴𝘤𝘢𝘳𝘨𝘢𝘥𝘰 𝘢𝘶𝘥𝘪𝘰, 𝘢𝘨𝘶𝘢𝘳𝘥𝘦 𝘶𝘯 𝘮𝘰𝘮𝘦𝘯𝘵𝘰 𝘱𝘰𝘳 𝘧𝘢𝘷𝘰𝘳...`
+await conn.sendMessage(m.chat, {text: spotifyi.trim(), contextInfo: {forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "renderLargerThumbnail": true, "title": global.titulowm2, "containsAutoReply": true, "mediaType": 1, "thumbnail": img, "thumbnailUrl": img, "mediaUrl": linkDL, "sourceUrl": linkDL}}}, {quoted: m});
+await conn.sendMessage(m.chat, {audio: music.data, fileName: `${spty.name}.mp3`, mimetype: 'audio/mpeg'}, {quoted: m});
+} catch (error) {
+console.error(error);
+return m.reply(info.error, + 'No fue posible descarga el audio (api caida 🤡)')}}
 
 async function git(conn, args, command, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
@@ -219,7 +243,7 @@ m.reply('*3 ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴜsᴀᴅᴏ*')
 } catch { 
 return m.reply(`*[ ⚠️ ] Error, no se encontrarón resultados para su búsqueda.*`)}}
 
-module.exports = {play, mp3, mp4, git, tiktok, letra, mediafire, fb, ig, ig2, apk}
+module.exports = {play, mp3, mp4, git, tiktok, letra, mediafire, fb, ig, ig2, apk, spoti}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
