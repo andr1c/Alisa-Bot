@@ -78,7 +78,7 @@ m.reply(info.limit)
 m.reply(info.error)}}
 
 async function spoti(conn, text, m, from, buffer, getFile) {
-if (!text) return m.reply(`*Que esta buscados? ingrese el nombre de alguna canción de spotify.*`) 
+if (!text) return m.reply(`*Que esta buscados?*\n*Ingrese el nombre de alguna canción de spotify.*`) 
 try { 
 m.reply('*🕔 𝘈𝘎𝘜𝘈𝘙𝘋𝘌 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖....*') 
 const res = await fetch(global.API('ApiEmpire', '/api/spotifysearch?text=' + text))
