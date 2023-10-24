@@ -19,7 +19,7 @@ try {
 let vid = (await yts(text)).all[0]
 const yt_play = await search(args.join(" "))
 let { title, description, url, thumbnail, videoId, timestamp, views, published } = vid
-let message = await conn.sendMessage(m.chat, { text: `         *⌜Cancion Encontrada ✅⌟*\n\n◉ *Título:* ${yt_play[0].title}\n◉ *Duracion:* ${secondString(yt_play[0].duration.seconds)}\n◉ *Publicado:* ${yt_play[0].ago}\n◉ *Autor:* ${yt_play[0].author.name}\n◉ *Vistas:* ${MilesNumber(yt_play[0].views)}\n\n*• 𝘋𝘦𝘴𝘤𝘢𝘳𝘨𝘰 𝘢𝘶𝘥𝘪𝘰 🔊, 𝘈𝘨𝘶𝘢𝘳𝘥𝘦 𝘶𝘯 𝘮𝘰𝘮𝘦𝘯𝘵𝘰....*`, contextInfo: { externalAdReply: { title: wm, body: yt_play[0].title.replace(/\*/g, ''), thumbnailUrl: thumbnail, sourceUrl: yt_play[0].url, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: true }}})
+let message = await conn.sendMessage(m.chat, { text: `         *⌜Cancion Encontrada ✅⌟*\n\n◉ *Título:* ${yt_play[0].title}\n◉ *Duracion:* ${secondString(yt_play[0].duration.seconds)}\n◉ *Publicado:* ${yt_play[0].ago}\n◉ *Autor:* ${yt_play[0].author.name}\n◉ *Vistas:* ${MilesNumber(yt_play[0].views)}\n\n*• 𝘋𝘦𝘴𝘤𝘢𝘳𝘨𝘢𝘥𝘰 𝘢𝘶𝘥𝘪𝘰 🔊, 𝘈𝘨𝘶𝘢𝘳𝘥𝘦 𝘶𝘯 𝘮𝘰𝘮𝘦𝘯𝘵𝘰....*`, contextInfo: { externalAdReply: { title: wm, body: yt_play[0].title.replace(/\*/g, ''), thumbnailUrl: thumbnail, sourceUrl: yt_play[0].url, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: true }}})
 let mediaa = await ytMp4(yt_play[0].url)
 conn.sendMessage(m.chat, { audio: { url: mediaa.result }, mimetype: 'audio/mpeg' }, { quoted: m })
 db.data.users[m.sender].limit -= 1
@@ -44,7 +44,7 @@ if (!text) return conn.sendMessage(m.chat, { text: `*Que esta buscado? ingrese e
 let vid = (await yts(text)).all[0]
 const yt_play = await search(args.join(" "))
 let { title, description, url, thumbnail, videoId, timestamp, views, published } = vid
-let message = await conn.sendMessage(m.chat, { text: `         *⌜Cancion Encontrada ✅⌟*\n\n◉ *Título:* ${yt_play[0].title}\n◉ *Duracion:* ${secondString(yt_play[0].duration.seconds)}\n◉ *Publicado:* ${yt_play[0].ago}\n◉ *Autor:* ${yt_play[0].author.name}\n◉ *Vistas:* ${MilesNumber(yt_play[0].views)}\n\n*• 𝘋𝘦𝘴𝘤𝘢𝘳𝘨𝘰 𝘷𝘪𝘥𝘦𝘰 🎥, 𝘈𝘨𝘶𝘢𝘳𝘥𝘦 𝘶𝘯 𝘮𝘰𝘮𝘦𝘯𝘵𝘰....*`, contextInfo: { externalAdReply: { title: wm, body: yt_play[0].title.replace(/\*/g, ''), thumbnailUrl: thumbnail, sourceUrl: yt_play[0].url, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: true }}})
+let message = await conn.sendMessage(m.chat, { text: `         *⌜Cancion Encontrada ✅⌟*\n\n◉ *Título:* ${yt_play[0].title}\n◉ *Duracion:* ${secondString(yt_play[0].duration.seconds)}\n◉ *Publicado:* ${yt_play[0].ago}\n◉ *Autor:* ${yt_play[0].author.name}\n◉ *Vistas:* ${MilesNumber(yt_play[0].views)}\n\n*• 𝘋𝘦𝘴𝘤𝘢𝘳𝘨𝘢𝘥𝘰 𝘷𝘪𝘥𝘦𝘰 🎥, 𝘈𝘨𝘶𝘢𝘳𝘥𝘦 𝘶𝘯 𝘮𝘰𝘮𝘦𝘯𝘵𝘰....*`, contextInfo: { externalAdReply: { title: wm, body: yt_play[0].title.replace(/\*/g, ''), thumbnailUrl: thumbnail, sourceUrl: yt_play[0].url, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: true }}})
 let mediaa = await ytMp4(yt_play[0].url)
 await conn.sendMessage(m.chat, { video: { url: mediaa.result }, fileName: `error.mp4`, caption: `*Aqui tiene sus video 👌*\n*🔰Titulo:* ${yt_play[0].title}`, thumbnail: mediaa.thumb, mimetype: 'video/mp4' }, { quoted: m })}
 
