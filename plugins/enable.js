@@ -156,7 +156,9 @@ m.reply(`*✅ ${command} se activó con éxito*`)
 global.db.data.chats[m.chat].antispam = false
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
 
-async function on14(text, command, args, m) {
+async function on14(isGroupAdmins, text, command, args, m) {
+if (!m.isGroup) return m.reply(info.group)
+if (!isGroupAdmins) return m.reply(info.admin)
 if (!text) return m.reply(`*Use de esta forma ejemplo:*\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
 if (args[0] === "on") {
 global.db.data.chats[m.chat].simi = true

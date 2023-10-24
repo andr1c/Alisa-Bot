@@ -5,33 +5,48 @@ const chalk = require("chalk");
 const axios = require('axios')
 const fetch = require('node-fetch')
 const cheerio = require('cheerio')
+const yts = require("yt-search") 
+const ytdl = require('ytdl-core') 
 const { smsg, fetchBuffer, getBuffer, buffergif, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getFile, getRandom, msToTime, downloadMediaMessage, convertirMsADiasHorasMinutosSegundos} = require('../libs/fuctions')
 
-async function play(conn, text, command, m) {
+async function play(conn, text, command, args, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
+const yts = require("yt-search") 
+const ytdl = require('ytdl-core') 
 if (!text) return conn.sendMessage(m.chat, { text: `*Que esta buscado? ingrese el nombre del tema*\n\nEjemplo: *${prefix + command}* ozuna` }, { quoted: m })
-let yts = require("youtube-yts")
+try { 
+let vid = (await yts(text)).all[0]
+const yt_play = await search(args.join(" "))
+let { title, description, url, thumbnail, videoId, timestamp, views, published } = vid
+let message = await conn.sendMessage(m.chat, { text: `         *⌜Cancion Encontrada ✅⌟*\n\n◉ *Título:* ${yt_play[0].title}\n◉ *Duracion:* ${secondString(yt_play[0].duration.seconds)}\n◉ *Publicado:* ${yt_play[0].ago}\n◉ *Autor:* ${yt_play[0].author.name}\n◉ *Vistas:* ${MilesNumber(yt_play[0].views)}\n\n*• 𝘋𝘦𝘴𝘤𝘢𝘳𝘨𝘰 𝘢𝘶𝘥𝘪𝘰 🔊, 𝘈𝘨𝘶𝘢𝘳𝘥𝘦 𝘶𝘯 𝘮𝘰𝘮𝘦𝘯𝘵𝘰....*`, contextInfo: { externalAdReply: { title: wm, body: yt_play[0].title.replace(/\*/g, ''), thumbnailUrl: thumbnail, sourceUrl: yt_play[0].url, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: true }}})
+let mediaa = await ytMp4(yt_play[0].url)
+conn.sendMessage(m.chat, { audio: { url: mediaa.result }, mimetype: 'audio/mpeg' }, { quoted: m })
+db.data.users[m.sender].limit -= 1
+m.reply(info.limit)
+} catch {
+try { 
 let search = await yts(text)
 let anup3k = search.videos[0]
 let anu = search.videos[Math.floor(Math.random() * search.videos.length)] 
 eek = await getBuffer(anu.thumbnail) 
-conn.sendMessage(m.chat, { image : eek, caption:  `╭───≪~*╌◌ᰱ•••⃙❨͟͞P̸͟͞L̸͟A̸͟͞Y̸͟͞❩⃘•••ᰱ◌╌*~*
-│║📌 *Título* : ${anu.title}
-│║📆 *Publicado:* ${anu.ago}
-│║⌚ *Duración:* ${anu.timestamp}
-│║👤 *Autor:* ${anu.author.name}
-│║👀 *Vistas:*  ${anu.views}
-│║
-│║  *si quiere descarga el video usar:*
-│║ #ytvideo ${anu.url}
-╰─•┈┈┈•••✦𝒟ℳ✦•••┈┈┈•─╯⟤` }, { quoted: m})
 const playmp3 = require('../libs/ytdl2')
 const pl= await playmp3.mp3(anup3k.url)
 await conn.sendMessage(m.chat, { audio: fs.readFileSync(pl.path), fileName: `error.mp3`, mimetype: 'audio/mp4' }, { quoted: m }); 
 await fs.unlinkSync(pl.path)
-db.data.users[m.sender].limit -= 1
-m.reply(info.limit)}
+} catch (e) {
+console.log(e)}}}
+
+async function play2(conn, text, command, args, m) {
+const yts = require("yt-search") 
+const ytdl = require('ytdl-core') 
+if (!text) return conn.sendMessage(m.chat, { text: `*Que esta buscado? ingrese el nombre del tema*\n\nEjemplo: *${prefix + command}* ozuna` }, { quoted: m })
+let vid = (await yts(text)).all[0]
+const yt_play = await search(args.join(" "))
+let { title, description, url, thumbnail, videoId, timestamp, views, published } = vid
+let message = await conn.sendMessage(m.chat, { text: `         *⌜Cancion Encontrada ✅⌟*\n\n◉ *Título:* ${yt_play[0].title}\n◉ *Duracion:* ${secondString(yt_play[0].duration.seconds)}\n◉ *Publicado:* ${yt_play[0].ago}\n◉ *Autor:* ${yt_play[0].author.name}\n◉ *Vistas:* ${MilesNumber(yt_play[0].views)}\n\n*• 𝘋𝘦𝘴𝘤𝘢𝘳𝘨𝘰 𝘷𝘪𝘥𝘦𝘰 🎥, 𝘈𝘨𝘶𝘢𝘳𝘥𝘦 𝘶𝘯 𝘮𝘰𝘮𝘦𝘯𝘵𝘰....*`, contextInfo: { externalAdReply: { title: wm, body: yt_play[0].title.replace(/\*/g, ''), thumbnailUrl: thumbnail, sourceUrl: yt_play[0].url, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: true }}})
+let mediaa = await ytMp4(yt_play[0].url)
+await conn.sendMessage(m.chat, { video: { url: mediaa.result }, fileName: `error.mp4`, caption: `*Aqui tiene sus video 👌*\n*🔰Titulo:* ${yt_play[0].title}`, thumbnail: mediaa.thumb, mimetype: 'video/mp4' }, { quoted: m })}
 
 async function mp3(conn, args, text, command, fkontak, ytplayvid, m) {
 if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
@@ -244,7 +259,92 @@ m.reply('*3 ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴜsᴀᴅᴏ*')
 } catch { 
 return m.reply(`*[ ⚠️ ] Error, no se encontrarón resultados para su búsqueda.*`)}}
 
-module.exports = {play, mp3, mp4, git, tiktok, letra, mediafire, fb, ig, ig2, apk, spoti}
+async function search(query, options = {}) {
+const search = await yts.search({ query, hl: "es", gl: "ES", ...options });
+return search.videos};
+
+function MilesNumber(number) {
+const exp = /(\d)(?=(\d{3})+(?!\d))/g;
+const rep = "$1.";
+let arr = number.toString().split(".");
+arr[0] = arr[0].replace(exp, rep);
+return arr[1] ? arr.join(".") : arr[0]};
+
+function secondString(seconds) {
+seconds = Number(seconds);
+var d = Math.floor(seconds / (3600 * 24));
+var h = Math.floor((seconds % (3600 * 24)) / 3600);
+var m = Math.floor((seconds % 3600) / 60);
+var s = Math.floor(seconds % 60);
+var dDisplay = d > 0 ? d + (d == 1 ? " día, " : " días, ") : "";
+var hDisplay = h > 0 ? h + (h == 1 ? " hora, " : " horas, ") : "";
+var mDisplay = m > 0 ? m + (m == 1 ? " minuto, " : " minutos, ") : "";
+var sDisplay = s > 0 ? s + (s == 1 ? " segundo" : " segundos") : "";
+return dDisplay + hDisplay + mDisplay + sDisplay};
+
+function bytesToSize(bytes) {
+return new Promise((resolve, reject) => {
+const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+if (bytes === 0) return 'n/a';
+const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10);
+if (i === 0) resolve(`${bytes} ${sizes[i]}`);
+resolve(`${(bytes / (1024 ** i)).toFixed(1)} ${sizes[i]}`)})};
+
+async function ytMp3(url) {
+return new Promise((resolve, reject) => {
+ytdl.getInfo(url).then(async(getUrl) => {
+let result = [];
+for(let i = 0; i < getUrl.formats.length; i++) {
+let item = getUrl.formats[i];
+if (item.mimeType == 'audio/webm; codecs=\"opus\"') {
+let { contentLength } = item;
+let bytes = await bytesToSize(contentLength);
+result[i] = { audio: item.url, size: bytes }}};
+let resultFix = result.filter(x => x.audio != undefined && x.size != undefined) 
+let tiny = await axios.get(`https://tinyurl.com/api-create.php?url=${resultFix[0].audio}`);
+let tinyUrl = tiny.data;
+let title = getUrl.videoDetails.title;
+let thumb = getUrl.player_response.microformat.playerMicroformatRenderer.thumbnail.thumbnails[0].url;
+resolve({ title, result: tinyUrl, result2: resultFix, thumb })}).catch(reject)})};
+
+async function ytMp4(url) {
+return new Promise(async(resolve, reject) => {
+ytdl.getInfo(url).then(async(getUrl) => {
+let result = [];
+for(let i = 0; i < getUrl.formats.length; i++) {
+let item = getUrl.formats[i];
+if (item.container == 'mp4' && item.hasVideo == true && item.hasAudio == true) {
+let { qualityLabel, contentLength } = item;
+let bytes = await bytesToSize(contentLength);
+result[i] = { video: item.url, quality: qualityLabel, size: bytes }}};
+let resultFix = result.filter(x => x.video != undefined && x.size != undefined && x.quality != undefined) 
+let tiny = await axios.get(`https://tinyurl.com/api-create.php?url=${resultFix[0].video}`);
+let tinyUrl = tiny.data;
+let title = getUrl.videoDetails.title;
+let thumb = getUrl.player_response.microformat.playerMicroformatRenderer.thumbnail.thumbnails[0].url;
+resolve({ title, result: tinyUrl, rersult2: resultFix[0].video, thumb })}).catch(reject)})};
+
+async function ytPlay(query) {
+return new Promise((resolve, reject) => {
+yts(query).then(async(getData) => {
+let result = getData.videos.slice( 0, 5 );
+let url = [];
+for (let i = 0; i < result.length; i++) { url.push(result[i].url) }
+let random = url[0];
+let getAudio = await ytMp3(random);
+resolve(getAudio)}).catch(reject)})};
+
+async function ytPlayVid(query) {
+return new Promise((resolve, reject) => {
+yts(query).then(async(getData) => {
+let result = getData.videos.slice( 0, 5 );
+let url = [];
+for (let i = 0; i < result.length; i++) { url.push(result[i].url) }
+let random = url[0];
+let getVideo = await ytMp4(random);
+resolve(getVideo)}).catch(reject)})};
+
+module.exports = {play, play2, mp3, mp4, git, tiktok, letra, mediafire, fb, ig, ig2, apk, spoti}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
