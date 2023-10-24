@@ -3,6 +3,7 @@ const fs = require("fs")
 const path = require("path")
 const chalk = require("chalk");
 const axios = require('axios')
+const fetch = require('node-fetch')
 const cheerio = require('cheerio')
 const { smsg, fetchBuffer, getBuffer, buffergif, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getFile, getRandom, msToTime, downloadMediaMessage, convertirMsADiasHorasMinutosSegundos} = require('../libs/fuctions')
 
