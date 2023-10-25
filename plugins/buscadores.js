@@ -63,7 +63,7 @@ try {
 image = await fetchJson(`https://api.akuari.my.id/search/googleimage?query=${text}`)
 n = image.result
 images = n[Math.floor(Math.random() * n.length)]
-conn.sendMessage(m.chat, { image: { url: images}, caption: `*💫 𝘙𝘌𝘚𝘜𝘓𝘛𝘈𝘋𝘖𝘚 𝘋𝘌 :* ${text}`}, { quoted: m })
+conn.sendMessage(m.chat, { image: { url: images}, caption: `*💫 𝘙𝘌𝘚𝘜𝘓𝘛𝘈𝘋𝘖𝘚 𝘋𝘌 :* ${text}`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 } catch {  
 const res = await googleImage(text);
 const image = res[Math.floor(Math.random() * res.length)]
