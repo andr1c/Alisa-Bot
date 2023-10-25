@@ -74,10 +74,9 @@ var memeg = await conn.updateProfilePicture(m.chat, { url: mediz })
 fs.unlinkSync(mediz)
 m.reply(`*✅Exito*`)}}
 
-async function hide(conn, m, isBotAdmins, isGroupAdmins, q, participants) {   
+async function hide(conn, m, isGroupAdmins, q, participants) {   
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (!m.isGroup) return m.reply(info.group) 
-if (!isBotAdmins) return m.reply(info.botAdmin)
 if (!isGroupAdmins) return m.reply(info.admin)
 if (!q) return conn.sendMessage(m.chat, { text: `*Y el texto?*` }, { quoted: m })
 conn.sendMessage(m.chat, { text : q ? q : '' , mentions: participants.map(a => a.id)}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
@@ -160,10 +159,9 @@ if (!global.db.data.chats[m.chat].isBanned) return m.reply(`*Este chat no esta b
 global.db.data.chats[m.chat].isBanned = false
 m.reply(`*BOT ONLINE YA ESTOY DISPONIBLE ✅*`)}}
 
-async function tag(conn, m, isBotAdmins, isGroupAdmins, participants, q){   
+async function tag(conn, m, isGroupAdmins, participants, q){   
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (!m.isGroup) return m.reply(info.group) 
-if (!isBotAdmins) return m.reply(info.botAdmin)
 if (!isGroupAdmins) return m.reply(info.admin)
 let teks = `❑ ━〔 *📢 ＩＮＶＯＣＡＣＩＯＮ 📢* 〕━ ❑\n\n`
 teks += `❑ Mensaje:  ${q ? q : 'Active perra'}\n\n`
