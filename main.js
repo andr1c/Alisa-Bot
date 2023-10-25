@@ -442,7 +442,7 @@ case 'join':
 join(conn, m, isCreator, text, delay, args, sender)
 break           
 case 'hidetag': case 'notificar': 
-hide(conn, m, isBotAdmins, isGroupAdmins, q, participants)
+hide(conn, m, isGroupAdmins, q, participants)
 break 
 case 'setppname': case 'nuevonombre': case 'newnombre': 
 setna(conn, m, isBotAdmins, isGroupAdmins, text)
@@ -475,7 +475,7 @@ case 'banchat':
 ban(m, isCreator, text, command, args)
 break              
 case 'tagall': case 'invocar': case 'todos':
-tag(conn, m, isBotAdmins, isGroupAdmins, participants, q)
+tag(conn, m, isGroupAdmins, participants, q)
 break            
 case 'admins': case 'administradores': 
 adm(conn, participants, groupMetadata, args, m) 
@@ -588,7 +588,7 @@ await randow3(conn, m, pickRandom)
 break
 case 'neko':  
 await randow4(sendImageAsUrl, m, pickRandom)
-break
+break  
 case 'akira': case 'akiyama': case 'anna': case 'asuna': case 'ayuzawa': case 'boruto': case 'chiho': case 'chitoge': case 'deidara': case 'erza': case 'elaina': case 'eba': case 'emilia': case 'hestia': case 'hinata': case 'inori': case 'isuzu': case 'itachi': case 'itori': case 'kaga': case 'kagura': case 'kaori': case 'keneki': case 'kotori': case 'kurumi': case 'madara': case 'mikasa': case 'miku': case 'minato': case 'naruto': case 'nezuko': case 'sagiri': case 'sasuke': case 'sakura': case 'cosplay':
 await randow5(sendImageAsUrl, command, pickRandom, m)
 break 
