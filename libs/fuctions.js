@@ -715,7 +715,7 @@ m.body = m.message.conversation || m.message[m.mtype].caption || m.message[m.mty
      * @returns 
      */
      
-    conn.sendImageAsSticker = async (jid, path, quoted, options = {}) => {
+    conn.sendImageAsSticker = async (jid, path, quoted, ephemeralExpiration, disappearingMessagesInChat, options = {}) => {
         let buff = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
         let buffer
         if (options && (options.packname || options.author)) {
@@ -723,7 +723,7 @@ m.body = m.message.conversation || m.message[m.mtype].caption || m.message[m.mty
         } else {
             buffer = await imageToWebp(buff)
         }
- await conn.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted })
+ await conn.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
         return buffer
     }
     
@@ -761,7 +761,7 @@ m.body = m.message.conversation || m.message[m.mtype].caption || m.message[m.mty
     */
     conn.sendImage = async (jid, path, caption = '', quoted = '', options) => { 
      let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0) 
-     return await conn.sendMessage(jid, { image: buffer, caption: caption, ...options }, { quoted }) 
+     return await conn.sendMessage(jid, { image: buffer, caption: caption, ...options }, { quoted, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}) 
      } 
      
     /**
@@ -787,7 +787,7 @@ m.body = m.message.conversation || m.message[m.mtype].caption || m.message[m.mty
     "thumbnail": thumbnail ? thumbnail : global.imagen1,  
     "mediaUrl": md,  
     "sourceUrl": md
-    }}}, { quoted: quoted ? quoted : m }) 
+    }}}, { quoted: quoted ? quoted : m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}) 
     }
     
     /**
@@ -838,7 +838,7 @@ conn.user.chat = m.chat // chat in user?????????
     * @param {*} quoted
     */
     conn.editMessage = async (jid, text, editedText, seconds, quoted) => {
-     const {key} = await conn.sendMessage(jid, { text: text }, { quoted: quoted ? quoted : m}); 
+     const {key} = await conn.sendMessage(jid, { text: text }, { quoted: quoted ? quoted : m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}); 
      await delay(1000 * seconds); // message in seconds?? (delay)
      await conn.sendMessage(m.chat, { text: editedText, edit: key }); 
     }
@@ -850,7 +850,7 @@ conn.user.chat = m.chat // chat in user?????????
     */
     conn.sendAudio = async (jid, audio, quoted, ppt, options) => { // audio? uwu
     await conn.sendPresenceUpdate('recording', jid)
-    await conn.sendMessage(jid, { audio: { url: audio }, fileName: 'error.mp3', mimetype: 'audio/mp4', ptt: ppt ? ptt : true, ...options }, { quoted: quoted ? quoted : m })
+    await conn.sendMessage(jid, { audio: { url: audio }, fileName: 'error.mp3', mimetype: 'audio/mp4', ptt: ppt ? ptt : true, ...options }, { quoted: quoted ? quoted : m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
     }
     conn.parseAudio = async (jid, audio, quoted, ppt, name, link, image) => {
     await conn.sendPresenceUpdate('recording', jid)
@@ -860,7 +860,7 @@ conn.user.chat = m.chat // chat in user?????????
     title: name ? name : global.botname,
     sourceUrl: link ? link : md, 
     thumbnail: image ? image : global.imagen1
-    }}}, { quoted: quoted ? quoted : m })
+    }}}, { quoted: quoted ? quoted : m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
     }
     
   /**
@@ -869,7 +869,7 @@ conn.user.chat = m.chat // chat in user?????????
     * @param {*} quoted
     * @param {*} options
     */
-    conn.sendTextWithMentions = async (jid, text, quoted, options = {}) => conn.sendMessage(jid, { text: text, contextInfo: { mentionedJid: [...text.matchAll(/@(\d{0,16})/g)].map(v => v[1] + '@s.whatsapp.net') }, ...options }, { quoted })
+    conn.sendTextWithMentions = async (jid, text, quoted, options = {}) => conn.sendMessage(jid, { text: text, contextInfo: { mentionedJid: [...text.matchAll(/@(\d{0,16})/g)].map(v => v[1] + '@s.whatsapp.net') }, ...options }, { quoted, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
     
     
     /**
@@ -879,7 +879,7 @@ conn.user.chat = m.chat // chat in user?????????
     * @param {*} options
     */
     
-    conn.sendText = (jid, text, quoted = '', options) => conn.sendMessage(jid, { text: text, ...options }, { quoted })
+    conn.sendText = (jid, text, quoted = '', options) => conn.sendMessage(jid, { text: text, ...options }, { quoted, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
    
     /**
     * @returns
@@ -938,7 +938,7 @@ conn.user.chat = m.chat // chat in user?????????
 	    	vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await conn.getName(i)}\nFN:${await conn.getName(i)}\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:toca aqui uwu\nitem2.EMAIL;type=INTERNET:${yt}\nitem2.X-ABLabel:YouTube\nitem3.URL:${github}\nitem3.X-ABLabel:GitHub\nitem4.ADR:;;${location};;;;\nitem4.X-ABLabel:Region\nEND:VCARD`
 	    })
 	}
-	conn.sendMessage(jid, { contacts: { displayName: `${list.length} Contacto`, contacts: list }, ...opts }, { quoted })
+	conn.sendMessage(jid, { contacts: { displayName: `${list.length} Contacto`, contacts: list }, ...opts }, { quoted, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
     }
     
     /**
@@ -958,7 +958,7 @@ conn.user.chat = m.chat // chat in user?????????
             buffer = await videoToWebp(buff)
         }
 
-        await conn.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted })
+        await conn.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
         return buffer
     }
     conn.sendPoll = (jid, name = '', values = [], selectableCount = 1) => { return conn.sendMessage(jid, { poll: { name, values, selectableCount }}) }
@@ -974,7 +974,7 @@ conn.user.chat = m.chat // chat in user?????????
     /**
     * a normal reply
     */
-    m.reply = (text, chatId, options) => conn.sendMessage(chatId ? chatId : m.chat, { text: text }, { quoted: m, detectLinks: false, thumbnail: global.thumb, ...options })
+    m.reply = (text, chatId, options) => conn.sendMessage(chatId ? chatId : m.chat, { text: text }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100, detectLinks: false, thumbnail: global.thumb, ...options })
 
     /**
     * copy message?
