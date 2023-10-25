@@ -48,7 +48,7 @@ const {efec, url, tomp3, toimg, toanime} = require('./plugins/convertidores.js')
 const {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, adm, infogr, warn1, warn2, online, listw} = require('./plugins/grupos.js')
 const {nsfw1, nsfw2, nsfw3, nsfw4, nsfw5} = require('./plugins/nsfw.js')
 const {randow1, randow2, randow3, randow4, randow5, randow6, randow7, randow8, randow9} = require('./plugins/randow.js') 
-const {play, play2, mp3, mp4, git, tiktok, letra, mediafire, fb, ig, ig2, apk, spoti} = require('./plugins/descargas.js')   
+const {play, play2, play3, play4, mp3, mp4, git, tiktok, letra, mediafire, fb, ig, ig2, apk, spoti} = require('./plugins/descargas.js')   
 const {s, wm2, attp, dado} = require('./plugins/stickers.js') 
 const {owner1, owner2, owner3, owner4, owner5, owner6, owner7, owner8, owner9} = require('./plugins/propietario.js')  
 const {on, on1, on2, on3, on4, on5, on6, on7, on8, on9, on10, on11, on12, on13, on14, on15} = require('./plugins/enable.js')
@@ -127,8 +127,8 @@ const time = moment(Number(msg.messageTimestamp + "000")).locale("es-mx").tz("Am
 const reply = (text) => {  
 m.reply(text)} 
 const sendAdMessage = (text, title, body, image, url) => { conn.sendMessage(m.chat, {text: text, contextInfo: { externalAdReply: { title: title, body: body, mediaUrl: url, sourceUrl: url, previewType: 'PHOTO', showAdAttribution: true, thumbnail: image, sourceUrl: url }}}, {})}  
-const sendImage = ( image, caption ) => { conn.sendMessage(m.chat, { image: image, caption: caption }, { quoted: m })}  
-const sendImageAsUrl = ( url, caption ) => { conn.sendMessage(m.chat, { image:  {url: url }, caption: caption }, { quoted: m })}  
+const sendImage = ( image, caption ) => { conn.sendMessage(m.chat, { image: image, caption: caption }, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}  
+const sendImageAsUrl = ( url, caption ) => { conn.sendMessage(m.chat, { image:  {url: url }, caption: caption }, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}  
 
 // ‿︵‿︵ʚɞ『 TIPOS DE MENSAJES Y CITADOS 』ʚɞ‿︵‿︵  
 const isAudio = type == 'audioMessage' // Mensaje de Audio  
@@ -162,8 +162,8 @@ conn.ev.emit('messages.upsert', msg)}
 if (m.message) {
 console.log(chalk.bold.cyanBright(`▣────────────···\n│+${conn.user.jid.split`@`[0]} ➢ ${botname} ${conn.user.id == global.numBot2 ? '' : '(SubBot)'}`), 
 chalk.bold.magenta('\n│────────────\n│⏰HORARIO: ') + chalk.magentaBright(moment(t * 1000).tz(place).format('DD/MM/YY HH:mm:ss'),
-chalk.bold.red('\n️│🏷️ TAGS: ') + chalk.bold.white(`[${conn.public ? 'Publico' : 'Privado'}]`), 
-chalk.bold.yellow('\n│📑TIPO (SMS): ') + chalk.yellowBright(`${type}`), 
+chalk.bold.red('\n️│🏷️ MODO: ') + chalk.bold.white(`[${conn.public ? 'Publico' : 'Privado'}]`), 
+chalk.bold.yellow('\n│📑TIPO (SMS): ') + chalk.yellowBright(`${type}`),  
 chalk.bold.cyan('\n│📊USUARIO: ') + chalk.cyanBright(pushname) + ' ➜', gradient.rainbow(userSender), 
 m.isGroup ? chalk.bold.greenBright('\n│📤GRUPO: ') + chalk.greenBright(groupName) + ' ➜ ' + gradient.rainbow(from) : chalk.bold.greenBright('\n│📥PRIVADO'), 
 //chalk.bold.red('\nETIQUETA: ') + chalk.redBright(`[${isBaneed ? 'Banned' : ''}]`),
@@ -216,7 +216,7 @@ if (budy.match(`chat.whatsapp.com`)) {
 let delet = m.key.participant
 let bang = m.key.id
 user = m.sender
-conn.sendMessage(m.chat, {text: `\`\`\`「 ANTILINK DETECTADO 」\`\`\`\n\n@${user.split("@")[0]} 🤨 eso no esta permitido rata, Sera expulsado del grupo....`, mentions: [user], },{quoted: m}) 
+conn.sendMessage(m.chat, {text: `\`\`\`「 ANTILINK DETECTADO 」\`\`\`\n\n@${user.split("@")[0]} 🤨 eso no esta permitido rata, Sera expulsado del grupo....`, mentions: [user], },{quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 if (!isBotAdmins) return reply(`Te salvarte puto no soy admins 🙄`)
 let gclink = (`https://chat.whatsapp.com/`+await conn.groupInviteCode(m.chat))
 let isLinkThisGc = new RegExp(gclink, 'i')
@@ -266,7 +266,7 @@ user.level++
 //user.role = global.rpg.role(user.level).name
 if (before !== user.level) {
 const str = `*「 FELICIDADES LEVEL UP 🆙🥳 」*\n\n🥳 Felicidades @${sender.split`@`[0]} 👏 subiste de nivel sigue asi 👏\n\n*NIVEL :* ${before} ⟿ ${user.level}\n*RANGO :* ${user.role}\n*FECHA :* ${new Date().toLocaleString('id-ID')}\n\n_*Para saber cual es tu puerto del top, coloca el comando #lb*_`.trim()
-return conn.sendMessage(m.chat, { text: str, contextInfo:{mentionedJid:[sender]}}, { quoted: fkontak })}}
+return conn.sendMessage(m.chat, { text: str, contextInfo:{mentionedJid:[sender]}},{quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}}
 
 //Chatbot
 if (global.db.data.chats[m.chat].simi && prefix) {
@@ -348,7 +348,7 @@ const message = user.map((v, index) => `[${index + 1}] ${v.user.name || '•'}\n
 const replyMessage = message.length === 0 ? '' : message;
 const totalUsers = user.length;
 const responseMessage = `*𝘚𝘜𝘉𝘉𝘖𝘛𝘚 𝘊𝘖𝘕𝘌𝘊𝘛𝘈𝘋𝘖𝘚:* ${totalUsers || '0'}\n\n${replyMessage.trim()}`.trim();
-await conn.sendMessage(m.chat, {text: responseMessage, mentions: conn.parseMention(responseMessage)}, {quoted: m});
+await conn.sendMessage(m.chat, {text: responseMessage, mentions: conn.parseMention(responseMessage)}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
 break
 
 //info
@@ -398,9 +398,6 @@ o = e
 let { stdout, stderr } = o
 if (stdout.trim()) m.reply(stdout)
 if (stderr.trim()) m.reply(stderr)}}
-break
-//opción activa/desartiva
-case 'welcome': on(isGroupAdmins, text, command, args, m) 
 break
 case 'antilink': case 'antienlace': on1(isBotAdmins, isGroupAdmins, text, command, args, m)
 break
@@ -587,9 +584,9 @@ case 'loli':
 await randow2(sendImageAsUrl, m, pickRandom)
 break
 case 'lolivid':
-await randow3(conn, m, pickRandom)
+await randow3(conn, m, pickRandom) 
 break
-case 'neko':
+case 'neko':  
 await randow4(sendImageAsUrl, m, pickRandom)
 break
 case 'akira': case 'akiyama': case 'anna': case 'asuna': case 'ayuzawa': case 'boruto': case 'chiho': case 'chitoge': case 'deidara': case 'erza': case 'elaina': case 'eba': case 'emilia': case 'hestia': case 'hinata': case 'inori': case 'isuzu': case 'itachi': case 'itori': case 'kaga': case 'kagura': case 'kaori': case 'keneki': case 'kotori': case 'kurumi': case 'madara': case 'mikasa': case 'miku': case 'minato': case 'naruto': case 'nezuko': case 'sagiri': case 'sasuke': case 'sakura': case 'cosplay':
@@ -616,6 +613,12 @@ play(conn, text, command, args, m)
 break   
 case 'play2': case 'video': 
 play2(conn, text, command, args, m)  
+break 
+case 'play3': case 'playdoc': case 'playaudiodoc': case 'ytmp3doc': 
+play3(conn, text, command, args, m)  
+break
+case 'play4': case 'playdoc2': case 'playvideodoc': case 'ytmp4doc': 
+play4(conn, text, command, args, m)   
 break
 case "ytmp3": case "ytaudio": 
 mp3(conn, args, text, command, fkontak, ytplayvid, m)
@@ -785,7 +788,7 @@ break
 //función pickrandow
 function pickRandom(list) {
 return list[Math.floor(list.length * Math.random())]
-} 
+}  
 
 default:
 if (budy.includes(`Todo bien`)) {
@@ -800,10 +803,10 @@ if (budy.startsWith(`a`)) {
 if (!global.db.data.chats[m.chat].audios) return
 let vn = './media/a.mp3'
 await conn.sendPresenceUpdate('recording', m.chat)
-conn.sendMessage(m.chat, { audio: { url: vn }, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": md, "showAdAttribution": true}}, seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, { quoted: m })}
+conn.sendMessage(m.chat, { audio: { url: vn }, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": md, "showAdAttribution": true}}, seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 if (budy.startsWith(`Feliz cumpleaños`)) {
 const vn = './media/Feliz cumple.mp3'
-conn.sendAudio(m.chat, vn, m)}
+conn.sendAudio(m.chat, vn, m)} 
 if (budy.startsWith(`Vete a la verga`)) {
 const vn = './media/vete a la verga.mp3';
 conn.sendAudio(m.chat, vn, m)}

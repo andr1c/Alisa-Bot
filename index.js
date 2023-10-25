@@ -238,7 +238,7 @@ if (fucker.isGroup == false) {
 if (fucker.status == "offer") {
 let call = await sock.sendTextWithMentions(fucker.from, `*[ ! ] @${fucker.from.split('@')[0]} Seras bloqueado*\n_Razon : por realizar una ${fucker.isVideo ? `videollamadas` : `llamadas` }_\n\n*Si accidentalmente llamaste póngase en contacto con mi creador para que te desbloquee.*\n\n• https://www.facebook.com/groups/872989990425789/`)
 let vcard = `BEGIN:VCARD\nVERSION:3.0\nN:;Propietario 👑;;;\nFN:Propietario\nORG:Propietario 👑\nTITLE:\nitem1.TEL;waid=595975740803:+595 975 740803\nitem1.X-ABLabel:Propietario 👑\nX-WA-BIZ-DESCRIPTION:ᴇsᴄʀɪʙɪ sᴏʟᴏ ᴘᴏʀ ᴄᴏsᴀs ᴅᴇʟ ʙᴏᴛ.\nX-WA-BIZ-NAME:Owner 👑\nEND:VCARD`
-sock.sendMessage(fucker.from, { contacts: { displayName: 'ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ 👑', contacts: [{ vcard }] }}, {quoted: call})
+sock.sendMessage(fucker.from, { contacts: { displayName: 'ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ 👑', contacts: [{ vcard }] }}, {quoted: call, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 await sleep(8000)
 await sock.updateBlockStatus(fucker.from, "block")
 }}}})
@@ -272,7 +272,7 @@ mentionedJid:[m.sender],
 "thumbnail": imagen1,  
 "mediaUrl": md,  
 "sourceUrl": md
-}}}, { quoted: null })
+}}}, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 } else if (res.announce == false) {
 await sleep(2000)
 try {
@@ -296,7 +296,7 @@ mentionedJid:[m.sender],
 "thumbnail": imagen1, 
 "mediaUrl": md, 
 "sourceUrl": md  
-}}}, { quoted: null })
+}}}, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 } else if (res.restrict == true) {
 await sleep(2000)
 try {
@@ -319,7 +319,7 @@ mentionedJid:[m.sender],
 "thumbnail": imagen1, 
 "mediaUrl": md, 
 "sourceUrl": yt
-}}}, { quoted: null })
+}}}, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 } else if (res.restrict == false) {
 await sleep(2000)
 try {
@@ -342,7 +342,7 @@ mentionedJid:[m.sender],
 "thumbnail": imagen1, 
 "mediaUrl": md, 
 "sourceUrl": md
-}}}, { quoted: null })
+}}}, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 } else if(!res.desc == ''){
 await sleep(2000)
 try {
@@ -365,7 +365,7 @@ mentionedJid:[m.sender],
 "thumbnail": imagen1, 
 "mediaUrl": md,  
 "sourceUrl": md
-}}}, { quoted: null })
+}}}, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 } else {
 await sleep(2000)
 try {
@@ -388,7 +388,7 @@ mentionedJid:[m.sender],
 "thumbnail": imagen1, 
 "mediaUrl": md,  
 "sourceUrl": md
-}}}, { quoted: null })
+}}}, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }})
 
 //Welcome adaptado
@@ -419,7 +419,11 @@ const time = moment.tz('America/Bogota').format('HH:mm:ss')
 const date = moment.tz('America/Bogota').format('DD/MM/YYYY')
 let name = num
 const miembros = metadata.participants.length
-sock.sendMessage(anu.id, { text: `⪨────[ ＷＥＬＣＯＭＥ ]────⪩
+let wel = [`Hola @${name.split("@")[0]} ¿COMO ESTAS? 😃`, `HOLAA!! @${name.split("@")[0]} ¿COMO ESTAS?😃\n『Bienvenido A *${metadata.subject}*』\n\nUn gusto conocerte amig@ 🤗\n\n_Recuerda leer las reglas del grupo para no tener ningun problema 🧐_\n\n*Solo disfrutar de este grupo y divertite 🥳*`, `[ NUEVO MIEMBRO ]\n\nBienvenido a @${name.split("@")[0]}`, `Bienvenido @${name.split("@")[0]} 🥳 A este hermoso grupo: ${metadata.subject} 🎉 Espero que te sienta a gusto aqui 🥰\n\n\n   ╭━━━━━━╮\n╭┃    ╭━━━━╮\n┃┃    ╰━━━━╯\n┃┃    💧   👉 👈    dime uwu 🥺\n╰┃    ┃ ─┌     ┃\n    ╰━╯   ╰━╯\n`]
+try { 
+let welcome = wel[Math.floor(Math.random() * wel.length)]
+sock.sendMessage(anu.id, { text: welcome, mentions: [num]}, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+/*sock.sendMessage(anu.id, { text: `⪨────[ ＷＥＬＣＯＭＥ ]────⪩
 
 💫 *Hola* @${name.split("@")[0]} ¿COMO ESTAS? 😃
 💫 *Bienvenido a :* ${metadata.subject}
@@ -439,12 +443,17 @@ body: `${metadata.subject}`,
 "previewType": "PHOTO",
 "thumbnailUrl": ``,
 "thumbnail": welc,
-"sourceUrl": md}}}) 
+"sourceUrl": md}}}) */
+} catch (e) {
+console.log('[Error]')}
 } else if (anu.action == 'remove') {
 const buffer = await getBuffer(ppuser)
 let name = num
 const members = metadata.participants.length
-sock.sendMessage(anu.id, { text: `Se fue @${name.split("@")[0]} nadie los van extraña 😹`,
+let by = [`Adios @${name.split("@")[0]} 👋`, `Se fue @${name.split("@")[0]} quien carajo era?`, `Bueno, se fue @${name.split("@")[0]} 👋\n\nQue dios lo bendiga 😎`, `\`\`\`[!] C fue alv : @${name.split("@")[0]}\`\`\``]
+let bye = by[Math.floor(Math.random() * by.length)]
+sock.sendMessage(anu.id, { text: bye, mentions: [num]}, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+/*sock.sendMessage(anu.id, { text: `Se fue @${name.split("@")[0]} nadie los van extraña 😹`,
 contextInfo:{
 forwardingScore: 9999999,
 isForwarded: true, 
@@ -456,7 +465,7 @@ body: `Esperemos que no vuelva -_-`,
 "previewType": "PHOTO",
 "thumbnailUrl": ``,
 "thumbnail": leave,
-"sourceUrl": md}}}) 
+"sourceUrl": md}}}) */
 } else if (anu.action == 'promote') {
 const buffer = await getBuffer(ppuser)
 let name = num
@@ -470,7 +479,7 @@ sock.sendMessage(anu.id, { text: `@${name.split("@")[0]} Ahora eres admin del gr
  "previewType": "PHOTO",
 "thumbnailUrl": ``,
 "thumbnail": welc,
-"sourceUrl": md}}})
+"sourceUrl": md}}}, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 } else if (anu.action == 'demote') {
 const buffer = await getBuffer(ppuser)
 let name = num
@@ -484,7 +493,7 @@ sock.sendMessage(anu.id, { text: `@${name.split("@")[0]} Joderte ya no eres admi
  "previewType": "PHOTO",
 "thumbnailUrl": ``,
 "thumbnail": leave,
-"sourceUrl": md}}})
+"sourceUrl": md}}}, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }}} catch (err) {
 console.log(err)
 }})
