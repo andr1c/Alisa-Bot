@@ -42,14 +42,14 @@ let stateRun = `┏━━━━❰･𝐄𝐒𝐓𝐀𝐃𝐎 𝐃𝐄𝐋 𝐁�
 ┃➢ 𝙱𝙾𝚃 𝚂𝙴𝙲𝚄𝙽𝙳𝙰𝚁𝙸𝙾𝚂 𝙰𝙲𝚃𝙸𝚅𝙾𝚂 : ${user.length}
 ┗━━━━━━━━━━━━━ ${conn.user.id == global.numBot2 ? '' : `\n\n➢ 𝐒𝐨𝐲 𝐮𝐧 𝐒𝐮𝐛𝐁𝐨𝐭 𝐝𝐞 : wa.me/${global.numBot.split`@`[0]}`}`.trim()
 let ments = [me]      
-conn.sendMessage(m.chat, {image: imagen1, caption: stateRun, contextInfo:{ mentionedJid:[sender]}}, { quoted: fkontak })
+conn.sendMessage(m.chat, {image: imagen1, caption: stateRun, contextInfo:{ mentionedJid:[sender]}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }
 
 async function owner(conn, m, sender) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 let vcard = `BEGIN:VCARD\nVERSION:3.0\nN:;PROPIETARIO/OWNER DEL BOT 👑;;;\nFN:OWNER\nORG:PROPIETARIO/OWNER DEL BOT 👑\nTITLE:\nitem1.TEL;waid=5492266466080:+54 9 2266 46-6080\nitem1.X-ABLabel:PROPIETARIO/OWNER DEL BOT👑\nX-WA-BIZ-DESCRIPTION:ᴇsᴄʀɪʙɪ sᴏʟᴏ ᴘᴏʀ ᴄᴏsᴀs ᴅᴇʟ ʙᴏᴛ.\nX-WA-BIZ-NAME:PROPIETARIO/OWNER DEL BOT 👑\nEND:VCARD`
 let a = await conn.sendMessage(m.chat, { contacts: { displayName: 'ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ 👑', contacts: [{ vcard }] }}, {quoted: m})
-await conn.sendMessage(m.chat, { text : `Hola @${sender.split("@")[0]}, este bot esta desarrollo si quiere contacta con mi creador aqui te dejo sus número`, mentions: [sender]}, { quoted: a })
+await conn.sendMessage(m.chat, { text : `Hola @${sender.split("@")[0]}, este bot esta desarrollo si quiere contacta con mi creador aqui te dejo sus número`, mentions: [sender]}, { quoted: a, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }
 
 const grupo = (conn, m, sender, pickRandom) => {
@@ -57,7 +57,7 @@ if (global.db.data.users[m.sender].registered < true) return m.reply(info.regist
 //const grupp = Math.floor(Math.random() * 70);
 let a = `${pickRandom([nn, nn2, nn3, nn4, nn5, nn6, nna, nn7, nn8])}`;
 let imagen = `${pickRandom([imagen1, imagen2, imagen3])}`;
-conn.sendMessage(m.chat, { text: `*ʜᴏʟᴀ ᴇsᴛɪᴍᴀᴅᴏs ᴜsᴜᴀʀɪᴏs 👋🏻, ᴛᴇ ɪɴᴠɪᴛᴏ ᴀ ᴜɴɪʀᴛᴇ ᴀ ʟᴏs ɢʀᴜᴘᴏs ᴏғɪᴄɪᴀʟᴇs ᴅᴇ ʟᴀs ғᴀᴍɪʟᴀs ᴛʜᴇ ʟᴏʟɪʙᴏᴛ-ᴍᴅ ʏ ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ, ᴘᴀʀᴀ ᴄᴏɴᴠɪᴠɪʀ ᴄᴏɴ ʟᴀ ᴄᴏᴍᴜɴɪᴅᴀᴅ :ᴠ*\n\n*➤ ɢʀᴜᴘᴏs ᴏғɪᴄɪᴀʟᴇs ᴅᴇʟ ʙᴏᴛ:*\n1) ${nn}\n\n2) ${nn2}\n\n*➤ ɢʀᴜᴘᴏ ᴅᴇʟ ᴄᴏʟᴀʙᴏʀᴀᴄɪᴏɴ:*\n• ${nn3}\n\n• ${nn4}\n\n• ${nn5}\n\n*➤ ɢʀᴜᴘᴏs ᴛᴇsᴛ ᴘᴀʀᴀ ᴘʀᴜᴇʙᴀ ᴅᴇʟ ʙᴏᴛ:*\n• ${nn6}\n\n*➤ ɪɴғᴏᴍᴀʀᴛᴇ sᴏʙʀᴇ ʟᴀs ɴᴜᴇᴠᴀs ᴀᴄᴛᴜᴀʟɪᴢᴀᴄɪᴏɴᴇs ᴅᴇʟ ʙᴏᴛ ᴀǫᴜɪ:*\n• ${nna}\n\n*➤ ɢʀᴜᴘᴏ ᴅᴇʟ ᴀʏᴜᴅᴀ sᴏʙʀᴇ ᴇʟ ʙᴏᴛ:*\n• ${nn7}\n\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n• ɢʀᴜᴘᴏs ᴅᴇʟ ᴀᴍɪsᴛᴀᴅᴇs ᴅᴏɴᴅᴇ ᴇsᴛᴀ ᴇʟ ʙᴏᴛ\n\n*⇶⃤꙰𝑬𝒏𝒍𝒂𝒄𝒆 𝒍𝒐𝒍𝒊𝒃𝒐𝒕ꦿ⃟⃢*\n${nn8}\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n\nsɪ ǫᴜɪᴇʀᴇs ǫᴜᴇ ᴛᴜ ɢʀᴜᴘᴏ ᴀᴘᴀʀᴇᴢᴄᴀɴ ᴀᴄᴀ ʜᴀʙʟᴀ ᴄᴏɴ ᴇʟ ᴀᴅᴍɪɴ ᴏғᴄ ᴅᴇʟ ʙᴏᴛ`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: a}}}, { quoted: m})}
+conn.sendMessage(m.chat, { text: `*ʜᴏʟᴀ ᴇsᴛɪᴍᴀᴅᴏs ᴜsᴜᴀʀɪᴏs 👋🏻, ᴛᴇ ɪɴᴠɪᴛᴏ ᴀ ᴜɴɪʀᴛᴇ ᴀ ʟᴏs ɢʀᴜᴘᴏs ᴏғɪᴄɪᴀʟᴇs ᴅᴇ ʟᴀs ғᴀᴍɪʟᴀs ᴛʜᴇ ʟᴏʟɪʙᴏᴛ-ᴍᴅ ʏ ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ, ᴘᴀʀᴀ ᴄᴏɴᴠɪᴠɪʀ ᴄᴏɴ ʟᴀ ᴄᴏᴍᴜɴɪᴅᴀᴅ :ᴠ*\n\n*➤ ɢʀᴜᴘᴏs ᴏғɪᴄɪᴀʟᴇs ᴅᴇʟ ʙᴏᴛ:*\n1) ${nn}\n\n2) ${nn2}\n\n*➤ ɢʀᴜᴘᴏ ᴅᴇʟ ᴄᴏʟᴀʙᴏʀᴀᴄɪᴏɴ:*\n• ${nn3}\n\n• ${nn4}\n\n• ${nn5}\n\n*➤ ɢʀᴜᴘᴏs ᴛᴇsᴛ ᴘᴀʀᴀ ᴘʀᴜᴇʙᴀ ᴅᴇʟ ʙᴏᴛ:*\n• ${nn6}\n\n*➤ ɪɴғᴏᴍᴀʀᴛᴇ sᴏʙʀᴇ ʟᴀs ɴᴜᴇᴠᴀs ᴀᴄᴛᴜᴀʟɪᴢᴀᴄɪᴏɴᴇs ᴅᴇʟ ʙᴏᴛ ᴀǫᴜɪ:*\n• ${nna}\n\n*➤ ɢʀᴜᴘᴏ ᴅᴇʟ ᴀʏᴜᴅᴀ sᴏʙʀᴇ ᴇʟ ʙᴏᴛ:*\n• ${nn7}\n\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n• ɢʀᴜᴘᴏs ᴅᴇʟ ᴀᴍɪsᴛᴀᴅᴇs ᴅᴏɴᴅᴇ ᴇsᴛᴀ ᴇʟ ʙᴏᴛ\n\n*⇶⃤꙰𝑬𝒏𝒍𝒂𝒄𝒆 𝒍𝒐𝒍𝒊𝒃𝒐𝒕ꦿ⃟⃢*\n${nn8}\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n\nsɪ ǫᴜɪᴇʀᴇs ǫᴜᴇ ᴛᴜ ɢʀᴜᴘᴏ ᴀᴘᴀʀᴇᴢᴄᴀɴ ᴀᴄᴀ ʜᴀʙʟᴀ ᴄᴏɴ ᴇʟ ᴀᴅᴍɪɴ ᴏғᴄ ᴅᴇʟ ʙᴏᴛ`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: a}}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 const instalar = (conn, m, pushname, sender) => {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
@@ -100,14 +100,14 @@ isForwarded: true,
 "thumbnailUrl": ``,
 "thumbnail": imagen1, 
 "sourceUrl": md}}},
-{ quoted: m})
+{ quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }
 
 const ping = (conn, from, msg, speed) => {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 var timestamp = speed();  
 var latensi = speed() - timestamp  
-conn.sendMessage(from, { text: `*Pong 🏓  ${latensi.toFixed(4)}*` }, { quoted: msg  })
+conn.sendMessage(from, { text: `*Pong 🏓  ${latensi.toFixed(4)}*` }, { quoted: msg, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }
 
 const report = (conn, from, m, prefix, command, text) => {
@@ -123,7 +123,7 @@ teks = `*|  |*`
 teks1 = `\n\nN`
 teks2 = `\n\n`
 for (let i of owner) {
-conn.sendMessage(i + "@s.whatsapp.net", {text: teks + teks1, mentions:[m.sender]}, {quoted:m})
+conn.sendMessage(i + "@s.whatsapp.net", {text: teks + teks1, mentions:[m.sender]}, {quoted:m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }
 conn.sendMessage(m.chat, {text: teks + teks2 + teks1, mentions:[m.sender]}, {quoted:m})
 }

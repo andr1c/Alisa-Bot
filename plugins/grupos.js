@@ -80,7 +80,7 @@ if (!m.isGroup) return m.reply(info.group)
 if (!isBotAdmins) return m.reply(info.botAdmin)
 if (!isGroupAdmins) return m.reply(info.admin)
 if (!q) return conn.sendMessage(m.chat, { text: `*Y el texto?*` }, { quoted: m })
-conn.sendMessage(m.chat, { text : q ? q : '' , mentions: participants.map(a => a.id)}, { quoted: m })}
+conn.sendMessage(m.chat, { text : q ? q : '' , mentions: participants.map(a => a.id)}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 async function setna(conn, m, isBotAdmins, isGroupAdmins, text) {   
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
@@ -170,7 +170,7 @@ teks += `❑ Mensaje:  ${q ? q : 'Active perra'}\n\n`
 for (let mem of participants) {
 teks += `➥ @${mem.id.split('@')[0]}\n`
 }
-conn.sendMessage(m.chat, { text: teks, mentions: participants.map(a => a.id) }, { quoted: m })}
+conn.sendMessage(m.chat, { text: teks, mentions: participants.map(a => a.id) }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 async function adm(conn, participants, groupMetadata, args, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
@@ -182,7 +182,7 @@ const owner = groupMetadata.owner || groupAdmins.find((p) => p.admin === 'supera
 const pesan = args.join` `;
 const oi = `*ᴍᴇɴsᴀᴊᴇ:* ${pesan}`;
 const text = `═✪〘 *ＩＮＶＯＣＡＮＤＯ ＡＤＭＩＮＳ* 〙✪═\n\n• *ɢʀᴜᴘᴏ:* [ ${groupMetadata.subject} ]\n\n• ${oi}\n\n• *ᴀᴅᴍɪɴs:*\n➥ ${listAdmin}\n\n*[ ⚠ ️] ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ sᴏʟᴏ ᴄᴜᴀɴᴅᴏ sᴇ ᴛʀᴀᴛᴇ ᴅᴇ ᴜɴᴀ ᴇᴍᴇʀɢᴇɴᴄɪᴀ*`.trim();
-conn.sendMessage(m.chat, { text: text, mentions: participants.map(a => a.id) }, { quoted: m })}
+conn.sendMessage(m.chat, { text: text, mentions: participants.map(a => a.id) }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 async function infogr(conn, participants, groupMetadata, fkontak, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
@@ -243,7 +243,7 @@ conn.sendMessage(m.chat, { text: `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈�
 ┊ • *𝙰𝚍𝚖𝚒𝚗𝚜:* ${name}
 ┊ • *𝙰𝚍𝚟𝚎𝚛𝚝𝚎𝚗𝚌𝚒𝚊:* ${warn + 1}/${war}
 ┊ • *𝚁𝚊𝚣𝚘𝚗:* 🫵🏾 ${text}
-╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈`, mentions: [who]}, { quoted: m })
+╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈`, mentions: [who]}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 await delay(2000)
 m.reply(`⚠️ *𝙰𝙳𝚅𝙴𝚁𝚃𝙴𝙽𝙲𝙸𝙰* ⚠️
 𝚁𝚎𝚌𝚒𝚋𝚒𝚜𝚝𝚎 𝚞𝚗𝚊 𝚊𝚍𝚟𝚎𝚛𝚝𝚎𝚗𝚌𝚒𝚊 𝚍𝚎 𝚞𝚗 𝚊𝚍𝚖𝚒𝚗
@@ -297,7 +297,7 @@ const caption = `⚠️ 𝚄𝚂𝚄𝙰𝚁𝙸𝙾𝚂 𝙰𝙳𝚅𝙴𝚁�
 ║
 ║ 1.- ${isCreator ? '@' + jid.split`@`[0] : jid} *(${user.warn}/4)*\n║\n║ - - - - - - - - -`.trim()).join('\n') : ''}
 ╚══════════════════·•`;
-conn.sendMessage(m.chat, {text: caption, contextInfo:{ mentionedJid: [...caption.matchAll(/@(\d{0,16})/g)].map(v => v[1] + '@s.whatsapp.net')}}, {quoted: m})}
+conn.sendMessage(m.chat, {text: caption, contextInfo:{ mentionedJid: [...caption.matchAll(/@(\d{0,16})/g)].map(v => v[1] + '@s.whatsapp.net')}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 module.exports = {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, adm, infogr, warn1, warn2, online, listw}
 

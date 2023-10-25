@@ -13,7 +13,7 @@ const os = require('os')
 
 async function game(conn, m, text, pushname, command, quoted) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (!text) return conn.sendMessage(m.chat, { text: `Hola 👋 *${pushname}* Quieres hablar un rato? conmigo usar de esta forma\n\nEjemplo: ${prefix + command} Hola` }, { quoted: m })
+if (!text) return m.reply(`Hola 👋 *${pushname}* Quieres hablar un rato? conmigo usar de esta forma\n\nEjemplo: ${prefix + command} Hola`) 
 try {     
 await conn.sendPresenceUpdate('composing', m.chat)
 let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${text}&lc=es&cf=false`)
@@ -36,7 +36,7 @@ let jawab = `@${who.split("@")[0]} Es 🏳️‍🌈 ${random}% Gay\n\n${ga}`
 let ments = [me, jodoh]
 conn.sendMessage(m.chat, { image: { url: global.API('https://some-random-api.com', '/canvas/gay', { 
 avatar: await conn.profilePictureUrl(who, 'image').catch((_) => 'https://telegra.ph/file/24fa902ead26340f3df2c.png'), 
-   })}, caption: jawab, contextInfo:{ mentionedJid:[who], forwardingScore: 9999999, isForwarded: true, }}, { quoted: m })
+   })}, caption: jawab, contextInfo:{ mentionedJid:[who], forwardingScore: 9999999, isForwarded: true, }}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }
 
 async function game2(conn, m, pushname, participants, sender) {
@@ -59,8 +59,7 @@ isForwarded: true,
 "previewType": "PHOTO",
 "thumbnailUrl": ``,
 "thumbnail": imagen1, 
-"sourceUrl": md}}},
-{ quoted: m})
+"sourceUrl": md}}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }
 
 async function game3(conn, text, prefix, command, body, from, m, sender, quoted, target, bot, participant) {
@@ -85,7 +84,7 @@ quoted: quotedMessage
 };
 conn.sendMessage(m.chat, sendMessageOptions, { quoted: quotedMessage });
 } else {
-conn.sendMessage(m.chat, { text: `*Ejemplo:* ${prefix + command} @tag|puto|😯`}, { quoted: m })
+conn.sendMessage(m.chat, { text: `*Ejemplo:* ${prefix + command} @tag|puto|😯`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }}
 
 async function game4(conn, m, pushname, text, sender) {
@@ -97,7 +96,7 @@ conn.sendMessage(m.chat, { text: `🤤👅🥵 *𝐀𝐂𝐀𝐁𝐀𝐒 𝐃�
 𝙏𝙚 𝙖𝙘𝙖𝙗𝙖𝙨 𝙙𝙚 𝙛𝙤𝙡𝙡𝙖𝙧 𝙖 𝙡𝙖 𝙥𝙚𝙧𝙧𝙖 𝙙𝙚 ${text} 𝙖 𝟰 𝙥𝙖𝙩𝙖𝙨 𝙢𝙞𝙚𝙣𝙩𝙧𝙖𝙨 𝙩𝙚 𝙜𝙚𝙢𝙞𝙖 𝙘𝙤𝙢𝙤 𝙪𝙣𝙖 𝙢𝙖𝙡𝙙𝙞𝙩𝙖 𝙥𝙚𝙧𝙧𝙖 "𝐀𝐚𝐚𝐡.., 𝐀𝐚𝐚𝐡𝐡, 𝐬𝐢𝐠𝐮𝐞, 𝐧𝐨 𝐩𝐚𝐫𝐞𝐬, 𝐧𝐨 𝐩𝐚𝐫𝐞𝐬.." 𝙮 𝙡𝙖 𝙝𝙖𝙨 𝙙𝙚𝙟𝙖𝙙𝙤 𝙩𝙖𝙣 𝙧𝙚𝙫𝙚𝙣𝙩𝙖𝙙𝙖 𝙦𝙪𝙚 𝙣𝙤 𝙥𝙪𝙚𝙙𝙚 𝙨𝙤𝙨𝙩𝙚𝙣𝙚𝙧 𝙣𝙞 𝙨𝙪 𝙥𝙧𝙤𝙥𝙞𝙤 𝙘𝙪𝙚𝙧𝙥𝙤 𝙡𝙖 𝙢𝙖𝙡𝙙𝙞𝙩𝙖 𝙯𝙤𝙧𝙧𝙖!
 
 ${text}
-🤤🥵 *¡𝐘𝐀 𝐓𝐄 𝐇𝐀𝐍 𝐅𝐎𝐋𝐋𝐀𝐃𝐎!* 🥵🤤`, mentions: [m.sender, text.replace('@', '') + '@s.whatsapp.net']}, { quoted: m})}
+🤤🥵 *¡𝐘𝐀 𝐓𝐄 𝐇𝐀𝐍 𝐅𝐎𝐋𝐋𝐀𝐃𝐎!* 🥵🤤`, mentions: [m.sender, text.replace('@', '') + '@s.whatsapp.net']}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 async function game5(conn, m, pushname, text, astro, sender, command) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
@@ -326,7 +325,7 @@ conn.sendMessage(m.chat, { text: top, contextInfo:{
 mentionedJid:[a, b, c, d, e],
 forwardingScore: 9999999,
 isForwarded: true, }}, { quoted: m })
-conn.sendMessage(m.chat, { audio: { url: vn }, fileName: 'error.mp3', mimetype: 'audio/mp4', ptt: true }, { quoted : m })}
+conn.sendMessage(m.chat, { audio: { url: vn }, fileName: 'error.mp3', mimetype: 'audio/mp4', ptt: true }, { quoted : m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 async function game13(conn, participants, command, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
@@ -360,7 +359,7 @@ conn.sendMessage(m.chat, { text: top, contextInfo:{
 mentionedJid:[a, b, c, d, e, f, g, h, i, j],
 forwardingScore: 9999999,
 isForwarded: true, }}, { quoted: m })
-await conn.sendMessage(m.chat, { audio: { url: vn }, fileName: 'error.mp3', mimetype: 'audio/mp4', ptt: true }, { quoted : m })}
+await conn.sendMessage(m.chat, { audio: { url: vn }, fileName: 'error.mp3', mimetype: 'audio/mp4', ptt: true }, { quoted : m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 if (command == 'topotakus') {
 const vn = './media/otaku.mp3';
 const top = `*🌸 TOP 10 OTAKUS DEL GRUPO 🌸*
@@ -379,7 +378,7 @@ conn.sendMessage(m.chat, { text: top, contextInfo:{
 mentionedJid:[a, b, c, d, e, f, g, h, i, j],
 forwardingScore: 9999999,
 isForwarded: true, }}, { quoted: m })
-await conn.sendMessage(m.chat, { audio: { url: vn }, fileName: 'error.mp3', mimetype: 'audio/mp4', ptt: true }, { quoted : m })}}
+await conn.sendMessage(m.chat, { audio: { url: vn }, fileName: 'error.mp3', mimetype: 'audio/mp4', ptt: true }, { quoted : m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}}
 
 async function game14(m, pickRandom) {
 m.reply(`╱╲❀╱╲╱╲❀╱╲╱╲❀╱╲\n◆ ${pickRandom(global.piropo)}\n╲╱❀╲╱╲╱❀╲╱╲╱❀╲╱`)}

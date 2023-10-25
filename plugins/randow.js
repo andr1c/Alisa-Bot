@@ -20,7 +20,7 @@ async function randow3(conn, m, pickRandom, sender){
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 var lolivid = JSON.parse(fs.readFileSync('./src/randow/lolivid.json'))
 var lolividresult = pickRandom(lolivid)
-conn.sendMessage(m.chat, { video: { url: lolividresult }, caption: `💕💕💕💕` }, { quoted: m })}
+conn.sendMessage(m.chat, { video: { url: lolividresult }, caption: `💕💕💕💕` }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 async function randow4(sendImageAsUrl, m, pickRandom, sender){
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
@@ -39,20 +39,20 @@ if (global.db.data.users[m.sender].registered < true) return m.reply(info.regist
 let who = conn
 conn.sendMessage(m.chat, { image: { url: global.API('https://some-random-api.com', '/canvas/horny', { 
 avatar: await conn.profilePictureUrl(m.chat, 'image').catch((_) => 'https://telegra.ph/file/24fa902ead26340f3df2c.png'), 
-})}, caption: `*𝚃𝚄 𝙴𝚂𝚃𝙰𝚂 𝙷𝙾𝚁𝙽𝚈 🥵🔥*`}, { quoted: m })}
+})}, caption: `*𝚃𝚄 𝙴𝚂𝚃𝙰𝚂 𝙷𝙾𝚁𝙽𝚈 🥵🔥*`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 async function randow7(conn, m, who) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 conn.sendMessage(m.chat, { image: { url: global.API('https://some-random-api.com', '/canvas/simpcard', { 
 avatar: await conn.profilePictureUrl(m.chat, 'image').catch((_) => 'https://telegra.ph/file/24fa902ead26340f3df2c.png'), 
-})}, caption: `_𝚃𝚄 𝚁𝙴𝙻𝙸𝙶𝙸𝙾𝙽 𝙴𝚂 𝚂𝙴𝚁 𝚄𝙽 𝚂𝙸𝙼𝙿!!_`}, { quoted: m })}
+})}, caption: `_𝚃𝚄 𝚁𝙴𝙻𝙸𝙶𝙸𝙾𝙽 𝙴𝚂 𝚂𝙴𝚁 𝚄𝙽 𝚂𝙸𝙼𝙿!!_`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 async function randow8(conn, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 const who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender;
 conn.sendMessage(m.chat, { image: { url: global.API('https://some-random-api.com', '/canvas/lolice', {
  avatar: await conn.profilePictureUrl(who, 'image').catch((_) => 'https://telegra.ph/file/24fa902ead26340f3df2c.png'),
-  })}, caption: '*ʟʟᴀᴍᴇɴ ᴀ ʟᴀ ᴘᴏʟɪᴄɪᴀ!!* 😱', mentions: [who] }, { quoted: m })}
+  })}, caption: '*ʟʟᴀᴍᴇɴ ᴀ ʟᴀ ᴘᴏʟɪᴄɪᴀ!!* 😱', mentions: [who] }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
   
 async function randow9(conn, text, m, sender, pushname) {  
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
@@ -61,7 +61,7 @@ conn.sendMessage(m.chat, { image: { url: global.API('https://some-random-api.com
 avatar: await conn.profilePictureUrl(m.sender, 'image').catch((_) => 'https://telegra.ph/file/24fa902ead26340f3df2c.png'), 
 comment: text, 
 username: pushname,
-})}, caption: `*ʜᴀs ᴄᴏᴍᴇɴᴛᴀᴅᴏ ᴇɴ ʏᴏᴜᴛᴜʙᴇ!!* 😳`, mentions: [m.sender] }, { quoted: m })}
+})}, caption: `*ʜᴀs ᴄᴏᴍᴇɴᴛᴀᴅᴏ ᴇɴ ʏᴏᴜᴛᴜʙᴇ!!* 😳`, mentions: [m.sender] }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 module.exports = {randow1, randow2, randow3, randow4, randow5, randow6, randow7, randow8, randow9}
 

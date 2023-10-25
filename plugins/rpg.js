@@ -50,9 +50,9 @@ isForwarded: true,
 "thumbnailUrl": ``,
 "thumbnail": imagen1, 
 "sourceUrl": md}}},
-{ quoted: fkontak})
+{ quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 await delay(2 * 2000)
-conn.sendMessage(m.chat, { text: sn, contextInfo:{forwardingScore: 9999999, isForwarded: true, }}, { quoted: m})
+conn.sendMessage(m.chat, { text: sn, contextInfo:{forwardingScore: 9999999, isForwarded: true, }}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }
 
 async function reg1(args, m, sender) { 
@@ -85,13 +85,13 @@ const users = global.db.data.users[who];
 let exp = Math.floor(Math.random() * 15) + 10;
 let limit = Math.floor(Math.random() * 5) + 3;
 const rob = Math.floor(Math.random() * 500);
-if (users.limit < 15) return conn.sendMessage(m.chat, {text: `*😔 ᴇʟ ᴜsᴜᴀʀɪᴏ @${who.split`@`[0]} ᴛɪᴇɴᴇ ᴍᴇɴᴏs ᴅᴇ 15 ᴅɪᴀᴍᴀɴᴛᴇ ɴᴏ ʀᴏʙᴇs ᴀ ᴜɴ ᴘᴏᴅʀᴇ* v:`, mentions: [who]}, {quoted: m});  
-if (users.exp < 10) return conn.sendMessage(m.chat, {text: `*😔 ᴇʟ ᴜsᴜᴀʀɪᴏ @${who.split`@`[0]} ᴛɪᴇɴᴇ ᴍᴇɴᴏs ᴅᴇ 10 ᴇxᴘ*\nɴᴏ ʀᴏʙᴇs ᴀ ᴜɴ ᴘᴏᴅʀᴇ* v:`, mentions: [who]}, {quoted: m});   
+if (users.limit < 15) return conn.sendMessage(m.chat, {text: `*😔 ᴇʟ ᴜsᴜᴀʀɪᴏ @${who.split`@`[0]} ᴛɪᴇɴᴇ ᴍᴇɴᴏs ᴅᴇ 15 ᴅɪᴀᴍᴀɴᴛᴇ ɴᴏ ʀᴏʙᴇs ᴀ ᴜɴ ᴘᴏᴅʀᴇ* v:`, mentions: [who]}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});  
+if (users.exp < 10) return conn.sendMessage(m.chat, {text: `*😔 ᴇʟ ᴜsᴜᴀʀɪᴏ @${who.split`@`[0]} ᴛɪᴇɴᴇ ᴍᴇɴᴏs ᴅᴇ 10 ᴇxᴘ*\nɴᴏ ʀᴏʙᴇs ᴀ ᴜɴ ᴘᴏᴅʀᴇ* v:`, mentions: [who]}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});   
 global.db.data.users[m.sender].exp += exp * 1;
 global.db.data.users[m.sender].limit += limit * 1;
 global.db.data.users[who].exp -= exp * 1;
 global.db.data.users[who].limit -= limit * 1;
-conn.sendMessage(m.chat, {text: `*ʜᴀs sᴀǫᴜᴇᴀᴅᴏ ⚔️ ᴀ @${who.split`@`[0]}*\n◦ ᴇxᴘ ${exp}\n◦ ᴅɪᴀᴍᴀɴᴛᴇ: ${limit}\n\nʀᴏʙᴀᴅᴏ ᴘᴏʀ: @${m.sender.split("@")[0]}`, mentions: [who, m.sender]}, {quoted: m});
+conn.sendMessage(m.chat, {text: `*ʜᴀs sᴀǫᴜᴇᴀᴅᴏ ⚔️ ᴀ @${who.split`@`[0]}*\n◦ ᴇxᴘ ${exp}\n◦ ᴅɪᴀᴍᴀɴᴛᴇ: ${limit}\n\nʀᴏʙᴀᴅᴏ ᴘᴏʀ: @${m.sender.split("@")[0]}`, mentions: [who, m.sender]}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
 global.db.data.users[m.sender].robs = new Date * 1;
  } catch {
 m.reply(`*🚓🚓🚓No le pudiste robar por que a este usuario los protege la policía 👮(AFK)*`)}}
@@ -112,7 +112,7 @@ conn.sendMessage(m.chat, {text: `╔════≪ 𝙱𝙰𝙻𝙰𝙽𝙲𝙴
 ║𝚞𝚜𝚊𝚗𝚍𝚘 𝚕𝚘𝚜 𝚜𝚒𝚐𝚞𝚎𝚗𝚝𝚎 𝚌𝚘𝚖𝚊𝚗𝚍𝚘𝚜:
 ║ • *${prefix}buy <cantidad>*
 ║ • *${prefix}buyall*
-╚═══════════════`, mentions: [who]}, {quoted: m})
+╚═══════════════`, mentions: [who]}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }
 
 async function work(conn, m, sender, fkontak) {
@@ -198,7 +198,7 @@ conn.sendMessage(m.chat, { image: { url: avatar }, caption: `┏─━─━─�
 │🏆ʀᴀɴɢᴏ: ${role}
 │——————«•»——————
 │📇 ʀᴇɢɪsᴛʀᴀᴅᴏs : ${registered ? 'Si': 'No'}
-┗─━─━─━∞◆∞━─━─━─┛`}, { quoted: fkontak })}
+┗─━─━─━∞◆∞━─━─━─┛`}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 async function nivel(conn, sender, canLevelUp, xpRange, m, pushname) {
 let name = conn.getName(m.sender);  
@@ -280,7 +280,7 @@ ${sortedLim.slice(0, len).map(({jid, limit}, i) => `║${i + 1}. ${participants.
 ${sortedLevel.slice(0, len).map(({jid, level}, i) => `║${i + 1}. ${participants.some((p) => jid === p.jid) ? `(${conn.getName(jid)}) wa.me/` : '@'}${jid.split`@`[0]} ➭ *nivel ${level}*`).join`\n`}
 ╚═══════════════ `.trim();
 conn.sendMessage(m.chat, { text: texto, contextInfo:{
-mentionedJid: [...texto.matchAll(/@(\d{0,16})/g)].map(v => v[1] + '@s.whatsapp.net')}}, { quoted: m })}
+mentionedJid: [...texto.matchAll(/@(\d{0,16})/g)].map(v => v[1] + '@s.whatsapp.net')}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 //función pickrandow
 function pickRandom(list) {

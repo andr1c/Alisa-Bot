@@ -29,7 +29,7 @@ for (let i of search.all) {
   teks += `${themeemoji} OPCIÓN : ${no++}\n${themeemoji} TIPO: ${i.type}\n${themeemoji} ID DEL VIDEO : ${i.videoId}\n${themeemoji} TITULO: ${i.title}\n${themeemoji} VISTAS : ${i.views}\n${themeemoji} DURACIÓN : ${i.timestamp}\n${themeemoji} SUBIDOS: ${i.ago}\n${themeemoji} URL: ${i.url}\n\n✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧\n\n`;
 }
 await conn.sendMessage(from, { image: { url: search.all[0].thumbnail }, caption: teks }, { quoted: fkontak });
-await conn.sendMessage(from, {text: info.result, edit: key}, { quoted: fkontak })
+await conn.sendMessage(from, {text: info.result, edit: key}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }
 
 async function acortar(conn, m, text, args, command) {
@@ -97,12 +97,12 @@ let texttosay = text
 : m.text;
 const SpeakEngine = require("google-tts-api"); 
 const texttospeechurl = SpeakEngine.getAudioUrl(texttosay, {lang: "es", slow: false, host: "https://translate.google.com",});
-conn.sendMessage(m.chat, { audio: { url: texttospeechurl }, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": md, "showAdAttribution": true}}, seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, { quoted: m })}
+conn.sendMessage(m.chat, { audio: { url: texttospeechurl }, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": md, "showAdAttribution": true}}, seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 async function ia(conn, m, text, quoted) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
-if (!text) return conn.sendMessage(m.chat, { text: `*INGRESE EL TEXTO DE LOS QUE QUIERE BUSCAR?*` }, { quoted: m })
+if (!text) return m.reply('*INGRESE EL TEXTO DE LOS QUE QUIERE BUSCAR?*') 
 await conn.sendPresenceUpdate('composing', m.chat)
 let tioress = await fetch(`https://api.lolhuman.xyz/api/openai-turbo?apikey=${lolkeysapi}&text=${text}`)
 let hasill = await tioress.json()
@@ -115,7 +115,7 @@ if (global.db.data.users[m.sender].registered < true) return m.reply(info.regist
 if (!q) return m.reply(`*Ejemplo:* ${prefix+command} link`)
 conn.fakeReply(m.chat, `⏳ *Aguarde un momento....*`, '0@s.whatsapp.net', 'No haga spam')
 let krt = await scp1.ssweb(q)
-conn.sendMessage(m.chat, {image:krt.result, caption: info.result}, {quoted:m})}
+conn.sendMessage(m.chat, {image:krt.result, caption: info.result}, {quoted:m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 async function wall(conn, text, command, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
@@ -124,7 +124,7 @@ if (!text) return m.reply(`*[ ⚠️ ] Ejemplo: ${prefix + command} anime*`)
 let { wallpaper, wallpaperv2 } = require('@bochilteam/scraper')
 let _res = await (/2/.test(command) ? wallpaperv2 : wallpaper)(text) 
 let _img = _res[Math.floor(Math.random() * _res.length)]
-conn.sendMessage(m.chat, { image: { url: _img }, caption: `_*ＲＥＳＵＬＴＡＤＯＳ ＤＥ : ${text}*_`}, { quoted: m })}
+conn.sendMessage(m.chat, { image: { url: _img }, caption: `_*ＲＥＳＵＬＴＡＤＯＳ ＤＥ : ${text}*_`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 module.exports = {yt, acortar, google, imagen, tran, tts, ia, ssw, wall}
 

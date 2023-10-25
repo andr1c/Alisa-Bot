@@ -29,7 +29,7 @@ exec(`ffmpeg -i ${media} ${set} ${ran}`, (err, stderr, stdout) => {
 fs.unlinkSync(media)  
 if (err) return reply(err)  
 let buff = fs.readFileSync(ran)  
-conn.sendMessage(m.chat, { audio: buff, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": md, "showAdAttribution": true}}, ptt: false, mimetype: 'audio/mpeg', fileName: `error.mp3` }, { quoted: m })
+conn.sendMessage(m.chat, { audio: buff, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": md, "showAdAttribution": true}}, ptt: false, mimetype: 'audio/mpeg', fileName: `error.mp3` }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 fs.unlinkSync(ran)})  
 } else m.reply(`*Responde al audio que deseas cambiar con el comando:* *${prefix + command}*`)  
 } catch (e) {  
@@ -59,7 +59,7 @@ if (!quoted) return m.reply(`*[ ⚠️ ] Responda a un audio*`)
 let { toAudio } = require('../libs/converter.js')
 let media  = await conn.downloadMediaMessage(quoted)
 let audio = await toAudio(media, 'mp4')
-await conn.sendMessage(m.chat, {audio: audio, mimetype: 'audio/mpeg', contextInfo:{  externalAdReply: { showAdAttribution: true, mediaType:  1, mediaUrl: md, title: global.botname, sourceUrl: md, thumbnail: imagen1 }}}, { quoted: m })}
+await conn.sendMessage(m.chat, {audio: audio, mimetype: 'audio/mpeg', contextInfo:{  externalAdReply: { showAdAttribution: true, mediaType:  1, mediaUrl: md, title: global.botname, sourceUrl: md, thumbnail: imagen1 }}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 async function toimg(conn, mime, quoted, exec, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
@@ -71,7 +71,7 @@ exec(`ffmpeg -i ${media} ${ran}`, (err) => {
 fs.unlinkSync(media)
 if (err) throw err
 let buffer = fs.readFileSync(ran)
-conn.sendMessage(m.chat, { image: buffer }, { quoted: m})
+conn.sendMessage(m.chat, { image: buffer }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 fs.unlinkSync(ran)})}
 
 async function toanime(conn, mime, quoted, lolkeysapi, m) { 

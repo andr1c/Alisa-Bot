@@ -378,7 +378,7 @@ mentionedJid:[sender, numBot],
 "thumbnail": imagen3,  
 "mediaUrl": md, 
 "sourceUrl": md, 
-}}}, { quoted: fkontak }) 
+}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}) 
 }
 
 const menu2 = (conn, pushname, m, fkontak) => {
@@ -439,7 +439,7 @@ Onichan
 La toca 7w7
 
 _*Ojito escribe tal y como esta en el mensaje*_`
-conn.sendMessage(m.chat, { text: menu2}, { quoted: fkontak })}
+conn.sendMessage(m.chat, { text: menu2}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 const nuevo = (conn, m, sender, pickRandom, fkontak) => {
 conn.sendMessage(m.chat, { text: `🤔 *Que hay de nuevo?* 🤗
@@ -447,6 +447,15 @@ conn.sendMessage(m.chat, { text: `🤔 *Que hay de nuevo?* 🤗
 *🌐 Version del bot:* [ ${vs} ] 
 
 *Nuevo comando:*
+
+🚀 Descarga audio el documento
+• ${prefix}play3
+• ${prefix}playdoc
+
+🚀 Descarga Video el documento
+• ${prefix}play4
+• ${prefix}ytmp4doc
+
 🚀 Descarga musica de spotify
 • ${prefix}spotify
 • ${prefix}music
@@ -457,7 +466,7 @@ conn.sendMessage(m.chat, { text: `🤔 *Que hay de nuevo?* 🤗
 💠 Nivel automatico activa con: 
 • ${prefix}autonivel on
 
-🤖 Mejorar para los SubBot mas estable 💫`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn, md, yt])}`}}}, { quoted: fkontak})}
+🤖 Mejorar para los SubBot mas estable 💫`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn, md, yt])}`}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 const regla = (conn, m, sender, pickRandom, fkontak) => {
 //let Grupos = `${pickRandom([nna, nn2, md, yt, tiktok])}`;
@@ -473,7 +482,7 @@ Hablar con mi creador y el lo une a tu grupo
 
 *• No llamar al bot, ni al creador*
 
-Si lo haces, seras baneado del bot y bloqueado`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn, md, yt])}`}}}, { quoted: fkontak})}
+Si lo haces, seras baneado del bot y bloqueado`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn, md, yt])}`}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 module.exports = { menu, menu2, nuevo, regla}
 
