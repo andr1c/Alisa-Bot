@@ -715,7 +715,7 @@ m.body = m.message.conversation || m.message[m.mtype].caption || m.message[m.mty
      * @returns 
      */
      
-    conn.sendImageAsSticker = async (jid, path, quoted, ephemeralExpiration, disappearingMessagesInChat, options = {}) => {
+    conn.sendImageAsSticker = async (jid, path, quoted, options = {}) => {
         let buff = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
         let buffer
         if (options && (options.packname || options.author)) {
@@ -723,7 +723,7 @@ m.body = m.message.conversation || m.message[m.mtype].caption || m.message[m.mty
         } else {
             buffer = await imageToWebp(buff)
         }
- await conn.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+ await conn.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted: quoted ? quoted : m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
         return buffer
     }
     
@@ -761,7 +761,7 @@ m.body = m.message.conversation || m.message[m.mtype].caption || m.message[m.mty
     */
     conn.sendImage = async (jid, path, caption = '', quoted = '', options) => { 
      let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0) 
-     return await conn.sendMessage(jid, { image: buffer, caption: caption, ...options }, { quoted, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}) 
+     return await conn.sendMessage(jid, { image: buffer, caption: caption, ...options }, { quoted: quoted ? quoted : m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
      } 
      
     /**
@@ -827,8 +827,8 @@ conn.user.chat = m.chat // chat in user?????????
     * @param {*} fakecaption
     */
 
-    conn.fakeReply = (jid, caption,  fakeNumber, fakeCaption) => {
-    conn.sendMessage(jid, { text: caption }, {quoted: { key: { fromMe: false, participant: fakeNumber, ...(m.chat ? { remoteJid: null } : {}) }, message: { conversation: fakeCaption }}})
+    conn.fakeReply = (jid, caption,  fakeNumber, fakeCaption, quoted) => {
+    conn.sendMessage(jid, { text: caption }, {quoted: { key: { fromMe: false, participant: fakeNumber, ...(m.chat ? { remoteJid: null } : {}) }, message: { conversation: fakeCaption, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}}})
     }
 
     /**
@@ -958,7 +958,7 @@ conn.user.chat = m.chat // chat in user?????????
             buffer = await videoToWebp(buff)
         }
 
-        await conn.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+        await conn.sendMessage(jid, { sticker: { url: buffer }, ...options }, {quoted: quoted ? quoted : m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
         return buffer
     }
     conn.sendPoll = (jid, name = '', values = [], selectableCount = 1) => { return conn.sendMessage(jid, { poll: { name, values, selectableCount }}) }
