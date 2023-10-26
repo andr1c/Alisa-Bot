@@ -419,9 +419,13 @@ const time = moment.tz('America/Bogota').format('HH:mm:ss')
 const date = moment.tz('America/Bogota').format('DD/MM/YYYY')
 let name = num
 const miembros = metadata.participants.length
-let wel = [`Hola @${name.split("@")[0]} ¿COMO ESTAS? 😃`, `HOLAA!! @${name.split("@")[0]} ¿COMO ESTAS?😃\n『Bienvenido A *${metadata.subject}*』\n\nUn gusto conocerte amig@ 🤗\n\n_Recuerda leer las reglas del grupo para no tener ningun problema 🧐_\n\n*Solo disfrutar de este grupo y divertite 🥳*`, `[ NUEVO MIEMBRO ]\n\nBienvenido a @${name.split("@")[0]}`, `Bienvenido @${name.split("@")[0]} 🥳 A este hermoso grupo: ${metadata.subject} 🎉 Espero que te sienta a gusto aqui 🥰\n\n\n   ╭━━━━━━╮\n╭┃    ╭━━━━╮\n┃┃    ╰━━━━╯\n┃┃    💧   👉 👈    dime uwu 🥺\n╰┃    ┃ ─┌     ┃\n    ╰━╯   ╰━╯\n`]
-try { 
+let wel = [`Hola @${name.split("@")[0]} ¿COMO ESTAS? 😃`, `HOLAA!! @${name.split("@")[0]} ¿COMO ESTAS?😃\n\n『Bienvenido A *${metadata.subject}*』\n\nUn gusto conocerte amig@ 🤗\n\n_Recuerda leer las reglas del grupo para no tener ningun problema 🧐_\n\n*Solo disfrutar de este grupo y divertite 🥳*`, `[ NUEVO MIEMBRO ]\n\nBienvenido a @${name.split("@")[0]}`, `Bienvenido @${name.split("@")[0]} 🥳 a este hermoso grupo [ ${metadata.subject} 🎉 ] Espero que te sienta a gusto aqui 🥰\n\n\n   
+ ▼￣＞-―-＜￣▼
+   ⚡ Ｙ                Ｙ ⚡
+  /   /   ๑⚈  ․̫  ⚈๑)    Bienvenido uwu
+＼  ｜     つ        ヽつ  \n`, `𝘓𝘦 𝘥𝘢𝘮𝘰𝘴 𝘭𝘢 𝘣𝘪𝘦𝘯𝘷𝘦𝘯𝘪𝘥𝘢 𝘢 @${name.split("@")[0]} 🥳`, `Holi @${name.split("@")[0]} Bienvenido 🎉`]
 let welcome = wel[Math.floor(Math.random() * wel.length)]
+try { 
 sock.sendMessage(anu.id, { text: welcome, mentions: [num]}, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 /*sock.sendMessage(anu.id, { text: `⪨────[ ＷＥＬＣＯＭＥ ]────⪩
 
@@ -450,7 +454,7 @@ console.log('[Error]')}
 const buffer = await getBuffer(ppuser)
 let name = num
 const members = metadata.participants.length
-let by = [`Adios @${name.split("@")[0]} 👋`, `Se fue @${name.split("@")[0]} quien carajo era?`, `Bueno, se fue @${name.split("@")[0]} 👋\n\nQue dios lo bendiga 😎`, `\`\`\`[!] C fue alv : @${name.split("@")[0]}\`\`\``]
+let by = [`Adios @${name.split("@")[0]} 👋`, `Se fue @${name.split("@")[0]} quien carajo era?`, `Bueno, se fue @${name.split("@")[0]} 👋\n\nQue dios lo bendiga 😎`, `\`\`\`[!] C fue alv : @${name.split("@")[0]}\`\`\``, `_Salio del grupo @${name.split("@")[0]}._`]
 let bye = by[Math.floor(Math.random() * by.length)]
 sock.sendMessage(anu.id, { text: bye, mentions: [num]}, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 /*sock.sendMessage(anu.id, { text: `Se fue @${name.split("@")[0]} nadie los van extraña 😹`,
