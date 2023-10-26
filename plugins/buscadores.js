@@ -58,18 +58,22 @@ m.reply(teks)})
 
 async function imagen(conn, m, text, command) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+const {googleImage} = require('@bochilteam/scraper') 
 if (!text) return m.reply(`*Que esta buscado?*\n*Ejemplo:*\n${prefix + command} gatito`)
 try {  
 image = await fetchJson(`https://api.akuari.my.id/search/googleimage?query=${text}`)
 n = image.result
 images = n[Math.floor(Math.random() * n.length)]
 conn.sendMessage(m.chat, { image: { url: images}, caption: `*💫 𝘙𝘌𝘚𝘜𝘓𝘛𝘈𝘋𝘖𝘚 𝘋𝘌 :* ${text}`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
-} catch {  
+} catch {
+try {  
 const res = await googleImage(text);
 const image = res[Math.floor(Math.random() * res.length)]
-const link = imagen;
-conn.sendFile(m.chat, link, 'error.jpg', `*💫 𝘙𝘌𝘚𝘜𝘓𝘛𝘈𝘋𝘖𝘚 𝘋𝘌 :* ${text}`, m);
-}}
+const link = image;
+conn.sendMessage(m.chat, { image: { url: link}, caption: `*💫 𝘙𝘌𝘚𝘜𝘓𝘛𝘈𝘋𝘖𝘚 𝘋𝘌 :* ${text}`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+} catch (e) {
+console.log(e)
+}}}
 
 async function tran(conn, m, args, quoted, prefix, command) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
