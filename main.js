@@ -769,6 +769,19 @@ if (!isCreator) return reply(info.owner)
 reply(m.chat, `*Adios fue un gusto esta aqui hasta pronto 👋*`)
 await conn.groupLeave(m.chat)}
 break
+case 'backup': case 'respaldo': case 'copia':
+if (!isCreator) return reply(info.owner)
+try {
+let d = new Date
+let date = d.toLocaleDateString('fr', { day: 'numeric', month: 'long', year: 'numeric' })
+let database = await fs.readFileSync(`./database.json`)
+let creds = await fs.readFileSync(`./sessions/creds.json`)
+await m.reply('*𝘌𝘯𝘷𝘪𝘢𝘯𝘥𝘰 𝘤𝘰𝘱𝘪𝘢 𝘥𝘦 𝘴𝘦𝘨𝘶𝘳𝘪𝘥𝘢 𝘶𝘯 𝘮𝘰𝘮𝘦𝘯𝘵𝘰*')
+await conn.sendMessage(m.sender, {document: database, mimetype: 'application/json', fileName: `database.json`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+await conn.sendMessage(m.sender, {document: creds, mimetype: 'application/json', fileName: `creds.json`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+} catch (e) {
+console.log(e)}   
+break
 case 'update':  
 if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg });    
 try {    
