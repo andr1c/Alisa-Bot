@@ -400,9 +400,9 @@ if (stdout.trim()) m.reply(stdout)
 if (stderr.trim()) m.reply(stderr)}}
 break
 case 'antilink': case 'antienlace': on1(isBotAdmins, isGroupAdmins, text, command, args, m)
-break 
+break  
 case 'antifake': case 'antiFake': on2(isBotAdmins, isGroupAdmins, text, command, args, m)
-break   
+break          
 case 'antiarabe': case 'antiArabe': on3(isBotAdmins, isGroupAdmins, text, command, args, m)
 break
 case 'autodetect': case 'detect': on4(isBotAdmins, isGroupAdmins, text, command, args, m)
