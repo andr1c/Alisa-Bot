@@ -387,21 +387,9 @@ break
 case 'sc':   
 sc(conn, m)  
 break
-case 'speedtest': {
-m.reply('*🚀 Test de velocidad | Speed...*')
-let cp = require('child_process')
-let { promisify } = require('util')
-let exec = promisify(cp.exec).bind(cp)
-let o
-try {
-o = await exec('python speed.py')
-} catch (e) {
-o = e
-} finally {
-let { stdout, stderr } = o 
-if (stdout.trim()) m.reply(stdout) 
-if (stderr.trim()) m.reply(stderr)}}
-break  
+//activa/desactivar
+case 'welcome': case 'bienvenida': on(isGroupAdmins, text, command, args, m) 
+break
 case 'antilink': case 'antienlace': on1(isBotAdmins, isGroupAdmins, text, command, args, m)
 break  
 case 'antifake': case 'antiFake': on2(isBotAdmins, isGroupAdmins, text, command, args, m)
