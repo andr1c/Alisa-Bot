@@ -22,6 +22,7 @@ const week = d.toLocaleDateString(locale, {weekday: 'long'});
 const date = d.toLocaleDateString(locale, {day: 'numeric', month: 'long', year: 'numeric'});*/
 let wa = m.key.id.length > 21 ? 'Android' : m.key.id.substring(0, 2) == '3A' ? 'IOS' : 'whatsapp web'
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+m.react('🙌') 
 let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
 ║✾ Hola @${sender.split("@")[0]} ${user.registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''} 👋🏻
@@ -98,8 +99,14 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 
 *╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*⃐🔄ＤＥＳＣＡＲＧＡ*️⃟ᬽ፝֟━*
 ├❥ᰰຼ ❏ ${prefix}play 
-├❥ᰰຼ ❏ ${prefix}play2 
 ├❥ᰰຼ _(Titulo/nombre de la canción para descargar el audio)_
+├❥ᰰຼ ❏ ${prefix}play2
+├❥ᰰຼ _(Titulo/nombre de la canción para descargar el video)_
+├❥ᰰຼ ❏ ${prefix}playdoc
+├❥ᰰຼ ❏ ${prefix}play3
+├❥ᰰຼ _(Descarga audio el documento)_
+├❥ᰰຼ ❏ ${prefix}play4 
+├❥ᰰຼ _(Descarga video el documento)_
 ├❥ᰰຼ ❏ ${prefix}yts 
 ├❥ᰰຼ  _(buscar los links para descarga el video)_
 ├❥ᰰຼ ❏ ${prefix}ytmp3
@@ -140,6 +147,8 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}modoadmin _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}audios _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}chatbot _(on/off)_
+├❥ᰰຼ ❏ ${prefix}autolevelup _(on/off)_
+├❥ᰰຼ ❏ ${prefix}autonivel _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}kick _(@tag)_
 ├❥ᰰຼ ❏ ${prefix}add _(@tag)_
 ├❥ᰰຼ ❏ ${prefix}invita _(@tag)_
@@ -186,6 +195,7 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ _(juegas un piedra, papel, o tijera)_
 ├❥ᰰຼ ❏ ${prefix}gay @tag
 ├❥ᰰຼ ❏ ${prefix}pareja @tag
+├❥ᰰຼ ❏ ${prefix}love @tag
 ├❥ᰰຼ ❏ ${prefix}follar @tag
 ├❥ᰰຼ ❏ ${prefix}topgays
 ├❥ᰰຼ ❏ ${prefix}topotakus
@@ -349,6 +359,8 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}antiprivado _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}autoread _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}modojadibot _(on/off)_
+├❥ᰰຼ ❏ ${prefix}banuser _(banea algun usuario por mal uso del bot)_
+├❥ᰰຼ ❏ ${prefix}unbanuser _(desbanea al usuario)_
 ├❥ᰰຼ ❏ ${prefix}autoadmin 
 ├❥ᰰຼ ❏ ${prefix}bc (difusión a todos los chat)
 ├❥ᰰຼ ❏ ${prefix}bcgc (difusión solo a grupos)

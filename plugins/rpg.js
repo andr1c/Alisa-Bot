@@ -85,8 +85,8 @@ const users = global.db.data.users[who];
 let exp = Math.floor(Math.random() * 15) + 10;
 let limit = Math.floor(Math.random() * 5) + 3;
 const rob = Math.floor(Math.random() * 500);
-if (users.limit < 15) return conn.sendMessage(m.chat, {text: `*😔 ᴇʟ ᴜsᴜᴀʀɪᴏ @${who.split`@`[0]} ᴛɪᴇɴᴇ ᴍᴇɴᴏs ᴅᴇ 15 ᴅɪᴀᴍᴀɴᴛᴇ ɴᴏ ʀᴏʙᴇs ᴀ ᴜɴ ᴘᴏᴅʀᴇ* v:`, mentions: [who]}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});  
-if (users.exp < 10) return conn.sendMessage(m.chat, {text: `*😔 ᴇʟ ᴜsᴜᴀʀɪᴏ @${who.split`@`[0]} ᴛɪᴇɴᴇ ᴍᴇɴᴏs ᴅᴇ 10 ᴇxᴘ*\nɴᴏ ʀᴏʙᴇs ᴀ ᴜɴ ᴘᴏᴅʀᴇ* v:`, mentions: [who]}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});   
+if (users.limit < 15) return conn.sendMessage(m.chat, {text: `*😔 ᴇʟ ᴜsᴜᴀʀɪᴏ @${who.split`@`[0]} ᴛɪᴇɴᴇ ᴍᴇɴᴏs ᴅᴇ 15 ᴅɪᴀᴍᴀɴᴛᴇ, ɴᴏ ʀᴏʙᴇs ᴀ ᴜɴ ᴘᴏʙʀᴇ* v:`, mentions: [who]}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});  
+if (users.exp < 10) return conn.sendMessage(m.chat, {text: `*😔 ᴇʟ ᴜsᴜᴀʀɪᴏ @${who.split`@`[0]} ᴛɪᴇɴᴇ ᴍᴇɴᴏs ᴅᴇ 10 ᴇxᴘ*\n*ɴᴏ ʀᴏʙᴇs ᴀ ᴜɴ ᴘᴏʙʀᴇ* v:`, mentions: [who]}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});   
 global.db.data.users[m.sender].exp += exp * 1;
 global.db.data.users[m.sender].limit += limit * 1;
 global.db.data.users[who].exp -= exp * 1;
@@ -198,7 +198,8 @@ conn.sendMessage(m.chat, { image: { url: avatar }, caption: `┏─━─━─�
 │🏆ʀᴀɴɢᴏ: ${role}
 │——————«•»——————
 │📇 ʀᴇɢɪsᴛʀᴀᴅᴏs : ${registered ? 'Si': 'No'}
-┗─━─━─━∞◆∞━─━─━─┛`}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+┗─━─━─━∞◆∞━─━─━─┛`}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+m.react(done)}
 
 async function nivel(conn, sender, canLevelUp, xpRange, m, pushname) {
 let name = conn.getName(m.sender);  

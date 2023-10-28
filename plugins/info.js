@@ -128,7 +128,21 @@ conn.sendMessage(i + "@s.whatsapp.net", {text: teks + teks1, mentions:[m.sender]
 conn.sendMessage(m.chat, {text: teks + teks2 + teks1, mentions:[m.sender]}, {quoted:m})
 }
 
-module.exports = { state, owner, grupo, instalar, ping, report, ow}
+async function sc(conn, m) {
+let who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false
+let res = await fetch('https://api.github.com/repos/elrebelde21/NovaBot-MD')
+let json = await res.json()
+let txt = `			 *乂 B O T  -  S C R I P T 乂*\n\n`
+txt += `◦  *Nombre* : ${json.name}\n`
+txt += `◦  *Visitantes* : ${json.watchers_count}\n`
+txt += `◦  *Tamaños* : ${(json.size / 1024).toFixed(2)} MB\n`
+txt += `◦  *Actulizacion* : ${moment(json.updated_at).format('DD/MM/YY - HH:mm:ss')}\n`
+txt += `◦  *Url* : ${json.html_url}\n\n`
+txt += `${json.forks_count} Forks · ${json.stargazers_count} Stars · ${json.open_issues_count} Issues\n\n`
+txt += res
+await conn.relayMessage(m.chat,  {requestPaymentMessage: {currencyCodeIso4217: 'INR', amount1000: '1000000000000', requestFrom: '0@s.whatsapp.net', noteMessage: {extendedTextMessage: {text: txt, contextInfo: {mentionedJid: [m.sender], externalAdReply: {showAdAttribution: true }}}}}}, {})}
+
+module.exports = { state, owner, grupo, instalar, ping, report, ow, sc}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {

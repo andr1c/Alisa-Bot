@@ -8,7 +8,8 @@ async function randow1(sendImageAsUrl, m, sender) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 let hispamemes = require("hispamemes") 
 const meme = hispamemes.meme()
-sendImageAsUrl(meme, '🤣')}
+sendImageAsUrl(meme, '🤣')
+m.react('😆')}
 
 async function randow2(sendImageAsUrl, m, pickRandom, sender){
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)

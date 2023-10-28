@@ -16,14 +16,16 @@ const yts = require("yt-search")
 const ytdl = require('ytdl-core') 
 if (!text) return m.reply(`*Que esta buscado? ingrese el nombre del tema*\n\nEjemplo: *${prefix + command}* ozuna`) 
 try { 
+m.react(rwait) 
 let vid = (await yts(text)).all[0]
 const yt_play = await search(args.join(" "))
 let { title, description, url, thumbnail, videoId, timestamp, views, published } = vid
 let message = await conn.sendMessage(m.chat, { text: `         *⌜Cancion Encontrada ✅⌟*\n\n◉ *Título:* ${yt_play[0].title}\n◉ *Duracion:* ${secondString(yt_play[0].duration.seconds)}\n◉ *Publicado:* ${yt_play[0].ago}\n◉ *Autor:* ${yt_play[0].author.name}\n◉ *Vistas:* ${MilesNumber(yt_play[0].views)}\n\n*• 𝘋𝘦𝘴𝘤𝘢𝘳𝘨𝘢𝘥𝘰 𝘢𝘶𝘥𝘪𝘰 🔊, 𝘈𝘨𝘶𝘢𝘳𝘥𝘦 𝘶𝘯 𝘮𝘰𝘮𝘦𝘯𝘵𝘰....*`, contextInfo: { externalAdReply: { title: wm, body: yt_play[0].title.replace(/\*/g, ''), thumbnailUrl: thumbnail, sourceUrl: yt_play[0].url, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: true }}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 let mediaa = await ytMp4(yt_play[0].url)
-conn.sendMessage(m.chat, { audio: { url: mediaa.result }, mimetype: 'audio/mpeg' }, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+conn.sendMessage(m.chat, { audio: { url: mediaa.result }, mimetype: 'audio/mpeg' }, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}) 
 db.data.users[m.sender].limit -= 1
 m.reply(info.limit)
+m.react(done) 
 } catch {
 try { 
 let search = await yts(text)
@@ -33,20 +35,24 @@ eek = await getBuffer(anu.thumbnail)
 const playmp3 = require('../libs/ytdl2')
 const pl= await playmp3.mp3(anup3k.url)
 await conn.sendMessage(m.chat, { audio: fs.readFileSync(pl.path), fileName: `error.mp3`, mimetype: 'audio/mp4' },  {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+m.react(done) 
 await fs.unlinkSync(pl.path)
 } catch (e) {
+m.react(error) 
 console.log(e)}}}
 
 async function play2(conn, text, command, args, m) {
 const yts = require("yt-search") 
 const ytdl = require('ytdl-core') 
 if (!text) return m.reply(`*Que esta buscado? ingrese el nombre del tema*\n\nEjemplo: *${prefix + command}* ozuna`) 
+m.react(rwait) 
 let vid = (await yts(text)).all[0]
 const yt_play = await search(args.join(" "))
 let { title, description, url, thumbnail, videoId, timestamp, views, published } = vid
 let message = await conn.sendMessage(m.chat, { text: `         *⌜Video Encontrado ✅⌟*\n\n◉ *Título:* ${yt_play[0].title}\n◉ *Duracion:* ${secondString(yt_play[0].duration.seconds)}\n◉ *Publicado:* ${yt_play[0].ago}\n◉ *Autor:* ${yt_play[0].author.name}\n◉ *Vistas:* ${MilesNumber(yt_play[0].views)}\n\n*• 𝘋𝘦𝘴𝘤𝘢𝘳𝘨𝘢𝘥𝘰 𝘷𝘪𝘥𝘦𝘰 🎥, 𝘈𝘨𝘶𝘢𝘳𝘥𝘦 𝘶𝘯 𝘮𝘰𝘮𝘦𝘯𝘵𝘰....*`, contextInfo: { externalAdReply: { title: wm, body: yt_play[0].title.replace(/\*/g, ''), thumbnailUrl: thumbnail, sourceUrl: yt_play[0].url, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: true }}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 let mediaa = await ytMp4(yt_play[0].url)
-await conn.sendMessage(m.chat, { video: { url: mediaa.result }, fileName: `error.mp4`, caption: `*Aqui tiene sus video 👌*\n*🔰Titulo:* ${yt_play[0].title}`, thumbnail: mediaa.thumb, mimetype: 'video/mp4' }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+await conn.sendMessage(m.chat, { video: { url: mediaa.result }, fileName: `error.mp4`, caption: `*Aqui tiene sus video 👌*\n*🔰Titulo:* ${yt_play[0].title}`, thumbnail: mediaa.thumb, mimetype: 'video/mp4' }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+m.react(done)}
 
 async function play3(conn, text, command, args, m) {
 const fetch = require('node-fetch') 
@@ -56,6 +62,7 @@ const axios = require('axios')
 const {youtubedl, youtubedlv2} = require('@bochilteam/scraper') 
 if (!text) return m.reply(`*Que esta buscado? ingrese el nombre del tema*\n\nEjemplo: *${prefix + command}* ozuna`) 
 try { 
+m.react(rwait) 
 let vid = (await yts(text)).all[0]
 const yt_play = await search(args.join(" "))
 let { title, description, url, thumbnail, videoId, timestamp, views, published } = vid
@@ -77,12 +84,14 @@ const dl_url = await yt.audio[q].download();
 const ttl = await yt.title;
 const size = await yt.audio[q].fileSizeH;
 await conn.sendMessage(m.chat, {document: {url: dl_url}, mimetype: 'audio/mpeg', fileName: `${ttl}.mp3`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
+m.react(done) 
 } catch {
 try {
 const lolhuman = await fetch(`https://api.lolhuman.xyz/api/ytaudio2?apikey=${lolkeysapi}&url=${yt_play[0].url}`);
 const lolh = await lolhuman.json();
 const n = lolh.result.title || 'error';
 await conn.sendMessage(m.chat, {document: {url: lolh.result.link}, fileName: `${n}.mp3`, mimetype: 'audio/mpeg'}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
+m.react(done) 
 } catch {
 try {
 const searchh = await yts(yt_play[0].url);
@@ -90,7 +99,9 @@ const __res = searchh.all.map((v) => v).filter((v) => v.type == 'video');
 const infoo = await ytdl.getInfo('https://youtu.be/' + __res[0].videoId);
 const ress = await ytdl.chooseFormat(infoo.formats, {filter: 'audioonly'});
 conn.sendMessage(m.chat, {audio: {url: ress.url}, fileName: __res[0].title + '.mp3', mimetype: 'audio/mp4'}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
+m.react(done) 
 } catch (e) {
+m.react(error) 
 return m.reply(`${info.error}\n\nNo se pudo descargar sus video por favor vuelve a intenta`) 
 console.log(e)}}}}
 
@@ -102,6 +113,7 @@ const axios = require('axios')
 const {youtubedl, youtubedlv2} = require('@bochilteam/scraper') 
 if (!text) return m.reply(`*Que esta buscado? ingrese el nombre del tema*\n\nEjemplo: *${prefix + command}* ozuna`) 
 try { 
+m.react(rwait) 
 let vid = (await yts(text)).all[0]
 const yt_play = await search(args.join(" "))
 let { title, description, url, thumbnail, videoId, timestamp, views, published } = vid
@@ -124,6 +136,7 @@ const dl_url = await yt.video[q].download();
 const ttl = await yt.title;
 const size = await yt.video[q].fileSizeH;
 await await conn.sendMessage(m.chat, {document: {url: dl_url}, fileName: `${ttl}.mp4`, mimetype: 'video/mp4', caption: `*╭┄〔 📥 𝐘𝐎𝐔𝐓𝐔𝐁𝐄 𝐃𝐋 📥 〕┄⊱-*\n┆🔸️ *𝚃𝙸𝚃𝚄𝙻𝙾:* ${ttl}\n┆🔸️ *𝙿𝙴𝚂𝙾:* ${size}\n╰─────────────────`, thumbnail: await fetch(yt.thumbnail)}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
+m.react(done) 
 } catch {
 try {
 const mediaa = await ytMp4(yt_play[0].url);
@@ -137,7 +150,9 @@ const n2 = lolh.result.link;
 const n3 = lolh.result.size;
 const n4 = lolh.result.thumbnail;
 await conn.sendMessage(m.chat, {document: {url: n2}, fileName: `${n}.mp4`, mimetype: 'video/mp4', caption: `*╭┄〔 📥 𝐘𝐎𝐔𝐓𝐔𝐁𝐄 𝐃𝐋 📥 〕┄⊱-*\n┆🔸️ *𝚃𝙸𝚃𝚄𝙻𝙾:* ${n}\n┆🔸️ *𝙿𝙴𝚂𝙾:* ${n3}\n╰─────────────────`, thumbnail: await fetch(n4)}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
+m.react(done) 
 } catch (e) {
+m.react(error) 
 return m.reply(`${info.error}\n\nNo se pudo descargar sus video por favor vuelve a intenta`) 
 console.log(e)}}}}
 
@@ -145,7 +160,8 @@ async function mp3(conn, args, text, command, fkontak, ytplayvid, m) {
 if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 const mp = require('../libs/ytdl2')
 if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return m.reply(`*Que esta buscado?*\n\n*Ejemplo:*\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
-conn.sendMessage(m.chat, { text: `         *⌜Audio Encontrado ✅⌟*\n\n• *Título:* ${vid.title}\n• *Publicado:* ${vid.date}\n\n*ESPERE ENVIANDO SU ARCHIVO MP3 ⚠*` }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});    
+m.react(rwait) 
+conn.sendMessage(m.chat, { text: `         *⌜Audio Encontrado ✅⌟*\n\n• *Título:* ${vid.title}\n• *Publicado:* ${vid.date}\n\n*ESPERE ENVIANDO SU ARCHIVO MP3 ⚠*` }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 try {
 let mediaa = await ytplayvid(text)
 const audio = await mp.mp3(text)
@@ -159,9 +175,11 @@ mediaType:2,
 mediaUrl:text,
 }}}, {quoted:m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}) 
 await fs.unlinkSync(audio.path)
+m.react(done) 
 db.data.users[m.sender].limit -= 1
 m.reply(info.limit)
 } catch {
+m.react(error) 
 m.reply(info.error)}}
 
 async function mp4(conn, args, text, command, fkontak, m) {
@@ -169,6 +187,7 @@ if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 const mp = require('../libs/ytdl2')
 const vid = await mp.mp4(text)
 if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return m.reply(`*Que esta buscado?*\n\n*Ejemplo:*\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
+m.react(rwait) 
 conn.sendMessage(m.chat, { text: `         *⌜Video Encontrado ✅⌟*\n\n• *Título:* ${vid.title}\n\n*ESPERE ENVIANDO SU ARCHIVO MP4 ⚠*` }, { quoted: fkontak });    
 try {
 const ytc = `*❏ Título :* ${vid.title} 
@@ -178,12 +197,15 @@ const ytc = `*❏ Título :* ${vid.title}
 await conn.sendMessage(m.chat, {video: {url : vid.videoUrl}, caption: ytc }, {quoted:m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 db.data.users[m.sender].limit -= 1
 m.reply(info.limit)
+m.react(done) 
 } catch {
+m.react(error) 
 m.reply(info.error)}}
 
 async function spoti(conn, text, m, from, buffer, getFile) {
 if (!text) return m.reply(`*Que esta buscados?*\n*Ingrese el nombre de alguna canción de spotify.*`) 
 try { 
+m.react(rwait) 
 m.reply('*🕔 𝘈𝘎𝘜𝘈𝘙𝘋𝘌 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖....*') 
 const res = await fetch(global.API('ApiEmpire', '/api/spotifysearch?text=' + text))
 const data = await res.json()
@@ -201,7 +223,9 @@ spotifyi += `◦  *𝘗𝘜𝘉𝘓𝘐𝘊𝘈𝘋𝘖:* ${spty.year}\n\n`
 spotifyi += `𝘋𝘦𝘴𝘤𝘢𝘳𝘨𝘢𝘥𝘰 𝘢𝘶𝘥𝘪𝘰, 𝘢𝘨𝘶𝘢𝘳𝘥𝘦 𝘶𝘯 𝘮𝘰𝘮𝘦𝘯𝘵𝘰 𝘱𝘰𝘳 𝘧𝘢𝘷𝘰𝘳...`
 await conn.sendMessage(m.chat, {text: spotifyi.trim(), contextInfo: {forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "renderLargerThumbnail": true, "title": global.titulowm2, "containsAutoReply": true, "mediaType": 1, "thumbnail": img, "thumbnailUrl": img, "mediaUrl": linkDL, "sourceUrl": linkDL}}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
 await conn.sendMessage(m.chat, {audio: music.data, fileName: `${spty.name}.mp3`, mimetype: 'audio/mpeg'}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
+m.react(done) 
 } catch (error) {
+m.react(error) 
 console.error(error);
 return m.reply(`${info.error}\nNo fue posible descarga el audio (api caida 🤡)`)}}
 
@@ -210,6 +234,7 @@ if (global.db.data.users[m.sender].registered < true) return m.reply(info.regist
 if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (!args[0]) return m.reply(`*Donde esta el link del github?*\n\n*Ejemplo :*\n${prefix + command} ${md}`)
 if (!isUrl(args[0]) && !args[0].includes('github.com')) return m.reply(`Link invalido!!`)
+m.react('🕔') 
 conn.sendMessage(m.chat, { text: `*𝘈𝘎𝘜𝘈𝘙𝘋𝘌 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖...*\n\nˢᶦ ᵉˡ ᵃʳᶜʰᶦᵛᵒ ⁿᵒ ˡˡᵉᵍᵃ ᵉˢ ᵠᵘᵉ ʳᵉᵖᵒˢᶦᵗᵒʳᶦᵒ ᵉˢ ᵐᵘʸ ᵖᵉˢᵃᵈᵒ` }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 try {
 let regex1 = /(?:https|git)(?::\/\/|@)github\.com[\/:]([^\/:]+)\/(.+)/i
@@ -220,7 +245,9 @@ let filename = (await fetch(url, {method: 'HEAD'})).headers.get('content-disposi
 conn.sendMessage(m.chat, { document: { url: url }, fileName: filename+'.zip', mimetype: 'application/zip' }, { quoted: m }).catch((err) => m.reply(info.error))
 db.data.users[m.sender].limit -= 1
 m.reply(info.limit) 
+m.react(done) 
 } catch {
+m.react(error) 
 m.reply(info.error)}}
 
 async function tiktok(conn, text, command, q, m) {
