@@ -39,10 +39,10 @@ const { ytmp4, ytmp3, ytplay, ytplayvid } = require('./libs/youtube')
 const { mediafireDl } = require('./libs/mediafire.js') 
 const {jadibot, listJadibot, killJadibot} = require('./plugins/serbot.js')   
 //const { jadibot2} = require('./plugins/serbot2.js')
-const { menu, menu2, nuevo, regla} = require('./plugins/menu.js')
-const { state, owner, grupo, instalar, ping, report, ow} = require('./plugins/info.js')
+const { menu, menu2, nuevo, regla} = require('./plugins/menu.js') 
+const { state, owner, grupo, instalar, ping, report, ow, sc} = require('./plugins/info.js')
 const {rob, bal, reg, reg1, reg2, work, mine, buy, claim, perfil, nivel, cofre, lb} = require('./plugins/rpg.js') 
-const {game, game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, game13, game14, game15} = require('./plugins/juegos.js') 
+const {game, game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, game13, game14, game15, game16} = require('./plugins/juegos.js')  
 const {yt, acortar, google, imagen, tran, tts, ia, ssw, wall} = require('./plugins/buscadores.js')
 const {efec, url, tomp3, toimg, toanime} = require('./plugins/convertidores.js') 
 const {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, adm, infogr, warn1, warn2, online, listw} = require('./plugins/grupos.js')
@@ -295,8 +295,8 @@ let mentionUser = [...new Set([...(m.mentionedJid || []), ...(m.quoted ? [m.quot
 for (let jid of mentionUser) {
 let user = global.db.data.users[jid]
 if (!user) continue
-let afkTime = user.afkTime
-if (!afkTime || afkTime < 0) continue
+let afkTime = user.afkTime 
+if (!afkTime || afkTime < 0) continue 
 let reason = user.afkReason || ''
 m.reply(`[ 💤 𝙽𝙾 𝙻𝙾𝚂 𝙴𝚃𝙸𝚀𝚄𝙴𝚃𝙴 💤 ]\n\n𝙴𝚜𝚝𝚎 𝚞𝚜𝚞𝚊𝚛𝚒𝚘 𝚚𝚞𝚎 𝚖𝚎𝚗𝚌𝚒𝚘𝚗𝚊𝚜 𝚎𝚜𝚝𝚊 𝙰𝙵𝙺\n\n${reason ? '🔸️ *𝚁𝙰𝚉𝙾𝙽* : ' + reason : '🔸️ *𝚁𝙰𝚉𝙾𝙽* : 𝚂𝚒𝚗 𝚛𝚊𝚣𝚘𝚗'}\n🔸️ *𝙴𝚂𝚃𝚄𝚅𝙾 𝙸𝙽𝙰𝙲𝚃𝙸𝚅𝙾 𝙳𝚄𝚁𝙰𝙽𝚃𝙴 : ${clockString(new Date - afkTime)}`.trim())}
 if (global.db.data.users[m.sender].afkTime > -1) {
@@ -306,7 +306,7 @@ user.afkTime = -1
 user.afkReason = ''
 }
  
-//ARRANCA LA DIVERSIÓN
+//ARRANCA LA DIVERSIÓN 
 switch (command) { 
 case 'yts': case 'ytsearch':
 yt(conn, m, text, from, command, fkontak, prefix)  
@@ -335,7 +335,7 @@ break
 case 'wallpaper':
 wall(conn, text, command, m) 
 break 
-  
+ 
 case 'serbot': case 'jadibot': case 'qr':
 jadibot(conn, m, command, text, args, sender)
 break  
@@ -378,12 +378,15 @@ instalar(conn, m, pushname, sender)
 break
 case '5492266613038': case '593980586516': case '595975740803': await ow(conn, args, m) 
 break
-case 'ping': 
+case 'ping':  
 ping(conn, from, msg, speed) 
 break  		  
 case 'report': 
 report(conn, from, m, prefix, command, text)
 break 
+case 'sc':   
+sc(conn, m)  
+break
 case 'speedtest': {
 m.reply('*🚀 Test de velocidad | Speed...*')
 let cp = require('child_process')
@@ -395,10 +398,10 @@ o = await exec('python speed.py')
 } catch (e) {
 o = e
 } finally {
-let { stdout, stderr } = o
-if (stdout.trim()) m.reply(stdout)
+let { stdout, stderr } = o 
+if (stdout.trim()) m.reply(stdout) 
 if (stderr.trim()) m.reply(stderr)}}
-break
+break  
 case 'antilink': case 'antienlace': on1(isBotAdmins, isGroupAdmins, text, command, args, m)
 break  
 case 'antifake': case 'antiFake': on2(isBotAdmins, isGroupAdmins, text, command, args, m)
@@ -438,7 +441,7 @@ break
 case 'delete': case 'del': 
 del(conn, m, isBotAdmins, isGroupAdmins)
 break  		
-case 'join': 
+case 'join': case 'unete':
 join(conn, m, isCreator, text, delay, args, sender)
 break           
 case 'hidetag': case 'notificar': 
@@ -462,10 +465,10 @@ break
 case 'kick': case 'echar': case 'sacar':
 k(conn, m, isBotAdmins, isGroupAdmins, quoted, text, sender)
 break 
-case 'promote':
+case 'promote': case 'darpoder':
 p(conn, m, isBotAdmins, isGroupAdmins, quoted, sender)
 break
-case 'demote':
+case 'demote': case 'quitarpoder':
 d(conn, m, isBotAdmins, isGroupAdmins, quoted, sender)
 break            
 case 'link': case 'linkgc': 
@@ -502,19 +505,19 @@ break
 case 'gay': 
 await game1(conn, m, participants, sender, who)
 break            
-case 'pareja': 
+case 'pareja': case 'formarpareja':
 await game2(conn, m, pushname, participants, sender)
 break
-case 'fake': {
-await game3(conn, text, prefix, command, body, from, m, sender, quoted)}
+case 'fake': 
+await game3(conn, text, prefix, command, body, from, m, sender, quoted)
 break
 case 'follar': case 'violar':
 game4(conn, m, pushname, text, sender)
 break 
-case 'ppt': 
+case 'ppt': case 'suit':
 game5(conn, m, pushname, text, sender)
 break
-case 'pregunta':
+case 'pregunta': case 'preg':
 game6(text, command, m)  
 break   
 case 'doxear': case 'doxxeo': 
@@ -523,10 +526,10 @@ break
 case 'personalidad': 
 game8(conn, text, pickRandom, m) 
 break   
-case 'slot':  
+case 'slot':  case 'apuesta':
 game9(conn, args, prefix, command, msToTime, m) 
 break
-case 'verdad': 
+case 'verdad':
 game10(sendImageAsUrl, pickRandom)   
 break   
 case 'reto': 
@@ -543,6 +546,9 @@ game14(m, pickRandom)
 break
 case 'racista':
 game15(m, body)  
+break
+case 'love': 
+game16(conn, text, m, sender) 
 break
 //convertidores
 case 'bass': case 'blown': case 'deep': case 'earrape': case 'fast': case 'fat': case 'nightcore': case 'reverse': case 'robot': case 'slow': case 'smooth': case 'squirrel': 
@@ -634,7 +640,7 @@ git(conn, args, command, m)
 break
 case 'tiktok': 
 tiktok(conn, text, command, q, m) 
-break 
+break     
 case 'lyrics': case 'letra': 
 letra(conn, text, command, fkontak, m) 
 break
@@ -668,13 +674,15 @@ if (global.db.data.users[m.sender].registered < true) return m.reply(info.regist
 let user = global.db.data.users[m.sender]
 user.afkTime = + new Date
 user.afkReason = text
-m.reply(`╭━─━─━─≪ 𝙰𝙺𝙵 ≫─━─━─━╮
+const afk = `𝙴𝚂𝚃𝙴 𝚄𝚂𝚄𝙰𝚁𝙸𝙾𝚂 ${pushname}  𝙴𝚂𝚃𝙰 𝙸𝙽𝙰𝙲𝚃𝙸𝚅𝙾 😴\n💤 𝙽𝙾 𝙻𝙾𝚂 𝙴𝚃𝙸𝚀𝚄𝙴𝚃𝙴 💤\n☣️ 𝙼𝙾𝚃𝙸𝚅𝙾𝚂 : ${text ? text : ''}\n\n\n\n\n\n\n`
+conn.relayMessage(m.chat, {scheduledCallCreationMessage: {callType: 'VIDEO', scheduledTimestampMs: 0, title: afk }}, {})}
+/*/m.reply(`╭━─━─━─≪ 𝙰𝙺𝙵 ≫─━─━─━╮
 ┃ 𝙴𝚂𝚃𝙴 𝚄𝚂𝚄𝙰𝚁𝙸𝙾𝚂 ${pushname}
 ┃ 𝙴𝚂𝚃𝙰 𝙸𝙽𝙰𝙲𝚃𝙸𝚅𝙾 😴
 ┃ ≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋
 ┃ 💤 𝙽𝙾 𝙻𝙾𝚂 𝙴𝚃𝙸𝚀𝚄𝙴𝚃𝙴 💤
 ┃ ☣️ 𝙼𝙾𝚃𝙸𝚅𝙾𝚂 : ${text ? text : ''}
-╰━─━─━─≪ ${vs} ≫─━─━─━╯`)}
+╰━─━─━─≪ ${vs} ≫─━─━─━╯`)}*/
 break             
 case 'buy': case 'buyall': {
 await buy(conn, m, sender, args, command, text, fkontak)}
@@ -747,6 +755,26 @@ break
 case 'getcase': 
 owner9(conn, isCreator, text, args, m) 
 break 
+case 'banuser': {
+let who 
+if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false
+else who = m.chat
+let user = global.db.data.users[who]
+if (!who) return m.reply(`*⚠️ 𝘌𝘵𝘪𝘲𝘶𝘦𝘵𝘢/𝘮𝘦𝘯𝘤𝘪𝘰𝘯𝘢 𝘢 𝘢𝘭𝘨𝘶𝘪𝘦𝘯*\n\n*𝘌𝘫𝘦𝘮𝘱𝘭𝘰 :* ${prefix + command} @user`) 
+let users = global.db.data.users
+users[who].banned = true
+m.reply(`*𝘌𝘭 𝘶𝘴𝘶𝘢𝘳𝘪𝘰𝘴 𝘧𝘶𝘦 𝘉𝘢𝘯𝘦𝘢𝘥𝘰 𝘺𝘢 𝘯𝘰 𝘱𝘰𝘥𝘳𝘢́ 𝘶𝘴𝘢𝘳 𝘮𝘪𝘴 𝘤𝘰𝘮𝘢𝘯𝘥𝘰𝘴*`)}
+break
+case 'unbanuser': {
+let who
+if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false
+else who = m.chat
+let user = global.db.data.users[who]
+if (!who) return m.reply(`*⚠️ 𝘌𝘵𝘪𝘲𝘶𝘦𝘵𝘢/𝘮𝘦𝘯𝘤𝘪𝘰𝘯𝘢 𝘢𝘭 𝘶𝘴𝘶𝘢𝘳𝘪𝘰 𝘱𝘢𝘳𝘢 𝘥𝘦𝘴𝘣𝘢𝘯𝘦𝘢𝘳*`) 
+let users = global.db.data.users
+users[who].banned = false
+m.reply(`*𝘌𝘭 𝘶𝘴𝘶𝘢𝘳𝘪𝘰𝘴 𝘩𝘢 𝘴𝘪𝘥𝘰 𝘋𝘦𝘴𝘣𝘢𝘯𝘦𝘢𝘥𝘰 𝘤𝘰𝘯 𝘦𝘹𝘪𝘵𝘰𝘴✅ 𝘢𝘩𝘰𝘳𝘢 𝘴𝘪 𝘱𝘶𝘦𝘥𝘦 𝘶𝘴𝘢𝘳 𝘦𝘭 𝘣𝘰𝘵*`)}
+break
 case 'public': case 'publico': {
 if (!isCreator) return reply(info.owner)
 conn.public = true
@@ -761,10 +789,10 @@ case 'autoadmin': case 'tenerpoder': {
 if (!m.isGroup) return m.reply(info.group)
 if (!isBotAdmins) return m.reply(info.botAdmin)
 if (!isCreator) return reply(info.owner)
-m.reply('Ya eres admin mi jefe 😎') 
+reply(`${pickRandom(['Ya eres admin mi jefe 😎', '*LISTO YA ERES ADMIN MI PROPIETARIO/DESARROLLADO 😎*'])}`)
 await conn.groupParticipantsUpdate(m.chat, [m.sender], "promote")} 
 break 
-case 'leave': { 
+case 'leave': {  
 if (!isCreator) return reply(info.owner)
 reply(m.chat, `*Adios fue un gusto esta aqui hasta pronto 👋*`)
 await conn.groupLeave(m.chat)}
@@ -781,7 +809,7 @@ await conn.sendMessage(m.sender, {document: database, mimetype: 'application/jso
 await conn.sendMessage(m.sender, {document: creds, mimetype: 'application/json', fileName: `creds.json`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 } catch (e) {
 console.log(e)}   
-break
+break 
 case 'update':  
 if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg });    
 try {    
@@ -805,9 +833,11 @@ return list[Math.floor(list.length * Math.random())]
 
 default:
 if (budy.includes(`Todo bien`)) {
-reply(`Si amigo todo bien, vite`)}
+reply(`${pickRandom(['Si amigo todo bien, vite', 'Todo bien capo y tu 😎'])}`)}
 if (budy.includes(`Buenos dias`)) {
-reply(`Buenos Dias trolos de mierda`)}
+reply(`${pickRandom(['Buenos Dias trolos de mierda', '*Buen dias mi amor 😘*', '*Buenos Dias hermosa mañana 🥰*'])}`)}
+if (budy.includes(`NovaBot`)) {
+m.react(`${pickRandom(['🌟', '👀', '🤑'])}`)}
 if (budy.includes(`Bot`)) {
 let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${budy}&lc=es&cf=false`)
 let res = anu.success;

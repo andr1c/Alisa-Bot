@@ -521,7 +521,7 @@ sock.sendMessage(anu.id, { text: `@${name.split("@")[0]} Joderte ya no eres admi
 "thumbnail": leave,
 "sourceUrl": md}}}, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }}} catch (err) {
-console.log(err)
+console.log(`${err} error no definido`)
 }})
 
 sock.ev.on('connection.update', async (update) => {
