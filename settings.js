@@ -97,13 +97,12 @@ global.nn8 = 'https://chat.whatsapp.com/KlqNmoUcVnsGJxIfATIDrK' //enlace lolibot
 global.nna2 = 'CKnomE19yR0IEmM571RvRm'
 
 //---------[ INFO ]--------- 
-global.info = {
-wait: '*⌛ _Cargando..._ ▬▭▭▭▭▭▭*', 
+global.info = { wait: '*⌛ _Cargando..._ ▬▭▭▭▭▭▭*', 
 waitt: '*⌛ _Cargando..._ ▬▬▭▭▭*', 
 waittt: '*⌛ _Cargando..._ ▬▬▬▬▭▭*', 
 waitttt: '*⌛ _Cargando..._ ▬▬▬▬▬▬▭*', 
 waittttt: '*⌛ _Cargando..._ ▬▬▬▬▬▬▬*', 
-result: '*✅ Listo*',
+result: '*✅ Listo*', 
 admin: '*[ ⚠️ ] 𝘛𝘜 𝘕𝘖 𝘌𝘙𝘌𝘚 𝘈𝘋𝘔𝘐𝘕𝘚 🤡 𝘌𝘚𝘛𝘌 𝘊𝘖𝘔𝘈𝘕𝘋𝘖 𝘚𝘖𝘓𝘖 𝘌𝘚 𝘗𝘈𝘙𝘈 𝘓𝘖𝘚 𝘈𝘋𝘔𝘐𝘕𝘚 𝘋𝘌𝘓 𝘎𝘙𝘜𝘗𝘖*',
 botAdmin: '[ ⚠️ ] *𝘏𝘌𝘠 𝘗𝘙𝘐𝘔𝘌𝘙𝘖 𝘌𝘓 𝘉𝘖𝘛 (𝘠𝘖) 𝘕𝘌𝘊𝘌𝘚𝘐𝘛𝘖 𝘚𝘌𝘙 𝘈𝘋𝘔𝘐𝘕𝘚 𝘗𝘈𝘙𝘈 𝘜𝘚𝘈𝘙 𝘌𝘚𝘛𝘌 𝘊𝘖𝘔𝘈𝘕𝘋𝘖*',
 owner: '*[ ⚠️ ] 𝘌𝘚𝘛𝘌 𝘊𝘖𝘔𝘈𝘕𝘋𝘖 𝘌𝘚 𝘗𝘈𝘙𝘈 𝘔𝘐 𝘑𝘌𝘍𝘌*',
@@ -115,8 +114,12 @@ advertencia: `[ ⚠️ ＡＤＶＥＲＴＥＮＣＩＡ ]`,
 registra: `*[ 🔴 HEY ALTO NO ESTAS REGISTRADO 🔴 ]*\n\nNO APARECES EN MI BASE DE DATOS ✋\n\nPara poder usar el bot necesita esta registrado:\n\n#reg nombre.edad`,  
 limit: '*1 ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴜsᴀᴅᴏ*', 
 AntiNsfw: `*Los comando +18 esta desactivado*\nSi eres admin y quiere activarlos usar:\nmodocaliente on`, 
-endLimit: 'ɴᴏ ᴛɪᴇɴᴇ ᴍᴀs ʟɪᴍɪᴛᴇ 💎, ᴘᴜᴇᴅᴇ ᴄᴏᴍᴘʀᴀʀ ᴍᴀs ᴜsᴀɴᴅᴏ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ #buy',
-}
+endLimit: 'ɴᴏ ᴛɪᴇɴᴇ ᴍᴀs ʟɪᴍɪᴛᴇ 💎, ᴘᴜᴇᴅᴇ ᴄᴏᴍᴘʀᴀʀ ᴍᴀs ᴜsᴀɴᴅᴏ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ #buy', }
+global.rwait = '⌛'
+global.dmoji = '🤭'
+global.done = '✅'
+global.error = '❌' 
+global.xmoji = '🔥' 
 
 //---------------[ NIVELES, ADVERTENCIA ]----------------
 global.multiplier = 90 // Cuanto más alto, más difícil subir de nivel 
