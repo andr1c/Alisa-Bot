@@ -403,6 +403,7 @@ if (!isNumber(user.regTime)) user.regTime = -1
   if (!isNumber(user.afkTime)) user.afkTime = -1  
   if (!isNumber(user.joincount)) user.joincount = 1;
   if (!('afkReason' in user)) user.afkReason = ''  
+  if (!('banned' in user)) user.banned = false
   if (!isNumber(user.limit)) user.limit = 20  
   if (!isNumber(user.warn)) user.warn = 0
   if(!isNumber(user.money)) user.money = 0  
@@ -438,6 +439,7 @@ if (!isNumber(user.regTime)) user.regTime = -1
    } else global.db.data.users[m.sender] = {  
   afkTime: -1,  
   afkReason: '',  
+  banned: false, 
   limit: 20,  
   warn: 0,
   registered: false,
@@ -976,6 +978,10 @@ conn.user.chat = m.chat // chat in user?????????
     */
     m.reply = (text, chatId, options) => conn.sendMessage(chatId ? chatId : m.chat, { text: text }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100, detectLinks: false, thumbnail: global.thumb, ...options })
 
+m.react = (text, key, options) => conn.sendMessage(m.chat, { react: {text, key: m.key }})
+
+//m.react = (text, chatId, key, options) => conn.relayMessage(chatId ? chatId : m.chat, {reactionMessage: { key: m.key, text, }}, { messageId: m.key.id })
+
     /**
     * copy message?
     */
@@ -986,7 +992,7 @@ conn.user.chat = m.chat // chat in user?????????
      * @param {*} path 
      * @returns 
      */
-     
+					
     conn.getFile = async (PATH, saveToFile = false) => { 
          let res; let filename; 
          const data = Buffer.isBuffer(PATH) ? PATH : PATH instanceof ArrayBuffer ? PATH.toBuffer() : /^data:.*?\/.*?;base64,/i.test(PATH) ? Buffer.from(PATH.split`,`[1], 'base64') : /^https?:\/\//.test(PATH) ? await (res = await fetch(PATH)).buffer() : fs.existsSync(PATH) ? (filename = PATH, fs.readFileSync(PATH)) : typeof PATH === 'string' ? PATH : Buffer.alloc(0); 
