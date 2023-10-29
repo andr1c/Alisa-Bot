@@ -341,7 +341,7 @@ case 'wallpaper':
 wall(conn, text, command, m) 
 break 
 case 'hd': 
-hd(conn, m) 
+hd(conn, command, m) 
 break
 case 'serbot': case 'jadibot': case 'qr':
 jadibot(conn, m, command, text, args, sender)
