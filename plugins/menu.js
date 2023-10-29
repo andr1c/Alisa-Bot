@@ -10,7 +10,7 @@ const cheerio = require('cheerio')
 const Jimp = require('jimp')
 const os = require('os')
 
-const menu = (conn, prefix, pushname, sender, m, fkontak) => {
+const menu = (conn, prefix, pushname, sender, m, pickRandom, fkontak) => {
 let user = global.db.data.users[m.sender]
 let totalreg = Object.keys(global.db.data.users).length
 let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length
@@ -237,6 +237,7 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}toimg
 ├❥ᰰຼ ❏ ${prefix}toaudio
 ├❥ᰰຼ ❏ ${prefix}toanime
+├❥ᰰຼ ❏ ${prefix}hd
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫* 	
 
 *╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*⃐🥵COMANDO +18*️⃟ᬽ፝֟━*
@@ -388,8 +389,7 @@ mentionedJid:[sender, numBot],
 "containsAutoReply": true,  
 "mediaType": 1,   
 "thumbnail": imagen3,  
-"mediaUrl": md, 
-"sourceUrl": md, 
+sourceUrl: `${pickRandom([nna, nn, md, yt])}`
 }}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}) 
 }
 
@@ -459,6 +459,9 @@ conn.sendMessage(m.chat, { text: `🤔 *Que hay de nuevo?* 🤗
 *🌐 Version del bot:* [ ${vs} ] 
 
 *Nuevo comando:*
+
+🟢 Mejorar la imagen a HD. 
+•${prefix}hd
 
 🚀 Descarga audio el documento
 • ${prefix}play3

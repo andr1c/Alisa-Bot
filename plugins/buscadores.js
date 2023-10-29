@@ -10,6 +10,7 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 const {googleImage} = require('@bochilteam/scraper') 
 const Jimp = require('jimp')
+const FormData = require("form-data") 
 const os = require('os')
 
 async function yt(conn, m, text, from, command, fkontak, prefix) {
@@ -130,11 +131,51 @@ let _res = await (/2/.test(command) ? wallpaperv2 : wallpaper)(text)
 let _img = _res[Math.floor(Math.random() * _res.length)]
 conn.sendMessage(m.chat, { image: { url: _img }, caption: `_*ＲＥＳＵＬＴＡＤＯＳ ＤＥ : ${text}*_`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
-module.exports = {yt, acortar, google, imagen, tran, tts, ia, ssw, wall}
+async function hd(conn, m) {
+const FormData = require("form-data") 
+const Jimp =  require("jimp") 
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+let q = m.quoted ? m.quoted : m;
+let mime = (q.msg || q).mimetype || q.mediaType || "";
+if (!mime) return m.reply(`*[ ⚠️ ] ᴇɴᴠɪᴇ/ʀᴇsᴘᴏɴᴅᴀ ᴀ ᴜɴᴀ ɪᴍᴀɢᴇɴ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ : ${prefix + command}*`) 
+if (!/image\/(jpe?g|png)/.test(mime)) return m.reply(`*[ ⚠️ ] ᴇʟ ғᴏʀᴍᴀᴛᴏ ᴅᴇʟ ᴀʀᴄɢɪᴠᴏ (${mime}) ɴᴏ ᴇs ᴄᴏᴍᴘᴀʀᴛɪʙʟᴇ, ᴇɴᴠɪᴀ/ʀᴇsᴘᴏɴᴅᴀ ᴀ ᴜɴᴀ ғᴏᴛᴏ*`) 
+m.reply('⏳ *𝘗𝘙𝘖𝘊𝘌𝘚𝘈𝘕𝘋𝘖 𝘓𝘈 𝘐𝘔𝘈𝘎𝘌𝘕, 𝘈𝘎𝘜𝘈𝘙𝘋𝘌𝘕 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖...*') 
+try {
+let img = await q.download?.();
+let pr = await remini(img, "enhance");
+conn.sendMessage(m.chat, {image: pr}, {caption: `*𝘈𝘘𝘜𝘐 𝘛𝘐𝘌𝘕𝘌 𝘓𝘈 𝘐𝘔𝘈𝘎𝘌𝘕 𝘌𝘓 𝘏𝘋*`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
+} catch (e) {
+return m.reply(`${info.error}\n\n*ʜᴜʙᴏʀ ᴜɴ ᴇʀʀᴏʀ (ᴀᴘɪ ᴄᴀɪᴅᴀ 🤡)*\n\n${e}`) 
+console.log(e) 
+}}
+ 
+module.exports = {yt, acortar, google, imagen, tran, tts, ia, ssw, wall, hd}
 
 exports.getRandom = (ext) => {
 return `${Math.floor(Math.random() * 10000)}${ext}`
 }
+
+async function remini(imageData, operation) {
+return new Promise(async (resolve, reject) => {
+const availableOperations = ["enhance", "recolor", "dehaze"];
+if (availableOperations.includes(operation)) {
+operation = operation;
+} else {
+operation = availableOperations[0];
+}
+const baseUrl = "https://inferenceengine.vyro.ai/" + operation + ".vyro";
+const formData = new FormData();
+formData.append("image", Buffer.from(imageData), {filename: "enhance_image_body.jpg", contentType: "image/jpeg"});
+formData.append("model_version", 1, {"Content-Transfer-Encoding": "binary", contentType: "multipart/form-data; charset=utf-8"});
+formData.submit({url: baseUrl, host: "inferenceengine.vyro.ai", path: "/" + operation, protocol: "https:", headers: {"User-Agent": "okhttp/4.9.3", Connection: "Keep-Alive", "Accept-Encoding": "gzip"}},
+function (err, res) {
+if (err) reject(err);
+const chunks = [];
+res.on("data", function (chunk) {chunks.push(chunk)});
+res.on("end", function () {resolve(Buffer.concat(chunks))});
+res.on("error", function (err) {
+reject(err);
+})},)})}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {

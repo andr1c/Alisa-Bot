@@ -22,7 +22,15 @@ const yt_play = await search(args.join(" "))
 let { title, description, url, thumbnail, videoId, timestamp, views, published } = vid
 let message = await conn.sendMessage(m.chat, { text: `         *⌜Cancion Encontrada ✅⌟*\n\n◉ *Título:* ${yt_play[0].title}\n◉ *Duracion:* ${secondString(yt_play[0].duration.seconds)}\n◉ *Publicado:* ${yt_play[0].ago}\n◉ *Autor:* ${yt_play[0].author.name}\n◉ *Vistas:* ${MilesNumber(yt_play[0].views)}\n\n*• 𝘋𝘦𝘴𝘤𝘢𝘳𝘨𝘢𝘥𝘰 𝘢𝘶𝘥𝘪𝘰 🔊, 𝘈𝘨𝘶𝘢𝘳𝘥𝘦 𝘶𝘯 𝘮𝘰𝘮𝘦𝘯𝘵𝘰....*`, contextInfo: { externalAdReply: { title: wm, body: yt_play[0].title.replace(/\*/g, ''), thumbnailUrl: thumbnail, sourceUrl: yt_play[0].url, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: true }}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 let mediaa = await ytMp4(yt_play[0].url)
-conn.sendMessage(m.chat, { audio: { url: mediaa.result }, mimetype: 'audio/mpeg' }, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}) 
+conn.sendMessage(m.chat, { audio: { url: mediaa.result }, mimetype: 'audio/mpeg', contextInfo: {
+externalAdReply: {
+title: yt_play[0].title,
+body: "",
+thumbnailUrl: yt_play[0].thumbnail, 
+mediaType: 1,
+showAdAttribution: true,
+renderLargerThumbnail: true
+}}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})  
 db.data.users[m.sender].limit -= 1
 m.reply(info.limit)
 m.react(done) 
