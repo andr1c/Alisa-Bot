@@ -131,7 +131,7 @@ let _res = await (/2/.test(command) ? wallpaperv2 : wallpaper)(text)
 let _img = _res[Math.floor(Math.random() * _res.length)]
 conn.sendMessage(m.chat, { image: { url: _img }, caption: `_*ＲＥＳＵＬＴＡＤＯＳ ＤＥ : ${text}*_`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
-async function hd(conn, m) {
+async function hd(conn, command, m) {
 const FormData = require("form-data") 
 const Jimp =  require("jimp") 
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
