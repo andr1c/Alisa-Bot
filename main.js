@@ -43,7 +43,7 @@ const { menu, menu2, nuevo, regla} = require('./plugins/menu.js')
 const { state, owner, grupo, instalar, ping, report, ow, sc} = require('./plugins/info.js')
 const {rob, bal, reg, reg1, reg2, work, mine, buy, claim, perfil, nivel, cofre, lb} = require('./plugins/rpg.js') 
 const {game, game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, game13, game14, game15, game16} = require('./plugins/juegos.js')  
-const {yt, acortar, google, imagen, tran, tts, ia, ssw, wall} = require('./plugins/buscadores.js')
+const {yt, acortar, google, imagen, tran, tts, ia, ssw, wall, hd} = require('./plugins/buscadores.js')
 const {efec, url, tomp3, toimg, toanime} = require('./plugins/convertidores.js') 
 const {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, adm, infogr, warn1, warn2, online, listw} = require('./plugins/grupos.js')
 const {nsfw1, nsfw2, nsfw3, nsfw4, nsfw5} = require('./plugins/nsfw.js')
@@ -208,8 +208,13 @@ let forbidPrefixes = ["212", "265", "234", "258", "263", "967", "20", "92", "91"
 for (let prefix of forbidPrefixes) {
 if (m.sender.startsWith(prefix)) {
 m.reply('✳️ En este grupo no esta permitido numero arabe hasta la próxima...', m.sender)
-conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')}}}
+//await conn.groupRequestParticipantsUpdate(m.chat, [m.sender], 'approve')
+conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')}}} 
 	
+if (global.db.data.chats[m.chat].aprobar && !isGroupAdmins) {	
+conn.groupRequestParticipantsUpdate(m.chat, [m.sender], 'approve')
+m.reply(`Nuevo usuario el grupo 💞.`)}
+
 //antilink
 if (global.db.data.chats[m.chat].antilink) {
 if (budy.match(`chat.whatsapp.com`)) {
@@ -248,7 +253,7 @@ media = await quoted.download()
 let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: botname, body: `h`, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}}, { quoted: m })
 await fs.unlinkSync(encmedia)   
 } else if (/video/.test(mime)) {  
-if ((quoted.msg || quoted).seconds > 25) return reply('🤡 Hey Donde carajo viste un stickes que dure tanto bobo 🤣. (Máximo 25 segundos)')  
+if ((quoted.msg || quoted).seconds > 25) return reply('🤡 Hey Donde carajo viste un stickes que dure tanto bobo 🤣. (Máximo 15 segundos)')  
 media = await quoted.download()  
 let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: goblal.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: wm, body: `h`, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}}, { quoted: m })
 await new Promise((resolve) => setTimeout(resolve, 2000));   
@@ -273,8 +278,8 @@ if (global.db.data.chats[m.chat].simi && prefix) {
 try {     
 await conn.sendPresenceUpdate('composing', m.chat)
 let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${budy}&lc=es&cf=false`)
-let res = anu.success;
-m.reply(res)
+let res = anu.success; 
+m.reply(res) 
 } catch { 
 return m.reply(`*Api simsimi caida, desactive el ChatBot con:*\n#chatbot off`)}}
 
@@ -335,7 +340,9 @@ break
 case 'wallpaper':
 wall(conn, text, command, m) 
 break 
- 
+case 'hd': 
+hd(conn, m) 
+break
 case 'serbot': case 'jadibot': case 'qr':
 jadibot(conn, m, command, text, args, sender)
 break  
@@ -356,7 +363,7 @@ case 'estado':
 state(conn, m, speed, sender, fkontak) 
 break
 case 'menu': case 'help': case 'menucompleto':
-menu(conn, prefix, pushname, sender, m, fkontak)
+menu(conn, prefix, pushname, sender, m, pickRandom, fkontak)
 break  
 case 'menu2': case 'audio': 
 menu2(conn, pushname, m, fkontak)
@@ -386,7 +393,7 @@ report(conn, from, m, prefix, command, text)
 break 
 case 'sc':   
 sc(conn, m)  
-break
+break 
 //activa/desactivar
 case 'welcome': case 'bienvenida': on(isGroupAdmins, text, command, args, m) 
 break
@@ -772,13 +779,13 @@ case 'self': case 'privado': {
 if (!isCreator) return reply(info.owner)
 conn.public = false
 reply('✅Cambio con exitoso a uso privado')}
-break	
+break	 
 case 'autoadmin': case 'tenerpoder': {
 if (!m.isGroup) return m.reply(info.group)
 if (!isBotAdmins) return m.reply(info.botAdmin)
 if (!isCreator) return reply(info.owner)
 reply(`${pickRandom(['Ya eres admin mi jefe 😎', '*LISTO YA ERES ADMIN MI PROPIETARIO/DESARROLLADO 😎*'])}`)
-await conn.groupParticipantsUpdate(m.chat, [m.sender], "promote")} 
+await conn.groupParticipantsUpdate(m.chat, [m.sender], "promote")}  
 break 
 case 'leave': {  
 if (!isCreator) return reply(info.owner)
@@ -828,8 +835,10 @@ if (budy.includes(`NovaBot`)) {
 m.react(`${pickRandom(['🌟', '👀', '🤑'])}`)}
 if (budy.includes(`Bot`)) {
 let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${budy}&lc=es&cf=false`)
-let res = anu.success;
-m.reply(res)}
+let res = anu.success; 
+m.reply(res)} 
+if (m.mentionedJid.includes(conn.user.jid)) {
+await conn.sendMessage(m.chat, {text: `*QUE YO QUE?*`}, {quoted: m})}
 if (budy.startsWith(`a`)) {
 if (!global.db.data.chats[m.chat].audios) return
 let vn = './media/a.mp3'
