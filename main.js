@@ -31,6 +31,7 @@ const ffmpeg = require("fluent-ffmpeg")
 const similarity = require('similarity') 
 const yts = require("yt-search") 
 const ytdl = require('ytdl-core') 
+const translate = require('@vitalets/google-translate-api') 
 const { TelegraPh, UploadFileUgu, webp2mp4File, floNime } = require('./libs/uploader.js')
 const { toAudio, toPTT, toVideo } = require('./libs/converter.js') 
 const { canLevelUp, xpRange } = require('./libs/levelling.js')
@@ -272,16 +273,17 @@ user.level++
 if (before !== user.level) {
 const str = `*「 FELICIDADES LEVEL UP 🆙🥳 」*\n\n🥳 Felicidades @${sender.split`@`[0]} 👏 subiste de nivel sigue asi 👏\n\n*NIVEL :* ${before} ⟿ ${user.level}\n*RANGO :* ${user.role}\n*FECHA :* ${new Date().toLocaleString('id-ID')}\n\n_*Para saber cual es tu puerto del top, coloca el comando #lb*_`.trim()
 return conn.sendMessage(m.chat, { text: str, contextInfo:{mentionedJid:[sender]}},{quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}}
-
-//Chatbot  
+ 
+//Chatbot
 if (global.db.data.chats[m.chat].simi && prefix) {
-try {      
+try {     
 await conn.sendPresenceUpdate('composing', m.chat)
 let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${budy}&lc=es&cf=false`)
-let res = anu.success; 
-m.reply(res) 
-} catch { 
-return m.reply(`*Api simsimi caida, desactive el ChatBot con:*\n#chatbot off`)}}
+let res = anu.success;
+m.reply(res)
+} catch (e) { 
+m.reply(`*Api simsimi caida, desactive el ChatBot con:*\n#chatbot off`)
+console.log(e)}}
 
 //antiprivado
 if (global.db.data.chats[m.chat].antiprivado && !isCreator) {
@@ -360,7 +362,7 @@ await conn.sendMessage(m.chat, {text: responseMessage, mentions: conn.parseMenti
 break
 
 //info
-case 'estado':
+case 'estado': case 'infobot':
 state(conn, m, speed, sender, fkontak) 
 break
 case 'menu': case 'help': case 'menucompleto':
@@ -369,7 +371,7 @@ break
 case 'menu2': case 'audio': 
 menu2(conn, pushname, m, fkontak)
 break
-case 'nuevo':
+case 'nuevo': case 'extreno':
 nuevo(conn, m, sender, pickRandom, fkontak)    
 break   
 case 'reglas':    
@@ -386,13 +388,13 @@ instalar(conn, m, pushname, sender)
 break
 case '5492266613038': case '593980586516': case '595975740803': await ow(conn, args, m) 
 break
-case 'ping':  
+case 'ping':
 ping(conn, from, msg, speed) 
 break  		  
 case 'report': 
 report(conn, from, m, prefix, command, text)
 break 
-case 'sc':   
+case 'sc': 
 sc(conn, m)  
 break 
 //activa/desactivar
@@ -507,7 +509,7 @@ break
 case 'fake': 
 await game3(conn, text, prefix, command, body, from, m, sender, quoted)
 break
-case 'follar': case 'violar':
+case 'follar': case 'violar': case 'coger':
 game4(conn, m, pushname, text, sender)
 break 
 case 'ppt': case 'suit':
@@ -821,6 +823,54 @@ m.reply('_🔄 Reiniciando Bot..._');
 await delay(3 * 3000) 
 conn.ws.close()}
 break
+case 'unbanned': {
+if (!isCreator) return
+if (m.quoted || q) {
+var tosend = m.quoted ? m.quoted.sender : q.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg }); 
+var targetnya = tosend.split('@')[0]
+try {
+var axioss = require('axios')
+let ntah = await axioss.get("https://www.whatsapp.com/contact/noclient/")
+let email = await axioss.get("https://www.1secmail.com/api/v1/?action=genRandomMailbox&count=199999999999999999995777678776668876677777")
+let cookie = ntah.headers["set-cookie"].join("; ")
+const cheerio = require('cheerio');
+let $ = cheerio.load(ntah.data)
+let $form = $("form");
+let url = new URL($form.attr("action"), "https://www.whatsapp.com").href
+let form = new URLSearchParams()
+form.append("jazoest", $form.find("input[name=jazoest]").val())
+form.append("lsd", $form.find("input[name=lsd]").val())
+form.append("step", "submit")
+form.append("country_selector", "+")
+form.append("phone_number", `+${targetnya}`,)
+form.append("email", email.data[0])
+form.append("email_confirm", email.data[0])
+form.append("platform", "ANDROID")
+form.append("your_message", `Aku Tidak Tau Mengapa Nomor Saya Tiba Tiba Di Larang Dari Menggunakan WhatsApp Aku Hanya Membalas Pesan Customer Saya Mohon Buka Larangan Akun WhatsApp Saya: [+${targetnya}]
+Terimakasih`)
+form.append("__user", "0")
+form.append("__a", "1")
+form.append("__csr", "")
+form.append("__req", "8")
+form.append("__hs", "19531.BP:whatsapp_www_pkg.2.0.0.0.0")
+form.append("dpr", "1")
+form.append("__ccg", "UNKNOWN")
+form.append("__rev", "1007735016")
+form.append("__comment_req", "0")
+let res = await axioss({url, method: "POST", data: form, headers: {cookie}})
+reply(`Espere de 1 a 24 horas para el proceso de desbloqueo del bot y espere ±30 segundos para ver la respuesta por correo electrónico de WhatsApp señor Hw Mods🥺🙏`)
+await sleep(90000)
+let payload = String(res.data)
+if (payload.includes(`"payload":true`)) {
+reply(`##- WhatsApp Support -##\n\nHola, gracias por contactarnos. Nuestro sistema marca la actividad de su cuenta como una violación de nuestros Términos de servicio y bloquea su número de teléfono. Realmente te apreciamos como usuario. Nos disculpamos por cualquier confusión o inconveniente causado por este problema. Hemos eliminado el bloqueo después de revisar la actividad de su cuenta. Ahora deberías tener acceso a WhatsApp. Como siguiente paso, te recomendamos volver a registrar tu número de teléfono en WhatsApp para asegurarte de tener acceso. Puede visitar nuestro sitio web para descargar la aplicación WhatsApp o WhatsApp Business.`)
+} else if (payload.includes(`"payload":false`)) {
+reply(`##- WhatsApp Support -##\n\nGracias por contactarnos. Nos comunicaremos con usted por correo electrónico y eso puede demorar hasta tres días hábiles.`)
+} else reply(util.format(res.data))
+} catch (err) {reply(`${err}`)}
+} else reply('⚠️ *Escriba el numero que quiere desbanea*')}
+break
+//=============
 
 //función pickrandow
 function pickRandom(list) {
@@ -828,14 +878,20 @@ return list[Math.floor(list.length * Math.random())]
 }  
 
 default:  
-if (budy.includes(`https://chat.whatsapp.com/`)) {
-m.reply(`*< UNE UN BOT A TU GRUPO />*\n\n*Hola ${pushname}  si deseas solicitar un Bot para tu grupo usa el comando #join mas el enlace de tu grupo.*\n\n_*El Bot se puede unir a tu grupo si mi creador acertar, Puede Apoyar al bot con una Estrellita 🌟*_\n${md}\n\n_*Subscrirte a nuestro canal del YouTube*_\n${global.yt}\n_*Nos ayudaria muchisimo 🥺*_\n\nManda cartura a mi creador al:\nwa.me/5492266466080\n*Para unir el bot a tu grupo 💞*`)}
 if (budy.includes(`Todo bien`)) {
 conn.sendPresenceUpdate('composing', m.chat)
 await m.reply(`${pickRandom(['Si amigo todo bien, vite', 'Todo bien capo y tu 😎'])}`)} 
 if (budy.includes(`Buenos dias`)) {
 conn.sendPresenceUpdate('composing', m.chat)
-m.reply(`${pickRandom(['Buenos Dias trolos de mierda', '*Buen dias mi amor 😘*', '*Buenos Dias hermosa mañana 🥰*'])}`)}
+m.reply(`${pickRandom(['Buenos Dias trolos de mierda', '*Buen dias mi amor 😘*', '*Buenos Dias hermosa mañana 🥰*'])}`)} 
+if (budy.includes(`autodestruction`)) { 
+let e = fs.readFileSync('./src/autodestruction.webp')
+let or = ['texto', 'sticker'];
+let media = or[Math.floor(Math.random() * 2)]
+if (media === 'texto')
+m.reply('*Mi jefe me mastrata 😢*') 
+if (media === 'sticker')
+conn.sendFile(m.chat, e, 'sticker.webp', '',m, true, { contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: 'ᶜ ᴬᵘᵗᵒᵈᵉˢᶜʳᵘʸᵉ', mediaType: 2, sourceUrl: nna, thumbnail: imagen1}}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 if (budy.includes(`NovaBot`)) {
 m.react(`${pickRandom(['🌟', '👀', '🤑'])}`)}
 if (budy.includes(`Bot`)) {
@@ -843,7 +899,7 @@ await conn.sendPresenceUpdate('composing', m.chat)
 game(m, text, pushname, command)} 
 if (m.mentionedJid.includes(conn.user.jid)) {
 await conn.sendMessage(m.chat, {text: `*QUE YO QUE?*`}, {quoted: m})}
-if (budy.startsWith(`a`)) {
+if (budy.startsWith(`A`)) {
 if (!global.db.data.chats[m.chat].audios) return
 let vn = './media/a.mp3'
 await conn.sendPresenceUpdate('recording', m.chat)

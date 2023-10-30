@@ -257,7 +257,7 @@ ppgroup = await sock.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*¡Ahora solo los administradores pueden enviar mensajes!*`
+let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*ᴬʰᵒʳᵃ ˢᵒˡᵒ ˡᵒˢ ᵃᵈᵐᶦⁿˢ ᵖᵘᵉᵈᵉⁿ ᵉˢᶜʳᶦᵇᶦʳ ᵉˡ ᵍʳᵘᵖᵒ*`
 sock.sendMessage(res.id, {text: text,  
 contextInfo:{  
 forwardingScore: 9999999,  
@@ -280,7 +280,7 @@ ppgroup = await sock.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*Ahora todos los participantes pueden mandar mensajes 🗣️*`
+let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*ᴬʰᵒʳᵃ ᵗᵒᵈᵒˢ ˡᵒˢ ᵖᵃʳᵗᶦᶜᶦᵖᵃⁿᵗᵉˢ ᵖᵘᵉᵈᵉⁿ ᵐᵃⁿᵈᵃʳ ᵐᵉⁿˢᵃʲᵉˢ 🗣️*`
 sock.sendMessage(res.id, {   
 text: text,  
 contextInfo:{  
@@ -304,7 +304,7 @@ ppgroup = await sock.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*ᴀʜᴏʀᴀ sᴏʟᴏ ʟᴏs ᴀᴅᴍɪɴɪsᴛʀᴀᴅᴏʀᴇs ᴘᴜᴇᴅᴇ ᴇᴅɪᴛᴀʀ ʟᴏs ᴀᴊᴜsᴛᴇ ᴅᴇʟ ɢʀᴜᴘᴏ*`
+let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*ᴬʰᵒʳᵃ ˢᵒˡᵒ ˡᵒˢ ᵃᵈᵐᶦⁿˢ ᵖᵘᵉᵈᵉ ᵉᵈᶦᵗᵃʳ ˡᵒˢ ᵃʲᵘˢᵗᵉ ᵈᵉˡ ᵍʳᵘᵖᵒ*`
 sock.sendMessage(res.id, {text: text,  
 contextInfo:{  
 forwardingScore: 9999999,  
@@ -327,7 +327,7 @@ ppgroup = await sock.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*ᴀʜᴏʀᴀ ᴛᴏᴅᴏs ʟᴏs ᴘᴀʀᴛɪᴄɪᴘᴀʀᴛᴇ ᴘᴜᴇᴅᴇ ᴇᴅɪᴛᴀʀ ʟᴏs ᴀᴊᴜsᴛᴇ ᴅᴇʟ ɢʀᴜᴘᴏ*`
+let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*ᴬʰᵒʳᵃ ᵗᵒᵈᵒˢ ˡᵒˢ ᵖᵃʳᵗᶦᶜᶦᵖᵃʳᵗᵉ ᵖᵘᵉᵈᵉ ᵉᵈᶦᵗᵃʳ ˡᵒˢ ᵃʲᵘˢᵗᵉ ᵈᵉˡ ᵍʳᵘᵖᵒ*`
 sock.sendMessage(res.id, {text: text,  
 contextInfo:{  
 forwardingScore: 9999999,  
@@ -350,7 +350,7 @@ ppgroup = await sock.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*La descripción del grupo fue cambiada nueva descripción es *\n${res.desc}`
+let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*ᴸᵃ ᵈᵉˢᶜʳᶦᵖᶜᶦᵒ́ⁿ ᵈᵉˡ ᵍʳᵘᵖᵒ ᶠᵘᵉ ᶜᵃᵐᵇᶦᵃᵈᵃ ⁿᵘᵉᵛᵃ ᵈᵉˢᶜʳᶦᵖᶜᶦᵒ́ⁿ ᵉˢ*\n${res.desc}`
 sock.sendMessage(res.id, {text: text,  
 contextInfo:{  
 forwardingScore: 9999999,  
@@ -373,7 +373,7 @@ ppgroup = await sock.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*El nombre del grupo fue cambiado nuevos nombre es :*\n${res.subject}`
+let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*ᴱˡ ⁿᵒᵐᵇʳᵉ ᵈᵉˡ ᵍʳᵘᵖᵒ ᶠᵘᵉ ᶜᵃᵐᵇᶦᵃᵈᵒ ⁿᵘᵉᵛᵒˢ ⁿᵒᵐᵇʳᵉ ᵉˢ*\n${res.subject}`
 sock.sendMessage(res.id, {text: text,  
 contextInfo:{  
 forwardingScore: 9999999,  
@@ -422,7 +422,7 @@ const miembros = metadata.participants.length
 let wel = [`Hola @${name.split("@")[0]} ¿COMO ESTAS? 😃`, `HOLAA!! @${name.split("@")[0]} ¿COMO ESTAS?😃\n\n『Bienvenido A *${metadata.subject}*』\n\nUn gusto conocerte amig@ 🤗\n\n_Recuerda leer las reglas del grupo para no tener ningun problema 🧐_\n\n*Solo disfrutar de este grupo y divertite 🥳*`, `[ NUEVO MIEMBRO ]\n\n@${name.split("@")[0]} Bienvenido 🥳`, `Bienvenido @${name.split("@")[0]} 🥳 a este hermoso grupo [ ${metadata.subject} 🎉 ] Espero que te sienta a gusto aqui 🥰\n\n
  ▼￣＞-―-＜￣▼
    ⚡ Ｙ                Ｙ ⚡
-  /   /   ๑⚈  ․̫  ⚈๑)    Bienvenido uwu
+  /   /   ๑⚈  ․̫  ⚈๑)    ᴮᶦᵉⁿᵛᵉⁿᶦᵈᵒ ᵘʷᵘ
 ＼  ｜     つ        ヽつ  \n`, `𝘓𝘦 𝘥𝘢𝘮𝘰𝘴 𝘭𝘢 𝘣𝘪𝘦𝘯𝘷𝘦𝘯𝘪𝘥𝘢 𝘢 @${name.split("@")[0]} 🥳`, `Holi @${name.split("@")[0]} Bienvenido 🎉`, `_Hello @${name.split("@")[0]} ❤, presentarte con: Foto, edad, sexo 😂_ *(na joda leer las reglas del grupo, para evitar problema)*\n\n
 .         ⣀⣤‌⣤⣤⣀             ⣀⣤⣤‌⣤‌⣀
     ⣠⣾⣿⣿⣿⣿⣿⣧⣄　　⣠⣼⣿⣿⣿⣿⣿⣷⣄    
