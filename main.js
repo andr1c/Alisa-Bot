@@ -273,9 +273,9 @@ if (before !== user.level) {
 const str = `*「 FELICIDADES LEVEL UP 🆙🥳 」*\n\n🥳 Felicidades @${sender.split`@`[0]} 👏 subiste de nivel sigue asi 👏\n\n*NIVEL :* ${before} ⟿ ${user.level}\n*RANGO :* ${user.role}\n*FECHA :* ${new Date().toLocaleString('id-ID')}\n\n_*Para saber cual es tu puerto del top, coloca el comando #lb*_`.trim()
 return conn.sendMessage(m.chat, { text: str, contextInfo:{mentionedJid:[sender]}},{quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}}
 
-//Chatbot
+//Chatbot  
 if (global.db.data.chats[m.chat].simi && prefix) {
-try {     
+try {      
 await conn.sendPresenceUpdate('composing', m.chat)
 let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${budy}&lc=es&cf=false`)
 let res = anu.success; 
@@ -343,6 +343,7 @@ break
 case 'hd': 
 hd(conn, command, m) 
 break
+
 case 'serbot': case 'jadibot': case 'qr':
 jadibot(conn, m, command, text, args, sender)
 break  
@@ -424,7 +425,7 @@ on12(isCreator, text, command, args, m, conn)
 break
 case 'antispam': on13(isCreator, text, command, args, m) 
 break
-case 'chatbot': case 'simi':
+case 'chatbot': case 'simsimi':
 on14(isGroupAdmins, text, command, args, m) 
 break
 case 'autolevelup': case 'autonivel':
@@ -494,9 +495,9 @@ case 'listonline': case 'liston':
 online(conn, sender, args, store, m) 
 break
 //juegos
-case 'simi': case 'bot': 
-await game(conn, m, text, pushname, command, quoted)
-break 
+case 'simi': case 'alexa': case 'siri':
+await game(m, text, pushname, command)
+break  
 case 'gay': 
 await game1(conn, m, participants, sender, who)
 break            
@@ -826,17 +827,20 @@ function pickRandom(list) {
 return list[Math.floor(list.length * Math.random())]
 }  
 
-default:
+default:  
+if (budy.includes(`https://chat.whatsapp.com/`)) {
+m.reply(`*< UNE UN BOT A TU GRUPO />*\n\n*Hola ${pushname}  si deseas solicitar un Bot para tu grupo usa el comando #join mas el enlace de tu grupo.*\n\n_*El Bot se puede unir a tu grupo si mi creador acertar, Puede Apoyar al bot con una Estrellita 🌟*_\n${md}\n\n_*Subscrirte a nuestro canal del YouTube*_\n${global.yt}\n_*Nos ayudaria muchisimo 🥺*_\n\nManda cartura a mi creador al:\nwa.me/5492266466080\n*Para unir el bot a tu grupo 💞*`)}
 if (budy.includes(`Todo bien`)) {
-reply(`${pickRandom(['Si amigo todo bien, vite', 'Todo bien capo y tu 😎'])}`)}
+conn.sendPresenceUpdate('composing', m.chat)
+await m.reply(`${pickRandom(['Si amigo todo bien, vite', 'Todo bien capo y tu 😎'])}`)} 
 if (budy.includes(`Buenos dias`)) {
-reply(`${pickRandom(['Buenos Dias trolos de mierda', '*Buen dias mi amor 😘*', '*Buenos Dias hermosa mañana 🥰*'])}`)}
+conn.sendPresenceUpdate('composing', m.chat)
+m.reply(`${pickRandom(['Buenos Dias trolos de mierda', '*Buen dias mi amor 😘*', '*Buenos Dias hermosa mañana 🥰*'])}`)}
 if (budy.includes(`NovaBot`)) {
 m.react(`${pickRandom(['🌟', '👀', '🤑'])}`)}
 if (budy.includes(`Bot`)) {
-let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${budy}&lc=es&cf=false`)
-let res = anu.success; 
-m.reply(res)} 
+await conn.sendPresenceUpdate('composing', m.chat)
+game(m, text, pushname, command)} 
 if (m.mentionedJid.includes(conn.user.jid)) {
 await conn.sendMessage(m.chat, {text: `*QUE YO QUE?*`}, {quoted: m})}
 if (budy.startsWith(`a`)) {
