@@ -10,18 +10,32 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 const Jimp = require('jimp')
 const os = require('os')
+const translate = require('@vitalets/google-translate-api') 
 
-async function game(conn, m, text, pushname, command, quoted) {
+async function game(m, text, pushname, command) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (!text) return m.reply(`Hola 👋 *${pushname}* Quieres hablar un rato? conmigo usar de esta forma\n\nEjemplo: ${prefix + command} Hola`) 
 try {     
-m.react('🗣️') 
 await conn.sendPresenceUpdate('composing', m.chat)
 let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${text}&lc=es&cf=false`)
 let res = anu.success;
 m.reply(res)
-} catch { 
-return m.reply(`*Api simsimi caida vuelva mas tardes*`)}}
+} catch {
+try {
+if (text.includes('Hola')) text = text.replace('Hola', 'Hello');
+if (text.includes('hola')) text = text.replace('hola', 'Hello');
+if (text.includes('HOLA')) text = text.replace('HOLA', 'HELLO');
+const reis = await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&dt=t&q=' + text);
+const resu = await reis.json();
+const nama = m.pushName || '1';
+const api = await fetch('http://api.brainshop.ai/get?bid=153868&key=rcKonOgrUFmn5usX&uid=' + nama + '&msg=' + resu[0][0][0]);
+const res = await api.json();
+const reis2 = await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=es&dt=t&q=' + res.cnt);
+const resu2 = await reis2.json();
+m.reply(resu2[0][0][0]);
+} catch (e) { 
+return m.reply(`*Api simsimi caida vuelva mas tardes*`)
+console.log(e)}}}
 
 async function game1(conn, m, participants, sender, who) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)

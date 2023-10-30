@@ -143,7 +143,7 @@ m.reply('⏳ *𝘗𝘙𝘖𝘊𝘌𝘚𝘈𝘕𝘋𝘖 𝘓𝘈 𝘐𝘔𝘈𝘎
 try {
 let img = await q.download?.();
 let pr = await remini(img, "enhance");
-conn.sendMessage(m.chat, {image: pr}, {caption: `*𝘈𝘘𝘜𝘐 𝘛𝘐𝘌𝘕𝘌 𝘓𝘈 𝘐𝘔𝘈𝘎𝘌𝘕 𝘌𝘓 𝘏𝘋*`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
+conn.sendMessage(m.chat, {image: pr, caption: `*𝘈𝘘𝘜𝘐 𝘛𝘐𝘌𝘕𝘌 𝘓𝘈 𝘐𝘔𝘈𝘎𝘌𝘕 𝘌𝘓 𝘏𝘋*\n\nˢᶦ ˡᵃ ᶦᵐᵃᵍᵉⁿ ⁿᵒ ˢᵃˡᵉ ᵉˡ ᴴᴰ ʳᵉˢᵖᵒⁿᵈᵉ ᵃ ˡᵃ ᶦᵐᵃᵍᵉⁿ ᶜᵒⁿ ᵉˡ ᶜᵒᵐᵃⁿᵈᵒ ᵈᵉ ⁿᵘᵉᵛᵒ`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
 } catch (e) {
 return m.reply(`${info.error}\n\n*ʜᴜʙᴏʀ ᴜɴ ᴇʀʀᴏʀ (ᴀᴘɪ ᴄᴀɪᴅᴀ 🤡)*\n\n${e}`) 
 console.log(e) 
