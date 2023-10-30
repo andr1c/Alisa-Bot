@@ -388,7 +388,7 @@ mentionedJid:[sender, numBot],
 "title": wm,   
 "containsAutoReply": true,  
 "mediaType": 1,   
-"thumbnail": imagen3,  
+"thumbnail": imagen2, 
 sourceUrl: `${pickRandom([nna, nn, md, yt])}`
 }}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}) 
 }
@@ -449,8 +449,10 @@ Me gimes 7u7
 Te amo botsito uwu
 Onichan
 La toca 7w7
+autodestruction | ᵃᵘᵗᵒᵈᵉˢᵗʳᵘᶜᶦᵒⁿ
 
-_*Ojito escribe tal y como esta en el mensaje*_`
+_*ᴼʲᶦᵗᵒ ᵉˢᶜʳᶦᵇᵉ ᵗᵃˡ ʸ ᶜᵒᵐᵒ ᵉˢᵗᵃ ᵉⁿ ᵉˡ ᵐᵉⁿˢᵃʲᵉ*_
+*ᵠᵘᶦᵉʳᵉ ᵃᵍʳᵉᵍᵃ ᵃˡᵍᵘⁿ ᵃᵘᵈᶦᵒ ⁿᵘᵉᵛᵒ ᵉˢᶜʳᶦᵇᶦʳˡᵉ ᵃ ᵐᶦ ᶜʳᵉᵃᵈᵒʳ ᵘʷᵘ*`
 conn.sendMessage(m.chat, { text: menu2}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 const nuevo = (conn, m, sender, pickRandom, fkontak) => {
@@ -481,7 +483,9 @@ conn.sendMessage(m.chat, { text: `🤔 *Que hay de nuevo?* 🤗
 💠 Nivel automatico activa con: 
 • ${prefix}autonivel on
 
-🤖 Mejorar para los SubBot mas estable 💫`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn, md, yt])}`}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+🤖 Mejorar para los SubBot mas estable 💫
+
+ᴹᵃˢ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᶠᵘᵗᵘʳᵃ ᵛᵉʳˢᶦᵒⁿᵉˢ ᵠᵘᶦᵉʳᵉ ᵠᵘᵉ ᵃᵍʳᵉᵍᵘᵉ ᵃˡᵍᵘⁿ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᵉˢᵖᵉᶜᶦᵃˡ ᵉˢᶜʳᶦᵇᶦʳˡᵉ ᵃ ᵐᶦ ᶜʳᵉᵃᵈᵒʳ`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn, md, yt])}`}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 const regla = (conn, m, sender, pickRandom, fkontak) => {
 //let Grupos = `${pickRandom([nna, nn2, md, yt, tiktok])}`;
