@@ -43,6 +43,10 @@ resultado += segundos + " segundos";
 return resultado;
 }
 
+function pickRandom(list) {
+return list[Math.floor(list.length * Math.random())]
+}  
+
 // Tiempo de Actividad del bot
 const used = process.memoryUsage()
 const cpus = os.cpus().map(cpu => {
@@ -488,6 +492,7 @@ let chats = global.db.data.chats[m.chat]
   if (!('antiNsfw' in chats)) chats.antiNsfw = true
   if (!('antispam' in chats)) chats.antispam = true
   if (!('antiFake' in chats)) chats.antiFake = false
+  if (!('aprobar' in chats)) chats.aprobar = false
   if (!('antiArabe' in chats)) chats.antiArabe = false
   if (!('autosticker' in chats)) chats.autosticker = false
   if (!('detect' in chats)) chats.detect = true
@@ -502,6 +507,7 @@ let chats = global.db.data.chats[m.chat]
   antiNsfw: true, 
   antispam: true, 
   antiFake: false,
+  aprobar: false, 
   antiArabe: false,
   autosticker: false, 
   detect: true, 
