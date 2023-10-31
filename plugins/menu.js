@@ -373,6 +373,8 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}update
 ├❥ᰰຼ ❏ ${prefix}restart
 ├❥ᰰຼ ❏ ${prefix}reiniciar
+├❥ᰰຼ ❏ ${prefix}unbanned
+├❥ᰰຼ ❏ ${prefix}sacasupport
 ├❥ᰰຼ ❏ $
 ├❥ᰰຼ ❏ >
 ├❥ᰰຼ ❏ => 
