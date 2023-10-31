@@ -419,11 +419,12 @@ const time = moment.tz('America/Bogota').format('HH:mm:ss')
 const date = moment.tz('America/Bogota').format('DD/MM/YYYY')
 let name = num
 const miembros = metadata.participants.length
-let wel = [`Hola @${name.split("@")[0]} ¿COMO ESTAS? 😃`, `HOLAA!! @${name.split("@")[0]} ¿COMO ESTAS?😃\n\n『Bienvenido A *${metadata.subject}*』\n\nUn gusto conocerte amig@ 🤗\n\n_Recuerda leer las reglas del grupo para no tener ningun problema 🧐_\n\n*Solo disfrutar de este grupo y divertite 🥳*`, `[ NUEVO MIEMBRO ]\n\n@${name.split("@")[0]} Bienvenido 🥳`, `Bienvenido @${name.split("@")[0]} 🥳 a este hermoso grupo [ ${metadata.subject} 🎉 ] Espero que te sienta a gusto aqui 🥰\n\n
+let vn = './media/Bienvenido.mp3'
+let wel = [`Hola @${name.split("@")[0]} ¿COMO ESTAS? 😃`, `HOLAA!! @${name.split("@")[0]} ¿COMO ESTAS?😃\n\n『Bienvenido A *${metadata.subject}*』\n\nUn gusto conocerte amig@ 🤗\n\n_Recuerda leer las reglas del grupo para no tener ningun problema 🧐_\n\n*Solo disfrutar de este grupo y divertite 🥳*`, `[ NUEVO MIEMBRO ]\n\n@${name.split("@")[0]} Bienvenido 🥳`, `Bienvenido @${name.split("@")[0]} 🥳 a este hermoso grupo 💞 ${metadata.subject} 🎉 Espero que te sienta a gusto aqui 🥰\n\n
  ▼￣＞-―-＜￣▼
    ⚡ Ｙ                Ｙ ⚡
   /   /   ๑⚈  ․̫  ⚈๑)    ᴮᶦᵉⁿᵛᵉⁿᶦᵈᵒ ᵘʷᵘ
-＼  ｜     つ        ヽつ  \n`, `𝘓𝘦 𝘥𝘢𝘮𝘰𝘴 𝘭𝘢 𝘣𝘪𝘦𝘯𝘷𝘦𝘯𝘪𝘥𝘢 𝘢 @${name.split("@")[0]} 🥳`, `Holi @${name.split("@")[0]} Bienvenido 🎉`, `_Hello @${name.split("@")[0]} ❤, presentarte con: Foto, edad, sexo 😂_ *(na joda leer las reglas del grupo, para evitar problema)*\n\n
+＼  ｜     つ        ヽつ  \n`, `𝘓𝘦 𝘥𝘢𝘮𝘰𝘴 𝘭𝘢 𝘣𝘪𝘦𝘯𝘷𝘦𝘯𝘪𝘥𝘢 𝘢 @${name.split("@")[0]} 🥳`, `_Holi @${name.split("@")[0]} ❤, Presentarte con: Foto, edad, sexo 😂_ *(na joda leer las reglas del grupo, para evitar problema)*\n\n
 .         ⣀⣤‌⣤⣤⣀             ⣀⣤⣤‌⣤‌⣀
     ⣠⣾⣿⣿⣿⣿⣿⣧⣄　　⣠⣼⣿⣿⣿⣿⣿⣷⣄    
   ⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦  
@@ -446,19 +447,24 @@ let wel = [`Hola @${name.split("@")[0]} ¿COMO ESTAS? 😃`, `HOLAA!! @${name.sp
                 ╲      ╲        ╱
                     ╲         ╱
                           ︶ `]
+let or = ['texto', 'audio', 'texto2'];
+let media = or[Math.floor(Math.random() * 3)]
 let welcome = wel[Math.floor(Math.random() * wel.length)]
-try { 
+if (media === 'texto')
 sock.sendMessage(anu.id, { text: welcome, mentions: [num]}, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
-/*sock.sendMessage(anu.id, { text: `⪨────[ ＷＥＬＣＯＭＥ ]────⪩
-
-💫 *Hola* @${name.split("@")[0]} ¿COMO ESTAS? 😃
-💫 *Bienvenido a :* ${metadata.subject}
-💫 *Participarte : ${miembros}*
-💫 *Fecha :* ${date}
-
-📢 *Lee la descripción* 📢
-
-${metadata.desc}`, contextInfo:{
+if (media === 'audio')
+sock.sendMessage(anu.id, { audio: { url: vn }, 
+contextInfo: { mentionedJid:[num], "externalAdReply": { 
+"title": `乂 ＷＥＬＣＯＭＥ 乂`, 
+"body": `${name.split("@")[0]}`, 
+"previewType": "PHOTO", 
+"thumbnailUrl": null,
+"thumbnail": welc, 
+"sourceUrl": `${pickRandom([md, yt])}`, 
+"showAdAttribution": true}}, 
+seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+if (media === 'texto2')
+sock.sendMessage(anu.id, { text: `⪨────[ ＷＥＬＣＯＭＥ ]────⪩\n\n💫 *Hola* @${name.split("@")[0]} ¿COMO ESTAS? 😃\n💫 *Bienvenido a :* ${metadata.subject}\n💫 *Participarte : ${miembros}*\n💫 *Fecha :* ${date}\n\n📢 *Lee la descripción* 📢\n\n${metadata.desc}`, contextInfo:{
 forwardingScore: 9999999,
 isForwarded: true, 
 mentionedJid:[num],
@@ -469,17 +475,20 @@ body: `${metadata.subject}`,
 "previewType": "PHOTO",
 "thumbnailUrl": ``,
 "thumbnail": welc,
-"sourceUrl": md}}}) */
-} catch (e) {
-console.log('[Error]')}
+"sourceUrl": `${pickRandom([nna, md, yt])}`}}}, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 } else if (anu.action == 'remove') {
 const buffer = await getBuffer(ppuser)
 let name = num
 const members = metadata.participants.length
-let by = [`Adios @${name.split("@")[0]} 👋`, `Se fue @${name.split("@")[0]} quien carajo era? 😂`, `Bueno, se fue @${name.split("@")[0]} 👋\n\nQue dios lo bendiga 😎`, `\`\`\`[!] C fue alv : @${name.split("@")[0]}\`\`\``, `_@${name.split("@")[0]} Salió del grupo._`, `Se fue @${name.split("@")[0]}, *UN PUTO MENOS EN EL GRUPO😂*`]
+let by = [`Adios @${name.split("@")[0]} 👋`, `Se fue @${name.split("@")[0]} quien carajo era? 😂`, `Bueno, se fue @${name.split("@")[0]} 👋\n\nQue dios lo bendiga 😎`, `_@${name.split("@")[0]} Salió del grupo._`, `_Se fue @${name.split("@")[0]} *UN PUTO MENOS EN EL GRUPO😂*_`]
+let byegc = fs.readFileSync('./src/byegc.webp')
+let or = ['texto', 'texto2', 'stickers'];
+let media = or[Math.floor(Math.random() * 3)]
 let bye = by[Math.floor(Math.random() * by.length)]
+if (media === 'texto')
 sock.sendMessage(anu.id, { text: bye, mentions: [num]}, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
-/*sock.sendMessage(anu.id, { text: `Se fue @${name.split("@")[0]} nadie los van extraña 😹`,
+if (media === 'texto2')
+sock.sendMessage(anu.id, { text: `\`\`\`[!] C fue alv : @${name.split("@")[0]} 😹\`\`\``,
 contextInfo:{
 forwardingScore: 9999999,
 isForwarded: true, 
@@ -491,11 +500,13 @@ body: `Esperemos que no vuelva -_-`,
 "previewType": "PHOTO",
 "thumbnailUrl": ``,
 "thumbnail": leave,
-"sourceUrl": md}}}) */
+"sourceUrl": `${pickRandom([nna, md, yt])}`}}}, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+if (media === 'stickers')
+sock.sendFile(anu.id, byegc, 'sticker.webp', '', null, true, { contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: '乂 ＡＤＩＯ́Ｓ 乂', body: `${name.split("@")[0]}`, mediaType: 2, sourceUrl: `${pickRandom([md, yt])}`, thumbnail: leave}}})
 } else if (anu.action == 'promote') {
 const buffer = await getBuffer(ppuser)
 let name = num
-sock.sendMessage(anu.id, { text: `@${name.split("@")[0]} Ahora eres admin del grupo 🥳`, 
+sock.sendMessage(anu.id, { text: `${pickRandom(['[ NUEVO ADMINS ]\n\n', 'Hey'])} @${name.split("@")[0]} ${pickRandom(['Ahora eres admin del grupo 🥳', 'Felicidades ahora eres parte staff 🎉'])}`, 
  contextInfo:{
  mentionedJid:[num],
  "externalAdReply": {"showAdAttribution": true,
@@ -505,11 +516,11 @@ sock.sendMessage(anu.id, { text: `@${name.split("@")[0]} Ahora eres admin del gr
  "previewType": "PHOTO",
 "thumbnailUrl": ``,
 "thumbnail": welc,
-"sourceUrl": md}}}, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+"sourceUrl": `${pickRandom([nna, md, yt])}`}}}, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 } else if (anu.action == 'demote') {
 const buffer = await getBuffer(ppuser)
 let name = num
-sock.sendMessage(anu.id, { text: `@${name.split("@")[0]} Joderte ya no eres admin 🥲`,
+sock.sendMessage(anu.id, { text: `@${name.split("@")[0]} ${pickRandom(['Joderte ya no eres admin 🥲', 'jjjjj ya no eres admin culiado 🤣'])}`,
  contextInfo:{
  mentionedJid:[num],
  "externalAdReply": {"showAdAttribution": true,
@@ -519,10 +530,14 @@ sock.sendMessage(anu.id, { text: `@${name.split("@")[0]} Joderte ya no eres admi
  "previewType": "PHOTO",
 "thumbnailUrl": ``,
 "thumbnail": leave,
-"sourceUrl": md}}}, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+"sourceUrl": `${pickRandom([nna, md, yt])}`}}}, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }}} catch (err) {
-console.log(`${err} error no definido`)
+console.log(`${err} Error`)
 }})
+
+function pickRandom(list) {
+return list[Math.floor(list.length * Math.random())]
+}  
 
 sock.ev.on('connection.update', async (update) => {
 const { connection, lastDisconnect, qr, receivedPendingNotifications } = update;

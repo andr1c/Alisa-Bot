@@ -35,7 +35,7 @@ const translate = require('@vitalets/google-translate-api')
 const { TelegraPh, UploadFileUgu, webp2mp4File, floNime } = require('./libs/uploader.js')
 const { toAudio, toPTT, toVideo } = require('./libs/converter.js') 
 const { canLevelUp, xpRange } = require('./libs/levelling.js')
-const { smsg, fetchBuffer, getBuffer, buffergif, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom, msToTime, downloadMediaMessage, convertirMsADiasHorasMinutosSegundos} = require('./libs/fuctions')
+const { smsg, fetchBuffer, getBuffer, buffergif, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom, msToTime, downloadMediaMessage, convertirMsADiasHorasMinutosSegundos, pickRandom} = require('./libs/fuctions')
 const { ytmp4, ytmp3, ytplay, ytplayvid } = require('./libs/youtube') 
 const { mediafireDl } = require('./libs/mediafire.js') 
 const {jadibot, listJadibot, killJadibot} = require('./plugins/serbot.js')   
@@ -823,7 +823,7 @@ m.reply('_🔄 Reiniciando Bot..._');
 await delay(3 * 3000) 
 conn.ws.close()}
 break
-case 'unbanned': {
+case 'unbanned': case 'sacasupport': {
 if (!isCreator) return
 if (m.quoted || q) {
 var tosend = m.quoted ? m.quoted.sender : q.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
