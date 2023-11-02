@@ -498,7 +498,7 @@ online(conn, sender, args, store, m)
 break
 //juegos
 case 'simi': case 'alexa': case 'siri':
-await game(m, text, pushname, command)
+await game(m, text, pickRandom, pushname, command)
 break  
 case 'gay': 
 await game1(conn, m, participants, sender, who)
@@ -764,7 +764,7 @@ users[who].banned = true
 m.reply(`*𝘌𝘭 𝘶𝘴𝘶𝘢𝘳𝘪𝘰𝘴 𝘧𝘶𝘦 𝘉𝘢𝘯𝘦𝘢𝘥𝘰 𝘺𝘢 𝘯𝘰 𝘱𝘰𝘥𝘳𝘢́ 𝘶𝘴𝘢𝘳 𝘮𝘪𝘴 𝘤𝘰𝘮𝘢𝘯𝘥𝘰𝘴*`)}
 break
 case 'unbanuser': {
-let who
+let who 
 if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false
 else who = m.chat
 let user = global.db.data.users[who]
@@ -870,7 +870,7 @@ reply(`##- WhatsApp Support -##\n\nGracias por contactarnos. Nos comunicaremos c
 } catch (err) {reply(`${err}`)}
 } else reply('⚠️ *Escriba el numero que quiere desbanea*')}
 break
-//=============
+//============= 
 
 //función pickrandow
 function pickRandom(list) {
@@ -889,16 +889,22 @@ let e = fs.readFileSync('./src/autodestruction.webp')
 let or = ['texto', 'sticker'];
 let media = or[Math.floor(Math.random() * 2)]
 if (media === 'texto')
-m.reply('*Mi jefe me mastrata 😢*') 
+m.reply('*Mi jefe no me quiere 😢*') 
 if (media === 'sticker')
 conn.sendFile(m.chat, e, 'sticker.webp', '',m, true, { contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: 'ᶜ ᴬᵘᵗᵒᵈᵉˢᶜʳᵘʸᵉ', mediaType: 2, sourceUrl: nna, thumbnail: imagen1}}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 if (budy.includes(`NovaBot`)) {
 m.react(`${pickRandom(['🌟', '👀', '🤑'])}`)}
-if (budy.includes(`Bot`)) {
+if (budy.includes(`Bot`)) { 
 await conn.sendPresenceUpdate('composing', m.chat)
-game(m, text, pushname, command)} 
+game(m, text, pickRandom, pushname, command)} 
 if (m.mentionedJid.includes(conn.user.jid)) {
-await conn.sendMessage(m.chat, {text: `*QUE YO QUE?*`}, {quoted: m})}
+let noetiqueta = fs.readFileSync('./src/etiqueta.webp')
+let or = ['texto', 'sticker']; 
+let media = or[Math.floor(Math.random() * 2)]
+if (media === 'sticker')     
+conn.sendFile(m.chat, noetiqueta, 'sticker.webp', '',m, true, { contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: 'Yo que?', mediaType: 2, sourceUrl: nna, thumbnail: imagen1}}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+if (media === 'texto')
+await conn.sendMessage(m.chat, {text: `${pickRandom(['*QUE YO QUE?*', 'Que?'])}`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 if (budy.startsWith(`A`)) {
 if (!global.db.data.chats[m.chat].audios) return
 let vn = './media/a.mp3'
