@@ -76,7 +76,7 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}owner
 ├❥ᰰຼ ❏ ${prefix}creador
 ├❥ᰰຼ _(Te envia los contactos de mi creador)_
-├❥ᰰຼ ❏ ${prefix}instalarbot (Pronto) 
+├❥ᰰຼ ❏ ${prefix}instalarbot (Tutorial del instalacion)_
 ├❥ᰰຼ ❏ ${prefix}report 
 ├❥ᰰຼ _(reporta comando con falla/errores/ortografía, etc)_
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*

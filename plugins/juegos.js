@@ -12,9 +12,9 @@ const Jimp = require('jimp')
 const os = require('os')
 const translate = require('@vitalets/google-translate-api') 
 
-async function game(m, text, pushname, command) {
+async function game(m, text, pickRandom, pushname, command) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (!text) return m.reply(`Hola 👋 *${pushname}* Quieres hablar un rato? conmigo usar de esta forma\n\nEjemplo: ${prefix + command} Hola`) 
+if (!text) return m.reply(`${pickRandom([`Hola 👋 *${pushname}* Como esta? quiere charlar cormigo 👀`, '*Hola soy un bot yo puedo ayudar?*', 'Hello hablemos un ratito justos ☺, que me cuenta?', 'Hola 👋😄 aqui estoy para hacerte reir un rato, mi amigo me dices que soy muy Diventida 😆', 'Que onda perro tdo bien?', 'Hey estoy aburrida podemos hablar un rato?'])}`) 
 try {     
 await conn.sendPresenceUpdate('composing', m.chat)
 let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${text}&lc=es&cf=false`)
