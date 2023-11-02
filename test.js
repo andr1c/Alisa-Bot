@@ -1,10 +1,10 @@
-import fs from 'fs'
-import path, { dirname } from 'path'
-import assert from 'assert'
-import { spawn } from 'child_process'
-import syntaxError from 'syntax-error'
-import { fileURLToPath } from 'url'
-import { createRequire } from 'module'
+const fs = require('fs');
+const path, { dirname } = require('path');
+const assert = require('assert');
+const { spawn } = require('child_process');
+const syntaxError = require('syntax-error');
+const { fileURLToPath } = require('url');
+const { createRequire } = require('module');
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 const require = createRequire(__dirname)
