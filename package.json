@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Bot de whatsapp",
   "main": "index.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
   "start": "node index.js", 
   "test": "node test.js",
