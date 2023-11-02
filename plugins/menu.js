@@ -451,8 +451,7 @@ Me gimes 7u7
 Te amo botsito uwu
 Onichan
 La toca 7w7
-A Mario le gusta el yaoi
-autodestruction | ᵃᵘᵗᵒᵈᵉˢᵗʳᵘᶜᶦᵒⁿ
+autodestruction
 
 _*ᴼʲᶦᵗᵒ ᵉˢᶜʳᶦᵇᵉ ᵗᵃˡ ʸ ᶜᵒᵐᵒ ᵉˢᵗᵃ ᵉⁿ ᵉˡ ᵐᵉⁿˢᵃʲᵉ*_
 *ᵠᵘᶦᵉʳᵉ ᵃᵍʳᵉᵍᵃ ᵃˡᵍᵘⁿ ᵃᵘᵈᶦᵒ ⁿᵘᵉᵛᵒ ᵉˢᶜʳᶦᵇᶦʳˡᵉ ᵃ ᵐᶦ ᶜʳᵉᵃᵈᵒʳ ᵘʷᵘ*`
