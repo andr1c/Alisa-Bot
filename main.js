@@ -876,7 +876,7 @@ break
 function pickRandom(list) {
 return list[Math.floor(list.length * Math.random())]
 }  
-
+ 
 default:  
 if (budy.includes(`Todo bien`)) {
 conn.sendPresenceUpdate('composing', m.chat)
