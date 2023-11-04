@@ -1,7 +1,7 @@
 //Código desde cero y comentarios hecho por: 
 // @gata_dios   
 // @Skidy89  
-// @elrebelde21  
+// @elrebelde21 
            
 //═════════[ Importaciones ]═════════ 
 const baileys = require('@whiskeysockets/baileys'); // trabajar a través de descargas por Whatsapp 
@@ -51,7 +51,7 @@ const {nsfw1, nsfw2, nsfw3, nsfw4, nsfw5, nsfw6, nsfw7, nsfw8, nsfw9} = require(
 const {randow1, randow2, randow3, randow4, randow5, randow6, randow7, randow8, randow9} = require('./plugins/randow.js') 
 const {play, play2, play3, play4, mp3, mp4, git, tiktok, letra, mediafire, fb, ig, ig2, apk, spoti, gdrive, tttimg} = require('./plugins/descargas.js')   
 const {s, wm2, attp, dado} = require('./plugins/stickers.js') 
-const {owner1, owner2, owner3, owner4, owner5, owner6, owner7, owner8, owner9} = require('./plugins/propietario.js')  
+const {owner1, owner2, owner3, owner4, owner5, owner6, owner7, owner8, owner9, owner10, owner11} = require('./plugins/propietario.js')  
 const {on, on1, on2, on3, on4, on5, on6, on7, on8, on9, on10, on11, on12, on13, on14, on15} = require('./plugins/enable.js')
 
 const msgs = (message) => { 
@@ -699,19 +699,25 @@ case 'unblock': case 'desbloquear':
 owner4(conn, isCreator, quoted, sender, text, m) 
 break            
 case 'setcmd':  case 'addcmd':
-owner5(conn, quoted, text, command, m) 
+owner5(isCreator, conn, quoted, text, command, m) 
 break
 case 'delcmd': 
-owner6(conn, m) 
+owner6(isCreator, conn, m) 
 break
 case 'listcmd': 
-owner7(conn, m) 
+owner7(isCreator, conn, m) 
 break
 case 'addcase': 
 owner8(conn, isCreator, text, q, m) 
 break	     
 case 'getcase': 
 owner9(conn, isCreator, text, args, m) 
+break 
+case 'añadirdiamantes': case 'dardiamantes': case 'addlimit':
+owner10(isCreator, m, text) 
+break
+case 'añadirxp': case 'addexp': case 'addxp': 
+owner11(isCreator, m, text) 
 break 
 case 'banuser': {
 let who 
