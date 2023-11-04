@@ -441,7 +441,7 @@ case 'delete': case 'del': del(conn, m, isBotAdmins, isGroupAdmins)
 break  		
 case 'join': case 'unete': join(conn, m, isCreator, text, delay, args, sender)
 break           
-case 'hidetag': case 'notificar': hide(conn, m, isGroupAdmins, q, participants)
+case 'hidetag': case 'notificar': case 'tag': hide(conn, m, isGroupAdmins, q, participants)
 break 
 case 'setppname': case 'nuevonombre': case 'newnombre': setna(conn, m, isBotAdmins, isGroupAdmins, text)
 break
