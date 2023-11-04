@@ -43,13 +43,13 @@ const {jadibot, listJadibot, killJadibot} = require('./plugins/serbot.js')
 const { menu, menu2, nuevo, regla} = require('./plugins/menu.js') 
 const { state, owner, grupo, instalar, ping, report, ow, sc} = require('./plugins/info.js')
 const {rob, bal, reg, reg1, reg2, work, mine, buy, claim, perfil, nivel, cofre, lb} = require('./plugins/rpg.js') 
-const {game, game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, game13, game14, game15, game16} = require('./plugins/juegos.js')  
-const {yt, acortar, google, imagen, tran, tts, ia, ssw, wall, hd} = require('./plugins/buscadores.js')
+const {game, game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, game13, game14, game15, game16} = require('./plugins/juegos.js')   
+const {yt, acortar, google, imagen, tran, tts, ia, ssw, wall, hd, dalle} = require('./plugins/buscadores.js')
 const {efec, url, tomp3, toimg, toanime} = require('./plugins/convertidores.js') 
 const {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, adm, infogr, warn1, warn2, online, listw} = require('./plugins/grupos.js')
-const {nsfw1, nsfw2, nsfw3, nsfw4, nsfw5} = require('./plugins/nsfw.js')
+const {nsfw1, nsfw2, nsfw3, nsfw4, nsfw5, nsfw6, nsfw7, nsfw8, nsfw9} = require('./plugins/nsfw.js')
 const {randow1, randow2, randow3, randow4, randow5, randow6, randow7, randow8, randow9} = require('./plugins/randow.js') 
-const {play, play2, play3, play4, mp3, mp4, git, tiktok, letra, mediafire, fb, ig, ig2, apk, spoti} = require('./plugins/descargas.js')   
+const {play, play2, play3, play4, mp3, mp4, git, tiktok, letra, mediafire, fb, ig, ig2, apk, spoti, gdrive, tttimg} = require('./plugins/descargas.js')   
 const {s, wm2, attp, dado} = require('./plugins/stickers.js') 
 const {owner1, owner2, owner3, owner4, owner5, owner6, owner7, owner8, owner9} = require('./plugins/propietario.js')  
 const {on, on1, on2, on3, on4, on5, on6, on7, on8, on9, on10, on11, on12, on13, on14, on15} = require('./plugins/enable.js')
@@ -345,7 +345,10 @@ break
 case 'hd': 
 hd(conn, command, m) 
 break
-
+case 'dalle': case 'ia2': case 'aimg': case 'imagine': case 'dall-e':
+dalle(conn, text, command, m, lolkeysapi) 
+break
+ 
 case 'serbot': case 'jadibot': case 'qr':
 jadibot(conn, m, command, text, args, sender)
 break  
@@ -427,186 +430,137 @@ on12(isCreator, text, command, args, m, conn)
 break
 case 'antispam': on13(isCreator, text, command, args, m) 
 break
-case 'chatbot': case 'simsimi':
-on14(isGroupAdmins, text, command, args, m) 
+case 'chatbot': case 'simsimi': on14(isGroupAdmins, text, command, args, m) 
 break
-case 'autolevelup': case 'autonivel':
-on15(text, command, args, m) 
+case 'autolevelup': case 'autonivel': on15(text, command, args, m) 
 break
 //Grupo 
 case 'grupo': grup(conn, m, args, isBotAdmins, isGroupAdmins, command, prefix, text)
 break
-case 'delete': case 'del': 
-del(conn, m, isBotAdmins, isGroupAdmins)
+case 'delete': case 'del': del(conn, m, isBotAdmins, isGroupAdmins)
 break  		
-case 'join': case 'unete':
-join(conn, m, isCreator, text, delay, args, sender)
+case 'join': case 'unete': join(conn, m, isCreator, text, delay, args, sender)
 break           
-case 'hidetag': case 'notificar': 
-hide(conn, m, isGroupAdmins, q, participants)
+case 'hidetag': case 'notificar': hide(conn, m, isGroupAdmins, q, participants)
 break 
-case 'setppname': case 'nuevonombre': case 'newnombre': 
-setna(conn, m, isBotAdmins, isGroupAdmins, text)
+case 'setppname': case 'nuevonombre': case 'newnombre': setna(conn, m, isBotAdmins, isGroupAdmins, text)
 break
-case 'setdesc': case 'descripción':  
-setde(conn, m, isBotAdmins, isGroupAdmins, text)
+case 'setdesc': case 'descripción': setde(conn, m, isBotAdmins, isGroupAdmins, text)
 break
-case 'setppgroup': case 'setpp': 
-setpp(conn, m, isBotAdmins, isGroupAdmins, quoted, prefix, command, mime, args, from)
+case 'setppgroup': case 'setpp': setpp(conn, m, isBotAdmins, isGroupAdmins, quoted, prefix, command, mime, args, from)
 break
 case 'anularlink': case 'resetlink': case 'revoke':
 let res = conn.groupRevokeInvite(m.chat)
 break
-case 'add': case 'agregar': case 'invitar': 
-add(conn, m, isBotAdmins, isGroupAdmins, text, sender, prefix)
+case 'add': case 'agregar': case 'invitar': add(conn, m, isBotAdmins, isGroupAdmins, text, sender, prefix)
 break           
-case 'kick': case 'echar': case 'sacar':
-k(conn, m, isBotAdmins, isGroupAdmins, quoted, text, sender)
+case 'kick': case 'echar': case 'sacar': k(conn, m, isBotAdmins, isGroupAdmins, quoted, text, sender)
 break 
-case 'promote': case 'darpoder':
-p(conn, m, isBotAdmins, isGroupAdmins, quoted, sender)
+case 'promote': case 'darpoder': p(conn, m, isBotAdmins, isGroupAdmins, quoted, sender)
 break
-case 'demote': case 'quitarpoder':
-d(conn, m, isBotAdmins, isGroupAdmins, quoted, sender)
+case 'demote': case 'quitarpoder': d(conn, m, isBotAdmins, isGroupAdmins, quoted, sender)
 break            
-case 'link': case 'linkgc': 
-link(conn, m, isBotAdmins)
+case 'link': case 'linkgc':  link(conn, m, isBotAdmins)
 break                        		
-case 'banchat': 
-ban(m, isCreator, text, command, args)
+case 'banchat': ban(m, isCreator, text, command, args)
 break              
-case 'tagall': case 'invocar': case 'todos':
-tag(conn, m, isGroupAdmins, participants, q)
+case 'tagall': case 'invocar': case 'todos': tag(conn, m, isGroupAdmins, participants, q)
 break                 
-case 'admins': case 'administradores': 
-adm(conn, participants, groupMetadata, args, m) 
+case 'admins': case 'administradores': adm(conn, participants, groupMetadata, args, m) 
 break 
-case 'infogrupo': case 'groupinfo':
-infogr(conn, participants, groupMetadata, fkontak, m) 
+case 'infogrupo': case 'groupinfo': infogr(conn, participants, groupMetadata, fkontak, m) 
 break  
-case 'warn': case 'advertencia':
-warn1(conn, m, isBotAdmins, isGroupAdmins, sender, command, text, delay) 
+case 'warn': case 'advertencia': warn1(conn, m, isBotAdmins, isGroupAdmins, sender, command, text, delay) 
 break 
-case 'unwarn': case 'quitardvertencia': 
-warn2(conn, m, isBotAdmins, isGroupAdmins, sender, command, delay) 
+case 'unwarn': case 'quitardvertencia': warn2(conn, m, isBotAdmins, isGroupAdmins, sender, command, delay) 
 break
-case 'listwarn': 
-listw(conn, isCreator, m) 
+case 'listwarn': listw(conn, isCreator, m) 
 break
-case 'listonline': case 'liston': 
-online(conn, sender, args, store, m) 
+case 'listonline': case 'liston': online(conn, sender, args, store, m) 
 break
 //juegos
-case 'simi': case 'alexa': case 'siri':
-await game(m, text, pickRandom, pushname, command)
+case 'simi': case 'alexa': case 'siri': await game(m, text, pickRandom, pushname, command)
 break  
-case 'gay': 
-await game1(conn, m, participants, sender, who)
+case 'gay': await game1(conn, m, participants, sender, who)
 break            
-case 'pareja': case 'formarpareja':
-await game2(conn, m, pushname, participants, sender)
+case 'pareja': case 'formarpareja': await game2(conn, m, pushname, participants, sender)
 break
-case 'fake': 
-await game3(conn, text, prefix, command, body, from, m, sender, quoted)
+case 'fake': await game3(conn, text, prefix, command, body, from, m, sender, quoted)
 break
-case 'follar': case 'violar': case 'coger':
-game4(conn, m, pushname, text, sender)
+case 'follar': case 'violar': case 'coger': game4(conn, m, pushname, text, sender)
 break 
-case 'ppt': case 'suit':
-game5(conn, m, pushname, text, sender)
+case 'ppt': case 'suit': game5(conn, m, pushname, text, sender)
 break
-case 'pregunta': case 'preg':
-game6(text, command, m)  
+case 'pregunta': case 'preg': game6(text, command, m)  
 break   
-case 'doxear': case 'doxxeo': 
-game7(conn, pickRandom, text) 
+case 'doxear': case 'doxxeo': game7(conn, pickRandom, text) 
 break
-case 'personalidad': 
-game8(conn, text, pickRandom, m) 
+case 'personalidad': game8(conn, text, pickRandom, m) 
 break   
-case 'slot':  case 'apuesta':
-game9(conn, args, prefix, command, msToTime, m) 
+case 'slot':  case 'apuesta': game9(conn, args, prefix, command, msToTime, m) 
 break
-case 'verdad':
-game10(sendImageAsUrl, pickRandom)   
+case 'verdad': game10(sendImageAsUrl, pickRandom)   
 break   
-case 'reto': 
-game11(pickRandom, sendImageAsUrl)   
+case 'reto': game11(pickRandom, sendImageAsUrl)   
 break                
-case 'top': 
-game12(conn, text, participants, pickRandom, m) 
+case 'top': game12(conn, text, participants, pickRandom, m) 
 break 
-case 'topgays': case 'topotakus': 
-game13(conn, participants, command, m) 
+case 'topgays': case 'topotakus': game13(conn, participants, command, m) 
 break 
-case 'piropo':
-game14(m, pickRandom) 
+case 'piropo': game14(m, pickRandom) 
 break
-case 'racista':
-game15(m, body)  
+case 'racista': game15(m, body)  
 break
-case 'love': 
-game16(conn, text, m, sender) 
+case 'love': game16(conn, text, m, sender) 
 break
 //convertidores
-case 'bass': case 'blown': case 'deep': case 'earrape': case 'fast': case 'fat': case 'nightcore': case 'reverse': case 'robot': case 'slow': case 'smooth': case 'squirrel': 
-efec(conn, command, mime, quoted, exec, prefix, m, from) 
+case 'bass': case 'blown': case 'deep': case 'earrape': case 'fast': case 'fat': case 'nightcore': case 'reverse': case 'robot': case 'slow': case 'smooth': case 'squirrel': efec(conn, command, mime, quoted, exec, prefix, m, from) 
 break   
-case 'toaudio': case 'tomp3': 
-tomp3(conn, mime, quoted, m) 
+case 'toaudio': case 'tomp3': tomp3(conn, mime, quoted, m) 
 break
-case 'toimg': case 'toimagen':
-toimg(conn, mime, quoted, exec, m) 
+case 'toimg': case 'toimagen': toimg(conn, mime, quoted, exec, m) 
 break
-case 'tourl': 
-url(conn, mime, quoted, util, m) 
+case 'tourl': url(conn, mime, quoted, util, m) 
 break
-case 'toanime': 
-toanime(conn, mime, quoted, lolkeysapi, m) 
+case 'toanime': toanime(conn, mime, quoted, lolkeysapi, m) 
 break
 //nsfw
-case 'hentai': 
-await nsfw1(conn, m, pickRandom)
+case 'hentai': nsfw1(conn, m, pickRandom)
 break
-case 'nsfwloli': 
-await nsfw2(conn, m, pickRandom) 
+case 'nsfwloli': nsfw2(conn, m, pickRandom) 
 break
-case 'lewd': case 'feed': case 'gasm': case 'anal': case 'holo': case 'tits': case 'kuni': case 'kiss': case 'erok': case 'smug': case 'solog': case 'feetg': case 'lewdk': case 'waifu': case 'pussy': case 'femdom': case 'cuddle': case 'eroyuri': case 'cum_jpg': case 'blowjob': case 'holoero': case 'erokemo': case 'fox_girl': case 'futanari': case 'wallpaper':
-await nsfw3(conn, m, pickRandom, sendImageAsUrl, command)
+case 'lewd': case 'feed': case 'gasm': case 'anal': case 'holo': case 'tits': case 'kuni': case 'kiss': case 'erok': case 'smug': case 'solog': case 'feetg': case 'lewdk': case 'waifu': case 'pussy': case 'femdom': case 'cuddle': case 'eroyuri': case 'cum_jpg': case 'blowjob': case 'holoero': case 'erokemo': case 'fox_girl': case 'futanari': case 'wallpaper': nsfw3(conn, m, pickRandom, sendImageAsUrl, command)
 break
-case 'hentai2':
-nsfw4(sendImageAsUrl, m) 
+case 'hentai2': nsfw4(sendImageAsUrl, m) 
 break
-case 'porno':
-nsfw5(sendImageAsUrl, m) 
-break
-//randow
-case 'memes':
-await randow1(sendImageAsUrl, m)
-break
-case 'loli': 
-await randow2(sendImageAsUrl, m, pickRandom)
-break
-case 'lolivid':
-await randow3(conn, m, pickRandom) 
-break
-case 'neko':  
-await randow4(sendImageAsUrl, m, pickRandom)
-break  
-case 'akira': case 'akiyama': case 'anna': case 'asuna': case 'ayuzawa': case 'boruto': case 'chiho': case 'chitoge': case 'deidara': case 'erza': case 'elaina': case 'eba': case 'emilia': case 'hestia': case 'hinata': case 'inori': case 'isuzu': case 'itachi': case 'itori': case 'kaga': case 'kagura': case 'kaori': case 'keneki': case 'kotori': case 'kurumi': case 'madara': case 'mikasa': case 'miku': case 'minato': case 'naruto': case 'nezuko': case 'sagiri': case 'sasuke': case 'sakura': case 'cosplay':
-await randow5(sendImageAsUrl, command, pickRandom, m)
+case 'porno': nsfw5(sendImageAsUrl, m) 
 break 
-case 'horny':  
-await randow6(conn, m) 
+case 'pack': nsfw6(sendImageAsUrl, m)   
 break
-case 'simp':  
-randow7(conn, m) 
+case 'pack2': case 'pack3':  nsfw7(sendImageAsUrl, m)  
 break
-case 'lolice':
-randow8(conn, m) 
+case 'videoxxx': case 'vídeoxxx': case 'videoxxxlesbi': nsfw8(conn, m)  
+break
+case 'videolesbixxx': case 'pornolesbivid': case 'pornolesbianavid': case 'pornolesbiv': case 'pornolesbianav': nsfw9(conn, m)  
+break 
+//randow     
+case 'memes': randow1(sendImageAsUrl, m)
 break  
-case 'comentar': case 'comment':
-randow9(conn, text, m, sender, pushname)
+case 'loli': randow2(sendImageAsUrl, m, pickRandom)
+break   
+case 'lolivid': randow3(conn, m, pickRandom)  
+break
+case 'neko': randow4(sendImageAsUrl, m, pickRandom)
+break  
+case 'akira': case 'akiyama': case 'anna': case 'asuna': case 'ayuzawa': case 'boruto': case 'chiho': case 'chitoge': case 'deidara': case 'erza': case 'elaina': case 'eba': case 'emilia': case 'hestia': case 'hinata': case 'inori': case 'isuzu': case 'itachi': case 'itori': case 'kaga': case 'kagura': case 'kaori': case 'keneki': case 'kotori': case 'kurumi': case 'madara': case 'mikasa': case 'miku': case 'minato': case 'naruto': case 'nezuko': case 'sagiri': case 'sasuke': case 'sakura': case 'cosplay': randow5(sendImageAsUrl, command, pickRandom, m)
+break 
+case 'horny': randow6(conn, m) 
+break
+case 'simp': randow7(conn, m) 
+break
+case 'lolice': randow8(conn, m) 
+break  
+case 'comentar': case 'comment': randow9(conn, text, m, sender, pushname)
 break 
 case 'blackpink':  
 sendImageAsUrl("https://delirius-image-random.vercel.app/api/all");
@@ -636,7 +590,7 @@ break
 case 'gitclone':
 git(conn, args, command, m) 
 break
-case 'tiktok': 
+case 'tiktok': case 'tt':
 tiktok(conn, text, command, q, m) 
 break     
 case 'lyrics': case 'letra': 
@@ -656,6 +610,12 @@ ig2(conn, args, command, m)
 break
 case 'apk': case 'modoapk':
 apk(conn, text, m)  
+break 
+case 'gdrive': 
+gdrive(conn, args, command, m) 
+break
+case 'tiktokimg': case 'ttimg': 
+tttimg(conn, text, command, m) 
 break
 //rpg
 case 'reg': case 'verificar':
@@ -876,14 +836,14 @@ break
 function pickRandom(list) {
 return list[Math.floor(list.length * Math.random())]
 }  
- 
+
 default:  
 if (budy.includes(`Todo bien`)) {
 conn.sendPresenceUpdate('composing', m.chat)
 await m.reply(`${pickRandom(['Si amigo todo bien, vite', 'Todo bien capo y tu 😎'])}`)} 
 if (budy.includes(`Buenos dias`)) {
 conn.sendPresenceUpdate('composing', m.chat)
-m.reply(`${pickRandom(['Buenos Dias trolos de mierda', '*Buen dias mi amor 😘*', '*Buenos Dias hermosa mañana 🥰*'])}`)} 
+m.reply(`${pickRandom(['Buenos Dias trolos de mierda', '*Buen dias mi amor 😘*', '*Buenos Dias hermosa mañana 🥰*'])}`)}  
 if (budy.includes(`autodestruction`)) { 
 let e = fs.readFileSync('./src/autodestruction.webp')
 let or = ['texto', 'sticker'];
