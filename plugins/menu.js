@@ -374,6 +374,11 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}antiprivado _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}autoread _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}modojadibot _(on/off)_
+├❥ᰰຼ ❏ ${prefix}añadirdiamantes
+├❥ᰰຼ ❏ ${prefix}addlimit
+├❥ᰰຼ ❏ ${prefix}dardiamantes _(@tag)_
+├❥ᰰຼ ❏ ${prefix}añadirxp
+├❥ᰰຼ ❏ ${prefix}addxp _(@tag)_
 ├❥ᰰຼ ❏ ${prefix}banuser _(Banea algun usuario por mal uso del bot)_
 ├❥ᰰຼ ❏ ${prefix}unbanuser _(Desbanea al usuario)_
 ├❥ᰰຼ ❏ ${prefix}autoadmin 
