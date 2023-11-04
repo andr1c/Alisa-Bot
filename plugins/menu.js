@@ -119,7 +119,9 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}gitclone
 ├❥ᰰຼ _(Ingresa el link del GitHub para descargar el repositorio)_
 ├❥ᰰຼ ❏ ${prefix}tiktok
-├❥ᰰຼ (Ingresa el link de tiktok para descargar el video)
+├❥ᰰຼ _(Ingresa el link de tiktok para descargar el video)_
+├❥ᰰຼ ❏ ${prefix}tiktokimg
+├❥ᰰຼ ❏ ${prefix}ttimg
 ├❥ᰰຼ ❏ ${prefix}igstalk
 ├❥ᰰຼ _(Ingresa el nombre de un usuario de Instagram para ver su perfil)_
 ├❥ᰰຼ ❏ ${prefix}facebook
@@ -130,6 +132,8 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ _(Descarga videos de Instagram)_
 ├❥ᰰຼ ❏ ${prefix}mediafire
 ├❥ᰰຼ (descarga archivos de mediafire)_
+├❥ᰰຼ ❏ ${prefix}gdrive
+├❥ᰰຼ _(Descarga archivos de gdrive)_
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
 
 *╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*🔰⃐ＧＲＵＰＯＳ*️⃟ᬽ፝֟━*
@@ -186,6 +190,9 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ _(Buscar imagen del wallpaper)_
 ├❥ᰰຼ ❏ ${prefix}ss 
 ├❥ᰰຼ _(Ingresa un link para mandar captura)_
+├❥ᰰຼ ❏ ${prefix}dall-e
+├❥ᰰຼ ❏ ${prefix}ia2
+├❥ᰰຼ _(Crea imagenes con la (IA)_
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
 
 *╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*⃐👾ＪＵＥＧＯＳ*️⃟ᬽ፝֟━*
@@ -247,6 +254,13 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}nsfwloli
 ├❥ᰰຼ ❏ ${prefix}hentai
 ├❥ᰰຼ ❏ ${prefix}hentai2
+├❥ᰰຼ ❏ ${prefix}pack
+├❥ᰰຼ ❏ ${prefix}pack2
+├❥ᰰຼ ❏ ${prefix}pack3
+├❥ᰰຼ ❏ ${prefix}videoxxx
+├❥ᰰຼ ❏ ${prefix}videoxxxlesbi
+├❥ᰰຼ ❏ ${prefix}pornolesbianavid
+├❥ᰰຼ ❏ ${prefix}videolesbixxx
 ├❥ᰰຼ ❏ ${prefix}porno
 ├❥ᰰຼ ❏ ${prefix}lewd'
 ├❥ᰰຼ ❏ ${prefix}feed'
@@ -465,27 +479,18 @@ conn.sendMessage(m.chat, { text: `🤔 *Que hay de nuevo?* 🤗
 *Nuevo comando:*
 
 🟢 Mejorar la imagen a HD. 
-•${prefix}hd
+• ${prefix}hd
 
-🚀 Descarga audio el documento
-• ${prefix}play3
-• ${prefix}playdoc
+🚀 Descarga archivo de gdrive
+• ${prefix}gdrive (links) 
 
-🚀 Descarga Video el documento
-• ${prefix}play4
-• ${prefix}ytmp4doc
+🚀 Descarga imagenes del tiktok
+• ${prefix}tiktokimg
+• ${prefix}ttimg
 
-🚀 Descarga musica de spotify
-• ${prefix}spotify
-• ${prefix}music
-
-💬 Chatbot automatico activa con:
-• ${prefix}chatbot on
-
-💠 Nivel automatico activa con: 
-• ${prefix}autonivel on
-
-🤖 Mejorar para los SubBot mas estable 💫
+🌐 (Crea imagenes con la (IA) 
+• ${prefix}dall-e
+• ${prefix}ia2
 
 ᴹᵃˢ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᶠᵘᵗᵘʳᵃ ᵛᵉʳˢᶦᵒⁿᵉˢ ᵠᵘᶦᵉʳᵉ ᵠᵘᵉ ᵃᵍʳᵉᵍᵘᵉ ᵃˡᵍᵘⁿ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᵉˢᵖᵉᶜᶦᵃˡ ᵉˢᶜʳᶦᵇᶦʳˡᵉ ᵃ ᵐᶦ ᶜʳᵉᵃᵈᵒʳ`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn, md, yt])}`}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 

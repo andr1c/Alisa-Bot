@@ -8,6 +8,9 @@ const cheerio = require('cheerio')
 const yts = require("yt-search") 
 const ytdl = require('ytdl-core') 
 const { smsg, fetchBuffer, getBuffer, buffergif, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getFile, getRandom, msToTime, downloadMediaMessage, convertirMsADiasHorasMinutosSegundos} = require('../libs/fuctions')
+const {sizeFormatter} = require('human-readable') 
+const formatSize = sizeFormatter({
+  std: 'JEDEC', decimalPlaces: 2, keepTrailingZeroes: false, render: (literal, symbol) => `${literal} ${symbol}B`});
 
 async function play(conn, text, command, args, m) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
@@ -383,6 +386,40 @@ m.reply('*3 ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴜsᴀᴅᴏ*')
 } catch { 
 return m.reply(`*[ ⚠️ ] Error, no se encontrarón resultados para su búsqueda.*`)}}
 
+async function gdrive(conn, args, command, m) {
+const {sizeFormatter} = require('human-readable') 
+const formatSize = sizeFormatter({
+  std: 'JEDEC', decimalPlaces: 2, keepTrailingZeroes: false, render: (literal, symbol) => `${literal} ${symbol}B`});
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
+if (!args[0]) return m.reply(`*⚠️ 𝘐𝘕𝘎𝘙𝘌𝘚𝘌 𝘌𝘓 𝘓𝘐𝘕𝘒 𝘗𝘈𝘙𝘈 𝘋𝘌𝘚𝘊𝘈𝘙𝘎𝘈 𝘚𝘜𝘚 𝘈𝘙𝘊𝘏𝘐𝘝𝘖 𝘋𝘌 𝘋𝘙𝘐𝘝𝘌*\n*𝘌𝘑𝘌𝘔𝘗𝘓𝘖:* ${prefix + command} https://drive.google.com/file/d/1dmHlx1WTbH5yZoNa_ln325q5dxLn1QHU/view*`) 
+try {
+GDriveDl(args[0]).then(async (res) => {
+ m.reply('*𝘋𝘌𝘚𝘊𝘈𝘙𝘎𝘈𝘋𝘖 𝘚𝘜𝘚 𝘈𝘙𝘊𝘏𝘐𝘝𝘖, 𝘈𝘎𝘜𝘈𝘙𝘋𝘌 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖 𝘗𝘖𝘙 𝘍𝘈𝘝𝘖𝘙...*\n\nᴱˡ ᵗᶦᵉᵐᵖᵒ ᵈᵉ ᵉˢᵖᵉʳᵃ ᵖᵘᵉᵈᵉ ᵛᵃʳᶦᵃʳ ᵈᵉᵖᵉⁿᵈᶦᵉⁿᵈᵒ ᵈᵉˡ ᵖᵉˢᵒ ᵈᵉˡ ᵃʳᶜʰᶦᵛᵒ ˢᶦ ᵉˡ ᵖᵉˢᵒ ˢᵘᵖᵉʳᵃ ˡᵒˢ ¹⁰⁰ ᴹᴮ ᵖᵘᵉᵈᵉ ᵠᵘᵉ ˢᵘ ᵃʳᶜʰᶦᵛᵒ ⁿᵒ ˢᵉᵃ ᵉⁿᵛᶦᵃᵈᵒ');
+if (!res) throw res;
+conn.sendMessage(m.chat, {document: {url: res.downloadUrl, mimetype: res.mimetype, asDocument: true, fileName: `${res}`}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}) 
+db.data.users[m.sender].limit -= 3
+m.reply('*3 ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴜsᴀᴅᴏ*')
+} catch (e) {
+m.reply('*[❗𝐈𝐍𝐅𝐎❗] 𝙴𝚁𝚁𝙾𝚁, 𝙿𝙾𝚁 𝙵𝙰𝚅𝙾𝚁 𝚅𝚄𝙴𝙻𝚅𝙰 𝙰 𝙸𝙽𝚃𝙴𝙽𝚃𝙰𝚁𝙻𝙾*\n\n*- 𝙲𝙾𝚁𝚁𝙾𝙱𝙾𝚁𝙴 𝚀𝚄𝙴 𝙴𝙻 𝙴𝙽𝙻𝙰𝙲𝙴 𝚂𝙴𝙰 𝚂𝙸𝙼𝙸𝙻𝙰𝚁 𝙰:*\n*◉ https://drive.google.com/file/d/1dmHlx1WTbH5yZoNa_ln325q5dxLn1QHU/view*');
+console.log(e)}}
+
+async function tttimg(conn, text, command, m) {
+if (!text) return m.reply(`⚠️ Ingresa un enlace de tiktok imagenes*\n\n*Ejemplo:* ${prefix + command} https://vm.tiktok.com/ZMjnPvJuF/`) 
+let imagesSent
+if (imagesSent) return;
+imagesSent = true    
+try {   
+m.reply('*Calma Ya estoy buscado tu Perdido...*') 
+let tioShadow = await ttimg(text); 
+let result = tioShadow?.data;
+for (let d of result) {
+await conn.sendMessage(m.chat, {image: {url: d}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})};
+imagesSent = false
+} catch (e) {
+imagesSent = false    
+return m.reply(`${info.error} *No se obtuvo respuesta de la página (Api caida), intente más tarde.*\n\n${e}`)}}
+
 async function search(query, options = {}) {
 const search = await yts.search({ query, hl: "es", gl: "ES", ...options });
 return search.videos};
@@ -468,7 +505,50 @@ let random = url[0];
 let getVideo = await ytMp4(random);
 resolve(getVideo)}).catch(reject)})};
 
-module.exports = {play, play2, play3, play4, mp3, mp4, git, tiktok, letra, mediafire, fb, ig, ig2, apk, spoti}
+async function GDriveDl(url) {
+  let id;
+  if (!(url && url.match(/drive\.google/i))) throw 'Invalid URL';
+  id = (url.match(/\/?id=(.+)/i) || url.match(/\/d\/(.*?)\//))[1];
+  if (!id) throw 'ID Not Found';
+  const res = await fetch(`https://drive.google.com/uc?id=${id}&authuser=0&export=download`, {
+    method: 'post',
+    headers: {
+      'accept-encoding': 'gzip, deflate, br',
+      'content-length': 0,
+      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      'origin': 'https://drive.google.com',
+      'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36',
+      'x-client-data': 'CKG1yQEIkbbJAQiitskBCMS2yQEIqZ3KAQioo8oBGLeYygE=',
+      'x-drive-first-party': 'DriveWebUi',
+      'x-json-requested': 'true'}});
+  const {fileName, sizeBytes, downloadUrl} = JSON.parse((await res.text()).slice(4));
+  if (!downloadUrl) throw 'Link Download Limit!';
+  const data = await fetch(downloadUrl);
+  if (data.status !== 200) throw data.statusText;
+  return {downloadUrl, fileName, fileSize: formatSize(sizeBytes), mimetype: data.headers.get('content-type')};
+}
+
+async function ttimg(link) {
+    try {    
+        let url = `https://dlpanda.com/es?url=${link}&token=G7eRpMaa`;    
+        let response = await axios.get(url);
+        const html = response.data;
+        const $ = cheerio.load(html);
+        let imgSrc = [];
+        $('div.col-md-12 > img').each((index, element) => {
+            imgSrc.push($(element).attr('src'));
+        });
+        if (imgSrc.length === 0) {
+            return { data: '*[ ⚠️ ] No se encontraron imágenes en el enlace proporcionado.*' };
+        }
+        return { data: imgSrc }; 
+    } catch (error) {
+        console.lo (error);
+        return { data: '*[ ⚠️ ] No se obtuvo respuesta de la página, intente más tarde.*'};
+    };
+};
+
+module.exports = {play, play2, play3, play4, mp3, mp4, git, tiktok, letra, mediafire, fb, ig, ig2, apk, spoti, gdrive, tttimg}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {

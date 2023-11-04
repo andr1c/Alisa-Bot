@@ -31,6 +31,7 @@ for (let i of search.all) {
 }
 await conn.sendMessage(from, { image: { url: search.all[0].thumbnail }, caption: teks }, { quoted: fkontak });
 await conn.sendMessage(from, {text: info.result, edit: key}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+m.react('💫') 
 }
 
 async function acortar(conn, m, text, args, command) {
@@ -102,7 +103,8 @@ let texttosay = text
 : m.text;
 const SpeakEngine = require("google-tts-api"); 
 const texttospeechurl = SpeakEngine.getAudioUrl(texttosay, {lang: "es", slow: false, host: "https://translate.google.com",});
-conn.sendMessage(m.chat, { audio: { url: texttospeechurl }, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": md, "showAdAttribution": true}}, seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+conn.sendMessage(m.chat, { audio: { url: texttospeechurl }, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": md, "showAdAttribution": true}}, seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+m.react('🗣️')}
 
 async function ia(conn, m, text, quoted) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
@@ -114,6 +116,33 @@ let hasill = await tioress.json()
 m.reply(`${hasill.result}`.trim())   
 db.data.users[m.sender].limit -= 1
 }
+
+async function dalle(conn, text, command, m, lolkeysapi) {
+if (!text) return m.reply(`*⚠️ INGRESE UN TEXTO PARA CREAR UNA IMAGEN Y ASI USAR LA FUNCION DE DALL-E*\n\n*• EJEMPLO:*\n*${prefix + command} gatitos llorando`) 
+m.reply('*AGUARDE UN MOMENTO...*') 
+try {
+const tiores1 = await fetch(`https://vihangayt.me/tools/imagine?q=${text}`);
+const json1 = await tiores1.json();
+await conn.sendMessage(m.chat, {image: {url: json1.data}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
+} catch {  
+console.log('[ ⚠️ ] Error con la api 1, intentamos con la otra api');  
+try {
+const tiores2 = await conn.getFile(`https://vihangayt.me/tools/midjourney?q=${text}`);
+await conn.sendMessage(m.chat, {image: {url: tiores2.data}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
+} catch {
+console.log('[ ⚠️ ] Error api 2 tambien esta caida.');
+try {
+const tiores3 = await fetch(`https://vihangayt.me/tools/lexicaart?q=${text}`);
+ const json3 = await tiores3.json();
+await conn.sendMessage(m.chat, {image: {url: json3.data[0].images[0].url}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
+} catch {
+console.log('[ ⚠️ ] Error, api 3 tambien eata caida 😢');
+try {
+const tiores4 = await conn.getFile(`https://api.lolhuman.xyz/api/dall-e?apikey=${lolkeysapi}&text=${text}`);
+await conn.sendMessage(m.chat, {image: {url: tiores4.data}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
+} catch (e) {
+return m.reply(`*${info.error} *Error, no se obtuvierón resultados (Api caida)*`) 
+console.log(e);}}}}}
 
 async function ssw(conn, m, q, prefix, command, quoted, scp1) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
@@ -149,7 +178,7 @@ return m.reply(`${info.error}\n\n*ʜᴜʙᴏʀ ᴜɴ ᴇʀʀᴏʀ (ᴀᴘɪ ᴄ�
 console.log(e) 
 }}
  
-module.exports = {yt, acortar, google, imagen, tran, tts, ia, ssw, wall, hd}
+module.exports = {yt, acortar, google, imagen, tran, tts, ia, ssw, wall, hd, dalle}
 
 exports.getRandom = (ext) => {
 return `${Math.floor(Math.random() * 10000)}${ext}`
