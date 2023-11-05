@@ -423,7 +423,7 @@ let [text1, ...text2] = text.split(' ')
 text2 = (text2 || []).join(' ')
 if (!text2) throw `*⚠️ ESCRIBE EL NOMBRE DE LA SEGUNDA PERSONA*`
 let lovetext = `❤️ *${text1}* tu oportunidad de enamorarte de *${text2}* es de *${Math.floor(Math.random() * 100)}%*👩🏻‍❤️‍👨🏻`.trim()
-m.reply(love, null, { mentions: conn.parseMention(lovetext) })
+m.reply(lovetext, null, { mentions: conn.parseMention(lovetext) })
 }
 
 module.exports = {game, game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, game13, game14, game15, game16, game17}
