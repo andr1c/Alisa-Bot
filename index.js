@@ -578,7 +578,7 @@ color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│YA ESTA CON
 );
 if (!sock.user.connect) {
 let res = await sock.groupAcceptInvite(global.nna2);
-await delay(45 * 45000)
+await delay(5 * 5000)
 sock.sendMessage(res, { text: `${pickRandom(['Hola me he conectado como un nuevo bot 🥳', 'Hola 👋😄 me presento soy un nuevo bot activo 🚀\n\nPoner #menu para vez mi comando\nᴺᵒ ʰᵃᵍᵃⁿ ˢᵖᵃᵐ ᵈᵉˡ ᶜᵒᵐᵃⁿᵈᵒ', 'Hola chavales me he conectado como un nuevo botsito (NovaBot-MD) 😎'])}`, 
 contextInfo:{
 forwardingScore: 9999999, 
