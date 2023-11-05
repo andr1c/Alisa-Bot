@@ -513,7 +513,7 @@ case 'racista': game15(m, body)
 break
 case 'love': game16(conn, text, m, sender) 
 break
-case 'ship': game17(conn, text, m, sender) 
+case 'ship': game17(conn, text) 
 break
 //convertidores
 case 'bass': case 'blown': case 'deep': case 'earrape': case 'fast': case 'fat': case 'nightcore': case 'reverse': case 'robot': case 'slow': case 'smooth': case 'squirrel': efec(conn, command, mime, quoted, exec, prefix, m, from) 
