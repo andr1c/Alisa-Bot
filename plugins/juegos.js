@@ -417,13 +417,14 @@ let love = `*❤️❤️ MEDIDOR DE AMOR ❤️❤️*
 m.react('💞') 
 conn.sendMessage(m.chat, { text: love, mentions: [m.sender, text.replace('@', '') + '@s.whatsapp.net']}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
-async function game17(conn, command, text) {
-if (!text) throw `*⚠️ ESCRIBE EL NOMBRE DE DOS PERSONAS PARA CALCULAR SU AMOR*`
+async function game17(conn, text, m) {
+if (!text) return m.reply(`*⚠️ ESCRIBE EL NOMBRE DE DOS PERSONAS PARA CALCULAR SU AMOR*`) 
 let [text1, ...text2] = text.split(' ')
 text2 = (text2 || []).join(' ')
-if (!text2) throw `*⚠️ ESCRIBE EL NOMBRE DE LA SEGUNDA PERSONA*`
+if (!text2) return m.reply(`*⚠️ ESCRIBE EL NOMBRE DE LA SEGUNDA PERSONA*`) 
 let lovetext = `❤️ *${text1}* tu oportunidad de enamorarte de *${text2}* es de *${Math.floor(Math.random() * 100)}%*👩🏻‍❤️‍👨🏻`.trim()
-conn.sendMessage(m.chat, { text: lovetext, mentions: [m.sender, text.replace('@', '') + '@s.whatsapp.net']}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+m.reply(lovetext, null, { mentions: conn.parseMention(lovetext) })
+}
 
 module.exports = {game, game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, game13, game14, game15, game16, game17}
 
