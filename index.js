@@ -6,7 +6,7 @@ const chalk = require('chalk')
 const moment = require('moment')
 const fs = require('fs')
 const yargs = require('yargs/yargs')
-const { smsg, sleep, getBuffer} = require('./libs/fuctions')
+const { smsg, sleep, delay, getBuffer} = require('./libs/fuctions')
 const _ = require('lodash')
 const NodeCache = require('node-cache')
 const os = require('os')
@@ -539,6 +539,8 @@ function pickRandom(list) {
 return list[Math.floor(list.length * Math.random())]
 }  
 
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
 sock.ev.on('connection.update', async (update) => {
 const { connection, lastDisconnect, qr, receivedPendingNotifications } = update;
 console.log(receivedPendingNotifications)
@@ -575,14 +577,16 @@ color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
 color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│YA ESTA CONECTADO CORRECTAMENTE\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯` + receivedPendingNotifications, '#38ef7d')
 );
 if (!sock.user.connect) {
-sock.sendMessage("5492266466080@s.whatsapp.net", { text: "Hola Creador me he conectado como un nuevo bot 🥳", 
+let res = await sock.groupAcceptInvite(global.nna2);
+await delay(45 * 45000)
+sock.sendMessage(res, { text: `${pickRandom(['Hola me he conectado como un nuevo bot 🥳', 'Hola 👋😄 me presento soy un nuevo bot activo 🚀\n\nPoner #menu para vez mi comando\nᴺᵒ ʰᵃᵍᵃⁿ ˢᵖᵃᵐ ᵈᵉˡ ᶜᵒᵐᵃⁿᵈᵒ', 'Hola chavales me he conectado como un nuevo botsito (NovaBot-MD) 😎'])}`, 
 contextInfo:{
 forwardingScore: 9999999, 
 isForwarded: true
 }})
 sock.user.connect = true
 }
-await sock.groupAcceptInvite(global.nna2);
+//await sock.groupAcceptInvite(global.nna2);
 }});
 
 sock.public = true
