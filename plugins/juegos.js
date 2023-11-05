@@ -417,7 +417,7 @@ let love = `*❤️❤️ MEDIDOR DE AMOR ❤️❤️*
 m.react('💞') 
 conn.sendMessage(m.chat, { text: love, mentions: [m.sender, text.replace('@', '') + '@s.whatsapp.net']}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
-async function game17(conn, text, m, sender) {
+async function game17(conn, command, text) {
 if (!text) throw `*⚠️ ESCRIBE EL NOMBRE DE DOS PERSONAS PARA CALCULAR SU AMOR*`
 let [text1, ...text2] = text.split(' ')
 text2 = (text2 || []).join(' ')
