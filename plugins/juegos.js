@@ -427,6 +427,7 @@ m.reply(lovetext, null, { mentions: conn.parseMention(lovetext) })
 }
 
 async function game18(conn, groupMetadata, m) {
+	let toM = a => '@' + a.split('@')[0]
 let ps = groupMetadata.participants.map(v => v.id)
 let a = ps.getRandom()
 let b
