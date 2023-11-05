@@ -217,6 +217,9 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}dado
 ├❥ᰰຼ ❏ ${prefix}piropo
 ├❥ᰰຼ ❏ ${prefix}fake
+├❥ᰰຼ ❏ ${prefix}formartrio
+├❥ᰰຼ ❏ ${prefix}𝖿᥆rmᥲ⍴ᥲrᥱȷᥲ5
+├❥ᰰຼ ❏ ${prefix}ship
 ├❥ᰰຼ _(Ingresa el texto + tag para joder a alguien con chat fake😹)_
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
 
@@ -496,6 +499,12 @@ conn.sendMessage(m.chat, { text: `🤔 *Que hay de nuevo?* 🤗
 🌐 (Crea imagenes con la (IA) 
 • ${prefix}dall-e
 • ${prefix}ia2
+
+👾 Mas juegos para divertir tu grupo 
+
+• ${prefix}formartrio
+• ${prefix}𝖿᥆rmᥲ⍴ᥲrᥱȷᥲ5
+• ${prefix}ship
 
 ᴹᵃˢ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᶠᵘᵗᵘʳᵃ ᵛᵉʳˢᶦᵒⁿᵉˢ ᵠᵘᶦᵉʳᵉ ᵠᵘᵉ ᵃᵍʳᵉᵍᵘᵉ ᵃˡᵍᵘⁿ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᵉˢᵖᵉᶜᶦᵃˡ ᵉˢᶜʳᶦᵇᶦʳˡᵉ ᵃ ᵐᶦ ᶜʳᵉᵃᵈᵒʳ`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn, md, yt])}`}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
