@@ -43,7 +43,7 @@ const {jadibot, listJadibot, killJadibot} = require('./plugins/serbot.js')
 const { menu, menu2, nuevo, regla} = require('./plugins/menu.js') 
 const { state, owner, grupo, instalar, ping, report, ow, sc} = require('./plugins/info.js')
 const {rob, bal, reg, reg1, reg2, work, mine, buy, claim, perfil, nivel, cofre, lb} = require('./plugins/rpg.js') 
-const {game, game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, game13, game14, game15, game16, game17} = require('./plugins/juegos.js')   
+const {game, game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, game13, game14, game15, game16, game17, game18} = require('./plugins/juegos.js')   
 const {yt, acortar, google, imagen, tran, tts, ia, ssw, wall, hd, dalle} = require('./plugins/buscadores.js')
 const {efec, url, tomp3, toimg, toanime} = require('./plugins/convertidores.js') 
 const {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, adm, infogr, warn1, warn2, online, listw} = require('./plugins/grupos.js')
@@ -514,6 +514,8 @@ break
 case 'love': game16(conn, text, m, sender) 
 break
 case 'ship': game17(conn, text, m)  
+break
+case 'formartrio': game18(conn, groupMetadata, m)
 break
 //convertidores
 case 'bass': case 'blown': case 'deep': case 'earrape': case 'fast': case 'fat': case 'nightcore': case 'reverse': case 'robot': case 'slow': case 'smooth': case 'squirrel': efec(conn, command, mime, quoted, exec, prefix, m, from) 
