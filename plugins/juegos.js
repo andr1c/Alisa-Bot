@@ -426,19 +426,16 @@ let lovetext = `❤️ *${text1}* tu oportunidad de enamorarte de *${text2}* es 
 m.reply(lovetext, null, { mentions: conn.parseMention(lovetext) })
 }
 
-async function game18(conn, groupMetadata, m) {
-	let toM = a => '@' + a.split('@')[0]
-let ps = groupMetadata.participants.map(v => v.id)
-let a = ps.getRandom()
-let b
-do b = ps.getRandom()
-while (b === a)
-let c
-do c = ps.getRandom()
-while (b === a)
-m.reply(`*Hey!!! ${toM(a)}, ${toM(b)} y ${toM(c)} han pensado en hacer un trio? ustedes 3 hacen un buen trio 😳😏*`, null, {
-mentions: [a, b, c],
-})}
+async function game18(conn, participants, m) {
+let member = participants.map(u => u.id)
+let me = m.sender
+let a = member[Math.floor(Math.random() * member.length)]
+let b = member[Math.floor(Math.random() * member.length)]
+let c = member[Math.floor(Math.random() * member.length)]
+/*m.reply(`*Hey!!! ${toM(a)}, ${toM(b)} y ${toM(c)} han pensado en hacer un trio? ustedes 3 hacen un buen trio 😳😏*`, null, {
+mentions: [a, b, c],*/
+conn.sendMessage(m.chat, { text: `*Hey!!! @${a.split('@')[0]}, @${b.split('@')[0]} y @${c.split('@')[0]} han pensado en hacer un trio? ustedes 3 hacen un buen trio 😳😏*`, contextInfo:{mentionedJid:[a, b, c], forwardingScore: 9999999, isForwarded: true, }}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+}
 
 module.exports = {game, game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, game13, game14, game15, game16, game17, game18}
 
