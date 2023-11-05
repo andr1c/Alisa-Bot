@@ -188,14 +188,7 @@ console.log('[Update]')
 if (!conn.autoread && m.message && prefix) {
 await conn.sendPresenceUpdate('composing', m.chat)
 conn.readMessages([m.key])}
-
-//antispam
-if (global.db.data.chats[m.chat].antispam && prefix) {
-const date = global.db.data.users[m.sender].spam + 3000; //5 seg
-if (new Date - global.db.data.users[m.sender].spam < 3000) return //conn.sendMessage(m.chat, {text: `_*Espere unos segundos antes de usar otro comando...*_ ✓`, mentions: [sender], },{quoted: m}) 
-global.db.data.users[m.sender].spam = new Date * 1
-}
-            
+          
 //antifake
 if (global.db.data.chats[m.chat].antifake && !isGroupAdmins) {	
 let forbidPrefixes = ["1", "994", "48", "43", "40", "41", "49"];
@@ -212,10 +205,6 @@ m.reply('✳️ En este grupo no esta permitido numero arabe hasta la próxima..
 //await conn.groupRequestParticipantsUpdate(m.chat, [m.sender], 'approve')
 conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')}}} 
 	
-if (global.db.data.chats[m.chat].aprobar && !isGroupAdmins) {	
-conn.groupRequestParticipantsUpdate(m.chat, [m.sender], 'approve')
-m.reply(`Nuevo usuario el grupo 💞.`)}
-
 //antilink
 if (global.db.data.chats[m.chat].antilink) {
 if (budy.match(`chat.whatsapp.com`)) {
@@ -249,7 +238,7 @@ return
 if (global.db.data.chats[m.chat].autosticker) {  
 if (/image/.test(mime)) {  
 await conn.sendPresenceUpdate('composing', m.chat)
-m.reply(`_Calma crack estoy haciendo tu sticker 👏_\n\n_*Autosticker esta activado*_`)   
+//m.reply(`_Calma crack estoy haciendo tu sticker 👏_\n\n_*Autosticker esta activado*_`)   
 media = await quoted.download()  
 let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: botname, body: `h`, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}}, { quoted: m })
 await fs.unlinkSync(encmedia)   
@@ -313,6 +302,12 @@ user.afkTime = -1
 user.afkReason = ''
 }
  
+if (command) {
+/*const date = global.db.data.users[m.sender].spam + 3000; //5 seg
+if (new Date - global.db.data.users[m.sender].spam < 3000) return //conn.sendMessage(m.chat, {text: `_*Espere unos segundos antes de usar otro comando...*_ ✓`, mentions: [sender], },{quoted: m}) 
+global.db.data.users[m.sender].spam = new Date * 1*/
+await delay(2 * 2000)}
+
 //ARRANCA LA DIVERSIÓN 
 switch (command) { 
 case 'yts': case 'ytsearch':
@@ -348,7 +343,34 @@ break
 case 'dalle': case 'ia2': case 'aimg': case 'imagine': case 'dall-e':
 dalle(conn, text, command, m, lolkeysapi) 
 break
- 
+case 'whatmusic': case 'quemusica':
+const acrcloud = require('acrcloud') 
+const acr = new acrcloud({
+  host: 'identify-eu-west-1.acrcloud.com',
+  access_key: 'c33c767d683f78bd17d4bd4991955d81',
+  access_secret: 'bvgaIAEtADBTbLwiPGYlxupWqkNGIjT7J9Ag2vIu', });
+const q = m.quoted ? m.quoted : m;
+const mime = (q.msg || q).mimetype || '';
+if (/audio|video/.test(mime)) {
+if ((q.msg || q).seconds > 25) return m.reply('[ ⚠️ ]\n\nEl archivo que carga es demasiado grande, le sugerimos que corte el archivo grande a un archivo más pequeño, 10-20 segundos Los datos de audio son suficientes para identificar');
+const media = await q.download();
+const ext = mime.split('/')[1];
+fs.writeFileSync(`./tmp/${m.sender}.${ext}`, media);
+const res = await acr.identify(fs.readFileSync(`./tmp/${m.sender}.${ext}`));
+const {code, msg} = res.status;
+if (code !== 0) throw msg;
+const {title, artists, album, genres, release_date} = res.metadata.music[0];
+const txt = `𝘙𝘌𝘚𝘜𝘓𝘛𝘈𝘋𝘖 𝘋𝘌 𝘓𝘈 𝘉𝘜𝘚𝘘𝘜𝘌𝘋𝘈
+
+• 📌 𝘛𝘪𝘵𝘶𝘭𝘰: ${title}
+• 👨‍🎤 𝘈𝘳𝘵𝘪𝘴𝘵𝘢: ${artists !== undefined ? artists.map((v) => v.name).join(', ') : 'No encontrado'}
+• 💾 𝘈𝘭𝘣𝘶𝘮: ${album.name || 'No encontrado'}
+• 🌐 𝘎𝘦𝘯𝘦𝘳𝘰: ${genres !== undefined ? genres.map((v) => v.name).join(', ') : 'No encontrado'}
+• 📆 𝘍𝘦𝘤𝘩𝘢 𝘥𝘦 𝘭𝘢𝘯𝘻𝘢𝘮𝘪𝘦𝘯𝘵𝘰: ${release_date || 'No encontrado'}`.trim();
+fs.unlinkSync(`./tmp/${m.sender}.${ext}`);
+m.reply(txt);
+} else throw '*[ ⚠️ ] 𝘙𝘦𝘴𝘱𝘰𝘯𝘥𝘢 𝘢 𝘶𝘯 𝘢𝘶𝘥𝘪𝘰*';
+break
 case 'serbot': case 'jadibot': case 'qr':
 jadibot(conn, m, command, text, args, sender)
 break  
