@@ -8,7 +8,7 @@ const baileys = require('@whiskeysockets/baileys'); // trabajar a través de des
 const { WaMessageStubType, areJidsSameUser, downloadContentFromMessage, generateWAMessageContent, generateWAMessageFromContent, generateWAMessage, prepareWAMessageMedia, relayMessage} = require('@whiskeysockets/baileys'); // Importa los objetos 'makeWASocket' y 'proto' desde el módulo '@whiskeysockets/baileys'   
 const { default: makeWASocket, proto } = require("@whiskeysockets/baileys") 
 const moment = require('moment-timezone') // Trabajar con fechas y horas en diferentes zonas horarias
-const gradient = require('gradient-string') // Aplicar gradientes de color al texto   
+const gradient = require('gradient-string') // Aplicar gradientes de color al texto     
 const { exec, spawn, execSync } =  require("child_process")// Función 'execSync' del módulo 'child_process' para ejecutar comandos en el sistema operativo 
 const chalk = require('chalk') // Estilizar el texto en la consola  
 const os = require('os') // Proporciona información del sistema operativo 
@@ -433,7 +433,7 @@ break
 case 'grupo': grup(conn, m, args, isBotAdmins, isGroupAdmins, command, prefix, text)
 break
 case 'delete': case 'del': del(conn, m, isBotAdmins, isGroupAdmins)
-break  		
+break  		 
 case 'join': case 'unete': join(conn, m, isCreator, text, delay, args, sender)
 break           
 case 'hidetag': case 'notificar': case 'tag': hide(conn, m, isGroupAdmins, q, participants)
