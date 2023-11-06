@@ -343,34 +343,7 @@ break
 case 'dalle': case 'ia2': case 'aimg': case 'imagine': case 'dall-e':
 dalle(conn, text, command, m, lolkeysapi) 
 break
-case 'whatmusic': case 'quemusica':
-const acrcloud = require('acrcloud') 
-const acr = new acrcloud({
-  host: 'identify-eu-west-1.acrcloud.com',
-  access_key: 'c33c767d683f78bd17d4bd4991955d81',
-  access_secret: 'bvgaIAEtADBTbLwiPGYlxupWqkNGIjT7J9Ag2vIu', });
-const q = m.quoted ? m.quoted : m;
-const mime = (q.msg || q).mimetype || '';
-if (/audio|video/.test(mime)) {
-if ((q.msg || q).seconds > 25) return m.reply('[ ⚠️ ]\n\nEl archivo que carga es demasiado grande, le sugerimos que corte el archivo grande a un archivo más pequeño, 10-20 segundos Los datos de audio son suficientes para identificar');
-const media = await q.download();
-const ext = mime.split('/')[1];
-fs.writeFileSync(`./tmp/${m.sender}.${ext}`, media);
-const res = await acr.identify(fs.readFileSync(`./tmp/${m.sender}.${ext}`));
-const {code, msg} = res.status;
-if (code !== 0) throw msg;
-const {title, artists, album, genres, release_date} = res.metadata.music[0];
-const txt = `𝘙𝘌𝘚𝘜𝘓𝘛𝘈𝘋𝘖 𝘋𝘌 𝘓𝘈 𝘉𝘜𝘚𝘘𝘜𝘌𝘋𝘈
 
-• 📌 𝘛𝘪𝘵𝘶𝘭𝘰: ${title}
-• 👨‍🎤 𝘈𝘳𝘵𝘪𝘴𝘵𝘢: ${artists !== undefined ? artists.map((v) => v.name).join(', ') : 'No encontrado'}
-• 💾 𝘈𝘭𝘣𝘶𝘮: ${album.name || 'No encontrado'}
-• 🌐 𝘎𝘦𝘯𝘦𝘳𝘰: ${genres !== undefined ? genres.map((v) => v.name).join(', ') : 'No encontrado'}
-• 📆 𝘍𝘦𝘤𝘩𝘢 𝘥𝘦 𝘭𝘢𝘯𝘻𝘢𝘮𝘪𝘦𝘯𝘵𝘰: ${release_date || 'No encontrado'}`.trim();
-fs.unlinkSync(`./tmp/${m.sender}.${ext}`);
-m.reply(txt);
-} else throw '*[ ⚠️ ] 𝘙𝘦𝘴𝘱𝘰𝘯𝘥𝘢 𝘢 𝘶𝘯 𝘢𝘶𝘥𝘪𝘰*';
-break
 case 'serbot': case 'jadibot': case 'qr':
 jadibot(conn, m, command, text, args, sender)
 break  
@@ -700,10 +673,10 @@ cofre(conn, sender, m)
 break 
 case 'lb': case 'leaderboard': 
 lb(conn, participants, args, m) 
-break
-//stickers
+break 
+//stickers  
 case 's': case 'sticker':  
-s(conn, m, quoted) 
+s(conn, mime, quoted, m) 
 break; 
 case 'wm': case 'take': 
 wm2(conn, args, quoted, mime, m) 
