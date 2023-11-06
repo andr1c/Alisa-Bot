@@ -199,7 +199,7 @@ const mp = require('../libs/ytdl2')
 const vid = await mp.mp4(text)
 if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return m.reply(`*Que esta buscado?*\n\n*Ejemplo:*\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
 m.react(rwait) 
-conn.sendMessage(m.chat, { text: `         *⌜Video Encontrado ✅⌟*\n\n• *Título:* ${vid.title}\n\n*ESPERE ENVIANDO SU ARCHIVO MP4 ⚠*` }, { quoted: fkontak });    
+conn.sendMessage(m.chat, { text: `         *⌜Video Encontrado ✅⌟*\n\n• *Título:* ${vid.title}\n\n*ESPERE ENVIANDO SU ARCHIVO MP4 ⚠*` }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});    
 try {
 const ytc = `*❏ Título :* ${vid.title} 
 *❏ Duración :* ${vid.duration}
@@ -246,14 +246,14 @@ if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (!args[0]) return m.reply(`*Donde esta el link del github?*\n\n*Ejemplo :*\n${prefix + command} ${md}`)
 if (!isUrl(args[0]) && !args[0].includes('github.com')) return m.reply(`Link invalido!!`)
 m.react('🕔') 
-conn.sendMessage(m.chat, { text: `*𝘈𝘎𝘜𝘈𝘙𝘋𝘌 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖...*\n\nˢᶦ ᵉˡ ᵃʳᶜʰᶦᵛᵒ ⁿᵒ ˡˡᵉᵍᵃ ᵉˢ ᵠᵘᵉ ʳᵉᵖᵒˢᶦᵗᵒʳᶦᵒ ᵉˢ ᵐᵘʸ ᵖᵉˢᵃᵈᵒ` }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+m.reply('*𝘈𝘎𝘜𝘈𝘙𝘋𝘌 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖...*\n\nˢᶦ ᵉˡ ᵃʳᶜʰᶦᵛᵒ ⁿᵒ ˡˡᵉᵍᵃ ᵉˢ ᵠᵘᵉ ʳᵉᵖᵒˢᶦᵗᵒʳᶦᵒ ᵉˢ ᵐᵘʸ ᵖᵉˢᵃᵈᵒ') 
 try {
 let regex1 = /(?:https|git)(?::\/\/|@)github\.com[\/:]([^\/:]+)\/(.+)/i
 let [, user, repo] = args[0].match(regex1) || []
 repo = repo.replace(/.git$/, '')
 let url = `https://api.github.com/repos/${user}/${repo}/zipball`
 let filename = (await fetch(url, {method: 'HEAD'})).headers.get('content-disposition').match(/attachment; filename=(.*)/)[1]
-conn.sendMessage(m.chat, { document: { url: url }, fileName: filename+'.zip', mimetype: 'application/zip' }, { quoted: m }).catch((err) => m.reply(info.error))
+conn.sendMessage(m.chat, { document: { url: url }, fileName: filename+'.zip', mimetype: 'application/zip' }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}).catch((err) => m.reply(info.error))
 db.data.users[m.sender].limit -= 1
 m.reply(info.limit) 
 m.react(done) 
@@ -401,7 +401,7 @@ conn.sendMessage(m.chat, {document: {url: res.downloadUrl, mimetype: res.mimetyp
 db.data.users[m.sender].limit -= 3
 m.reply('*3 ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴜsᴀᴅᴏ*')
 } catch (e) {
-m.reply('*[❗𝐈𝐍𝐅𝐎❗] 𝙴𝚁𝚁𝙾𝚁, 𝙿𝙾𝚁 𝙵𝙰𝚅𝙾𝚁 𝚅𝚄𝙴𝙻𝚅𝙰 𝙰 𝙸𝙽𝚃𝙴𝙽𝚃𝙰𝚁𝙻𝙾*\n\n*- 𝙲𝙾𝚁𝚁𝙾𝙱𝙾𝚁𝙴 𝚀𝚄𝙴 𝙴𝙻 𝙴𝙽𝙻𝙰𝙲𝙴 𝚂𝙴𝙰 𝚂𝙸𝙼𝙸𝙻𝙰𝚁 𝙰:*\n*◉ https://drive.google.com/file/d/1dmHlx1WTbH5yZoNa_ln325q5dxLn1QHU/view*');
+m.reply('*[ ⚠️ ] ᴇʀʀᴏʀ, ᴘᴏʀ ғᴀᴠᴏʀ ᴠᴜᴇʟᴠᴀ ᴀ ɪɴᴛᴇɴᴛᴀʀʟᴏ*');
 console.log(e)}}
 
 async function tttimg(conn, text, command, m) {
