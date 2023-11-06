@@ -406,7 +406,7 @@ case 'owner': case 'creador': case 'contacto':
 owner(conn, m, sender)  
 break 
 case 'grupos': case 'grupoficiales': 
-grupo(conn, m, sender, pickRandom) 
+grupo(conn, m, sender, pickRandom)  
 break
 case 'instalarbot': case 'crearbot':
 instalar(conn, m, pushname, sender) 
@@ -486,7 +486,7 @@ case 'link': case 'linkgc':  link(conn, m, isBotAdmins)
 break                        		
 case 'banchat': ban(m, isCreator, text, command, args)
 break              
-case 'tagall': case 'invocar': case 'todos': tag(conn, m, isGroupAdmins, participants, q)
+case 'tagall': case 'invocar': case 'todos': tag(conn, m, isGroupAdmins, participants)
 break                 
 case 'admins': case 'administradores': adm(conn, participants, groupMetadata, args, m) 
 break 
@@ -698,12 +698,12 @@ break
 case 'cofre':
 cofre(conn, sender, m) 
 break 
-case 'lb': case 'leaderboard':
+case 'lb': case 'leaderboard': 
 lb(conn, participants, args, m) 
 break
 //stickers
 case 's': case 'sticker':  
-s(conn, mime, quoted, m) 
+s(conn, m, quoted) 
 break; 
 case 'wm': case 'take': 
 wm2(conn, args, quoted, mime, m) 
