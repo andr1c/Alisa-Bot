@@ -6,7 +6,7 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('../libs/fuctions.js'); 
 
-async function s(conn, mime, quoted, m) {
+async function s(conn, m, mime, quoted) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (/image/.test(mime)) {  
 conn.fakeReply(m.chat, `⏳ *Aguarde un momento estoy creando tu stickers....*`, '0@s.whatsapp.net', 'No haga spam')
