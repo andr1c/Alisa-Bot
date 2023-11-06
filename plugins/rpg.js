@@ -57,10 +57,10 @@ conn.sendMessage(m.chat, { text: sn, contextInfo:{forwardingScore: 9999999, isFo
 
 async function reg1(args, m, sender) { 
 const {createHash} = require('crypto') 
-if (!args[0]) return m.reply('*[ ✳️ ] Ingrese número de serie*\n*Verifique su número de serie con el comando #myns*') 
+if (!args[0]) return m.reply('*✳️ Ingrese número de serie"\n\n*Verifique su número de serie con el comando: #myns*') 
 const user = global.db.data.users[m.sender];
 const sn = createHash('md5').update(m.sender).digest('hex');
-if (args[0] !== sn) return m.reply('*[ ⚠️ ] *Número de serie incorrecto*\n\n*Usar : #myns*') 
+if (args[0] !== sn) return m.reply('*⚠️ Número de serie incorrecto*\n\n*Usar:* #myns') 
 user.registered = false; 
 global.db.data.users[m.sender].limit -= 2
 global.db.data.users[m.sender].exp -= 200
