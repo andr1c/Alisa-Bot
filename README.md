@@ -84,7 +84,7 @@ npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
 ------------------ 
 
 ###  🚀 VORTEXUSCLOUD HOST
-[![blog](https://img.shields.io/badge/BoxMine-GataBotMD-FF0000?style=for-the-badge&logo=youtube&logoColor=white)
+[![blog](https://img.shields.io/badge/Vortexuscloud-NovaBotMD-FF0000?style=for-the-badge&logo=youtube&logoColor=white)
 ](https://youtu.be/Xp2jRbG_v8o?si=nSAj4vUdz9tS31pO)
 > Activar NovaBot-MD 24/7 en Vortexuscloud Host
 
