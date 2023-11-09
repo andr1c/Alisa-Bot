@@ -83,6 +83,23 @@ npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
 
 ------------------ 
 
+###  🚀 VORTEXUSCLOUD HOST
+[![blog](https://img.shields.io/badge/BoxMine-GataBotMD-FF0000?style=for-the-badge&logo=youtube&logoColor=white)
+](https://youtu.be/Xp2jRbG_v8o?si=nSAj4vUdz9tS31pO)
+> Activar NovaBot-MD 24/7 en Vortexuscloud Host
+
+<a href="https://vortexuscloud.com"><img src="https://telegra.ph/file/4bd3d8d14e5683073d4f3.jpg" height="125px"></a>
+### vortexus cloud
+
+- Pagina Oficial: [`https://vortexuscloud.com`](https://vortexuscloud.com)
+- Canal sobre informacion del host : [`https://whatsapp.com/channel/0029Va8ZD6O3mFXxTPl1m13A`](https://whatsapp.com/channel/0029Va8ZD6O3mFXxTPl1m13A)
+- Dashboard: [`https://dash.vortexuscloud.com`](https://dash.vortexuscloud.com)
+- Panel: [`https://panel.vortexuscloud.com`](https://panel.vortexuscloud.com)
+- Dudas UNICAMENTE SOBRE EL HOST: [`wa.me/258858119033`](wa.me/258858119033) (Creador: Mauro) 
+- Tutorial - Crea una cuenta en la Dashboard: [`https://youtu.be/U3CEj0OlB9U?si=IMQAcGfGgYOqqVyZ`](https://youtu.be/U3CEj0OlB9U?si=IMQAcGfGgYOqqVyZ)
+
+------------------ 
+
 ## `𝙴𝙳𝙸𝚃𝙾𝚁 𝚈 𝙿𝚁𝙾𝙿𝙸𝙴𝚃𝙰𝚁𝙸𝙾 𝙳𝙴𝙻 𝙱𝙾𝚃`
 
 <a href="https://github.com/elrebelde21"><img src="https://github.com/elrebelde21.png" width="250" height="250" alt="elrebelde21"/></a>
