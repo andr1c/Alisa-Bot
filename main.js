@@ -302,11 +302,11 @@ user.afkTime = -1
 user.afkReason = ''
 }
  
-if (command) {
-/*const date = global.db.data.users[m.sender].spam + 3000; //5 seg
+/*if (command) {
+const date = global.db.data.users[m.sender].spam + 3000; //5 seg
 if (new Date - global.db.data.users[m.sender].spam < 3000) return //conn.sendMessage(m.chat, {text: `_*Espere unos segundos antes de usar otro comando...*_ ✓`, mentions: [sender], },{quoted: m}) 
-global.db.data.users[m.sender].spam = new Date * 1*/
-await delay(2 * 2000)}
+global.db.data.users[m.sender].spam = new Date * 1
+await delay(2 * 2000)}*/
 
 //ARRANCA LA DIVERSIÓN 
 switch (command) { 
