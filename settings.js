@@ -96,7 +96,7 @@ global.nn6 = 'https://chat.whatsapp.com/CKnomE19yR0IEmM571RvRm' //test
 global.nn7 = 'https://chat.whatsapp.com/FRkr7jJHSJA5OjVtE64dDs' //Grupo ayuda sobre el bot
 global.nn8 = 'https://chat.whatsapp.com/KlqNmoUcVnsGJxIfATIDrK' //enlace lolibot
 global.multi = 'https://chat.whatsapp.com/IB9Vs7mZ03BBkH3reCU8Dw' //Grupo COL 4
-global.nna2 = 'CKnomE19yR0IEmM571RvRm'
+global.nna2 = 'IB9Vs7mZ03BBkH3reCU8Dw'
 
 //---------[ INFO ]--------- 
 global.info = { wait: '*⌛ _Cargando..._ ▬▭▭▭▭▭▭*', 
