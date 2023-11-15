@@ -4,7 +4,7 @@ const path = require('path')
 const chalk = require('chalk') 
 
 //---------[ PROPIETADO/OWNER ]---------
-global.owner = [["5492266466080", "Owner", true], ["573026191480", "asistencia", true], ["593968585383"], ["5492266466080"], ["595992302861"], ["5492266613038"], ["5217294888993"]]
+global.owner = [["5492266466080", "Owner", true], ["573026191480", "asistencia", true], ["593968585383"], ["5492266466080"], ["595992302861"], ["5492266613038"], ["5217294888993"],["5214437863111"]
 global.mods = []
 global.premium = []  
 global.blockList = []  
@@ -15,8 +15,8 @@ global.wm = 'Ｎ Ｏ Ｖ Ａ Ｂ Ｏ Ｔ- Ｍ Ｄ 💫'
 global.vs = '1.0.0'
 
 //---------[ FECHA/IDIOMAS ]---------
-global.place = 'America/Bogota' // Aquí puede encontrar su ubicación https://momentjs.com/timezone/
-global.language = 'es' // Aquí puede encontrar su idioma https://cloud.google.com/translate/docs/languages?hl=es-419
+global.place = 'America/Bogota' // Aquí puedes encontrar tu ubicación https://momentjs.com/timezone/
+global.language = 'es' // Aquí puedes encontrar su idioma https://cloud.google.com/translate/docs/languages?hl=es-419
 
 //---------[ APIS GLOBAL ]---------
 global.keysZens = ['LuOlangNgentot', 'c2459db922', '37CC845916', '6fb0eff124', 'hdiiofficial', 'fiktod', 'BF39D349845E', '675e34de8a', '0b917b905e6f']; 
