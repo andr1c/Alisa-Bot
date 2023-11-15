@@ -4,7 +4,7 @@ const path = require('path')
 const chalk = require('chalk') 
 
 //---------[ PROPIETADO/OWNER ]---------
-global.owner = [["5492266466080", "Owner", true], ["573026191480", "asistencia", true], ["593968585383"], ["5492266466080"], ["595992302861"], ["5492266613038"], ["5217294888993"],["5214437863111"]
+global.owner = [["5492266466080", "Owner", true], ["573026191480", "asistencia", true], ["593968585383"], ["5492266466080"], ["595992302861"], ["5492266613038"], ["5217294888993"],["5214437863111"]]
 global.mods = []
 global.premium = []  
 global.blockList = []  
