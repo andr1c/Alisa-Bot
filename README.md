@@ -28,7 +28,7 @@
 
 ### Quiere probar la funciones del bot, antes de instalar, probar el bot aquí
 
-[![Grupos](https://img.shields.io/badge/Grupos-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/CKnomE19yR0IEmM571RvRm) 
+[![Grupos](https://img.shields.io/badge/Grupos-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/DAm4ov8WQ7G9SgBJomhJHH) 
 
 ------------------ 
 
