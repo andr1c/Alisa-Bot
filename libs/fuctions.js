@@ -427,6 +427,7 @@ if (!isNumber(user.regTime)) user.regTime = -1
   if (!isNumber(user.lastmiming)) user.lastmiming = 0
   if (!isNumber(user.robs)) user.robs = 0
   if (!isNumber(user.spam)) user.spam = 0
+  if (!isNumber(user.spam2)) user.spam2 = 0
   if (!isNumber(user.lastclaim)) user.lastclaim = 0
   if (!isNumber(user.lastslot)) user.lastslot= 0
   if (!isNumber(user.lastcofre)) user.lastcofre = 0
