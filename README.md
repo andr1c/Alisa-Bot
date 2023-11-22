@@ -1,5 +1,5 @@
-### Bot en desarrollo 💫
-> <b>  🚀 Version 1.0.0 </b>
+### NovaBot 💫
+> <b>  🚀 Version 1.0.2 </b>
 
 
 <p align="center">
