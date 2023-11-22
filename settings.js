@@ -12,7 +12,7 @@ global.blockList = []
 //---------[ NOMBRE/INFO ]---------
 global.botname = "𝐍𝐨𝐯𝐚𝐁𝐨𝐭-𝐌𝐃"
 global.wm = 'Ｎ Ｏ Ｖ Ａ Ｂ Ｏ Ｔ- Ｍ Ｄ 💫'
-global.vs = '1.0.0'
+global.vs = '1.0.2 (Beta)'
 
 //---------[ FECHA/IDIOMAS ]---------
 global.place = 'America/Bogota' // Aquí puedes encontrar tu ubicación https://momentjs.com/timezone/
@@ -64,7 +64,7 @@ global.APIKeys = {
  
 //---------[ STICKERS ]---------
 global.packname = "𝐍𝐨𝐯𝐚𝐁𝐨𝐭-𝐌𝐃"
-global.author = "1.0.0"
+global.author = "1.0.2"
  
 //---------[ IMAGEN ]---------
 global.imagen1 = fs.readFileSync('./media/menu.jpg')
