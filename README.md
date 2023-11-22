@@ -1,4 +1,3 @@
-### NovaBot 💫
 > <b>  🚀 Version 1.0.2 </b>
 
 
