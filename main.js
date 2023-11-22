@@ -2,8 +2,8 @@
 // @gata_dios   
 // @Skidy89  
 // @elrebelde21 
-           
-//═════════[ Importaciones ]═════════ 
+                      
+//--------------------[ IMPORTACIONES ]-----------------------          
 const baileys = require('@whiskeysockets/baileys'); // trabajar a través de descargas por Whatsapp 
 const { WaMessageStubType, areJidsSameUser, downloadContentFromMessage, generateWAMessageContent, generateWAMessageFromContent, generateWAMessage, prepareWAMessageMedia, relayMessage} = require('@whiskeysockets/baileys'); // Importa los objetos 'makeWASocket' y 'proto' desde el módulo '@whiskeysockets/baileys'   
 const { default: makeWASocket, proto } = require("@whiskeysockets/baileys") 
@@ -24,41 +24,33 @@ const ws = require('ws')
 const JavaScriptObfuscator = require('javascript-obfuscator')
 const webp = require("node-webpmux")
 const Jimp = require('jimp')
-const scp1 = require('./libs/scraper') 
 const { File } = require("megajs")
 const speed = require("performance-now")
 const ffmpeg = require("fluent-ffmpeg")
 const similarity = require('similarity') 
-const yts = require("yt-search") 
-const ytdl = require('ytdl-core') 
 const translate = require('@vitalets/google-translate-api') 
-const { TelegraPh, UploadFileUgu, webp2mp4File, floNime } = require('./libs/uploader.js')
-const { toAudio, toPTT, toVideo } = require('./libs/converter.js') 
 const { canLevelUp, xpRange } = require('./libs/levelling.js')
 const { smsg, fetchBuffer, getBuffer, buffergif, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom, msToTime, downloadMediaMessage, convertirMsADiasHorasMinutosSegundos, pickRandom} = require('./libs/fuctions')
-const { ytmp4, ytmp3, ytplay, ytplayvid } = require('./libs/youtube') 
-const { mediafireDl } = require('./libs/mediafire.js') 
-const {jadibot, listJadibot, killJadibot} = require('./plugins/serbot.js')   
-//const { jadibot2} = require('./plugins/serbot2.js')
-const { menu, menu2, nuevo, regla} = require('./plugins/menu.js') 
-const { state, owner, grupo, instalar, ping, report, ow, sc} = require('./plugins/info.js')
-const {rob, bal, reg, reg1, reg2, work, mine, buy, claim, perfil, nivel, cofre, lb} = require('./plugins/rpg.js') 
-const {game, game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, game13, game14, game15, game16, game17, game18, game19} = require('./plugins/juegos.js')   
-const {yt, acortar, google, imagen, tran, tts, ia, ssw, wall, hd, dalle} = require('./plugins/buscadores.js')
-const {efec, url, tomp3, toimg, toanime} = require('./plugins/convertidores.js') 
-const {grup, del, join, setpp, hide, setna, setde, add, k, p, d, link, ban, tag, adm, infogr, warn1, warn2, online, listw} = require('./plugins/grupos.js')
-const {nsfw1, nsfw2, nsfw3, nsfw4, nsfw5, nsfw6, nsfw7, nsfw8, nsfw9} = require('./plugins/nsfw.js')
-const {randow1, randow2, randow3, randow4, randow5, randow6, randow7, randow8, randow9} = require('./plugins/randow.js') 
-const {play, play2, play3, play4, mp3, mp4, git, tiktok, letra, mediafire, fb, ig, ig2, apk, spoti, gdrive, tttimg} = require('./plugins/descargas.js')   
-const {s, wm2, attp, dado} = require('./plugins/stickers.js') 
-const {owner1, owner2, owner3, owner4, owner5, owner6, owner7, owner8, owner9, owner10, owner11} = require('./plugins/propietario.js')  
-const {on, on1, on2, on3, on4, on5, on6, on7, on8, on9, on10, on11, on12, on13, on14, on15} = require('./plugins/enable.js')
+const {jadibot, listJadibot, killJadibot} = require('./plugins/serbot.js')    
+const {menu} = require('./plugins/menu.js') 
+const {info} = require('./plugins/info.js')
+const {reg, rpg} = require('./plugins/rpg.js') 
+const {game, game2, game3} = require('./plugins/juegos.js')   
+const {buscadores} = require('./plugins/buscadores.js')
+const {efec, convertidores} = require('./plugins/convertidores.js') 
+const {grupo} = require('./plugins/grupos.js')
+const {nsfw} = require('./plugins/nsfw.js') 
+const {randow, randow2} = require('./plugins/randow.js') 
+const {descarga} = require('./plugins/descargas.js')   
+const {stickers} = require('./plugins/stickers.js') 
+const {owner} = require('./plugins/propietario.js')  
+const {enable} = require('./plugins/enable.js')
 
 const msgs = (message) => { 
 if (message.length >= 10) { 
 return `${message.substr(0, 500)}` 
 } else { 
-return `${message}`}} 
+return `${message}`}}
 const getFileBuffer = async (mediakey, MediaType) => {  
 const stream = await downloadContentFromMessage(mediakey, MediaType)  
 let buffer = Buffer.from([])  
@@ -70,19 +62,18 @@ return buffer
 module.exports = conn = async (conn, m, chatUpdate, mek, store) => {  
 var budy = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
   
-// ‿︵‿︵ʚɞ『 ATRIBUTOS 』ʚɞ‿︵‿︵     
+//----------------------[ ATRIBUTOS ]-------------------------
 if (m.key.id.startsWith("BAE5")) return  
 var body = (typeof m.text == 'string' ? m.text : '')
 var _prefix = /^[°•÷×™+✓_=|~!?@#%^.©^]/gi.test(body) ? body.match(/^[°•÷×™+✓_=|~!?@#%^.©^]/gi)[0] : ""
 global.prefix = _prefix
-const isCmd = body.startsWith(prefix)  
+const isCmd = body.startsWith(prefix)   
+const command = isCmd ? body.slice(1).trim().split(/ +/).shift().toLocaleLowerCase() : null
+const args = body.trim().split(/ +/).slice(1) 
 const from = m.chat 
 const msg = JSON.parse(JSON.stringify(m, undefined, 2)) 
 const content = JSON.stringify(m.message) 
 const type = m.mtype 
-const command = isCmd ? body.slice(1).trim().split(/ +/).shift().toLocaleLowerCase() : null
-  const args = body.trim().split(/ +/).slice(1) 
-const q = args.join(" ") 
 let t = m.messageTimestamp 
 const pushname = m.pushName || "Sin nombre" 
 const botnm = conn.user.id.split(":")[0] + "@s.whatsapp.net"  
@@ -106,7 +97,7 @@ const msd = m.message[type].contextInfo.mentionedJid
 for (let i = 0; i < msd.length; i++) {  
 mentions.push(msd[i])}}} 
   
-// ‿︵‿︵ʚɞ『 GRUPO 』ʚɞ‿︵‿︵      
+//----------------------[ FUNCION/GRUPO ]-------------------------
 const groupMetadata = m.isGroup ? await conn.groupMetadata(from) : ''
 const groupName = m.isGroup ? groupMetadata.subject : '' 
 const participants = m.isGroup ? await groupMetadata.participants : '' 
@@ -131,7 +122,7 @@ const sendAdMessage = (text, title, body, image, url) => { conn.sendMessage(m.ch
 const sendImage = ( image, caption ) => { conn.sendMessage(m.chat, { image: image, caption: caption }, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}  
 const sendImageAsUrl = ( url, caption ) => { conn.sendMessage(m.chat, { image:  {url: url }, caption: caption }, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}  
 
-// ‿︵‿︵ʚɞ『 TIPOS DE MENSAJES Y CITADOS 』ʚɞ‿︵‿︵  
+//-------------[ TIPOS DE MENSAJES Y CITADOS ]----------------
 const isAudio = type == 'audioMessage' // Mensaje de Audio  
 const isSticker = type == 'stickerMessage' // Mensaje de Sticker  
 const isContact = type == 'contactMessage' // Mensaje de Contacto  
@@ -159,7 +150,7 @@ type: 'append'
 }
 conn.ev.emit('messages.upsert', msg)}
  
-// ‿︵‿︵ʚɞ『 INFO CONSOLE 』ʚɞ‿︵‿︵	
+//--------------------[ INFO CONSOLE ]-----------------------
 if (m.message) {
 console.log(chalk.bold.cyanBright(`▣────────────···\n│+${conn.user.jid.split`@`[0]} ➢ ${botname} ${conn.user.id == global.numBot2 ? '' : '(SubBot)'}`), 
 chalk.bold.magenta('\n│────────────\n│⏰HORARIO: ') + chalk.magentaBright(moment(t * 1000).tz(place).format('DD/MM/YY HH:mm:ss'),
@@ -171,25 +162,28 @@ m.isGroup ? chalk.bold.greenBright('\n│📤GRUPO: ') + chalk.greenBright(group
 chalk.bold.white('\n│💬MENSAJE: ') + chalk.whiteBright(`\n▣────────────···\n${msgs(m.text)}\n`))
 )}          
 
-//autobio
+//--------------------[ AUTOBIO ]-----------------------
 if (global.db.data.settings[numBot].autobio) {
 let setting = global.db.data.settings[numBot]
 if (new Date() * 1 - setting.status > 1000) {
 let uptime = await runtime(process.uptime())
+var timestamp = speed();  
+var latensi = speed() - timestamp  
+let text = [`🦁 ɴᴏᴠᴀʙᴏᴛ - ᴛᴇɴɢᴏ: ${Object.keys(global.db.data.users).length} ᴜsᴜᴀʀɪᴏs ᴜsᴀᴅᴏʀᴍᴇ ᴘᴜᴇᴅᴏ ʀᴇsᴘᴏɴᴅᴇ ʟᴇɴᴛᴀ ᴍɪ ᴠᴇʟᴏᴄɪᴅᴀᴅ ᴅᴇ ʀᴇsᴘᴜᴇsᴛᴀ ᴇs: ${latensi.toFixed(4)} 🚀`, `ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ | ᴀᴄᴛɪᴠᴏ ✅️: ${runtime(process.uptime())}\n\nᴘᴀʀᴀ ᴠᴇᴢ ᴍɪ ʟɪsᴛᴀ ᴅᴇ ᴄᴏᴍᴀɴᴅᴏ ᴜsᴀʀ #menu`, `ɴᴏᴠᴀʙᴏᴛ ᴘᴏʀ ʟᴏʟɪʙᴏᴛ - sᴜʙsᴄʀɪʙɪʀᴛᴇ ᴇʟ ɴᴜᴇsᴛʀᴏ ᴄᴀɴᴀʟ ᴅᴇʟ ʏᴏᴜᴛᴜʙᴇ 🔔\n${yt}`, `🤖 NovaBot uso: ${conn.public ? 'Publico' : 'Privado'} | ✅ Actividad: ${runtime(process.uptime())} | 👥 Usuarios: ${Object.keys(global.db.data.users).length}`]
+let bio = text[Math.floor(Math.random() * text.length)]
 try {
-const bio = `ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ | ᴀᴄᴛɪᴠᴏ ✅️: ${runtime(process.uptime())}\n\nᴘᴀʀᴀ ᴠᴇᴢ ᴍɪ ʟɪsᴛᴀ ᴅᴇ ᴄᴏᴍᴀɴᴅᴏ ᴜsᴀʀ #menu`
 await conn.updateProfileStatus(bio)
 setting.status = new Date() * 1
 } catch {
-console.log('[Update]') 
+console.log(`[UPDATE]\nPing: ${latensi.toFixed(4)}`) 
 }}} 
-  
-//autoread
+ 
+//--------------------[ AUTOREAD ]-----------------------
 if (!conn.autoread && m.message && prefix) {
 await conn.sendPresenceUpdate('composing', m.chat)
 conn.readMessages([m.key])}
           
-//antifake
+//--------------------[ ANTIFAKES ]-----------------------
 if (global.db.data.chats[m.chat].antifake && !isGroupAdmins) {	
 let forbidPrefixes = ["1", "994", "48", "43", "40", "41", "49"];
 for (let prefix of forbidPrefixes) {
@@ -198,21 +192,21 @@ m.reply('✳️ El este grupo no esta permitido numero fake sera expulsado...', 
 conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')}}}
 if (global.db.data.chats[m.chat].antiarabe && !isGroupAdmins) {
 let forbidPrefixes = ["212", "265", "234", "258", "263", "967", "20", "92", "91"];
-//if (m.chat && m.sender.startsWith('212')) return
 for (let prefix of forbidPrefixes) {
 if (m.sender.startsWith(prefix)) {
 m.reply('✳️ En este grupo no esta permitido numero arabe hasta la próxima...', m.sender)
-//await conn.groupRequestParticipantsUpdate(m.chat, [m.sender], 'approve')
 conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')}}} 
-	
-//antilink
+
+//--------------------[ ANTILINK ]-----------------------
 if (global.db.data.chats[m.chat].antilink) {
 if (budy.match(`chat.whatsapp.com`)) {
+const groupAdmins = participants.filter((p) => p.admin);
+const listAdmin = groupAdmins.map((v, i) => `${i + 1}. @${v.id.split('@')[0]}`).join('\n➥ ');
 let delet = m.key.participant
 let bang = m.key.id
 user = m.sender
 conn.sendMessage(m.chat, {text: `\`\`\`「 ANTILINK DETECTADO 」\`\`\`\n\n@${user.split("@")[0]} 🤨 eso no esta permitido rata, Sera expulsado del grupo....`, mentions: [user], },{quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
-if (!isBotAdmins) return reply(`Te salvarte puto no soy admins 🙄`)
+if (!isBotAdmins) return conn.sendMessage(m.chat, { text: `Te salvarte puto no soy admins 🙄\n\n*[ LLAMADO A LOS ADMINS ]*\n${listAdmin}\n\nᴱˡ ᵇᵒᵗ ⁿᵉᶜᵉˢᶦᵗᵃ ᵃᵈᵐᶦⁿ ᵖᵃʳᵃ ᵉˡᶦᵐᶦⁿᵃʳ ᵃ ᵉˢᵗᵃ ˢᵘᶜᶦᵃ ʳᵃᵗᵃ`, mentions: participants.map(a => a.id) }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})  
 let gclink = (`https://chat.whatsapp.com/`+await conn.groupInviteCode(m.chat))
 let isLinkThisGc = new RegExp(gclink, 'i')
 let isgclink = isLinkThisGc.test(m.text)
@@ -221,20 +215,19 @@ if (isGroupAdmins) return reply(`Te salvarte por que eres un admins :v`)
 conn.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: bang, participant: delet }})
 conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')}}
  
-//modo public & privado
+//-------[ MODO PUBLIC/PRIVADO ]-----------
 if (!conn.public && !isCreator) {
-if (!m.key.fromMe) return
-}        	
-//Banea chat
-if (global.db.data.chats[m.chat].isBanned && isCreator) {
-return
-}
-//modoadmin
-if (global.db.data.chats[m.chat].modeadmin && !isGroupAdmins) {
-return
-}
+if (!m.key.fromMe) return }        	
 
-//autosticker
+//--------------------[ BANCHAT ]---------------------
+if (global.db.data.chats[m.chat].isBanned && isCreator) {
+return }
+
+//----------------[ MODOADMINS ]------------------
+if (global.db.data.chats[m.chat].modeadmin && !isGroupAdmins) {
+return }
+
+//----------------[ AUTOSTICKERS]--------------------
 if (global.db.data.chats[m.chat].autosticker) {  
 if (/image/.test(mime)) {  
 await conn.sendPresenceUpdate('composing', m.chat)
@@ -250,7 +243,7 @@ await new Promise((resolve) => setTimeout(resolve, 2000));
 await fs.unlinkSync(encmedia)  
 }}
 
-//autolevelup
+//----------------[ AUTOLEVELUP/AUTONIVEL ]-------------------
 if (global.db.data.users[m.sender].autolevelup) {	
 let user = global.db.data.users[m.sender]
 if (!user.autolevelup)
@@ -263,7 +256,7 @@ if (before !== user.level) {
 const str = `*「 FELICIDADES LEVEL UP 🆙🥳 」*\n\n🥳 Felicidades @${sender.split`@`[0]} 👏 subiste de nivel sigue asi 👏\n\n*NIVEL :* ${before} ⟿ ${user.level}\n*RANGO :* ${user.role}\n*FECHA :* ${new Date().toLocaleString('id-ID')}\n\n_*Para saber cual es tu puerto del top, coloca el comando #lb*_`.trim()
 return conn.sendMessage(m.chat, { text: str, contextInfo:{mentionedJid:[sender]}},{quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}}
  
-//Chatbot
+//----------------[ CHATBOT/AUTOMATICO ]-------------------
 if (global.db.data.chats[m.chat].simi && prefix) {
 try {     
 await conn.sendPresenceUpdate('composing', m.chat)
@@ -274,7 +267,7 @@ m.reply(res)
 m.reply(`*Api simsimi caida, desactive el ChatBot con:*\n#chatbot off`)
 console.log(e)}}
 
-//antiprivado
+//---------------------[ ANTIPRIVADO ]------------------------
 if (global.db.data.chats[m.chat].antiprivado && !isCreator) {
 if (m.isBaileys && m.fromMe) return !0;
 if (m.isGroup) return !1;
@@ -282,68 +275,17 @@ if (!m.message) return !0;
 if (m.text.includes('PIEDRA') || m.text.includes('PAPEL') || m.text.includes('TIJERA') ||  m.text.includes('menu') ||  m.text.includes('estado') || m.text.includes('bots') ||  m.text.includes('serbot') || m.text.includes('jadibot')) return !0
 const chat = global.db.data.chats[m.chat];
 const bot = global.db.data.settings[numBot]
-await conn.sendMessage(m.chat, {text: `*ʜᴏʟᴀ @${sender.split`@`[0]}, ᴇsᴛᴀ ᴘʀᴏʜɪʙɪᴅᴏ ʜᴀʙʟᴀʀ ᴀʟ ᴘʀɪᴠᴀᴅᴏ ᴅᴇʟ ʙᴏᴛ ᴘᴏʀ ʟᴏ ᴄᴜᴀʟ sᴇʀᴀs ʙʟᴏϙᴜᴇᴀᴅᴏ.*\n*ᴘᴀʀᴀ ᴜsᴀʀ ᴇʟ ʙᴏᴛ ᴜɴɪʀᴛᴇ ᴀʟ ɢʀᴜᴘᴏ ᴅᴇʟ ʙᴏᴛ*\n\n${nn2}`, mentions: [sender], },{quoted: m})
+await conn.sendMessage(m.chat, {text: `*ʜᴏʟᴀ @${sender.split`@`[0]}, ᴇsᴛᴀ ᴘʀᴏʜɪʙɪᴅᴏ ʜᴀʙʟᴀʀ ᴀʟ ᴘʀɪᴠᴀᴅᴏ ᴅᴇʟ ʙᴏᴛ ᴘᴏʀ ʟᴏ ᴄᴜᴀʟ sᴇʀᴀs ʙʟᴏϙᴜᴇᴀᴅᴏ.*\n*ᴘᴀʀᴀ ᴜsᴀʀ ᴇʟ ʙᴏᴛ ᴜɴɪʀᴛᴇ ᴀʟ ɢʀᴜᴘᴏ ᴅᴇʟ ʙᴏᴛ*\n\n${nn2}`, mentions: [sender], },{quoted: m}) 
 await conn.updateBlockStatus(m.chat, 'block')
 return !1;
 }
 
-let mentionUser = [...new Set([...(m.mentionedJid || []), ...(m.quoted ? [m.quoted.sender] : [])])]
-for (let jid of mentionUser) {
-let user = global.db.data.users[jid]
-if (!user) continue
-let afkTime = user.afkTime 
-if (!afkTime || afkTime < 0) continue 
-let reason = user.afkReason || ''
-m.reply(`[ 💤 𝙽𝙾 𝙻𝙾𝚂 𝙴𝚃𝙸𝚀𝚄𝙴𝚃𝙴 💤 ]\n\n𝙴𝚜𝚝𝚎 𝚞𝚜𝚞𝚊𝚛𝚒𝚘 𝚚𝚞𝚎 𝚖𝚎𝚗𝚌𝚒𝚘𝚗𝚊𝚜 𝚎𝚜𝚝𝚊 𝙰𝙵𝙺\n\n${reason ? '🔸️ *𝚁𝙰𝚉𝙾𝙽* : ' + reason : '🔸️ *𝚁𝙰𝚉𝙾𝙽* : 𝚂𝚒𝚗 𝚛𝚊𝚣𝚘𝚗'}\n🔸️ *𝙴𝚂𝚃𝚄𝚅𝙾 𝙸𝙽𝙰𝙲𝚃𝙸𝚅𝙾 𝙳𝚄𝚁𝙰𝙽𝚃𝙴 : ${clockString(new Date - afkTime)}`.trim())}
-if (global.db.data.users[m.sender].afkTime > -1) {
-let user = global.db.data.users[m.sender]
-m.reply(`*🕔 𝙳𝙴𝙹𝙰𝚂𝚃𝙴 𝙳𝙴 𝙴𝚂𝚃𝙰 𝙰𝙵𝙺 🕔*\n${user.afkReason ? '\n*𝚁𝙰𝚉𝙾𝙽 :* ' + user.afkReason : ''}\n*𝙴𝚂𝚃𝚄𝚅𝙾 𝙸𝙽𝙰𝙲𝚃𝙸𝚅𝙾 𝙳𝚄𝚁𝙰𝙽𝚃𝙴 :* ${clockString(new Date - user.afkTime)}`.trim())
-user.afkTime = -1
-user.afkReason = ''
-}
- 
-/*if (command) {
-const date = global.db.data.users[m.sender].spam + 3000; //5 seg
-if (new Date - global.db.data.users[m.sender].spam < 3000) return //conn.sendMessage(m.chat, {text: `_*Espere unos segundos antes de usar otro comando...*_ ✓`, mentions: [sender], },{quoted: m}) 
-global.db.data.users[m.sender].spam = new Date * 1
-await delay(2 * 2000)}*/
-
 //ARRANCA LA DIVERSIÓN 
 switch (command) { 
-case 'yts': case 'ytsearch':
-yt(conn, m, text, from, command, fkontak, prefix)  
-break
-case 'acortar': 
-acortar(conn, m, text, args, command)  
-break
-case 'google': {      
-google(conn, m, text, command)} 
-break  
-case 'imagen': {
-imagen(conn, m, text, command)}
-break
-case 'traducir': case 'translate': {
-tran(conn, m, args, quoted, prefix, command)}
-break
-case "tts":
-tts(conn, m, q, text, quoted)
-break		              				
-case 'ia': case 'chatgpt':
-ia(conn, m, text, quoted)
-break
-case 'ss': case 'ssweb': {
-ssw(conn, m, q, prefix, command, quoted, scp1)}
-break
-case 'wallpaper':
-wall(conn, text, command, m) 
+case 'yts': case 'ytsearch': case 'acortar': case 'google': case 'imagen': case 'traducir': case 'translate': case "tts": case 'ia': case 'chatgpt': case 'dalle': case 'ia2': case 'aimg': case 'imagine': case 'dall-e': case 'ss': case 'ssweb': case 'wallpaper': case 'hd': await buscadores(m, command, conn, text, from, fkontak, prefix, args, quoted, lolkeysapi)
 break 
-case 'hd': 
-hd(conn, command, m) 
-break
-case 'dalle': case 'ia2': case 'aimg': case 'imagine': case 'dall-e':
-dalle(conn, text, command, m, lolkeysapi) 
-break
 
+//jadibot/serbot
 case 'serbot': case 'jadibot': case 'qr':
 jadibot(conn, m, command, text, args, sender)
 break  
@@ -359,367 +301,60 @@ const responseMessage = `*𝘚𝘜𝘉𝘉𝘖𝘛𝘚 𝘊𝘖𝘕𝘌𝘊𝘛�
 await conn.sendMessage(m.chat, {text: responseMessage, mentions: conn.parseMention(responseMessage)}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
 break
 
-//info
-case 'estado': case 'infobot':
-state(conn, m, speed, sender, fkontak) 
-break
-case 'menu': case 'help': case 'menucompleto':
-menu(conn, prefix, pushname, sender, m, pickRandom, fkontak)
+//Info
+case 'menu': case 'help': case 'menucompleto': case 'menu2': case 'audio': case 'nuevo': case 'extreno': case 'reglas': menu(m, command, conn, prefix, pushname, sender, pickRandom, fkontak) 
 break  
-case 'menu2': case 'audio': 
-menu2(conn, pushname, m, fkontak)
+case 'estado': case 'infobot': case 'owner': case 'creador': case 'contacto': case 'grupos': case 'grupoficiales': case 'instalarbot': case 'crearbot': case 'ping': case '5492266613038': case '593980586516': case '595975740803': case 'report': case 'sc': info(command, conn, m, speed, sender, fkontak, pickRandom, pushname, from, msg, text) 
 break
-case 'nuevo': case 'extreno':
-nuevo(conn, m, sender, pickRandom, fkontak)    
-break   
-case 'reglas':    
-regla(conn, m, sender, pickRandom, fkontak)   
-break  
-case 'owner': case 'creador': case 'contacto':
-owner(conn, m, sender)  
-break 
-case 'grupos': case 'grupoficiales': 
-grupo(conn, m, sender, pickRandom)  
+
+//activar/desactivar
+case 'welcome': case 'bienvenida': case 'antilink': case 'antienlace': case 'antifake': case 'antiFake': case 'antiarabe': case 'antiArabe': case 'autodetect': case 'detect': case 'audios': case 'autosticker': case 'stickers': case 'modocaliente': case 'antinsfw': case 'modoadmin': case 'modoadmins': case 'soloadmin': case 'antiprivado': case 'antipv': case 'anticall': case 'antillamada': case 'modojadibot': case 'jadibot': case 'autoread': case 'autovisto': case 'antispam': case 'chatbot': case 'simsimi': case 'autolevelup': case 'autonivel': enable(m, command, isGroupAdmins, text, command, args, isBotAdmins, isGroupAdmins, isCreator) 
 break
-case 'instalarbot': case 'crearbot':
-instalar(conn, m, pushname, sender) 
-break
-case '5492266613038': case '593980586516': case '595975740803': await ow(conn, args, m) 
-break
-case 'ping':
-ping(conn, from, msg, speed) 
-break  		  
-case 'report': 
-report(conn, from, m, prefix, command, text)
-break 
-case 'sc': 
-sc(conn, m)  
-break 
-//activa/desactivar
-case 'welcome': case 'bienvenida': on(isGroupAdmins, text, command, args, m) 
-break
-case 'antilink': case 'antienlace': on1(isBotAdmins, isGroupAdmins, text, command, args, m)
-break  
-case 'antifake': case 'antiFake': on2(isBotAdmins, isGroupAdmins, text, command, args, m)
-break          
-case 'antiarabe': case 'antiArabe': on3(isBotAdmins, isGroupAdmins, text, command, args, m)
-break
-case 'autodetect': case 'detect': on4(isBotAdmins, isGroupAdmins, text, command, args, m)
-break
-case 'audios': on5(text, command, args, m) 
-break
-case 'autosticker': case 'stickers': on6(text, command, args, m) 
-break
-case 'modocaliente': case 'antinsfw': on7(isGroupAdmins, text, command, args, m) 
-break
-case 'modoadmin': case 'modoadmins': on8(isBotAdmins, isGroupAdmins, text, command, args, m) 
-break
-case 'antiprivado': case 'antipv': on9(isCreator, text, command, args, m) 
-break
-case 'anticall': case 'antillamada': on10(isCreator, text, command, args, m) 
-break           
-case 'modojadibot': case 'jadibot': on11(isCreator, text, command, args, m) 
-break
-case 'autoread': case 'autovisto':
-on12(isCreator, text, command, args, m, conn) 
-break
-case 'antispam': on13(isCreator, text, command, args, m) 
-break
-case 'chatbot': case 'simsimi': on14(isGroupAdmins, text, command, args, m) 
-break
-case 'autolevelup': case 'autonivel': on15(text, command, args, m) 
-break
-//Grupo 
-case 'grupo': grup(conn, m, args, isBotAdmins, isGroupAdmins, command, prefix, text)
-break
-case 'delete': case 'del': del(conn, m, isBotAdmins, isGroupAdmins)
-break  		 
-case 'join': case 'unete': join(conn, m, isCreator, text, delay, args, sender)
-break           
-case 'hidetag': case 'notificar': case 'tag': hide(conn, m, isGroupAdmins, q, participants)
-break 
-case 'setppname': case 'nuevonombre': case 'newnombre': setna(conn, m, isBotAdmins, isGroupAdmins, text)
-break
-case 'setdesc': case 'descripción': setde(conn, m, isBotAdmins, isGroupAdmins, text)
-break
-case 'setppgroup': case 'setpp': setpp(conn, m, isBotAdmins, isGroupAdmins, quoted, prefix, command, mime, args, from)
-break
-case 'anularlink': case 'resetlink': case 'revoke':
-let res = conn.groupRevokeInvite(m.chat)
-break
-case 'add': case 'agregar': case 'invitar': add(conn, m, isBotAdmins, isGroupAdmins, text, sender, prefix)
-break           
-case 'kick': case 'echar': case 'sacar': k(conn, m, isBotAdmins, isGroupAdmins, quoted, text, sender)
-break 
-case 'promote': case 'darpoder': p(conn, m, isBotAdmins, isGroupAdmins, quoted, sender)
-break
-case 'demote': case 'quitarpoder': d(conn, m, isBotAdmins, isGroupAdmins, quoted, sender)
-break            
-case 'link': case 'linkgc':  link(conn, m, isBotAdmins)
-break                        		
-case 'banchat': ban(m, isCreator, text, command, args)
-break              
-case 'tagall': case 'invocar': case 'todos': tag(conn, m, isGroupAdmins, participants)
-break                 
-case 'admins': case 'administradores': adm(conn, participants, groupMetadata, args, m) 
-break 
-case 'infogrupo': case 'groupinfo': infogr(conn, participants, groupMetadata, fkontak, m) 
-break  
-case 'warn': case 'advertencia': warn1(conn, m, isBotAdmins, isGroupAdmins, sender, command, text, delay) 
-break 
-case 'unwarn': case 'quitardvertencia': warn2(conn, m, isBotAdmins, isGroupAdmins, sender, command, delay) 
-break
-case 'listwarn': listw(conn, isCreator, m) 
-break
-case 'listonline': case 'liston': online(conn, sender, args, store, m) 
-break
+
+//Grupos
+case 'grupo': case 'delete': case 'del': case 'join': case 'unete': case 'hidetag': case 'notificar': case 'tag': case 'setppgroup': case 'setpp': case 'setppname': case 'nuevonombre': case 'newnombre': case 'setdesc': case 'descripción': case 'anularlink': case 'resetlink': case 'revoke': case 'add': case 'agregar': case 'invitar': case 'kick': case 'echar': case 'sacar': case 'promote': case 'darpoder': case 'demote': case 'quitarpoder': case 'link': case 'linkgc': case 'banchat': case 'tagall': case 'invocar': case 'todos': case 'admins': case 'administradores': case 'infogrupo': case 'groupinfo': case 'warn': case 'advertencia': case 'unwarn': case 'quitardvertencia': case 'listwarn': case 'enline': case 'online': case 'listonine': case 'listaenlinea': case 'enlinea': case 'listonline': grupo(m, command, isGroupAdmins, text, conn, participants, isBotAdmins, args, isCreator, delay, sender, quoted, mime, from, isCreator, groupMetadata, fkontak, delay) 
+break    
+
 //juegos
-case 'simi': case 'alexa': case 'siri': await game(m, text, pickRandom, pushname, command)
-break  
-case 'gay': await game1(conn, m, participants, sender, who)
-break            
-case 'pareja': case 'formarpareja': await game2(conn, m, pushname, participants, sender)
-break
-case 'fake': await game3(conn, text, prefix, command, body, from, m, sender, quoted)
-break
-case 'follar': case 'violar': case 'coger': game4(conn, m, pushname, text, sender)
-break 
-case 'ppt': case 'suit': game5(conn, m, pushname, text, sender)
-break
-case 'pregunta': case 'preg': game6(text, command, m)  
-break   
-case 'doxear': case 'doxxeo': game7(conn, pickRandom, text) 
-break
-case 'personalidad': game8(conn, text, pickRandom, m) 
-break   
-case 'slot':  case 'apuesta': game9(conn, args, prefix, command, msToTime, m) 
-break
-case 'verdad': game10(sendImageAsUrl, pickRandom)   
-break   
-case 'reto': game11(pickRandom, sendImageAsUrl)   
+case 'simi': case 'alexa': case 'siri': case 'pregunta': case 'preg': case 'gay': case 'pareja': case 'formarpareja': case 'follar': case 'violar': case 'coger': case 'doxear': case 'doxxeo': case 'personalidad': case 'top': case 'topgays': case 'topotakus': case 'racista': case 'love': case 'ship': case 'formartrio': case 'formapareja5': game(m, command, text, pickRandom, pushname, conn, participants, sender, who, body, sendImageAsUrl)  
 break                
-case 'top': game12(conn, text, participants, pickRandom, m) 
-break 
-case 'topgays': case 'topotakus': game13(conn, participants, command, m) 
-break 
-case 'piropo': game14(m, pickRandom) 
+case 'verdad': case 'reto': case 'piropo': game2(m, command, sendImageAsUrl, pickRandom)
 break
-case 'racista': game15(m, body)  
-break
-case 'love': game16(conn, text, m, sender) 
-break
-case 'ship': game17(conn, text, m)  
-break 
-case 'formartrio': game18(conn, participants, m)
-break
-case 'formapareja5': 
-game19(conn, participants, m) 
-break
+case 'slot': case 'apuesta':  case 'fake': case 'ppt': case 'suit': game3(m, command, conn, args, prefix, msToTime, text, body, from, sender, quoted, pushname)
+break    
+
 //convertidores
-case 'bass': case 'blown': case 'deep': case 'earrape': case 'fast': case 'fat': case 'nightcore': case 'reverse': case 'robot': case 'slow': case 'smooth': case 'squirrel': efec(conn, command, mime, quoted, exec, prefix, m, from) 
+case 'bass': case 'blown': case 'deep': case 'earrape': case 'fast': case 'fat': case 'nightcore': case 'reverse': case 'robot': case 'slow': case 'smooth': case 'squirrel': efec(conn, command, mime, quoted, exec, prefix, m, from)  
 break   
-case 'toaudio': case 'tomp3': tomp3(conn, mime, quoted, m) 
-break
-case 'toimg': case 'toimagen': toimg(conn, mime, quoted, exec, m) 
-break
-case 'tourl': url(conn, mime, quoted, util, m) 
-break
-case 'toanime': toanime(conn, mime, quoted, lolkeysapi, m) 
-break
+case 'toaudio': case 'tomp3': case 'toimg': case 'toimagen': case 'tourl': case 'toanime': convertidores(conn, command, mime, quoted, util, m, exec, lolkeysapi) 
+break    
+
 //nsfw
-case 'hentai': nsfw1(conn, m, pickRandom)
-break
-case 'nsfwloli': nsfw2(conn, m, pickRandom) 
-break
-case 'lewd': case 'feed': case 'gasm': case 'anal': case 'holo': case 'tits': case 'kuni': case 'kiss': case 'erok': case 'smug': case 'solog': case 'feetg': case 'lewdk': case 'waifu': case 'pussy': case 'femdom': case 'cuddle': case 'eroyuri': case 'cum_jpg': case 'blowjob': case 'holoero': case 'erokemo': case 'fox_girl': case 'futanari': case 'wallpaper': nsfw3(conn, m, pickRandom, sendImageAsUrl, command)
-break
-case 'hentai2': nsfw4(sendImageAsUrl, m) 
-break
-case 'porno': nsfw5(sendImageAsUrl, m) 
-break 
-case 'pack': nsfw6(sendImageAsUrl, m)   
-break
-case 'pack2': case 'pack3':  nsfw7(sendImageAsUrl, m)  
-break
-case 'videoxxx': case 'vídeoxxx': case 'videoxxxlesbi': nsfw8(conn, m)  
-break
-case 'videolesbixxx': case 'pornolesbivid': case 'pornolesbianavid': case 'pornolesbiv': case 'pornolesbianav': nsfw9(conn, m)  
-break 
-//randow     
-case 'memes': randow1(sendImageAsUrl, m)
+case 'hentai': case 'nsfwloli': case 'lewd': case 'feed': case 'gasm': case 'anal': case 'holo': case 'tits': case 'kuni': case 'kiss': case 'erok': case 'smug': case 'solog': case 'feetg': case 'lewdk': case 'waifu': case 'pussy': case 'femdom': case 'cuddle': case 'eroyuri': case 'cum_jpg': case 'blowjob': case 'holoero': case 'erokemo': case 'fox_girl': case 'futanari': case 'wallpaper': case 'hentai2': case 'porno': case 'pack': case 'pack2': case 'pack3': case 'videoxxx': case 'vídeoxxx': case 'videoxxxlesbi': case 'videolesbixxx': case 'pornolesbivid': case 'pornolesbianavid': case 'pornolesbiv': case 'pornolesbianav': case 'tetas': case 'pechos': nsfw(conn, m, command, pickRandom, sendImageAsUrl)
 break  
-case 'loli': randow2(sendImageAsUrl, m, pickRandom)
-break   
-case 'lolivid': randow3(conn, m, pickRandom)  
-break
-case 'neko': randow4(sendImageAsUrl, m, pickRandom)
+
+//randow
+case 'memes': case 'loli': case 'lolivid': case 'neko': case 'akira': case 'akiyama': case 'anna': case 'asuna': case 'ayuzawa': case 'boruto': case 'chiho': case 'chitoge': case 'deidara': case 'erza': case 'elaina': case 'eba': case 'emilia': case 'hestia': case 'hinata': case 'inori': case 'isuzu': case 'itachi': case 'itori': case 'kaga': case 'kagura': case 'kaori': case 'keneki': case 'kotori': case 'kurumi': case 'madara': case 'mikasa': case 'miku': case 'minato': case 'naruto': case 'nezuko': case 'sagiri': case 'sasuke': case 'sakura': case 'cosplay': case 'blackpink': randow(m, sender, command, sendImageAsUrl, pickRandom, conn)
 break  
-case 'akira': case 'akiyama': case 'anna': case 'asuna': case 'ayuzawa': case 'boruto': case 'chiho': case 'chitoge': case 'deidara': case 'erza': case 'elaina': case 'eba': case 'emilia': case 'hestia': case 'hinata': case 'inori': case 'isuzu': case 'itachi': case 'itori': case 'kaga': case 'kagura': case 'kaori': case 'keneki': case 'kotori': case 'kurumi': case 'madara': case 'mikasa': case 'miku': case 'minato': case 'naruto': case 'nezuko': case 'sagiri': case 'sasuke': case 'sakura': case 'cosplay': randow5(sendImageAsUrl, command, pickRandom, m)
-break 
-case 'horny': randow6(conn, m) 
+case 'horny': case 'simp': case 'lolice': case 'comentar': case 'comment': randow2(conn, m, command, text, sender, pushname) 
 break
-case 'simp': randow7(conn, m) 
+
+//descargas
+case 'play': case 'musica': case 'play2': case 'video': case 'play3': case 'playdoc': case 'playaudiodoc': case 'ytmp3doc': case 'play4': case 'playdoc2': case 'playvideodoc': case 'ytmp4doc': case "ytmp3": case "ytaudio": case 'ytmp4': case 'ytvideo': case 'music': case 'spotify': case 'gitclone': case 'tiktok': case 'tt': case 'lyrics': case 'letra': case 'mediafire': case 'facebook': case 'fb': case 'instagram': case 'ig': case 'igstalk': case 'apk': case 'modoapk': case 'gdrive': case 'tiktokimg': case 'ttimg': descarga(m, command, conn, text, command, args, fkontak, from, lolkeysapi)    
 break
-case 'lolice': randow8(conn, m) 
-break  
-case 'comentar': case 'comment': randow9(conn, text, m, sender, pushname)
-break 
-case 'blackpink':  
-sendImageAsUrl("https://delirius-image-random.vercel.app/api/all");
-break
-//descargas		    
-case 'play': case 'musica': 
-play(conn, text, command, args, m)  
-break   
-case 'play2': case 'video': 
-play2(conn, text, command, args, m)  
-break 
-case 'play3': case 'playdoc': case 'playaudiodoc': case 'ytmp3doc': 
-play3(conn, text, command, args, m)  
-break
-case 'play4': case 'playdoc2': case 'playvideodoc': case 'ytmp4doc': 
-play4(conn, text, command, args, m)   
-break
-case "ytmp3": case "ytaudio": 
-mp3(conn, args, text, command, fkontak, ytplayvid, m)
-break 
-case 'ytmp4': case 'ytvideo': 
-mp4(conn, args, text, command, fkontak, m)
-break   
-case 'music': case 'spotify':
-spoti(conn, text, m, from) 
-break
-case 'gitclone':
-git(conn, args, command, m) 
-break
-case 'tiktok': case 'tt':
-tiktok(conn, text, command, q, m) 
-break     
-case 'lyrics': case 'letra': 
-letra(conn, text, command, fkontak, m) 
-break
-case 'mediafire': 
-mediafire(conn, text, command, mediafireDl, m) 
-break 
-case 'facebook': case 'fb':
-fb(conn, text, command, lolkeysapi, args, m) 
-break
-case 'instagram': case 'ig':
-ig(conn, text, command, lolkeysapi, args, m) 
-break
-case 'igstalk':
-ig2(conn, args, command, m) 
-break
-case 'apk': case 'modoapk':
-apk(conn, text, m)  
-break 
-case 'gdrive': 
-gdrive(conn, args, command, m) 
-break
-case 'tiktokimg': case 'ttimg': 
-tttimg(conn, text, command, m) 
-break
+
 //rpg
-case 'reg': case 'verificar':
-await reg(conn, m, sender, text, fkontak, delay)
-break            
-case 'unreg': 
-reg1(args, m, sender)  
-break
-case 'myns':
-reg2(sender, m)
+case 'reg': case 'verificar': case 'unreg': case 'myns': await reg(command, conn, m, sender, text, fkontak, delay, args)
+break   
+case 'lb': case 'leaderboard': case 'afk': case 'rob': case 'robar': case 'buy': case 'buyall': case 'bal': case 'balance': case 'diamond': case 'minar': case 'mine': case 'trabajar': case 'work': case 'w': case 'claim': case 'daily': case 'perfil': case 'levelup': case 'nivel': case 'cofre': rpg(m, command, participants, args, sender, pushname, text, conn, fkontak, who) 
 break 
-case 'afk': {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-let user = global.db.data.users[m.sender]
-user.afkTime = + new Date
-user.afkReason = text
-const afk = `𝙴𝚂𝚃𝙴 𝚄𝚂𝚄𝙰𝚁𝙸𝙾𝚂 ${pushname}  𝙴𝚂𝚃𝙰 𝙸𝙽𝙰𝙲𝚃𝙸𝚅𝙾 😴\n💤 𝙽𝙾 𝙻𝙾𝚂 𝙴𝚃𝙸𝚀𝚄𝙴𝚃𝙴 💤\n☣️ 𝙼𝙾𝚃𝙸𝚅𝙾𝚂 : ${text ? text : ''}\n\n\n\n\n\n\n`
-conn.relayMessage(m.chat, {scheduledCallCreationMessage: {callType: 'VIDEO', scheduledTimestampMs: 0, title: afk }}, {})}
-/*/m.reply(`╭━─━─━─≪ 𝙰𝙺𝙵 ≫─━─━─━╮
-┃ 𝙴𝚂𝚃𝙴 𝚄𝚂𝚄𝙰𝚁𝙸𝙾𝚂 ${pushname}
-┃ 𝙴𝚂𝚃𝙰 𝙸𝙽𝙰𝙲𝚃𝙸𝚅𝙾 😴
-┃ ≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋
-┃ 💤 𝙽𝙾 𝙻𝙾𝚂 𝙴𝚃𝙸𝚀𝚄𝙴𝚃𝙴 💤
-┃ ☣️ 𝙼𝙾𝚃𝙸𝚅𝙾𝚂 : ${text ? text : ''}
-╰━─━─━─≪ ${vs} ≫─━─━─━╯`)}*/
-break             
-case 'buy': case 'buyall': {
-await buy(conn, m, sender, args, command, text, fkontak)}
+
+//stickers
+case 's': case 'sticker': case 'wm': case 'take': case 'attp': case 'dado': stickers(m, command, conn, mime, quoted, args, text, lolkeysapi, fkontak) 
 break
-case 'minar': case 'mine':
-await mine(conn, m, sender, fkontak)
-break 
-case 'trabajar': case 'work': case 'w': {
-await work(conn, m, sender, fkontak)}
-break
-case 'rob': case 'robar': { 
-await rob(conn, m, sender, fkontak)}
-break
-case 'bal': case 'balance': case 'diamond': {
-await bal(conn, m, sender, fkontak)}
-break
-case 'claim': case 'daily': 
-await claim(conn, m, sender)
-break
-case 'perfil':
-await perfil(conn, who, sender, pushname, fkontak, m) 
-break
-case 'levelup': case 'nivel': {  
-nivel(conn, sender, canLevelUp, xpRange, m, pushname)}
-break  
-case 'cofre':
-cofre(conn, sender, m) 
-break 
-case 'lb': case 'leaderboard': 
-lb(conn, participants, args, m) 
-break 
-//stickers  
-case 's': case 'sticker':  
-s(conn, mime, quoted, m) 
-break; 
-case 'wm': case 'take': 
-wm2(conn, args, quoted, mime, m) 
-break 
-case 'attp': 
-attp(conn, text, lolkeysapi, fkontak, m) 
-break
-case 'dado': 
-dado(conn, lolkeysapi, fkontak, m) 
-break
-//owner
-case 'bcgc': case 'bcgroup': 
-owner1(conn, isCreator, text, delay, fkontak, m) 
-break
-case 'bc': case 'broadcast': case 'bcall': 
-owner2(conn, isCreator, text, store, delay, fkontak, m) 
-break 
-case 'block': case 'bloquear': 
-owner3(conn, isCreator, quoted, sender, text, m) 
-break 
-case 'unblock': case 'desbloquear': 
-owner4(conn, isCreator, quoted, sender, text, m) 
-break            
-case 'setcmd':  case 'addcmd':
-owner5(isCreator, conn, quoted, text, command, m) 
-break
-case 'delcmd': 
-owner6(isCreator, conn, m) 
-break
-case 'listcmd': 
-owner7(isCreator, conn, m) 
-break
-case 'addcase': 
-owner8(conn, isCreator, text, q, m) 
-break	     
-case 'getcase': 
-owner9(conn, isCreator, text, args, m) 
-break 
-case 'añadirdiamantes': case 'dardiamantes': case 'addlimit':
-owner10(isCreator, m, text) 
-break
-case 'añadirxp': case 'addexp': case 'addxp': 
-owner11(isCreator, m, text) 
+
+//propietario/owner
+case 'bcgc': case 'bcgroup': case 'bc': case 'broadcast': case 'bcall': case 'block': case 'bloquear': case 'unblock': case 'desbloquear': case 'setcmd':  case 'addcmd': case 'delcmd': case 'listcmd': case 'añadirdiamantes': case 'dardiamantes': case 'addlimit': case 'añadirxp': case 'addexp': case 'addxp': owner(isCreator, m, command, conn, text, delay, fkontak, store, quoted, sender) 
 break 
 case 'banuser': {
 let who 
@@ -777,7 +412,7 @@ await conn.sendMessage(m.sender, {document: creds, mimetype: 'application/json',
 console.log(e)}   
 break 
 case 'update':  
-if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg });    
+if (!isCreator) return reply(info.owner)
 try {    
 let stdout = execSync('git pull' + (m.fromMe && q ? ' ' + q : ''))
 await conn.sendMessage(from, { text: stdout.toString() }, { quoted: msg });
@@ -786,65 +421,20 @@ let updatee = execSync('git remote set-url origin https://github.com/elrebelde21
 await conn.sendMessage(from, { text: updatee.toString() }, { quoted: msg })}  
 break
 case 'reiniciar': case 'restart': {
-if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg });   
+if (!isCreator) return reply(info.owner)
 m.reply('_🔄 Reiniciando Bot..._');
 await delay(3 * 3000) 
 conn.ws.close()}
 break
-case 'unbanned': case 'sacasupport': {
-if (!isCreator) return
-if (m.quoted || q) {
-var tosend = m.quoted ? m.quoted.sender : q.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-if (!isCreator) return conn.sendMessage(from, { text: info.owner }, { quoted: msg }); 
-var targetnya = tosend.split('@')[0]
-try {
-var axioss = require('axios')
-let ntah = await axioss.get("https://www.whatsapp.com/contact/noclient/")
-let email = await axioss.get("https://www.1secmail.com/api/v1/?action=genRandomMailbox&count=199999999999999999995777678776668876677777")
-let cookie = ntah.headers["set-cookie"].join("; ")
-const cheerio = require('cheerio');
-let $ = cheerio.load(ntah.data)
-let $form = $("form");
-let url = new URL($form.attr("action"), "https://www.whatsapp.com").href
-let form = new URLSearchParams()
-form.append("jazoest", $form.find("input[name=jazoest]").val())
-form.append("lsd", $form.find("input[name=lsd]").val())
-form.append("step", "submit")
-form.append("country_selector", "+")
-form.append("phone_number", `+${targetnya}`,)
-form.append("email", email.data[0])
-form.append("email_confirm", email.data[0])
-form.append("platform", "ANDROID")
-form.append("your_message", `Aku Tidak Tau Mengapa Nomor Saya Tiba Tiba Di Larang Dari Menggunakan WhatsApp Aku Hanya Membalas Pesan Customer Saya Mohon Buka Larangan Akun WhatsApp Saya: [+${targetnya}]
-Terimakasih`)
-form.append("__user", "0")
-form.append("__a", "1")
-form.append("__csr", "")
-form.append("__req", "8")
-form.append("__hs", "19531.BP:whatsapp_www_pkg.2.0.0.0.0")
-form.append("dpr", "1")
-form.append("__ccg", "UNKNOWN")
-form.append("__rev", "1007735016")
-form.append("__comment_req", "0")
-let res = await axioss({url, method: "POST", data: form, headers: {cookie}})
-reply(`Espere de 1 a 24 horas para el proceso de desbloqueo del bot y espere ±30 segundos para ver la respuesta por correo electrónico de WhatsApp señor Hw Mods🥺🙏`)
-await sleep(90000)
-let payload = String(res.data)
-if (payload.includes(`"payload":true`)) {
-reply(`##- WhatsApp Support -##\n\nHola, gracias por contactarnos. Nuestro sistema marca la actividad de su cuenta como una violación de nuestros Términos de servicio y bloquea su número de teléfono. Realmente te apreciamos como usuario. Nos disculpamos por cualquier confusión o inconveniente causado por este problema. Hemos eliminado el bloqueo después de revisar la actividad de su cuenta. Ahora deberías tener acceso a WhatsApp. Como siguiente paso, te recomendamos volver a registrar tu número de teléfono en WhatsApp para asegurarte de tener acceso. Puede visitar nuestro sitio web para descargar la aplicación WhatsApp o WhatsApp Business.`)
-} else if (payload.includes(`"payload":false`)) {
-reply(`##- WhatsApp Support -##\n\nGracias por contactarnos. Nos comunicaremos con usted por correo electrónico y eso puede demorar hasta tres días hábiles.`)
-} else reply(util.format(res.data))
-} catch (err) {reply(`${err}`)}
-} else reply('⚠️ *Escriba el numero que quiere desbanea*')}
-break
-//============= 
+//__________
 
-//función pickrandow
+//--------------------[ FUNCIONES ]-----------------------
 function pickRandom(list) {
 return list[Math.floor(list.length * Math.random())]
 }  
 
+//--------------------[ AUDIO/TEXTOS ]-----------------------
+//🟢Comando que responde sin prefix
 default:  
 if (budy.includes(`Todo bien`)) {
 conn.sendPresenceUpdate('composing', m.chat)
@@ -852,6 +442,8 @@ await m.reply(`${pickRandom(['Si amigo todo bien, vite', 'Todo bien capo y tu �
 if (budy.includes(`Buenos dias`)) {
 conn.sendPresenceUpdate('composing', m.chat)
 m.reply(`${pickRandom(['Buenos Dias trolos de mierda', '*Buen dias mi amor 😘*', '*Buenos Dias hermosa mañana 🥰*'])}`)}  
+if (budy.includes(`Yaoi`)) {
+m.reply(`${pickRandom(['Que mamada? vete a estudiar mejor', 'Soy un bot hetero, no pida mamada (︶｡︶)zzZ '])}`)}
 if (budy.includes(`autodestruction`)) { 
 let e = fs.readFileSync('./src/autodestruction.webp')
 let or = ['texto', 'sticker'];
@@ -873,7 +465,9 @@ if (media === 'sticker')
 conn.sendFile(m.chat, noetiqueta, 'sticker.webp', '',m, true, { contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: 'Yo que?', mediaType: 2, sourceUrl: nna, thumbnail: imagen1}}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 if (media === 'texto')
 await conn.sendMessage(m.chat, {text: `${pickRandom(['*QUE YO QUE?*', 'Que?'])}`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
-if (budy.startsWith(`A`)) {
+if (budy.startsWith(`yaoi`)) {
+m.reply(`${pickRandom(['que mamada? vete a estudia mejor', 'Soy un bot hetero no pida mamada (︶｡︶)zzZ '])}`)}
+if (budy.startsWith(`a`)) {
 if (!global.db.data.chats[m.chat].audios) return
 let vn = './media/a.mp3'
 await conn.sendPresenceUpdate('recording', m.chat)
@@ -909,7 +503,7 @@ if (budy.startsWith(`Cuentate un chiste`)) {
 const vn = './media/dylan2.mp3'
 conn.sendAudio(m.chat, vn, m)}
 if (budy.startsWith(`Admin party`)) {
-const vn = './media/fiesta.mp3'
+const vn = './media/fiesta.mp3' 
 conn.sendAudio(m.chat, vn, m)}
 if (budy.startsWith(`Fiesta del admin`)) {
 const vn = './media/admin.mp3'
@@ -1035,8 +629,9 @@ if (budy.startsWith(`Nefasto`)) {
 const vn = './media/gaspi1.mp3'
 conn.sendAudio(m.chat, vn, m)}
                   
+//--------------------[ OWNER ]-----------------------     
 if (budy.startsWith('>')) {
-if (!isCreator) return
+if (!isCreator) return reply(info.owner)
 try {
 return reply(JSON.stringify(eval(budy.slice(2)), null, '\t'))
 } catch (e) {
@@ -1052,11 +647,13 @@ e = String(e)
 reply(e)
 }}
 if (budy.startsWith('$')) {
-if (!isCreator) return
+if (!isCreator) return reply(info.owner)
 try {
 return reply(String(execSync(budy.slice(2), { encoding: 'utf-8' })))
 } catch (err) {
-console.log(util.format(err))
+console.log(util.format(err)) 
+
+//--------------------[ REPORTE/ERRORS ]-----------------------     
 let e = String(err) 
 conn.sendMessage("5492266466080@s.whatsapp.net", { text: "Hola Creador/desarrollador, parece haber un error, por favor arreglarlo 🥲\n\n" + util.format(e), 
 contextInfo:{
@@ -1065,8 +662,9 @@ isForwarded: true
 }})
 
 process.on('uncaughtException', function (err) {
-console.log('Caught exception: ', err)
-})}}}}
+console.log('Caught exception: ', err)})}}}}
+
+//--------------------[ UPDATE/CONSOLA ]-----------------------     
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
