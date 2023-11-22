@@ -8,13 +8,15 @@ const cheerio = require('cheerio')
 const yts = require("yt-search") 
 const ytdl = require('ytdl-core') 
 const { smsg, fetchBuffer, getBuffer, buffergif, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getFile, getRandom, msToTime, downloadMediaMessage, convertirMsADiasHorasMinutosSegundos} = require('../libs/fuctions')
+const { ytmp4, ytmp3, ytplay, ytplayvid } = require('../libs/youtube') 
 const {sizeFormatter} = require('human-readable') 
 const formatSize = sizeFormatter({
   std: 'JEDEC', decimalPlaces: 2, keepTrailingZeroes: false, render: (literal, symbol) => `${literal} ${symbol}B`});
 
-async function play(conn, text, command, args, m) {
+async function descarga(m, command, conn, text, command, args, fkontak, from, buffer, getFile, q, includes, lolkeysapi) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
+if (command == 'play' || command == 'musica') {
 const yts = require("yt-search") 
 const ytdl = require('ytdl-core') 
 if (!text) return m.reply(`*Que esta buscado? ingrese el nombre del tema*\n\nEjemplo: *${prefix + command}* ozuna`) 
@@ -52,7 +54,7 @@ await fs.unlinkSync(pl.path)
 m.react(error) 
 console.log(e)}}}
 
-async function play2(conn, text, command, args, m) {
+if (command == 'play2' || command == 'video') {
 const yts = require("yt-search") 
 const ytdl = require('ytdl-core') 
 if (!text) return m.reply(`*Que esta buscado? ingrese el nombre del tema*\n\nEjemplo: *${prefix + command}* ozuna`) 
@@ -65,7 +67,7 @@ let mediaa = await ytMp4(yt_play[0].url)
 await conn.sendMessage(m.chat, { video: { url: mediaa.result }, fileName: `error.mp4`, caption: `*Aqui tiene sus video 👌*\n*🔰Titulo:* ${yt_play[0].title}`, thumbnail: mediaa.thumb, mimetype: 'video/mp4' }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 m.react(done)}
 
-async function play3(conn, text, command, args, m) {
+if (command == 'play3' || command == 'playdoc' || command == 'playaudiodoc' || command == 'ytmp3doc') {
 const fetch = require('node-fetch') 
 const yts = require('yt-search') 
 const ytdl = require('ytdl-core') 
@@ -116,7 +118,7 @@ m.react(error)
 return m.reply(`${info.error}\n\nNo se pudo descargar sus video por favor vuelve a intenta`) 
 console.log(e)}}}}
 
-async function play4(conn, text, command, args, m) {
+if (command == 'play4' || command == 'playdoc2' || command == 'playvideodoc' || command == 'ytmp4doc') {
 const fetch = require('node-fetch') 
 const yts = require('yt-search') 
 const ytdl = require('ytdl-core') 
@@ -167,9 +169,9 @@ m.react(error)
 return m.reply(`${info.error}\n\nNo se pudo descargar sus video por favor vuelve a intenta`) 
 console.log(e)}}}}
 
-async function mp3(conn, args, text, command, fkontak, ytplayvid, m) {
-if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
+if (command == 'ytmp3' || command == 'ytaudio') {
 const mp = require('../libs/ytdl2')
+const vid = await mp.mp4(text)
 if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return m.reply(`*Que esta buscado?*\n\n*Ejemplo:*\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
 m.react(rwait) 
 conn.sendMessage(m.chat, { text: `         *⌜Audio Encontrado ✅⌟*\n\n• *Título:* ${vid.title}\n• *Publicado:* ${vid.date}\n\n*ESPERE ENVIANDO SU ARCHIVO MP3 ⚠*` }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
@@ -193,8 +195,7 @@ m.reply(info.limit)
 m.react(error) 
 m.reply(info.error)}}
 
-async function mp4(conn, args, text, command, fkontak, m) {
-if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
+if (command == 'ytmp4' || command == 'ytvideo') {
 const mp = require('../libs/ytdl2')
 const vid = await mp.mp4(text)
 if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return m.reply(`*Que esta buscado?*\n\n*Ejemplo:*\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
@@ -213,7 +214,7 @@ m.react(done)
 m.react(error) 
 m.reply(info.error)}}
 
-async function spoti(conn, text, m, from, buffer, getFile) {
+if (command == 'music' || command == 'spotify') {
 if (!text) return m.reply(`*Que esta buscados?*\n*Ingrese el nombre de alguna canción de spotify.*`) 
 try { 
 m.react(rwait) 
@@ -240,9 +241,7 @@ m.react(error)
 console.error(error);
 return m.reply(`${info.error}\nNo fue posible descarga el audio (api caida 🤡)`)}}
 
-async function git(conn, args, command, m) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
+if (command == 'gitclone') {
 if (!args[0]) return m.reply(`*Donde esta el link del github?*\n\n*Ejemplo :*\n${prefix + command} ${md}`)
 if (!isUrl(args[0]) && !args[0].includes('github.com')) return m.reply(`Link invalido!!`)
 m.react('🕔') 
@@ -261,15 +260,12 @@ m.react(done)
 m.react(error) 
 m.reply(info.error)}}
 
-async function tiktok(conn, text, command, q, m) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
+if (command == 'tiktok' || command == 'tt') {
 if (!text) return m.reply(`*Ejemplo:*\n${prefix + command} https://vm.tiktok.com/ZMjdrFCtg/`)
-if (!q.includes('tiktok')) return m.reply(`*link invalido!*`)
-//await loading ()
+if (!isUrl(args[0]) && !args[0].includes('tiktok')) return m.reply(`Link invalido!!`)
 conn.fakeReply(m.chat, `⏳ *Aguarde un momento....*`, '0@s.whatsapp.net', 'No haga spam')
 try {
-require('../libs/tiktok').Tiktok(q).then( data => {
+require('../libs/tiktok').Tiktok(args).then( data => {
 conn.sendMessage(m.chat, { video: { url: data.nowm }}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 conn.sendMessage(m.chat, { audio: { url: data.audio }, mimetype: 'audio/mp4' }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})})
 db.data.users[m.sender].limit -= 1
@@ -277,9 +273,23 @@ m.reply(info.limit)
 } catch {
 m.reply(info.error)}}
 
-async function letra(conn, text, command, fkontak, m) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
+if (command == 'tiktokimg' || command == 'ttimg') {
+if (!text) return m.reply(`⚠️ Ingresa un enlace de tiktok imagenes*\n\n*Ejemplo:* ${prefix + command} https://vm.tiktok.com/ZMjnPvJuF/`) 
+let imagesSent
+if (imagesSent) return;
+imagesSent = true    
+try {   
+m.reply('*Calma Ya estoy buscado tu Perdido...*') 
+let tioShadow = await ttimg(text); 
+let result = tioShadow?.data;
+for (let d of result) {
+await conn.sendMessage(m.chat, {image: {url: d}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})};
+imagesSent = false
+} catch (e) {
+imagesSent = false    
+return m.reply(`${info.error} *No se obtuvo respuesta de la página (Api caida), intente más tarde.*\n\n${e}`)}}
+
+if (command == 'lyrics' || command == 'letra') {
 if (!text) return m.reply(`*Que esta buscado? ingresa el titulo/nombre de la canción*\n*Ejemplo:* ${prefix + command} ozuna`)
 const { lyrics, lyricsv2 } = require('@bochilteam/scraper')
 const result = await lyricsv2(text).catch(async _ => await lyrics(text))
@@ -287,9 +297,8 @@ conn.editMessage(m.chat, '*Aguarde un momento....*', `*❏ Titulo:* ${result.tit
 db.data.users[m.sender].limit -= 1
 m.reply(info.limit)}
 
-async function mediafire(conn, text, command, mediafireDl, m) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
+if (command == 'mediafire') {
+const { mediafireDl } = require('../libs/mediafire.js') 
 if (!text) return m.reply(`*Ejemplo:*\n${prefix + command} https://www.mediafire.com/file/admrdma1ff3cq10/Siete-Ocho.zip/file`) 
 const baby1 = await mediafireDl(text)
 if (baby1[0].size.split('MB')[0] >= 1500) return reply('No puedo descarga el archivo supera el limite 900 MB ' + util.format(baby1))
@@ -314,9 +323,7 @@ m.reply(`${result4}`)
  db.data.users[m.sender].limit -= 2
 m.reply('*2 ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴜsᴀᴅᴏ*')}
 
-async function fb(conn, text, command, lolkeysapi, args, m) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
+if (command == 'facebook' || command == 'fb') {
 if (!text) return m.reply(`*Ejemplo:*\n${prefix + command} https://fb.watch/ncowLHMp-x/?mibextid=rS40aB7S9Ucbxw6v`)
 conn.fakeReply(m.chat, `⏳ *Aguarde un momento....*`, '0@s.whatsapp.net', 'No haga spam')
 try {
@@ -330,9 +337,7 @@ m.reply(info.limit)
 } catch {
 m.reply(info.error)}}
 
-async function ig(conn, text, command, lolkeysapi, args, m) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
+if (command == 'instagram' || command == 'ig') {
 if (!text) return m.reply(`*Ejemplo:*\n${prefix + command} https://www.instagram.com/p/CCoI4DQBGVQ/?igshid=YmMyMTA2M2Y=`)
 conn.fakeReply(m.chat, `⏳ *Aguarde un momento....*`, '0@s.whatsapp.net', 'No haga spam')
 try {
@@ -344,10 +349,9 @@ conn.sendMessage(m.chat, {video: {url: videoig}, caption: `🔗 *Url:* ${shortUr
 db.data.users[m.sender].limit -= 1
 m.reply(info.limit)
 } catch {
-m.reply(info.error)}}           
+m.reply(info.error)}}
 
-async function ig2(conn, args, command, m) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (command == 'igstalk') {
 if (!args[0]) return m.reply(`*Ingrese el nombre del usuario*\n\n*Ejemplo:* ${prefix + command} Emilia`)
 const fg = require('api-dylux')
 try {
@@ -368,9 +372,7 @@ await conn.sendMessage(m.chat, {image: { url: res.profilePic }, caption: te }, {
 } catch {
 m.reply(info.error)}}
 
-async function apk(conn, text, m) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
+if (command == 'apk' || command == 'modoapk') {
 let { search, download } = require('aptoide-scraper')
 if (!text) return m.reply('*[ ⚠️ ] Que apk esta buscando?*') 
 try {     
@@ -386,7 +388,7 @@ m.reply('*3 ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴜsᴀᴅᴏ*')
 } catch { 
 return m.reply(`*[ ⚠️ ] Error, no se encontrarón resultados para su búsqueda.*`)}}
 
-async function gdrive(conn, args, command, m) {
+if (command == 'gdrive') {
 const {sizeFormatter} = require('human-readable') 
 const formatSize = sizeFormatter({
   std: 'JEDEC', decimalPlaces: 2, keepTrailingZeroes: false, render: (literal, symbol) => `${literal} ${symbol}B`});
@@ -402,23 +404,7 @@ db.data.users[m.sender].limit -= 3
 m.reply('*3 ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴜsᴀᴅᴏ*')
 } catch (e) {
 m.reply('*[ ⚠️ ] ᴇʀʀᴏʀ, ᴘᴏʀ ғᴀᴠᴏʀ ᴠᴜᴇʟᴠᴀ ᴀ ɪɴᴛᴇɴᴛᴀʀʟᴏ*');
-console.log(e)}}
-
-async function tttimg(conn, text, command, m) {
-if (!text) return m.reply(`⚠️ Ingresa un enlace de tiktok imagenes*\n\n*Ejemplo:* ${prefix + command} https://vm.tiktok.com/ZMjnPvJuF/`) 
-let imagesSent
-if (imagesSent) return;
-imagesSent = true    
-try {   
-m.reply('*Calma Ya estoy buscado tu Perdido...*') 
-let tioShadow = await ttimg(text); 
-let result = tioShadow?.data;
-for (let d of result) {
-await conn.sendMessage(m.chat, {image: {url: d}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})};
-imagesSent = false
-} catch (e) {
-imagesSent = false    
-return m.reply(`${info.error} *No se obtuvo respuesta de la página (Api caida), intente más tarde.*\n\n${e}`)}}
+console.log(e)}}}
 
 async function search(query, options = {}) {
 const search = await yts.search({ query, hl: "es", gl: "ES", ...options });
@@ -548,7 +534,7 @@ async function ttimg(link) {
     };
 };
 
-module.exports = {play, play2, play3, play4, mp3, mp4, git, tiktok, letra, mediafire, fb, ig, ig2, apk, spoti, gdrive, tttimg}
+module.exports = { descarga }
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {

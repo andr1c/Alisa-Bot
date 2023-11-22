@@ -13,10 +13,11 @@ const Jimp = require('jimp')
 const FormData = require("form-data") 
 const os = require('os')
 
-async function yt(conn, m, text, from, command, fkontak, prefix) {
+async function buscadores(m, command, conn, text, from, fkontak, prefix, args, q, quoted, lolkeysapi) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (command == 'yts' || command == 'ytsearch') {
 if (!text) return m.reply(`*Ejemplo:*\n${prefix + command} anime`)
-if (global.db.data.users[m.sender].level < 2) return m.reply(`[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀᴅ ᴇʟ ɴɪᴠᴇʟ 2 ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ .nivel`) 
+if (global.db.data.users[m.sender].level < 2) return m.reply(`[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀ ᴇʟ ɴɪᴠᴇʟ 2 ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ .nivel`) 
 const yts = require("youtube-yts");
 const search = await yts(text);
 const {key} = await conn.sendMessage(from, {text: info.wait}, { quoted: fkontak })
@@ -34,9 +35,8 @@ await conn.sendMessage(from, {text: info.result, edit: key}, { quoted: fkontak, 
 m.react('💫') 
 }
 
-async function acortar(conn, m, text, args, command) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (global.db.data.users[m.sender].level < 2) return m.reply(`[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀs ᴇʟ ɴɪᴠᴇʟ 2 ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ .nivel`) 
+if (command == 'acortar') {
+if (global.db.data.users[m.sender].level < 2) return m.reply(`[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀ ᴇʟ ɴɪᴠᴇʟ 2 ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ .nivel`) 
  if (!text) return m.reply(`*Ingresa un link para acortar!*`)
 let shortUrl1 = await (await fetch(`https://tinyurl.com/api-create.php?url=${args[0]}`)).text()  
 if (!shortUrl1) return m.reply(`*⚠️ ERROR*`)
@@ -44,8 +44,7 @@ let done = `*❇️ LINK ACORTADO*\n\n*➵ link: ${text}*\n➵ *Link Acortado: $
 m.reply(done)
 }
 
-async function google(conn, m, text, command) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (command == 'google') {
 if (!text) return m.reply(`*Ejemplo:*\n${prefix + command} gatito`)
 let google = require('google-it')
 google({'query': text}).then(res => {
@@ -58,8 +57,7 @@ teks += `🔶 *Link* : ${g.link}\n\n✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧⋄�
 m.reply(teks)})
 }
 
-async function imagen(conn, m, text, command) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (command == 'imagen') {
 const {googleImage} = require('@bochilteam/scraper') 
 if (!text) return m.reply(`*Que esta buscado?*\n*Ejemplo:*\n${prefix + command} gatito`)
 try {  
@@ -77,8 +75,7 @@ conn.sendMessage(m.chat, { image: { url: link}, caption: `*💫 𝘙𝘌𝘚𝘜
 console.log(e)
 }}}
 
-async function tran(conn, m, args, quoted, prefix, command) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (command == 'traducir' || command == 'translate') {
 if (!args || !args[0]) return m.reply(`*Ejemplo:*\n${prefix + command} es hello`)
 let lang = args[0];
 let text = args.slice(1).join(' ');
@@ -92,9 +89,8 @@ const loll = await lol.json();
 const result2 = loll.result.translated;
 await m.reply('*🔶 Traducción:* ' + result2)}
 
-async function tts(conn, m, q, text, quoted) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (!q) return m.reply("*Y EL TEXTO?*")
+if (command == 'tts') {
+if (!text) return m.reply("*Y EL TEXTO?*")
 await conn.sendPresenceUpdate('recording', m.chat)
 let texttosay = text
 ? text
@@ -106,10 +102,9 @@ const texttospeechurl = SpeakEngine.getAudioUrl(texttosay, {lang: "es", slow: fa
 conn.sendMessage(m.chat, { audio: { url: texttospeechurl }, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": md, "showAdAttribution": true}}, seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 m.react('🗣️')}
 
-async function ia(conn, m, text, quoted) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (command == 'chatgpt' || command == 'ia') {
 if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
-if (!text) return m.reply('*INGRESE EL TEXTO DE LO QUE QUIERE BUSCAR?*') 
+if (!text) return m.reply('*INGRESE EL TEXTO DE LOS QUE QUIERE BUSCAR?*') 
 await conn.sendPresenceUpdate('composing', m.chat)
 let tioress = await fetch(`https://api.lolhuman.xyz/api/openai-turbo?apikey=${lolkeysapi}&text=${text}`)
 let hasill = await tioress.json()
@@ -117,8 +112,8 @@ m.reply(`${hasill.result}`.trim())
 db.data.users[m.sender].limit -= 1
 }
 
-async function dalle(conn, text, command, m, lolkeysapi) {
-if (!text) return m.reply(`*⚠️ INGRESE EL TEXTO PARA CREAR UNA IMAGEN Y ASI USAR LA FUNCION DE DALL-E*\n\n*• EJEMPLO:*\n*${prefix + command} gatitos llorando`) 
+if (command == 'dalle' || command == 'ia2' || command == 'aimg' || command == 'imagine' || command == 'dall-e') {
+if (!text) return m.reply(`*⚠️ INGRESE UN TEXTO PARA CREAR UNA IMAGEN Y ASI USAR LA FUNCION DE DALL-E*\n\n*• EJEMPLO:*\n*${prefix + command} gatitos llorando`) 
 m.reply('*AGUARDE UN MOMENTO...*') 
 try {
 const tiores1 = await fetch(`https://vihangayt.me/tools/imagine?q=${text}`);
@@ -144,15 +139,14 @@ await conn.sendMessage(m.chat, {image: {url: tiores4.data}}, {quoted: m, ephemer
 return m.reply(`*${info.error} *Error, no se obtuvierón resultados (Api caida)*`) 
 console.log(e);}}}}}
 
-async function ssw(conn, m, q, prefix, command, quoted, scp1) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (!q) return m.reply(`*Ejemplo:* ${prefix+command} link`)
+if (command == 'ss' || command == 'ssweb') {
+const scp1 = require('../libs/scraper') 
+if (!text) return m.reply(`*Ejemplo:* ${prefix+command} link`)
 conn.fakeReply(m.chat, `⏳ *Aguarde un momento....*`, '0@s.whatsapp.net', 'No haga spam')
 let krt = await scp1.ssweb(q)
 conn.sendMessage(m.chat, {image:krt.result, caption: info.result}, {quoted:m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
-async function wall(conn, text, command, m) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (command == 'wallpaper') {
 if (global.db.data.users[m.sender].level < 3) return m.reply(`[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀ ᴇʟ ɴɪᴠᴇʟ 3 ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ .nivel`) 
 if (!text) return m.reply(`*[ ⚠️ ] Ejemplo: ${prefix + command} anime*`) 
 let { wallpaper, wallpaperv2 } = require('@bochilteam/scraper')
@@ -160,15 +154,14 @@ let _res = await (/2/.test(command) ? wallpaperv2 : wallpaper)(text)
 let _img = _res[Math.floor(Math.random() * _res.length)]
 conn.sendMessage(m.chat, { image: { url: _img }, caption: `_*ＲＥＳＵＬＴＡＤＯＳ ＤＥ : ${text}*_`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
-async function hd(conn, command, m) {
+if (command == 'hd') {
 const FormData = require("form-data") 
 const Jimp =  require("jimp") 
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 let q = m.quoted ? m.quoted : m;
 let mime = (q.msg || q).mimetype || q.mediaType || "";
 if (!mime) return m.reply(`*[ ⚠️ ] ᴇɴᴠɪᴇ/ʀᴇsᴘᴏɴᴅᴀ ᴀ ᴜɴᴀ ɪᴍᴀɢᴇɴ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ : ${prefix + command}*`) 
-if (!/image\/(jpe?g|png)/.test(mime)) return m.reply(`*[ ⚠️ ] ᴇʟ ғᴏʀᴍᴀᴛᴏ ᴅᴇʟ ᴀʀᴄʜɪᴠᴏ (${mime}) ɴᴏ ᴇs ᴄᴏᴍᴘᴀʀᴛɪʙʟᴇ, ᴇɴᴠɪᴀ/ʀᴇsᴘᴏɴᴅᴀ ᴀ ᴜɴᴀ ғᴏᴛᴏ*`) 
-m.reply('⏳ *𝘗𝘙𝘖𝘊𝘌𝘚𝘈𝘕𝘋𝘖 𝘓𝘈 𝘐𝘔𝘈𝘎𝘌𝘕, 𝘈𝘎𝘜𝘈𝘙𝘋𝘌 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖...*') 
+if (!/image\/(jpe?g|png)/.test(mime)) return m.reply(`*[ ⚠️ ] ᴇʟ ғᴏʀᴍᴀᴛᴏ ᴅᴇʟ ᴀʀᴄɢɪᴠᴏ (${mime}) ɴᴏ ᴇs ᴄᴏᴍᴘᴀʀᴛɪʙʟᴇ, ᴇɴᴠɪᴀ/ʀᴇsᴘᴏɴᴅᴀ ᴀ ᴜɴᴀ ғᴏᴛᴏ*`) 
+m.reply('⏳ *𝘗𝘙𝘖𝘊𝘌𝘚𝘈𝘕𝘋𝘖 𝘓𝘈 𝘐𝘔𝘈𝘎𝘌𝘕, 𝘈𝘎𝘜𝘈𝘙𝘋𝘌𝘕 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖...*') 
 try {
 let img = await q.download?.();
 let pr = await remini(img, "enhance");
@@ -176,9 +169,9 @@ conn.sendMessage(m.chat, {image: pr, caption: `*𝘈𝘘𝘜𝘐 𝘛𝘐𝘌�
 } catch (e) {
 return m.reply(`${info.error}\n\n*ʜᴜʙᴏʀ ᴜɴ ᴇʀʀᴏʀ (ᴀᴘɪ ᴄᴀɪᴅᴀ 🤡)*\n\n${e}`) 
 console.log(e) 
-}}
+}}}
  
-module.exports = {yt, acortar, google, imagen, tran, tts, ia, ssw, wall, hd, dalle}
+module.exports = {buscadores}
 
 exports.getRandom = (ext) => {
 return `${Math.floor(Math.random() * 10000)}${ext}`

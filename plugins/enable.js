@@ -4,7 +4,9 @@ const path = require("path")
 const chalk = require("chalk");
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('../libs/fuctions.js'); 
 
-async function on(isGroupAdmins, text, command, args, m) {
+async function enable(m, command, isGroupAdmins, text, command, args, isBotAdmins, isGroupAdmins, isCreator) {
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (command == 'welcome' || command == 'bienvenida') {
 if (!m.isGroup) return m.reply(info.group)
 if (!isGroupAdmins) return m.reply(info.admin)
 if (!text) return m.reply(`*Use de esta forma ejemplo:*\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
@@ -15,7 +17,7 @@ m.reply(`*✅El ${command} se activo con exito*`)
 global.db.data.chats[m.chat].welcome = false
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
 
-async function on1(isBotAdmins, isGroupAdmins, text, command, args, m) {
+if (command == 'antilink' || command == 'antienlace') {
 if (!m.isGroup) return m.reply(info.group)
 if (!isBotAdmins) return m.reply(info.botAdmin)
 if (!isGroupAdmins) return m.reply(info.admin)
@@ -27,7 +29,7 @@ m.reply(`*Atención a todos los miembros activos de este grupo 📣*\n\n*El anti
 global.db.data.chats[m.chat].antilink = false
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
 
-async function on2(isBotAdmins, isGroupAdmins, text, command, args, m) {
+if (command == 'antifake' || command == 'antiFake') {
 if (!m.isGroup) return m.reply(info.group)
 if (!isBotAdmins) return m.reply(info.botAdmin)
 if (!isGroupAdmins) return m.reply(info.admin)
@@ -39,7 +41,7 @@ m.reply(`*Atención a todos los miembros activos de este grupo 📣*\n\n*El ${co
 global.db.data.chats[m.chat].antiFake = false
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
 
-async function on3(isBotAdmins, isGroupAdmins, text, command, args, m) {
+if (command == 'antiarabe' || command == 'antiArabe') {
 if (!m.isGroup) return m.reply(info.group)
 if (!isBotAdmins) return m.reply(info.botAdmin)
 if (!isGroupAdmins) return m.reply(info.admin)
@@ -51,7 +53,7 @@ m.reply(`*Atención a todos los miembros activos de este grupo 📣*\n\n*El ${co
 global.db.data.chats[m.chat].antiArabe = false
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
 
-async function on4(isBotAdmins, isGroupAdmins, text, command, args, m) {
+if (command == 'autodetect' || command == 'detect') {
 if (!m.isGroup) return m.reply(info.group)
 if (!isGroupAdmins) return m.reply(info.admin)
 if (!isGroupAdmins) return m.reply(info.admin)
@@ -63,7 +65,7 @@ m.reply(`*✅El ${command} se activo con exito*`)
 global.db.data.chats[m.chat].detect = false
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
 
-async function on5(text, command, args, m) {
+if (command == 'audios') {
 if (!text) return m.reply(`*Use de esta forma ejemplo:*\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
 if (args[0] === "on") {
 global.db.data.chats[m.chat].audios = true
@@ -72,7 +74,7 @@ m.reply(`*✅ ${command} se activó con éxito*`)
 global.db.data.chats[m.chat].audios = false
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
 
-async function on6(text, command, args, m) {
+if (command == 'autosticker' || command == 'stickers') {
 if (!text) return m.reply(`*Use de esta forma ejemplo:*\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
 if (args[0] === "on") {
 global.db.data.chats[m.chat].autosticker = true
@@ -81,7 +83,7 @@ m.reply(`*✅ ${command} se activó con éxito*`)
 global.db.data.chats[m.chat].autosticker = false
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
 
-async function on7(isGroupAdmins, text, command, args, m) {
+if (command == 'modocaliente' || command == 'antinsfw') {
 if (!m.isGroup) return m.reply(info.group)
 if (!isGroupAdmins) return m.reply(info.admin)
 if (!text) return m.reply(`*Use de esta forma ejemplo:*\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
@@ -92,7 +94,7 @@ m.reply(`*✅ ${command} se activó con éxito*`)
 global.db.data.chats[m.chat].antiNsfw = false
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
 
-async function on8(isBotAdmins, isGroupAdmins, text, command, args, m) {
+if (command == 'modoadmin' || command == 'soloadmin' || command == 'modoadmins') {
 if (!m.isGroup) return m.reply(info.group)
 if (!isBotAdmins) return m.reply(info.botAdmin)
 if (!isGroupAdmins) return m.reply(info.admin)
@@ -104,7 +106,7 @@ m.reply(`*✅ ${command} se activó con éxito*\n\nEl Bot solo responderá a los
 global.db.data.chats[m.chat].modeadmin = false
 m.reply(`*🟢 ${command} esta desactivado!*\n\nAhora el bot funciona para todos los participante del grupo 🥳`)}}
 
-async function on9(isCreator, text, command, args, m) {
+if (command == 'antiprivado' || command == 'antipv') {
 if (!isCreator) return m.reply(info.owner)
 if (!text) return m.reply(`*Use de esta forma ejemplo:*\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
 if (args[0] === "on") {
@@ -114,7 +116,7 @@ m.reply(`*✅ ${command} se activó con éxito*`)
 global.db.data.chats[m.chat].antiprivado = false
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
 
-async function on10(isCreator, text, command, args, m) { 
+if (command == 'anticall' || command == 'antillamada') {
 if (!isCreator) return m.reply(info.owner)
 if (!text) return m.reply(`*Use de esta forma ejemplo:*\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
 if (args[0] === "on") {
@@ -124,7 +126,7 @@ m.reply(`*✅ ${command} se activó con éxito*`)
 global.db.data.chats[m.chat].anticall = false
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
 
-async function on11(isCreator, text, command, args, m) {
+if (command == 'modojadibot' || command == 'jadibot') {
 if (!isCreator) return m.reply(info.owner)
 if (!text) return m.reply(`*Use de esta forma ejemplo:*\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
 if (args[0] === "on") {
@@ -134,7 +136,7 @@ m.reply(`*✅ ${command} se activó con éxito*`)
 global.db.data.chats[m.chat].jadibot = false
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
 
-async function on12(isCreator, text, command, args, m, conn) {
+if (command == 'autoread' || command == 'autovisto') {
 if (!isCreator) return m.reply(info.owner)
 if (!text) return m.reply(`*Use de esta forma ejemplo:*\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
 if (args[0] === "on") {
@@ -146,7 +148,7 @@ global.db.data.settings[conn.user.jid].autoread = true
 //conn.autoread = true
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
 
-async function on13(isCreator, text, command, args, m) {
+if (command == 'antispam') {
 if (!isCreator) return m.reply(info.owner)
 if (!text) return m.reply(`*Use de esta forma ejemplo:*\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
 if (args[0] === "on") {
@@ -156,7 +158,7 @@ m.reply(`*✅ ${command} se activó con éxito*`)
 global.db.data.chats[m.chat].antispam = false
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
 
-async function on14(isGroupAdmins, text, command, args, m) {
+if (command == 'chatbot' || command == 'simsimi') {
 if (!m.isGroup) return m.reply(info.group)
 if (!isGroupAdmins) return m.reply(info.admin)
 if (!text) return m.reply(`*Use de esta forma ejemplo:*\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
@@ -167,7 +169,7 @@ m.reply(`*✅ ${command} se activó con éxito*`)
 global.db.data.chats[m.chat].simi = false
 m.reply(`*🟢 ${command} esta desactivado!*`)}}
 
-async function on15(text, command, args, m) {
+if (command == 'autolevelup' || command == 'autonivel') {
 if (!m.isGroup) return m.reply(info.group)
 if (!text) return m.reply(`*Use de esta forma ejemplo:*\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
 if (args[0] === "on") {
@@ -175,9 +177,9 @@ global.db.data.chats[m.chat].autolevelup = true
 m.reply(`*✅ ${command} se activó con éxito*`)
 } else if (args[0] === "off") {
 global.db.data.chats[m.chat].autolevelup = false
-m.reply(`*🟢 ${command} esta desactivado!*`)}}
+m.reply(`*🟢 ${command} esta desactivado!*`)}}}
 
-module.exports = {on, on1, on2, on3, on4, on5, on6, on7, on8, on9, on10, on11, on12, on13, on14, on15}
+module.exports = { enable }
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {

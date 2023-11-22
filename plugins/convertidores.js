@@ -4,6 +4,7 @@ const path = require("path")
 const chalk = require("chalk");
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('../libs/fuctions')
 const { TelegraPh, UploadFileUgu, webp2mp4File, floNime } = require('../libs/uploader.js')
+const { toAudio, toPTT, toVideo } = require('../libs/converter.js') 
 
 async function efec(conn, command, mime, quoted, exec, prefix, m, from) {
 try {  
@@ -36,8 +37,9 @@ fs.unlinkSync(ran)})
 m.reply(`${info.error} ${e}`)
 console.log(e)}}
 
-async function url(conn, mime, quoted, util, m) {
+async function convertidores(conn, command, mime, quoted, util, m, exec, lolkeysapi) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (command == 'tourl') {
 if (!mime) return m.reply(`*Responde a una imagen/video para converti el url*`)  
 m.reply(info.wait) 
 let { UploadFileUgu, webp2mp4File, TelegraPh } = require('../libs/uploader') 
@@ -47,13 +49,10 @@ let anu = await TelegraPh(media)
 m.reply(`*🔸Link :*\n${util.format(anu)}`)
 } else if (!/image/.test(mime)) { 
 let anu = await UploadFileUgu(media)
-m.reply(util.format(anu))  
-}
-await fs.unlinkSync(media)
-}
+m.reply(util.format(anu))}
+await fs.unlinkSync(media)}
 
-async function tomp3(conn, mime, quoted, m) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (command == 'toaudio' || command == 'tomp3') {
 if (!/video/.test(mime) && !/audio/.test(mime)) return m.reply(`*[ ⚠️ ] Responda a un audio*`) 
 if (!quoted) return m.reply(`*[ ⚠️ ] Responda a un audio*`) 
 let { toAudio } = require('../libs/converter.js')
@@ -61,8 +60,7 @@ let media  = await conn.downloadMediaMessage(quoted)
 let audio = await toAudio(media, 'mp4')
 await conn.sendMessage(m.chat, {audio: audio, mimetype: 'audio/mpeg', contextInfo:{  externalAdReply: { showAdAttribution: true, mediaType:  1, mediaUrl: md, title: global.botname, sourceUrl: md, thumbnail: imagen1 }}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
-async function toimg(conn, mime, quoted, exec, m) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (command == 'toimg' || command == 'toimagen') {
 if (!m.quoted) return m.reply('*Y el sticker?*\n*Responde a un stickers capo*') 
 if (!/webp/.test(mime)) return m.reply('*Y el sticker? Responde a un stickers capo*') 
 let media = await conn.downloadAndSaveMediaMessage(m.quoted)
@@ -74,8 +72,7 @@ let buffer = fs.readFileSync(ran)
 conn.sendMessage(m.chat, { image: buffer }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 fs.unlinkSync(ran)})}
 
-async function toanime(conn, mime, quoted, lolkeysapi, m) { 
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (command == 'toanime') {
 if (/image/.test(mime)) {
 let media = await conn.downloadAndSaveMediaMessage(quoted)
 let _upload = await TelegraPh(media)
@@ -86,9 +83,9 @@ await conn.sendFile(m.chat, anime, 'error.jpg', null, m)
 } catch (e) {
 throw m.reply(`*${info.error}*\n\n*ᴠᴇʀɪғɪǫᴜᴇ ǫᴜᴇ ᴇɴ ʟᴀ ɪᴍᴀɢᴇɴ sᴇᴀ ᴠɪsɪʙʟᴇ ᴇʟ ʀᴏsᴛʀᴏ ᴅᴇ ᴜɴᴀ ᴘᴇʀsᴏɴᴀ*`)}
 } else { 
-m.reply(`*𝘠 𝘭𝘢 𝘪𝘮𝘢𝘨𝘦𝘯? 𝘙𝘦𝘴𝘱𝘰𝘯𝘥𝘦 𝘰 𝘦𝘵𝘪𝘲𝘶𝘦𝘵𝘦 𝘢 𝘶𝘯𝘢 𝘪𝘮𝘢𝘨𝘦𝘯*`)}}
+m.reply(`*𝘠 𝘭𝘢 𝘪𝘮𝘢𝘨𝘦𝘯? 𝘙𝘦𝘴𝘱𝘰𝘯𝘥𝘦 𝘰 𝘦𝘵𝘪𝘲𝘶𝘦𝘵𝘦 𝘢 𝘶𝘯𝘢 𝘪𝘮𝘢𝘨𝘦𝘯*`)}}}
 
-module.exports = {efec, url, tomp3, toimg, toanime}
+module.exports = {efec, convertidores}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {

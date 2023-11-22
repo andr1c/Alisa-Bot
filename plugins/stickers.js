@@ -6,8 +6,9 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('../libs/fuctions.js'); 
 
-async function s(conn, mime, quoted, m) {
+async function stickers(m, command, conn, mime, quoted, args, text, lolkeysapi, fkontak) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (command == 's' || command == 'sticker') {
 if (/image/.test(mime)) {  
 conn.fakeReply(m.chat, `⏳ *Aguarde un momento estoy creando tu stickers....*`, '0@s.whatsapp.net', 'No haga spam')
 media = await quoted.download()  
@@ -20,10 +21,9 @@ let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: globa
 await new Promise((resolve) => setTimeout(resolve, 2000));
 await fs.unlinkSync(encmedia)  
 } else {  
-m.reply(`*Y LA IMAGEN?*`)}}  
+m.reply(`*Y LA IMAGEN?*`)}}
 
-async function wm2(conn, args, quoted, mime, m) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (command == 'wm' || command == 'take') {
 if (!args.join(" ")) return m.reply(`*Responda un sticker para robar*`)
 conn.fakeReply(m.chat, `⏳ *Aguarde un momento....*`, '0@s.whatsapp.net', 'No haga spam') 
 const swn = args.join(" ")
@@ -42,19 +42,17 @@ let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: pcknm
 } else {
 m.reply(`Y la imagen?`)}}
 
-async function attp(conn, text, lolkeysapi, fkontak, m) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (command == 'attp') {
 if (!text) return m.reply('ingresa algo para convertirlo a sticker :v')
 m.reply(`_*Calma crack estoy haciendo tu texto a sticker 👏*_\n\n_*Esto puede demorar unos minutos....*_`) 
 let link = `https://api.lolhuman.xyz/api/attp?apikey=${lolkeysapi}&text=${text}`
 await conn.sendMessage(m.chat, { sticker: { url: link } }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
-async function dado(conn, lolkeysapi, fkontak, m) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (command == 'dado') {
 let dir = `https://api.lolhuman.xyz/api/sticker/dadu?apikey=${lolkeysapi}`
-conn.sendMessage(m.chat, { sticker: { url: dir } }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+conn.sendMessage(m.chat, { sticker: { url: dir } }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}}
 
-module.exports = {s, wm2, attp, dado}
+module.exports = { stickers }
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {

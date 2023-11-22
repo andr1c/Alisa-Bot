@@ -11,23 +11,21 @@ const cheerio = require('cheerio')
 const Jimp = require('jimp')
 const os = require('os')
 
-async function nsfw1(conn, m, pickRandom) {
+async function nsfw(conn, m, command, pickRandom, sendImageAsUrl, lolkeysapi) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (!global.db.data.chats[m.chat].antiNsfw) return m.reply(info.nsfw)
 if (!m.isGroup) return m.reply(info.group) 
+let user = global.db.data.users[m.sender].age
+if (user < 15) throw m.reply(`😐 Eres menor de edad! vete a jugar free fire 😆`) 
+if (command == 'hentai') {
 var hentai = JSON.parse(fs.readFileSync('./src/nsfw/neko.json'))
 var hentairesult = pickRandom(hentai)
 conn.sendMessage(m.chat, { caption: `🥵`, image: { url: hentairesult.url } }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 m.react(xmoji) 
 db.data.users[m.sender].limit -= 2
 m.reply(info.limit)}
-
-async function nsfw2(conn, m, pickRandom) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
-if (!global.db.data.chats[m.chat].antiNsfw) return m.reply(info.nsfw)
-if (!m.isGroup) return m.reply(info.group) 
+if (command == 'nsfwloli') {
 var nsfw = JSON.parse(fs.readFileSync('./src/nsfw/nsfwloli.json'))
 var result = pickRandom(nsfw)
 conn.sendMessage(m.chat, { caption: '🥵', image: { url: result.url } }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
@@ -35,76 +33,60 @@ m.react(xmoji)
 db.data.users[m.sender].limit -= 1
 m.reply(info.limit)}
 
-async function nsfw3(conn, m, pickRandom, sendImageAsUrl, command) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
-if (!global.db.data.chats[m.chat].antiNsfw) return m.reply(info.nsfw)
-if (!m.isGroup) return m.reply(info.group) 
+if (command == 'lewd' || command == 'feed' || command == 'gasm' || command == 'anal' || command == 'holo' || command == 'tits' || command == 'kuni' || command == 'kiss' || command == 'erok' || command == 'erok' || command == 'smug' || command == 'solog' || command == 'feetg' || command == 'lewdk' || command == 'waifu' || command == 'pussy' || command == 'femdom' || command == 'cuddle' || command == 'eroyuri' || command == 'cum_jpg' || command == 'blowjob' || command == 'holoero' || command == 'erokemo' || command == 'fox_girl' || command == 'futanari' || command == 'wallpaper') {
 if (global.db.data.users[m.sender].level < 3) return m.reply(`[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀ ᴇʟ ɴɪᴠᴇʟ 3 ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ .nivel`) 
 sendImageAsUrl(`https://api.lolhuman.xyz/api/random2/${command}?apikey=${lolkeysapi}`, `*🔥 ${command} 🔥*`)
 m.react(xmoji) 
 db.data.users[m.sender].limit -= 3
 m.reply(info.limit)}
 
-async function nsfw4(sendImageAsUrl, m) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
-if (!global.db.data.chats[m.chat].antiNsfw) return m.reply(info.nsfw)
-if (!m.isGroup) return m.reply(info.group) 
+if (command == 'hentai2') {
 if (global.db.data.users[m.sender].level < 3) return m.reply(`[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀ ᴇʟ ɴɪᴠᴇʟ 3 ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ .nivel`) 
 sendImageAsUrl("https://delirius-nsfw.onrender.com/media/h/bdsm", '🥵')
 m.react(xmoji) 
 db.data.users[m.sender].limit -= 1
 m.reply(info.limit)}
 
-async function nsfw5(sendImageAsUrl, m) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
-if (!global.db.data.chats[m.chat].antiNsfw) return m.reply(info.nsfw)
-if (!m.isGroup) return m.reply(info.group) 
+if (command == 'porno') {
 sendImageAsUrl("https://delirius-nsfw.onrender.com/media/r/ass", '🥵');
 m.react(xmoji) 
 db.data.users[m.sender].limit -= 1
 m.reply(info.limit)}
 
-async function nsfw6(sendImageAsUrl, m) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (!global.db.data.chats[m.chat].antiNsfw) return m.reply(info.nsfw)
-if (!m.isGroup) return m.reply(info.group) 
+if (command == 'pack') {
 const url = await pack[Math.floor(Math.random() * pack.length)];
 sendImageAsUrl(url, `*Aqui tiene mi pack 🥵*`)}
 
-async function nsfw7(sendImageAsUrl, m) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (!global.db.data.chats[m.chat].antiNsfw) return m.reply(info.nsfw)
-if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
-if (!m.isGroup) return m.reply(info.group) 
+if (command == 'pack2' || command == 'pack3') {
 const url2 = await packgirl[Math.floor(Math.random() * packgirl.length)];
 sendImageAsUrl(url2, `*🥵 Pack 🥵*`)
 db.data.users[m.sender].limit -= 1
 m.reply(info.limit)}
 
-async function nsfw8(conn, m) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (!global.db.data.chats[m.chat].antiNsfw) return m.reply(info.nsfw)
-if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
-if (!m.isGroup) return m.reply(info.group) 
+if (command == 'videoxxx' || command == 'vídeoxxx' || command == 'videoxxxlesbi') {
 const url4 = await videosxxxc[Math.floor(Math.random() * videosxxxc.length)];
 await conn.sendMessage(m.chat, {video: {url: url4}, caption: `*🥵 𝘋𝘐𝘚𝘍𝘙𝘜𝘛𝘈 𝘋𝘌𝘓 𝘝𝘐𝘋𝘌𝘖 🥵*`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 db.data.users[m.sender].limit -= 1
 m.reply(info.limit)}
 
-async function nsfw9(conn, m) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (!global.db.data.chats[m.chat].antiNsfw) return m.reply(info.nsfw)
-if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
-if (!m.isGroup) return m.reply(info.group) 
+if (command == 'videolesbixxx' || command == 'pornolesbivid' || command == 'pornolesbianavid' || command == 'pornolesbiv' || command == 'pornolesbianav') {
 const url5 = await videosxxxc2[Math.floor(Math.random() * videosxxxc2.length)];
 await conn.sendMessage(m.chat, {video: {url: url5}, caption: `*𝘋𝘐𝘚𝘍𝘙𝘜𝘛𝘈 𝘋𝘌𝘓 𝘝𝘐𝘋𝘌𝘖 🥵`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 db.data.users[m.sender].limit -= 2
 m.reply(info.limit)}
 
-module.exports = {nsfw1, nsfw2, nsfw3, nsfw4, nsfw5, nsfw6, nsfw7, nsfw8, nsfw9}
+if (command == 'tetas') {
+const resError = (await axios.get(`https://raw.githubusercontent.com/elrebelde21/NovaBot-MD/master/src/nsfw/tetas.json`)).data;
+let res = await conn.getFile(`https://api-fgmods.ddns.net/api/nsfw/boobs?apikey=fg-dylux`).data;
+if (res == '' || !res || res == null) res = await resError[Math.floor(resError.length * Math.random())];
+conn.sendMessage(m.chat, {image: {url: res}, caption: `_${command}_`.trim()}, {quoted: m})}
+    
+if (command == 'pechos') {
+const res = (await axios.get(`https://raw.githubusercontent.com/elrebelde21/NovaBot-MD/master/src/nsfw/pechos.json`)).data;
+const url = await res[Math.floor(res.length * Math.random())];
+conn.sendMessage(m.chat, {image: {url: url}, caption: `_${command}_`.trim()}, {quoted: m})}}
+
+module.exports = {nsfw}
 
 global.pack = ['https://telegra.ph/file/957fe4031132ef90b66ec.jpg',
   'https://telegra.ph/file/c4b85bd53030cb648382f.jpg',

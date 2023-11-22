@@ -10,18 +10,15 @@ const cheerio = require('cheerio')
 const Jimp = require('jimp')
 const os = require('os')
 
-const menu = (conn, prefix, pushname, sender, m, pickRandom, fkontak) => {
+const menu = (m, command, conn, prefix, pushname, sender, pickRandom, fkontak) => {
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (command == 'menu' || command == 'menucompleto') {
 let user = global.db.data.users[m.sender]
 let totalreg = Object.keys(global.db.data.users).length
 let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length
 const date = moment.tz('America/Bogota').format('DD/MM/YYYY')
 const time = moment.tz('America/Argentina/Buenos_Aires').format('LT')
-/*const d = new Date(new Date + 3600000);
-const locale = 'es';
-const week = d.toLocaleDateString(locale, {weekday: 'long'});
-const date = d.toLocaleDateString(locale, {day: 'numeric', month: 'long', year: 'numeric'});*/
 let wa = m.key.id.length > 21 ? 'Android' : m.key.id.substring(0, 2) == '3A' ? 'IOS' : 'whatsapp web'
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 m.react('🙌') 
 let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
@@ -45,11 +42,8 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
 ╚══════ ≪ •❈• ≫ ══════╝
 
-\`\`\`🟢 ＩＮＦＯＲＭＡＣＩＯＮ 🟢\`\`\`
-\`\`\`♨️ ᴇʟ ʙᴏᴛ ᴇs ɴᴜᴇᴠᴏ ᴛᴏᴅᴀᴠɪᴀ ᴇsᴛᴀ ᴅᴇsᴀʀʀᴏʟʟᴀᴅᴏ,  sɪ ᴘʀᴇsᴇɴᴛᴀ ᴀʟɢᴜɴ ᴘʀᴏʙʟᴇᴍᴀ, ᴄᴏᴍᴜɴɪᴄᴀʀsᴇ ᴄᴏɴ ᴍɪ ᴄʀᴇᴀᴅᴏʀ ᴇsᴄʀɪʙɪʀ #creador\`\`\`
-
 ===============================
-\`\`\`♨️ ＬＩＳＴＡ ＤＥ ＣＯＭＡＮＤＯ ♨️\`\`\`
+\`\`\`🎅 ＬＩＳＴＡ ＤＥ ＣＯＭＡＮＤＯ 🎅\`\`\`
 \`\`\`ʙᴏᴛ sɪᴍᴘʟᴇ ᴄᴏɴ ᴘᴏᴄᴏs ᴄᴏᴍᴀɴᴅᴏs\`\`\`
 ===============================
 
@@ -413,11 +407,11 @@ mentionedJid:[sender, numBot],
 "containsAutoReply": true,  
 "mediaType": 1,   
 "thumbnail": imagen2, 
-sourceUrl: `${pickRandom([nna, nn2, md, yt])}`
+sourceUrl: `${pickRandom([nna, nn, md, yt])}`
 }}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}) 
 }
 
-const menu2 = (conn, pushname, m, fkontak) => {
+if (command == 'menu2' || command == 'audio') {
 
 let menu2 = `*Palabras especificas para que el bot interactue con ustedes*
 
@@ -479,10 +473,10 @@ _*ᴼʲᶦᵗᵒ ᵉˢᶜʳᶦᵇᵉ ᵗᵃˡ ʸ ᶜᵒᵐᵒ ᵉˢᵗᵃ ᵉⁿ
 *ᵠᵘᶦᵉʳᵉ ᵃᵍʳᵉᵍᵃ ᵃˡᵍᵘⁿ ᵃᵘᵈᶦᵒ ⁿᵘᵉᵛᵒ ᵉˢᶜʳᶦᵇᶦʳˡᵉ ᵃ ᵐᶦ ᶜʳᵉᵃᵈᵒʳ ᵘʷᵘ*`
 conn.sendMessage(m.chat, { text: menu2}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
-const nuevo = (conn, m, sender, pickRandom, fkontak) => {
+if (command == 'nuevo' || command == 'extreno') {
 conn.sendMessage(m.chat, { text: `🤔 *Que hay de nuevo?* 🤗
 
-*🌐 Version del bot:* [ ${vs} ] 
+*🌐 Nueva Version:* [ ${vs} ] 
 
 *Nuevo comando:*
 
@@ -503,13 +497,20 @@ conn.sendMessage(m.chat, { text: `🤔 *Que hay de nuevo?* 🤗
 👾 Mas juegos para divertir tu grupo 
 
 • ${prefix}formartrio
-• ${prefix}𝖿᥆rmᥲ⍴ᥲrᥱȷᥲ5
+• ${prefix}formapareja5
 • ${prefix}ship
 
-ᴹᵃˢ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᶠᵘᵗᵘʳᵃ ᵛᵉʳˢᶦᵒⁿᵉˢ ᵠᵘᶦᵉʳᵉ ᵠᵘᵉ ᵃᵍʳᵉᵍᵘᵉ ᵃˡᵍᵘⁿ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᵉˢᵖᵉᶜᶦᵃˡ ᵉˢᶜʳᶦᵇᶦʳˡᵉ ᵃ ᵐᶦ ᶜʳᵉᵃᵈᵒʳ`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn2, md, yt])}`}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+🥵 Mas contenido +18 para vos pajin jj
 
-const regla = (conn, m, sender, pickRandom, fkontak) => {
-//let Grupos = `${pickRandom([nna, nn2, md, yt, tiktok])}`;
+• ${prefix}tetas
+• ${prefix}pechos
+• ${prefix}pack2
+• ${prefix}videoxxx
+• ${prefix}pornolesbianavid
+
+ᴹᵃˢ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᶠᵘᵗᵘʳᵃ ᵛᵉʳˢᶦᵒⁿᵉˢ ᵠᵘᶦᵉʳᵉ ᵠᵘᵉ ᵃᵍʳᵉᵍᵘᵉ ᵃˡᵍᵘⁿ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᵉˢᵖᵉᶜᶦᵃˡ ᵉˢᶜʳᶦᵇᶦʳˡᵉ ᵃ ᵐᶦ ᶜʳᵉᵃᵈᵒʳ`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn, md, yt])}`}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+
+if (command == 'reglas') {
 conn.sendMessage(m.chat, { text: `*🌐 REGLAS DEL BOT 🌐*
 
 *• No hacer spam de comandos*
@@ -522,14 +523,14 @@ Hablar con mi creador y el lo une a tu grupo
 
 *• No llamar al bot, ni al creador*
 
-Si lo haces, seras baneado del bot y bloqueado`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn2, md, yt])}`}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+Si lo haces, seras baneado del bot y bloqueado`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn, md, yt])}`}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}}
 
-module.exports = { menu, menu2, nuevo, regla}
+module.exports = { menu }
 
- let file = require.resolve(__filename)
+let file = require.resolve(__filename)
 fs.watchFile(file, () => {
-	fs.unwatchFile(file)
-	console.log(chalk.redBright(`Update ${__filename}`))
-	delete require.cache[file]
-	require(file)
+fs.unwatchFile(file)
+console.log(chalk.redBright(`Update ${__filename}`))
+delete require.cache[file]
+require(file)
 })
