@@ -64,7 +64,7 @@ global.APIKeys = {
  
 //---------[ STICKERS ]---------
 global.packname = "𝐍𝐨𝐯𝐚𝐁𝐨𝐭-𝐌𝐃"
-global.author = "1.0.2"
+global.author = `${vs}`
  
 //---------[ IMAGEN ]---------
 global.imagen1 = fs.readFileSync('./media/menu.jpg')
