@@ -88,8 +88,7 @@ if (opts['autocleartmp'] && (global.support || {}).find) (tmp = [os.tmpdir(), 't
 }}
 setInterval(async () => {
 await clearTmp()
-console.log(chalk.cyanBright(`╭━─━─━─≪🔆≫─━─━─━╮\n│SE LIMPIO LA CARPETA TMP CORRECTAMENTE\n╰━─━─━─≪🔆≫─━─━─━╯`)
-)}, 180000)
+console.log(chalk.cyanBright(lenguaje['tmp']()))}, 180000)
 //_________________
 
 //sessions/jadibts
@@ -118,9 +117,9 @@ DSBPreKeys.forEach(fileInDir => {
 unlinkSync(`./jadibts/${directorio}/${fileInDir}`)
 })}})
 if (SBprekey.length === 0) return; 
-console.log(chalk.cyanBright(`🟢 NO HAY ARCHIVO POR ELIMINAR.`))
+console.log(chalk.cyanBright(lenguaje['session']()))
 } catch (err) {
-console.log(chalk.bold.red(`🟢 ALGO SALIO MAL DURANTE LA ELIMINACIÓN, ARCHIVO NO ELIMINADOS`))
+console.log(chalk.bold.red(lenguaje['errorsession']()))
 }}
 
 function purgeOldFiles() {
@@ -136,21 +135,21 @@ if (err) throw err;
 if (stats.isFile() && stats.mtimeMs < oneHourAgo && file !== 'creds.json') { 
 unlinkSync(filePath, err => {  
 if (err) throw err
-console.log(chalk.bold.green(`🟢 ARCHIVO ${file} BORRADO CON EXITO`))})
+console.log(chalk.bold.green(`${lenguaje['archivo']()} ${file} ${lenguaje['archivoborrado']()}`))})
 } else {  
-console.log(chalk.bold.red(`🟢 ARCHIVO ${file} NO BORRADO` + err))
+console.log(chalk.bold.red(`${lenguaje['archivo']()} ${file} ${lenguaje['archborrado']()}` + err))
 } }) }) }) })}
 setInterval(async () => {
   await purgeSession();
-  console.log(chalk.cyanBright(`╭━─━─━─≪🔆≫─━─━─━╮\n│AUTOPURGESESSIONS\n│ARCHIVOS ELIMINADOS ✅\n╰━─━─━─≪🔆≫─━─━─━╯`));
+  console.log(chalk.cyanBright(`${lenguaje['purgesessions']()}`));
 }, 1000 * 60 * 60);
 setInterval(async () => {
   await purgeSessionSB();
-  console.log(chalk.cyanBright(`╭━─━─━─≪🔆≫─━─━─━╮\n│AUTO_PURGE_SESSIONS_SUB-BOTS\n│ ARCHIVOS ELIMINADOS ✅\n╰━─━─━─≪🔆≫─━─━─━╯`));
+  console.log(chalk.cyanBright(`${lenguaje['purgesubbots']()}`));
 }, 1000 * 60 * 60);
 setInterval(async () => {
   await purgeOldFiles();
-  console.log(chalk.cyanBright(`╭━─━─━─≪🔆≫─━─━─━╮\n│AUTO_PURGE_OLDFILES\n│ARCHIVOS ELIMINADOS ✅\n╰━─━─━─≪🔆≫─━─━─━╯`));
+  console.log(chalk.cyanBright(`${lenguaje['purgeoldfiles']()}`));
 }, 1000 * 60 * 60);
 //___________
     
@@ -236,7 +235,7 @@ console.log(fuckedcall)
 for (let fucker of fuckedcall) {
 if (fucker.isGroup == false) {
 if (fucker.status == "offer") {
-let call = await sock.sendTextWithMentions(fucker.from, `*[ ! ] @${fucker.from.split('@')[0]} Seras bloqueado*\n_Razon : por realizar una ${fucker.isVideo ? `videollamadas` : `llamadas` }_\n\n*Si accidentalmente llamaste póngase en contacto con mi creador para que te desbloquee.*\n\n• https://www.facebook.com/groups/872989990425789/`)
+let call = await sock.sendTextWithMentions(fucker.from, `*[ ! ] @${fucker.from.split('@')[0]} ${lenguaje['smscall']()} ${fucker.isVideo ? `videollamadas` : `llamadas` }_\n\n${lenguaje['smscall2']()}\n\n• https://www.facebook.com/groups/872989990425789/`)
 let vcard = `BEGIN:VCARD\nVERSION:3.0\nN:;Propietario 👑;;;\nFN:Propietario\nORG:Propietario 👑\nTITLE:\nitem1.TEL;waid=595975740803:+595 975 740803\nitem1.X-ABLabel:Propietario 👑\nX-WA-BIZ-DESCRIPTION:ᴇsᴄʀɪʙɪ sᴏʟᴏ ᴘᴏʀ ᴄᴏsᴀs ᴅᴇʟ ʙᴏᴛ.\nX-WA-BIZ-NAME:Owner 👑\nEND:VCARD`
 sock.sendMessage(fucker.from, { contacts: { displayName: 'ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ 👑', contacts: [{ vcard }] }}, {quoted: call, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 await sleep(8000)
@@ -257,8 +256,8 @@ ppgroup = await sock.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*ᴬʰᵒʳᵃ ˢᵒˡᵒ ˡᵒˢ ᵃᵈᵐᶦⁿˢ ᵖᵘᵉᵈᵉⁿ ᵉˢᶜʳᶦᵇᶦʳ ᵉˡ ᵍʳᵘᵖᵒ*`
-sock.sendMessage(res.id, {text: text,  
+//let text = ``
+sock.sendMessage(res.id, {text: lenguaje['smsAvisos2'](),  
 contextInfo:{  
 forwardingScore: 9999999,  
 isForwarded: true,   
@@ -267,7 +266,7 @@ mentionedJid:[m.sender],
 "showAdAttribution": true,  
 "containsAutoReply": false,
 "renderLargerThumbnail": false,  
-"title": `[ 🔒 ＧＲＵＰＯ ＣＥＲＲＡＤＯ ]`,  
+"title": lenguaje['smsAvisos'](), 
 "mediaType": 1,   
 "thumbnail": imagen1,  
 "mediaUrl": md,  
@@ -280,9 +279,9 @@ ppgroup = await sock.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*ᴬʰᵒʳᵃ ᵗᵒᵈᵒˢ ˡᵒˢ ᵖᵃʳᵗᶦᶜᶦᵖᵃⁿᵗᵉˢ ᵖᵘᵉᵈᵉⁿ ᵐᵃⁿᵈᵃʳ ᵐᵉⁿˢᵃʲᵉˢ 🗣️*`
+//let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*ᴬʰᵒʳᵃ ᵗᵒᵈᵒˢ ˡᵒˢ ᵖᵃʳᵗᶦᶜᶦᵖᵃⁿᵗᵉˢ ᵖᵘᵉᵈᵉⁿ ᵐᵃⁿᵈᵃʳ ᵐᵉⁿˢᵃʲᵉˢ 🗣️*`
 sock.sendMessage(res.id, {   
-text: text,  
+text: lenguaje['smsAvisos3'](),  
 contextInfo:{  
 forwardingScore: 9999999,  
 isForwarded: true,   
@@ -291,7 +290,7 @@ mentionedJid:[m.sender],
 "showAdAttribution": true,  
 "containsAutoReply": false,
 "renderLargerThumbnail": false,  
-"title": `[ 🔓 ＧＲＵＰＯ ＡＢＩＥＲＴＯ ]`,   
+"title": lenguaje['smsAvisos4'](),   
 "mediaType": 1,   
 "thumbnail": imagen1, 
 "mediaUrl": md, 
@@ -304,8 +303,8 @@ ppgroup = await sock.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*ᴬʰᵒʳᵃ ˢᵒˡᵒ ˡᵒˢ ᵃᵈᵐᶦⁿˢ ᵖᵘᵉᵈᵉ ᵉᵈᶦᵗᵃʳ ˡᵒˢ ᵃʲᵘˢᵗᵉ ᵈᵉˡ ᵍʳᵘᵖᵒ*`
-sock.sendMessage(res.id, {text: text,  
+//let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*ᴬʰᵒʳᵃ ˢᵒˡᵒ ˡᵒˢ ᵃᵈᵐᶦⁿˢ ᵖᵘᵉᵈᵉ ᵉᵈᶦᵗᵃʳ ˡᵒˢ ᵃʲᵘˢᵗᵉ ᵈᵉˡ ᵍʳᵘᵖᵒ*`
+sock.sendMessage(res.id, {text: lenguaje['smsAvisos6'](),
 contextInfo:{  
 forwardingScore: 9999999,  
 isForwarded: true,   
@@ -314,7 +313,8 @@ mentionedJid:[m.sender],
 "showAdAttribution": true,  
 "containsAutoReply": false,
 "renderLargerThumbnail": false,  
-"title": wm, 
+"title": lenguaje['smsAvisos5'](),
+"body": wm, 
 "mediaType": 1,   
 "thumbnail": imagen1, 
 "mediaUrl": md, 
@@ -327,8 +327,8 @@ ppgroup = await sock.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*ᴬʰᵒʳᵃ ᵗᵒᵈᵒˢ ˡᵒˢ ᵖᵃʳᵗᶦᶜᶦᵖᵃʳᵗᵉ ᵖᵘᵉᵈᵉ ᵉᵈᶦᵗᵃʳ ˡᵒˢ ᵃʲᵘˢᵗᵉ ᵈᵉˡ ᵍʳᵘᵖᵒ*`
-sock.sendMessage(res.id, {text: text,  
+//let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*ᴬʰᵒʳᵃ ᵗᵒᵈᵒˢ ˡᵒˢ ᵖᵃʳᵗᶦᶜᶦᵖᵃʳᵗᵉ ᵖᵘᵉᵈᵉ ᵉᵈᶦᵗᵃʳ ˡᵒˢ ᵃʲᵘˢᵗᵉ ᵈᵉˡ ᵍʳᵘᵖᵒ*`
+sock.sendMessage(res.id, {text: lenguaje['smsAvisos7'](),  
 contextInfo:{  
 forwardingScore: 9999999,  
 isForwarded: true,   
@@ -337,7 +337,8 @@ mentionedJid:[m.sender],
 "showAdAttribution": true,  
 "containsAutoReply": false,
 "renderLargerThumbnail": false,  
-"title": wm, 
+"title": lenguaje['smsAvisos5'](),
+"body": wm, 
 "mediaType": 1,   
 "thumbnail": imagen1, 
 "mediaUrl": md, 
@@ -350,7 +351,7 @@ ppgroup = await sock.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*ᴸᵃ ᵈᵉˢᶜʳᶦᵖᶜᶦᵒ́ⁿ ᵈᵉˡ ᵍʳᵘᵖᵒ ᶠᵘᵉ ᶜᵃᵐᵇᶦᵃᵈᵃ ⁿᵘᵉᵛᵃ ᵈᵉˢᶜʳᶦᵖᶜᶦᵒ́ⁿ ᵉˢ*\n${res.desc}`
+let text = `${lenguaje['smsAvisos8']()}\n${res.desc}`
 sock.sendMessage(res.id, {text: text,  
 contextInfo:{  
 forwardingScore: 9999999,  
@@ -360,7 +361,8 @@ mentionedJid:[m.sender],
 "showAdAttribution": true,  
 "containsAutoReply": false,
 "renderLargerThumbnail": false,  
-"title": wm, 
+"title": lenguaje['smsAvisos5'](),
+"body": wm, 
 "mediaType": 1,   
 "thumbnail": imagen1, 
 "mediaUrl": md,  
@@ -373,7 +375,7 @@ ppgroup = await sock.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*ᴱˡ ⁿᵒᵐᵇʳᵉ ᵈᵉˡ ᵍʳᵘᵖᵒ ᶠᵘᵉ ᶜᵃᵐᵇᶦᵃᵈᵒ ⁿᵘᵉᵛᵒˢ ⁿᵒᵐᵇʳᵉ ᵉˢ*\n${res.subject}`
+let text = `${lenguaje['smsAvisos9']()}\n${res.subject}`
 sock.sendMessage(res.id, {text: text,  
 contextInfo:{  
 forwardingScore: 9999999,  
@@ -383,7 +385,8 @@ mentionedJid:[m.sender],
 "showAdAttribution": true,  
 "containsAutoReply": false,
 "renderLargerThumbnail": false,  
-"title": wm, 
+"title": lenguaje['smsAvisos5'](),
+"body": wm, 
 "mediaType": 1,   
 "thumbnail": imagen1, 
 "mediaUrl": md,  
@@ -420,33 +423,7 @@ const date = moment.tz('America/Bogota').format('DD/MM/YYYY')
 let name = num
 const miembros = metadata.participants.length
 let vn = './media/Bienvenido.mp3'
-let wel = [`Hola @${name.split("@")[0]} ¿COMO ESTAS? 😃`, `HOLAA!! @${name.split("@")[0]} ¿COMO ESTAS?😃\n\n『Bienvenido A *${metadata.subject}*』\n\nUn gusto conocerte amig@ 🤗\n\n_Recuerda leer las reglas del grupo para no tener ningun problema 🧐_\n\n*Solo disfrutar de este grupo y divertite 🥳*`, `[ NUEVO MIEMBRO ]\n\n@${name.split("@")[0]} Bienvenido 🥳`, `Bienvenido @${name.split("@")[0]} 🥳 a este hermoso grupo 💞 ${metadata.subject} 🎉 Espero que te sienta a gusto aqui 🥰\n\n
- ▼￣＞-―-＜￣▼
-   ⚡ Ｙ                Ｙ ⚡
-  /   /   ๑⚈  ․̫  ⚈๑)    ᴮᶦᵉⁿᵛᵉⁿᶦᵈᵒ ᵘʷᵘ
-＼  ｜     つ        ヽつ  \n`, `𝘓𝘦 𝘥𝘢𝘮𝘰𝘴 𝘭𝘢 𝘣𝘪𝘦𝘯𝘷𝘦𝘯𝘪𝘥𝘢 𝘢 @${name.split("@")[0]} 🥳`, `_Holi @${name.split("@")[0]} ❤, Presentarte con: Foto, edad, sexo 😂_ *(na joda leer las reglas del grupo, para evitar problema)*\n\n
-.         ⣀⣤‌⣤⣤⣀             ⣀⣤⣤‌⣤‌⣀
-    ⣠⣾⣿⣿⣿⣿⣿⣧⣄　　⣠⣼⣿⣿⣿⣿⣿⣷⣄    
-  ⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦  
-  ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿  
-  ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿  
-  ⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏  
-     ⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟    
-        ⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟      
-           ⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋        
-                 ⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋            
-                      ⠙⢿⣿⣿⣿⣿⡿⠋                
-                            ⠙⢿⡿⠋    
-                      ︵      ‌        ︵
-                    (      ╲       /      /
-                      ╲       ╲/      /
-                           ╲       ╲ /
-                        ╭ ͡   ╲        ╲
-                   ╭ ͡  ╲        ╲      ﾉ
-              ╭ ͡  ╲       ╲       ╱
-                ╲      ╲        ╱
-                    ╲         ╱
-                          ︶ `]
+let wel = [`${lenguaje['smsWel']()} @${name.split("@")[0]} ${lenguaje['smsWel2']()}`, `${lenguaje['smsWel']()} @${name.split("@")[0]} ${lenguaje['smsWel3']()} ${metadata.subject} 』\n\n${lenguaje['smsWel4']()}`, `${lenguaje['smsWel5']()} @${name.split("@")[0]} ${lenguaje['smsWel6']()} 🥳`]
 let or = ['texto', 'audio', 'texto2'];
 let media = or[Math.floor(Math.random() * 3)]
 let welcome = wel[Math.floor(Math.random() * wel.length)]
@@ -464,7 +441,7 @@ contextInfo: { mentionedJid:[num], "externalAdReply": {
 "showAdAttribution": true}}, 
 seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 if (media === 'texto2')
-sock.sendMessage(anu.id, { text: `⪨────[ ＷＥＬＣＯＭＥ ]────⪩\n\n💫 *Hola* @${name.split("@")[0]} ¿COMO ESTAS? 😃\n💫 *Bienvenido a :* ${metadata.subject}\n💫 *Participarte : ${miembros}*\n💫 *Fecha :* ${date}\n\n📢 *Lee la descripción* 📢\n\n${metadata.desc}`, contextInfo:{
+sock.sendMessage(anu.id, { text: `${lenguaje['smsWel7']()} ${lenguaje['smsWel']()} @${name.split("@")[0]} ${lenguaje['smsWel2']()}\n${lenguaje['smsWel8']()} ${metadata.subject}\n${lenguaje['smsWel9']()} ${miembros}*\n${lenguaje['smsWel10']()} ${date}\n\n${lenguaje['smsWel11']()} \n\n${metadata.desc}`, contextInfo:{
 forwardingScore: 9999999,
 isForwarded: true, 
 mentionedJid:[num],
@@ -480,7 +457,7 @@ body: `${metadata.subject}`,
 const buffer = await getBuffer(ppuser)
 let name = num
 const members = metadata.participants.length
-let by = [`Adios @${name.split("@")[0]} 👋`, `Se fue @${name.split("@")[0]} quien carajo era? 😂`, `Bueno, se fue @${name.split("@")[0]} 👋\n\nQue dios lo bendiga 😎`, `_@${name.split("@")[0]} Salió del grupo._`, `_Se fue @${name.split("@")[0]} *UN PUTO MENOS EN EL GRUPO😂*_`]
+let by = [`${lenguaje['smsBye']()} @${name.split("@")[0]} 👋`, `${lenguaje['smsBye2']()} @${name.split("@")[0]} 👋\n\n${lenguaje['smsBye3']()}`, `_@${name.split("@")[0]} ${lenguaje['smsBye4']()}`]
 let byegc = fs.readFileSync('./src/byegc.webp')
 let or = ['texto', 'texto2', 'stickers'];
 let media = or[Math.floor(Math.random() * 3)]
@@ -556,15 +533,15 @@ say(`Bot el desarrollo`, {
   gradient: ['red', 'magenta']});
   
 console.log(color(` `,'magenta'))
-console.log(color(`\n🟢 𝘜𝘚𝘜𝘈𝘙𝘐𝘖𝘚 𝘊𝘖𝘕𝘌𝘊𝘛𝘈𝘋𝘖 => ` + JSON.stringify(sock.user, null, 2), 'yellow'))
+console.log(color(`\n${lenguaje['smsConexion']()} ` + JSON.stringify(sock.user, null, 2), 'yellow'))
 } else if (qr !== undefined) {
 console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
-color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│ESCANEA EL QR, EXPIRA 45 SEG...\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯`, '#f12711'))
+color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│${lenguaje['smsEscaneaQR']()}\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯`, '#f12711'))
 } else if (connection === 'close') {
 console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
-color(`⚠️ CONEXION CERRADA, SE INTENTARA RECONECTAR`, '#f64f59'));
+color(`${lenguaje['smsConexioncerrar']()}`, '#f64f59'));
 lastDisconnect.error?.output?.statusCode !== DisconnectReason.loggedOut
 ? startBot()
 : console.log(color('[SYS]', '#009FFF'),
@@ -574,19 +551,19 @@ color(`Wa Web logged Out`, '#f64f59')
 } else if (connection == 'open') {
 console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
-color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│YA ESTA CONECTADO CORRECTAMENTE\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯` + receivedPendingNotifications, '#38ef7d')
+color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│${lenguaje['smsConectado']()}\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯` + receivedPendingNotifications, '#38ef7d')
 );
 if (!sock.user.connect) {
-let res = await sock.groupAcceptInvite(global.nna2);
+/*let res = await sock.groupAcceptInvite(global.nna2);
 await delay(5 * 5000)
 sock.sendMessage(res, { text: `${pickRandom(['Hola me he conectado como un nuevo bot 🥳', 'Hola 👋😄 me presento soy un nuevo bot activo 🚀\n\nPoner #menu para vez mi comando\n\nᴺᵒ ʰᵃᵍᵃⁿ ˢᵖᵃᵐ ᵈᵉˡ ᶜᵒᵐᵃⁿᵈᵒ', 'Hola chavales me he conectado como un nuevo botsito (NovaBot-MD) 😎'])}`, 
 contextInfo:{
 forwardingScore: 9999999, 
 isForwarded: true
-}})
+}})*/
+await sock.groupAcceptInvite(global.nna2);
 sock.user.connect = true
 }
-//await sock.groupAcceptInvite(global.nna2);
 }});
 
 sock.public = true

@@ -152,8 +152,8 @@ conn.ev.emit('messages.upsert', msg)}
  
 //--------------------[ INFO CONSOLE ]-----------------------
 if (m.message) {
-console.log(chalk.bold.cyanBright(`▣────────────···\n│+${conn.user.jid.split`@`[0]} ➢ ${botname} ${conn.user.id == global.numBot2 ? '' : '(SubBot)'}`), 
-chalk.bold.magenta('\n│────────────\n│⏰HORARIO: ') + chalk.magentaBright(moment(t * 1000).tz(place).format('DD/MM/YY HH:mm:ss'),
+console.log(chalk.bold.cyanBright(`▣────────────···\n│+${conn.user.jid.split`@`[0]} ➢ ${botname} ${conn.user.id == global.numBot2 ? '' : '(SubBot)'} ${vs}`), 
+chalk.bold.magenta(`\n│────────────\n│⏰HORARIO: `) + chalk.magentaBright(moment(t * 1000).tz(place).format('DD/MM/YY HH:mm:ss'),
 chalk.bold.red('\n️│🏷️ MODO: ') + chalk.bold.white(`[${conn.public ? 'Publico' : 'Privado'}]`), 
 chalk.bold.yellow('\n│📑TIPO (SMS): ') + chalk.yellowBright(`${type}`),  
 chalk.bold.cyan('\n│📊USUARIO: ') + chalk.cyanBright(pushname) + ' ➜', gradient.rainbow(userSender), 
@@ -162,14 +162,14 @@ m.isGroup ? chalk.bold.greenBright('\n│📤GRUPO: ') + chalk.greenBright(group
 chalk.bold.white('\n│💬MENSAJE: ') + chalk.whiteBright(`\n▣────────────···\n${msgs(m.text)}\n`))
 )}          
 
-//--------------------[ AUTOBIO ]-----------------------
+//--------------------[ AUTOBIO ]----------------------- 
 if (global.db.data.settings[numBot].autobio) {
 let setting = global.db.data.settings[numBot]
 if (new Date() * 1 - setting.status > 1000) {
 let uptime = await runtime(process.uptime())
-var timestamp = speed();  
-var latensi = speed() - timestamp  
-let text = [`🦁 ɴᴏᴠᴀʙᴏᴛ - ᴛᴇɴɢᴏ: ${Object.keys(global.db.data.users).length} ᴜsᴜᴀʀɪᴏs ᴜsᴀᴅᴏʀᴍᴇ ᴘᴜᴇᴅᴏ ʀᴇsᴘᴏɴᴅᴇ ʟᴇɴᴛᴀ ᴍɪ ᴠᴇʟᴏᴄɪᴅᴀᴅ ᴅᴇ ʀᴇsᴘᴜᴇsᴛᴀ ᴇs: ${latensi.toFixed(4)} 🚀`, `ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ | ᴀᴄᴛɪᴠᴏ ✅️: ${runtime(process.uptime())}\n\nᴘᴀʀᴀ ᴠᴇᴢ ᴍɪ ʟɪsᴛᴀ ᴅᴇ ᴄᴏᴍᴀɴᴅᴏ ᴜsᴀʀ #menu`, `ɴᴏᴠᴀʙᴏᴛ ᴘᴏʀ ʟᴏʟɪʙᴏᴛ - sᴜʙsᴄʀɪʙɪʀᴛᴇ ᴇʟ ɴᴜᴇsᴛʀᴏ ᴄᴀɴᴀʟ ᴅᴇʟ ʏᴏᴜᴛᴜʙᴇ 🔔\n${yt}`, `🤖 NovaBot uso: ${conn.public ? 'Publico' : 'Privado'} | ✅ Actividad: ${runtime(process.uptime())} | 👥 Usuarios: ${Object.keys(global.db.data.users).length}`]
+var timestamp = speed();   
+var latensi = speed() - timestamp 
+let text = [`${lenguaje.Bio.text} ${Object.keys(global.db.data.users).length} ${lenguaje.Bio.text2} ${latensi.toFixed(4)} 🚀`, `${lenguaje.Bio.text3} ${runtime(process.uptime())}\n\n${lenguaje.Bio.text4}`, `${lenguaje.Bio.text5}`, `🎅 NovaBot uso: ${conn.public ? 'Publico' : 'Privado'} | ${lenguaje.Bio.text6} ${runtime(process.uptime())} | ${lenguaje.Bio.text7} ${Object.keys(global.db.data.users).length}`]
 let bio = text[Math.floor(Math.random() * text.length)]
 try {
 await conn.updateProfileStatus(bio)
@@ -180,7 +180,7 @@ console.log(`[UPDATE]\nPing: ${latensi.toFixed(4)}`)
  
 //--------------------[ AUTOREAD ]-----------------------
 if (!conn.autoread && m.message && prefix) {
-await conn.sendPresenceUpdate('composing', m.chat)
+//await conn.sendPresenceUpdate('composing', m.chat)
 conn.readMessages([m.key])}
           
 //--------------------[ ANTIFAKES ]-----------------------
@@ -188,13 +188,13 @@ if (global.db.data.chats[m.chat].antifake && !isGroupAdmins) {
 let forbidPrefixes = ["1", "994", "48", "43", "40", "41", "49"];
 for (let prefix of forbidPrefixes) {
 if (m.sender.startsWith(prefix)) {
-m.reply('✳️ El este grupo no esta permitido numero fake sera expulsado...', m.sender)
+m.reply(`${lenguaje['smsAntiFake']()}`, m.sender)
 conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')}}}
 if (global.db.data.chats[m.chat].antiarabe && !isGroupAdmins) {
 let forbidPrefixes = ["212", "265", "234", "258", "263", "967", "20", "92", "91"];
 for (let prefix of forbidPrefixes) {
 if (m.sender.startsWith(prefix)) {
-m.reply('✳️ En este grupo no esta permitido numero arabe hasta la próxima...', m.sender)
+m.reply(`${lenguaje['smsAntiArabe']()}`, m.sender)
 conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')}}} 
 
 //--------------------[ ANTILINK ]-----------------------
@@ -205,13 +205,13 @@ const listAdmin = groupAdmins.map((v, i) => `${i + 1}. @${v.id.split('@')[0]}`).
 let delet = m.key.participant
 let bang = m.key.id
 user = m.sender
-conn.sendMessage(m.chat, {text: `\`\`\`「 ANTILINK DETECTADO 」\`\`\`\n\n@${user.split("@")[0]} 🤨 eso no esta permitido rata, Sera expulsado del grupo....`, mentions: [user], },{quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
-if (!isBotAdmins) return conn.sendMessage(m.chat, { text: `Te salvarte puto no soy admins 🙄\n\n*[ LLAMADO A LOS ADMINS ]*\n${listAdmin}\n\nᴱˡ ᵇᵒᵗ ⁿᵉᶜᵉˢᶦᵗᵃ ᵃᵈᵐᶦⁿ ᵖᵃʳᵃ ᵉˡᶦᵐᶦⁿᵃʳ ᵃ ᵉˢᵗᵃ ˢᵘᶜᶦᵃ ʳᵃᵗᵃ`, mentions: participants.map(a => a.id) }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})  
+conn.sendMessage(m.chat, {text: `${lenguaje['smsAntiLink']()} @${user.split("@")[0]} ${lenguaje['smsAntiLink2']()}`, mentions: [user], },{quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+if (!isBotAdmins) return conn.sendMessage(m.chat, { text: `${lenguaje['smsAntiLink3']()}\n${listAdmin}\n\n${lenguaje['smsAntiLink4']()}`, mentions: participants.map(a => a.id) }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})  
 let gclink = (`https://chat.whatsapp.com/`+await conn.groupInviteCode(m.chat))
 let isLinkThisGc = new RegExp(gclink, 'i')
 let isgclink = isLinkThisGc.test(m.text)
-if (isgclink) return reply(`Te salvarte el link enviado es de este grupo`)
-if (isGroupAdmins) return reply(`Te salvarte por que eres un admins :v`)
+if (isgclink) return
+if (isGroupAdmins) return reply(`${lenguaje['smsAntiLink5']()}`)
 conn.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: bang, participant: delet }})
 conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')}}
  
@@ -236,7 +236,7 @@ media = await quoted.download()
 let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: botname, body: `h`, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}}, { quoted: m })
 await fs.unlinkSync(encmedia)   
 } else if (/video/.test(mime)) {  
-if ((quoted.msg || quoted).seconds > 25) return reply('🤡 Hey Donde carajo viste un stickes que dure tanto bobo 🤣. (Máximo 15 segundos)')  
+if ((quoted.msg || quoted).seconds > 25) return reply(lenguaje['smsAutoSicker']())  
 media = await quoted.download()  
 let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: goblal.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: wm, body: `h`, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}}, { quoted: m })
 await new Promise((resolve) => setTimeout(resolve, 2000));   
@@ -252,20 +252,33 @@ let before = user.level * 1
 while (canLevelUp(user.level, user.exp, global.multiplier))
 user.level++
 //user.role = global.rpg.role(user.level).name
-if (before !== user.level) {
-const str = `*「 FELICIDADES LEVEL UP 🆙🥳 」*\n\n🥳 Felicidades @${sender.split`@`[0]} 👏 subiste de nivel sigue asi 👏\n\n*NIVEL :* ${before} ⟿ ${user.level}\n*RANGO :* ${user.role}\n*FECHA :* ${new Date().toLocaleString('id-ID')}\n\n_*Para saber cual es tu puerto del top, coloca el comando #lb*_`.trim()
+if (before !== user.level) { 
+let text = [`${lenguaje['smsAutonivel']()} @${sender.split`@`[0]} ${lenguaje['smsAutonivel2']()}\n\n${lenguaje['smsAutonivel3']()} ${before} ⟿ ${user.level}\n${lenguaje['smsAutonivel6']()} ${user.role}\n${lenguaje['smsAutonivel7']()} ${new Date().toLocaleString('id-ID')}\n\n${lenguaje['smsAutonivel8']()}`, `${lenguaje['smsAutonivel9']()}\n\n${lenguaje['smsAutonivel4']()} ${before}\n${lenguaje['smsAutonivel5']()} ${user.level}\n${lenguaje['smsAutonivel6']()} ${user.role}\n${lenguaje['smsAutonivel7']()} ${new Date().toLocaleString('id-ID')}`]
+let str = text[Math.floor(Math.random() * text.length)]
 return conn.sendMessage(m.chat, { text: str, contextInfo:{mentionedJid:[sender]}},{quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}}
  
 //----------------[ CHATBOT/AUTOMATICO ]-------------------
-if (global.db.data.chats[m.chat].simi && prefix) {
-try {     
+if (global.db.data.chats[m.chat].simi) {
+let textodem = budy
+try {
 await conn.sendPresenceUpdate('composing', m.chat)
-let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${budy}&lc=es&cf=false`)
-let res = anu.success;
-m.reply(res)
-} catch (e) { 
-m.reply(`*Api simsimi caida, desactive el ChatBot con:*\n#chatbot off`)
-console.log(e)}}
+const ressimi = await fetch(`https://api.simsimi.net/v2/?text=${encodeURIComponent(textodem)}&lc=es`)
+const data = await ressimi.json()
+if (data.success == 'No s\u00e9 lo qu\u00e9 est\u00e1s diciendo. Por favor ense\u00f1ame.') return m.reply(`${lol}`); /* EL TEXTO "lol" NO ESTA DEFINIDO PARA DAR ERROR Y USAR LA OTRA API */
+await m.reply(data.success)
+} catch {
+/*🟢 SI DA ERROR USARA ESTA OTRA OPCION DE API DE IA QUE RECUERDA EL NOMBRE DE LA PERSONA */
+if (textodem.includes('Hola')) textodem = textodem.replace('Hola', 'Hello')
+if (textodem.includes('hola')) textodem = textodem.replace('hola', 'hello')
+if (textodem.includes('HOLA')) textodem = textodem.replace('HOLA', 'HELLO')
+const reis = await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&dt=t&q=' + textodem)
+const resu = await reis.json()
+const nama = m.pushName || '1'
+const api = await fetch('http://api.brainshop.ai/get?bid=153868&key=rcKonOgrUFmn5usX&uid=' + nama + '&msg=' + resu[0][0][0])
+const res = await api.json()
+const reis2 = await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=es&dt=t&q=' + res.cnt)
+const resu2 = await reis2.json()
+await m.reply(resu2[0][0][0])}}
 
 //---------------------[ ANTIPRIVADO ]------------------------
 if (global.db.data.chats[m.chat].antiprivado && !isCreator) {
@@ -274,8 +287,8 @@ if (m.isGroup) return !1;
 if (!m.message) return !0;
 if (m.text.includes('PIEDRA') || m.text.includes('PAPEL') || m.text.includes('TIJERA') ||  m.text.includes('menu') ||  m.text.includes('estado') || m.text.includes('bots') ||  m.text.includes('serbot') || m.text.includes('jadibot')) return !0
 const chat = global.db.data.chats[m.chat];
-const bot = global.db.data.settings[numBot]
-await conn.sendMessage(m.chat, {text: `*ʜᴏʟᴀ @${sender.split`@`[0]}, ᴇsᴛᴀ ᴘʀᴏʜɪʙɪᴅᴏ ʜᴀʙʟᴀʀ ᴀʟ ᴘʀɪᴠᴀᴅᴏ ᴅᴇʟ ʙᴏᴛ ᴘᴏʀ ʟᴏ ᴄᴜᴀʟ sᴇʀᴀs ʙʟᴏϙᴜᴇᴀᴅᴏ.*\n*ᴘᴀʀᴀ ᴜsᴀʀ ᴇʟ ʙᴏᴛ ᴜɴɪʀᴛᴇ ᴀʟ ɢʀᴜᴘᴏ ᴅᴇʟ ʙᴏᴛ*\n\n${nn2}`, mentions: [sender], },{quoted: m}) 
+const bot = global.db.data.setting[numBot]
+await conn.sendMessage(m.chat, {text: `${lenguaje['smsWel']()} @${sender.split`@`[0]}, ${lenguaje['smsAntiPv']()}\n${nn2}`, mentions: [sender], },{quoted: m}) 
 await conn.updateBlockStatus(m.chat, 'block')
 return !1;
 }
@@ -304,14 +317,18 @@ break
 //Info
 case 'menu': case 'help': case 'menucompleto': case 'menu2': case 'audio': case 'nuevo': case 'extreno': case 'reglas': menu(m, command, conn, prefix, pushname, sender, pickRandom, fkontak) 
 break  
-case 'estado': case 'infobot': case 'owner': case 'creador': case 'contacto': case 'grupos': case 'grupoficiales': case 'instalarbot': case 'crearbot': case 'ping': case '5492266613038': case '593980586516': case '595975740803': case 'report': case 'sc': info(command, conn, m, speed, sender, fkontak, pickRandom, pushname, from, msg, text) 
-break
-
+case 'estado': case 'infobot': case 'owner': case 'creador': case 'contacto': case 'grupos': case 'grupoficiales': case 'instalarbot': case 'crearbot': case 'ping': case '5492266613038': case '593980586516': case '595975740803': case 'report': case 'sc': case 'donar': info(command, conn, m, speed, sender, fkontak, pickRandom, pushname, from, msg, text) 
+break 
+    
+case 'prueba4': 
+m.reply(`${lenguaje.informacion.prueba3}`)
+break 
+ 
 //activar/desactivar
 case 'welcome': case 'bienvenida': case 'antilink': case 'antienlace': case 'antifake': case 'antiFake': case 'antiarabe': case 'antiArabe': case 'autodetect': case 'detect': case 'audios': case 'autosticker': case 'stickers': case 'modocaliente': case 'antinsfw': case 'modoadmin': case 'modoadmins': case 'soloadmin': case 'antiprivado': case 'antipv': case 'anticall': case 'antillamada': case 'modojadibot': case 'jadibot': case 'autoread': case 'autovisto': case 'antispam': case 'chatbot': case 'simsimi': case 'autolevelup': case 'autonivel': enable(m, command, isGroupAdmins, text, command, args, isBotAdmins, isGroupAdmins, isCreator) 
 break
 
-//Grupos
+//Grupos 
 case 'grupo': case 'delete': case 'del': case 'join': case 'unete': case 'hidetag': case 'notificar': case 'tag': case 'setppgroup': case 'setpp': case 'setppname': case 'nuevonombre': case 'newnombre': case 'setdesc': case 'descripción': case 'anularlink': case 'resetlink': case 'revoke': case 'add': case 'agregar': case 'invitar': case 'kick': case 'echar': case 'sacar': case 'promote': case 'darpoder': case 'demote': case 'quitarpoder': case 'link': case 'linkgc': case 'banchat': case 'tagall': case 'invocar': case 'todos': case 'admins': case 'administradores': case 'infogrupo': case 'groupinfo': case 'warn': case 'advertencia': case 'unwarn': case 'quitardvertencia': case 'listwarn': case 'enline': case 'online': case 'listonine': case 'listaenlinea': case 'enlinea': case 'listonline': grupo(m, command, isGroupAdmins, text, conn, participants, isBotAdmins, args, isCreator, delay, sender, quoted, mime, from, isCreator, groupMetadata, fkontak, delay) 
 break    
 
@@ -334,19 +351,19 @@ case 'hentai': case 'nsfwloli': case 'lewd': case 'feed': case 'gasm': case 'ana
 break  
 
 //randow
-case 'memes': case 'loli': case 'lolivid': case 'neko': case 'akira': case 'akiyama': case 'anna': case 'asuna': case 'ayuzawa': case 'boruto': case 'chiho': case 'chitoge': case 'deidara': case 'erza': case 'elaina': case 'eba': case 'emilia': case 'hestia': case 'hinata': case 'inori': case 'isuzu': case 'itachi': case 'itori': case 'kaga': case 'kagura': case 'kaori': case 'keneki': case 'kotori': case 'kurumi': case 'madara': case 'mikasa': case 'miku': case 'minato': case 'naruto': case 'nezuko': case 'sagiri': case 'sasuke': case 'sakura': case 'cosplay': case 'blackpink': randow(m, sender, command, sendImageAsUrl, pickRandom, conn)
-break  
-case 'horny': case 'simp': case 'lolice': case 'comentar': case 'comment': randow2(conn, m, command, text, sender, pushname) 
-break
-
+case 'memes': case 'loli': case 'lolivid': case 'neko': case 'akira': case 'akiyama': case 'anna': case 'asuna': case 'ayuzawa': case 'boruto': case 'chiho': case 'chitoge': case 'deidara': case 'erza': case 'elaina': case 'eba': case 'emilia': case 'hestia': case 'hinata': case 'inori': case 'isuzu': case 'itachi': case 'itori': case 'kaga': case 'kagura': case 'kaori': case 'keneki': case 'kotori': case 'kurumi': case 'madara': case 'mikasa': case 'miku': case 'minato': case 'naruto': case 'nezuko': case 'sagiri': case 'sasuke': case 'sakura': case 'cosplay': case 'blackpink': case 'navidad': randow(m, sender, command, sendImageAsUrl, pickRandom, conn)
+break   
+case 'horny': case 'simp': case 'lolice': case 'comentar': case 'comment': randow2(conn, m, command, text, sender, pushname)  
+break 
+     
 //descargas
-case 'play': case 'musica': case 'play2': case 'video': case 'play3': case 'playdoc': case 'playaudiodoc': case 'ytmp3doc': case 'play4': case 'playdoc2': case 'playvideodoc': case 'ytmp4doc': case "ytmp3": case "ytaudio": case 'ytmp4': case 'ytvideo': case 'music': case 'spotify': case 'gitclone': case 'tiktok': case 'tt': case 'lyrics': case 'letra': case 'mediafire': case 'facebook': case 'fb': case 'instagram': case 'ig': case 'igstalk': case 'apk': case 'modoapk': case 'gdrive': case 'tiktokimg': case 'ttimg': descarga(m, command, conn, text, command, args, fkontak, from, lolkeysapi)    
-break
+case 'play': case 'musica': case 'play2': case 'video': case 'play3': case 'playdoc': case 'playaudiodoc': case 'ytmp3doc': case 'play4': case 'playdoc2': case 'playvideodoc': case 'ytmp4doc': case "ytmp3": case "ytaudio": case 'ytmp4': case 'ytvideo': case 'music': case 'spotify': case 'gitclone': case 'tiktok': case 'tt': case 'lyrics': case 'letra': case 'mediafire': case 'facebook': case 'fb': case 'instagram': case 'ig': case 'igstalk': case 'apk': case 'modoapk': case 'gdrive': case 'tiktokimg': case 'ttimg': case 'play.1': case 'play.2': descarga(m, command, conn, text, command, args, fkontak, from, lolkeysapi)    
+break    
 
-//rpg
+//rpg 
 case 'reg': case 'verificar': case 'unreg': case 'myns': await reg(command, conn, m, sender, text, fkontak, delay, args)
 break   
-case 'lb': case 'leaderboard': case 'afk': case 'rob': case 'robar': case 'buy': case 'buyall': case 'bal': case 'balance': case 'diamond': case 'minar': case 'mine': case 'trabajar': case 'work': case 'w': case 'claim': case 'daily': case 'perfil': case 'levelup': case 'nivel': case 'cofre': rpg(m, command, participants, args, sender, pushname, text, conn, fkontak, who) 
+case 'lb': case 'leaderboard': case 'afk': case 'rob': case 'robar': case 'buy': case 'buyall': case 'bal': case 'balance': case 'diamond': case 'minar': case 'mine': case 'trabajar': case 'work': case 'w': case 'claim': case 'daily': case 'perfil': case 'levelup': case 'nivel': case 'cofre': case 'minar2': case 'mine2': rpg(m, command, participants, args, sender, pushname, text, conn, fkontak, who) 
 break 
 
 //stickers
@@ -356,7 +373,8 @@ break
 //propietario/owner
 case 'bcgc': case 'bcgroup': case 'bc': case 'broadcast': case 'bcall': case 'block': case 'bloquear': case 'unblock': case 'desbloquear': case 'setcmd':  case 'addcmd': case 'delcmd': case 'listcmd': case 'añadirdiamantes': case 'dardiamantes': case 'addlimit': case 'añadirxp': case 'addexp': case 'addxp': owner(isCreator, m, command, conn, text, delay, fkontak, store, quoted, sender) 
 break 
-case 'banuser': {
+case 'banuser': {  
+if (!isCreator) return reply(info.owner)
 let who 
 if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false
 else who = m.chat
@@ -367,6 +385,7 @@ users[who].banned = true
 m.reply(`*𝘌𝘭 𝘶𝘴𝘶𝘢𝘳𝘪𝘰𝘴 𝘧𝘶𝘦 𝘉𝘢𝘯𝘦𝘢𝘥𝘰 𝘺𝘢 𝘯𝘰 𝘱𝘰𝘥𝘳𝘢́ 𝘶𝘴𝘢𝘳 𝘮𝘪𝘴 𝘤𝘰𝘮𝘢𝘯𝘥𝘰𝘴*`)}
 break
 case 'unbanuser': {
+if (!isCreator) return reply(info.owner)
 let who 
 if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false
 else who = m.chat
@@ -395,7 +414,8 @@ await conn.groupParticipantsUpdate(m.chat, [m.sender], "promote")}
 break 
 case 'leave': {  
 if (!isCreator) return reply(info.owner)
-reply(m.chat, `*Adios fue un gusto esta aqui hasta pronto 👋*`)
+reply(`*Adios fue un gusto esta aqui hasta pronto 👋*`)
+await delay(3 * 3000)
 await conn.groupLeave(m.chat)}
 break
 case 'backup': case 'respaldo': case 'copia':
@@ -415,25 +435,25 @@ case 'update':
 if (!isCreator) return reply(info.owner)
 try {    
 let stdout = execSync('git pull' + (m.fromMe && q ? ' ' + q : ''))
-await conn.sendMessage(from, { text: stdout.toString() }, { quoted: msg });
+await m.reply(stdout.toString())
 } catch { 
 let updatee = execSync('git remote set-url origin https://github.com/elrebelde21/NovaBot-MD.git && git pull')
-await conn.sendMessage(from, { text: updatee.toString() }, { quoted: msg })}  
+await m.reply(updatee.toString())}  
 break
-case 'reiniciar': case 'restart': {
-if (!isCreator) return reply(info.owner)
+case 'reiniciar': case 'restart': { 
+if (!isCreator) return reply(info.owner) 
 m.reply('_🔄 Reiniciando Bot..._');
 await delay(3 * 3000) 
-conn.ws.close()}
-break
-//__________
-
+conn.ws.close()}   
+break  
+/////////////////////////////////  
+   
 //--------------------[ FUNCIONES ]-----------------------
 function pickRandom(list) {
 return list[Math.floor(list.length * Math.random())]
 }  
 
-//--------------------[ AUDIO/TEXTOS ]-----------------------
+//-------------------[ AUDIO/TEXTOS ]----------------------
 //🟢Comando que responde sin prefix
 default:  
 if (budy.includes(`Todo bien`)) {
@@ -442,8 +462,6 @@ await m.reply(`${pickRandom(['Si amigo todo bien, vite', 'Todo bien capo y tu �
 if (budy.includes(`Buenos dias`)) {
 conn.sendPresenceUpdate('composing', m.chat)
 m.reply(`${pickRandom(['Buenos Dias trolos de mierda', '*Buen dias mi amor 😘*', '*Buenos Dias hermosa mañana 🥰*'])}`)}  
-if (budy.includes(`Yaoi`)) {
-m.reply(`${pickRandom(['Que mamada? vete a estudiar mejor', 'Soy un bot hetero, no pida mamada (︶｡︶)zzZ '])}`)}
 if (budy.includes(`autodestruction`)) { 
 let e = fs.readFileSync('./src/autodestruction.webp')
 let or = ['texto', 'sticker'];
@@ -465,8 +483,8 @@ if (media === 'sticker')
 conn.sendFile(m.chat, noetiqueta, 'sticker.webp', '',m, true, { contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: 'Yo que?', mediaType: 2, sourceUrl: nna, thumbnail: imagen1}}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 if (media === 'texto')
 await conn.sendMessage(m.chat, {text: `${pickRandom(['*QUE YO QUE?*', 'Que?'])}`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
-if (budy.startsWith(`yaoi`)) {
-m.reply(`${pickRandom(['que mamada? vete a estudia mejor', 'Soy un bot hetero no pida mamada (︶｡︶)zzZ '])}`)}
+if (budy.includes(`Yaoi`)) {
+m.reply(`${pickRandom(['Que mamada? vete a estudiar mejor', 'Soy un bot hetero, no pida mamada (︶｡︶)zzZ '])}`)}
 if (budy.startsWith(`a`)) {
 if (!global.db.data.chats[m.chat].audios) return
 let vn = './media/a.mp3'
@@ -474,6 +492,9 @@ await conn.sendPresenceUpdate('recording', m.chat)
 conn.sendMessage(m.chat, { audio: { url: vn }, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": md, "showAdAttribution": true}}, seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 if (budy.startsWith(`Feliz cumpleaños`)) {
 const vn = './media/Feliz cumple.mp3'
+conn.sendAudio(m.chat, vn, m)} 
+if (budy.startsWith(`Feliz navidad`) || budy.startsWith(`Merry Christmas`) || budy.startsWith(`feliz navidad`)) {
+const vn = './media/navidad.mp3'
 conn.sendAudio(m.chat, vn, m)} 
 if (budy.startsWith(`Vete a la verga`)) {
 const vn = './media/vete a la verga.mp3';
@@ -656,11 +677,7 @@ console.log(util.format(err))
 //--------------------[ REPORTE/ERRORS ]-----------------------     
 let e = String(err) 
 conn.sendMessage("5492266466080@s.whatsapp.net", { text: "Hola Creador/desarrollador, parece haber un error, por favor arreglarlo 🥲\n\n" + util.format(e), 
-contextInfo:{
-forwardingScore: 9999999, 
-isForwarded: true
-}})
-
+contextInfo:{forwardingScore: 9999999, isForwarded: true }})
 process.on('uncaughtException', function (err) {
 console.log('Caught exception: ', err)})}}}}
 
