@@ -16,19 +16,19 @@ const os = require('os')
 async function buscadores(m, command, conn, text, from, fkontak, prefix, args, q, quoted, lolkeysapi) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (command == 'yts' || command == 'ytsearch') {
-if (!text) return m.reply(`*Ejemplo:*\n${prefix + command} anime`)
-if (global.db.data.users[m.sender].level < 2) return m.reply(`[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀ ᴇʟ ɴɪᴠᴇʟ 2 ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ .nivel`) 
+if (global.db.data.users[m.sender].level < 2) return m.reply(`${lenguaje['nivel']()} 2 ${lenguaje['nivel2']()}`) 
+if (!text) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} anime`)
 const yts = require("youtube-yts");
 const search = await yts(text);
 const {key} = await conn.sendMessage(from, {text: info.wait}, { quoted: fkontak })
 await conn.sendMessage(from, {text: info.waitt, edit: key}, { quoted: fkontak })
 await conn.sendMessage(from, {text: info.waittt, edit: key}, { quoted: fkontak })
 await conn.sendMessage(from, {text: info.waitttt, edit: key}, { quoted: fkontak })	
-let teks = '💫 Resultados de ' + text + '\n\n';
+let teks = `💫 ${lenguaje['result']()} ` + text + '\n\n';
 let no = 1;
 let themeemoji = "🔶"
 for (let i of search.all) {
-  teks += `${themeemoji} OPCIÓN : ${no++}\n${themeemoji} TIPO: ${i.type}\n${themeemoji} ID DEL VIDEO : ${i.videoId}\n${themeemoji} TITULO: ${i.title}\n${themeemoji} VISTAS : ${i.views}\n${themeemoji} DURACIÓN : ${i.timestamp}\n${themeemoji} SUBIDOS: ${i.ago}\n${themeemoji} URL: ${i.url}\n\n✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧\n\n`;
+  teks += `${themeemoji} ${lenguaje.lengua.opcion} ${no++}\n${themeemoji} ${lenguaje.lengua.tipo} ${i.type}\n${themeemoji} ${lenguaje.lengua.id} ${i.videoId}\n${themeemoji} ${lenguaje.lengua.titulo} ${i.title}\n${themeemoji} ${lenguaje.lengua.vista} ${i.views}\n${themeemoji} ${lenguaje.lengua.dura} ${i.timestamp}\n${themeemoji} ${lenguaje.lengua.subidos} ${i.ago}\n${themeemoji} URL: ${i.url}\n\n✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧\n\n`;
 }
 await conn.sendMessage(from, { image: { url: search.all[0].thumbnail }, caption: teks }, { quoted: fkontak });
 await conn.sendMessage(from, {text: info.result, edit: key}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
@@ -36,47 +36,46 @@ m.react('💫')
 }
 
 if (command == 'acortar') {
-if (global.db.data.users[m.sender].level < 2) return m.reply(`[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀ ᴇʟ ɴɪᴠᴇʟ 2 ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ .nivel`) 
- if (!text) return m.reply(`*Ingresa un link para acortar!*`)
+if (global.db.data.users[m.sender].level < 2) return m.reply(`${lenguaje['nivel']()} 2 ${lenguaje['nivel2']()}`) 
+ if (!text) return m.reply(`${lenguaje.lengua.text}`)
 let shortUrl1 = await (await fetch(`https://tinyurl.com/api-create.php?url=${args[0]}`)).text()  
-if (!shortUrl1) return m.reply(`*⚠️ ERROR*`)
-let done = `*❇️ LINK ACORTADO*\n\n*➵ link: ${text}*\n➵ *Link Acortado: ${shortUrl1}*`
-m.reply(done)
+if (!shortUrl1) return m.reply(`${lenguaje['error']()}`)
+m.reply(`${shortUrl1}`)
 }
 
 if (command == 'google') {
-if (!text) return m.reply(`*Ejemplo:*\n${prefix + command} gatito`)
+if (!text) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} gatito`)
 let google = require('google-it')
 google({'query': text}).then(res => {
-let teks = `💫 𝘙𝘌𝘚𝘜𝘓𝘛𝘈𝘋𝘖𝘚 𝘋𝘌 : ${text}\n\n`
+let teks = `💫  ${lenguaje['result']()} : ${text}\n\n`
 for (let g of res) {
-teks += `🔶 *Titulo* : ${g.title}\n`
-teks += `🔶 *Descripcion* : ${g.snippet}\n`
-teks += `🔶 *Link* : ${g.link}\n\n✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧\n\n`
+teks += `🔶 ${lenguaje.lengua.titulo} ${g.title}\n`
+teks += `🔶 ${lenguaje.lengua.desc} ${g.snippet}\n`
+teks += `🔶 *LINK* : ${g.link}\n\n✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧⋄⋆⋅⋆⋄✧\n\n`
 } 
 m.reply(teks)})
 }
 
 if (command == 'imagen') {
 const {googleImage} = require('@bochilteam/scraper') 
-if (!text) return m.reply(`*Que esta buscado?*\n*Ejemplo:*\n${prefix + command} gatito`)
+if (!text) return m.reply(`${lenguaje.lengua.ejemplo}\n${prefix + command} gatito`)
 try {  
 image = await fetchJson(`https://api.akuari.my.id/search/googleimage?query=${text}`)
 n = image.result
 images = n[Math.floor(Math.random() * n.length)]
-conn.sendMessage(m.chat, { image: { url: images}, caption: `*💫 𝘙𝘌𝘚𝘜𝘓𝘛𝘈𝘋𝘖𝘚 𝘋𝘌 :* ${text}`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+conn.sendMessage(m.chat, { image: { url: images}, caption: `*💫 ${lenguaje['result']()} ${text}`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 } catch {
 try {  
 const res = await googleImage(text);
 const image = res[Math.floor(Math.random() * res.length)]
 const link = image;
-conn.sendMessage(m.chat, { image: { url: link}, caption: `*💫 𝘙𝘌𝘚𝘜𝘓𝘛𝘈𝘋𝘖𝘚 𝘋𝘌 :* ${text}`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+conn.sendMessage(m.chat, { image: { url: link}, caption: `*💫 ${lenguaje['result']()} :* ${text}`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 } catch (e) {
 console.log(e)
 }}}
 
 if (command == 'traducir' || command == 'translate') {
-if (!args || !args[0]) return m.reply(`*Ejemplo:*\n${prefix + command} es hello`)
+if (!args || !args[0]) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} es hello`)
 let lang = args[0];
 let text = args.slice(1).join(' ');
 const defaultLang = 'es';
@@ -87,10 +86,10 @@ if (!text && m.quoted && m.quoted.text) text = m.quoted.text;
 const lol = await fetch(`https://api.lolhuman.xyz/api/translate/auto/${lang}?apikey=${lolkeysapi}&text=${text}`);
 const loll = await lol.json();
 const result2 = loll.result.translated;
-await m.reply('*🔶 Traducción:* ' + result2)}
+await m.reply(`${lenguaje.lengua.trad}` + result2)}
 
 if (command == 'tts') {
-if (!text) return m.reply("*Y EL TEXTO?*")
+if (!text) return m.reply(`${lenguaje.lengua.text2}`)
 await conn.sendPresenceUpdate('recording', m.chat)
 let texttosay = text
 ? text
@@ -103,71 +102,150 @@ conn.sendMessage(m.chat, { audio: { url: texttospeechurl }, contextInfo: { "exte
 m.react('🗣️')}
 
 if (command == 'chatgpt' || command == 'ia') {
-if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
-if (!text) return m.reply('*INGRESE EL TEXTO DE LOS QUE QUIERE BUSCAR?*') 
-await conn.sendPresenceUpdate('composing', m.chat)
-let tioress = await fetch(`https://api.lolhuman.xyz/api/openai-turbo?apikey=${lolkeysapi}&text=${text}`)
-let hasill = await tioress.json()
-m.reply(`${hasill.result}`.trim())   
-db.data.users[m.sender].limit -= 1
+const translate = require('@vitalets/google-translate-api') 
+const {Configuration, OpenAIApi} = require('openai') 
+const configuration = new Configuration({organization: global.openai_org_id, apiKey: global.openai_key})
+const openaiii = new OpenAIApi(configuration)
+if (prefix == 'a' || prefix == 'A') return
+if (!text) return m.reply(`${lenguaje.lengua.ia} ${prefix + command} Recomienda un top 10 de películas de acción`) 
+try {
+conn.sendPresenceUpdate('composing', m.chat)
+let sistema1 = `Actuaras como un Bot de WhatsApp el cual fue creado por elrebelde, tu seras NovaBot-MD`
+async function getOpenAIChatCompletion(texto) {
+const openaiAPIKey = global.openai_key
+let chgptdb = global.chatgpt.data.users[m.sender]
+chgptdb.push({ role: 'user', content: texto })
+const url = "https://api.openai.com/v1/chat/completions"
+const headers = { "Content-Type": "application/json", "Authorization": `Bearer ${openaiAPIKey}` }
+const data = { "model": "gpt-3.5-turbo", "messages": [{ "role": "system", "content": sistema1 }, ...chgptdb, ]}
+const response = await fetch(url, {method: "POST", headers: headers, body: JSON.stringify(data)})
+const result = await response.json()
+const finalResponse = result.choices[0].message.content
+return finalResponse
 }
+let respuesta = await getOpenAIChatCompletion(text)
+if (respuesta == 'error' || respuesta == '' || !respuesta) return XD; // causar error undefined para usar otra api
+m.reply(`${respuesta}`.trim())
+} catch {
+try {
+const botIA222 = await openaiii.createCompletion({model: 'text-davinci-003', prompt: text, temperature: 0.3, max_tokens: 4097, stop: ['Ai:', 'Human:'], top_p: 1, frequency_penalty: 0.2, presence_penalty: 0});
+if (botIA222.data.choices[0].text == 'error' || botIA222.data.choices[0].text == '' || !botIA222.data.choices[0].text) return XD; // causar error undefined para usar otra api
+m.reply(botIA222.data.choices[0].text.trim());
+} catch {
+try {
+const syms1 = `Actuaras como un Bot de WhatsApp el cual fue creado por elrebelde, tu seras NovaBot-MD.`;
+const fgapi1 = await fetch(`https://api-fgmods.ddns.net/api/info/openai?text=${text}&symsg=${syms1}&apikey=XlwAnX8d`);
+const fgjson1 = await fgapi1.json();
+if (fgjson1.result == 'error' || fgjson1.result == '' || !fgjson1.result) return XD; // causar error undefined para lanzar msg de error
+m.reply(`${fgjson1.result}`.trim());
+} catch {
+try {
+const vihangayt1 = await fetch(`https://vihangayt.me/tools/chatgpt?q=${text}`);
+const vihangaytjson1 = await vihangayt1.json();
+if (vihangaytjson1.data == 'error' || vihangaytjson1.data == '' || !vihangaytjson1.data) return XD; // causar error undefined para usar otra api
+m.reply(`${vihangaytjson1.data}`.trim());
+} catch {
+try {
+const vihangayt2 = await fetch(`https://vihangayt.me/tools/chatgpt2?q=${text}`);
+const vihangaytjson2 = await vihangayt2.json();
+if (vihangaytjson2.data == 'error' || vihangaytjson2.data == '' || !vihangaytjson2.data) return XD; // causar error undefined para usar otra api
+m.reply(`${vihangaytjson2.data}`.trim());
+} catch {
+try {
+const vihangayt3 = await fetch(`https://vihangayt.me/tools/chatgpt3?q=${text}`);
+const vihangaytjson3 = await vihangayt3.json();
+if (vihangaytjson3.data == 'error' || vihangaytjson3.data == '' || !vihangaytjson3.data) return XD; // causar error undefined para usar otra api
+m.reply(`${vihangaytjson3.data}`.trim());        
+} catch {
+try {
+const tioress22 = await fetch(`https://api.lolhuman.xyz/api/openai?apikey=${lolkeysapi}&text=${text}&user=${m.sender}`);
+const hasill22 = await tioress22.json();
+if (hasill22.result == 'error' || hasill22.result == '' || !hasill22.result) return XD; // causar error undefined para usar otra api
+const hasill22_result = await translate(`${hasill22.result}`, {to: 'es', autoCorrect: true});
+m.reply(`${hasill22_result.text}`.trim());
+} catch {
+try {
+const searchString2 = ' Indonesia ';
+const replacementString2 = ' español ';
+const rres = await fetch(`https://api.ibeng.tech/api/others/chatgpt?q=Hola&apikey=eMlBNRzUXv`);
+const jjson = await rres.json();
+const hahaha = await translate(`${jjson.data}`, {to: 'es', autoCorrect: true});
+const sextS = hahaha.text;
+const replacedText = sextS.replace(searchString2, replacementString2).trim();
+m.reply(replacedText);
+} catch {
+try {
+const akuariapi2 = await fetch(`https://api.akuari.my.id/ai/gpt?chat=${text}`);
+const akuariapijson2 = await akuariapi2.json();
+if (akuariapijson2.respon == 'error' || akuariapijson2.respon == '' || !akuariapijson2.respon) return XD; // causar error undefined para lanzar msg de error
+const akuariapiresult2 = await translate(`${akuariapijson2.respon}`, {to: 'es', autoCorrect: true});
+m.reply(akuariapiresult2.text.trim());
+} catch {
+try {
+const akuariapi1 = await fetch(`https://api.azz.biz.id/api/bard?q=${text}&key=global`);
+const akuariapijson1 = await akuariapi1.json();
+if (akuariapijson1.respon == 'error' || akuariapijson1.respon == '' || !akuariapijson1.respon) return XD; // causar error undefined para usar otra api
+const akuariapiresult1 = await translate(`${akuariapijson1.respon}`, {to: 'es', autoCorrect: true});
+m.reply(`${akuariapiresult1.text}`.trim());
+} catch {
+return m.reply(`${info.error + lenguaje.lengua.erro}`) 
+}}}}}}}}}}}
 
 if (command == 'dalle' || command == 'ia2' || command == 'aimg' || command == 'imagine' || command == 'dall-e') {
-if (!text) return m.reply(`*⚠️ INGRESE UN TEXTO PARA CREAR UNA IMAGEN Y ASI USAR LA FUNCION DE DALL-E*\n\n*• EJEMPLO:*\n*${prefix + command} gatitos llorando`) 
-m.reply('*AGUARDE UN MOMENTO...*') 
+if (!text) return m.reply(`${lenguaje.lengua.ia2} ${prefix + command} gatitos llorando`) 
+m.reply(`${lenguaje.lengua.espere}`) 
 try {
 const tiores1 = await fetch(`https://vihangayt.me/tools/imagine?q=${text}`);
 const json1 = await tiores1.json();
 await conn.sendMessage(m.chat, {image: {url: json1.data}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
-} catch {  
-console.log('[ ⚠️ ] Error con la api 1, intentamos con la otra api');  
+} catch (e) {  
+console.log(`${info.error + e}`);  
 try {
 const tiores2 = await conn.getFile(`https://vihangayt.me/tools/midjourney?q=${text}`);
 await conn.sendMessage(m.chat, {image: {url: tiores2.data}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
-} catch {
-console.log('[ ⚠️ ] Error api 2 tambien esta caida.');
+} catch (e) {
+console.log(`${e}`) 
 try {
 const tiores3 = await fetch(`https://vihangayt.me/tools/lexicaart?q=${text}`);
  const json3 = await tiores3.json();
 await conn.sendMessage(m.chat, {image: {url: json3.data[0].images[0].url}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
 } catch {
-console.log('[ ⚠️ ] Error, api 3 tambien eata caida 😢');
 try {
 const tiores4 = await conn.getFile(`https://api.lolhuman.xyz/api/dall-e?apikey=${lolkeysapi}&text=${text}`);
 await conn.sendMessage(m.chat, {image: {url: tiores4.data}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
 } catch (e) {
-return m.reply(`*${info.error} *Error, no se obtuvierón resultados (Api caida)*`) 
+return m.reply(`${info.error + lenguaje.lengua.erro}`) 
 console.log(e);}}}}}
 
 if (command == 'ss' || command == 'ssweb') {
 const scp1 = require('../libs/scraper') 
-if (!text) return m.reply(`*Ejemplo:* ${prefix+command} link`)
-conn.fakeReply(m.chat, `⏳ *Aguarde un momento....*`, '0@s.whatsapp.net', 'No haga spam')
+if (!text) return m.reply(`${lenguaje.lengua.ejem} ${prefix+command} link`)
+conn.fakeReply(m.chat, `${lenguaje.lengua.espere}`, '0@s.whatsapp.net', 'No haga spam')
 let krt = await scp1.ssweb(q)
 conn.sendMessage(m.chat, {image:krt.result, caption: info.result}, {quoted:m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 if (command == 'wallpaper') {
-if (global.db.data.users[m.sender].level < 3) return m.reply(`[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀ ᴇʟ ɴɪᴠᴇʟ 3 ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ .nivel`) 
-if (!text) return m.reply(`*[ ⚠️ ] Ejemplo: ${prefix + command} anime*`) 
+if (global.db.data.users[m.sender].level < 3) return m.reply(`${lenguaje['nivel']()} 3 ${lenguaje['nivel2']()}`) 
+if (!text) return m.reply(`${lenguaje.lengua.ejem} ${prefix + command} anime*`) 
 let { wallpaper, wallpaperv2 } = require('@bochilteam/scraper')
 let _res = await (/2/.test(command) ? wallpaperv2 : wallpaper)(text) 
 let _img = _res[Math.floor(Math.random() * _res.length)]
-conn.sendMessage(m.chat, { image: { url: _img }, caption: `_*ＲＥＳＵＬＴＡＤＯＳ ＤＥ : ${text}*_`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+conn.sendMessage(m.chat, { image: { url: _img }, caption: `_${lenguaje['result']()} ${text}_`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 if (command == 'hd') {
 const FormData = require("form-data") 
 const Jimp =  require("jimp") 
 let q = m.quoted ? m.quoted : m;
 let mime = (q.msg || q).mimetype || q.mediaType || "";
-if (!mime) return m.reply(`*[ ⚠️ ] ᴇɴᴠɪᴇ/ʀᴇsᴘᴏɴᴅᴀ ᴀ ᴜɴᴀ ɪᴍᴀɢᴇɴ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ : ${prefix + command}*`) 
-if (!/image\/(jpe?g|png)/.test(mime)) return m.reply(`*[ ⚠️ ] ᴇʟ ғᴏʀᴍᴀᴛᴏ ᴅᴇʟ ᴀʀᴄɢɪᴠᴏ (${mime}) ɴᴏ ᴇs ᴄᴏᴍᴘᴀʀᴛɪʙʟᴇ, ᴇɴᴠɪᴀ/ʀᴇsᴘᴏɴᴅᴀ ᴀ ᴜɴᴀ ғᴏᴛᴏ*`) 
-m.reply('⏳ *𝘗𝘙𝘖𝘊𝘌𝘚𝘈𝘕𝘋𝘖 𝘓𝘈 𝘐𝘔𝘈𝘎𝘌𝘕, 𝘈𝘎𝘜𝘈𝘙𝘋𝘌𝘕 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖...*') 
+if (!mime) return m.reply(`${lenguaje.lengua.responde} ${prefix + command}*`) 
+if (!/image\/(jpe?g|png)/.test(mime)) return m.reply(`${lenguaje.lengua.incorrecto}`) 
+m.reply(`${lenguaje.lengua.aguarde}`) 
 try {
 let img = await q.download?.();
 let pr = await remini(img, "enhance");
-conn.sendMessage(m.chat, {image: pr, caption: `*𝘈𝘘𝘜𝘐 𝘛𝘐𝘌𝘕𝘌 𝘓𝘈 𝘐𝘔𝘈𝘎𝘌𝘕 𝘌𝘓 𝘏𝘋*\n\nˢᶦ ˡᵃ ᶦᵐᵃᵍᵉⁿ ⁿᵒ ˢᵃˡᵉ ᵉˡ ᴴᴰ ʳᵉˢᵖᵒⁿᵈᵉ ᵃ ˡᵃ ᶦᵐᵃᵍᵉⁿ ᶜᵒⁿ ᵉˡ ᶜᵒᵐᵃⁿᵈᵒ ᵈᵉ ⁿᵘᵉᵛᵒ`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
+conn.sendMessage(m.chat, {image: pr, caption: `${lenguaje.lengua.hd}`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
 } catch (e) {
-return m.reply(`${info.error}\n\n*ʜᴜʙᴏʀ ᴜɴ ᴇʀʀᴏʀ (ᴀᴘɪ ᴄᴀɪᴅᴀ 🤡)*\n\n${e}`) 
+return m.reply(`${info.error + lenguaje.lengua.erro}`) 
 console.log(e) 
 }}}
  

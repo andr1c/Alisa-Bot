@@ -32,7 +32,7 @@ if (err) return reply(err)
 let buff = fs.readFileSync(ran)  
 conn.sendMessage(m.chat, { audio: buff, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": md, "showAdAttribution": true}}, ptt: false, mimetype: 'audio/mpeg', fileName: `error.mp3` }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 fs.unlinkSync(ran)})  
-} else m.reply(`*Responde al audio que deseas cambiar con el comando:* *${prefix + command}*`)  
+} else m.reply(`${lenguaje.sms.text} *${prefix + command}*`)  
 } catch (e) {  
 m.reply(`${info.error} ${e}`)
 console.log(e)}}
@@ -40,7 +40,7 @@ console.log(e)}}
 async function convertidores(conn, command, mime, quoted, util, m, exec, lolkeysapi) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (command == 'tourl') {
-if (!mime) return m.reply(`*Responde a una imagen/video para converti el url*`)  
+if (!mime) return m.reply(`${lenguaje.sms.text2}`)  
 m.reply(info.wait) 
 let { UploadFileUgu, webp2mp4File, TelegraPh } = require('../libs/uploader') 
 let media = await conn.downloadAndSaveMediaMessage(quoted)
@@ -53,16 +53,16 @@ m.reply(util.format(anu))}
 await fs.unlinkSync(media)}
 
 if (command == 'toaudio' || command == 'tomp3') {
-if (!/video/.test(mime) && !/audio/.test(mime)) return m.reply(`*[ ⚠️ ] Responda a un audio*`) 
-if (!quoted) return m.reply(`*[ ⚠️ ] Responda a un audio*`) 
+if (!/video/.test(mime) && !/audio/.test(mime)) return m.reply(lenguaje.sms.text3) 
+if (!quoted) return m.reply(lenguaje.sms.text3) 
 let { toAudio } = require('../libs/converter.js')
 let media  = await conn.downloadMediaMessage(quoted)
 let audio = await toAudio(media, 'mp4')
 await conn.sendMessage(m.chat, {audio: audio, mimetype: 'audio/mpeg', contextInfo:{  externalAdReply: { showAdAttribution: true, mediaType:  1, mediaUrl: md, title: global.botname, sourceUrl: md, thumbnail: imagen1 }}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 if (command == 'toimg' || command == 'toimagen') {
-if (!m.quoted) return m.reply('*Y el sticker?*\n*Responde a un stickers capo*') 
-if (!/webp/.test(mime)) return m.reply('*Y el sticker? Responde a un stickers capo*') 
+if (!m.quoted) return m.reply(lenguaje.sms.text4) 
+if (!/webp/.test(mime)) return m.reply(lenguaje.sms.text4) 
 let media = await conn.downloadAndSaveMediaMessage(m.quoted)
 let ran = await getRandom('sk.png')
 exec(`ffmpeg -i ${media} ${ran}`, (err) => {
@@ -78,12 +78,12 @@ let media = await conn.downloadAndSaveMediaMessage(quoted)
 let _upload = await TelegraPh(media)
 try {
 let anime = await `https://api.lolhuman.xyz/api/imagetoanime?apikey=${lolkeysapi}&img=${_upload}`
-m.reply('*🕔 𝘈𝘎𝘜𝘈𝘙𝘋𝘌 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖....*\n𝘌𝘴𝘵𝘰𝘺 𝘤𝘰𝘯𝘷𝘪𝘦𝘳𝘵𝘪𝘥𝘰 𝘪𝘮𝘢𝘨𝘦𝘯 𝘢 𝘥𝘪𝘴𝘦𝘯̃𝘰 𝘢𝘯𝘪𝘮𝘦, 𝘴𝘦𝘢 𝘱𝘢𝘤𝘪𝘦𝘯𝘵𝘦 𝘦𝘯 𝘭𝘰 𝘲𝘶𝘦 𝘦𝘯𝘷𝘪𝘰 𝘦𝘭 𝘳𝘦𝘴𝘶𝘭𝘵𝘢𝘥𝘰');
+m.reply(lenguaje.sms.text5);
 await conn.sendFile(m.chat, anime, 'error.jpg', null, m) 
 } catch (e) {
-throw m.reply(`*${info.error}*\n\n*ᴠᴇʀɪғɪǫᴜᴇ ǫᴜᴇ ᴇɴ ʟᴀ ɪᴍᴀɢᴇɴ sᴇᴀ ᴠɪsɪʙʟᴇ ᴇʟ ʀᴏsᴛʀᴏ ᴅᴇ ᴜɴᴀ ᴘᴇʀsᴏɴᴀ*`)}
+throw m.reply(`${info.error}\n\n${lenguaje.sms.text6}`)}
 } else { 
-m.reply(`*𝘠 𝘭𝘢 𝘪𝘮𝘢𝘨𝘦𝘯? 𝘙𝘦𝘴𝘱𝘰𝘯𝘥𝘦 𝘰 𝘦𝘵𝘪𝘲𝘶𝘦𝘵𝘦 𝘢 𝘶𝘯𝘢 𝘪𝘮𝘢𝘨𝘦𝘯*`)}}}
+m.reply(lenguaje.sms.text7)}}}
 
 module.exports = {efec, convertidores}
 

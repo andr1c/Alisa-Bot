@@ -38,12 +38,11 @@ return m.reply(`*Api simsimi caida vuelva mas tardes*`)
 console.log(e)}}}
 
 if (command == 'pregunta' || command == 'preg') { 
-if (!text) return m.reply(`*Hey y la pregunta?*\n\n*Ejemplo:* ${prefix + command} mañana llover?`)
+if (!text) return m.reply(`*🎅 y la pregunta?*\n\n*Ejemplo:* ${prefix + command} mañana llover?`)
 m.react('🤔') 
 let pr = ['no', 'si', 'nose', 'puede ser', 'no creo', 'olvio', 'Que pregunta mas boluda', 'A']
 let preg = pr[Math.floor(Math.random() * pr.length)]
-m.reply(`*🔸️ Pregunta:* ${text}
-*🔸️ Respuesta:* ${preg}`)}
+m.reply(`*🤔 Pregunta:* ${text}\n*🎅 Respuesta:* ${preg}`)}
 
 if (command == 'gay') {
 if (!m.isGroup) return m.reply(info.group) 
@@ -100,7 +99,7 @@ let me = m.sender
 let a = member[Math.floor(Math.random() * member.length)]
 let b = member[Math.floor(Math.random() * member.length)]
 let c = member[Math.floor(Math.random() * member.length)]
-conn.sendMessage(m.chat, { text: `Hey!! @${a.split('@')[0]}, @${b.split('@')[0]} y @${c.split('@')[0]} han pensado en hacer un trio? ustedes 3 hacen un buen trio 😳😏`, contextInfo:{mentionedJid:[a, b, c], forwardingScore: 9999999, isForwarded: true, }}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+conn.sendMessage(m.chat, { text: `🥵 Hey!!! @${a.split('@')[0]}, @${b.split('@')[0]} y @${c.split('@')[0]} han pensado en hacer un trio? ustedes 3 hacen un buen trio 😳😏`, contextInfo:{mentionedJid:[a, b, c], forwardingScore: 9999999, isForwarded: true, }}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 if (command == 'formapareja5') {
 let member = participants.map(u => u.id)
@@ -338,16 +337,16 @@ m.reply(`╱╲❀╱╲╱╲❀╱╲╱╲❀╱╲\n◆ ${pickRandom(global.
 async function game3(m, command, conn, args, prefix, msToTime, text, body, from, sender, quoted, target, bot, participant, pushname, astro) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (command == 'slot' || command == 'apuesta') { 
-if (!args[0]) return m.reply(`*[ ⚠️ ] 𝙸𝙽𝙶𝚁𝙴𝚂𝙰 𝙻𝙰 𝙲𝙰𝙽𝚃𝙸𝙳𝙰𝙳 𝚀𝚄𝙴 𝙳𝙴𝚂𝙴𝙰 𝙰𝙿𝙾𝚂𝚃𝙰𝚁*\n\n*📌 𝙴𝙹𝙴𝙼𝙿𝙻𝙾:*\n*${prefix + command} 100*`)
-if (isNaN(args[0])) return m.reply(`*[ ⚠️ ] 𝙸𝙽𝙶𝚁𝙴𝚂𝙰 𝙻𝙰 𝙲𝙰𝙽𝚃𝙸𝙳𝙰𝙳 𝚀𝚄𝙴 𝙳𝙴𝚂𝙴𝙰 𝙰𝙿𝙾𝚂𝚃𝙰𝚁*\n\n*📌 𝙴𝙹𝙴𝙼𝙿𝙻𝙾:*\n*${prefix + command} 100*`)
+if (!args[0]) return m.reply(`*[ ⚠️ ] іᥒgrᥱsᥲ ᥣᥲ ᥴᥲᥒ𝗍іძᥲძ 𝗊ᥙᥱ ძᥱsᥱᥲ ᥲ⍴᥆s𝗍ᥲr*\n\n*📌 ᥱȷᥱm⍴ᥣ᥆:*\n*${prefix + command} 100*`)
+if (isNaN(args[0])) return m.reply(`*[ ⚠️ ] іᥒgrᥱsᥲ ᥣᥲ ᥴᥲᥒ𝗍іძᥲძ 𝗊ᥙᥱ ძᥱsᥱᥲ ᥲ⍴᥆s𝗍ᥲr*\n\n*📌 ᥱȷᥱm⍴ᥣ᥆:*\n*${prefix + command} 100*`)
 const apuesta = parseInt(args[0]);
 const users = global.db.data.users[m.sender];
 const time = users.lastslot + 30000;//30 seg
-if (new Date - users.lastslot < 30000) return m.reply(`*⏳ 𝙴𝚂𝙿𝙴𝚁𝙴 ${msToTime(time - new Date())} 𝙿𝙰𝚁𝙰 𝚅𝙾𝙻𝚅𝙴𝚁 𝙰 𝙰𝙿𝙾𝚂𝚃𝙰𝚁*`) 
-if (apuesta < 100) return m.reply('✳️ 𝙼𝚒𝚗𝚒𝚖𝚘 𝚍𝚎 𝚕𝚊 𝚊𝚙𝚞𝚎𝚜𝚝𝚊 𝚎𝚜 *100 XP*') 
+if (new Date - users.lastslot < 30000) return m.reply(`*⏳ ᥱs⍴ᥱrᥱ ${msToTime(time - new Date())}  ⍴ᥲrᥲ ᥎᥆ᥣ᥎ᥱr ᥲ ᥲ⍴᥆s𝗍ᥲr*`) 
+if (apuesta < 100) return m.reply('✳️ mіᥒіm᥆ ძᥱ ᥣᥲ ᥲ⍴ᥙᥱs𝗍ᥲ ᥱs *100 ᥊⍴*') 
 if (users.exp < apuesta) {
-return m.reply(`*✳️ 𝙽𝚘 𝚝𝚒𝚎𝚗𝚎𝚜 𝚜𝚞𝚏𝚒𝚌𝚒𝚎𝚗𝚝𝚎 𝚇𝙿*`)}
-const emojis = ['💎', '🪙', '🌀'];
+return m.reply(`*✳️ ᥒ᥆ 𝗍іᥱᥒᥱs sᥙ𝖿іᥴіᥱᥒ𝗍ᥱ ᥊⍴*`)}
+const emojis = ['💎', '🎅', '🎊'];
 let a = Math.floor(Math.random() * emojis.length);
 let b = Math.floor(Math.random() * emojis.length);
 let c = Math.floor(Math.random() * emojis.length);
@@ -371,23 +370,21 @@ if (c == emojis.length) c = 0;
 }
 let end;
 if (a == b && b == c) {
-end = `*🎁 𝙶𝙰𝙽𝙰𝚂𝚃𝙴 +${apuesta + apuesta} 𝚇𝙿*`;
-users.exp += apuesta + apuesta
+end = `*🎁 gᥲᥒᥲr𝗍ᥱ +${apuesta + apuesta} ᥊⍴*`;
+users.exp += apuesta += apuesta += apuesta
 } else if (a == b || a == c || b == c) {
-end = `*🔮 𝙲𝙰𝚂𝙸 𝙻𝙾 𝙻𝙾𝙶𝚁𝙰𝚂!, 𝚂𝙸𝙶𝚄𝙴 𝙸𝙽𝚃𝙴𝙽𝚃𝙰𝙽𝙳𝙾*\n*𝚃𝙾𝙼𝙰 +10 XP*`;
-users.exp += 10;
+end = `*🔮 ᥴᥲsі ᥣ᥆ ᥣ᥆grᥲs!! sіgᥙᥱ іᥒ𝗍ᥱᥒ𝗍ᥲᥒძ᥆*\n*𝗍᥆mᥲ +20 ᥊⍴*`;
+users.exp += 20;
 } else {
-end = `*😔 𝙿𝙴𝚁𝙳𝙸𝚂𝚃𝙴 -${apuesta} 𝚇𝙿*`;
+end = `*😔 ⍴ᥱrძіs𝗍ᥱ -${apuesta} ᥊⍴*`;
 users.exp -= apuesta;
 }
 users.lastslot = new Date * 1;
-return await m.reply(`*🎰 | SLOTS | 🎰*
-╲╱❀╲╱╲╱❀╲╱╲╱❀╲╱
-${x[0]} : ${y[0]} : ${z[0]}
-${x[1]} : ${y[1]} : ${z[1]}
-${x[2]} : ${y[2]} : ${z[2]}
-╲╱❀╲╱╲╱❀╲╱╲╱❀╲╱
-*🎰 | SLOTS | 🎰*\n\n${end}`)}
+return await m.reply(`┏╼≪ *🎰 | SLOTS | 🎰* ≫╼┓
+╏         ${x[0]} : ${y[0]} : ${z[0]}
+╏         ${x[1]} : ${y[1]} : ${z[1]}
+╏         ${x[2]} : ${y[2]} : ${z[2]}
+┗╼≪ *🎰 | SLOTS | 🎰* ≫╼┛\n\n${end}`)}
 
 if (command == 'fake') { 
 var gh = body.slice(11);

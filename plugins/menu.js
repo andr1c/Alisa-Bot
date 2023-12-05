@@ -22,29 +22,29 @@ let wa = m.key.id.length > 21 ? 'Android' : m.key.id.substring(0, 2) == '3A' ? '
 m.react('🙌') 
 let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
-║✾ Hola @${sender.split("@")[0]} ${user.registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''} 👋🏻
+║🎅 ${lenguaje['smsWel']()} @${sender.split("@")[0]} ${user.registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''} 👋🏻
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
-║✾ ᴘʀᴇғɪᴊᴏ: [ ${prefix} ]
-║✾ ғᴇᴄʜᴀ: ${date}
-║✾ ʜᴏʀᴀ: ${time}
-║✾ ᴜsᴜᴀʀɪᴏ : ${Object.keys(global.db.data.users).length}
-║✾ ᴀᴄᴛɪᴠɪᴅᴀᴅ : ${runtime(process.uptime())}
-║✾ ᴍᴏᴅᴏ : ${conn.public ? 'publico' : 'privado'}
-║✾ ${conn.user.id == global.numBot2 ? 'ʙᴏᴛ ᴏғᴄ : ᴇsᴛᴇ ᴇs ᴇʟ ʙᴏᴛ ᴏғᴄ' : `sᴏʏ ᴜɴ sᴜʙʙᴏᴛ ᴅᴇ : @${global.numBot.split`@`[0]}`}
+║${lenguaje.menu.text} [ ${prefix} ]
+║${lenguaje.menu.text2} ${date}
+║${lenguaje.menu.text3} ${time}
+║${lenguaje.menu.text4} ${vs}
+║${lenguaje.menu.text5} ${Object.keys(global.db.data.users).length}
+║${lenguaje.menu.text6} ${runtime(process.uptime())}
+║${lenguaje.menu.text7} ${conn.public ? 'publico' : 'privado'}
+║🎅 ${conn.user.id == global.numBot2 ? 'ʙᴏᴛ ᴏғᴄ : ᴇsᴛᴇ ᴇs ᴇʟ ʙᴏᴛ ᴏғᴄ' : `sᴏʏ ᴜɴ sᴜʙʙᴏᴛ ᴅᴇ : @${global.numBot.split`@`[0]}`}
 ║ 
-║✾ ʟɪᴍɪᴛᴇ : ${user.limit}
-║✾ ɴɪᴠᴇʟ : ${user.level}
-║✾ ʀᴀɴɢᴏ : ${user.role}
-║✾ ᴇxᴘ : ${user.exp}
-║✾ ᴄᴏɪɴs : ${user.money}
+║${lenguaje.menu.text8} ${user.limit}
+║${lenguaje.menu.text9} ${user.level}
+║${lenguaje.menu.text10} ${user.role}
+║🎅 ᴇxᴘ : ${user.exp}
+║🎅 ᴄᴏɪɴs : ${user.money}
 ║ 
-║✾ ʀᴇɢɪsᴛʀᴀᴅᴏ : ${rtotalreg} de ${totalreg}
+║${lenguaje.menu.text11} ${rtotalreg} de ${totalreg}
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
 ╚══════ ≪ •❈• ≫ ══════╝
 
 ===============================
-\`\`\`🎅 ＬＩＳＴＡ ＤＥ ＣＯＭＡＮＤＯ 🎅\`\`\`
-\`\`\`ʙᴏᴛ sɪᴍᴘʟᴇ ᴄᴏɴ ᴘᴏᴄᴏs ᴄᴏᴍᴀɴᴅᴏs\`\`\`
+${lenguaje.menu.text12}
 ===============================
 
 *╭─╮─᤻─᳒─᤻᳒᯽⃟ᰳᰬᰶ┈*⃐ℹ️ ＩＮＦＯＢＯＴ*️⃟ᬽ፝֟━*
@@ -96,6 +96,10 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ _(Titulo/nombre de la canción para descargar el audio)_
 ├❥ᰰຼ ❏ ${prefix}play2
 ├❥ᰰຼ _(Titulo/nombre de la canción para descargar el video)_
+├❥ᰰຼ ❏ ${prefix}play.1
+├❥ᰰຼ ❏ ${prefix}play.2
+├❥ᰰຼ ❏ ${prefix}musica
+├❥ᰰຼ ❏ ${prefix}video
 ├❥ᰰຼ ❏ ${prefix}playdoc
 ├❥ᰰຼ ❏ ${prefix}play3
 ├❥ᰰຼ _(Descarga audio en documento)_
@@ -259,8 +263,8 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}pornolesbianavid
 ├❥ᰰຼ ❏ ${prefix}videolesbixxx
 ├❥ᰰຼ ❏ ${prefix}porno
-├❥ᰰຼ ❏ ${prefix}lewd'
-├❥ᰰຼ ❏ ${prefix}feed'
+├❥ᰰຼ ❏ ${prefix}lewd
+├❥ᰰຼ ❏ ${prefix}feed
 ├❥ᰰຼ ❏ ${prefix}gasm
 ├❥ᰰຼ ❏ ${prefix}anal	    	
 ├❥ᰰຼ ❏ ${prefix}holo	    	
@@ -297,6 +301,7 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}neko
 ├❥ᰰຼ ❏ ${prefix}waifu	
 ├❥ᰰຼ ❏ ${prefix}blackpink
+├❥ᰰຼ ❏ ${prefix}navidad
 ├❥ᰰຼ ❏ ${prefix}akira
 ├❥ᰰຼ ❏ ${prefix}akiyama
 ├❥ᰰຼ ❏ ${prefix}anna
@@ -385,12 +390,9 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ├❥ᰰຼ ❏ ${prefix}public (Modo público) 
 ├❥ᰰຼ ❏ ${prefix}privado (Modo privado) 
 ├❥ᰰຼ ❏ ${prefix}getcase
-├❥ᰰຼ ❏ ${prefix}addcase
 ├❥ᰰຼ ❏ ${prefix}update
 ├❥ᰰຼ ❏ ${prefix}restart
 ├❥ᰰຼ ❏ ${prefix}reiniciar
-├❥ᰰຼ ❏ ${prefix}unbanned
-├❥ᰰຼ ❏ ${prefix}sacasupport
 ├❥ᰰຼ ❏ $
 ├❥ᰰຼ ❏ >
 ├❥ᰰຼ ❏ => 
@@ -413,117 +415,14 @@ sourceUrl: `${pickRandom([nna, nn, md, yt])}`
 
 if (command == 'menu2' || command == 'audio') {
 
-let menu2 = `*Palabras especificas para que el bot interactue con ustedes*
-
-a
-Feliz cumpleaños
-Pasa pack
-Uwu
-Siuuu
-Vete a la verga
-Pasen porno
-Hora del sexito
-Pongan cuties
-Fiesta del admin
-Admin party
-Viernes
-GOOOOD
-Alto temazo
-Todo bien
-Buenos dias
-Bot gay
-Gracias
-Hola
-Fua
-Corte
-Gaspi buenos dias 
-Gaspi me saludas
-Gaspi y las minitas
-Gaspi todo bien
-Me quiero suicidar
-Gaspi ya no aguanto
-Contate algo bot
-Sexo
-Momento epico
-El bot del orto no funciona
-Epicardo
-Insta de la minita
-Una mierda de bot
-Ultimo momento
-Nefasto
-Paraguayo
-Bot de mierda
-Venezolano
-Gaspi corte
-Ya me voy a dormir
-Calefon
-Apurate bot
-Un chino
-No funciona
-Boliviano
-Enano
-Quien es tu sempai botsito
-Me gimes 7u7
-Te amo botsito uwu
-Onichan
-La toca 7w7
-autodestruction
-
-_*ᴼʲᶦᵗᵒ ᵉˢᶜʳᶦᵇᵉ ᵗᵃˡ ʸ ᶜᵒᵐᵒ ᵉˢᵗᵃ ᵉⁿ ᵉˡ ᵐᵉⁿˢᵃʲᵉ*_
-*ᵠᵘᶦᵉʳᵉ ᵃᵍʳᵉᵍᵃ ᵃˡᵍᵘⁿ ᵃᵘᵈᶦᵒ ⁿᵘᵉᵛᵒ ᵉˢᶜʳᶦᵇᶦʳˡᵉ ᵃ ᵐᶦ ᶜʳᵉᵃᵈᵒʳ ᵘʷᵘ*`
+let menu2 = `${lenguaje.menu.text13}\n\na\nfeliz navidad\nMerry Christmas\nFeliz cumpleaños\nPasa pack\nUwu\nSiuuu\nVete a la verga\nPasen porno\nHora del sexito\nPongan cuties\nFiesta del admin\nAdmin party\nViernes\nGOOOOD\nAlto temazo\nTodo bien\nBuenos dias\nBot gay\nGracias\nFua\nCorte\nGaspi buenos dias\nGaspi me saludas\nGaspi y las minitas\nGaspi todo bien\nGaspi ya no aguanto\nContate algo bot\nSexo\nMomento epico\nEl bot del orto no funciona\nEpicardo\nInsta de la minita\nUna mierda de bot\nUltimo momento\nNefasto\nParaguayo\nBot de mierda\nVenezolano\nGaspi corte\nYa me voy a dormir\nCalefon\nApurate bot\nUn chino\nNo funciona\nBoliviano\nEnano\nQuien es tu sempai botsito\nMe gimes 7u7\nTe amo botsito uwu\nOnichan\nLa toca 7w7\nautodestruction\n\n${lenguaje.menu.text14}`
 conn.sendMessage(m.chat, { text: menu2}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 if (command == 'nuevo' || command == 'extreno') {
-conn.sendMessage(m.chat, { text: `🤔 *Que hay de nuevo?* 🤗
-
-*🌐 Nueva Version:* [ ${vs} ] 
-
-*Nuevo comando:*
-
-🟢 Mejorar la imagen a HD. 
-• ${prefix}hd
-
-🚀 Descarga archivo de gdrive
-• ${prefix}gdrive (links) 
-
-🚀 Descarga imagenes del tiktok
-• ${prefix}tiktokimg
-• ${prefix}ttimg
-
-🌐 (Crea imagenes con la (IA) 
-• ${prefix}dall-e
-• ${prefix}ia2
-
-👾 Mas juegos para divertir tu grupo 
-
-• ${prefix}formartrio
-• ${prefix}formapareja5
-• ${prefix}ship
-
-🥵 Mas contenido +18 para vos pajin jj
-
-• ${prefix}tetas
-• ${prefix}pechos
-• ${prefix}pack2
-• ${prefix}videoxxx
-• ${prefix}pornolesbianavid
-
-ᴹᵃˢ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᶠᵘᵗᵘʳᵃ ᵛᵉʳˢᶦᵒⁿᵉˢ ᵠᵘᶦᵉʳᵉ ᵠᵘᵉ ᵃᵍʳᵉᵍᵘᵉ ᵃˡᵍᵘⁿ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᵉˢᵖᵉᶜᶦᵃˡ ᵉˢᶜʳᶦᵇᶦʳˡᵉ ᵃ ᵐᶦ ᶜʳᵉᵃᵈᵒʳ`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn, md, yt])}`}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+conn.sendMessage(m.chat, { text: `${lenguaje.menu.text15} [ ${vs} ]\n\n${lenguaje.menu.text16}`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn, md, yt])}`}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 if (command == 'reglas') {
-conn.sendMessage(m.chat, { text: `*🌐 REGLAS DEL BOT 🌐*
-
-*• No hacer spam de comandos*
-
-Usar los comando cada 5 segundos, de lo contrario el bot se puede satura, o numero del bot puede irse a support por spam.
-
-*• No estar enviando link del grupos al bot para que se una*
-
-Hablar con mi creador y el lo une a tu grupo
-
-*• No llamar al bot, ni al creador*
-
-Si lo haces, seras baneado del bot y bloqueado`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn, md, yt])}`}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}}
+conn.sendMessage(m.chat, { text: `${lenguaje.menu.text17}`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn, md, yt])}`}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}}
 
 module.exports = { menu }
 

@@ -29,7 +29,11 @@ let a = JSON.parse(fs.readFileSync(`./src/randow/anime-${command}.json`))
 var result = pickRandom(a)
 sendImageAsUrl(result, `${command}`)}
 if (command == 'blackpink') {
-sendImageAsUrl("https://delirius-image-random.vercel.app/api/all")}}
+sendImageAsUrl("https://delirius-image-random.vercel.app/api/all")}
+if (command == 'navidad') {
+const res = (await axios.get(`https://raw.githubusercontent.com/elrebelde21/NovaBot-MD/master/src/randow/navidad.json`)).data;
+const result = await res[Math.floor(res.length * Math.random())];
+sendImageAsUrl(result, `${command}`)}}
 
 async function randow2(conn, m, command, text, sender, pushname) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)

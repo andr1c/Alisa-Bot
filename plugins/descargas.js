@@ -16,7 +16,7 @@ const formatSize = sizeFormatter({
 async function descarga(m, command, conn, text, command, args, fkontak, from, buffer, getFile, q, includes, lolkeysapi) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
-if (command == 'play' || command == 'musica') {
+if (command == 'play') {
 const yts = require("yt-search") 
 const ytdl = require('ytdl-core') 
 if (!text) return m.reply(`*Que esta buscado? ingrese el nombre del tema*\n\nEjemplo: *${prefix + command}* ozuna`) 
@@ -54,7 +54,7 @@ await fs.unlinkSync(pl.path)
 m.react(error) 
 console.log(e)}}}
 
-if (command == 'play2' || command == 'video') {
+if (command == 'play2') {
 const yts = require("yt-search") 
 const ytdl = require('ytdl-core') 
 if (!text) return m.reply(`*Que esta buscado? ingrese el nombre del tema*\n\nEjemplo: *${prefix + command}* ozuna`) 
@@ -168,6 +168,70 @@ m.react(done)
 m.react(error) 
 return m.reply(`${info.error}\n\nNo se pudo descargar sus video por favor vuelve a intenta`) 
 console.log(e)}}}}
+
+if (command == 'play.1' || command == 'musica' || command == 'play.2' || command == 'video') {
+let data;
+let buff;
+let mimeType;
+let fileName;
+let apiUrl;
+let enviando = false;
+if (!text) return m.reply(`*Que esta buscado?*\n\n*Ejemplo:* ${prefix + command} ozuna`) 
+if (enviando) return enviando = true
+try {
+m.react(rwait) 
+const apiUrls = [`https://api-brunosobrino.zipponodes.xyz/api/ytplay?text=${text}`, `https://api-brunosobrino.onrender.com/api/ytplay?text=${text}`];
+for (const url of apiUrls) {
+try {
+const res = await fetch(url);
+data = await res.json();
+if (data.resultado && data.resultado.url) {
+break;
+}} catch {}
+}
+if (!data.resultado || !data.resultado.url) {
+enviando = false;
+} else {
+try {
+if (command === 'play.1' || command == 'musica') {
+m.reply('*⏳ＰＲＯＣＥＳＡＮＤＯ....*\n\n_ᴰᵉˢᶜᵃʳᵍᵃᵈᵒ ˢᵘˢ ᵃᵘᵈᶦᵒ ᵃᵍᵘᵃʳᵈᵉ ᵘⁿ ᵐᵒᵐᵉⁿᵗᵒ ᵖᵒʳ ᶠᵃᵛᵒʳ_') 
+apiUrl = `https://api-brunosobrino.zipponodes.xyz/api/v1/ytmp3?url=${data.resultado.url}`;
+mimeType = 'audio/mpeg';
+fileName = 'error.mp3';
+buff = await conn.getFile(apiUrl);
+} else if (command === 'play.2' || command == 'video') {
+m.reply('*⏳ＰＲＯＣＥＳＡＮＤＯ....*\n\n_ᴰᵉˢᶜᵃʳᵍᵃᵈᵒ ˢᵘˢ ᵛᶦᵈᵉᵒ ᵃᵍᵘᵃʳᵈᵉ ᵘⁿ ᵐᵒᵐᵉⁿᵗᵒ ᵖᵒʳ ᶠᵃᵛᵒʳ_') 
+apiUrl = `https://api-brunosobrino.zipponodes.xyz/api/v1/ytmp4?url=${data.resultado.url}`;
+mimeType = 'video/mp4';
+fileName = 'error.mp4';
+buff = await conn.getFile(apiUrl);
+}} catch {
+try {
+if (command === 'play.1' || command == 'musica') {
+m.reply('*⏳ＰＲＯＣＥＳＡＮＤＯ....*\n\n_ᴰᵉˢᶜᵃʳᵍᵃᵈᵒ ˢᵘˢ ᵃᵘᵈᶦᵒ ᵃᵍᵘᵃʳᵈᵉ ᵘⁿ ᵐᵒᵐᵉⁿᵗᵒ ᵖᵒʳ ᶠᵃᵛᵒʳ_') 
+apiUrl = `https://api-brunosobrino.onrender.com/api/v1/ytmp3?url=${data.resultado.url}`;
+mimeType = 'audio/mpeg';
+fileName = 'error.mp3';
+buff = await conn.getFile(apiUrl);
+} else if (command === 'play.2' || command == 'video') {
+m.reply('*⏳ＰＲＯＣＥＳＡＮＤＯ....*\n\n_ᴰᵉˢᶜᵃʳᵍᵃᵈᵒ ˢᵘˢ ᵛᶦᵈᵉᵒ ᵃᵍᵘᵃʳᵈᵉ ᵘⁿ ᵐᵒᵐᵉⁿᵗᵒ ᵖᵒʳ ᶠᵃᵛᵒʳ_') 
+apiUrl = `https://api-brunosobrino.onrender.com/api/v1/ytmp4?url=${data.resultado.url}`;
+mimeType = 'video/mp4';
+fileName = 'error.mp4';
+buff = await conn.getFile(apiUrl)}
+} catch {
+enviando = false;
+return
+}}}
+if (buff) {
+await conn.sendMessage(m.chat, {[mimeType.startsWith('audio') ? 'audio' : 'video']: buff.data, mimetype: mimeType, fileName: fileName}, {quoted: m});
+m.react(done) 
+enviando = false
+} else {
+enviando = false
+}} catch (error) {
+enviando = false
+return m.reply(`*⚠️ Error no pudimos descarga sus audio/video intente mas tarde (api caida 😢)*`)}}
 
 if (command == 'ytmp3' || command == 'ytaudio') {
 const mp = require('../libs/ytdl2')
