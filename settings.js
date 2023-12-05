@@ -2,6 +2,7 @@
 const fs = require('fs') 
 const path = require('path')
 const chalk = require('chalk') 
+const { en, es } = require('./libs/idiomas/total-idiomas.js') 
 
 //---------[ PROPIETADO/OWNER ]---------
 global.owner = [["5492266466080", "Owner", true], ["573026191480", "asistencia", true], ["593968585383"], ["5492266466080"], ["595985451858"], ["5492266613038"], ["5217294888993"],["5214437863111"]]
@@ -16,7 +17,7 @@ global.vs = '1.0.2 (Beta)'
 
 //---------[ FECHA/IDIOMAS ]---------
 global.place = 'America/Bogota' // Aquí puedes encontrar tu ubicación https://momentjs.com/timezone/
-global.language = 'es' // Aquí puedes encontrar su idioma https://cloud.google.com/translate/docs/languages?hl=es-419
+global.lenguaje = es //Predeterminado en idioma Español 
 
 //---------[ APIS GLOBAL ]---------
 global.keysZens = ['LuOlangNgentot', 'c2459db922', '37CC845916', '6fb0eff124', 'hdiiofficial', 'fiktod', 'BF39D349845E', '675e34de8a', '0b917b905e6f']; 
@@ -30,7 +31,7 @@ global.itsrose = ['4b146102c4d500809da9d1ff'];
 global.API = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({...query, ...(apikeyqueryname ? {[apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name]} : {})})) : '');
 
 global.APIs = {
-  ApiEmpire: 'https://api.boxmine.xyz',
+  ApiEmpire: 'https://api-brunosobrino.zipponodes.xyz',
   xteam: 'https://api.xteam.xyz',
   dzx: 'https://api.dhamzxploit.my.id',
   lol: 'https://api.lolhuman.xyz',
