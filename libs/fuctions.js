@@ -140,7 +140,7 @@ function msToTime(duration) {
   minutes = (minutes < 10) ? "0" + minutes : minutes
   seconds = (seconds < 10) ? "0" + seconds : seconds
 
-  return hours + " Horas " + minutes + " Minutos"
+  return hours + " Horas " + minutes + " Minutos " + seconds + " Seg "
 }
 
 exports.msToTime = msToTime
@@ -401,6 +401,7 @@ if (!('premium' in user)) user.premium = false;
 if (!('registered' in user)) user.registered = false
 if (!user.registered) {
 if (!('name' in user)) user.name = m.name
+if (!('language' in user)) user.language = 'es'
 if (!isNumber(user.age)) user.age = -1
 if (!isNumber(user.regTime)) user.regTime = -1
 }
@@ -452,6 +453,7 @@ if (!isNumber(user.regTime)) user.regTime = -1
   joincount: 1,
   lastclaim: 0,
   name: m.name,
+  language: 'es',
   age: -1,
   regTime: -1,
   afk: -1,
@@ -493,7 +495,6 @@ let chats = global.db.data.chats[m.chat]
   if (!('antiNsfw' in chats)) chats.antiNsfw = true
   if (!('antispam' in chats)) chats.antispam = true
   if (!('antiFake' in chats)) chats.antiFake = false
-  if (!('aprobar' in chats)) chats.aprobar = false
   if (!('antiArabe' in chats)) chats.antiArabe = false
   if (!('autosticker' in chats)) chats.autosticker = false
   if (!('detect' in chats)) chats.detect = true
@@ -522,7 +523,7 @@ let chats = global.db.data.chats[m.chat]
   if (!('autobio' in setting)) setting.autobio = true
   if (!('jadibot' in setting)) setting.jadibot = true 
   if (!('anticall' in setting)) setting.anticall = true
-  if (!('antiprivado' in setting)) setting.antiprivado = false
+  if (!('antiprivado' in setting)) setting.antiprivado = false;
   } else global.db.data.settings[conn.user.jid] = {  
   status: 0,  
   autobio: true,
