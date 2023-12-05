@@ -1,4 +1,4 @@
-> <b>  🚀 Version 1.0.2 (beta) </b>
+> <b>  🚀 Version 1.0.5 (navideñas 🎅) </b>
 
 
 <p align="center">
