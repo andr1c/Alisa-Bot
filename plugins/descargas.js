@@ -37,7 +37,7 @@ showAdAttribution: true,
 renderLargerThumbnail: true
 }}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})  
 db.data.users[m.sender].limit -= 1
-m.reply(info.limit)
+m.reply('1 ' + info.limit)
 m.react(done) 
 } catch {
 try { 
@@ -254,7 +254,7 @@ mediaUrl:text,
 await fs.unlinkSync(audio.path)
 m.react(done) 
 db.data.users[m.sender].limit -= 1
-m.reply(info.limit)
+m.reply('1 ' + info.limit)
 } catch {
 m.react(error) 
 m.reply(info.error)}}
@@ -272,7 +272,7 @@ const ytc = `*❏ Título :* ${vid.title}
 *❏ calidad :* ${vid.quality}`
 await conn.sendMessage(m.chat, {video: {url : vid.videoUrl}, caption: ytc }, {quoted:m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 db.data.users[m.sender].limit -= 1
-m.reply(info.limit)
+m.reply('1 ' + info.limit)
 m.react(done) 
 } catch {
 m.react(error) 
@@ -318,7 +318,7 @@ let url = `https://api.github.com/repos/${user}/${repo}/zipball`
 let filename = (await fetch(url, {method: 'HEAD'})).headers.get('content-disposition').match(/attachment; filename=(.*)/)[1]
 conn.sendMessage(m.chat, { document: { url: url }, fileName: filename+'.zip', mimetype: 'application/zip' }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}).catch((err) => m.reply(info.error))
 db.data.users[m.sender].limit -= 1
-m.reply(info.limit) 
+m.reply('1 ' + info.limit)
 m.react(done) 
 } catch {
 m.react(error) 
@@ -333,7 +333,7 @@ require('../libs/tiktok').Tiktok(args).then( data => {
 conn.sendMessage(m.chat, { video: { url: data.nowm }}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 conn.sendMessage(m.chat, { audio: { url: data.audio }, mimetype: 'audio/mp4' }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})})
 db.data.users[m.sender].limit -= 1
-m.reply(info.limit) 
+m.reply('1 ' + info.limit)
 } catch {
 m.reply(info.error)}}
 
@@ -359,7 +359,7 @@ const { lyrics, lyricsv2 } = require('@bochilteam/scraper')
 const result = await lyricsv2(text).catch(async _ => await lyrics(text))
 conn.editMessage(m.chat, '*Aguarde un momento....*', `*❏ Titulo:* ${result.title}\n*❏ Autor :* ${result.author}\n*❏ Url :* ${result.link}\n\n*❏ Letra :* ${result.lyrics}`, 3, fkontak)
 db.data.users[m.sender].limit -= 1
-m.reply(info.limit)}
+m.reply('1 ' + info.limit)}
 
 if (command == 'mediafire') {
 const { mediafireDl } = require('../libs/mediafire.js') 
@@ -385,7 +385,7 @@ m.reply(`${result4}`)
    mediaUrl: md,  
  sourceUrl: md }}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
  db.data.users[m.sender].limit -= 2
-m.reply('*2 ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴜsᴀᴅᴏ*')}
+m.reply('2 ' + info.limit)}
 
 if (command == 'facebook' || command == 'fb') {
 if (!text) return m.reply(`*Ejemplo:*\n${prefix + command} https://fb.watch/ncowLHMp-x/?mibextid=rS40aB7S9Ucbxw6v`)
@@ -397,7 +397,7 @@ let VIDEO = Jjson.result[0];
 if (VIDEO == '' || !VIDEO || VIDEO == null) VIDEO = Jjson.result[1];
 conn.sendMessage(m.chat, {video: {url: VIDEO}, caption: `*🎥 AQUI ESTA TU VIDEO DE FACEBOOK*`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 db.data.users[m.sender].limit -= 1
-m.reply(info.limit)
+m.reply('1 ' + info.limit)
 } catch {
 m.reply(info.error)}}
 
@@ -411,7 +411,7 @@ const videoig = json.result;
 const shortUrl1 = await (await fetch(`https://tinyurl.com/api-create.php?url=${args[0]}`)).text();
 conn.sendMessage(m.chat, {video: {url: videoig}, caption: `🔗 *Url:* ${shortUrl1}`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 db.data.users[m.sender].limit -= 1
-m.reply(info.limit)
+m.reply('1 ' + info.limit)
 } catch {
 m.reply(info.error)}}
 
@@ -448,7 +448,7 @@ if (data5.size.includes('GB') || data5.size.replace(' MB', '') > 999) {
 return await conn.sendMessage(m.chat, {text: '*[ ⛔ ] El archivo es demasiado pesado por lo que no se enviará.*'}, {quoted: m})} 
 await conn.sendMessage(m.chat, {document: {url: data5.dllink}, mimetype: 'application/vnd.android.package-archive', fileName: data5.name + '.apk', caption: null}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}); 
 db.data.users[m.sender].limit -= 3
-m.reply('*3 ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴜsᴀᴅᴏ*')
+m.reply('3 ' + info.limit)
 } catch { 
 return m.reply(`*[ ⚠️ ] Error, no se encontrarón resultados para su búsqueda.*`)}}
 
@@ -465,7 +465,7 @@ GDriveDl(args[0]).then(async (res) => {
 if (!res) throw res;
 conn.sendMessage(m.chat, {document: {url: res.downloadUrl, mimetype: res.mimetype, asDocument: true, fileName: `${res}`}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}) 
 db.data.users[m.sender].limit -= 3
-m.reply('*3 ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴜsᴀᴅᴏ*')
+m.reply('3 ' + info.limit)
 } catch (e) {
 m.reply('*[ ⚠️ ] ᴇʀʀᴏʀ, ᴘᴏʀ ғᴀᴠᴏʀ ᴠᴜᴇʟᴠᴀ ᴀ ɪɴᴛᴇɴᴛᴀʀʟᴏ*');
 console.log(e)}}}

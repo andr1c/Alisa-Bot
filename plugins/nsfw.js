@@ -31,14 +31,14 @@ var result = pickRandom(nsfw)
 conn.sendMessage(m.chat, { caption: '🥵', image: { url: result.url } }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 m.react(xmoji) 
 db.data.users[m.sender].limit -= 1
-m.reply(info.limit)}
+m.reply('1 ' + info.limit)}
 
 if (command == 'lewd' || command == 'feed' || command == 'gasm' || command == 'anal' || command == 'holo' || command == 'tits' || command == 'kuni' || command == 'kiss' || command == 'erok' || command == 'erok' || command == 'smug' || command == 'solog' || command == 'feetg' || command == 'lewdk' || command == 'waifu' || command == 'pussy' || command == 'femdom' || command == 'cuddle' || command == 'eroyuri' || command == 'cum_jpg' || command == 'blowjob' || command == 'holoero' || command == 'erokemo' || command == 'fox_girl' || command == 'futanari' || command == 'wallpaper') {
 if (global.db.data.users[m.sender].level < 3) return m.reply(`[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀ ᴇʟ ɴɪᴠᴇʟ 3 ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ .nivel`) 
 sendImageAsUrl(`https://api.lolhuman.xyz/api/random2/${command}?apikey=${lolkeysapi}`, `*🔥 ${command} 🔥*`)
 m.react(xmoji) 
 db.data.users[m.sender].limit -= 3
-m.reply(info.limit)}
+m.reply('3 ' + info.limit)}
 
 if (command == 'hentai2') {
 if (global.db.data.users[m.sender].level < 3) return m.reply(`[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀ ᴇʟ ɴɪᴠᴇʟ 3 ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ .nivel`) 
@@ -51,7 +51,7 @@ if (command == 'porno') {
 sendImageAsUrl("https://delirius-nsfw.onrender.com/media/r/ass", '🥵');
 m.react(xmoji) 
 db.data.users[m.sender].limit -= 1
-m.reply(info.limit)}
+m.reply('1 ' + info.limit)}
 
 if (command == 'pack') {
 const url = await pack[Math.floor(Math.random() * pack.length)];
@@ -61,30 +61,34 @@ if (command == 'pack2' || command == 'pack3') {
 const url2 = await packgirl[Math.floor(Math.random() * packgirl.length)];
 sendImageAsUrl(url2, `*🥵 Pack 🥵*`)
 db.data.users[m.sender].limit -= 1
-m.reply(info.limit)}
+m.reply('1 ' + info.limit)}
 
 if (command == 'videoxxx' || command == 'vídeoxxx' || command == 'videoxxxlesbi') {
 const url4 = await videosxxxc[Math.floor(Math.random() * videosxxxc.length)];
 await conn.sendMessage(m.chat, {video: {url: url4}, caption: `*🥵 𝘋𝘐𝘚𝘍𝘙𝘜𝘛𝘈 𝘋𝘌𝘓 𝘝𝘐𝘋𝘌𝘖 🥵*`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 db.data.users[m.sender].limit -= 1
-m.reply(info.limit)}
+m.reply('1 ' + info.limit)}
 
 if (command == 'videolesbixxx' || command == 'pornolesbivid' || command == 'pornolesbianavid' || command == 'pornolesbiv' || command == 'pornolesbianav') {
 const url5 = await videosxxxc2[Math.floor(Math.random() * videosxxxc2.length)];
 await conn.sendMessage(m.chat, {video: {url: url5}, caption: `*𝘋𝘐𝘚𝘍𝘙𝘜𝘛𝘈 𝘋𝘌𝘓 𝘝𝘐𝘋𝘌𝘖 🥵`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 db.data.users[m.sender].limit -= 2
-m.reply(info.limit)}
+m.reply('2 ' + info.limit)}
 
 if (command == 'tetas') {
 const resError = (await axios.get(`https://raw.githubusercontent.com/elrebelde21/NovaBot-MD/master/src/nsfw/tetas.json`)).data;
 let res = await conn.getFile(`https://api-fgmods.ddns.net/api/nsfw/boobs?apikey=fg-dylux`).data;
 if (res == '' || !res || res == null) res = await resError[Math.floor(resError.length * Math.random())];
-conn.sendMessage(m.chat, {image: {url: res}, caption: `_${command}_`.trim()}, {quoted: m})}
+conn.sendMessage(m.chat, {image: {url: res}, caption: `_${command}_`.trim()}, {quoted: m})
+db.data.users[m.sender].limit -= 1
+m.reply('1 ' + info.limit)}
     
 if (command == 'pechos') {
 const res = (await axios.get(`https://raw.githubusercontent.com/elrebelde21/NovaBot-MD/master/src/nsfw/pechos.json`)).data;
 const url = await res[Math.floor(res.length * Math.random())];
-conn.sendMessage(m.chat, {image: {url: url}, caption: `_${command}_`.trim()}, {quoted: m})}}
+conn.sendMessage(m.chat, {image: {url: url}, caption: `_${command}_`.trim()}, {quoted: m})
+db.data.users[m.sender].limit -= 1
+m.reply('1 ' + info.limit)}}
 
 module.exports = {nsfw}
 

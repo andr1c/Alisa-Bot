@@ -8,6 +8,7 @@ const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, slee
 
 async function stickers(m, command, conn, mime, quoted, args, text, lolkeysapi, fkontak) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (command == 's' || command == 'sticker') {
 if (/image/.test(mime)) {  
 conn.fakeReply(m.chat, `⏳ *Aguarde un momento estoy creando tu stickers....*`, '0@s.whatsapp.net', 'No haga spam')
@@ -46,11 +47,14 @@ if (command == 'attp') {
 if (!text) return m.reply('ingresa algo para convertirlo a sticker :v')
 m.reply(`_*Calma crack estoy haciendo tu texto a sticker 👏*_\n\n_*Esto puede demorar unos minutos....*_`) 
 let link = `https://api.lolhuman.xyz/api/attp?apikey=${lolkeysapi}&text=${text}`
-await conn.sendMessage(m.chat, { sticker: { url: link } }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+await conn.sendMessage(m.chat, { sticker: { url: link } }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+db.data.users[m.sender].limit -= 1 }
 
 if (command == 'dado') {
 let dir = `https://api.lolhuman.xyz/api/sticker/dadu?apikey=${lolkeysapi}`
-conn.sendMessage(m.chat, { sticker: { url: dir } }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}}
+conn.sendMessage(m.chat, { sticker: { url: dir } }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+db.data.users[m.sender].limit -= 1
+m.reply('1 ' + info.limit)}}
 
 module.exports = { stickers }
 

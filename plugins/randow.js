@@ -6,6 +6,7 @@ const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, slee
 
 async function randow(m, sender, command, sendImageAsUrl, pickRandom, conn) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (command == 'memes') {
 let hispamemes = require("hispamemes") 
 const meme = hispamemes.meme()
@@ -27,7 +28,9 @@ sendImageAsUrl(neko)}
 if (command == 'akira' || command == 'akiyama' || command == 'anna' || command == 'asuma' || command == 'ayuzawa' || command == 'boruto' || command == 'chiho' || command == 'chitoge' || command == 'deidara' || command == 'erza' || command == 'elaina' || command == 'eba' || command == 'emilia' || command == 'hestia' || command == 'hinata' || command == 'inori' || command == 'isuzu' || command == 'itachi' || command == 'itori' || command == 'kaga' || command == 'kagura' || command == 'kaori' || command == 'keneki' || command == 'kotori' || command == 'kurumi' || command == 'madara' || command == 'mikasa' || command == 'miku' || command == 'minato' || command == 'naruto' || command == 'nezuko' || command == 'sagiri' || command == 'sakura' || command == 'sasuke' || command == 'cosplay') {
 let a = JSON.parse(fs.readFileSync(`./src/randow/anime-${command}.json`))
 var result = pickRandom(a)
-sendImageAsUrl(result, `${command}`)}
+sendImageAsUrl(result, `${command}`)
+db.data.users[m.sender].limit -= 1
+m.reply('1 ' + info.limit)}
 if (command == 'blackpink') {
 sendImageAsUrl("https://delirius-image-random.vercel.app/api/all")}
 if (command == 'navidad') {
@@ -37,27 +40,36 @@ sendImageAsUrl(result, `${command}`)}}
 
 async function randow2(conn, m, command, text, sender, pushname) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (command == 'horny') {
 let who = conn
 conn.sendMessage(m.chat, { image: { url: global.API('https://some-random-api.com', '/canvas/horny', { 
 avatar: await conn.profilePictureUrl(m.chat, 'image').catch((_) => 'https://telegra.ph/file/24fa902ead26340f3df2c.png'), 
-})}, caption: `*𝚃𝚄 𝙴𝚂𝚃𝙰𝚂 𝙷𝙾𝚁𝙽𝚈 🥵🔥*`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+})}, caption: `*𝚃𝚄 𝙴𝚂𝚃𝙰𝚂 𝙷𝙾𝚁𝙽𝚈 🥵🔥*`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+db.data.users[m.sender].limit -= 1
+m.reply('1 ' + info.limit)}
 if (command == 'simp') {
 conn.sendMessage(m.chat, { image: { url: global.API('https://some-random-api.com', '/canvas/simpcard', { 
 avatar: await conn.profilePictureUrl(m.chat, 'image').catch((_) => 'https://telegra.ph/file/24fa902ead26340f3df2c.png'), 
-})}, caption: `_𝚃𝚄 𝚁𝙴𝙻𝙸𝙶𝙸𝙾𝙽 𝙴𝚂 𝚂𝙴𝚁 𝚄𝙽 𝚂𝙸𝙼𝙿!!_`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+})}, caption: `_𝚃𝚄 𝚁𝙴𝙻𝙸𝙶𝙸𝙾𝙽 𝙴𝚂 𝚂𝙴𝚁 𝚄𝙽 𝚂𝙸𝙼𝙿!!_`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+db.data.users[m.sender].limit -= 1
+m.reply('1 ' + info.limit)}
 if (command == 'lolice') {
 const who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender;
 conn.sendMessage(m.chat, { image: { url: global.API('https://some-random-api.com', '/canvas/lolice', {
  avatar: await conn.profilePictureUrl(who, 'image').catch((_) => 'https://telegra.ph/file/24fa902ead26340f3df2c.png'),
-  })}, caption: '*ʟʟᴀᴍᴇɴ ᴀ ʟᴀ ᴘᴏʟɪᴄɪᴀ!!* 😱', mentions: [who] }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+  })}, caption: '*ʟʟᴀᴍᴇɴ ᴀ ʟᴀ ᴘᴏʟɪᴄɪᴀ!!* 😱', mentions: [who] }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+db.data.users[m.sender].limit -= 1
+m.reply('1 ' + info.limit)}
 if (command == 'comentar' || command == 'comment') {
 if (!text) return m.reply('*falta un texto*') 
 conn.sendMessage(m.chat, { image: { url: global.API('https://some-random-api.com', '/canvas/youtube-comment', { 
 avatar: await conn.profilePictureUrl(m.sender, 'image').catch((_) => 'https://telegra.ph/file/24fa902ead26340f3df2c.png'), 
 comment: text, 
 username: pushname,
-})}, caption: `*ʜᴀs ᴄᴏᴍᴇɴᴛᴀᴅᴏ ᴇɴ ʏᴏᴜᴛᴜʙᴇ!!* 😳`, mentions: [m.sender] }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}}
+})}, caption: `*ʜᴀs ᴄᴏᴍᴇɴᴛᴀᴅᴏ ᴇɴ ʏᴏᴜᴛᴜʙᴇ!!* 😳`, mentions: [m.sender] }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+db.data.users[m.sender].limit -= 1
+m.reply('1 ' + info.limit)}}
 
 module.exports = {randow, randow2}
 
