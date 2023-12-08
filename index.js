@@ -423,7 +423,7 @@ const date = moment.tz('America/Bogota').format('DD/MM/YYYY')
 let name = num
 const miembros = metadata.participants.length
 let vn = './media/Bienvenido.mp3'
-let wel = [`${lenguaje['smsWel']()} @${name.split("@")[0]} ${lenguaje['smsWel2']()}`, `${lenguaje['smsWel']()} @${name.split("@")[0]} ${lenguaje['smsWel3']()} ${metadata.subject} 』\n\n${lenguaje['smsWel4']()}`, `${lenguaje['smsWel5']()} @${name.split("@")[0]} ${lenguaje['smsWel6']()} 🥳`]
+let wel = [`${lenguaje['smsWel']()} @${name.split("@")[0]} ${lenguaje['smsWel2']()}`, `${lenguaje['smsWel']()} @${name.split("@")[0]} ${lenguaje['smsWel3']()} ${metadata.subject} 』\n\n${lenguaje['smsWel4']()}`, `${lenguaje['smsWel5']()} ${lenguaje['smsWel6']()} @${name.split("@")[0]} 🥳`]
 let or = ['texto', 'audio', 'texto2'];
 let media = or[Math.floor(Math.random() * 3)]
 let welcome = wel[Math.floor(Math.random() * wel.length)]
@@ -441,7 +441,7 @@ contextInfo: { mentionedJid:[num], "externalAdReply": {
 "showAdAttribution": true}}, 
 seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 if (media === 'texto2')
-sock.sendMessage(anu.id, { text: `${lenguaje['smsWel7']()} ${lenguaje['smsWel']()} @${name.split("@")[0]} ${lenguaje['smsWel2']()}\n${lenguaje['smsWel8']()} ${metadata.subject}\n${lenguaje['smsWel9']()} ${miembros}*\n${lenguaje['smsWel10']()} ${date}\n\n${lenguaje['smsWel11']()} \n\n${metadata.desc}`, contextInfo:{
+sock.sendMessage(anu.id, { text: `${lenguaje['smsWel7']()} ${lenguaje['smsWel']()} @${name.split("@")[0]} ${lenguaje['smsWel2']()}\n${lenguaje['smsWel8']()} ${metadata.subject}\n${lenguaje['smsWel9']()} ${miembros}\n${lenguaje['smsWel10']()} ${date}\n\n${lenguaje['smsWel11']()} \n\n${metadata.desc}`, contextInfo:{
 forwardingScore: 9999999,
 isForwarded: true, 
 mentionedJid:[num],

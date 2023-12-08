@@ -211,10 +211,10 @@ let gclink = (`https://chat.whatsapp.com/`+await conn.groupInviteCode(m.chat))
 let isLinkThisGc = new RegExp(gclink, 'i')
 let isgclink = isLinkThisGc.test(m.text)
 if (isgclink) return
-if (isGroupAdmins) return reply(`${lenguaje['smsAntiLink5']()}`)
+if (isGroupAdmins) return reply(`${lenguaje['smsAntiLink5']()}`) 
 conn.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: bang, participant: delet }})
 conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')}}
- 
+  
 //-------[ MODO PUBLIC/PRIVADO ]-----------
 if (!conn.public && !isCreator) {
 if (!m.key.fromMe) return }        	
@@ -303,14 +303,14 @@ case 'serbot': case 'jadibot': case 'qr':
 jadibot(conn, m, command, text, args, sender)
 break  
 case 'deljadibot': case 'stop': 
-killJadibot(conn, m, prefix, command)
+killJadibot(conn, m, prefix, command, sender)
 break 
 case 'bots': case 'listbots': 
 const user = [...new Set([...global.listJadibot.filter((conn) => conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED).map((conn) => conn)])];
 const message = user.map((v, index) => `[${index + 1}] ${v.user.name || '•'}\nwa.me/${v.user.jid.replace(/[^0-9]/g, '')}?text=${prefix}estado`).join('\n\n');
 const replyMessage = message.length === 0 ? '' : message;
 const totalUsers = user.length;
-const responseMessage = `*𝘚𝘜𝘉𝘉𝘖𝘛𝘚 𝘊𝘖𝘕𝘌𝘊𝘛𝘈𝘋𝘖𝘚:* ${totalUsers || '0'}\n\n${replyMessage.trim()}`.trim();
+const responseMessage = `${lenguaje.jadibot.text18} ${totalUsers || '0'}\n\n${replyMessage.trim()}`.trim();
 await conn.sendMessage(m.chat, {text: responseMessage, mentions: conn.parseMention(responseMessage)}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
 break
 
@@ -373,16 +373,17 @@ break
 //propietario/owner
 case 'bcgc': case 'bcgroup': case 'bc': case 'broadcast': case 'bcall': case 'block': case 'bloquear': case 'unblock': case 'desbloquear': case 'setcmd':  case 'addcmd': case 'delcmd': case 'listcmd': case 'añadirdiamantes': case 'dardiamantes': case 'addlimit': case 'añadirxp': case 'addexp': case 'addxp': owner(isCreator, m, command, conn, text, delay, fkontak, store, quoted, sender) 
 break 
+
 case 'banuser': {  
 if (!isCreator) return reply(info.owner)
 let who 
 if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false
 else who = m.chat
 let user = global.db.data.users[who]
-if (!who) return m.reply(`*⚠️ 𝘌𝘵𝘪𝘲𝘶𝘦𝘵𝘢/𝘮𝘦𝘯𝘤𝘪𝘰𝘯𝘢 𝘢 𝘢𝘭𝘨𝘶𝘪𝘦𝘯*\n\n*𝘌𝘫𝘦𝘮𝘱𝘭𝘰 :* ${prefix + command} @user`) 
+if (!who) return m.reply(lenguaje.owner.text15) 
 let users = global.db.data.users
 users[who].banned = true
-m.reply(`*𝘌𝘭 𝘶𝘴𝘶𝘢𝘳𝘪𝘰𝘴 𝘧𝘶𝘦 𝘉𝘢𝘯𝘦𝘢𝘥𝘰 𝘺𝘢 𝘯𝘰 𝘱𝘰𝘥𝘳𝘢́ 𝘶𝘴𝘢𝘳 𝘮𝘪𝘴 𝘤𝘰𝘮𝘢𝘯𝘥𝘰𝘴*`)}
+m.reply(lenguaje.owner.text22)}
 break
 case 'unbanuser': {
 if (!isCreator) return reply(info.owner)
@@ -390,20 +391,20 @@ let who
 if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false
 else who = m.chat
 let user = global.db.data.users[who]
-if (!who) return m.reply(`*⚠️ 𝘌𝘵𝘪𝘲𝘶𝘦𝘵𝘢/𝘮𝘦𝘯𝘤𝘪𝘰𝘯𝘢 𝘢𝘭 𝘶𝘴𝘶𝘢𝘳𝘪𝘰 𝘱𝘢𝘳𝘢 𝘥𝘦𝘴𝘣𝘢𝘯𝘦𝘢𝘳*`) 
+if (!who) return m.reply(lenguaje.owner.text15) 
 let users = global.db.data.users
 users[who].banned = false
-m.reply(`*𝘌𝘭 𝘶𝘴𝘶𝘢𝘳𝘪𝘰𝘴 𝘩𝘢 𝘴𝘪𝘥𝘰 𝘋𝘦𝘴𝘣𝘢𝘯𝘦𝘢𝘥𝘰 𝘤𝘰𝘯 𝘦𝘹𝘪𝘵𝘰𝘴✅ 𝘢𝘩𝘰𝘳𝘢 𝘴𝘪 𝘱𝘶𝘦𝘥𝘦 𝘶𝘴𝘢𝘳 𝘦𝘭 𝘣𝘰𝘵*`)}
+m.reply(lenguaje.owner.text23)}
 break
 case 'public': case 'publico': {
 if (!isCreator) return reply(info.owner)
 conn.public = true
-reply('✅Cambio con exitoso a uso público')}
+m.reply(lenguaje.owner.text24)}
 break
 case 'self': case 'privado': {
 if (!isCreator) return reply(info.owner)
 conn.public = false
-reply('✅Cambio con exitoso a uso privado')}
+m.reply(lenguaje.owner.text25)}
 break	 
 case 'autoadmin': case 'tenerpoder': {
 if (!m.isGroup) return m.reply(info.group)
@@ -414,7 +415,7 @@ await conn.groupParticipantsUpdate(m.chat, [m.sender], "promote")}
 break 
 case 'leave': {  
 if (!isCreator) return reply(info.owner)
-reply(`*Adios fue un gusto esta aqui hasta pronto 👋*`)
+reply(lenguaje.owner.text26)
 await delay(3 * 3000)
 await conn.groupLeave(m.chat)}
 break
@@ -425,7 +426,7 @@ let d = new Date
 let date = d.toLocaleDateString('fr', { day: 'numeric', month: 'long', year: 'numeric' })
 let database = await fs.readFileSync(`./database.json`)
 let creds = await fs.readFileSync(`./sessions/creds.json`)
-await m.reply('*𝘌𝘯𝘷𝘪𝘢𝘯𝘥𝘰 𝘤𝘰𝘱𝘪𝘢 𝘥𝘦 𝘴𝘦𝘨𝘶𝘳𝘪𝘥𝘢 𝘶𝘯 𝘮𝘰𝘮𝘦𝘯𝘵𝘰*')
+await m.reply(lenguaje.owner.text27)
 await conn.sendMessage(m.sender, {document: database, mimetype: 'application/json', fileName: `database.json`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 await conn.sendMessage(m.sender, {document: creds, mimetype: 'application/json', fileName: `creds.json`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 } catch (e) {
@@ -442,7 +443,7 @@ await m.reply(updatee.toString())}
 break
 case 'reiniciar': case 'restart': { 
 if (!isCreator) return reply(info.owner) 
-m.reply('_🔄 Reiniciando Bot..._');
+m.reply(lenguaje.owner.text28)
 await delay(3 * 3000) 
 conn.ws.close()}   
 break  
@@ -474,7 +475,7 @@ if (budy.includes(`NovaBot`)) {
 m.react(`${pickRandom(['🌟', '👀', '🤑'])}`)}
 if (budy.includes(`Bot`)) { 
 await conn.sendPresenceUpdate('composing', m.chat)
-game(m, text, pickRandom, pushname, command)} 
+m.reply(`${pickRandom([ '*Hola soy un bot yo puedo ayudar?*', 'Hello hablemos un ratito justos ☺, que me cuenta?', 'Hola 👋😄 aqui estoy para hacerte reir un rato, mi amigo me dices que soy muy Diventida 😆', 'Que onda perro tdo bien?', 'Hey estoy aburrida podemos hablar un rato?'])}`)}
 if (m.mentionedJid.includes(conn.user.jid)) {
 let noetiqueta = fs.readFileSync('./src/etiqueta.webp')
 let or = ['texto', 'sticker']; 
