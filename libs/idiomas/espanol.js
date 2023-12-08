@@ -36,15 +36,17 @@ const smsWel3 = () => { return `¿COMO ESTAS?😃\n\n『Bienvenido A` }
 const smsWel4 = () => { return `Un gusto conocerte amig@ 🤗\n\n_Recuerda leer las reglas del grupo para no tener ningun problema 🧐_\n\n*Solo disfrutar de este grupo y divertite 🥳*` }
 const smsWel5 = () => { return `[ NUEVO MIEMBRO ]\n\n` }
 const smsWel6 = () => { return `𝘓𝘦 𝘥𝘢𝘮𝘰𝘴 𝘭𝘢 𝘣𝘪𝘦𝘯𝘷𝘦𝘯𝘪𝘥𝘢 𝘢` }
-const smsWel7 = () => { return `⪨────[ ＷＥＬＣＯＭＥ ]────⪩\n\n💫 ` }
+const smsWel7 = () => { return `⪨────[ ＷＥＬＣＯＭＥ ]────⪩\n\n` }
 const smsWel8 = () => { return `💫 *Bienvenido a :*` }
 const smsWel9 = () => { return `💫 *Participarte*` }
 const smsWel10 = () => { return `💫 *Fecha*` }
-const smsWel11 = () => { return `📢 *Lee la descripcion* 📢\n\n` }
+const smsWel11 = () => { return `📢 *Lee la descripcion* 📢\n` }
 const smsBye = () => { return `Adios` }
 const smsBye2 = () => { return `Bueno, se fue` }
 const smsBye3 = () => { return `Que dios lo bendiga 😎` }
 const smsBye4 = () => { return `Salió del grupo._` }
+const promote = () => { return `Felicidades ahora eres parte staff 🎉` }
+const demote = () => { return `ya no eres admins 🥲` }
 
 //mensaje el la consola inicio
 const smsConexion = () => { return `🟢 𝘜𝘚𝘜𝘈𝘙𝘐𝘖𝘚 𝘊𝘖𝘕𝘌𝘊𝘛𝘈𝘋𝘖 =>` }
@@ -77,9 +79,9 @@ const smsAntiLink5 = () => { return `Te salvarte por que eres un admins :v` }
 const smsAutoSicker = () => { return `🤡 Hey Donde carajo viste un stickes que dure tanto bobo 🤣. (Máximo 15 segundos)` }
 
 //autonivel
-const smsAutonivel = () => { return `*「 FELICIDADES LEVEL UP 🆙🥳 」*\n🥳 Felicidades` }
-const smsAutonivel2 = () => { return `👏 subiste de nivel sigue asi 👏` }
-const smsAutonivel3 = () => { return `*NIVEL :*` }
+const smsAutonivel = () => { return `*「 FELICIDADES LEVEL UP 🆙🥳 」*\n\n🥳 Felicidades` }
+const smsAutonivel2 = () => { return `👏 subiste de nivel sigue asi 👏\n\n` }
+const smsAutonivel3 = () => { return `*🎅 NIVEL :*` }
 const smsAutonivel4 = () => { return `*🎅 NIVEL ANTERIOR :* ` }
 const smsAutonivel5 = () => { return `*🎅 NIVEL ACTUAL :*` }
 const smsAutonivel6 = () => { return `*🎅 RANGO :*` }
@@ -92,17 +94,17 @@ const nivel = () => { return `[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀ ᴇʟ ɴɪᴠᴇʟ
 const nivel2 = () => { return `ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ` }
 const admin = () => { return `*⚠️ Tu no eres admins 🤡 solo los admins puede usar este comando*` }
 const botAdmin = () => { return `*⚠️ Hey primero el bot osea (Yo), Necesito ser admins para usar este comando*` }
-const owner = () => { return `*⚠️ Quien carajo eres tu? solo mi jefe puede usar este comando*` }
+const propietario = () => { return `*⚠️ Quien carajo eres tu? solo mi jefe puede usar este comando*` }
 const group = () => { return `*⚠️ Pendejo este comando solo se puede usar el grupo*` }
 const private = () => { return `*⚠️ Este comando solo se puede usar al chat privado*` }
 const bot = () => { return `*⚠️ Este comando solo (YO) los puedo usar*` }
-const error = () => { return `*[ ⚠️ 𝘌𝘙𝘙𝘖𝘙 ]*` }
+const error = () => { return `⪨╼╼≪⚠️ ERROR ⚠️≫╾╼⪩\n\nOCURRIÓ UN ERROR INESPERADO, (API CAIDA 😢)` }
 const advertencia = () => { return `[ ⚠️ ＡＤＶＥＲＴＥＮＣＩＡ ]` }
 const registra = () => { return `*[ 🔴 HEY ALTO NO ESTAS REGISTRADO 🔴 ]*\n\nNO APARECES EN MI BASE DE DATOS ✋\n\nPara poder usar el bot necesita esta registrado:\n\n#reg nombre.edad` }
 const limit = () => { return `*ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴜsᴀᴅᴏ*` }
 const AntiNsfw = () => { return `*Los comando +18 esta desactivado*\nSi eres admin y quiere activarlos usar:\n• modocaliente on` }
-const endLimit = () => { return `*🧐 Noo tiene mas limite 💎*\n\nPuede comprar mas usando el comando: #buy` }
-const result = () => { return `Resultados de` }
+const endLimit = () => { return `*😢 NOO TENER MAS DIAMANTE 💎*\n\nPuede comprar mas usando el comando: #buy` }
+const result = () => { return `*Resultados de :*` }
 
 //Buscadores
 const lengua = { 
@@ -112,9 +114,14 @@ opcion: `OPCIÓN :`,
 tipo: `TIPO :`, 
 id: `ID DEL VIDEO :`, 
 titulo: `TITULO :`, 
+Peso: `*PESO :*`, 
+artista: `𝘈𝘙𝘛𝘐𝘚𝘛𝘈`, 
+album: `𝘈𝘓𝘉𝘜𝘔`, 
 vista: `VISTAS :`, 
+publi: `𝘗𝘜𝘉𝘓𝘐𝘊𝘈𝘋𝘖`, 
 dura: `DURACIÓN :`, 
 subidos: `SUBIDOS :`, 
+calidad: `calidad :`, 
 desc: `DESCRIPCION :`, 
 text: `Ingresa un link para acortar!`, 
 trad: `🔸 Traducción`, 
@@ -122,11 +129,11 @@ text2: `*Y EL TEXTO?*`,
 ia: `*⚠️ INGRESE EL TEXTO DE LOS QUE QUIERE BUSCAR?*\n\n*• EJEMPLO :*\n`, 
 ia2: `*⚠️ INGRESE UN TEXTO PARA CREAR UNA IMAGEN Y ASI USAR LA FUNCION DE DALL-E*\n\n*• EJEMPLO:*\n`,
 espere: `⏳ *Aguarde un momento....*`, 
-aguarde: `⏳ *𝘗𝘙𝘖𝘊𝘌𝘚𝘈𝘕𝘋𝘖 𝘓𝘈 𝘐𝘔𝘈𝘎𝘌𝘕, 𝘈𝘎𝘜𝘈𝘙𝘋𝘌𝘕 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖...`, 
-erro: `*Intenta de nuevo (api caida 😢)*`, 
+aguarde: `⏳ *𝘗𝘙𝘖𝘊𝘌𝘚𝘈𝘕𝘋𝘖 𝘓𝘈 𝘐𝘔𝘈𝘎𝘌𝘕, 𝘈𝘎𝘜𝘈𝘙𝘋𝘌𝘕 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖....*`, 
 responde: `*[ ⚠️ ] ᴇɴᴠɪᴇ/ʀᴇsᴘᴏɴᴅᴀ ᴀ ᴜɴᴀ ɪᴍᴀɢᴇɴ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ :`, 
 incorrecto: `*[ ⚠️ ] ᴇʟ ғᴏʀᴍᴀᴛᴏ ᴅᴇʟ ᴀʀᴄʜɪᴠᴏ ɴᴏ ᴇs ᴄᴏᴍᴘᴀʀᴛɪʙʟᴇ, ᴇɴᴠɪᴀ/ʀᴇsᴘᴏɴᴅᴀ ᴀ ᴜɴᴀ ғᴏᴛᴏ*`, 
-hd: `*𝘈𝘘𝘜𝘐 𝘛𝘐𝘌𝘕𝘌 𝘓𝘈 𝘐𝘔𝘈𝘎𝘌𝘕 𝘌𝘓 𝘏𝘋*\n\nˢᶦ ˡᵃ ᶦᵐᵃᵍᵉⁿ ⁿᵒ ˢᵃˡᵉ ᵉˡ ᴴᴰ ʳᵉˢᵖᵒⁿᵈᵉ ᵃ ˡᵃ ᶦᵐᵃᵍᵉⁿ ᶜᵒⁿ ᵉˡ ᶜᵒᵐᵃⁿᵈᵒ ᵈᵉ ⁿᵘᵉᵛᵒ`
+hd: `*𝘈𝘘𝘜𝘐 𝘛𝘐𝘌𝘕𝘌 𝘓𝘈 𝘐𝘔𝘈𝘎𝘌𝘕 𝘌𝘓 𝘏𝘋*\n\nˢᶦ ˡᵃ ᶦᵐᵃᵍᵉⁿ ⁿᵒ ˢᵃˡᵉ ᵉˡ ᴴᴰ ʳᵉˢᵖᵒⁿᵈᵉ ᵃ ˡᵃ ᶦᵐᵃᵍᵉⁿ ᶜᵒⁿ ᵉˡ ᶜᵒᵐᵃⁿᵈᵒ ᵈᵉ ⁿᵘᵉᵛᵒ`, 
+error: `No se pudo descargar sus video por favor vuelve a intenta` 
 }
 
 //convertidores
@@ -153,10 +160,10 @@ text9: `➢ 𝙼𝙾𝙳𝙾 :`,
 text10: `➢ 𝙱𝙾𝚃 𝚂𝙴𝙲𝚄𝙽𝙳𝙰𝚁𝙸𝙾𝚂 𝙰𝙲𝚃𝙸𝚅𝙾𝚂 :`, 
 text11: `➢ 𝐒𝐨𝐲 𝐮𝐧 𝐒𝐮𝐛𝐁𝐨𝐭 𝐝𝐞 :`,
 text12: `este bot esta desarrollo si quiere contacta con mi creador aqui te dejo sus número\n\nᴺᵒ ʰᵃᵍᵃⁿ ˢᵖᵃᵐ ᵃ ᵐᶦ ᶜʳᵉᵃᵈᵒʳ ᵒ ᵠᵘᵉ ᵇˡᵒᵠᵘᵉᵃ`, 
-text13: `ʜᴏʟᴀ ᴇsᴛɪᴍᴀᴅᴏs ᴜsᴜᴀʀɪᴏs 👋🏻, ᴛᴇ ɪɴᴠɪᴛᴏ ᴀ ᴜɴɪʀᴛᴇ ᴀ ʟᴏs ɢʀᴜᴘᴏs ᴏғɪᴄɪᴀʟᴇs ᴅᴇ ʟᴀs ғᴀᴍɪʟᴀs ᴛʜᴇ ʟᴏʟɪʙᴏᴛ-ᴍᴅ ʏ ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ, ᴘᴀʀᴀ ᴄᴏɴᴠɪᴠɪʀ ᴄᴏɴ ʟᴀ ᴄᴏᴍᴜɴɪᴅᴀᴅ :ᴠ*\n\n*➤ ɢʀᴜᴘᴏs ᴏғɪᴄɪᴀʟᴇs ᴅᴇʟ ʙᴏᴛ:`, 
-text14: `➤ ɢʀᴜᴘᴏ ᴅᴇʟ ᴄᴏʟᴀʙᴏʀᴀᴄɪᴏɴ:*`, 
-text15: `➤ ɢʀᴜᴘᴏs ᴛᴇsᴛ ᴘᴀʀᴀ ᴘʀᴜᴇʙᴀ ᴅᴇʟ ʙᴏᴛ:*`, 
-text16: `➤ ɪɴғᴏᴍᴀʀᴛᴇ sᴏʙʀᴇ ʟᴀs ɴᴜᴇᴠᴀs ᴀᴄᴛᴜᴀʟɪᴢᴀᴄɪᴏɴᴇs ᴅᴇʟ ʙᴏᴛ ᴀǫᴜɪ:*`, 
+text13: `*ʜᴏʟᴀ ᴇsᴛɪᴍᴀᴅᴏs ᴜsᴜᴀʀɪᴏs 👋🏻, ᴛᴇ ɪɴᴠɪᴛᴏ ᴀ ᴜɴɪʀᴛᴇ ᴀ ʟᴏs ɢʀᴜᴘᴏs ᴏғɪᴄɪᴀʟᴇs ᴅᴇ ʟᴀs ғᴀᴍɪʟᴀs ᴛʜᴇ ʟᴏʟɪʙᴏᴛ-ᴍᴅ ʏ ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ, ᴘᴀʀᴀ ᴄᴏɴᴠɪᴠɪʀ ᴄᴏɴ ʟᴀ ᴄᴏᴍᴜɴɪᴅᴀᴅ :ᴠ*\n\n*➤ ɢʀᴜᴘᴏs ᴏғɪᴄɪᴀʟᴇs ᴅᴇʟ ʙᴏᴛ:*`, 
+text14: `*➤ ɢʀᴜᴘᴏ ᴅᴇʟ ᴄᴏʟᴀʙᴏʀᴀᴄɪᴏɴ:*`, 
+text15: `*➤ ɢʀᴜᴘᴏs ᴛᴇsᴛ ᴘᴀʀᴀ ᴘʀᴜᴇʙᴀ ᴅᴇʟ ʙᴏᴛ:*`, 
+text16: `*➤ ɪɴғᴏᴍᴀʀᴛᴇ sᴏʙʀᴇ ʟᴀs ɴᴜᴇᴠᴀs ᴀᴄᴛᴜᴀʟɪᴢᴀᴄɪᴏɴᴇs ᴅᴇʟ ʙᴏᴛ ᴀǫᴜɪ:*`, 
 text17: `*➤ ɢʀᴜᴘᴏ ᴅᴇʟ ᴀʏᴜᴅᴀ sᴏʙʀᴇ ᴇʟ ʙᴏᴛ:*`, 
 text18: `• ɢʀᴜᴘᴏs ᴅᴇʟ ᴀᴍɪsᴛᴀᴅᴇs ᴅᴏɴᴅᴇ ᴇsᴛᴀ ᴇʟ ʙᴏᴛ`, 
 text19: `ˢᶦ ᵠᵘᶦᵉʳᵉˢ ᵠᵘᵉ ᵗᵘ ᵍʳᵘᵖᵒˢ ᵃᵖᵃʳᵉᶻᶜᵃⁿ ᵃᵠᵘᶦ ʰᵃᵇˡᵃʳ ᶜᵒⁿ ᵐᶦ ᶜʳᵉᵃᵈᵒ`, 
@@ -265,4 +272,278 @@ Hablar con mi creador y el lo une a tu grupo
 
 Si lo haces, seras baneado del bot y bloqueado` }
 
-module.exports = { lenguaje, tmp, session, errorsession, archivo, archborrado, archivoborrado, purgesessions, purgesubbots, purgeoldfiles, smscall, smscall2, smsAvisos, smsAvisos2, smsAvisos3, smsAvisos4, smsAvisos5, smsAvisos6, smsAvisos7, smsAvisos8, smsAvisos9, smsWel, smsWel2, smsWel3, smsWel4, smsWel5, smsWel6, smsWel7, smsWel8, smsWel9, smsWel10, smsWel11, smsBye, smsBye2, smsBye3, smsBye4, smsConexion, smsEscaneaQR, smsConectado, smsConexioncerrar, nivel, nivel2, admin, botAdmin, owner, group, private, bot, error, advertencia, registra, limit, AntiNsfw, endLimit, result, lengua, sms, Bio, smsAntiFake, smsAntiArabe, smsAntiLink, smsAntiLink2, smsAntiLink3, smsAntiLink4, smsAntiLink5, smsAutoSicker, smsAutonivel, smsAutonivel2, smsAutonivel3, smsAutonivel4, smsAutonivel5, smsAutonivel6, smsAutonivel7, smsAutonivel8, smsAutonivel9, smsAntiPv, info, menu}
+//jadibot.js
+const jadibot = {
+text: `Escanea este QR para convertirte en un bot temporal
+
+1) Haz clic en los tres puntos en la esquina superior derecha
+2) Toca WhatsApp Web
+3) Escanea este QR
+*El QR expira a los 45 segundos*\n\n`, 
+text2: `NUEVO FORMA DE HACERTE UN SUB BOT
+
+1) Haz clic en los tres puntos en la esquina superior derecha
+2) Toca WhatsApp Web
+3) Da click en vincular con codigo de teléfono
+4) Pega el codigo a continuación\n\n`, 
+text3: `*⚠️ Este comando fue desabilitado por el creador*`, 
+text4: `*✅ Ya estas conectado, sea paciente, los mensajes se estan cargando...*`, 
+text5: `*Conectado con exito*`, 
+text6: `× Bot :`, 
+text7: `× Dueño :`, 
+text8: `*NOTA:* el bot se puede reiniciar si deja de recibir comandos use: #serbot o la id que se enviara a continuación, para volver, a conectarte`, 
+text9: `*⚠️ Dispositivo desconectado tendra que volver a conectarte con #jadibot*`, 
+text10: `*⚠️ Reenvia el comando....*`, 
+text11: `[ ⚠️ ] Reinicio requerido, Reiniciando...`, 
+text12: `*⚠️ Dispositivo desconectado*\n\n*Tendras que volver a iniciar sesion (usa .deljadibot)*`, 
+text13: `*⚠️ Conexion cerrada*\n*Intenta reconectarte con:`, 
+text14: `[ ⚠️ ] Conexion perdida con el servidor, reconexion Forzada`, 
+text15: `*[ ⚠️ ] Tu conexion es invalida*\n*no se te reconectara*`, 
+text16: `[ ⚠️ ] Se agoto el tiempo de conexión.`, 
+tex17: `[ ⚠️ ] Error desconocido:\n`, 
+text18: `*𝘚𝘜𝘉𝘉𝘖𝘛𝘚 𝘊𝘖𝘕𝘌𝘊𝘛𝘈𝘋𝘖𝘚:*` }
+
+//descargar.js
+const descargar = {
+text: `*Que esta buscado? ingrese el nombre del tema*\n\nEjemplo:`, 
+text2: `         *⌜Cancion Encontrada ✅⌟*`,
+text3: `         *⌜Video Encontrado ✅⌟*`, 
+text4: `*Aqui tiene sus video 👌*`, 
+text5: `          *⌜Audio Encontrado ✅⌟*`, 
+text6: `*𝘌𝘚𝘗𝘌𝘙𝘌 𝘌𝘕𝘝𝘐𝘈𝘕𝘋𝘖 𝘚𝘜 𝘈𝘙𝘊𝘏𝘐𝘝𝘖 𝘔𝘗3 ⚠*
+
+*𝘚𝘦𝘳𝘷𝘪𝘤𝘪𝘰 𝘱𝘳𝘰𝘷𝘦𝘪𝘥𝘰 𝘱𝘰𝘳 𝘕𝘰𝘷𝘢𝘉𝘰𝘵*`, 
+text7: `*𝘌𝘚𝘗𝘌𝘙𝘌 𝘌𝘕𝘝𝘐𝘈𝘕𝘋𝘖 𝘚𝘜 𝘈𝘙𝘊𝘏𝘐𝘝𝘖 𝘔𝘗4 ⚠*
+
+*𝘚𝘦𝘳𝘷𝘪𝘤𝘪𝘰 𝘱𝘳𝘰𝘷𝘦𝘪𝘥𝘰 𝘱𝘰𝘳 𝘕𝘰𝘷𝘢𝘉𝘰𝘵*`, 
+text8: `*Que esta buscados?*\n*Ingrese el nombre de alguna canción de spotify.*`, 
+text9: `*Donde esta el link del github?*\n\n*Ejemplo :*`, 
+text10: `*𝘈𝘎𝘜𝘈𝘙𝘋𝘌 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖...*\n\nˢᶦ ᵉˡ ᵃʳᶜʰᶦᵛᵒ ⁿᵒ ˡˡᵉᵍᵃ ᵉˢ ᵠᵘᵉ ʳᵉᵖᵒˢᶦᵗᵒʳᶦᵒ ᵉˢ ᵐᵘʸ ᵖᵉˢᵃᵈᵒ`, 
+text11: `*Que esta buscado? ingresa el titulo/nombre de la canción, para buscar la letra*\n*Ejemplo:*`, 
+text12: `*Nombre*`, 
+text13: `*Tamaño*`, 
+text14: `*Extension*`, 
+text15: `No puedo descarga el archivo supera el limite 900 MB\n`, 
+text16: `*🎥 AQUI ESTA TU VIDEO DE FACEBOOK*`, 
+text17: `*Ingrese el nombre del usuario*\n\n*Ejemplo:*`, 
+text19: `*Nombre de usuario :*`, 
+text20: `*Seguidores :*`, 
+text21: `*Siguiendo :*`, 
+text22: `*Biografía :*`, 
+text23: `*Publicaciones :*`, 
+text24: `*[ ⚠️ ] Que apk esta buscando?*`, 
+text25: `*Descargador de Aptoide*`, 
+text26: `*Última actualización`, 
+text27: `*Tamaño`, 
+text28: `[ ⛔ ] El archivo es demasiado pesado por lo que no se enviará.`, 
+title: `*Título:*`, 
+duracion: `*Duracion:*`,
+ago: `*Publicado:*`, 
+autor: `*Autor:*`,
+views: `*Vistas:*`, 
+letra: `*Letra:*`, 
+music: `• 𝘋𝘦𝘴𝘤𝘢𝘳𝘨𝘢𝘥𝘰 𝘢𝘶𝘥𝘪𝘰 🔊, 𝘈𝘨𝘶𝘢𝘳𝘥𝘦 𝘶𝘯 𝘮𝘰𝘮𝘦𝘯𝘵𝘰....*`, 
+vid: `*• 𝘋𝘦𝘴𝘤𝘢𝘳𝘨𝘢𝘥𝘰 𝘷𝘪𝘥𝘦𝘰 🎥, 𝘈𝘨𝘶𝘢𝘳𝘥𝘦 𝘶𝘯 𝘮𝘰𝘮𝘦𝘯𝘵𝘰....*`, 
+espere: `*🕔 𝘈𝘎𝘜𝘈𝘙𝘋𝘌 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖....*`, 
+audio: `*⏳ＰＲＯＣＥＳＡＮＤＯ....*\n\n_ᴰᵉˢᶜᵃʳᵍᵃᵈᵒ ˢᵘˢ ᵃᵘᵈᶦᵒ ᵃᵍᵘᵃʳᵈᵉ ᵘⁿ ᵐᵒᵐᵉⁿᵗᵒ ᵖᵒʳ ᶠᵃᵛᵒʳ_`, 
+video: `*⏳ＰＲＯＣＥＳＡＮＤＯ....*\n\n_ᴰᵉˢᶜᵃʳᵍᵃᵈᵒ ˢᵘˢ ᵛᶦᵈᵉᵒ ᵃᵍᵘᵃʳᵈᵉ ᵘⁿ ᵐᵒᵐᵉⁿᵗᵒ ᵖᵒʳ ᶠᵃᵛᵒʳ_`,
+descargado: `_Descargo archivo aguarde un momento...._` }
+
+//enable.js
+const enable = {
+text: `⪨╼╼≪⚠️ ACCION MAL USABA ⚠️≫╾╼⪩\n\n*Use de esta forma ejemplo:*`, 
+text1: `*Se activo con exito*`, 
+text2: `Esta desactivado!*`, 
+text3: `*Atención a todos los miembros activos de este grupo 📣*\n\n*El antilink esta activo*\n\n*Y solo los admins de este grupo podran pasar el enlace*\n\nSi algun participante que no es admin envía un enlace de otro grupo sera expulsado de este grupo de inmediato`, 
+text4: `El Bot solo responderá a los admins del grupo.`, 
+text5: `Ahora el bot funciona para todos los participante del grupo 🥳` }
+
+//grupo.js
+const grupos = {
+text: `*Y el texto?*`, 
+text1: `*GRUPO ABIERTO CON EXITO✅*`, 
+text2: `*GRUPO CERRADO CON EXITO✅*`, 
+text3: `*INGRESE ENLACE DEL GRUPO*\n\n*📌 EJEMPLO:*`, 
+text4: `*YA ME UNÍ 😼*`, 
+text5: `📧 *ＳＯＬＩＣＩＴＵＤ ＰＡＲＡ ＵＮ ＧＲＵＰＯ*\n\n*👤 ＳＯＬＩＣＩＴＡＮＴＥ*`, 
+text6: `*🔮 ＥＮＬＡＣＥ*`, 
+text7: `*✅ 𝘚𝘶 𝘦𝘯𝘭𝘢𝘤𝘦 𝘴𝘦 𝘦𝘯𝘷𝘪𝘰𝘯 𝘢 𝘮𝘪 𝘗𝘳𝘰𝘱𝘪𝘦𝘵𝘢𝘳𝘪𝘰(𝘢)*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n⚠️ *𝘚𝘶 𝘨𝘳𝘶𝘱𝘰 𝘴𝘦𝘳𝘢 𝘦𝘷𝘢𝘭𝘶𝘢𝘥𝘰 𝘺 𝘲𝘶𝘦𝘥𝘢𝘳𝘢 𝘢 𝘥𝘦𝘤𝘪𝘴𝘪𝘰𝘯 𝘥𝘦 𝘮𝘪 𝘗𝘳𝘰𝘱𝘪𝘦𝘵𝘢𝘳𝘪𝘰(𝘢) 𝘴𝘪 𝘦𝘭 𝘣𝘰𝘵 𝘴𝘦 𝘶𝘯𝘦 𝘰 𝘯𝘰 𝘢𝘭 𝘨𝘳𝘶𝘱𝘰.*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n❕ *𝘌𝘴 𝘱𝘰𝘴𝘪𝘣𝘭𝘦 𝘲𝘶𝘦 𝘴𝘶 𝘚𝘰𝘭𝘪𝘤𝘪𝘵𝘶𝘥 𝘴𝘦𝘢 𝘙𝘦𝘤𝘩𝘢𝘻𝘢𝘥𝘢 𝘱𝘰𝘳 𝘭𝘢𝘴 𝘴𝘪𝘨𝘶𝘪𝘦𝘯𝘵𝘦𝘴 𝘊𝘢𝘶𝘴𝘢𝘴:*\n*1️⃣ 𝘌𝘭 𝘉𝘰𝘵 𝘦𝘴𝘵𝘢́ 𝘚𝘢𝘵𝘶𝘳𝘢𝘥𝘰.*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n2️⃣ *𝘌𝘭 𝘉𝘰𝘵 𝘧𝘶𝘦 𝘦𝘭𝘪𝘮𝘪𝘯𝘢𝘥𝘰 𝘥𝘦𝘭 𝘎𝘳𝘶𝘱𝘰.*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n3️⃣ *𝘌𝘭 𝘎𝘳𝘶𝘱𝘰 𝘯𝘰 𝘤𝘶𝘮𝘱𝘭𝘦 𝘤𝘰𝘯 𝘭𝘢𝘴 𝘕𝘰𝘳𝘮𝘢𝘵𝘪𝘷𝘢𝘴 𝘥𝘦 𝘣𝘰𝘵*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n4️⃣ *𝘌𝘭 𝘦𝘯𝘭𝘢𝘤𝘦 𝘥𝘦𝘭 𝘨𝘳𝘶𝘱𝘰 𝘴𝘦 𝘳𝘦𝘴𝘵𝘢𝘣𝘭𝘦𝘤𝘪𝘰.*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n5️⃣ *𝘕𝘰 𝘴𝘦 𝘢𝘨𝘳𝘦𝘨𝘢 𝘢 𝘎𝘳𝘶𝘱𝘰𝘴 𝘴𝘦𝘨𝘶́𝘯 𝘔𝘪 𝘗𝘳𝘰𝘱𝘪𝘦𝘵𝘢𝘳𝘪𝘰(𝘢)*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n📧 *𝘓𝘢 𝘴𝘰𝘭𝘪𝘤𝘪𝘵𝘶𝘥 𝘱𝘶𝘦𝘥𝘦 𝘵𝘢𝘳𝘥𝘢𝘳 𝘏𝘰𝘳𝘢𝘴 𝘦𝘯 𝘴𝘦𝘳 𝘙𝘦𝘴𝘱𝘰𝘯𝘥𝘪𝘥𝘢. 𝘗𝘰𝘳 𝘧𝘢𝘷𝘰𝘳 𝘛𝘦𝘯𝘦𝘳 𝘗𝘢𝘤𝘪𝘦𝘯𝘤𝘪𝘢, 𝘎𝘳𝘢𝘤𝘪𝘢𝘴*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n*ᴾᵘᵉᵈᵉ ᵃᵖᵒʸᵃʳ ᵉˡ ᵇᵒᵗ ᶜᵒⁿ ᵘⁿᵃ ᴱˢᵗʳᵉˡˡᶦᵗᵃ ᵉˡ ⁿᵘᵉˢᵗʳᵒ ʳᵉᵖᵒˢᶦᵗᵒʳᶦᵒ ᵒᶠᶦᶜᶦᵃˡ ʸ ˢᵘˢᶜʳᶦʳᵗᵉ ᵃ ⁿᵘᵉˢᵗʳᵒ ᶜᵃⁿᵃˡ ᵈᵉˡ ʸᵒᵘᵀᵘᵇᵉ ᵐᵃⁿᵈᵃ ᶜᵃʳᵗᵘʳᵃ ᵃ ᵐᶦ ᶜʳᵉᵃᵈᵒʳ ᵖᵃʳᵃ ᵠᵘᵉ ᵖᵘᵉᵈᵃ ᵃᵍʳᵉᵍᵃ ᵉˡ ᵇᵒᵗ ᵃ ᵗᵘ ᵍʳᵘᵖᵒ 💫*`, 
+text8: `*[ ＵＮＥ ＵＮ ＢＯＴ Ａ ＴＵ ＧＲＵＰＯ ]*\n\n𝙀𝙡 𝙗𝙤𝙩 𝙨𝙚 𝙥𝙪𝙚𝙙𝙚𝙣 𝙪𝙣𝙞𝙧 𝙖 𝙩𝙪 𝙜𝙧𝙪𝙥𝙤, 𝙨𝙞 𝙩𝙪 𝙖𝙥𝙤𝙮𝙖𝙧 𝙖𝙡 𝙗𝙤𝙩 𝙘𝙤𝙣 𝙪𝙣𝙖 𝙚𝙨𝙩𝙧𝙚𝙡𝙡𝙞𝙩𝙖 🌟 𝙚𝙡 𝙧𝙚𝙥𝙤𝙨𝙞𝙩𝙤𝙧𝙞𝙤 𝙤𝙛𝙘\nhttps://github.com/elrebelde21/NovaBot-MD\n\n🔔 𝙎𝙪𝙗𝙨𝙘𝙧𝙞𝙧𝙩𝙚 𝙖 𝙣𝙪𝙚𝙨𝙩𝙧𝙤 𝙘𝙖𝙣𝙖𝙡 𝙙𝙚 𝙮𝙤𝙪𝙩𝙪𝙗𝙚\nhttps://www.youtube.com/@elrebelde.21\n\n🧐 𝙈𝙖𝙣𝙙𝙖 𝘾𝙖𝙥𝙩𝙪𝙧𝙖 (𝙥𝙧𝙪𝙚𝙗𝙖) 𝙖 𝙢𝙞 𝙘𝙧𝙚𝙖𝙙𝙤𝙧 𝙖𝙡:\nwa.me/5492266466080 𝙋𝙖𝙧𝙖 𝙥𝙤𝙙𝙚𝙧 𝙪𝙣𝙞𝙧 𝙪𝙣 𝙗𝙤𝙩 𝙖 𝙩𝙪 𝙜𝙧𝙪𝙥𝙤 💞`, 
+text9: `*⚠️Y la imagen?*`, 
+text10: `*⚠️Responde a una  Image con :*`, 
+text11: `*✅El nombre del grupo se cambio correctamente*`, 
+text12: `*✅La descripción del grupo se cambio con éxito*`, 
+text13: `*[ ⚠️ ] INGRESA EL NÚMERO DEL LA PERSONA QUE QUIERA AGREGA*\n*EJEMPLO:*`, 
+text14: `*⚠️ INGRESA EL NUMERO SIN EL (+)*`, 
+text15: `≡ *INVITACIÓN*\n\nHola un usuario te invito a unirte a este grupos`, 
+text16: `*[ ⚠️ ] A QUIEN CARAJO ELIMINO? ETIQUETA ALGUN USUARIO NO SOY ADIVINO 😯*`, 
+text17: `*[ ⚠️ ] A QUIEN LE DOY ADMIN? ETIQUETA A LA PERSONA O RESPONDE A SUS MENSAJES*`, 
+text18: `*[ ⚠️ ] A QUIEN LE QUITO ADMINS? ETIQUETA A LA PERSONA O RESPONDE A SUS MENSAJES*`, 
+text19: `*BOT APAGADO*`, 
+text20: `*BOT ONLINE YA ESTOY DISPONIBLE ✅*`, 
+text21: `❑ Mensaje :`, 
+text22: `*[ ⚠ ️] ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ sᴏʟᴏ ᴄᴜᴀɴᴅᴏ sᴇ ᴛʀᴀᴛᴇ ᴅᴇ ᴜɴᴀ ᴇᴍᴇʀɢᴇɴᴄɪᴀ*`, 
+text23: `ɪɴғᴏ ᴅᴇ ɢʀᴜᴘᴏ`, 
+text24: `*🔸️ ɴᴏᴍʙʀᴇ* :`, 
+text25: `*🔸️ ᴍɪᴇᴍʙʀᴏs* :`, 
+text26: `Participantes`, 
+text27: `*🔸️ ᴄʀᴇᴀᴅᴏʀ ᴅᴇʟ ɢʀᴜᴘᴏ:*`, 
+text28: `*🔸️ ᴄᴏɴғɪɢᴜʀᴀᴄɪᴏɴ ᴅᴇʟ ɢʀᴜᴘᴏ:*`, 
+text29: `*🔸️ ᴅᴇsᴄʀɪᴘᴄɪᴏɴ* :`, 
+text30: `[ ⚠️ ] ᴇᴛɪǫᴜᴇᴛᴀ/ᴍᴇɴᴄɪᴏɴᴀ ᴀ ᴀʟɢᴜɪᴇɴ\n\n📌 ᴇᴊᴇᴍᴘʟᴏ :`, 
+text31: `✳️ ᴇʟ ᴜsᴜᴀʀɪᴏ ɴᴏ sᴇ ᴇɴᴄᴜᴇɴᴛʀᴀ ᴇɴ ᴍɪ ʙᴀsᴇ ᴅᴇ ᴅᴀᴛᴏs`, 
+text32: `⚠️ *𝚄𝚂𝚄𝙰𝚁𝙸𝙾 𝙰𝙳𝚅𝙴𝚁𝚃𝙸𝙳𝙾* ⚠️`, 
+text33: `*𝚄𝚜𝚞𝚊𝚛𝚒𝚘:*`, 
+text34: `*𝙰𝚍𝚟𝚎𝚛𝚝𝚎𝚗𝚌𝚒𝚊:*`, 
+text35: `*𝚁𝚊𝚣𝚘𝚗:*`, 
+text36: `⚠️ *𝙰𝙳𝚅𝙴𝚁𝚃𝙴𝙽𝙲𝙸𝙰* ⚠️
+𝚁𝚎𝚌𝚒𝚋𝚒𝚜𝚝𝚎 𝚞𝚗𝚊 𝚊𝚍𝚟𝚎𝚛𝚝𝚎𝚗𝚌𝚒𝚊 𝚍𝚎 𝚞𝚗 𝚊𝚍𝚖𝚒𝚗`, 
+text37: `𝚜𝚒 𝚛𝚎𝚌𝚒𝚋𝚎𝚜 *4* 𝚊𝚍𝚟𝚎𝚛𝚝𝚎𝚗𝚌𝚒𝚊𝚜 𝚜𝚎𝚛𝚊𝚜 𝚎𝚕𝚒𝚖𝚒𝚗𝚊𝚍𝚘 𝚊𝚞𝚝𝚘𝚖𝚊𝚝𝚒𝚌𝚊𝚖𝚎𝚗𝚝𝚎 𝚍𝚎𝚕 𝚐𝚛𝚞𝚙𝚘`, 
+text38: `⛔ 𝙴𝚕 𝚞𝚜𝚞𝚊𝚛𝚒𝚘 𝚜𝚞𝚙𝚎𝚛𝚘 𝚕𝚊𝚜 *4* 𝚊𝚍𝚟𝚎𝚛𝚝𝚎𝚗𝚌𝚒𝚊𝚜 𝚙𝚘𝚛 𝚕𝚘 𝚝𝚊𝚗𝚝𝚘 𝚜𝚎𝚛𝚊 𝚎𝚕𝚒𝚖𝚒𝚗𝚊𝚍𝚘`, 
+text39: `⚠️ *𝚂𝙴 𝚀𝚄𝙸𝚃𝙾 𝚄𝙽𝙰 𝙰𝙳𝚅𝙴𝚁𝚃𝙴𝙽𝙲𝙸𝙰* ⚠️`, 
+text40: `ᴀᴅᴠᴇʀᴛᴇɴᴄɪᴀs ᴛᴏᴛᴀʟ:`, 
+text41: `🔸️ ᴜɴ ᴀᴅᴍɪɴ ʀᴇᴅᴜᴊᴏ sᴜ ᴀᴅᴠᴇʀᴛᴇɴᴄɪᴀ, ᴀʜᴏʀᴀ ᴛɪᴇɴᴇs`, 
+text42: `🔸️ ᴇʟ ᴜsᴜᴀʀɪᴏ ɴᴏ ᴛɪᴇɴᴇ ɴɪɴɢᴜɴᴀ ᴀᴅᴠᴇʀᴛᴇɴᴄɪᴀ` }
+
+//juegos.js
+const juegos = {
+text: `*🎅 y la pregunta?*\n\n*Ejemplo:*`, 
+text1: `*🤔 Pregunta:*`, 
+text2: `*🎅 Respuesta:*`, 
+text3: `Te deberias casar con`, 
+text4: `hacen una bonita pareja 💕`, 
+text5: `*Ingrese el @ o el nombre de la persona*`, 
+text6: `🤤👅🥵 *𝐀𝐂𝐀𝐁𝐀𝐒 𝐃𝐄 𝐅𝐎𝐋𝐋𝐀𝐑𝐓𝐄𝐋@!*🥵👅🤤
+
+𝙏𝙚 𝙖𝙘𝙖𝙗𝙖𝙨 𝙙𝙚 𝙛𝙤𝙡𝙡𝙖𝙧 𝙖 𝙡𝙖 𝙥𝙚𝙧𝙧𝙖 𝙙𝙚`, 
+text7: `𝙖 𝟰 𝙥𝙖𝙩𝙖𝙨 𝙢𝙞𝙚𝙣𝙩𝙧𝙖𝙨 𝙩𝙚 𝙜𝙚𝙢𝙞𝙖 𝙘𝙤𝙢𝙤 𝙪𝙣𝙖 𝙢𝙖𝙡𝙙𝙞𝙩𝙖 𝙥𝙚𝙧𝙧𝙖 "𝐀𝐚𝐚𝐡.., 𝐀𝐚𝐚𝐡𝐡, 𝐬𝐢𝐠𝐮𝐞, 𝐧𝐨 𝐩𝐚𝐫𝐞𝐬, 𝐧𝐨 𝐩𝐚𝐫𝐞𝐬.." 𝙮 𝙡𝙖 𝙝𝙖𝙨 𝙙𝙚𝙟𝙖𝙙𝙤 𝙩𝙖𝙣 𝙧𝙚𝙫𝙚𝙣𝙩𝙖𝙙𝙖 𝙦𝙪𝙚 𝙣𝙤 𝙥𝙪𝙚𝙙𝙚 𝙨𝙤𝙨𝙩𝙚𝙣𝙚𝙧 𝙣𝙞 𝙨𝙪 𝙥𝙧𝙤𝙥𝙞𝙤 𝙘𝙪𝙚𝙧𝙥𝙤 𝙡𝙖 𝙢𝙖𝙡𝙙𝙞𝙩𝙖 𝙯𝙤𝙧𝙧𝙖!`, 
+text8: `🤤🥵 *¡𝐘𝐀 𝐓𝐄 𝐇𝐀𝐍 𝐅𝐎𝐋𝐋𝐀𝐃𝐎!* 🥵🤤`, 
+text9: `han pensado en hacer un trio? ustedes 3 hacen un buen trio 😳😏`, 
+text10: `*_😍 Las 5 mejores parejas del grupo 😍_*`, 
+text11: `- Esta pareja esta destinada a estar junta 💙`, 
+text12: `- Esta pareja son dos pequeños tortolitos enamorados ✨`, 
+text13: `- Ufff y que decir de esta pareja, ya hasta familia deberian tener 🤱🧑‍🍼`, 
+text14: `- Estos ya se casaron en secreto 💍`, 
+text15: `- Esta pareja se esta de luna de miel ✨🥵😍❤️`, 
+text16: `*[ ⚠️ ] ᥱsᥴrіᑲᥱ ᥱᥣ ᥒ᥆mᑲrᥱ ძᥱ ძ᥆s ⍴ᥱrs᥆ᥒᥲs ⍴ᥲrᥲ ᥴᥲᥣᥴᥙᥣᥲr sᥙ ᥲm᥆r*`, 
+text17: `*һᥱᥡ ᥱsᥴrіᑲᥱ ᥱᥣ ᥒ᥆mᑲrᥱ ძᥱ ᥣᥲ sᥱgᥙᥒძᥲ ⍴ᥱrs᥆ᥒᥲ*`,
+text18: `*Ingrese un nombre?*`, 
+text19: `*[ ⚠️ ] INGRESA EL @tag DE ALGUN USUARIO*`, 
+text20: `*[ ⚠️ ] іᥒgrᥱsᥲ ᥣᥲ ᥴᥲᥒ𝗍іძᥲძ 𝗊ᥙᥱ ძᥱsᥱᥲ ᥲ⍴᥆s𝗍ᥲr*\n\n*📌 ᥱȷᥱm⍴ᥣ᥆:*`, 
+text21: `⏳ ᥱs⍴ᥱrᥱ`, 
+text22: `⍴ᥲrᥲ ᥎᥆ᥣ᥎ᥱr ᥲ ᥲ⍴᥆s𝗍ᥲr`, 
+text23: `*✳️ mіᥒіm᥆ ძᥱ ᥣᥲ ᥲ⍴ᥙᥱs𝗍ᥲ ᥱs *100 ᥊⍴*`, 
+text24: `*✳️ ᥒ᥆ 𝗍іᥱᥒᥱs sᥙ𝖿іᥴіᥱᥒ𝗍ᥱ ᥊⍴*`, 
+text25: `🎁 gᥲᥒᥲr𝗍ᥱ`, 
+text26: `*🔮 ᥴᥲsі ᥣ᥆ ᥣ᥆grᥲs!! sіgᥙᥱ іᥒ𝗍ᥱᥒ𝗍ᥲᥒძ᥆*\n*𝗍᥆mᥲ +20 ᥊⍴*`, 
+text27: `😔 ⍴ᥱrძіs𝗍ᥱ`, 
+text28: `🥌ᴘɪᴇᴅʀᴀ 📄ᴘᴀᴘᴇʟ ✂️ᴛɪᴊᴇʀᴀ\n\n• ᴘᴜᴇᴅᴇ ᴜsᴀʀ ᴇsᴛᴏs ᴄᴏᴍᴀɴᴅᴏ:\n🥌 #ppt piedra\n📄 #ppt papel\n✂️ #ppt tijera\n\n• ᴜsᴇ ᴇɴ ᴍɪɴᴜsᴄᴜʟᴀs\n*Ejemplo:* #ppt papel` }
+
+//nsfw.js
+const nsfw = {
+text: `😐 Eres menor de edad! vete a jugar free fire 😆`, 
+text1: `*Aqui tiene mi pack 🥵*`, 
+text2: `*🥵 𝘋𝘐𝘚𝘍𝘙𝘜𝘛𝘈 𝘋𝘌𝘓 𝘝𝘐𝘋𝘌𝘖 🥵` }
+
+//propietario.js
+const owner = {
+text: `*Ingrese el texto que quiere difundir*`, 
+text1: `*Enviando mensajes oficial un momento*`, 
+text2: `「 ✅ *𝘊𝘖𝘔𝘜𝘕𝘐𝘊𝘈𝘋𝘖 𝘖𝘍𝘐𝘊𝘐𝘈𝘓* ✅ 」`, 
+text3: `ᴛʀᴀɴsᴍɪsɪᴏɴ ʀᴇᴀʟɪᴢᴀᴅᴀ ᴄᴏɴ ᴇxɪᴛᴏs ✅ ᴛᴏᴛᴀʟ:`, 
+text4: `ᴄʜᴀᴛ ɢʀᴜᴘᴏs\nᴛɪᴇᴍᴘᴏ ᴛᴏᴛᴀʟ ᴅᴇ ᴇɴᴠɪᴏ:`, 
+text5: `*El usuario fue bloqueado del bot*`, 
+text6: `*El usuario fue desbloqueado*`, 
+text7: `*[ ⚠️ ] 𝚁𝙴𝚂𝙿𝙾𝙽𝙳𝙴 𝙰𝙻 𝚂𝚃𝙸𝙲𝙺𝙴𝚁 𝙾 𝙸𝙼𝙰𝙶𝙴𝙽 𝙰𝙻 𝙲𝚄𝙰𝙻 𝙳𝙴𝚂𝙴𝙰 𝙰𝙶𝚁𝙴𝙶𝙰𝚁 𝚄𝙽 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙾 𝚃𝙴𝚇𝚃𝙾*`, 
+text8: `*⚠️ 𝙼𝙴𝙽𝙲𝙸𝙾𝙽𝙰 𝙰𝙻 𝙼𝙴𝙽𝚂𝙰𝙹𝙴*`, 
+text9: `*[ ⚠️ ] 𝙴𝚁𝚁𝙾𝚁 𝙳𝙴 𝚄𝚂𝙾, 𝚃𝙴𝚇𝚃𝙾 𝙵𝙰𝙻𝚃𝙰𝙽𝚃𝙴*\n\n*𝙴𝙹𝙴𝙼𝙿𝙻𝙾 𝙳𝙴 𝚄𝚂𝙾 𝙲𝙾𝚁𝚁𝙴𝙲𝚃𝙾 𝙳𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾:*`, 
+text10: `*[ ⚠️ ] 𝙽𝚘 𝚝𝚒𝚎𝚗𝚎𝚜 𝚙𝚎𝚛𝚖𝚒𝚜𝚘 𝚙𝚊𝚛𝚊 𝚌𝚊𝚖𝚋𝚒𝚊𝚛 𝚎𝚜𝚝𝚎 𝚌𝚘𝚖𝚊𝚗𝚍𝚘 𝚍𝚎 𝚂𝚝𝚒𝚌𝚔𝚎𝚛*`, 
+text11: `*[ ✔ ] ᴇʟ ᴛᴇxᴛᴏ/ᴄᴏᴍᴀɴᴅᴏ ᴀsɪɢɴᴀᴅᴏ ᴀʟ sᴛɪᴄᴋᴇʀ/ɪᴍᴀɢᴇɴ ғᴜᴇ ᴀɢʀᴇɢᴀᴅᴏ ᴀ ʟᴀ ʙᴀsᴇ ᴅᴇ ᴅᴀᴛᴏs ᴄᴏʀʀᴇᴄᴛᴀᴍᴇɴᴛᴇ*`, 
+text12: `*𝙴𝚜𝚝𝚎 𝚒𝚍 𝚍𝚎 𝚜𝚝𝚒𝚌𝚔𝚎𝚛 𝚗𝚘 𝚎𝚡𝚒𝚜𝚝𝚎*`, 
+text13: `*[ ⚠️ ] No tienes permiso para cambiar este comando de Sticker*`, 
+text14: `*𝙻𝙸𝚂𝚃𝙰 𝙳𝙴 𝙲𝙾𝙼𝙰𝙽𝙳𝙾𝚂*\n▢ *𝙸𝚗𝚏𝚘:* 𝚂𝚒 𝚎𝚜𝚝𝚊 𝚎𝚗 *𝚗𝚎𝚐𝚛𝚒𝚝𝚊* 𝚎𝚜𝚝𝚊 𝚋𝚕𝚘𝚚𝚞𝚎𝚊𝚍𝚘`, 
+text15: `*[ ⚠️ ] ᥱ𝗍і𝗊ᥙᥱ𝗍ᥲ ᥲ ᥙᥒ ᥙsᥙᥲrі᥆ ᥴ᥆ᥒ ᥱᥣ @𝚝𝚊𝚐*`, 
+text16: `*[ ⚠️ ] іᥒgrᥱsᥱ ᥣᥲ ᥴᥲᥒ𝗍іძᥲძ ძᥱ ძіᥲmᥲᥒ𝗍ᥱ 𝗊ᥙᥱ ძᥱsᥱᥲ ᥲᥒ̃ᥲძіr*`, 
+text17: `*[ ⚠️ ] sіmᑲ᥆ᥣ᥆ ᥒ᥆ ᥲძmі𝗍іძ᥆, s᥆ᥣ᥆ ᥒᥙmᥱr᥆!*`, 
+text18: `*[ ⚠️ ] ᥱᥣ ᥒᥙmᥱr᥆ mіᥒіm᥆ ძᥱ ძіᥲmᥲᥒ𝗍ᥱ ⍴ᥲrᥲ ᥲᥒ̃ᥲძіr ᥱs 𝟷*`, 
+text19: `*sᥱ ᥲᥒ̃ᥲძіძ᥆*`, 
+text20: `*[ ⚠️ ] іᥒgrᥱsᥲ ᥣᥲ ᥴᥲᥒ𝗍іძᥲძ ძᥱ ᥱ᥊⍴ᥱrіᥱᥒᥴіᥲ (᥊⍴) 𝗊ᥙᥱ ძᥱsᥱᥲᥲ ᥲᥒ̃ᥲძіr*`, 
+text21: `*[ ⚠️ ] ᥱᥣ ᥒᥙmᥱr᥆ mіᥒіm᥆ ძᥱ ᥱ᥊⍴ᥱrіᥱᥒᥴіᥲ (᥊⍴) ⍴ᥲrᥲ ᥲᥒ̃ᥲძіr ᥱs 𝟷*`, 
+text22: `*𝘌𝘭 𝘶𝘴𝘶𝘢𝘳𝘪𝘰𝘴 𝘧𝘶𝘦 𝘉𝘢𝘯𝘦𝘢𝘥𝘰 𝘺𝘢 𝘯𝘰 𝘱𝘰𝘥𝘳𝘢́ 𝘶𝘴𝘢𝘳 𝘮𝘪𝘴 𝘤𝘰𝘮𝘢𝘯𝘥𝘰𝘴*`, 
+text23: `*𝘌𝘭 𝘶𝘴𝘶𝘢𝘳𝘪𝘰𝘴 𝘩𝘢 𝘴𝘪𝘥𝘰 𝘋𝘦𝘴𝘣𝘢𝘯𝘦𝘢𝘥𝘰 𝘤𝘰𝘯 𝘦𝘹𝘪𝘵𝘰𝘴✅ 𝘢𝘩𝘰𝘳𝘢 𝘴𝘪 𝘱𝘶𝘦𝘥𝘦 𝘶𝘴𝘢𝘳 𝘦𝘭 𝘣𝘰𝘵*`, 
+text24: `✅Cambio con exitoso a uso público`, 
+text25: `✅Cambio con exitoso a uso privado`, 
+text26: `*Adios fue un gusto esta aqui hasta pronto 👋*`, 
+text27: `*𝘌𝘯𝘷𝘪𝘢𝘯𝘥𝘰 𝘤𝘰𝘱𝘪𝘢 𝘥𝘦 𝘴𝘦𝘨𝘶𝘳𝘪𝘥𝘢 𝘶𝘯 𝘮𝘰𝘮𝘦𝘯𝘵𝘰*`, 
+text28: `_🔄 Reiniciando Bot..._` }
+
+//randow.js
+const ramdow = {
+text: `*𝚃𝚄 𝙴𝚂𝚃𝙰𝚂 𝙷𝙾𝚁𝙽𝚈 🥵🔥*`, 
+text2: `_𝚃𝚄 𝚁𝙴𝙻𝙸𝙶𝙸𝙾𝙽 𝙴𝚂 𝚂𝙴𝚁 𝚄𝙽 𝚂𝙸𝙼𝙿!!_`, 
+text3: `*ʟʟᴀᴍᴇɴ ᴀ ʟᴀ ᴘᴏʟɪᴄɪᴀ!!* 😱`, 
+text4: `*ʜᴀs ᴄᴏᴍᴇɴᴛᴀᴅᴏ ᴇɴ ʏᴏᴜᴛᴜʙᴇ!!* 😳` }
+
+//rpg.js
+const rpg = {
+text: `[ 💤 𝙽𝙾 𝙻𝙾𝚂 𝙴𝚃𝙸𝚀𝚄𝙴𝚃𝙴 💤 ]\n\n𝙴𝚜𝚝𝚎 𝚞𝚜𝚞𝚊𝚛𝚒𝚘 𝚚𝚞𝚎 𝚖𝚎𝚗𝚌𝚒𝚘𝚗𝚊𝚜 𝚎𝚜𝚝𝚊 𝙰𝙵𝙺`, 
+text1: `*𝙴𝚂𝚃𝚄𝚅𝙾 𝙸𝙽𝙰𝙲𝚃𝙸𝚅𝙾 𝙳𝚄𝚁𝙰𝙽𝚃𝙴 : `, 
+text2: `*🕔 𝙳𝙴𝙹𝙰𝚂𝚃𝙴 𝙳𝙴 𝙴𝚂𝚃𝙰 𝙰𝙵𝙺 🕔*`, 
+text3: `𝚃𝙰𝙱𝙻𝙰 𝙳𝙴 𝙲𝙻𝙰𝚂𝙸𝙵𝙸𝙲𝙰𝙲𝙸𝙾𝙽`, 
+text4: `𝙴𝚂𝚃𝙴 𝚄𝚂𝚄𝙰𝚁𝙸𝙾𝚂`, 
+text5: `𝙴𝚂𝚃𝙰 𝙸𝙽𝙰𝙲𝚃𝙸𝚅𝙾 😴\n💤 𝙽𝙾 𝙻𝙾𝚂 𝙴𝚃𝙸𝚀𝚄𝙴𝚃𝙴 💤\n☣️ 𝙼𝙾𝚃𝙸𝚅𝙾𝚂 :`, 
+text6: `*🚓 Regresa el*`, 
+text7: `*𝙽𝙾𝙼𝙱𝚁𝙴 :*`, 
+text8: `*𝙽𝙾𝚃𝙰 :*\n║𝙿𝚞𝚎𝚍𝚎𝚜 𝚌𝚘𝚖𝚙𝚛𝚊𝚛 💎 𝚍𝚒𝚊𝚖𝚊𝚗𝚝𝚎𝚜\n║𝚞𝚜𝚊𝚗𝚍𝚘 𝚕𝚘𝚜 𝚜𝚒𝚐𝚞𝚎𝚗𝚝𝚎 𝚌𝚘𝚖𝚊𝚗𝚍𝚘𝚜:`, 
+text9: `[ ⏳ ] Espera`, 
+text10: `para volver a minar`, 
+text11: `⚒️ Genial minaste`, 
+text12: `*🎅 Ya trabajarte mucho por hoy*`, 
+text13: `*para volver a chambea*`, 
+text14: `🎁 *ʏᴀ ʀᴇᴄᴏɢɪsᴛᴇ ᴛᴜ ʀᴇᴄᴏᴍᴘᴇɴsᴀ ᴅɪᴀʀɪᴀ*\n\n🕚 ᴠᴜᴇʟᴠᴇ ᴇɴ :`, 
+text15: `*🎁 ᨵׁׅׅ֮ϐׁtׁׅꪱׁׁׁׅׅׅꫀׁׅܻ݊݊ꪀꫀׁׅܻ݊ υׁׅ݊ꪀ ꭈׁׅꫀׁׅܻ݊ᧁׁɑׁׅᥣׁׅ֪ᨵׁׅׅׅ꯱ ݊ꪀɑׁׁׅׅ᥎ׁׅꪱׁׁׁׅׅׅժׁׅ݊ꫀׁׅܻ݊݊ꪀ̃ᨵׁׅׅׅ꯱ 🎁🎅*
+
+🎅 *ʜᴀs ʀᴇᴄɪʙɪᴅᴏ:*`, 
+text16: `*🎁 𝚈𝙰 𝚁𝙴𝙲𝙾𝙶𝙸𝚂𝚃𝙴 𝚃𝚄 𝙲𝙾𝙵𝚁𝙴*\n🕚 𝚅𝚄𝙴𝙻𝚅𝙴 𝙴𝙻:`, 
+text17: `🛒 𝙾𝙱𝚃𝙸𝙴𝙽𝙴𝚂 𝚄𝙽 𝙲𝙾𝙵𝚁𝙴`, 
+unreg: `*✳️ Ingrese número de serie, verifique su número de serie con el comando:* #myns`, 
+myns: `*⚠️ Número de serie incorrecto, usar:* #myns`, 
+delreg: `*✅ ᴿᵉᵍᶦˢᵗʳᵒ ᵉˡᶦᵐᶦⁿᵃᵈᵒ*`, 
+myns2: `👇 ᴱˢᵗᵉ ᵉˢ ˢᵘˢ ⁿᵘᵐᵉʳᵒ ᵈᵉˡ ˢᵉʳᶦᵉ:`, 
+rob: `*⚠️ ETIQUETA A LA PERSONA BOBO*`, 
+rob2: `*😔 ᴇʟ ᴜsᴜᴀʀɪᴏ*`, 
+rob3: `*ᴛɪᴇɴᴇ ᴍᴇɴᴏs ᴅᴇ 15 ᴅɪᴀᴍᴀɴᴛᴇ, ɴᴏ ʀᴏʙᴇs ᴀ ᴜɴ ᴘᴏʙʀᴇ*`, 
+rob4: `ᴛɪᴇɴᴇ ᴍᴇɴᴏs ᴅᴇ 10 ᴇxᴘ*\n*ɴᴏ ʀᴏʙᴇs ᴀ ᴜɴ ᴘᴏʙʀᴇ* v:`, 
+rob5: `*ʜᴀs sᴀǫᴜᴇᴀᴅᴏ ⚔️ ᴀ*`, 
+rob6: `ʀᴏʙᴀᴅᴏ ᴘᴏʀ:`, 
+rob7: `*🚓🚓🚓No le pudiste robar por que a este usuario los protege la policía 👮(AFK)*`, 
+buy: `*ɴᴏᴛᴀ ᴅᴇ ᴘᴀɢᴏ*`, 
+buy2: `*ʜᴀs ᴄᴏᴍᴘʀᴀᴅᴏ :*`, 
+buy3: `*ʜᴀs ɢᴀsᴛᴀᴅᴏ :*`, 
+buy4: `🔶 ɴᴏ ᴛɪᴇɴᴇ sᴜғɪᴄɪᴇɴᴛᴇ xᴘ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ`, 
+buy5: `ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴘᴜᴇᴅᴇs ᴄᴏɴsᴇɢᴜɪʀ *xᴘ* ᴜsᴀɴᴅᴏ ᴇʟ ᴄᴏᴍᴀɴᴅᴏs #minar`, 
+pp: `              *⪨ ＰＥＲＦＩＬ ⪩*`, 
+pp2: `*🎅 NOMBRE :*`, 
+pp3: `*📱 NUMERO :*`, 
+pp4: `*💎 DIAMANTES :*`, 
+pp5: `*🆙 NIVEL :*`, 
+pp6: `*🏆 RANGO :*`, 
+pp7: `*📇 REGISTRADOS :*`, 
+level: `*🎅 TUS ESTADISTICAS 🆙*`, 
+level2: `『 Tus estadisticas en tiempo real 🕐 』`, 
+level3: `🎅 *NOMBRE:*`, 
+level4: `🎊 𝘛𝘦 𝘧𝘢𝘭𝘵𝘢`, 
+level5: `𝘥𝘦 *XP* 𝘱𝘢𝘳𝘢 𝘴𝘶𝘣𝘪𝘳 𝘥𝘦 𝘯𝘪𝘷𝘦𝘭`, 
+level6: `𝘍𝘦𝘭𝘪𝘤𝘪𝘥𝘢𝘥𝘦𝘴\n├ 𝘭𝘭𝘦𝘨𝘢𝘴𝘵𝘦 𝘢 𝘶𝘯 𝘯𝘶𝘦𝘷𝘰 𝘯𝘪𝘷𝘦𝘭 』`, 
+level7: `*🎅 𝘊𝘶𝘢𝘯𝘵𝘰 𝘮𝘢𝘴 𝘪𝘯𝘵𝘦𝘳𝘢𝘤𝘵𝘶𝘦𝘴 𝘤𝘰𝘯 𝘭𝘰𝘴 𝘣𝘰𝘵𝘴, 𝘮𝘢𝘺𝘰𝘳 𝘴𝘦𝘳𝘢 𝘵𝘶 𝘯𝘪𝘷𝘦𝘭*` }
+
+//sticker.js
+const sticker = {
+text: `⏳ *Aguarde un momento estoy creando tu stickers....*`, 
+text1: `_[ ❌ ] Máximo 20 segundos!_`, 
+text2: `*Y LA IMAGEN?*`, 
+text3: `*Responda un sticker para robar`, 
+text4: `ingresa algo para convertirlo a sticker :v`, 
+text5: `_*Calma crack estoy haciendo tu texto a sticker 👏*_\n\n_*Esto puede demorar unos minutos....*_` }
+
+module.exports = { lenguaje, tmp, session, errorsession, archivo, archborrado, archivoborrado, purgesessions, purgesubbots, purgeoldfiles, smscall, smscall2, smsAvisos, smsAvisos2, smsAvisos3, smsAvisos4, smsAvisos5, smsAvisos6, smsAvisos7, smsAvisos8, smsAvisos9, smsWel, smsWel2, smsWel3, smsWel4, smsWel5, smsWel6, smsWel7, smsWel8, smsWel9, smsWel10, smsWel11, smsBye, smsBye2, smsBye3, smsBye4, smsConexion, smsEscaneaQR, smsConectado, smsConexioncerrar, nivel, nivel2, admin, botAdmin, propietario, group, private, bot, error, advertencia, registra, limit, AntiNsfw, endLimit, result, lengua, sms, Bio, smsAntiFake, smsAntiArabe, smsAntiLink, smsAntiLink2, smsAntiLink3, smsAntiLink4, smsAntiLink5, smsAutoSicker, smsAutonivel, smsAutonivel2, smsAutonivel3, smsAutonivel4, smsAutonivel5, smsAutonivel6, smsAutonivel7, smsAutonivel8, smsAutonivel9, smsAntiPv, info, menu, jadibot, descargar, demote, promote, enable, grupos, juegos, nsfw, owner, ramdow, rpg, sticker}
