@@ -47,7 +47,7 @@ if (command == 'google') {
 if (!text) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} gatito`)
 let google = require('google-it')
 google({'query': text}).then(res => {
-let teks = `💫  ${lenguaje['result']()} : ${text}\n\n`
+let teks = `💫  ${lenguaje['result']()} ${text}\n\n`
 for (let g of res) {
 teks += `🔶 ${lenguaje.lengua.titulo} ${g.title}\n`
 teks += `🔶 ${lenguaje.lengua.desc} ${g.snippet}\n`
@@ -63,7 +63,7 @@ try {
 image = await fetchJson(`https://api.akuari.my.id/search/googleimage?query=${text}`)
 n = image.result
 images = n[Math.floor(Math.random() * n.length)]
-conn.sendMessage(m.chat, { image: { url: images}, caption: `*💫 ${lenguaje['result']()} ${text}`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+conn.sendMessage(m.chat, { image: { url: images}, caption: `*💫 ${lenguaje['result']()}* ${text}`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 } catch {
 try {  
 const res = await googleImage(text);
@@ -188,8 +188,7 @@ if (akuariapijson1.respon == 'error' || akuariapijson1.respon == '' || !akuariap
 const akuariapiresult1 = await translate(`${akuariapijson1.respon}`, {to: 'es', autoCorrect: true});
 m.reply(`${akuariapiresult1.text}`.trim());
 } catch {
-return m.reply(`${info.error + lenguaje.lengua.erro}`) 
-}}}}}}}}}}}
+return m.reply(info.error)}}}}}}}}}}}
 
 if (command == 'dalle' || command == 'ia2' || command == 'aimg' || command == 'imagine' || command == 'dall-e') {
 if (!text) return m.reply(`${lenguaje.lengua.ia2} ${prefix + command} gatitos llorando`) 
@@ -214,7 +213,7 @@ try {
 const tiores4 = await conn.getFile(`https://api.lolhuman.xyz/api/dall-e?apikey=${lolkeysapi}&text=${text}`);
 await conn.sendMessage(m.chat, {image: {url: tiores4.data}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
 } catch (e) {
-return m.reply(`${info.error + lenguaje.lengua.erro}`) 
+return m.reply(info.error) 
 console.log(e);}}}}}
 
 if (command == 'ss' || command == 'ssweb') {
@@ -245,7 +244,7 @@ let img = await q.download?.();
 let pr = await remini(img, "enhance");
 conn.sendMessage(m.chat, {image: pr, caption: `${lenguaje.lengua.hd}`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
 } catch (e) {
-return m.reply(`${info.error + lenguaje.lengua.erro}`) 
+return m.reply(info.error) 
 console.log(e) 
 }}}
  

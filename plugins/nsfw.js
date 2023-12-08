@@ -17,7 +17,7 @@ if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (!global.db.data.chats[m.chat].antiNsfw) return m.reply(info.nsfw)
 if (!m.isGroup) return m.reply(info.group) 
 let user = global.db.data.users[m.sender].age
-if (user < 15) throw m.reply(`😐 Eres menor de edad! vete a jugar free fire 😆`) 
+if (user < 15) throw m.reply(lenguaje.nsfw.text) 
 if (command == 'hentai') {
 var hentai = JSON.parse(fs.readFileSync('./src/nsfw/neko.json'))
 var hentairesult = pickRandom(hentai)
@@ -34,18 +34,18 @@ db.data.users[m.sender].limit -= 1
 m.reply('1 ' + info.limit)}
 
 if (command == 'lewd' || command == 'feed' || command == 'gasm' || command == 'anal' || command == 'holo' || command == 'tits' || command == 'kuni' || command == 'kiss' || command == 'erok' || command == 'erok' || command == 'smug' || command == 'solog' || command == 'feetg' || command == 'lewdk' || command == 'waifu' || command == 'pussy' || command == 'femdom' || command == 'cuddle' || command == 'eroyuri' || command == 'cum_jpg' || command == 'blowjob' || command == 'holoero' || command == 'erokemo' || command == 'fox_girl' || command == 'futanari' || command == 'wallpaper') {
-if (global.db.data.users[m.sender].level < 3) return m.reply(`[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀ ᴇʟ ɴɪᴠᴇʟ 3 ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ .nivel`) 
+if (global.db.data.users[m.sender].level < 3) return m.reply(`${lenguaje['nivel']()} 3 ${lenguaje['nivel2']()}`) 
 sendImageAsUrl(`https://api.lolhuman.xyz/api/random2/${command}?apikey=${lolkeysapi}`, `*🔥 ${command} 🔥*`)
 m.react(xmoji) 
 db.data.users[m.sender].limit -= 3
 m.reply('3 ' + info.limit)}
 
 if (command == 'hentai2') {
-if (global.db.data.users[m.sender].level < 3) return m.reply(`[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀ ᴇʟ ɴɪᴠᴇʟ 3 ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ .nivel`) 
+if (global.db.data.users[m.sender].level < 3) return m.reply(`${lenguaje['nivel']()} 3 ${lenguaje['nivel2']()}`) 
 sendImageAsUrl("https://delirius-nsfw.onrender.com/media/h/bdsm", '🥵')
 m.react(xmoji) 
 db.data.users[m.sender].limit -= 1
-m.reply(info.limit)}
+m.reply('1 ' + info.limit)}
 
 if (command == 'porno') {
 sendImageAsUrl("https://delirius-nsfw.onrender.com/media/r/ass", '🥵');
@@ -55,23 +55,23 @@ m.reply('1 ' + info.limit)}
 
 if (command == 'pack') {
 const url = await pack[Math.floor(Math.random() * pack.length)];
-sendImageAsUrl(url, `*Aqui tiene mi pack 🥵*`)}
+sendImageAsUrl(url, `${lenguaje.nsfw.text1}`)}
 
 if (command == 'pack2' || command == 'pack3') {
 const url2 = await packgirl[Math.floor(Math.random() * packgirl.length)];
-sendImageAsUrl(url2, `*🥵 Pack 🥵*`)
+sendImageAsUrl(url2, `*🥵*`)
 db.data.users[m.sender].limit -= 1
 m.reply('1 ' + info.limit)}
 
 if (command == 'videoxxx' || command == 'vídeoxxx' || command == 'videoxxxlesbi') {
 const url4 = await videosxxxc[Math.floor(Math.random() * videosxxxc.length)];
-await conn.sendMessage(m.chat, {video: {url: url4}, caption: `*🥵 𝘋𝘐𝘚𝘍𝘙𝘜𝘛𝘈 𝘋𝘌𝘓 𝘝𝘐𝘋𝘌𝘖 🥵*`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+await conn.sendMessage(m.chat, {video: {url: url4}, caption: `${lenguaje.nsfw.text2}`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 db.data.users[m.sender].limit -= 1
 m.reply('1 ' + info.limit)}
 
 if (command == 'videolesbixxx' || command == 'pornolesbivid' || command == 'pornolesbianavid' || command == 'pornolesbiv' || command == 'pornolesbianav') {
 const url5 = await videosxxxc2[Math.floor(Math.random() * videosxxxc2.length)];
-await conn.sendMessage(m.chat, {video: {url: url5}, caption: `*𝘋𝘐𝘚𝘍𝘙𝘜𝘛𝘈 𝘋𝘌𝘓 𝘝𝘐𝘋𝘌𝘖 🥵`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+await conn.sendMessage(m.chat, {video: {url: url5}, caption: `${lenguaje.nsfw.text2}`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 db.data.users[m.sender].limit -= 2
 m.reply('2 ' + info.limit)}
 

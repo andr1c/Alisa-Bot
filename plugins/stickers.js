@@ -11,22 +11,22 @@ if (global.db.data.users[m.sender].registered < true) return m.reply(info.regist
 if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (command == 's' || command == 'sticker') {
 if (/image/.test(mime)) {  
-conn.fakeReply(m.chat, `⏳ *Aguarde un momento estoy creando tu stickers....*`, '0@s.whatsapp.net', 'No haga spam')
+conn.fakeReply(m.chat, `${lenguaje.sticker.text}`, '0@s.whatsapp.net', 'No haga spam')
 media = await quoted.download()  
 let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: botname, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}})
 await fs.unlinkSync(encmedia)  
 } else if (/video/.test(mime)) {  
-if ((quoted.msg || quoted).seconds > 20) return m. reply('_[ ❌ ] Máximo 20 segundos!_')  
+if ((quoted.msg || quoted).seconds > 20) return m. reply(lenguaje.sticker.text1)  
 media = await quoted.download()  
 let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: global.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: botname, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}})
 await new Promise((resolve) => setTimeout(resolve, 2000));
 await fs.unlinkSync(encmedia)  
 } else {  
-m.reply(`*Y LA IMAGEN?*`)}}
+m.reply(lenguaje.sticker.text2)}}
 
 if (command == 'wm' || command == 'take') {
-if (!args.join(" ")) return m.reply(`*Responda un sticker para robar*`)
-conn.fakeReply(m.chat, `⏳ *Aguarde un momento....*`, '0@s.whatsapp.net', 'No haga spam') 
+if (!args.join(" ")) return m.reply(lenguaje.sticker.text3)
+conn.fakeReply(m.chat, `${lenguaje.lengua.espere}`, '0@s.whatsapp.net', 'No haga spam') 
 const swn = args.join(" ")
 const pcknm = swn.split("|")[0]
 const atnm = swn.split("|")[1]
@@ -41,11 +41,11 @@ if ((quoted.msg || quoted).seconds > 11) return m. reply('Maximum 10 Seconds!')
 let media = await quoted.download()
 let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: pcknm, author: atnm, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: wm, body: `h`, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}})
 } else {
-m.reply(`Y la imagen?`)}}
+m.reply(lenguaje.sticker.text2)}}
 
 if (command == 'attp') {
-if (!text) return m.reply('ingresa algo para convertirlo a sticker :v')
-m.reply(`_*Calma crack estoy haciendo tu texto a sticker 👏*_\n\n_*Esto puede demorar unos minutos....*_`) 
+if (!text) return m.reply(lenguaje.sticker.text4)
+m.reply(lenguaje.sticker.text5)
 let link = `https://api.lolhuman.xyz/api/attp?apikey=${lolkeysapi}&text=${text}`
 await conn.sendMessage(m.chat, { sticker: { url: link } }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 db.data.users[m.sender].limit -= 1 }

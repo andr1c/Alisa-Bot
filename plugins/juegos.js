@@ -38,11 +38,11 @@ return m.reply(`*Api simsimi caida vuelva mas tardes*`)
 console.log(e)}}}
 
 if (command == 'pregunta' || command == 'preg') { 
-if (!text) return m.reply(`*🎅 y la pregunta?*\n\n*Ejemplo:* ${prefix + command} mañana llover?`)
+if (!text) return m.reply(`${lenguaje.juegos.text} ${prefix + command} mañana llover?`) 
 m.react('🤔') 
 let pr = ['no', 'si', 'nose', 'puede ser', 'no creo', 'olvio', 'Que pregunta mas boluda', 'A']
 let preg = pr[Math.floor(Math.random() * pr.length)]
-m.reply(`*🤔 Pregunta:* ${text}\n*🎅 Respuesta:* ${preg}`)}
+m.reply(`${lenguaje.juegos.text1}  ${text}\n${lenguaje.juegos.text2} ${preg}`)}
 
 if (command == 'gay') {
 if (!m.isGroup) return m.reply(info.group) 
@@ -68,7 +68,7 @@ let member = participants.map(u => u.id)
 let me = m.sender
 let jodoh = member[Math.floor(Math.random() * member.length)]
 let love = member[Math.floor(Math.random() * member.length)]
-conn.sendMessage(m.chat, { text: `*@${jodoh.split('@')[0]} Te deberias casar con @${love.split('@')[0]} hacen una bonita pareja 💕*`,
+conn.sendMessage(m.chat, { text: `*@${jodoh.split('@')[0]} ${lenguaje.juegos.text3} @${love.split('@')[0]} ${lenguaje.juegos.text4}*`,
 contextInfo:{
 mentionedJid:[jodoh, love],
 forwardingScore: 9999999,
@@ -84,14 +84,9 @@ isForwarded: true,
 "sourceUrl": md}}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 if (command == 'follar' || command == 'violar' || command == 'coger') { 
-if (!text) return m.reply(`*Ingrese el @ o el nombre de la persona*`) 
+if (!text) return m.reply(lenguaje.juegos.text5) 
 let user = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted.sender
-conn.sendMessage(m.chat, { text: `🤤👅🥵 *𝐀𝐂𝐀𝐁𝐀𝐒 𝐃𝐄 𝐅𝐎𝐋𝐋𝐀𝐑𝐓𝐄𝐋@!*🥵👅🤤
-
-𝙏𝙚 𝙖𝙘𝙖𝙗𝙖𝙨 𝙙𝙚 𝙛𝙤𝙡𝙡𝙖𝙧 𝙖 𝙡𝙖 𝙥𝙚𝙧𝙧𝙖 𝙙𝙚 ${text} 𝙖 𝟰 𝙥𝙖𝙩𝙖𝙨 𝙢𝙞𝙚𝙣𝙩𝙧𝙖𝙨 𝙩𝙚 𝙜𝙚𝙢𝙞𝙖 𝙘𝙤𝙢𝙤 𝙪𝙣𝙖 𝙢𝙖𝙡𝙙𝙞𝙩𝙖 𝙥𝙚𝙧𝙧𝙖 "𝐀𝐚𝐚𝐡.., 𝐀𝐚𝐚𝐡𝐡, 𝐬𝐢𝐠𝐮𝐞, 𝐧𝐨 𝐩𝐚𝐫𝐞𝐬, 𝐧𝐨 𝐩𝐚𝐫𝐞𝐬.." 𝙮 𝙡𝙖 𝙝𝙖𝙨 𝙙𝙚𝙟𝙖𝙙𝙤 𝙩𝙖𝙣 𝙧𝙚𝙫𝙚𝙣𝙩𝙖𝙙𝙖 𝙦𝙪𝙚 𝙣𝙤 𝙥𝙪𝙚𝙙𝙚 𝙨𝙤𝙨𝙩𝙚𝙣𝙚𝙧 𝙣𝙞 𝙨𝙪 𝙥𝙧𝙤𝙥𝙞𝙤 𝙘𝙪𝙚𝙧𝙥𝙤 𝙡𝙖 𝙢𝙖𝙡𝙙𝙞𝙩𝙖 𝙯𝙤𝙧𝙧𝙖!
-
-${text}
-🤤🥵 *¡𝐘𝐀 𝐓𝐄 𝐇𝐀𝐍 𝐅𝐎𝐋𝐋𝐀𝐃𝐎!* 🥵🤤`, mentions: [m.sender, text.replace('@', '') + '@s.whatsapp.net']}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+conn.sendMessage(m.chat, { text: `${lenguaje.juegos.text6} ${text} ${lenguaje.juegos.text7}\n\n${text}\n${lenguaje.juegos.text8}`, mentions: [m.sender, text.replace('@', '') + '@s.whatsapp.net']}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 if (command == 'formartrio') {
 let member = participants.map(u => u.id)
@@ -99,7 +94,7 @@ let me = m.sender
 let a = member[Math.floor(Math.random() * member.length)]
 let b = member[Math.floor(Math.random() * member.length)]
 let c = member[Math.floor(Math.random() * member.length)]
-conn.sendMessage(m.chat, { text: `🥵 Hey!!! @${a.split('@')[0]}, @${b.split('@')[0]} y @${c.split('@')[0]} han pensado en hacer un trio? ustedes 3 hacen un buen trio 😳😏`, contextInfo:{mentionedJid:[a, b, c], forwardingScore: 9999999, isForwarded: true, }}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+conn.sendMessage(m.chat, { text: `🥵 Hey!!! @${a.split('@')[0]}, @${b.split('@')[0]} y @${c.split('@')[0]} ${lenguaje.juegos.text9}`, contextInfo:{mentionedJid:[a, b, c], forwardingScore: 9999999, isForwarded: true, }}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 if (command == 'formapareja5') {
 let member = participants.map(u => u.id)
@@ -114,22 +109,7 @@ let g = member[Math.floor(Math.random() * member.length)]
 let h = member[Math.floor(Math.random() * member.length)]
 let i = member[Math.floor(Math.random() * member.length)]
 let j = member[Math.floor(Math.random() * member.length)]
-conn.sendMessage(m.chat, { text: `*_😍 Las 5 mejores parejas del grupo 😍_*
-    
-*_1.- @${a.split('@')[0]} y @${b.split('@')[0]}_*
-- Esta pareja esta destinada a estar junta 💙
-
-*_2.- @${c.split('@')[0]} y @${d.split('@')[0]}_*
-- Esta pareja son dos pequeños tortolitos enamorados ✨
-
-*_3.- @${e.split('@')[0]} y @${f.split('@')[0]}_*
-- Ufff y que decir de esta pareja, ya hasta familia deberian tener 🤱🧑‍🍼
-
-*_4.- @${g.split('@')[0]} y @${h.split('@')[0]}_*
-- Estos ya se casaron en secreto 💍
-
-*_5.- @${i.split('@')[0]} y @${j.split('@')[0]}_*
-- Esta pareja se esta de luna de miel ✨🥵😍❤️`, contextInfo:{mentionedJid:[a, b, c, d, e, f, g, h, i, j]}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+conn.sendMessage(m.chat, { text: `${lenguaje.juegos.text10}\n\n*_1.- @${a.split('@')[0]} y @${b.split('@')[0]}_*\n${lenguaje.juegos.text11}\n\n*_2.- @${c.split('@')[0]} y @${d.split('@')[0]}_*\n${lenguaje.juegos.text12}\n\n*_3.- @${e.split('@')[0]} y @${f.split('@')[0]}_*\n${lenguaje.juegos.text13}\n\n*_4.- @${g.split('@')[0]} y @${h.split('@')[0]}_*\n${lenguaje.juegos.text14}\n\n*_5.- @${i.split('@')[0]} y @${j.split('@')[0]}_*\n${lenguaje.juegos.text15}`, contextInfo:{mentionedJid:[a, b, c, d, e, f, g, h, i, j]}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 if (command == 'top') { 
 if (!text) return m.reply(`*Ejemplo de uso:*\n.top *texto*`) 
@@ -238,15 +218,15 @@ m.react('💞')
 conn.sendMessage(m.chat, { text: love, mentions: [m.sender, text.replace('@', '') + '@s.whatsapp.net']}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 if (command == 'ship') {
-if (!text) return m.reply(`*[ ⚠️ ] ᥱsᥴrіᑲᥱ ᥱᥣ ᥒ᥆mᑲrᥱ ძᥱ ძ᥆s ⍴ᥱrs᥆ᥒᥲs ⍴ᥲrᥲ ᥴᥲᥣᥴᥙᥣᥲr sᥙ ᥲm᥆r*`) 
+if (!text) return m.reply(lenguaje.juegos.text16) 
 let [text1, ...text2] = text.split(' ')
 text2 = (text2 || []).join(' ')
-if (!text2) return m.reply(`*һᥱᥡ ᥱsᥴrіᑲᥱ ᥱᥣ ᥒ᥆mᑲrᥱ ძᥱ ᥣᥲ sᥱgᥙᥒძᥲ ⍴ᥱrs᥆ᥒᥲ*`) 
+if (!text2) return m.reply(lenguaje.juegos.text17) 
 let lovetext = `❤️ *${text1}* tu oportunidad de enamorarte de *${text2}* es de *${Math.floor(Math.random() * 100)}%*👩🏻‍❤️‍👨🏻`.trim()
 m.reply(lovetext, null, { mentions: conn.parseMention(lovetext)})}
 
 if (command == 'personalidad') { 
-if (!text) return m.reply('*Ingrese un nombre?*')
+if (!text) return m.reply(lenguaje.juegos.text18) 
 let personalidad = `┏━━°❀❬ *PERSONALIDAD* ❭❀°━━┓
 *┃*
 *┃• Nombre* : ${text}
@@ -267,7 +247,7 @@ if (command == 'doxear' || command == 'doxxeo') {
 let who
 if (m.isGroup) who = m.mentionedJid[0]
 else who = m.chat
-if (!who) return m.reply("*[ ⚠️ ] INGRESA EL @tag DE ALGUN USUARIO*")
+if (!who) return m.reply(lenguaje.juegos.text19) 
 let start = `*😱 ¡¡Empezando Doxxeo!! 😱*`
 let boost = `*${pickRandom(['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20'])}%*`
 let boost2 = `*${pickRandom(['21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40'])}%*`
@@ -337,15 +317,15 @@ m.reply(`╱╲❀╱╲╱╲❀╱╲╱╲❀╱╲\n◆ ${pickRandom(global.
 async function game3(m, command, conn, args, prefix, msToTime, text, body, from, sender, quoted, target, bot, participant, pushname, astro) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (command == 'slot' || command == 'apuesta') { 
-if (!args[0]) return m.reply(`*[ ⚠️ ] іᥒgrᥱsᥲ ᥣᥲ ᥴᥲᥒ𝗍іძᥲძ 𝗊ᥙᥱ ძᥱsᥱᥲ ᥲ⍴᥆s𝗍ᥲr*\n\n*📌 ᥱȷᥱm⍴ᥣ᥆:*\n*${prefix + command} 100*`)
-if (isNaN(args[0])) return m.reply(`*[ ⚠️ ] іᥒgrᥱsᥲ ᥣᥲ ᥴᥲᥒ𝗍іძᥲძ 𝗊ᥙᥱ ძᥱsᥱᥲ ᥲ⍴᥆s𝗍ᥲr*\n\n*📌 ᥱȷᥱm⍴ᥣ᥆:*\n*${prefix + command} 100*`)
+if (!args[0]) return m.reply(`${lenguaje.juegos.text20}\n*${prefix + command} 100*`)
+if (isNaN(args[0])) return m.reply(`${lenguaje.juegos.text20}\n*${prefix + command} 100*`)
 const apuesta = parseInt(args[0]);
 const users = global.db.data.users[m.sender];
 const time = users.lastslot + 30000;//30 seg
-if (new Date - users.lastslot < 30000) return m.reply(`*⏳ ᥱs⍴ᥱrᥱ ${msToTime(time - new Date())}  ⍴ᥲrᥲ ᥎᥆ᥣ᥎ᥱr ᥲ ᥲ⍴᥆s𝗍ᥲr*`) 
-if (apuesta < 100) return m.reply('✳️ mіᥒіm᥆ ძᥱ ᥣᥲ ᥲ⍴ᥙᥱs𝗍ᥲ ᥱs *100 ᥊⍴*') 
+if (new Date - users.lastslot < 30000) return m.reply(`*${lenguaje.juegos.text21} ${msToTime(time - new Date())} ${lenguaje.juegos.text22}*`) 
+if (apuesta < 100) return m.reply(lenguaje.juegos.text23) 
 if (users.exp < apuesta) {
-return m.reply(`*✳️ ᥒ᥆ 𝗍іᥱᥒᥱs sᥙ𝖿іᥴіᥱᥒ𝗍ᥱ ᥊⍴*`)}
+return m.reply(lenguaje.juegos.text24)}
 const emojis = ['💎', '🎅', '🎊'];
 let a = Math.floor(Math.random() * emojis.length);
 let b = Math.floor(Math.random() * emojis.length);
@@ -370,13 +350,13 @@ if (c == emojis.length) c = 0;
 }
 let end;
 if (a == b && b == c) {
-end = `*🎁 gᥲᥒᥲr𝗍ᥱ +${apuesta + apuesta} ᥊⍴*`;
+end = `${lenguaje.juegos.text25} +${apuesta + apuesta} ᥊⍴`;
 users.exp += apuesta += apuesta += apuesta
 } else if (a == b || a == c || b == c) {
-end = `*🔮 ᥴᥲsі ᥣ᥆ ᥣ᥆grᥲs!! sіgᥙᥱ іᥒ𝗍ᥱᥒ𝗍ᥲᥒძ᥆*\n*𝗍᥆mᥲ +20 ᥊⍴*`;
+end = `${lenguaje.juegos.text26}`;
 users.exp += 20;
 } else {
-end = `*😔 ⍴ᥱrძіs𝗍ᥱ -${apuesta} ᥊⍴*`;
+end = `${lenguaje.juegos.text27} -${apuesta} ᥊⍴`;
 users.exp -= apuesta;
 }
 users.lastslot = new Date * 1;
@@ -407,11 +387,11 @@ quoted: quotedMessage
 };
 conn.sendMessage(m.chat, sendMessageOptions, { quoted: quotedMessage });
 } else {
-conn.sendMessage(m.chat, { text: `*Ejemplo:* ${prefix + command} @tag|puto|😯`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+conn.sendMessage(m.chat, { text: `${lenguaje.lengua.ejem} ${prefix + command} @tag|puto|😯`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }}
 
 if (command == 'ppt' || command == 'suit') { 
-if (!text) return m.reply(`🥌ᴘɪᴇᴅʀᴀ 📄ᴘᴀᴘᴇʟ ✂️ᴛɪᴊᴇʀᴀ\n\n• ᴘᴜᴇᴅᴇ ᴜsᴀʀ ᴇsᴛᴏs ᴄᴏᴍᴀɴᴅᴏ:\n🥌${prefix}ppt piedra\n📄${prefix}ppt papel\n✂️${prefix}ppt tijera\n\n• ᴜsᴇ ᴇɴ ᴍɪɴᴜsᴄᴜʟᴀs\n*Ejemplo:* ${prefix}ppt papel`) 
+if (!text) return m.reply(`${lenguaje.juegos.text28}`) 
 var astro = Math.random()
 if (astro < 0.34) {
 astro = 'piedra' 

@@ -19,13 +19,13 @@ if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (command == 'play') {
 const yts = require("yt-search") 
 const ytdl = require('ytdl-core') 
-if (!text) return m.reply(`*Que esta buscado? ingrese el nombre del tema*\n\nEjemplo: *${prefix + command}* ozuna`) 
+if (!text) return m.reply(lenguaje.descargar.text + ` *${prefix + command}* ozuna`) 
 try { 
 m.react(rwait) 
 let vid = (await yts(text)).all[0]
 const yt_play = await search(args.join(" "))
 let { title, description, url, thumbnail, videoId, timestamp, views, published } = vid
-let message = await conn.sendMessage(m.chat, { text: `         *⌜Cancion Encontrada ✅⌟*\n\n◉ *Título:* ${yt_play[0].title}\n◉ *Duracion:* ${secondString(yt_play[0].duration.seconds)}\n◉ *Publicado:* ${yt_play[0].ago}\n◉ *Autor:* ${yt_play[0].author.name}\n◉ *Vistas:* ${MilesNumber(yt_play[0].views)}\n\n*• 𝘋𝘦𝘴𝘤𝘢𝘳𝘨𝘢𝘥𝘰 𝘢𝘶𝘥𝘪𝘰 🔊, 𝘈𝘨𝘶𝘢𝘳𝘥𝘦 𝘶𝘯 𝘮𝘰𝘮𝘦𝘯𝘵𝘰....*`, contextInfo: { externalAdReply: { title: wm, body: yt_play[0].title.replace(/\*/g, ''), thumbnailUrl: thumbnail, sourceUrl: yt_play[0].url, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: true }}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+let message = await conn.sendMessage(m.chat, { text: `${lenguaje.descargar.text2}\n\n◉ ${lenguaje.descargar.title} ${yt_play[0].title}\n◉ ${lenguaje.descargar.duracion} ${secondString(yt_play[0].duration.seconds)}\n◉ ${lenguaje.descargar.ago} ${yt_play[0].ago}\n◉ ${lenguaje.descargar.autor} ${yt_play[0].author.name}\n◉ ${lenguaje.descargar.views} ${MilesNumber(yt_play[0].views)}\n\n${lenguaje.descargar.music}`, contextInfo: { externalAdReply: { title: wm, body: yt_play[0].title.replace(/\*/g, ''), thumbnailUrl: thumbnail, sourceUrl: yt_play[0].url, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: true }}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 let mediaa = await ytMp4(yt_play[0].url)
 conn.sendMessage(m.chat, { audio: { url: mediaa.result }, mimetype: 'audio/mpeg', contextInfo: {
 externalAdReply: {
@@ -57,14 +57,14 @@ console.log(e)}}}
 if (command == 'play2') {
 const yts = require("yt-search") 
 const ytdl = require('ytdl-core') 
-if (!text) return m.reply(`*Que esta buscado? ingrese el nombre del tema*\n\nEjemplo: *${prefix + command}* ozuna`) 
+if (!text) return m.reply(lenguaje.descargar.text + ` *${prefix + command}* ozuna`) 
 m.react(rwait) 
 let vid = (await yts(text)).all[0]
 const yt_play = await search(args.join(" "))
 let { title, description, url, thumbnail, videoId, timestamp, views, published } = vid
-let message = await conn.sendMessage(m.chat, { text: `         *⌜Video Encontrado ✅⌟*\n\n◉ *Título:* ${yt_play[0].title}\n◉ *Duracion:* ${secondString(yt_play[0].duration.seconds)}\n◉ *Publicado:* ${yt_play[0].ago}\n◉ *Autor:* ${yt_play[0].author.name}\n◉ *Vistas:* ${MilesNumber(yt_play[0].views)}\n\n*• 𝘋𝘦𝘴𝘤𝘢𝘳𝘨𝘢𝘥𝘰 𝘷𝘪𝘥𝘦𝘰 🎥, 𝘈𝘨𝘶𝘢𝘳𝘥𝘦 𝘶𝘯 𝘮𝘰𝘮𝘦𝘯𝘵𝘰....*`, contextInfo: { externalAdReply: { title: wm, body: yt_play[0].title.replace(/\*/g, ''), thumbnailUrl: thumbnail, sourceUrl: yt_play[0].url, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: true }}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+let message = await conn.sendMessage(m.chat, { text: `${lenguaje.descargar.text3}\n\n◉ ${lenguaje.descargar.title} ${yt_play[0].title}\n◉ ${lenguaje.descargar.duracion} ${secondString(yt_play[0].duration.seconds)}\n◉ ${lenguaje.descargar.ago} ${yt_play[0].ago}\n◉ ${lenguaje.descargar.autor} ${yt_play[0].author.name}\n◉ ${lenguaje.descargar.views} ${MilesNumber(yt_play[0].views)}\n\n${lenguaje.descargar.vid}`, contextInfo: { externalAdReply: { title: wm, body: yt_play[0].title.replace(/\*/g, ''), thumbnailUrl: thumbnail, sourceUrl: yt_play[0].url, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: true }}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 let mediaa = await ytMp4(yt_play[0].url)
-await conn.sendMessage(m.chat, { video: { url: mediaa.result }, fileName: `error.mp4`, caption: `*Aqui tiene sus video 👌*\n*🔰Titulo:* ${yt_play[0].title}`, thumbnail: mediaa.thumb, mimetype: 'video/mp4' }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+await conn.sendMessage(m.chat, { video: { url: mediaa.result }, fileName: `error.mp4`, caption: `${lenguaje.descargar.text4}\n🔰 ${lenguaje.descargar.title} ${yt_play[0].title}`, thumbnail: mediaa.thumb, mimetype: 'video/mp4' }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 m.react(done)}
 
 if (command == 'play3' || command == 'playdoc' || command == 'playaudiodoc' || command == 'ytmp3doc') {
@@ -73,23 +73,13 @@ const yts = require('yt-search')
 const ytdl = require('ytdl-core') 
 const axios = require('axios') 
 const {youtubedl, youtubedlv2} = require('@bochilteam/scraper') 
-if (!text) return m.reply(`*Que esta buscado? ingrese el nombre del tema*\n\nEjemplo: *${prefix + command}* ozuna`) 
+if (!text) return m.reply(lenguaje.descargar.text + ` *${prefix + command}* ozuna`) 
 try { 
 m.react(rwait) 
 let vid = (await yts(text)).all[0]
 const yt_play = await search(args.join(" "))
 let { title, description, url, thumbnail, videoId, timestamp, views, published } = vid
-let message = await conn.sendMessage(m.chat, { text: `          *⌜Audio Encontrado ✅⌟*
-◉ *Título* : ${yt_play[0].title}
-◉ *Publicado:* ${yt_play[0].ago}
-◉ *Duración:* ${secondString(yt_play[0].duration.seconds)}
-◉ *Autor:* ${yt_play[0].author.name}
-◉ *Vistas:* ${MilesNumber(yt_play[0].views)}
-◉ *Link:* ${yt_play[0].url}
-
-*𝘌𝘚𝘗𝘌𝘙𝘌 𝘌𝘕𝘝𝘐𝘈𝘕𝘋𝘖 𝘚𝘜 𝘈𝘙𝘊𝘏𝘐𝘝𝘖 𝘔𝘗3 ⚠*
-
-*𝘚𝘦𝘳𝘷𝘪𝘤𝘪𝘰 𝘱𝘳𝘰𝘷𝘦𝘪𝘥𝘰 𝘱𝘰𝘳 𝘕𝘰𝘷𝘢𝘉𝘰𝘵*`, contextInfo: { externalAdReply: { title: wm, body: yt_play[0].title.replace(/\*/g, ''), thumbnailUrl: thumbnail, sourceUrl: yt_play[0].url, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: true }}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}) 
+let message = await conn.sendMessage(m.chat, { text: `${lenguaje.descargar.text5}\n◉ ${lenguaje.descargar.title} ${yt_play[0].title}\n◉ ${lenguaje.descargar.ago} ${yt_play[0].ago}\n◉ ${lenguaje.descargar.duracion} ${secondString(yt_play[0].duration.seconds)}\n◉ ${lenguaje.descargar.autor} ${yt_play[0].author.name}\n◉ ${lenguaje.descargar.views} ${MilesNumber(yt_play[0].views)}\n◉ *Link:* ${yt_play[0].url}\n\n${lenguaje.descargar.text6}`, contextInfo: { externalAdReply: { title: wm, body: yt_play[0].title.replace(/\*/g, ''), thumbnailUrl: thumbnail, sourceUrl: yt_play[0].url, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: true }}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}) 
 const q = '128kbps';
 const v = yt_play[0].url;
 const yt = await youtubedl(v).catch(async (_) => await youtubedlv2(v));
@@ -115,7 +105,7 @@ conn.sendMessage(m.chat, {audio: {url: ress.url}, fileName: __res[0].title + '.m
 m.react(done) 
 } catch (e) {
 m.react(error) 
-return m.reply(`${info.error}\n\nNo se pudo descargar sus video por favor vuelve a intenta`) 
+return m.reply(info.error) 
 console.log(e)}}}}
 
 if (command == 'play4' || command == 'playdoc2' || command == 'playvideodoc' || command == 'ytmp4doc') {
@@ -124,23 +114,13 @@ const yts = require('yt-search')
 const ytdl = require('ytdl-core') 
 const axios = require('axios') 
 const {youtubedl, youtubedlv2} = require('@bochilteam/scraper') 
-if (!text) return m.reply(`*Que esta buscado? ingrese el nombre del tema*\n\nEjemplo: *${prefix + command}* ozuna`) 
+if (!text) return m.reply(lenguaje.descargar.text + ` *${prefix + command}* ozuna`) 
 try { 
 m.react(rwait) 
 let vid = (await yts(text)).all[0]
 const yt_play = await search(args.join(" "))
 let { title, description, url, thumbnail, videoId, timestamp, views, published } = vid
-let message = await conn.sendMessage(m.chat, { text: `          *⌜Video Encontrado ✅⌟*
-◉ *Título* : ${yt_play[0].title}
-◉ *Publicado:* ${yt_play[0].ago}
-◉ *Duración:* ${secondString(yt_play[0].duration.seconds)}
-◉ *Autor:* ${yt_play[0].author.name}
-◉ *Vistas:* ${MilesNumber(yt_play[0].views)}
-◉ *Link:* ${yt_play[0].url}
- 
-*𝘌𝘚𝘗𝘌𝘙𝘌 𝘌𝘕𝘝𝘐𝘈𝘕𝘋𝘖 𝘚𝘜 𝘈𝘙𝘊𝘏𝘐𝘝𝘖 𝘔𝘗4 ⚠*
-
-*𝘚𝘦𝘳𝘷𝘪𝘤𝘪𝘰 𝘱𝘳𝘰𝘷𝘦𝘪𝘥𝘰 𝘱𝘰𝘳 𝘕𝘰𝘷𝘢𝘉𝘰𝘵*`, contextInfo: { externalAdReply: { title: wm, body: yt_play[0].title.replace(/\*/g, ''), thumbnailUrl: thumbnail, sourceUrl: yt_play[0].url, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: true }}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}) 
+let message = await conn.sendMessage(m.chat, { text: `${lenguaje.descargar.text3}\n◉ ${lenguaje.descargar.title} ${yt_play[0].title}\n◉ ${lenguaje.descargar.ago} ${yt_play[0].ago}\n◉ ${lenguaje.descargar.duracion} ${secondString(yt_play[0].duration.seconds)}\n◉ ${lenguaje.descargar.autor} ${yt_play[0].author.name}\n◉ ${lenguaje.descargar.views} ${MilesNumber(yt_play[0].views)}\n◉ *Link:* ${yt_play[0].url}\n\n${lenguaje.descargar.text7}`, contextInfo: { externalAdReply: { title: wm, body: yt_play[0].title.replace(/\*/g, ''), thumbnailUrl: thumbnail, sourceUrl: yt_play[0].url, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: true }}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}) 
 const qu = '360';
 const q = qu + 'p';
 const v = yt_play[0].url;
@@ -148,7 +128,7 @@ const yt = await youtubedl(v).catch(async (_) => await youtubedlv2(v));
 const dl_url = await yt.video[q].download();
 const ttl = await yt.title;
 const size = await yt.video[q].fileSizeH;
-await await conn.sendMessage(m.chat, {document: {url: dl_url}, fileName: `${ttl}.mp4`, mimetype: 'video/mp4', caption: `*╭┄〔 📥 𝐘𝐎𝐔𝐓𝐔𝐁𝐄 𝐃𝐋 📥 〕┄⊱-*\n┆🔸️ *𝚃𝙸𝚃𝚄𝙻𝙾:* ${ttl}\n┆🔸️ *𝙿𝙴𝚂𝙾:* ${size}\n╰─────────────────`, thumbnail: await fetch(yt.thumbnail)}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
+await await conn.sendMessage(m.chat, {document: {url: dl_url}, fileName: `${ttl}.mp4`, mimetype: 'video/mp4', caption: `*╭┄〔 📥 𝐘𝐎𝐔𝐓𝐔𝐁𝐄 𝐃𝐋 📥 〕┄⊱-*\n┆🔸️ ${lenguaje.lengua.titulo} ${ttl}\n┆🔸️ ${lenguaje.lengua.Peso} ${size}\n╰─────────────────`, thumbnail: await fetch(yt.thumbnail)}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
 m.react(done) 
 } catch {
 try {
@@ -162,11 +142,11 @@ const n = lolh.result.title || 'error';
 const n2 = lolh.result.link;
 const n3 = lolh.result.size;
 const n4 = lolh.result.thumbnail;
-await conn.sendMessage(m.chat, {document: {url: n2}, fileName: `${n}.mp4`, mimetype: 'video/mp4', caption: `*╭┄〔 📥 𝐘𝐎𝐔𝐓𝐔𝐁𝐄 𝐃𝐋 📥 〕┄⊱-*\n┆🔸️ *𝚃𝙸𝚃𝚄𝙻𝙾:* ${n}\n┆🔸️ *𝙿𝙴𝚂𝙾:* ${n3}\n╰─────────────────`, thumbnail: await fetch(n4)}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
+await conn.sendMessage(m.chat, {document: {url: n2}, fileName: `${n}.mp4`, mimetype: 'video/mp4', caption: `*╭┄〔 📥 𝐘𝐎𝐔𝐓𝐔𝐁𝐄 𝐃𝐋 📥 〕┄⊱-*\n┆🔸 ${lenguaje.lengua.titulo} ${n}\n┆🔸️${lenguaje.lengua.Peso} ${n3}\n╰─────────────────`, thumbnail: await fetch(n4)}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
 m.react(done) 
 } catch (e) {
 m.react(error) 
-return m.reply(`${info.error}\n\nNo se pudo descargar sus video por favor vuelve a intenta`) 
+return m.reply(info.error) 
 console.log(e)}}}}
 
 if (command == 'play.1' || command == 'musica' || command == 'play.2' || command == 'video') {
@@ -176,7 +156,7 @@ let mimeType;
 let fileName;
 let apiUrl;
 let enviando = false;
-if (!text) return m.reply(`*Que esta buscado?*\n\n*Ejemplo:* ${prefix + command} ozuna`) 
+if (!text) return m.reply(lenguaje.descargar.text + ` *${prefix + command}* ozuna`) 
 if (enviando) return enviando = true
 try {
 m.react(rwait) 
@@ -194,13 +174,13 @@ enviando = false;
 } else {
 try {
 if (command === 'play.1' || command == 'musica') {
-m.reply('*⏳ＰＲＯＣＥＳＡＮＤＯ....*\n\n_ᴰᵉˢᶜᵃʳᵍᵃᵈᵒ ˢᵘˢ ᵃᵘᵈᶦᵒ ᵃᵍᵘᵃʳᵈᵉ ᵘⁿ ᵐᵒᵐᵉⁿᵗᵒ ᵖᵒʳ ᶠᵃᵛᵒʳ_') 
+m.reply(lenguaje.descargar.audio) 
 apiUrl = `https://api-brunosobrino.zipponodes.xyz/api/v1/ytmp3?url=${data.resultado.url}`;
 mimeType = 'audio/mpeg';
 fileName = 'error.mp3';
 buff = await conn.getFile(apiUrl);
 } else if (command === 'play.2' || command == 'video') {
-m.reply('*⏳ＰＲＯＣＥＳＡＮＤＯ....*\n\n_ᴰᵉˢᶜᵃʳᵍᵃᵈᵒ ˢᵘˢ ᵛᶦᵈᵉᵒ ᵃᵍᵘᵃʳᵈᵉ ᵘⁿ ᵐᵒᵐᵉⁿᵗᵒ ᵖᵒʳ ᶠᵃᵛᵒʳ_') 
+m.reply(lenguaje.descargar.video) 
 apiUrl = `https://api-brunosobrino.zipponodes.xyz/api/v1/ytmp4?url=${data.resultado.url}`;
 mimeType = 'video/mp4';
 fileName = 'error.mp4';
@@ -208,13 +188,13 @@ buff = await conn.getFile(apiUrl);
 }} catch {
 try {
 if (command === 'play.1' || command == 'musica') {
-m.reply('*⏳ＰＲＯＣＥＳＡＮＤＯ....*\n\n_ᴰᵉˢᶜᵃʳᵍᵃᵈᵒ ˢᵘˢ ᵃᵘᵈᶦᵒ ᵃᵍᵘᵃʳᵈᵉ ᵘⁿ ᵐᵒᵐᵉⁿᵗᵒ ᵖᵒʳ ᶠᵃᵛᵒʳ_') 
+m.reply(lenguaje.descargar.audio) 
 apiUrl = `https://api-brunosobrino.onrender.com/api/v1/ytmp3?url=${data.resultado.url}`;
 mimeType = 'audio/mpeg';
 fileName = 'error.mp3';
 buff = await conn.getFile(apiUrl);
 } else if (command === 'play.2' || command == 'video') {
-m.reply('*⏳ＰＲＯＣＥＳＡＮＤＯ....*\n\n_ᴰᵉˢᶜᵃʳᵍᵃᵈᵒ ˢᵘˢ ᵛᶦᵈᵉᵒ ᵃᵍᵘᵃʳᵈᵉ ᵘⁿ ᵐᵒᵐᵉⁿᵗᵒ ᵖᵒʳ ᶠᵃᵛᵒʳ_') 
+m.reply(lenguaje.descargar.video) 
 apiUrl = `https://api-brunosobrino.onrender.com/api/v1/ytmp4?url=${data.resultado.url}`;
 mimeType = 'video/mp4';
 fileName = 'error.mp4';
@@ -231,14 +211,13 @@ enviando = false
 enviando = false
 }} catch (error) {
 enviando = false
-return m.reply(`*⚠️ Error no pudimos descarga sus audio/video intente mas tarde (api caida 😢)*`)}}
-
+return m.reply(`${info.error}\n\n${lenguaje.lengua.erro}`)}}
 if (command == 'ytmp3' || command == 'ytaudio') {
 const mp = require('../libs/ytdl2')
 const vid = await mp.mp4(text)
-if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return m.reply(`*Que esta buscado?*\n\n*Ejemplo:*\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
+if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return m.reply(lenguaje.lengua.ejemplo + `\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
 m.react(rwait) 
-conn.sendMessage(m.chat, { text: `         *⌜Audio Encontrado ✅⌟*\n\n• *Título:* ${vid.title}\n• *Publicado:* ${vid.date}\n\n*ESPERE ENVIANDO SU ARCHIVO MP3 ⚠*` }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+conn.sendMessage(m.chat, { text: `${lenguaje.descargar.text5}\n\n• ${lenguaje.descargar.title} ${vid.title}\n• ${lenguaje.descargar.duracion} ${vid.date}\n\n${lenguaje.descargar.text6}` }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 try {
 let mediaa = await ytplayvid(text)
 const audio = await mp.mp3(text)
@@ -262,14 +241,11 @@ m.reply(info.error)}}
 if (command == 'ytmp4' || command == 'ytvideo') {
 const mp = require('../libs/ytdl2')
 const vid = await mp.mp4(text)
-if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return m.reply(`*Que esta buscado?*\n\n*Ejemplo:*\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
+if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return m.reply(lenguaje.lengua.ejemplo + `\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
 m.react(rwait) 
-conn.sendMessage(m.chat, { text: `         *⌜Video Encontrado ✅⌟*\n\n• *Título:* ${vid.title}\n\n*ESPERE ENVIANDO SU ARCHIVO MP4 ⚠*` }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});    
+conn.sendMessage(m.chat, { text: `${lenguaje.descargar.text3}\n\n• ${lenguaje.descargar.title} ${vid.title}\n\n${lenguaje.descargar.text7}` }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});    
 try {
-const ytc = `*❏ Título :* ${vid.title} 
-*❏ Duración :* ${vid.duration}
-*❏ Subido :* ${vid.date}
-*❏ calidad :* ${vid.quality}`
+const ytc = `❏ ${lenguaje.lengua.titulo} ${vid.title}\n❏ ${lenguaje.lengua.subidos} ${vid.date}\n❏ ${lenguaje.lengua.calidad} ${vid.quality}`
 await conn.sendMessage(m.chat, {video: {url : vid.videoUrl}, caption: ytc }, {quoted:m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 db.data.users[m.sender].limit -= 1
 m.reply('1 ' + info.limit)
@@ -279,10 +255,10 @@ m.react(error)
 m.reply(info.error)}}
 
 if (command == 'music' || command == 'spotify') {
-if (!text) return m.reply(`*Que esta buscados?*\n*Ingrese el nombre de alguna canción de spotify.*`) 
+if (!text) return m.reply(lenguaje.descargar.text8) 
 try { 
 m.react(rwait) 
-m.reply('*🕔 𝘈𝘎𝘜𝘈𝘙𝘋𝘌 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖....*') 
+m.reply(lenguaje.descargar.espere) 
 const res = await fetch(global.API('ApiEmpire', '/api/spotifysearch?text=' + text))
 const data = await res.json()
 const linkDL = data.spty.resultado[0].link;
@@ -292,24 +268,24 @@ const infos = await fetch(global.API('ApiEmpire', '/api/spotifyinfo?text=' + lin
 const info = await infos.json()
 const spty = info.spty.resultado
 const img = await (await fetch(`${spty.thumbnail}`)).buffer()  
-let spotifyi = `◦  *𝘛𝘐𝘛𝘜𝘓𝘖:* ${spty.title}\n`
-spotifyi += `◦  *𝘈𝘙𝘛𝘐𝘚𝘛𝘈:* ${spty.artist}\n`
-spotifyi += `◦  *𝘈𝘓𝘉𝘜𝘔:* ${spty.album}\n`          
-spotifyi += `◦  *𝘗𝘜𝘉𝘓𝘐𝘊𝘈𝘋𝘖:* ${spty.year}\n\n`   
-spotifyi += `𝘋𝘦𝘴𝘤𝘢𝘳𝘨𝘢𝘥𝘰 𝘢𝘶𝘥𝘪𝘰, 𝘢𝘨𝘶𝘢𝘳𝘥𝘦 𝘶𝘯 𝘮𝘰𝘮𝘦𝘯𝘵𝘰 𝘱𝘰𝘳 𝘧𝘢𝘷𝘰𝘳...`
+let spotifyi = `◦  ${lenguaje.lengua.titulo} ${spty.title}\n`
+spotifyi += `◦  ${lenguaje.lengua.artista} ${spty.artist}\n`
+spotifyi += `◦  ${lenguaje.lengua.album} ${spty.album}\n`          
+spotifyi += `◦  ${lenguaje.lengua.publi} ${spty.year}\n\n`   
+spotifyi += `${lenguaje.descargar.music}`
 await conn.sendMessage(m.chat, {text: spotifyi.trim(), contextInfo: {forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "renderLargerThumbnail": true, "title": global.titulowm2, "containsAutoReply": true, "mediaType": 1, "thumbnail": img, "thumbnailUrl": img, "mediaUrl": linkDL, "sourceUrl": linkDL}}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
 await conn.sendMessage(m.chat, {audio: music.data, fileName: `${spty.name}.mp3`, mimetype: 'audio/mpeg'}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
 m.react(done) 
 } catch (error) {
 m.react(error) 
 console.error(error);
-return m.reply(`${info.error}\nNo fue posible descarga el audio (api caida 🤡)`)}}
+return m.reply(info.error)}}
 
 if (command == 'gitclone') {
-if (!args[0]) return m.reply(`*Donde esta el link del github?*\n\n*Ejemplo :*\n${prefix + command} ${md}`)
+if (!args[0]) return m.reply(lenguaje.descargar.text9 + `\n${prefix + command} ${md}`)
 if (!isUrl(args[0]) && !args[0].includes('github.com')) return m.reply(`Link invalido!!`)
 m.react('🕔') 
-m.reply('*𝘈𝘎𝘜𝘈𝘙𝘋𝘌 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖...*\n\nˢᶦ ᵉˡ ᵃʳᶜʰᶦᵛᵒ ⁿᵒ ˡˡᵉᵍᵃ ᵉˢ ᵠᵘᵉ ʳᵉᵖᵒˢᶦᵗᵒʳᶦᵒ ᵉˢ ᵐᵘʸ ᵖᵉˢᵃᵈᵒ') 
+m.reply(lenguaje.descargar.text10) 
 try {
 let regex1 = /(?:https|git)(?::\/\/|@)github\.com[\/:]([^\/:]+)\/(.+)/i
 let [, user, repo] = args[0].match(regex1) || []
@@ -325,9 +301,9 @@ m.react(error)
 m.reply(info.error)}}
 
 if (command == 'tiktok' || command == 'tt') {
-if (!text) return m.reply(`*Ejemplo:*\n${prefix + command} https://vm.tiktok.com/ZMjdrFCtg/`)
+if (!text) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} https://vm.tiktok.com/ZMjdrFCtg/`)
 if (!isUrl(args[0]) && !args[0].includes('tiktok')) return m.reply(`Link invalido!!`)
-conn.fakeReply(m.chat, `⏳ *Aguarde un momento....*`, '0@s.whatsapp.net', 'No haga spam')
+conn.fakeReply(m.chat, `${lenguaje.lengua.espere}`, '0@s.whatsapp.net', 'No haga spam')
 try {
 require('../libs/tiktok').Tiktok(args).then( data => {
 conn.sendMessage(m.chat, { video: { url: data.nowm }}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
@@ -338,12 +314,12 @@ m.reply('1 ' + info.limit)
 m.reply(info.error)}}
 
 if (command == 'tiktokimg' || command == 'ttimg') {
-if (!text) return m.reply(`⚠️ Ingresa un enlace de tiktok imagenes*\n\n*Ejemplo:* ${prefix + command} https://vm.tiktok.com/ZMjnPvJuF/`) 
+if (!text) return m.reply(`${lenguaje.lengua.espere}\n${prefix + command} https://vm.tiktok.com/ZMjnPvJuF/`) 
 let imagesSent
 if (imagesSent) return;
 imagesSent = true    
 try {   
-m.reply('*Calma Ya estoy buscado tu Perdido...*') 
+conn.fakeReply(m.chat, `${lenguaje.lengua.espere}`, '0@s.whatsapp.net', 'No haga spam')
 let tioShadow = await ttimg(text); 
 let result = tioShadow?.data;
 for (let d of result) {
@@ -351,30 +327,30 @@ await conn.sendMessage(m.chat, {image: {url: d}}, {quoted: m, ephemeralExpiratio
 imagesSent = false
 } catch (e) {
 imagesSent = false    
-return m.reply(`${info.error} *No se obtuvo respuesta de la página (Api caida), intente más tarde.*\n\n${e}`)}}
+return m.reply(`${info.error}\n\n${e}`)}}
 
 if (command == 'lyrics' || command == 'letra') {
-if (!text) return m.reply(`*Que esta buscado? ingresa el titulo/nombre de la canción*\n*Ejemplo:* ${prefix + command} ozuna`)
+if (!text) return m.reply(lenguaje.descargar.text11 + `\n${prefix + command} ozuna`)
 const { lyrics, lyricsv2 } = require('@bochilteam/scraper')
 const result = await lyricsv2(text).catch(async _ => await lyrics(text))
-conn.editMessage(m.chat, '*Aguarde un momento....*', `*❏ Titulo:* ${result.title}\n*❏ Autor :* ${result.author}\n*❏ Url :* ${result.link}\n\n*❏ Letra :* ${result.lyrics}`, 3, fkontak)
+conn.editMessage(m.chat, `${lenguaje.lengua.espere}`, `❏ ${lenguaje.descargar.title} ${result.title}\n❏ ${lenguaje.descargar.autor}  ${result.author}\n*❏ Url :* ${result.link}\n\n❏ ${lenguaje.descargar.letra} ${result.lyrics}`, 3, fkontak)
 db.data.users[m.sender].limit -= 1
-m.reply('1 ' + info.limit)}
+m.reply('1 ' + info.limit)} 
 
 if (command == 'mediafire') {
 const { mediafireDl } = require('../libs/mediafire.js') 
-if (!text) return m.reply(`*Ejemplo:*\n${prefix + command} https://www.mediafire.com/file/admrdma1ff3cq10/Siete-Ocho.zip/file`) 
+if (!text) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} https://www.mediafire.com/file/admrdma1ff3cq10/Siete-Ocho.zip/file`) 
 const baby1 = await mediafireDl(text)
-if (baby1[0].size.split('MB')[0] >= 1500) return reply('No puedo descarga el archivo supera el limite 900 MB ' + util.format(baby1))
+if (baby1[0].size.split('MB')[0] >= 1500) return reply(lenguaje.descargar.text15 + util.format(baby1))
 const result4 = `╭━─━─━─≪💎≫─━─━─━╮
-┆      *MEDIAFIRE*
+┆      *MEDIAFIRE* 
 ┆——————«•»——————
-┆🔸️ *Nombre:* ${baby1[0].nama} 
+┆🔸️ ${lenguaje.descargar.text12} ${baby1[0].nama} 
 ┆——————«•»——————
-┆🔸️ *Tamaño:* ${baby1[0].size} 
+┆🔸️ ${lenguaje.descargar.text13} ${baby1[0].size} 
 ┆——————«•»——————
-┆🔸️ *Extension:* ${baby1[0].mime}
-╰━─━─━─≪💎≫─━─━─━╯\n\n_Descargo archivo aguarde un momento...._  ` 
+┆🔸️ ${lenguaje.descargar.text14} ${baby1[0].mime}
+╰━─━─━─≪💎≫─━─━─━╯\n\n${lenguaje.descargar.descargado}` 
 m.reply(`${result4}`) 
  conn.sendMessage(m.chat, { document : { url : baby1[0].link}, fileName : baby1[0].nama, mimetype: baby1[0].mime ,  quoted : m, contextInfo: { externalAdReply:{ 
    title: botname, 
@@ -388,22 +364,22 @@ m.reply(`${result4}`)
 m.reply('2 ' + info.limit)}
 
 if (command == 'facebook' || command == 'fb') {
-if (!text) return m.reply(`*Ejemplo:*\n${prefix + command} https://fb.watch/ncowLHMp-x/?mibextid=rS40aB7S9Ucbxw6v`)
-conn.fakeReply(m.chat, `⏳ *Aguarde un momento....*`, '0@s.whatsapp.net', 'No haga spam')
+if (!text) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} https://fb.watch/ncowLHMp-x/?mibextid=rS40aB7S9Ucbxw6v`)
+conn.fakeReply(m.chat, `${lenguaje.lengua.espere}`, '0@s.whatsapp.net', 'No haga spam')
 try {
 const Rres = await fetch(`https://api.lolhuman.xyz/api/facebook?apikey=${lolkeysapi}&url=${args[0]}`);
 const Jjson = await Rres.json();
 let VIDEO = Jjson.result[0];
 if (VIDEO == '' || !VIDEO || VIDEO == null) VIDEO = Jjson.result[1];
-conn.sendMessage(m.chat, {video: {url: VIDEO}, caption: `*🎥 AQUI ESTA TU VIDEO DE FACEBOOK*`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+conn.sendMessage(m.chat, {video: {url: VIDEO}, caption: `${lenguaje.descargar.text16}`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 db.data.users[m.sender].limit -= 1
 m.reply('1 ' + info.limit)
 } catch {
 m.reply(info.error)}}
 
 if (command == 'instagram' || command == 'ig') {
-if (!text) return m.reply(`*Ejemplo:*\n${prefix + command} https://www.instagram.com/p/CCoI4DQBGVQ/?igshid=YmMyMTA2M2Y=`)
-conn.fakeReply(m.chat, `⏳ *Aguarde un momento....*`, '0@s.whatsapp.net', 'No haga spam')
+if (!text) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} https://www.instagram.com/p/CCoI4DQBGVQ/?igshid=YmMyMTA2M2Y=`)
+conn.fakeReply(m.chat, `${lenguaje.lengua.espere}`, '0@s.whatsapp.net', 'No haga spam')
 try {
 const human = await fetch(`https://api.lolhuman.xyz/api/instagram?apikey=${lolkeysapi}&url=${args[0]}`);
 const json = await human.json();
@@ -416,19 +392,19 @@ m.reply('1 ' + info.limit)
 m.reply(info.error)}}
 
 if (command == 'igstalk') {
-if (!args[0]) return m.reply(`*Ingrese el nombre del usuario*\n\n*Ejemplo:* ${prefix + command} Emilia`)
+if (!args[0]) return m.reply(lenguaje.descargar.text17 + ` ${prefix + command} Emilia`)
 const fg = require('api-dylux')
 try {
 let res = await fg.igStalk(args[0])
 let te = `╭━─━─━─≪≫─━─━─━╮
 │ ≡  *STALKING* 
 │——————«•»——————
-│🔸 *🔖Nombre:* ${res.name} 
-│🔸 *🔖Username:* ${res.username}
-│🔸 *👥Seguidores:* ${res.followersH}
-│🔸 *🫂Siguiendo:* ${res.followingH}
-│🔸 *📌Bio:* ${res.description}
-│🔸 *🏝️Posts:* ${res.postsH}
+│🔸 🔖${lenguaje.descargar.text12} ${res.name} 
+│🔸 🔖${lenguaje.descargar.text19} ${res.username} 
+│🔸 👥 ${lenguaje.descargar.text20} ${res.followersH}
+│🔸 🫂 ${lenguaje.descargar.text21} ${res.followingH}
+│🔸 📌 ${lenguaje.descargar.text22} ${res.description}
+│🔸 🏝️ ${lenguaje.descargar.text23} ${res.postsH}
 │——————«•»——————
 │🔸 *🔗 Link* : https://instagram.com/${res.username.replace(/^@/, '')}
 ╰━─━─━─≪≫─━─━─━╯`
@@ -438,19 +414,19 @@ m.reply(info.error)}}
 
 if (command == 'apk' || command == 'modoapk') {
 let { search, download } = require('aptoide-scraper')
-if (!text) return m.reply('*[ ⚠️ ] Que apk esta buscando?*') 
+if (!text) return m.reply(lenguaje.descargar.text24) 
 try {     
 let searchA = await search(text); 
 let data5 = await download(searchA[0].id); 
-let response = `╭━─━─━─≪≫─━─━─━╮\n│ ≡ *Descargador de Aptoide* ≡\n│——————«•»——————\n│🔸📌 *Nombre:* ${data5.name}\n│🔸📦 *Package:* ${data5.package}\n│🔸🕒 *Última actualización:* ${data5.lastup}\n│🔸📥 *Tamaño:* ${data5.size}\n╰━─━─━─≪≫─━─━─━╯` 
+let response = `╭━─━─━─≪≫─━─━─━╮\n│ ≡ ${lenguaje.descargar.text25} ≡\n│——————«•»——————\n│🔸📌 ${lenguaje.descargar.text12} ${data5.name}\n│🔸📦 *Package:* ${data5.package}\n│🔸🕒 ${lenguaje.descargar.text26} ${data5.lastup}\n│🔸📥 ${lenguaje.descargar.text27} ${data5.size}\n╰━─━─━─≪≫─━─━─━╯` 
 await conn.sendMessage(m.chat, {image: {url: data5.icon}, caption: response}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}); 
 if (data5.size.includes('GB') || data5.size.replace(' MB', '') > 999) { 
-return await conn.sendMessage(m.chat, {text: '*[ ⛔ ] El archivo es demasiado pesado por lo que no se enviará.*'}, {quoted: m})} 
+return await m.reply(lenguaje.descargar.text28)}
 await conn.sendMessage(m.chat, {document: {url: data5.dllink}, mimetype: 'application/vnd.android.package-archive', fileName: data5.name + '.apk', caption: null}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}); 
 db.data.users[m.sender].limit -= 3
 m.reply('3 ' + info.limit)
 } catch { 
-return m.reply(`*[ ⚠️ ] Error, no se encontrarón resultados para su búsqueda.*`)}}
+return m.reply(info.error)}}
 
 if (command == 'gdrive') {
 const {sizeFormatter} = require('human-readable') 
@@ -458,16 +434,16 @@ const formatSize = sizeFormatter({
   std: 'JEDEC', decimalPlaces: 2, keepTrailingZeroes: false, render: (literal, symbol) => `${literal} ${symbol}B`});
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
-if (!args[0]) return m.reply(`*⚠️ 𝘐𝘕𝘎𝘙𝘌𝘚𝘌 𝘌𝘓 𝘓𝘐𝘕𝘒 𝘗𝘈𝘙𝘈 𝘋𝘌𝘚𝘊𝘈𝘙𝘎𝘈 𝘚𝘜𝘚 𝘈𝘙𝘊𝘏𝘐𝘝𝘖 𝘋𝘌 𝘋𝘙𝘐𝘝𝘌*\n*𝘌𝘑𝘌𝘔𝘗𝘓𝘖:* ${prefix + command} https://drive.google.com/file/d/1dmHlx1WTbH5yZoNa_ln325q5dxLn1QHU/view*`) 
+if (!args[0]) return m.reply(`${lenguaje.lengua.ejem}\n*𝘌𝘑𝘌𝘔𝘗𝘓𝘖:* ${prefix + command} https://drive.google.com/file/d/1dmHlx1WTbH5yZoNa_ln325q5dxLn1QHU/view*`) 
 try {
 GDriveDl(args[0]).then(async (res) => {
- m.reply('*𝘋𝘌𝘚𝘊𝘈𝘙𝘎𝘈𝘋𝘖 𝘚𝘜𝘚 𝘈𝘙𝘊𝘏𝘐𝘝𝘖, 𝘈𝘎𝘜𝘈𝘙𝘋𝘌 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖 𝘗𝘖𝘙 𝘍𝘈𝘝𝘖𝘙...*\n\nᴱˡ ᵗᶦᵉᵐᵖᵒ ᵈᵉ ᵉˢᵖᵉʳᵃ ᵖᵘᵉᵈᵉ ᵛᵃʳᶦᵃʳ ᵈᵉᵖᵉⁿᵈᶦᵉⁿᵈᵒ ᵈᵉˡ ᵖᵉˢᵒ ᵈᵉˡ ᵃʳᶜʰᶦᵛᵒ ˢᶦ ᵉˡ ᵖᵉˢᵒ ˢᵘᵖᵉʳᵃ ˡᵒˢ ¹⁰⁰ ᴹᴮ ᵖᵘᵉᵈᵉ ᵠᵘᵉ ˢᵘ ᵃʳᶜʰᶦᵛᵒ ⁿᵒ ˢᵉᵃ ᵉⁿᵛᶦᵃᵈᵒ');
+ m.reply(lenguaje.descargar.text10);
 if (!res) throw res;
 conn.sendMessage(m.chat, {document: {url: res.downloadUrl, mimetype: res.mimetype, asDocument: true, fileName: `${res}`}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}) 
 db.data.users[m.sender].limit -= 3
 m.reply('3 ' + info.limit)
 } catch (e) {
-m.reply('*[ ⚠️ ] ᴇʀʀᴏʀ, ᴘᴏʀ ғᴀᴠᴏʀ ᴠᴜᴇʟᴠᴀ ᴀ ɪɴᴛᴇɴᴛᴀʀʟᴏ*');
+m.reply(info.error) 
 console.log(e)}}}
 
 async function search(query, options = {}) {

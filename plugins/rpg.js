@@ -20,10 +20,10 @@ if (!user) continue
 let afkTime = user.afkTime 
 if (!afkTime || afkTime < 0) continue 
 let reason = user.afkReason || ''
-m.reply(`[ 💤 𝙽𝙾 𝙻𝙾𝚂 𝙴𝚃𝙸𝚀𝚄𝙴𝚃𝙴 💤 ]\n\n𝙴𝚜𝚝𝚎 𝚞𝚜𝚞𝚊𝚛𝚒𝚘 𝚚𝚞𝚎 𝚖𝚎𝚗𝚌𝚒𝚘𝚗𝚊𝚜 𝚎𝚜𝚝𝚊 𝙰𝙵𝙺\n\n${reason ? '🔸️ *𝚁𝙰𝚉𝙾𝙽* : ' + reason : '🔸️ *𝚁𝙰𝚉𝙾𝙽* : 𝚂𝚒𝚗 𝚛𝚊𝚣𝚘𝚗'}\n🔸️ *𝙴𝚂𝚃𝚄𝚅𝙾 𝙸𝙽𝙰𝙲𝚃𝙸𝚅𝙾 𝙳𝚄𝚁𝙰𝙽𝚃𝙴 : ${clockString(new Date - afkTime)}`.trim())}
+m.reply(`${lenguaje.rpg.text}\n\n${reason ? '🔸️ *𝚁𝙰𝚉𝙾𝙽* : ' + reason : '🔸️ *𝚁𝙰𝚉𝙾𝙽* : 𝚂𝚒𝚗 𝚛𝚊𝚣𝚘𝚗'}\n🔸️ ${lenguaje.rpg.text1} ${clockString(new Date - afkTime)}`.trim())}
 if (global.db.data.users[m.sender].afkTime > -1) {
 let user = global.db.data.users[m.sender]
-m.reply(`*🕔 𝙳𝙴𝙹𝙰𝚂𝚃𝙴 𝙳𝙴 𝙴𝚂𝚃𝙰 𝙰𝙵𝙺 🕔*\n${user.afkReason ? '\n*𝚁𝙰𝚉𝙾𝙽 :* ' + user.afkReason : ''}\n*𝙴𝚂𝚃𝚄𝚅𝙾 𝙸𝙽𝙰𝙲𝚃𝙸𝚅𝙾 𝙳𝚄𝚁𝙰𝙽𝚃𝙴 :* ${clockString(new Date - user.afkTime)}`.trim())
+m.reply(`${lenguaje.rpg.text2}\n${user.afkReason ? '\n*𝚁𝙰𝚉𝙾𝙽 :* ' + user.afkReason : ''}\n${lenguaje.rpg.text1} ${clockString(new Date - user.afkTime)}`.trim())
 user.afkTime = -1
 user.afkReason = ''  
 }
@@ -76,19 +76,19 @@ conn.sendMessage(m.chat, { text: sn, contextInfo:{forwardingScore: 9999999, isFo
 
 if (command == 'unreg') {
 const {createHash} = require('crypto') 
-if (!args[0]) return m.reply('*✳️ Ingrese número de serie, verifique su número de serie con el comando:* #myns') 
+if (!args[0]) return m.reply(lenguaje.rpg.unreg) 
 const user = global.db.data.users[m.sender];
 const sn = createHash('md5').update(m.sender).digest('hex');
-if (args[0] !== sn) return m.reply('*⚠️ Número de serie incorrecto, usar:* #myns') 
+if (args[0] !== sn) return m.reply(lenguaje.rpg.myns) 
 user.registered = false; 
 global.db.data.users[m.sender].limit -= 2
 global.db.data.users[m.sender].exp -= 200
-m.reply(`*✅ ᴿᵉᵍᶦˢᵗʳᵒ ᵉˡᶦᵐᶦⁿᵃᵈᵒ*`)}
+m.reply(lenguaje.rpg.delreg)}
 
 if (command == 'myns') {
 const {createHash} = require('crypto') 
 let sn = createHash('md5').update(m.sender).digest('hex')
-conn.fakeReply(m.chat, sn, '0@s.whatsapp.net', '👇 ᴱˢᵗᵉ ᵉˢ ˢᵘˢ ⁿᵘᵐᵉʳᵒ ᵈᵉˡ ˢᵉʳᶦᵉ:', 'status@broadcast')}}
+conn.fakeReply(m.chat, sn, '0@s.whatsapp.net', `${lenguaje.rpg.myns2}`, 'status@broadcast')}}
 
 async function rpg(m, command, participants, args, sender, pushname, text, conn, fkontak, replace, who) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
@@ -104,7 +104,7 @@ const usersExp = sortedExp.map(enumGetKey);
 const usersLim = sortedLim.map(enumGetKey);
 const usersLevel = sortedLevel.map(enumGetKey);
 const len = args[0] && args[0].length > 0 ? Math.min(100, Math.max(parseInt(args[0]), 10)) : Math.min(10, sortedExp.length);
-const texto = `𝚃𝙰𝙱𝙻𝙰 𝙳𝙴 𝙲𝙻𝙰𝚂𝙸𝙵𝙸𝙲𝙰𝙲𝙸𝙾𝙽
+const texto = `${lenguaje.rpg.text3}
 
 ╔═❖ *𝚃𝙾𝙿 ${len} 𝚇𝙿* 🧬 
 ║𝚃𝚞 : ${usersExp.indexOf(m.sender) + 1} 𝚍𝚎 ${usersExp.length}
@@ -127,32 +127,32 @@ if (command == 'afk') {
 let user = global.db.data.users[m.sender]
 user.afkTime = + new Date
 user.afkReason = text
-const afk = `𝙴𝚂𝚃𝙴 𝚄𝚂𝚄𝙰𝚁𝙸𝙾𝚂 ${pushname}  𝙴𝚂𝚃𝙰 𝙸𝙽𝙰𝙲𝚃𝙸𝚅𝙾 😴\n💤 𝙽𝙾 𝙻𝙾𝚂 𝙴𝚃𝙸𝚀𝚄𝙴𝚃𝙴 💤\n☣️ 𝙼𝙾𝚃𝙸𝚅𝙾𝚂 : ${text ? text : ''}\n\n\n\n\n\n\n`
+const afk = `${lenguaje.rpg.text4} ${pushname} ${lenguaje.rpg.text5} ${text ? text : ''}\n\n\n\n\n\n\n`
 conn.relayMessage(m.chat, {scheduledCallCreationMessage: {callType: 'VIDEO', scheduledTimestampMs: 0, title: afk }}, {})}
 
 if (command == 'rob' || command == 'robar') {
 const user = global.db.data.users[m.sender]
 const date = global.db.data.users[m.sender].robs + 600000; //600000
-if (new Date - global.db.data.users[m.sender].robs < 600000) return m.reply(`*🚓 Regresa el ${msToTime(date - new Date())}*`) 
+if (new Date - global.db.data.users[m.sender].robs < 600000) return m.reply(`${lenguaje.rpg.text6} ${msToTime(date - new Date())}`) 
 if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false;
 else who = m.chat;
-if (!who) return m.reply(`*⚠️ ETIQUETA A LA PERSONA BOBO*`)
+if (!who) return m.reply(lenguaje.rpg.rob)
 try { 
-if (!(who in global.db.data.users)) return m.reply(`*⚠️ El usuario no se encuentra en mi base de datos.*`)
+if (!(who in global.db.data.users)) return m.reply(lenguaje.grupos.text31)
 const users = global.db.data.users[who];
 let exp = Math.floor(Math.random() * 15) + 10;
 let limit = Math.floor(Math.random() * 5) + 3;
 const rob = Math.floor(Math.random() * 500);
-if (users.limit < 15) return conn.sendMessage(m.chat, {text: `*😔 ᴇʟ ᴜsᴜᴀʀɪᴏ @${who.split`@`[0]} ᴛɪᴇɴᴇ ᴍᴇɴᴏs ᴅᴇ 15 ᴅɪᴀᴍᴀɴᴛᴇ, ɴᴏ ʀᴏʙᴇs ᴀ ᴜɴ ᴘᴏʙʀᴇ* v:`, mentions: [who]}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});  
-if (users.exp < 10) return conn.sendMessage(m.chat, {text: `*😔 ᴇʟ ᴜsᴜᴀʀɪᴏ @${who.split`@`[0]} ᴛɪᴇɴᴇ ᴍᴇɴᴏs ᴅᴇ 10 ᴇxᴘ*\n*ɴᴏ ʀᴏʙᴇs ᴀ ᴜɴ ᴘᴏʙʀᴇ* v:`, mentions: [who]}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});   
+if (users.limit < 15) return conn.sendMessage(m.chat, {text: `${lenguaje.rpg.rob2} @${who.split`@`[0]} ${lenguaje.rpg.rob3}`, mentions: [who]}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});  
+if (users.exp < 10) return conn.sendMessage(m.chat, {text: `${lenguaje.rpg.rob2} @${who.split`@`[0]} ${lenguaje.rpg.text4}`, mentions: [who]}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});   
 global.db.data.users[m.sender].exp += exp * 1;
 global.db.data.users[m.sender].limit += limit * 1;
 global.db.data.users[who].exp -= exp * 1;
 global.db.data.users[who].limit -= limit * 1;
-conn.sendMessage(m.chat, {text: `*ʜᴀs sᴀǫᴜᴇᴀᴅᴏ ⚔️ ᴀ @${who.split`@`[0]}*\n◦ ᴇxᴘ ${exp}\n◦ ᴅɪᴀᴍᴀɴᴛᴇ: ${limit}\n\nʀᴏʙᴀᴅᴏ ᴘᴏʀ: @${m.sender.split("@")[0]}`, mentions: [who, m.sender]}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
+conn.sendMessage(m.chat, {text: `${lenguaje.rpg.rob5} @${who.split`@`[0]}*\n◦ ᴇxᴘ ${exp}\n◦ ᴅɪᴀᴍᴀɴᴛᴇ: ${limit}\n\n${lenguaje.rpg.rob6} @${m.sender.split("@")[0]}`, mentions: [who, m.sender]}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
 global.db.data.users[m.sender].robs = new Date * 1;
  } catch {
-m.reply(`*🚓🚓🚓No le pudiste robar por que a este usuario los protege la policía 👮(AFK)*`)}}
+m.reply(lenguaje.rpg.rob7)}}
 
 if (command == 'buy' || command == 'buyall') {
 let count = command.replace(/^buy/i, '');
@@ -161,23 +161,21 @@ count = Math.max(1, count);
 if (global.db.data.users[m.sender].exp >= 450 * count) {
 global.db.data.users[m.sender].exp -= 450 * count;
 global.db.data.users[m.sender].limit += count;
-m.reply(`╔═❖ *ɴᴏᴛᴀ ᴅᴇ ᴘᴀɢᴏ*\n║‣ *ʜᴀs ᴄᴏᴍᴘʀᴀᴅᴏ :* ${count}💎\n║‣ *ʜᴀs ɢᴀsᴛᴀᴅᴏ :* ${450 * count} XP\n╚═══════════════`);
-} else m.reply(`🔶 ɴᴏ ᴛɪᴇɴᴇ sᴜғɪᴄɪᴇɴᴛᴇ xᴘ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ *${count}* ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴘᴜᴇᴅᴇs ᴄᴏɴsᴇɢᴜɪʀ *xᴘ* ᴜsᴀɴᴅᴏ ᴇʟ ᴄᴏᴍᴀɴᴅᴏs #minar`)
+m.reply(`╔═❖ ${lenguaje.rpg.buy}\n║‣ {lenguaje.rpg.buy2} ${count}💎\n║‣ ${lenguaje.rpg.buy3} ${450 * count} XP\n╚═══════════════`);
+} else m.reply(`${lenguaje.rpg.buy4} *${count}* ${lenguaje.rpg.buy5}`)
 }
 
 if (command == 'bal' || command == 'balance' || command == 'diamond') {
 let who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
 let user = global.db.data.users[who]
-if (!(who in global.db.data.users)) return m.reply(`✳️ ᴇʟ ᴜsᴜᴀʀɪᴏ ɴᴏ sᴇ ᴇɴᴄᴜᴇɴᴛʀᴀ ᴇɴ ᴍɪ ʙᴀsᴇ ᴅᴇ ᴅᴀᴛᴏs`) 
+if (!(who in global.db.data.users)) return m.reply(lenguaje.grupos.text31)
 conn.sendMessage(m.chat, {text: `╔════≪ 𝙱𝙰𝙻𝙰𝙽𝙲𝙴 ≫════╗
-║ • *📌𝙽𝙾𝙼𝙱𝚁𝙴 :* @${who.split('@')[0]} ${user.registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''} 
+║ • 📌 ${lenguaje.rpg.text7} @${who.split('@')[0]} ${user.registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''} 
 ║ • *💎𝙳𝙸𝙰𝙼𝙰𝙽𝚃𝙴 :* ${user.limit}
 ║ • *⬆️𝙴𝚇𝙿 :* ${user.exp}
 ║ • *🪙𝙲𝙾𝙸𝙽𝚂 :* ${user.money}
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
-║ *𝙽𝙾𝚃𝙰 :* 
-║𝙿𝚞𝚎𝚍𝚎𝚜 𝚌𝚘𝚖𝚙𝚛𝚊𝚛 💎 𝚍𝚒𝚊𝚖𝚊𝚗𝚝𝚎𝚜
-║𝚞𝚜𝚊𝚗𝚍𝚘 𝚕𝚘𝚜 𝚜𝚒𝚐𝚞𝚎𝚗𝚝𝚎 𝚌𝚘𝚖𝚊𝚗𝚍𝚘𝚜:
+║ ${lenguaje.rpg.text8}
 ║ • *${prefix}buy <cantidad>*
 ║ • *${prefix}buyall*
 ╚═══════════════`, mentions: [who]}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
@@ -185,16 +183,16 @@ conn.sendMessage(m.chat, {text: `╔════≪ 𝙱𝙰𝙻𝙰𝙽𝙲𝙴
 
 if (command == 'minar' || command == 'mine') {
 const date = global.db.data.users[m.sender].lastmiming + 600000;
-if (new Date - global.db.data.users[m.sender].lastmiming < 600000) return m.reply(`*[ ⏳ ] Espera ${msToTime(date - new Date())} para volver a minar*`) 
+if (new Date - global.db.data.users[m.sender].lastmiming < 600000) return m.reply(`*${lenguaje.rpg.text9} ${msToTime(date - new Date())} ${lenguaje.rpg.text10}*`) 
 const exp = Math.floor(Math.random() * 1500)
 global.db.data.users[m.sender].exp += exp;
-m.reply(`*⚒️ Genial minaste ${exp} XP*`)
+m.reply(`*${lenguaje.rpg.text11} ${exp} XP*`)
 global.db.data.users[m.sender].lastmiming = new Date * 1;
 }
 
 if (command == 'minar2' || command == 'mine2') {
 const date = global.db.data.users[m.sender].lastmiming + 600000;
-if (new Date - global.db.data.users[m.sender].lastmiming < 600000) return m.reply(`*⏳ Espera ${msToTime(date - new Date())} para volver a minar*`) 
+if (new Date - global.db.data.users[m.sender].lastmiming < 600000) return m.reply(`*${lenguaje.rpg.text9} ${msToTime(date - new Date())} ${lenguaje.rpg.text10}*`) 
 const exp = Math.floor(Math.random() * 2500)
 const diamond = Math.floor(Math.random() * 60)
 const money = Math.floor(Math.random() * 2500)
@@ -217,7 +215,7 @@ if (command == 'trabajar' || command == 'work' || command == 'w') {
 let hasil = Math.floor(Math.random() * 3000)
 let dono = Math.floor(Math.random() * 40)
 let time = global.db.data.users[m.sender].lastwork + 3600000 //3600000
-if (new Date - global.db.data.users[m.sender].lastwork < 3600000) return m.reply(`*🎅 Ya trabajarte mucho por hoy*\n\n*🕙 Espera:* ${msToTime(time - new Date())} *para volver a chambea*`) 
+if (new Date - global.db.data.users[m.sender].lastwork < 3600000) return m.reply(`${lenguaje.rpg.text12}\n\n*${lenguaje.rpg.text9}* ${msToTime(time - new Date())} ${lenguaje.rpg.text13}`) 
 let anu = (await axios.get('https://raw.githubusercontent.com/fgmods/fg-team/main/games/work.json')).data
 let res = pickRandom(anu)
 global.db.data.users[m.sender].exp += hasil
@@ -228,16 +226,14 @@ global.db.data.users[m.sender].lastwork = new Date * 1
 
 if (command == 'claim' || command == 'daily') {
 let time = global.db.data.users[m.sender].lastclaim + 7200000
-if (new Date - global.db.data.users[m.sender].lastclaim < 7200000) return m.reply(`🎁 *ʏᴀ ʀᴇᴄᴏɢɪsᴛᴇ ᴛᴜ ʀᴇᴄᴏᴍᴘᴇɴsᴀ ᴅɪᴀʀɪᴀ*\n\n🕚 ᴠᴜᴇʟᴠᴇ ᴇɴ ${msToTime(time - new Date())}`) 
+if (new Date - global.db.data.users[m.sender].lastclaim < 7200000) return m.reply(`${lenguaje.rpg.text14} ${msToTime(time - new Date())}`) 
 const exp = Math.floor(Math.random() * 900)
 const limit = Math.floor(Math.random() * 30)
 const money = Math.floor(Math.random() * 800)
 global.db.data.users[m.sender].limit += limit;
 global.db.data.users[m.sender].money += money
 global.db.data.users[m.sender].exp += exp
-m.reply(`*🎁 ᨵׁׅׅ֮ϐׁtׁׅꪱׁׁׁׅׅׅꫀׁׅܻ݊݊ꪀꫀׁׅܻ݊ υׁׅ݊ꪀ ꭈׁׅꫀׁׅܻ݊ᧁׁɑׁׅᥣׁׅ֪ᨵׁׅׅׅ꯱ ݊ꪀɑׁׁׅׅ᥎ׁׅꪱׁׁׁׅׅׅժׁׅ݊ꫀׁׅܻ݊݊ꪀ̃ᨵׁׅׅׅ꯱ 🎁🎅*
-
-🎅 *ʜᴀs ʀᴇᴄɪʙɪᴅᴏ:*
+m.reply(`${lenguaje.rpg.text15}
 🆙 *xᴘ* : ${exp}
 💎 *ᴅɪᴀᴍᴀɴᴛᴇ :* ${limit}
 🪙 *ᴄᴏɪɴs :* ${money}`)
@@ -247,53 +243,52 @@ global.db.data.users[m.sender].lastclaim = new Date * 1
 if (command == 'perfil') {
 avatar = await conn.profilePictureUrl(who, 'image').catch((_) => 'https://telegra.ph/file/24fa902ead26340f3df2c.png')
 let { money, exp, role, limit, level, registered, age} = global.db.data.users[m.sender]
-conn.sendMessage(m.chat, { image: { url: avatar }, caption: `              *⪨ ＰＥＲＦＩＬ ⪩*
+conn.sendMessage(m.chat, { image: { url: avatar }, caption: `${lenguaje.rpg.pp}
 
-*🎅 NOMBRE :* ${pushname} ${registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''}
-*📱 NUMERO :* wa.me/${sender.split("@")[0]} ${registered ? '\n*🧐 EDAD :* ' + age + ' años' : ''}
-*💎 DIAMANTES :* ${limit}
-*🆙 NIVEL :* ${level}
+${lenguaje.rpg.pp2} ${pushname} ${registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''}
+${lenguaje.rpg.pp3} wa.me/${sender.split("@")[0]} ${registered ? '\n*🧐 EDAD :* ' + age + ' años' : ''}
+${lenguaje.rpg.pp4} ${limit}
+${lenguaje.rpg.pp5} ${level}
 *⬆️ EXP :* ${exp}
-*🏆 RANGO :* ${role}
-*📇 REGISTRADOS :* ${registered ? 'Si': 'No'}`}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+${lenguaje.rpg.pp6} ${role}
+${lenguaje.rpg.pp7} ${registered ? 'Si': 'No'}`}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 m.react(done)}
 
 if (command == 'levelup' || command == 'nivel') {
 let name = conn.getName(m.sender);  
 let user = global.db.data.users[m.sender]; 
 if (!canLevelUp(user.level, user.exp, global.multiplier)) { 
-let {min, xp, max} = xpRange(user.level, global.multiplier); 
-return m.reply(`╭╌「 *🎅 TUS ESTADISTICAS 🆙* 」
+let {min, xp, max} = xpRange(user.level, global.multiplier);
+return m.reply(`╭╌「 ${lenguaje.rpg.level} 」
 ├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
-├『 Tus estadisticas en tiempo real 🕐 』
+├ ${lenguaje.rpg.level2}
 ├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
-├─ ❏ *NOMBRE:* ${pushname}
-├─ ❏ *XP 🆙:* ${user.exp - min}/${xp}
-├─ ❏ *NIVEL:* ${user.level}
-├─ ❏ *RANGO:* ${user.role}
+├─ ${lenguaje.rpg.level3} ${pushname}
+├─ 🎅 *XP 🆙:* ${user.exp - min}/${xp}
+├─ ${lenguaje['smsAutonivel3']()} ${user.level}
+├─ ${lenguaje['smsAutonivel6']()} ${user.role}
 ╰╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
-🎊 𝘛𝘦 𝘧𝘢𝘭𝘵𝘢 *${max - user.exp}* 𝘥𝘦 *XP* 𝘱𝘢𝘳𝘢 𝘴𝘶𝘣𝘪𝘳 𝘥𝘦 𝘯𝘪𝘷𝘦𝘭`)} 
+${lenguaje.rpg.level4} *${max - user.exp}* ${lenguaje.rpg.level5}`)} 
 const before = user.level * 1; 
 while (canLevelUp(user.level, user.exp, global.multiplier)) user.level++; 
 if (before !== user.level) {
 const str = `╭╌「 *LEVEL UP 🎊* 」
 ├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
-├『 🥳 ${pushname} 𝘍𝘦𝘭𝘪𝘤𝘪𝘥𝘢𝘥𝘦𝘴
-├ 𝘭𝘭𝘦𝘨𝘢𝘴𝘵𝘦 𝘢 𝘶𝘯 𝘯𝘶𝘦𝘷𝘰 𝘯𝘪𝘷𝘦𝘭 』
+├『 🥳 ${pushname} ${lenguaje.rpg.level6}
 ├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
-├─ ❏ *NIVEL ANTERIOR:* ${before}
-├─ ❏ *NIVEL ACTUAL:* ${user.level}
-├─ ❏ *RANGO:* ${user.role}
+├─ ${lenguaje['smsAutonivel4']()} ${before}
+├─ ${lenguaje['smsAutonivel5']()} ${user.level}
+├─ ${lenguaje['smsAutonivel6']()} ${user.role}
 ╰╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
-*🎅 𝘊𝘶𝘢𝘯𝘵𝘰 𝘮𝘢𝘴 𝘪𝘯𝘵𝘦𝘳𝘢𝘤𝘵𝘶𝘦𝘴 𝘤𝘰𝘯 𝘭𝘰𝘴 𝘣𝘰𝘵𝘴, 𝘮𝘢𝘺𝘰𝘳 𝘴𝘦𝘳𝘢 𝘵𝘶 𝘯𝘪𝘷𝘦𝘭*`.trim()
+${lenguaje.rpg.level7}`.trim()
 return m.reply(str)}}
 
 if (command == 'cofre') {
-if (global.db.data.users[m.sender].level < 9) return m.reply(`[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀ ᴇʟ ɴɪᴠᴇʟ 9 ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ .nivel`) 
+if (global.db.data.users[m.sender].level < 9) return m.reply(`${lenguaje['nivel']()} 9 ${lenguaje['nivel2']()}`) 
 const date = global.db.data.users[m.sender].lastcofre + 86400000; //10 hs
-if (new Date - global.db.data.users[m.sender].lastcofre < 86400000) return m.reply(`*🎁 𝚈𝙰 𝚁𝙴𝙲𝙾𝙶𝙸𝚂𝚃𝙴 𝚃𝚄 𝙲𝙾𝙵𝚁𝙴*\n🕚 𝚅𝚄𝙴𝙻𝚅𝙴 𝙴𝙻: ${msToTime(date - new Date())}`) 
+if (new Date - global.db.data.users[m.sender].lastcofre < 86400000) return m.reply(`${lenguaje.rpg.text16} ${msToTime(date - new Date())}`) 
 exp = Math.floor(Math.random() * 9999)
 limit = Math.floor(Math.random() * 70)
 trash = Math.floor(Math.random() * 600)
@@ -304,7 +299,7 @@ global.db.data.users[m.sender].limit += limit
 global.db.data.users[m.sender].trash += trash
 global.db.data.users[m.sender].potion += potion
 global.db.data.users[m.sender].money += money
-m.reply(`╔══🎉═🎉═🎉══⬣\n║🛒 𝙾𝙱𝚃𝙸𝙴𝙽𝙴𝚂 𝚄𝙽 𝙲𝙾𝙵𝚁𝙴\n║┈┈┈┈┈┈┈┈┈┈┈┈┈\n║⚡${exp} 𝙴𝚇𝙿\n║💎 ${limit} 𝙳𝙸𝙰𝙼𝙰𝙽𝚃𝙴\n║🗑️ ${trash} 𝙱𝙰𝚂𝚄𝚁𝙰\n║🥤 ${potion} 𝙿𝙾𝙲𝙸𝙾𝙽𝙴𝚂\n║🪙 ${money} 𝙲𝙾𝙸𝙽𝚂\n╚═════════════════⬣`)
+m.reply(`╔══🎉═🎉═🎉══⬣\n║${lenguaje.rpg.text17}\n║┈┈┈┈┈┈┈┈┈┈┈┈┈\n║⚡${exp} 𝙴𝚇𝙿\n║💎 ${limit} 𝙳𝙸𝙰𝙼𝙰𝙽𝚃𝙴\n║🗑️ ${trash} 𝙱𝙰𝚂𝚄𝚁𝙰\n║🥤 ${potion} 𝙿𝙾𝙲𝙸𝙾𝙽𝙴𝚂\n║🪙 ${money} 𝙲𝙾𝙸𝙽𝚂\n╚═════════════════⬣`)
 global.db.data.users[m.sender].lastcofre = new Date * 1;
 }}
 

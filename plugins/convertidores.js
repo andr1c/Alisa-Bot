@@ -81,7 +81,7 @@ let anime = await `https://api.lolhuman.xyz/api/imagetoanime?apikey=${lolkeysapi
 m.reply(lenguaje.sms.text5);
 await conn.sendFile(m.chat, anime, 'error.jpg', null, m) 
 } catch (e) {
-throw m.reply(`${info.error}\n\n${lenguaje.sms.text6}`)}
+throw m.reply(info.error)}
 } else { 
 m.reply(lenguaje.sms.text7)}}}
 

@@ -9,56 +9,56 @@ const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, slee
 async function owner(isCreator, m, command, conn, text, delay, fkontak, store, quoted, sender) {
 if (!isCreator) return m.reply(info.owner) 
 if (command == 'bcgc' || command == 'bcgroup') {
-if (!text) return conn.sendMessage(m.chat, { text: `*Ingrese el texto que quiere difundir*` }, { quoted: m }); 
+if (!text) return conn.sendMessage(m.chat, { text: `${lenguaje.owner.text}` }, { quoted: m }); 
 let getGroups = await conn.groupFetchAllParticipating()
 let groups = Object.entries(getGroups).slice(0).map(entry => entry[1])
 let anu = groups.map(v => v.id)
-m.reply(`*Enviando mensajes oficial un momento*`)
+m.reply(lenguaje.owner.text1)
 for (let i of anu) {
 await delay(3 * 3000)
-let txt = `「 ✅ *𝘊𝘖𝘔𝘜𝘕𝘐𝘊𝘈𝘋𝘖 𝘖𝘍𝘐𝘊𝘐𝘈𝘓* ✅ 」\n\n${text}`
+let txt = `${lenguaje.owner.text2}\n\n${text}`
 conn.sendText(i, txt, fkontak)}
-m.reply(`ᴛʀᴀɴsᴍɪsɪᴏɴ ʀᴇᴀʟɪᴢᴀᴅᴀ ᴄᴏɴ ᴇxɪᴛᴏs ✅ ᴛᴏᴛᴀʟ ${anu.length} ᴄʜᴀᴛ ɢʀᴜᴘᴏs\nᴛɪᴇᴍᴘᴏ ᴛᴏᴛᴀʟ ᴅᴇ ᴇɴᴠɪᴏ: ${anu.length * 1.5} sᴇɢ`)}
+m.reply(`${lenguaje.owner.text3} ${anu.length} ${lenguaje.owner.text4} ${anu.length * 1.5} sᴇɢ`)}
 
 if (command == 'bc' || command == 'broadcast' || command == 'bcall') {
 if (!text) return conn.sendMessage(m.chat, { text: `*Ingrese el texto*` }, { quoted: m }); 
 let anu = await store.chats.all().map(v => v.id)
-m.reply(`ᴛʀᴀɴsᴍɪsɪᴏɴ ʀᴇᴀʟɪᴢᴀᴅᴀ ᴄᴏɴ ᴇxɪᴛᴏs ✅\nᴛᴏᴛᴀʟ ${anu.length} ᴄʜᴀᴛs`)
+m.reply(`${lenguaje.owner.text3} ${anu.length} ᴄʜᴀᴛs`)
 for (let yoi of anu) {
 //await sleep(1500)
 await delay(3 * 3000)
-let txt = `「 ✅ *𝘊𝘖𝘔𝘜𝘕𝘐𝘊𝘈𝘋𝘖 𝘖𝘍𝘐𝘊𝘐𝘈𝘓* ✅ 」\n\n${text}`
+let txt = `${lenguaje.owner.text2}\n\n${text}`
 conn.sendText(yoi, txt, fkontak)}
 m.reply('Listo')}
 
 if (command == 'block' || command == 'bloquear') {
-m.reply(`*El usuario fue bloqueado del bot*`)
+m.reply(lenguaje.owner.text5)
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await conn.updateBlockStatus(users, 'block')}
 
 if (command == 'unblock' || command == 'desbloquear') {
-m.reply(`*El usuario fue desbloqueado*`)
+m.reply(lenguaje.owner.text6)
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await conn.updateBlockStatus(users, 'unblock')}
 
 if (command == 'setcmd' || command == 'addcmd') {
-if (!m.quoted) return m.reply('*[ ⚠️ ] 𝚁𝙴𝚂𝙿𝙾𝙽𝙳𝙴 𝙰𝙻 𝚂𝚃𝙸𝙲𝙺𝙴𝚁 𝙾 𝙸𝙼𝙰𝙶𝙴𝙽 𝙰𝙻 𝙲𝚄𝙰𝙻 𝙳𝙴𝚂𝙴𝙰 𝙰𝙶𝚁𝙴𝙶𝙰𝚁 𝚄𝙽 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙾 𝚃𝙴𝚇𝚃𝙾*') 
-if (!m.quoted.fileSha256) return m.reply('*⚠️ 𝙼𝙴𝙽𝙲𝙸𝙾𝙽𝙰 𝙰𝙻 𝙼𝙴𝙽𝚂𝙰𝙹𝙴*') 
-if (!text) return m.reply(`*[ ⚠️ ] 𝙴𝚁𝚁𝙾𝚁 𝙳𝙴 𝚄𝚂𝙾, 𝚃𝙴𝚇𝚃𝙾 𝙵𝙰𝙻𝚃𝙰𝙽𝚃𝙴*\n\n*𝙴𝙹𝙴𝙼𝙿𝙻𝙾 𝙳𝙴 𝚄𝚂𝙾 𝙲𝙾𝚁𝚁𝙴𝙲𝚃𝙾 𝙳𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾:*\n*${prefix + command} <#menu> <responder a sticker o imagen>*`) 
+if (!m.quoted) return m.reply(lenguaje.owner.text7)
+if (!m.quoted.fileSha256) return m.reply(lenguaje.owner.text7)
+if (!text) return m.reply(`${lenguaje.owner.text9}\n*${prefix + command} <#menu> <responder a sticker o imagen>*`) 
 let hash = m.quoted.fileSha256.toString('base64')
-if (global.db.data.sticker[hash] && global.db.data.sticker[hash].locked) return m.reply('*[ ⚠️ ] 𝙽𝚘 𝚝𝚒𝚎𝚗𝚎𝚜 𝚙𝚎𝚛𝚖𝚒𝚜𝚘 𝚙𝚊𝚛𝚊 𝚌𝚊𝚖𝚋𝚒𝚊𝚛 𝚎𝚜𝚝𝚎 𝚌𝚘𝚖𝚊𝚗𝚍𝚘 𝚍𝚎 𝚂𝚝𝚒𝚌𝚔𝚎𝚛*') 
+if (global.db.data.sticker[hash] && global.db.data.sticker[hash].locked) return m.reply(lenguaje.owner.text10)
 global.db.data.sticker[hash] = {text, mentionedJid: m.mentionedJid, creator: m.sender, at: + new Date, locked: false, }
-m.reply(`*[ ✔ ] ᴇʟ ᴛᴇxᴛᴏ/ᴄᴏᴍᴀɴᴅᴏ ᴀsɪɢɴᴀᴅᴏ ᴀʟ sᴛɪᴄᴋᴇʀ/ɪᴍᴀɢᴇɴ ғᴜᴇ ᴀɢʀᴇɢᴀᴅᴏ ᴀ ʟᴀ ʙᴀsᴇ ᴅᴇ ᴅᴀᴛᴏs ᴄᴏʀʀᴇᴄᴛᴀᴍᴇɴᴛᴇ*`)}
+m.reply(lenguaje.owner.text11)}
 
 if (command == 'delcmd') {
 let _sh = m.quoted.fileSha256.toString('base64')
-if (!_sh) return reply('*𝙴𝚜𝚝𝚎 𝚒𝚍 𝚍𝚎 𝚜𝚝𝚒𝚌𝚔𝚎𝚛 𝚗𝚘 𝚎𝚡𝚒𝚜𝚝𝚎*') 
-if (global.db.data.sticker[_sh] && global.db.data.sticker[_sh].locked) return m.reply('*[ ⚠️ ] No tienes permiso para cambiar este comando de Sticker*')      
+if (!_sh) return m.reply(lenguaje.owner.text12)
+if (global.db.data.sticker[_sh] && global.db.data.sticker[_sh].locked) return m.reply(lenguaje.owner.text13)   
 delete global.db.data.sticker[_sh]
 m.reply('*✅ 𝙷𝚎𝚌𝚑𝚘*')}
 
 if (command == 'listcmd') {
-let _teks = `*𝙻𝙸𝚂𝚃𝙰 𝙳𝙴 𝙲𝙾𝙼𝙰𝙽𝙳𝙾𝚂*\n▢ *𝙸𝚗𝚏𝚘:* 𝚂𝚒 𝚎𝚜𝚝𝚊 𝚎𝚗 *𝚗𝚎𝚐𝚛𝚒𝚝𝚊* 𝚎𝚜𝚝𝚊 𝚋𝚕𝚘𝚚𝚞𝚎𝚊𝚍𝚘\n\n──────────────────\n${Object.entries(global.db.data.sticker).map(([key, value], index) => `${index + 1}. ${value.locked ? `*${key}*` : key} : ${value.text}`).join('\n')}`.trim()
+let _teks = `${lenguaje.owner.text14}\n\n──────────────────\n${Object.entries(global.db.data.sticker).map(([key, value], index) => `${index + 1}. ${value.locked ? `*${key}*` : key} : ${value.text}`).join('\n')}`.trim()
 conn.sendText(m.chat, _teks, m, { mentions: Object.values(global.db.data.sticker).map(x => x.mentionedJid).reduce((a,b) => [...a, ...b], []) })}
 
 if (command == 'añadirdiamantes' || command == 'dardiamantes' || command == 'addlimit') {
@@ -66,18 +66,18 @@ const pajak = 0;
 let who;
 if (m.isGroup) who = m.mentionedJid[0];
 else who = m.chat;
-if (!who) return m.reply('*[ ⚠️ ] ᥱ𝗍і𝗊ᥙᥱ𝗍ᥲ ᥲ ᥙᥒ ᥙsᥙᥲrі᥆ ᥴ᥆ᥒ ᥱᥣ @𝚝𝚊𝚐*') 
+if (!who) return m.reply(lenguaje.owner.text15)   
 const txt = text.replace('@' + who.split`@`[0], '').trim();
-if (!txt) return m.reply('*[ ⚠️ ] іᥒgrᥱsᥱ ᥣᥲ ᥴᥲᥒ𝗍іძᥲძ ძᥱ ძіᥲmᥲᥒ𝗍ᥱ 𝗊ᥙᥱ ძᥱsᥱᥲ ᥲᥒ̃ᥲძіr*') 
-if (isNaN(txt)) return m.reply('*[ ⚠️ ] sіmᑲ᥆ᥣ᥆ ᥒ᥆ ᥲძmі𝗍іძ᥆, s᥆ᥣ᥆ ᥒᥙmᥱr᥆!*') 
+if (!txt) return m.reply(lenguaje.owner.text16)   
+if (isNaN(txt)) return m.reply(lenguaje.owner.text17)   
 const dmt = parseInt(txt);
 let limit = dmt;
 const pjk = Math.ceil(dmt * pajak);
 limit += pjk;
-if (limit < 1) return m.reply('*[ ⚠️ ] ᥱᥣ ᥒᥙmᥱr᥆ mіᥒіm᥆ ძᥱ ძіᥲmᥲᥒ𝗍ᥱ ⍴ᥲrᥲ ᥲᥒ̃ᥲძіr ᥱs 𝟷*') 
+if (limit < 1) return m.reply(lenguaje.owner.text18) 
 const users = global.db.data.users;
 users[who].limit += dmt;
-m.reply(`≡ *💎 sᥱ ᥲᥒ̃ᥲძіძ᥆*
+m.reply(`≡ 💎 ${lenguaje.owner.text19}
 ┏╍╍╍╍╍╍╍╍╍╍╍╍╍
 ┃• *𝗍᥆𝗍ᥲᥣ:* ${dmt}
 ┗╍╍╍╍╍╍╍╍╍╍╍╍╍`)}
@@ -87,18 +87,18 @@ const pajak = 0;
 let who;
 if (m.isGroup) who = m.mentionedJid[0];
 else who = m.chat;
-if (!who) return m.reply('*[ ⚠️ ] ᥱ𝗍і𝗊ᥙᥱ𝗍ᥲ ᥲ ᥙᥒ ᥙsᥙᥲrі᥆ ᥴ᥆ᥒ ᥱᥣ @𝚝𝚊𝚐*') 
+if (!who) return m.reply(lenguaje.owner.text15)   
 const txt = text.replace('@' + who.split`@`[0], '').trim();
-if (!txt) return m.reply('*[ ⚠️ ] іᥒgrᥱsᥲ ᥣᥲ ᥴᥲᥒ𝗍іძᥲძ ძᥱ ᥱ᥊⍴ᥱrіᥱᥒᥴіᥲ (᥊⍴) 𝗊ᥙᥱ ძᥱsᥱᥲᥲ ᥲᥒ̃ᥲძіr*') 
-if (isNaN(txt)) return m.reply('*[ ⚠️ ] sіmᑲ᥆ᥣ᥆ ᥒ᥆ ᥲძmі𝗍іძ᥆, s᥆ᥣ᥆ ᥒᥙmᥱr᥆*') 
+if (!txt) return m.reply(lenguaje.owner.text20) 
+if (isNaN(txt)) return m.reply(lenguaje.owner.text17)   
 const xp = parseInt(txt);
 let exp = xp;
 const pjk = Math.ceil(xp * pajak);
 exp += pjk;
-if (exp < 1) return m.reply('*[ ⚠️ ] ᥱᥣ ᥒᥙmᥱr᥆ mіᥒіm᥆ ძᥱ ᥱ᥊⍴ᥱrіᥱᥒᥴіᥲ (᥊⍴) ⍴ᥲrᥲ ᥲᥒ̃ᥲძіr ᥱs 𝟷*') 
+if (exp < 1) return m.reply(lenguaje.owner.text21) 
 const users = global.db.data.users;
 users[who].exp += xp;
-m.reply(`≡ *᥊⍴ ᥲᥒ̃ᥲძіძ᥆*
+m.reply(`≡ ᥊⍴ ${lenguaje.owner.text19}
 ┏╍╍╍╍╍╍╍╍╍╍╍╍╍
 ┃• *𝗍᥆𝗍ᥲᥣ:* ${xp}
 ┗╍╍╍╍╍╍╍╍╍╍╍╍╍`)}}
