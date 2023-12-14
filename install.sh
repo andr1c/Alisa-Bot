@@ -10,7 +10,6 @@ echo -e "
 ├┬┴┬┴ ιηι¢ιαη∂σ ιηѕтαℓα¢ισ́η αυтσмάтι ┬┴┬┴┤ " 
 
 apt update && apt upgrade && pkg update && pkg upgrade && pkg install bash && pkg install libwebp && pkg install git -y && pkg install nodejs -y && pkg install ffmpeg -y && pkg install wget && pkg install imagemagick -y && pkg install yarn
-wget -O ~/../usr/share/tessdata/ind.traineddata "https://github.com/tesseract-ocr/tessdata/blob/master/ind.traineddata?raw=true"
 echo -e "\033[1;35m"
 git clone https://github.com/elrebelde21/NovaBot-MD.git
 echo -e "\033[01;32m\033[01mLa clonación se ha descargado e instalado correctamente..\n\033[0m"
