@@ -30,9 +30,7 @@ else
 echo -e "\033[01;32m\033[01m𝙸𝙽𝚂𝚃𝙰𝙻𝙰𝙲𝙸𝙾𝙽 𝙳𝙴𝙿𝙴𝙽𝙳𝙴𝙲𝙸𝙰𝚂!!!\n\033[0m" 
 echo -e "\e[36m
 𝐈𝐍𝐒𝐓𝐀𝐋𝐋 𝐆𝐈𝐓\n\e[0m"
-
 if command -v git >/dev/null 2>&1; then
-else
 if pkg install git -y 2>&1 >/dev/null | grep -E -i -q '(command not found|unable to locate package|E: Could not get lock|debconf: delaying package configuration|Package not found|Failed to fetch|404 Not Found|Hash sum mismatch|503 Service Unavailable|504 Gateway Timeout|408 Request Timeout|Connection timed out|Temporary failure resolving)'; then
 error=$(pkg install git -y 2>&1 >/dev/null)
 echo -e "\033[0;31mError: $error\033[0m" 
