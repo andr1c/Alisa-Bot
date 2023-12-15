@@ -51,7 +51,6 @@ echo -e "\e[35m
 \n\e[0m"
 
 if command -v node >/dev/null 2>&1; then
-else
 if pkg install nodejs -y 2>&1 >/dev/null | grep -E -i -q '(command not found|unable to locate package|E: Could not get lock|debconf: delaying package configuration|Package not found|Failed to fetch|404 Not Found|Hash sum mismatch|503 Service Unavailable|504 Gateway Timeout|408 Request Timeout|Connection timed out|Temporary failure resolving)'; then
 error=$(pkg install nodejs -y 2>&1 >/dev/null)
 echo -e "\033[0;31mError: $error\033[0m" 
@@ -60,7 +59,6 @@ echo -e "\033[01;33mpkg install git -y\npkg install nodejs -y\npkg install ffmpe
 exit 1
 else
 echo -e "\033[01;32m\033[01mNode.js se ha instalado correctamente.\nNode.js has been installed successfully.\n\033[0m" 
-fi
 fi
 
 echo -e "\e[36m
@@ -71,7 +69,6 @@ echo -e "\e[36m
 █▀ █▀ █░▀░█ █▀▀ ██▄ █▄█\n\e[0m"
 
 if command -v ffmpeg >/dev/null 2>&1; then
-else
 if pkg install ffmpeg -y 2>&1 >/dev/null | grep -E -i -q '(command not found|unable to locate package|E: Could not get lock|debconf: delaying package configuration|Package not found|Failed to fetch|404 Not Found|Hash sum mismatch|503 Service Unavailable|504 Gateway Timeout|408 Request Timeout|Connection timed out|Temporary failure resolving)'; then
 error=$(pkg install ffmpeg -y 2>&1 >/dev/null)
 echo -e "\033[0;31mError: $error\033[0m" 
@@ -81,10 +78,8 @@ exit 1
 else
 echo -e "\033[01;32m\033[01mFFmpeg se ha instalado correctamente.\nFFmpeg has been installed successfully.\n\033[0m" 
 fi
-fi
 
 if command -v convert >/dev/null 2>&1; then
-else
 if pkg install imagemagick -y 2>&1 >/dev/null | grep -E -i -q '(command not found|unable to locate package|E: Could not get lock|debconf: delaying package configuration|Package not found|Failed to fetch|404 Not Found|Hash sum mismatch|503 Service Unavailable|504 Gateway Timeout|408 Request Timeout|Connection timed out|Temporary failure resolving)'; then
 error=$(pkg install imagemagick -y 2>&1 >/dev/null)
 echo -e "\033[0;31mError: $error\033[0m" 
@@ -93,10 +88,8 @@ echo -e "\033[01;33mpkg install git -y\npkg install nodejs -y\npkg install ffmpe
 exit 1
 else
 fi
-fi
 
 if command -v yarn >/dev/null 2>&1; then
-else
 if npm install -g yarn 2>&1 >/dev/null | grep -E -i -q '(command not found|unable to locate package|E: Could not get lock|debconf: delaying package configuration|Package not found|Failed to fetch|404 Not Found|Hash sum mismatch|503 Service Unavailable|504 Gateway Timeout|408 Request Timeout|Connection timed out|Temporary failure resolving)'; then
 error=$(npm install -g yarn 2>&1 >/dev/null)
 echo -e "\033[0;31mError: $error\033[0m" 
@@ -105,7 +98,6 @@ echo -e "\033[01;33mpkg install git -y\npkg install nodejs -y\npkg install ffmpe
 exit 1
 else
 echo -e "\033[01;32m\033[01mYarn se ha instalado correctamente.\nYarn has been installed successfully.\n\033[0m" 
-fi
 fi
 
 echo -e "\e[36m
@@ -142,7 +134,6 @@ echo -e "\033[0;34mNo se pudo instalar NPM. Verifique su conexión a Internet e 
 else
 echo -e "\033[01;32m\033[01mNPM se ha instalado correctamente..\n\033[0m" 
 fi
-
 
 : <<'COMMENT'
 v="${b}\033[1;32m"
