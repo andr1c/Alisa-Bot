@@ -13,7 +13,7 @@ const Jimp = require('jimp')
 const FormData = require("form-data") 
 const os = require('os')
 
-async function buscadores(m, command, conn, text, from, fkontak, prefix, args, q, quoted, lolkeysapi) {
+async function buscadores(m, command, conn, text, from, fkontak, prefix, args, q, quoted, lang, lolkeysapi) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (command == 'yts' || command == 'ytsearch') {
 if (global.db.data.users[m.sender].level < 2) return m.reply(`${lenguaje['nivel']()} 2 ${lenguaje['nivel2']()}`) 
@@ -86,7 +86,7 @@ if (!text && m.quoted && m.quoted.text) text = m.quoted.text;
 const lol = await fetch(`https://api.lolhuman.xyz/api/translate/auto/${lang}?apikey=${lolkeysapi}&text=${text}`);
 const loll = await lol.json();
 const result2 = loll.result.translated;
-await m.reply(`${lenguaje.lengua.trad}` + result2)}
+await m.reply(`${lenguaje.lengua.trad} ` + result2)}
 
 if (command == 'tts') {
 if (!text) return m.reply(`${lenguaje.lengua.text2}`)

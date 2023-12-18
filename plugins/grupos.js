@@ -291,7 +291,7 @@ if (command == 'enline' || command == 'online' || command == 'listonine' || comm
 if (!m.isGroup) return m.reply(info.group);  
 let id = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : m.chat
 let online = [...Object.keys(store.presences[id]), numBot]
-conn.sendText(m.chat, '*ESTA ONLINE 😎 :*\n\n' + online.map(v => '❑ @' + v.replace(/@.+/, '')).join`\n`, m, { mentions: online })}}
+conn.sendText(m.chat, '*Lista de activos | online:*\n\n' + online.map(v => '❑ @' + v.replace(/@.+/, '')).join`\n`, m, { mentions: online })}}
 
 module.exports = { grupo }
 

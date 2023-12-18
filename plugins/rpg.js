@@ -28,21 +28,21 @@ user.afkTime = -1
 user.afkReason = ''  
 }
 
-async function reg(command, conn, m, sender, text, fkontak, delay, args) {
+async function reg(command, conn, m, sender, text, budy, fkontak, delay, args) {
 if (command == 'reg' || command == 'verificar') {
 let Reg = /\|?(.*)([.|] *?)([0-9]*)$/i
 let user = global.db.data.users[m.sender]
 let codigosIdiomas = ['es', 'en']
 let nombresIdiomas = {'es': 'Español', 'en': 'English' }
-if (user.registered === true) return m.reply(`*Ya estas registrado 🧐*`) 
-if (!Reg.test(text)) return m.reply(`*❌ Forma incorrecta*\n\nuse de esta forma\nEjemplo: ${prefix}reg nombre.edad`) 
+if (user.registered === true) return m.reply(lenguaje.smsReg()) 
+if (!Reg.test(text)) return m.reply(lenguaje.smsReg1(prefix)) 
 let [_, name, splitter, age] = text.match(Reg)
-if (!name) return m.reply('El nombre no puede esta vacio') 
-if (!age) return m.reply('La edad no puede esta vacia (Numeros)') 
+if (!name) return m.reply(lenguaje.smsReg2()) 
+if (!age) return m.reply(lenguaje.smsReg3()) 
 age = parseInt(age)
-if (age > 100) return m.reply('Esta Viejo (。-`ω´-)') 
-if (age < 6) return m.reply('🚼  Basado, los bebes saber escribir.✍️😳') 
-if (name.length >= 30) return m.reply('🐈 Fua que basado, el nombre es muy largo que quiere un puente como nombre😹') 
+if (age > 100) return m.reply(lenguaje.smsReg4()) 
+if (age < 6) return m.reply(lenguaje.smsReg5()) 
+if (name.length >= 30) return m.reply(lenguaje.smsReg6()) 
 user.name = name + 'ͧͧͧͦꙶͣͤ✓'.trim()
 user.age = age
 user.regTime = + new Date
@@ -54,8 +54,7 @@ const time = moment.tz('America/Argentina/Buenos_Aires').format('LT')
 let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length
 global.db.data.users[m.sender].limit += 2
 global.db.data.users[m.sender].exp += 200
-conn.sendMessage(m.chat, { text: `[ ✅ REGISTRO COMPLETADO ]\n\n ◉ *Nombre:* ${name} ${user.registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''}\n ◉ *Edad:* ${age} años\n ◉ *Hora:* ${time}\n ◉ *Fecha:* ${date}\n ◉ *Número:* wa.me/${sender.split("@")[0]}\n ◉ *Numero del serie*\n ⤷ ${sn}\n\n 🎁 *Recompensa:*\n ⤷ 2 diamante 💎\n ⤷ 200 exp\n\n *◉ Para ver los comandos del bot usar:*
- ${prefix}menu\n\n ◉ *Total de usuários registrados:* ${rtotalreg}`,
+conn.sendMessage(m.chat, { text: lenguaje.smsReg7(name, user, age, time, date, sender, sn, prefix, rtotalreg),
 contextInfo:{
 mentionedJid:[name],
 forwardingScore: 9999999,
@@ -72,6 +71,8 @@ isForwarded: true,
 { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 await delay(2 * 2000)
 conn.sendMessage(m.chat, { text: sn, contextInfo:{forwardingScore: 9999999, isForwarded: true, }}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+await delay(2 * 2000)
+conn.sendMessage(m.chat, { text: lenguaje.smsReg8(), contextInfo:{forwardingScore: 9999999, isForwarded: true, }}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }
 
 if (command == 'unreg') {
@@ -161,7 +162,7 @@ count = Math.max(1, count);
 if (global.db.data.users[m.sender].exp >= 450 * count) {
 global.db.data.users[m.sender].exp -= 450 * count;
 global.db.data.users[m.sender].limit += count;
-m.reply(`╔═❖ ${lenguaje.rpg.buy}\n║‣ {lenguaje.rpg.buy2} ${count}💎\n║‣ ${lenguaje.rpg.buy3} ${450 * count} XP\n╚═══════════════`);
+m.reply(`╔═❖ ${lenguaje.rpg.buy}\n║‣ ${lenguaje.rpg.buy2} ${count}💎\n║‣ ${lenguaje.rpg.buy3} ${450 * count} XP\n╚═══════════════`);
 } else m.reply(`${lenguaje.rpg.buy4} *${count}* ${lenguaje.rpg.buy5}`)
 }
 
