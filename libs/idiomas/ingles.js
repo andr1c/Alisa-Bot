@@ -101,11 +101,13 @@ const group = () => { return `*⚠️ Asshole, this command can only be used by 
 const private = () => { return `*⚠️ This command can only be used in private chat*` }
 const bot = () => { return `*⚠️ This command can only be used by (ME)*` }
 const error = () => { return `⪨╼╼≪⚠️ ERROR ⚠️≫╾╼⪩\n\nAN UNEXPECTED ERROR OCCURRED, (API DROPPED 😢)` }
+const AvisoMG = () => { return `⪨╼╼≪⚠️ MISUSED ACTION ⚠️≫╾╼⪩\n\n` }
 const advertencia = () => { return `[ ⚠️ ＷＡＲＮＩＮＧ  ]` } 
 const registra = () => { return `*[ 🔴 HEY STOP YOU ARE NOT REGISTERED 🔴 ]*\n\nYOU DO NOT APPEAR IN MY DATABASE ✋\n\nTo be able to use the bot you need to be registered:\n\n#reg nombre.edad` }
 const limit = () => { return `*ᴅɪᴀᴍᴏɴᴅ 💎 ᴜsᴇᴅ*` } 
 const AntiNsfw = () => { return `*Command 18 is disabled*\nIf you are an admin and want to activate them, use:\n• modocaliente on` }
 const endLimit = () => { return `*😢 NOO HAVE MORE DIAMOND 💎*\n\nYou can buy more using the command: #buy` } 
+const exito = () => { return `*SUCCESSFUL ✅*` }
 const result = () => { return `results of :` }
 
 //Buscadores | Search engines 
@@ -238,25 +240,9 @@ text16: `*New command:*
 
 🔵 THE MULTI LANGUAGE PER HOUR FUNCTION IS ARRIVED 2 LANGUAGE AVAILABLE SPANISH/ENGLISH
 
-🟢 Upgrade the image to HD.
-• #hd
-
-🚀 Download gdrive file
-• #gdrive (links) 
-
-🚀 Download tiktok images
-• #tiktokimg
-• #ttimg
-
-🚀 Backup in case the play fails you can use
-• #musica
-• #play.1 _(descarga audio)_
-• #video
-• #play.2 _(descarga video)_
-
-🌐 (Create images with (AI)
-• #dall-e
-• $#ia2
+🟢 Multi language now you can choose the language you want the bot to respond to with:
+• #idioma 
+• #lenguaje
 
 ᴹᵒʳᵉ ᶜᵒᵐᵐᵃⁿᵈˢ, ᶠᵘᵗᵘʳᵉ ᵛᵉʳˢᶦᵒⁿˢ ʷᵃⁿᵗ ᵐᵉ ᵗᵒ ᵃᵈᵈ ˢᵒᵐᵉ ˢᵖᵉᶜᶦᵃˡ ᶜᵒᵐᵐᵃⁿᵈˢ, ʷʳᶦᵗᵉ ᵗᵒ ᵐʸ ᶜʳᵉᵃᵗᵒʳ`, 
 text17: `*🌐 BOT RULES 🌐*
@@ -573,4 +559,18 @@ text3: `*Respond to a sticker to steal`,
 text4: `enter something to convert it to a sticker :v`, 
 text5: `_*Calm down crack, I'm making your text a sticker 👏*_\n\n_*This may take a few minutes....*_` }
 
-module.exports = { lenguaje, tmp, session, errorsession, archivo, archborrado, archivoborrado, purgesessions, purgesubbots, purgeoldfiles, smscall, smscall2, smsAvisos, smsAvisos2, smsAvisos3, smsAvisos4, smsAvisos5, smsAvisos6, smsAvisos7, smsAvisos8, smsAvisos9, smsWel, smsWel2, smsWel3, smsWel4, smsWel5, smsWel6, smsWel7, smsWel8, smsWel9, smsWel10, smsWel11, smsBye, smsBye2, smsBye3, smsBye4, smsBye5, smsConexion, smsEscaneaQR, smsConectado, smsConexioncerrar, nivel, nivel2, admin, botAdmin, propietario, group, private, bot, error, advertencia, registra, limit, AntiNsfw, endLimit, result, lengua, sms, Bio, smsAntiFake, smsAntiArabe, smsAntiLink, smsAntiLink2, smsAntiLink3, smsAntiLink4, smsAntiLink5, smsAutoSicker, smsAutonivel, smsAutonivel2, smsAutonivel3, smsAutonivel4, smsAutonivel5, smsAutonivel6, smsAutonivel7, smsAutonivel8, smsAutonivel9, smsAntiPv, info, menu, jadibot, descargar, demote, promote, enable, grupos, juegos, nsfw, owner, ramdow, rpg, sticker}
+const idioma = (prefix) => { return `*✳️To use:*\n${prefix}language 1 (Spanish)\n${prefix}language ​​2 (english)\n\n*❗ Example:*\n• ${prefix}language 1` }
+const idioma2 = () => { return `✅Languages ​​successfully changed to ` }
+
+const smsReg = () => { return `*You are already registered 🧐*` }
+const smsReg1 = (prefix) => { return `*❌ Incorrect form*\n\nuse de esta forma\nExample: ${prefix}reg name Age` }
+const smsReg2 = () => { return `The name cannot be empty` }
+const smsReg3 = () => { return `Age cannot be empty (Numbers)` }
+const smsReg4 = () => { return 'Its old (。-`ω´-)' }
+const smsReg5 = () => { return `🚼 Based, babies know how to write.✍️😳` }
+const smsReg6 = () => { return `🐈 Fua that based, the name is too long that wants a bridge as a name 😹` }
+const smsReg7 = (name, user, age, time, date, sender, sn, prefix, rtotalreg) => { return `[ ✅ REGISTRATION COMPLETE ]\n\n ◉ *Name:* ${name} ${user.registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''}\n ◉ *Age:* ${age} years\n ◉ *Hour:* ${time}\n ◉ *Date:* ${date}\n ◉ *Number:* wa.me/${sender.split("@")[0]}\n ◉ *Serial number*\n ⤷ ${sn}\n\n 🎁 *Reward:*\n ⤷ 2 diamante 💎\n ⤷ 200 exp\n\n *◉ To see the bot commands use:*
+ ${prefix}menu\n\n ◉ *Total registered users:* ${rtotalreg}` }
+const smsReg8 = () => { return `*💬 Choose your language with:* #idioma` }
+ 
+module.exports = { lenguaje, exito, tmp, session, errorsession, archivo, AvisoMG, archborrado, archivoborrado, purgesessions, purgesubbots, purgeoldfiles, smscall, smscall2, smsAvisos, smsAvisos2, smsAvisos3, smsAvisos4, smsAvisos5, smsAvisos6, smsAvisos7, smsAvisos8, smsAvisos9, smsWel, smsWel2, smsWel3, smsWel4, smsWel5, smsWel6, smsWel7, smsWel8, smsWel9, smsWel10, smsWel11, smsBye, smsBye2, smsBye3, smsBye4, smsBye5, smsConexion, smsEscaneaQR, smsConectado, smsConexioncerrar, nivel, nivel2, admin, botAdmin, propietario, group, private, bot, error, advertencia, registra, limit, AntiNsfw, endLimit, result, lengua, sms, Bio, smsAntiFake, smsAntiArabe, smsAntiLink, smsAntiLink2, smsAntiLink3, smsAntiLink4, smsAntiLink5, smsAutoSicker, smsAutonivel, smsAutonivel2, smsAutonivel3, smsAutonivel4, smsAutonivel5, smsAutonivel6, smsAutonivel7, smsAutonivel8, smsAutonivel9, smsAntiPv, info, menu, jadibot, descargar, demote, promote, enable, grupos, juegos, nsfw, owner, ramdow, rpg, sticker, idioma, idioma2, smsReg, smsReg1, smsReg2, smsReg3, smsReg4, smsReg5, smsReg6, smsReg7, smsReg8}

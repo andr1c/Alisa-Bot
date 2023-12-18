@@ -26,7 +26,7 @@ const smsAvisos4 = () => { return `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋
 const smsAvisos5 = () => { return `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n` }
 const smsAvisos6 = () => { return `*ᴬʰᵒʳᵃ ˢᵒˡᵒ ˡᵒˢ ᵃᵈᵐᶦⁿˢ ᵖᵘᵉᵈᵉ ᵉᵈᶦᵗᵃʳ ˡᵒˢ ᵃʲᵘˢᵗᵉ ᵈᵉˡ ᵍʳᵘᵖᵒ*` } 
 const smsAvisos7 = () => { return `ᴬʰᵒʳᵃ ᵗᵒᵈᵒˢ ˡᵒˢ ᵖᵃʳᵗᶦᶜᶦᵖᵃʳᵗᵉ ᵖᵘᵉᵈᵉ ᵉᵈᶦᵗᵃʳ ˡᵒˢ ᵃʲᵘˢᵗᵉ ᵈᵉˡ ᵍʳᵘᵖᵒ` }
-const smsAvisos8 = () => { return `ᴸᵃ ᵈᵉˢᶜʳᶦᵖᶜᶦᵒ́ⁿ ᵈᵉˡ ᵍʳᵘᵖᵒ ᶠᵘᵉ ᶜᵃᵐᵇᶦᵃᵈᵃ ⁿᵘᵉᵛᵃ ᵈᵉˢᶜʳᶦᵖᶜᶦᵒ́ⁿ ᵉˢ` }
+const smsAvisos8 = () => { return `ᴸᵃ ᵈᵉˢᶜʳᶦᵖᶜᶦᵒ́ⁿ ᵈᵉˡ ᵍʳᵘᵖᵒ ᶠᵘᵉ ᶜᵃᵐᵇᶦᵃᵈᵃ ⁿᵘᵉᵛᵃ ᵈᵉˢᶜʳᶦᵖᶜᶦᵒⁿ ᵉˢ` }
 const smsAvisos9 = () => { return `*ᴱˡ ⁿᵒᵐᵇʳᵉ ᵈᵉˡ ᵍʳᵘᵖᵒ ᶠᵘᵉ ᶜᵃᵐᵇᶦᵃᵈᵒ ⁿᵘᵉᵛᵒˢ ⁿᵒᵐᵇʳᵉ ᵉˢ*` }
 
 //welcome
@@ -81,7 +81,7 @@ const smsAutoSicker = () => { return `🤡 Hey Donde carajo viste un stickes que
 
 //autonivel
 const smsAutonivel = () => { return `*「 FELICIDADES LEVEL UP 🆙🥳 」*\n\n🥳 Felicidades` }
-const smsAutonivel2 = () => { return `👏 subiste de nivel sigue asi 👏\n\n` }
+const smsAutonivel2 = () => { return `👏 Subiste de nivel sigue asi 👏\n` }
 const smsAutonivel3 = () => { return `*🎅 NIVEL :*` }
 const smsAutonivel4 = () => { return `*🎅 NIVEL ANTERIOR :* ` }
 const smsAutonivel5 = () => { return `*🎅 NIVEL ACTUAL :*` }
@@ -100,11 +100,13 @@ const group = () => { return `*⚠️ Pendejo este comando solo se puede usar el
 const private = () => { return `*⚠️ Este comando solo se puede usar al chat privado*` }
 const bot = () => { return `*⚠️ Este comando solo (YO) los puedo usar*` }
 const error = () => { return `⪨╼╼≪⚠️ ERROR ⚠️≫╾╼⪩\n\nOCURRIÓ UN ERROR INESPERADO, (API CAIDA 😢)` }
+const AvisoMG = () => { return `⪨╼╼≪⚠️ ACCION MAL USADA ⚠️≫╾╼⪩\n\n` }
 const advertencia = () => { return `[ ⚠️ ＡＤＶＥＲＴＥＮＣＩＡ ]` }
 const registra = () => { return `*[ 🔴 HEY ALTO NO ESTAS REGISTRADO 🔴 ]*\n\nNO APARECES EN MI BASE DE DATOS ✋\n\nPara poder usar el bot necesita esta registrado:\n\n#reg nombre.edad` }
 const limit = () => { return `*ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴜsᴀᴅᴏ*` }
 const AntiNsfw = () => { return `*Los comando +18 esta desactivado*\nSi eres admin y quiere activarlos usar:\n• modocaliente on` }
 const endLimit = () => { return `*😢 NOO TENER MAS DIAMANTE 💎*\n\nPuede comprar mas usando el comando: #buy` }
+const exito = () => { return `*EXITOS ✅*` }
 const result = () => { return `*Resultados de :*` }
 
 //Buscadores
@@ -122,7 +124,7 @@ vista: `VISTAS :`,
 publi: `𝘗𝘜𝘉𝘓𝘐𝘊𝘈𝘋𝘖`, 
 dura: `DURACIÓN :`, 
 subidos: `SUBIDOS :`, 
-calidad: `calidad :`, 
+calidad: `CALIDAD :`, 
 desc: `DESCRIPCION :`, 
 text: `Ingresa un link para acortar!`, 
 trad: `🔸 Traducción`, 
@@ -236,27 +238,9 @@ text14: `_*ᴼʲᶦᵗᵒ ᵉˢᶜʳᶦᵇᵉ ᵗᵃˡ ʸ ᶜᵒᵐᵒ ᵉˢᵗ�
 text15: `🤔 *Que hay de nuevo?* 🤗\n\n*🌐 Nueva Version:*`, 
 text16: `*Nuevo comando:*
 
-🔵 ESTA LLEGADO LA FUNCIÓN MULTI LENGUAJE POR HORA 2 IDIOMA DISPONIBLE ESPAÑOL/INGLES 
-
-🟢 Mejorar la imagen a HD. 
-• #hd
-
-🚀 Descarga archivo de gdrive
-• #gdrive (links) 
-
-🚀 Descarga imagenes del tiktok
-• #tiktokimg
-• #ttimg
-
-🚀 Respaldo por si el play falla puede usar
-• #musica
-• #play.1 _(descarga audio)_
-• #video
-• #play.2 _(descarga video)_
-
-🌐 (Crea imagenes con la (IA) 
-• #dall-e
-• $#ia2
+🟢 Multi lenguaje ahora puede eligir el que idioma quiere te responda el bot con:
+• #idioma
+• #lenguaje
 
 ᴹᵃˢ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᶠᵘᵗᵘʳᵃ ᵛᵉʳˢᶦᵒⁿᵉˢ ᵠᵘᶦᵉʳᵉ ᵠᵘᵉ ᵃᵍʳᵉᵍᵘᵉ ᵃˡᵍᵘⁿ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᵉˢᵖᵉᶜᶦᵃˡ ᵉˢᶜʳᶦᵇᶦʳˡᵉ ᵃ ᵐᶦ ᶜʳᵉᵃᵈᵒʳ`, 
 text17: `*🌐 REGLAS DEL BOT 🌐*
@@ -343,7 +327,7 @@ ago: `*Publicado:*`,
 autor: `*Autor:*`,
 views: `*Vistas:*`, 
 letra: `*Letra:*`, 
-music: `• 𝘋𝘦𝘴𝘤𝘢𝘳𝘨𝘢𝘥𝘰 𝘢𝘶𝘥𝘪𝘰 🔊, 𝘈𝘨𝘶𝘢𝘳𝘥𝘦 𝘶𝘯 𝘮𝘰𝘮𝘦𝘯𝘵𝘰....*`, 
+music: `*• 𝘋𝘦𝘴𝘤𝘢𝘳𝘨𝘢𝘥𝘰 𝘢𝘶𝘥𝘪𝘰 🔊, 𝘈𝘨𝘶𝘢𝘳𝘥𝘦 𝘶𝘯 𝘮𝘰𝘮𝘦𝘯𝘵𝘰....*`, 
 vid: `*• 𝘋𝘦𝘴𝘤𝘢𝘳𝘨𝘢𝘥𝘰 𝘷𝘪𝘥𝘦𝘰 🎥, 𝘈𝘨𝘶𝘢𝘳𝘥𝘦 𝘶𝘯 𝘮𝘰𝘮𝘦𝘯𝘵𝘰....*`, 
 espere: `*🕔 𝘈𝘎𝘜𝘈𝘙𝘋𝘌 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖....*`, 
 audio: `*⏳ＰＲＯＣＥＳＡＮＤＯ....*\n\n_ᴰᵉˢᶜᵃʳᵍᵃᵈᵒ ˢᵘˢ ᵃᵘᵈᶦᵒ ᵃᵍᵘᵃʳᵈᵉ ᵘⁿ ᵐᵒᵐᵉⁿᵗᵒ ᵖᵒʳ ᶠᵃᵛᵒʳ_`, 
@@ -354,7 +338,7 @@ descargado: `_Descargo archivo aguarde un momento...._` }
 const enable = {
 text: `⪨╼╼≪⚠️ ACCION MAL USABA ⚠️≫╾╼⪩\n\n*Use de esta forma ejemplo:*`, 
 text1: `*Se activo con exito*`, 
-text2: `Esta desactivado!*`, 
+text2: `*Esta desactivado!*`, 
 text3: `*Atención a todos los miembros activos de este grupo 📣*\n\n*El antilink esta activo*\n\n*Y solo los admins de este grupo podran pasar el enlace*\n\nSi algun participante que no es admin envía un enlace de otro grupo sera expulsado de este grupo de inmediato`, 
 text4: `El Bot solo responderá a los admins del grupo.`, 
 text5: `Ahora el bot funciona para todos los participante del grupo 🥳` }
@@ -576,4 +560,18 @@ text3: `*Responda un sticker para robar`,
 text4: `ingresa algo para convertirlo a sticker :v`, 
 text5: `_*Calma crack estoy haciendo tu texto a sticker 👏*_\n\n_*Esto puede demorar unos minutos....*_` }
 
-module.exports = { lenguaje, tmp, session, errorsession, archivo, archborrado, archivoborrado, purgesessions, purgesubbots, purgeoldfiles, smscall, smscall2, smsAvisos, smsAvisos2, smsAvisos3, smsAvisos4, smsAvisos5, smsAvisos6, smsAvisos7, smsAvisos8, smsAvisos9, smsWel, smsWel2, smsWel3, smsWel4, smsWel5, smsWel6, smsWel7, smsWel8, smsWel9, smsWel10, smsWel11, smsBye, smsBye2, smsBye3, smsBye4, smsBye5, smsConexion, smsEscaneaQR, smsConectado, smsConexioncerrar, nivel, nivel2, admin, botAdmin, propietario, group, private, bot, error, advertencia, registra, limit, AntiNsfw, endLimit, result, lengua, sms, Bio, smsAntiFake, smsAntiArabe, smsAntiLink, smsAntiLink2, smsAntiLink3, smsAntiLink4, smsAntiLink5, smsAutoSicker, smsAutonivel, smsAutonivel2, smsAutonivel3, smsAutonivel4, smsAutonivel5, smsAutonivel6, smsAutonivel7, smsAutonivel8, smsAutonivel9, smsAntiPv, info, menu, jadibot, descargar, demote, promote, enable, grupos, juegos, nsfw, owner, ramdow, rpg, sticker}
+const idioma = (prefix) => { return `*✳️Usar:*\n${prefix}idioma 1 (español)\n${prefix}idioma 2 (inglés)\n\n*❗Ejemplo:*\n• ${prefix}idioma 1` }
+const idioma2 = () => { return `✅Idiomas cambiado con éxito a ` }
+
+const smsReg = () => { return `*Ya estas registrado 🧐*` }
+const smsReg1 = (prefix) => { return `*❌ Forma incorrecta*\n\nuse de esta forma\nEjemplo: ${prefix}reg nombre.edad` }
+const smsReg2 = () => { return `El nombre no puede esta vacio` }
+const smsReg3 = () => { return `La edad no puede esta vacia (Numeros)` }
+const smsReg4 = () => { return 'Esta Viejo (。-`ω´-)' }
+const smsReg5 = () => { return `🚼  Basado, los bebes saber escribir.✍️😳` }
+const smsReg6 = () => { return `🐈 Fua que basado, el nombre es muy largo que quiere un puente como nombre😹` }
+const smsReg7 = (name, user, age, time, date, sender, sn, prefix, rtotalreg) => { return `[ ✅ REGISTRO COMPLETADO ]\n\n ◉ *Nombre:* ${name} ${user.registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''}\n ◉ *Edad:* ${age} años\n ◉ *Hora:* ${time}\n ◉ *Fecha:* ${date}\n ◉ *Número:* wa.me/${sender.split("@")[0]}\n ◉ *Numero del serie*\n ⤷ ${sn}\n\n 🎁 *Recompensa:*\n ⤷ 2 diamante 💎\n ⤷ 200 exp\n\n *◉ Para ver los comandos del bot usar:*
+ ${prefix}menu\n\n ◉ *Total de usuários registrados:* ${rtotalreg}` }
+const smsReg8 = () => { return `*💬 Elegir tu idioma con:* #idioma` }
+ 
+module.exports = { lenguaje, exito, tmp, session, errorsession, archivo, AvisoMG, archborrado, archivoborrado, purgesessions, purgesubbots, purgeoldfiles, smscall, smscall2, smsAvisos, smsAvisos2, smsAvisos3, smsAvisos4, smsAvisos5, smsAvisos6, smsAvisos7, smsAvisos8, smsAvisos9, smsWel, smsWel2, smsWel3, smsWel4, smsWel5, smsWel6, smsWel7, smsWel8, smsWel9, smsWel10, smsWel11, smsBye, smsBye2, smsBye3, smsBye4, smsBye5, smsConexion, smsEscaneaQR, smsConectado, smsConexioncerrar, nivel, nivel2, admin, botAdmin, propietario, group, private, bot, error, advertencia, registra, limit, AntiNsfw, endLimit, result, lengua, sms, Bio, smsAntiFake, smsAntiArabe, smsAntiLink, smsAntiLink2, smsAntiLink3, smsAntiLink4, smsAntiLink5, smsAutoSicker, smsAutonivel, smsAutonivel2, smsAutonivel3, smsAutonivel4, smsAutonivel5, smsAutonivel6, smsAutonivel7, smsAutonivel8, smsAutonivel9, smsAntiPv, info, menu, jadibot, descargar, demote, promote, enable, grupos, juegos, nsfw, owner, ramdow, rpg, sticker, idioma, idioma2, smsReg, smsReg1, smsReg2, smsReg3, smsReg4, smsReg5, smsReg6, smsReg7, smsReg8}
