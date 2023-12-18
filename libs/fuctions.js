@@ -18,6 +18,7 @@ const path = require("path")
 const os = require('os') // Proporciona información del sistema operativo 
 const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
 const PhoneNumber = require('awesome-phonenumber')
+const { en, es } = require('./idiomas/total-idiomas.js') 
 
 function convertirMsADiasHorasMinutosSegundos(ms) {
 var segundos = Math.floor(ms / 1000);
@@ -401,7 +402,7 @@ if (!('premium' in user)) user.premium = false;
 if (!('registered' in user)) user.registered = false
 if (!user.registered) {
 if (!('name' in user)) user.name = m.name
-if (!('language' in user)) user.language = 'es'
+if (!('Language' in user)) user.Language = m.Language
 if (!isNumber(user.age)) user.age = -1
 if (!isNumber(user.regTime)) user.regTime = -1
 }
@@ -453,7 +454,7 @@ if (!isNumber(user.regTime)) user.regTime = -1
   joincount: 1,
   lastclaim: 0,
   name: m.name,
-  language: 'es',
+  Language: 0,
   age: -1,
   regTime: -1,
   afk: -1,
