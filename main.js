@@ -253,7 +253,7 @@ while (canLevelUp(user.level, user.exp, global.multiplier))
 user.level++
 //user.role = global.rpg.role(user.level).name
 if (before !== user.level) { 
-let text = [`${lenguaje['smsAutonivel']()} @${sender.split`@`[0]} ${lenguaje['smsAutonivel2']()}\n${lenguaje['smsAutonivel3']()} ${before} ⟿ ${user.level}\n${lenguaje['smsAutonivel6']()} ${user.role}\n${lenguaje['smsAutonivel7']()} ${new Date().toLocaleString('id-ID')}\n\n${lenguaje['smsAutonivel8']()}`, `${lenguaje['smsAutonivel9']()}\n\n${lenguaje['smsAutonivel4']()} ${before}\n${lenguaje['smsAutonivel5']()} ${user.level}\n${lenguaje['smsAutonivel6']()} ${user.role}\n${lenguaje['smsAutonivel7']()} ${new Date().toLocaleString('id-ID')}`]
+let text = [`${lenguaje['smsAutonivel']()} @${sender.split`@`[0]} ${lenguaje['smsAutonivel2']()}\n${lenguaje['smsAutonivel3']()} ${before} ⟿ ${user.level}\n${lenguaje['smsAutonivel6']()} ${user.role}\n${lenguaje['smsAutonivel7']()} ${new Date().toLocaleString('id-ID')}\n\n${lenguaje['smsAutonivel8']()}`, `${lenguaje['smsAutonivel9']()}\n${lenguaje['smsAutonivel4']()} ${before}\n${lenguaje['smsAutonivel5']()} ${user.level}\n${lenguaje['smsAutonivel6']()} ${user.role}\n${lenguaje['smsAutonivel7']()} ${new Date().toLocaleString('id-ID')}`]
 let str = text[Math.floor(Math.random() * text.length)]
 return conn.sendMessage(m.chat, { text: str, contextInfo:{mentionedJid:[sender]}},{quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}}
  
@@ -293,6 +293,17 @@ await conn.updateBlockStatus(m.chat, 'block')
 return !1;
 }
 
+//multilenguaje
+const { en, es } = require('./libs/idiomas/total-idiomas.js')
+let user = global.db.data.users[m.sender]
+if (user.Language == 'es') {
+global.lenguaje = es
+} else if (user.Language == 'en') {
+global.lenguaje = en
+} else {
+global.lenguaje = es
+}
+
 //ARRANCA LA DIVERSIÓN 
 switch (command) { 
 case 'yts': case 'ytsearch': case 'acortar': case 'google': case 'imagen': case 'traducir': case 'translate': case "tts": case 'ia': case 'chatgpt': case 'dalle': case 'ia2': case 'aimg': case 'imagine': case 'dall-e': case 'ss': case 'ssweb': case 'wallpaper': case 'hd': await buscadores(m, command, conn, text, from, fkontak, prefix, args, quoted, lolkeysapi)
@@ -318,10 +329,6 @@ break
 case 'menu': case 'help': case 'menucompleto': case 'menu2': case 'audio': case 'nuevo': case 'extreno': case 'reglas': menu(m, command, conn, prefix, pushname, sender, pickRandom, fkontak) 
 break  
 case 'estado': case 'infobot': case 'owner': case 'creador': case 'contacto': case 'grupos': case 'grupoficiales': case 'instalarbot': case 'crearbot': case 'ping': case '5492266613038': case '593980586516': case '595975740803': case 'report': case 'sc': case 'donar': info(command, conn, m, speed, sender, fkontak, pickRandom, pushname, from, msg, text) 
-break 
-    
-case 'prueba4': 
-m.reply(`${lenguaje.informacion.prueba3}`)
 break 
  
 //activar/desactivar
@@ -361,14 +368,30 @@ case 'play': case 'musica': case 'play2': case 'video': case 'play3': case 'play
 break    
 
 //rpg 
-case 'reg': case 'verificar': case 'unreg': case 'myns': await reg(command, conn, m, sender, text, fkontak, delay, args)
+case 'reg': case 'verificar': case 'unreg': case 'myns': await reg(command, conn, m, sender, text, budy, fkontak, delay, args)
 break   
-case 'lb': case 'leaderboard': case 'afk': case 'rob': case 'robar': case 'buy': case 'buyall': case 'bal': case 'balance': case 'diamond': case 'minar': case 'mine': case 'trabajar': case 'work': case 'w': case 'claim': case 'daily': case 'perfil': case 'levelup': case 'nivel': case 'cofre': case 'minar2': case 'mine2': rpg(m, command, participants, args, sender, pushname, text, conn, fkontak, who) 
-break 
-
+case 'lb': case 'leaderboard': case 'afk': case 'rob': case 'robar': case 'buy': case 'buyall': case 'bal': case 'balance': case 'diamond': case 'minar': case 'mine': case 'trabajar': case 'work': case 'w': case 'claim': case 'daily': case 'perfil': case 'levelup': case 'nivel': case 'cofre': case 'minar2': case 'mine2': rpg(m, command, participants, args, sender, pushname, text, conn, fkontak, who)   
+break    
+   
 //stickers
 case 's': case 'sticker': case 'wm': case 'take': case 'attp': case 'dado': stickers(m, command, conn, mime, quoted, args, text, lolkeysapi, fkontak) 
 break
+ 
+//idiomas
+case 'idioma': case 'Language': { 
+let user = global.db.data.users[m.sender]
+if (!text) return m.reply(lenguaje.AvisoMG() + lenguaje.idioma(prefix)) 
+if (budy.includes(`1`)) { 
+idioma = 'es' 
+idiomas = 'español'
+}
+if (budy.includes(`2`)) {
+idioma = 'en'
+idiomas = 'ingles'
+}
+user.Language = idioma
+m.reply(lenguaje.idioma2() + idiomas)}  
+break 
 
 //propietario/owner
 case 'bcgc': case 'bcgroup': case 'bc': case 'broadcast': case 'bcall': case 'block': case 'bloquear': case 'unblock': case 'desbloquear': case 'setcmd':  case 'addcmd': case 'delcmd': case 'listcmd': case 'añadirdiamantes': case 'dardiamantes': case 'addlimit': case 'añadirxp': case 'addexp': case 'addxp': owner(isCreator, m, command, conn, text, delay, fkontak, store, quoted, sender) 
@@ -475,7 +498,7 @@ if (budy.includes(`NovaBot`)) {
 m.react(`${pickRandom(['🌟', '👀', '🤑'])}`)}
 if (budy.includes(`Bot`)) { 
 await conn.sendPresenceUpdate('composing', m.chat)
-m.reply(`${pickRandom([ '*Hola soy un bot yo puedo ayudar?*', 'Hello hablemos un ratito justos ☺, que me cuenta?', 'Hola 👋😄 aqui estoy para hacerte reir un rato, mi amigo me dices que soy muy Diventida 😆', 'Que onda perro tdo bien?', 'Hey estoy aburrida podemos hablar un rato?'])}`)}
+m.reply(`${pickRandom([ '*Hola soy un bot yo puedo ayudar?*', 'Hello hablemos un ratito justos ☺, que me cuenta?', 'Hola 👋😄 aqui estoy para hacerte reir un rato, mi amigo me dices que soy muy Divertida 😆', 'Que onda perro tdo bien?', 'Hey estoy aburrida podemos hablar un rato?'])}`)}
 if (m.mentionedJid.includes(conn.user.jid)) {
 let noetiqueta = fs.readFileSync('./src/etiqueta.webp')
 let or = ['texto', 'sticker']; 
