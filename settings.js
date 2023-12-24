@@ -2,7 +2,7 @@
 const fs = require('fs') 
 const path = require('path')
 const chalk = require('chalk') 
-const { en, es } = require('./libs/idiomas/total-idiomas.js') 
+const { en, es, ar, id} = require('./libs/idiomas/total-idiomas.js') 
 
 //---------[ PROPIETADO/OWNER ]---------
 global.owner = [["5492266466080", "Owner", true], ["573026191480", "asistencia", true], ["593968585383"], ["5492266466080"], ["595985451858"], ["5492266613038"], ["5217294888993"],["5214437863111"], ["5491155983299"]]
