@@ -294,15 +294,19 @@ return !1;
 }
 
 //multilenguaje
-const { en, es } = require('./libs/idiomas/total-idiomas.js')
+const { en, es, ar, id } = require('./libs/idiomas/total-idiomas.js')
 let user = global.db.data.users[m.sender]
 if (user.Language == 'es') {
 global.lenguaje = es
 } else if (user.Language == 'en') {
 global.lenguaje = en
+} else if (user.Language == 'ar') {
+global.lenguaje = ar 
+} else if (user.Language == 'id') { 
+global.lenguaje = id
 } else {
-global.lenguaje = es
-}
+global.lenguaje = global.lenguaje
+}   
 
 //ARRANCA LA DIVERSIÓN 
 switch (command) { 
@@ -377,8 +381,8 @@ break
 case 's': case 'sticker': case 'wm': case 'take': case 'attp': case 'dado': stickers(m, command, conn, mime, quoted, args, text, lolkeysapi, fkontak) 
 break
  
-//idiomas
-case 'idioma': case 'Language': { 
+//idiomas 
+case 'idioma': case 'Language': case 'idiomas': { 
 let user = global.db.data.users[m.sender]
 if (!text) return m.reply(lenguaje.AvisoMG() + lenguaje.idioma(prefix)) 
 if (budy.includes(`1`)) { 
@@ -388,6 +392,14 @@ idiomas = 'español'
 if (budy.includes(`2`)) {
 idioma = 'en'
 idiomas = 'ingles'
+}
+if (budy.includes(`3`)) {
+idioma = 'ar'
+idiomas = 'arabe'
+}
+if (budy.includes(`4`)) {
+idioma = 'id'
+idiomas = 'indonesio'
 }
 user.Language = idioma
 m.reply(lenguaje.idioma2() + idiomas)}  
