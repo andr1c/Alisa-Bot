@@ -305,7 +305,7 @@ global.lenguaje = ar
 } else if (user.Language == 'id') { 
 global.lenguaje = id
 } else {
-global.lenguaje = global.lenguaje
+global.lenguaje = es
 }   
 
 //ARRANCA LA DIVERSIÓN 
