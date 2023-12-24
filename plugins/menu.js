@@ -31,7 +31,7 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ║${lenguaje.menu.text5} ${Object.keys(global.db.data.users).length}
 ║${lenguaje.menu.text6} ${runtime(process.uptime())}
 ║${lenguaje.menu.text7} ${conn.public ? 'publico' : 'privado'}
-║🎅 ${conn.user.id == global.numBot2 ? 'ʙᴏᴛ ᴏғᴄ : ᴇsᴛᴇ ᴇs ᴇʟ ʙᴏᴛ ᴏғᴄ' : `sᴏʏ ᴜɴ sᴜʙʙᴏᴛ ᴅᴇ : @${global.numBot.split`@`[0]}`}
+║${conn.user.id == global.numBot2 ? `${lenguaje.menu.textt} ` : `${lenguaje.menu.texttt} @${global.numBot.split`@`[0]}`}
 ║ 
 ║${lenguaje.menu.text8} ${user.limit}
 ║${lenguaje.menu.text9} ${user.level}
