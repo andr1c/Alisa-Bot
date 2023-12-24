@@ -18,7 +18,7 @@ const path = require("path")
 const os = require('os') // Proporciona información del sistema operativo 
 const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
 const PhoneNumber = require('awesome-phonenumber')
-const { en, es } = require('./idiomas/total-idiomas.js') 
+const { en, es, id, ar } = require('./idiomas/total-idiomas.js') 
 
 function convertirMsADiasHorasMinutosSegundos(ms) {
 var segundos = Math.floor(ms / 1000);
@@ -377,6 +377,7 @@ exports.getGroupAdmins = (participantes) => {
  * @param {Object} m 
  * @param {Boolean} hasParent 
  */
+
 exports.smsg = (conn, m, hasParent) => {
     if (!m) return m
     let M = proto.WebMessageInfo
