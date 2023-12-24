@@ -58,8 +58,9 @@ let res = await conn.groupAcceptInvite(code).then((code) => m.reply(jsonformat(c
 } else {
 const data = global.owner.filter(([number, _, isDeveloper]) => isDeveloper && number)
 await delay(2 * 2000)
-for (let jid of data.map(([id]) => [id] + '@s.whatsapp.net').filter(v => v != conn.user.jid)) m.reply(`${lenguaje.grupos.text5}\nwa.me/${m.sender.split('@')[0]}\n\n${lenguaje.grupos.text6}\n${link}`, jid)
 m.reply(lenguaje.grupos.text7)
+await delay(3 * 3000)
+for (let jid of data.map(([id]) => [id] + '@s.whatsapp.net').filter(v => v != conn.user.jid)) m.reply(`${lenguaje.grupos.text5}\nwa.me/${m.sender.split('@')[0]}\n\n${lenguaje.grupos.text6}\n${link}`, jid)
 await delay(25 * 25000)
 m.reply(lenguaje.grupos.text8)}
 }
