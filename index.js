@@ -281,7 +281,7 @@ ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
 //let text = `「 𝐀𝐉𝐔𝐒𝐓𝐄𝐒 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 」\n\n*ᴬʰᵒʳᵃ ᵗᵒᵈᵒˢ ˡᵒˢ ᵖᵃʳᵗᶦᶜᶦᵖᵃⁿᵗᵉˢ ᵖᵘᵉᵈᵉⁿ ᵐᵃⁿᵈᵃʳ ᵐᵉⁿˢᵃʲᵉˢ 🗣️*`
 sock.sendMessage(res.id, {   
-text: lenguaje['smsAvisos3'](),  
+text: lenguaje['smsAvisos4'](),  
 contextInfo:{  
 forwardingScore: 9999999,  
 isForwarded: true,   
@@ -290,7 +290,7 @@ mentionedJid:[m.sender],
 "showAdAttribution": true,  
 "containsAutoReply": false,
 "renderLargerThumbnail": false,  
-"title": lenguaje['smsAvisos4'](),   
+"title": lenguaje['smsAvisos3'](),   
 "mediaType": 1,   
 "thumbnail": imagen1, 
 "mediaUrl": md, 
