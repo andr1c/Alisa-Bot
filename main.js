@@ -65,8 +65,8 @@ var budy = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == '
 //----------------------[ ATRIBUTOS ]-------------------------
 if (m.key.id.startsWith("BAE5")) return  
 var body = (typeof m.text == 'string' ? m.text : '')
-var _prefix = /^[°•÷×™+✓_=|~!?@#%^.©^]/gi.test(body) ? body.match(/^[°•÷×™+✓_=|~!?@#%^.©^]/gi)[0] : ""
-global.prefix = _prefix
+//var _prefix = /^[°•÷×™+✓_=|~!?@#%^.©^]/gi.test(body) ? body.match(/^[°•÷×™+✓_=|~!?@#%^.©^]/gi)[0] : ""
+global.prefix = body.match(/^[/.*#]/) 
 const isCmd = body.startsWith(prefix)   
 const command = isCmd ? body.slice(1).trim().split(/ +/).shift().toLocaleLowerCase() : null
 const args = body.trim().split(/ +/).slice(1) 
@@ -180,7 +180,7 @@ console.log(`[UPDATE]\nPing: ${latensi.toFixed(4)}`)
  
 //--------------------[ AUTOREAD ]-----------------------
 if (!conn.autoread && m.message && prefix) {
-//await conn.sendPresenceUpdate('composing', m.chat)
+await conn.sendPresenceUpdate('composing', m.chat)
 conn.readMessages([m.key])}
           
 //--------------------[ ANTIFAKES ]-----------------------
@@ -285,16 +285,16 @@ if (global.db.data.chats[m.chat].antiprivado && !isCreator) {
 if (m.isBaileys && m.fromMe) return !0;
 if (m.isGroup) return !1;
 if (!m.message) return !0;
-if (m.text.includes('PIEDRA') || m.text.includes('PAPEL') || m.text.includes('TIJERA') ||  m.text.includes('menu') ||  m.text.includes('estado') || m.text.includes('bots') ||  m.text.includes('serbot') || m.text.includes('jadibot')) return !0
+if (budy.includes('PIEDRA') || budy.includes('PAPEL') || budy.includes('TIJERA') || budy.includes('menu') || budy.includes('estado') || budy.includes('bots') ||  budy.includes('serbot') || budy.includes('jadibot')) return !0
 const chat = global.db.data.chats[m.chat];
 const bot = global.db.data.setting[numBot]
-await conn.sendMessage(m.chat, {text: `${lenguaje['smsWel']()} @${sender.split`@`[0]}, ${lenguaje['smsAntiPv']()}\n${nn2}`, mentions: [sender], },{quoted: m}) 
+await conn.sendMessage(m.chat, {text: `*${lenguaje['smsWel']()}* @${sender.split`@`[0]}, ${lenguaje['smsAntiPv']()}\n${nn2}`, mentions: [sender], },{quoted: m}) 
 await conn.updateBlockStatus(m.chat, 'block')
 return !1;
 }
 
-//multilenguaje
-const { en, es, ar, id } = require('./libs/idiomas/total-idiomas.js')
+//---------------------[ MULTILENGUAJE ]------------------------
+const { en, es, ar, id, pt, rs} = require('./libs/idiomas/total-idiomas.js')
 let user = global.db.data.users[m.sender]
 if (user.Language == 'es') {
 global.lenguaje = es
@@ -304,6 +304,10 @@ global.lenguaje = en
 global.lenguaje = ar 
 } else if (user.Language == 'id') { 
 global.lenguaje = id
+} else if (user.Language == 'pt') { 
+global.lenguaje = pt
+} else if (user.Language == 'rs') { 
+global.lenguaje = rs
 } else {
 global.lenguaje = es
 }   
@@ -343,8 +347,8 @@ break
 case 'grupo': case 'delete': case 'del': case 'join': case 'unete': case 'hidetag': case 'notificar': case 'tag': case 'setppgroup': case 'setpp': case 'setppname': case 'nuevonombre': case 'newnombre': case 'setdesc': case 'descripción': case 'anularlink': case 'resetlink': case 'revoke': case 'add': case 'agregar': case 'invitar': case 'kick': case 'echar': case 'sacar': case 'promote': case 'darpoder': case 'demote': case 'quitarpoder': case 'link': case 'linkgc': case 'banchat': case 'tagall': case 'invocar': case 'todos': case 'admins': case 'administradores': case 'infogrupo': case 'groupinfo': case 'warn': case 'advertencia': case 'unwarn': case 'quitardvertencia': case 'listwarn': case 'enline': case 'online': case 'listonine': case 'listaenlinea': case 'enlinea': case 'listonline': grupo(m, command, isGroupAdmins, text, conn, participants, isBotAdmins, args, isCreator, delay, sender, quoted, mime, from, isCreator, groupMetadata, fkontak, delay) 
 break    
 
-//juegos
-case 'simi': case 'alexa': case 'siri': case 'pregunta': case 'preg': case 'gay': case 'pareja': case 'formarpareja': case 'follar': case 'violar': case 'coger': case 'doxear': case 'doxxeo': case 'personalidad': case 'top': case 'topgays': case 'topotakus': case 'racista': case 'love': case 'ship': case 'formartrio': case 'formapareja5': game(m, command, text, pickRandom, pushname, conn, participants, sender, who, body, sendImageAsUrl)  
+//juegos 
+case 'simi': case 'alexa': case 'Bot': case 'siri': case 'pregunta': case 'preg': case 'gay': case 'pareja': case 'formarpareja': case 'follar': case 'violar': case 'coger': case 'doxear': case 'doxxeo': case 'personalidad': case 'top': case 'topgays': case 'topotakus': case 'racista': case 'love': case 'ship': case 'formartrio': case 'formapareja5': game(m, command, text, pickRandom, pushname, conn, participants, sender, who, body, sendImageAsUrl)  
 break                
 case 'verdad': case 'reto': case 'piropo': game2(m, command, sendImageAsUrl, pickRandom)
 break
@@ -400,6 +404,14 @@ idiomas = 'arabe'
 if (budy.includes(`4`)) {
 idioma = 'id'
 idiomas = 'indonesio'
+}
+if (budy.includes(`5`)) {
+idioma = 'pt'
+idiomas = 'portugues'
+}
+if (budy.includes(`6`)) {
+idioma = 'rs'
+idiomas = 'ruso'
 }
 user.Language = idioma
 m.reply(lenguaje.idioma2() + idiomas)}  
