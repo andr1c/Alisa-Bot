@@ -564,7 +564,7 @@ text3: `*Respond to a sticker to steal`,
 text4: `enter something to convert it to a sticker :v`, 
 text5: `_*Calm down crack, I'm making your text a sticker 👏*_\n\n_*This may take a few minutes....*_` }
 
-const idioma = (prefix) => { return `*✳️ To use:*\n${prefix}idioma 1 (Spanish)\n${prefix}idioma 2 (English)\n${prefix}idioma 3 (Arab)\n${prefix}idioma 4 (Indonesia)\n*❗ Example:*\n• ${prefix}idioma 1` }
+const idioma = (prefix) => { return `*✳️ To use:*\n${prefix}idioma 1 (Spanish)\n${prefix}idioma 2 (English)\n${prefix}idioma 3 (Arab)\n${prefix}idioma 4 (Indonesia)\n${prefix}idioma 5 (Portuguese)\n${prefix}idioma 6 (Russian)\n\n*❗Example:*\n• ${prefix}idioma 1` } 
 const idioma2 = () => { return `✅Languages ​​successfully changed to ` }
 
 const smsReg = () => { return `*You are already registered 🧐*` }

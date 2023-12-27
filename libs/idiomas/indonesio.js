@@ -559,7 +559,7 @@ text3: `*Balas stiker untuk mencurir`,
 text4: `masukkan sesuatu untuk mengubahnya menjadi stiker :v`, 
 text5: `_*Tenang crack, aku akan membuatkan teksmu menjadi stiker 👏*_\n\n_*Ini mungkin memakan waktu beberapa menit.....*_` }
 
-const idioma = (prefix) => { return `*✳️ Menggunakan:*\n${prefix}idioma 1 (Orang Spanyol)\n${prefix}idioma 2 (Bahasa inggris)\n${prefix}idioma 3 (Arab)\n${prefix}idioma 4 (Indonesia)\n*❗ Contoh:*\n• ${prefix}idioma 1` }
+const idioma = (prefix) => { return `*✳️ Menggunakan:*\n${prefix}idioma 1 (Orang Spanyol)\n${prefix}idioma 2 (Bahasa inggris)\n${prefix}idioma 3 (Arab)\n${prefix}idioma 4 (Indonesia)\n${prefix}idioma 5 (Portugis)\n${prefix}idioma 6 (Rusia)\n\n*❗Contoh:*\n• ${prefix}idioma 1` } 
 const idioma2 = () => { return `✅ Bahasa berhasil diubah menjadi ` }
 
 const smsReg = () => { return `*Anda sudah terdaftar 🧐*` }

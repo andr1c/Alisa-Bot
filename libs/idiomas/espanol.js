@@ -16,7 +16,7 @@ const smscall = () => { return `Seras bloqueado*\n_Razon : por realizar una` }
 const smscall2 = () => { return `*Si accidentalmente llamaste póngase en contacto con mi creador para que te desbloquee.*` }
 
 //antiprivado
-const smsAntiPv = () => { return `ᴇsᴛᴀ ᴘʀᴏʜɪʙɪᴅᴏ ʜᴀʙʟᴀʀ ᴀʟ ᴘʀɪᴠᴀᴅᴏ ᴅᴇʟ ʙᴏᴛ ᴘᴏʀ ʟᴏ ᴄᴜᴀʟ sᴇʀᴀs ʙʟᴏϙᴜᴇᴀᴅᴏ.*\n*ᴘᴀʀᴀ ᴜsᴀʀ ᴇʟ ʙᴏᴛ ᴜɴɪʀᴛᴇ ᴀʟ ɢʀᴜᴘᴏ ᴅᴇʟ ʙᴏᴛ` }
+const smsAntiPv = () => { return `*ᴇsᴛᴀ ᴘʀᴏʜɪʙɪᴅᴏ ʜᴀʙʟᴀʀ ᴀʟ ᴘʀɪᴠᴀᴅᴏ ᴅᴇʟ ʙᴏᴛ ᴘᴏʀ ʟᴏ ᴄᴜᴀʟ sᴇʀᴀs ʙʟᴏϙᴜᴇᴀᴅᴏ.*\n\n*ᴘᴀʀᴀ ᴜsᴀʀ ᴇʟ ʙᴏᴛ ᴜɴɪʀᴛᴇ ᴀʟ ɢʀᴜᴘᴏ ᴅᴇʟ ʙᴏᴛ*` }
 
 //detec
 const smsAvisos = () => { return `[ 🔒 ＧＲＵＰＯ ＣＥＲＲＡＤＯ ]` }
@@ -243,6 +243,12 @@ text16: `*Nuevo comando:*
 🟢 Multi lenguaje ahora puede eligir el que idioma quiere te responda el bot con:
 • #idioma
 • #lenguaje
+
+🔸El bot solo vas a responder a estos prefix: (#./*) 
+
+🔵 Anti privado funcionando se activa con:
+• #antipv on
+• #antiprivado on
 
 ᴹᵃˢ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᶠᵘᵗᵘʳᵃ ᵛᵉʳˢᶦᵒⁿᵉˢ ᵠᵘᶦᵉʳᵉ ᵠᵘᵉ ᵃᵍʳᵉᵍᵘᵉ ᵃˡᵍᵘⁿ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᵉˢᵖᵉᶜᶦᵃˡ ᵉˢᶜʳᶦᵇᶦʳˡᵉ ᵃ ᵐᶦ ᶜʳᵉᵃᵈᵒʳ`, 
 text17: `*🌐 REGLAS DEL BOT 🌐*
@@ -559,7 +565,7 @@ text3: `*Responda un sticker para robar`,
 text4: `ingresa algo para convertirlo a sticker :v`, 
 text5: `_*Calma crack estoy haciendo tu texto a sticker 👏*_\n\n_*Esto puede demorar unos minutos....*_` }
 
-const idioma = (prefix) => { return `*✳️Usar:*\n${prefix}idioma 1 (español)\n${prefix}idioma 2 (inglés)\n${prefix}idioma 3 (arabe)\n${prefix}idioma 4 (Indonesia)\n\n*❗Ejemplo:*\n• ${prefix}idioma 1` }
+const idioma = (prefix) => { return `*✳️Usar:*\n${prefix}idioma 1 (español)\n${prefix}idioma 2 (inglés)\n${prefix}idioma 3 (arabe)\n${prefix}idioma 4 (Indonesia)\n${prefix}idioma 5 (portugues)\n${prefix}idioma 6 (ruso)\n\n*❗Ejemplo:*\n• ${prefix}idioma 1` }
 const idioma2 = () => { return `✅Idiomas cambiado con éxito a ` }
 
 const smsReg = () => { return `*Ya estas registrado 🧐*` }
