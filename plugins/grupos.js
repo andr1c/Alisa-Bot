@@ -77,11 +77,11 @@ if (args[0] == `full`) {
 var { img } = await generateProfilePicture(mediz)
 await conn.query({tag: 'iq', attrs: {to: m.chat, type:'set', xmlns: 'w:profile:picture' }, content: [ {tag: 'picture', attrs: { type: 'image' }, content: img } ]}) 
 fs.unlinkSync(mediz)
-m.reply(`*✅Exito*`)
+m.reply(lenguaje.exito()) 
 } else {
 var memeg = await conn.updateProfilePicture(m.chat, { url: mediz })
 fs.unlinkSync(mediz)
-m.reply(`*✅Exito*`)}}
+m.reply(lenguaje.exito())}}
 
 if (command == 'setppname' || command == 'nuevonombre' || command == 'newnombre') {
 if (!m.isGroup) return m.reply(info.group) 
@@ -114,7 +114,7 @@ if (text.includes('+')) return m.reply(lenguaje.grupos.text14)
 let group = m.chat
 let link = 'https://chat.whatsapp.com/' + await conn.groupInviteCode(group)
 await conn.sendMessage(text+'@s.whatsapp.net', {text: `${lenguaje.grupos.text15}\n\n${link}`, mentions: [m.sender]})
-m.reply(`*✅Listo*`)}
+m.reply(lenguaje.exito())}
 
 if (command == 'kick' || command == 'echar' || command == 'sacar') {
 if (!m.isGroup) return m.reply(info.group) 

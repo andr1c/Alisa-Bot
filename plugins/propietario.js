@@ -29,7 +29,7 @@ for (let yoi of anu) {
 await delay(3 * 3000)
 let txt = `${lenguaje.owner.text2}\n\n${text}`
 conn.sendText(yoi, txt, fkontak)}
-m.reply('Listo')}
+m.reply(lenguaje.exito())}
 
 if (command == 'block' || command == 'bloquear') {
 m.reply(lenguaje.owner.text5)
@@ -55,7 +55,7 @@ let _sh = m.quoted.fileSha256.toString('base64')
 if (!_sh) return m.reply(lenguaje.owner.text12)
 if (global.db.data.sticker[_sh] && global.db.data.sticker[_sh].locked) return m.reply(lenguaje.owner.text13)   
 delete global.db.data.sticker[_sh]
-m.reply('*✅ 𝙷𝚎𝚌𝚑𝚘*')}
+m.reply(lenguaje.exito())}
 
 if (command == 'listcmd') {
 let _teks = `${lenguaje.owner.text14}\n\n──────────────────\n${Object.entries(global.db.data.sticker).map(([key, value], index) => `${index + 1}. ${value.locked ? `*${key}*` : key} : ${value.text}`).join('\n')}`.trim()
