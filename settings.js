@@ -85,11 +85,11 @@ global.nn2 = 'https://chat.whatsapp.com/H4hxytyGvucIF1k0UAR7es' //Loli & Nova
 global.nn3 = 'https://chat.whatsapp.com/IlyJBy1fxcw2qAHLSC5YLa' //Grupo de Colaboracion
 global.nn4 = 'https://chat.whatsapp.com/K7RzcVdxGqhGP5dCpVENSI' // Grupo COL 2
 global.nn5 = 'https://chat.whatsapp.com/E9qJfvlLjENKAxnhII9rao' //Grupo COL 3
-global.nn6 = 'https://chat.whatsapp.com/D3HCiQYT1oE3DDIZ9WT6E1' //test
+global.nn6 = 'https://chat.whatsapp.com/Em4Byf4w5VgHObPvZQlfnM' //test
 global.nn7 = 'https://chat.whatsapp.com/FRkr7jJHSJA5OjVtE64dDs' //Grupo ayuda sobre el bot
 global.nn8 = 'https://chat.whatsapp.com/KlqNmoUcVnsGJxIfATIDrK' //enlace lolibot
 global.multi = 'https://chat.whatsapp.com/IB9Vs7mZ03BBkH3reCU8Dw' //Grupo COL 4
-global.nna2 = 'D3HCiQYT1oE3DDIZ9WT6E1'
+global.nna2 = 'D3HCiQYT1oE3DDIZ9WT6E1''
 
 //---------[ INFO ]--------- 
 global.info = { wait: '*⌛ _Cargando..._ ▬▭▭▭▭▭▭*', 
