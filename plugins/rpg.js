@@ -12,6 +12,8 @@ const Jimp = require('jimp')
 const os = require('os')
 const {createHash} = require('crypto') 
 const { canLevelUp, xpRange } = require('../libs/levelling.js')
+let minar = `${pickRandom(['Que pro 😎 has minado',
+'🌟✨ Genial!! Obtienes', 'WOW!! eres un(a) gran Minero(a) ⛏️ Obtienes', 'Has Minado!!', '😲 Lograste Minar la cantidad de', 'Tus Ingresos subiran gracias a que minaste', '⛏️⛏️⛏️⛏️⛏️ Minando', '🤩 SII!!! AHORA TIENES', 'La minaria esta de tu lado, por ello obtienes', '😻 La suerte de Minar', '♻️ Tu Mision se ha cumplido, lograste minar', '⛏️ La Mineria te ha beneficiado con', '🛣️ Has encontrado un Lugar y por minar dicho lugar Obtienes', '👾 Gracias a que has minado tus ingresos suman', 'Felicidades!! Ahora tienes','⛏️⛏️⛏️ Obtienes', '⛏️ has obtenido'])}` 
 
 let mentionUser = [...new Set([...(m.mentionedJid || []), ...(m.quoted ? [m.quoted.sender] : [])])]
 for (let jid of mentionUser) {
@@ -187,15 +189,13 @@ const date = global.db.data.users[m.sender].lastmiming + 600000;
 if (new Date - global.db.data.users[m.sender].lastmiming < 600000) return m.reply(`*${lenguaje.rpg.text9} ${msToTime(date - new Date())} ${lenguaje.rpg.text10}*`) 
 const exp = Math.floor(Math.random() * 1500)
 global.db.data.users[m.sender].exp += exp;
-m.reply(`*${lenguaje.rpg.text11} ${exp} XP*`)
+m.reply(`*${minar} ${exp} XP*`)
 global.db.data.users[m.sender].lastmiming = new Date * 1;
 }
 
 if (command == 'minar2' || command == 'mine2') {
 const date = global.db.data.users[m.sender].lastmiming + 3600000;
 if (new Date - global.db.data.users[m.sender].lastmiming < 3600000) return m.reply(`*${lenguaje.rpg.text9} ${msToTime(date - new Date())} ${lenguaje.rpg.text10}*`)
-let minar = `${pickRandom(['Que pro 😎 has minado',
-'🌟✨ Genial!! Obtienes', 'WOW!! eres un(a) gran Minero(a) ⛏️ Obtienes', 'Has Minado!!', '😲 Lograste Minar la cantidad de', 'Tus Ingresos subiran gracias a que minaste', '⛏️⛏️⛏️⛏️⛏️ Minando', '🤩 SII!!! AHORA TIENES', 'La minaria esta de tu lado, por ello obtienes', '😻 La suerte de Minar', '♻️ Tu Mision se ha cumplido, lograste minar', '⛏️ La Mineria te ha beneficiado con', '🛣️ Has encontrado un Lugar y por minar dicho lugar Obtienes', '👾 Gracias a que has minado tus ingresos suman', 'Felicidades!! Ahora tienes','⛏️⛏️⛏️ Obtienes'])}` 
 //const exp = Math.floor(Math.random() * 2500)
 const diamond = Math.floor(Math.random() * 60)
 const money = Math.floor(Math.random() * 2500)
