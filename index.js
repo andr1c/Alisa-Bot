@@ -527,7 +527,7 @@ say('NovaBot-MD', {
   font: 'chrome',
   align: 'center',
   gradient: ['red', 'magenta']});
-say(`Bot el desarrollo`, {
+say(`By: elrebelde21`, {
   font: 'console',
   align: 'center',
   gradient: ['red', 'magenta']});
