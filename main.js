@@ -280,10 +280,10 @@ const res = await api.json()
 const reis2 = await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=es&dt=t&q=' + res.cnt)
 const resu2 = await reis2.json()
 await m.reply(resu2[0][0][0])}}
-
+ 
 //---------------------[ ANTIPRIVADO ]------------------------
 if (global.db.data.chats[m.chat].antiprivado && !isCreator) {
-if (m.isBaileys && m.fromMe) return !0;
+//if (m.isBaileys && m.fromMe) return !0;
 if (m.isGroup) return !1;
 if (!m.message) return !0;
 if (budy.includes('menu') || budy.includes('estado') || budy.includes('bots') ||  budy.includes('serbot') || budy.includes('jadibot')) return !0
@@ -311,9 +311,13 @@ global.lenguaje = pt
 global.lenguaje = rs
 } else {
 global.lenguaje = es
-}   
+}    
 
-if (!conn.user.mensaje) {
+if (!user.mensaje) { 
+if (m.isGroup) return !1;
+if (!m.message) return !0;
+let str = [nna, md, yt, tiktok, fb] 
+let info = str[Math.floor(Math.random() * str.length)]
 conn.sendMessage(m.chat, { text: `*Hola @${sender.split`@`[0]} 👋😄 Mi nombre es ${botname} Soy un bot de WhatsApp con multi funcione 👾, registrarte para poder usar mi comando 👌*
 
 *💫 MI INFO:*
@@ -323,27 +327,26 @@ conn.sendMessage(m.chat, { text: `*Hola @${sender.split`@`[0]} 👋😄 Mi nombr
 *⚠️ PD:* No hagan spam del comando o te van baneado
   
 • *PORFAVOR LEE LAS REGLAS:*
-${prefix}reglas
+#reglas
 
 • *QUIERES VER QUE HAY DE NUEVO?*
-*Escribe: ${prefix}nuevo*
+*Escribe:* #nuevo 
 
-*💫 ¿Quieres apoyar este proyecto para que siga actualizándose? puede apoyar con una donación voluntaria por nuestro Mercado pago:
-• Alias: elrebelde21
-• CVU: 0000003100059201491917
+• ¿QUIERE SOLICITA UN BOT PARA TU GRUPO? 
+*Escribe:* #solicitud
 
-*⚡ subscriberte a nuestro canal del youtube*
-${global.yt}
+*💫 ¿Quieres apoyar este proyecto para que siga actualizándose? 
+• #donar  
 
-*💕 visitar nuestro repositorio oficial para mas infomarcion*
-${md}`, contextInfo:{mentionedJid:[sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": wm, thumbnail: imagen2, sourceUrl: md}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
-conn.user.mensaje = true
+* ✨ CUENTA OFICIALES*
+• #cuentas`, contextInfo:{mentionedJid:[sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": wm, thumbnail: imagen2, sourceUrl: info}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+user.mensaje = true
 }
 
 //ARRANCA LA DIVERSIÓN 
 switch (command) { 
 case 'yts': case 'ytsearch': case 'acortar': case 'google': case 'imagen': case 'traducir': case 'translate': case "tts": case 'ia': case 'chatgpt': case 'dalle': case 'ia2': case 'aimg': case 'imagine': case 'dall-e': case 'ss': case 'ssweb': case 'wallpaper': case 'hd': await buscadores(m, command, conn, text, from, fkontak, prefix, args, quoted, lolkeysapi)
-break 
+break  
 
 //jadibot/serbot
 case 'serbot': case 'jadibot': case 'qr':
@@ -364,9 +367,9 @@ break
 //Info
 case 'menu': case 'help': case 'menucompleto': case 'menu2': case 'audio': case 'nuevo': case 'extreno': case 'reglas': menu(m, command, conn, prefix, pushname, sender, pickRandom, fkontak) 
 break  
-case 'estado': case 'infobot': case 'owner': case 'creador': case 'contacto': case 'grupos': case 'grupoficiales': case 'instalarbot': case 'crearbot': case 'ping': case '5492266613038': case '593980586516': case '595975740803': case 'report': case 'sc': case 'donar': info(command, conn, m, speed, sender, fkontak, pickRandom, pushname, from, msg, text) 
+case 'estado': case 'infobot': case 'owner': case 'creador': case 'contacto': case 'grupos': case 'grupoficiales': case 'instalarbot': case 'crearbot': case 'ping': case '5492266613038': case '593980586516': case '595975740803': case 'report': case 'sc': case 'donar': case 'solicitud': case 'cuenta': case 'cuentaoficiales': case 'cuentaofc': info(command, conn, m, speed, sender, fkontak, pickRandom, pushname, from, msg, text) 
 break 
- 
+  
 //activar/desactivar
 case 'welcome': case 'bienvenida': case 'antilink': case 'antienlace': case 'antifake': case 'antiFake': case 'antiarabe': case 'antiArabe': case 'autodetect': case 'detect': case 'audios': case 'autosticker': case 'stickers': case 'modocaliente': case 'antinsfw': case 'modoadmin': case 'modoadmins': case 'soloadmin': case 'antiprivado': case 'antipv': case 'anticall': case 'antillamada': case 'modojadibot': case 'jadibot': case 'autoread': case 'autovisto': case 'antispam': case 'chatbot': case 'simsimi': case 'autolevelup': case 'autonivel': enable(m, command, isGroupAdmins, text, command, args, isBotAdmins, isGroupAdmins, isCreator) 
 break
