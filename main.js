@@ -30,7 +30,7 @@ const ffmpeg = require("fluent-ffmpeg")
 const similarity = require('similarity') 
 const translate = require('@vitalets/google-translate-api') 
 const { canLevelUp, xpRange } = require('./libs/levelling.js')
-const { smsg, fetchBuffer, getBuffer, buffergif, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom, msToTime, downloadMediaMessage, convertirMsADiasHorasMinutosSegundos, pickRandom} = require('./libs/fuctions')
+const { smsg, fetchBuffer, getBuffer, buffergif, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom, msToTime, downloadMediaMessage, convertirMsADiasHorasMinutosSegundos, pickRandom, getUserBio, asyncgetUserProfilePic} = require('./libs/fuctions')
 const {jadibot, listJadibot, killJadibot} = require('./plugins/serbot.js')    
 const {menu} = require('./plugins/menu.js') 
 const {info} = require('./plugins/info.js')
@@ -149,7 +149,7 @@ let msg = {...chatUpdate, messages: [proto.WebMessageInfo.fromObject(messages)],
 type: 'append'
 }
 conn.ev.emit('messages.upsert', msg)}
- 
+   
 //--------------------[ INFO CONSOLE ]-----------------------
 if (m.message) {
 console.log(chalk.bold.cyanBright(`▣────────────···\n│+${conn.user.jid.split`@`[0]} ➢ ${botname} ${conn.user.id == global.numBot2 ? '' : '(SubBot)'} ${vs}`), 
@@ -169,7 +169,7 @@ if (new Date() * 1 - setting.status > 1000) {
 let uptime = await runtime(process.uptime())
 var timestamp = speed();   
 var latensi = speed() - timestamp 
-let text = [`${lenguaje.Bio.text} ${Object.keys(global.db.data.users).length} ${lenguaje.Bio.text2} ${latensi.toFixed(4)} 🚀`, `${lenguaje.Bio.text3} ${runtime(process.uptime())}\n\n${lenguaje.Bio.text4}`, `${lenguaje.Bio.text5}`, `🎅 NovaBot uso: ${conn.public ? 'Publico' : 'Privado'} | ${lenguaje.Bio.text6} ${runtime(process.uptime())} | ${lenguaje.Bio.text7} ${Object.keys(global.db.data.users).length}`]
+let text = [`${lenguaje.Bio.text} ${Object.keys(global.db.data.users).length} ${lenguaje.Bio.text2} ${latensi.toFixed(4)} 🚀`, `${lenguaje.Bio.text3} ${runtime(process.uptime())}\n\n${lenguaje.Bio.text4}`, `${lenguaje.Bio.text5}`, `👑 NovaBot uso: ${conn.public ? 'Publico' : 'Privado'} | ${lenguaje.Bio.text6} ${runtime(process.uptime())} | ${lenguaje.Bio.text7} ${Object.keys(global.db.data.users).length}`]
 let bio = text[Math.floor(Math.random() * text.length)]
 try {
 await conn.updateProfileStatus(bio)
@@ -180,6 +180,7 @@ console.log(`[UPDATE]\nPing: ${latensi.toFixed(4)}`)
  
 //--------------------[ AUTOREAD ]-----------------------
 if (!conn.autoread && m.message && prefix) {
+await delay(1 * 1000) 
 await conn.sendPresenceUpdate('composing', m.chat)
 conn.readMessages([m.key])}
           
@@ -285,7 +286,7 @@ if (global.db.data.chats[m.chat].antiprivado && !isCreator) {
 if (m.isBaileys && m.fromMe) return !0;
 if (m.isGroup) return !1;
 if (!m.message) return !0;
-if (budy.includes('PIEDRA') || budy.includes('PAPEL') || budy.includes('TIJERA') || budy.includes('menu') || budy.includes('estado') || budy.includes('bots') ||  budy.includes('serbot') || budy.includes('jadibot')) return !0
+if (budy.includes('menu') || budy.includes('estado') || budy.includes('bots') ||  budy.includes('serbot') || budy.includes('jadibot')) return !0
 const chat = global.db.data.chats[m.chat];
 const bot = global.db.data.setting[numBot]
 await conn.sendMessage(m.chat, {text: `*${lenguaje['smsWel']()}* @${sender.split`@`[0]}, ${lenguaje['smsAntiPv']()}\n${nn2}`, mentions: [sender], },{quoted: m}) 
@@ -311,6 +312,33 @@ global.lenguaje = rs
 } else {
 global.lenguaje = es
 }   
+
+if (!conn.user.mensaje) {
+conn.sendMessage(m.chat, { text: `*Hola @${sender.split`@`[0]} 👋😄 Mi nombre es ${botname} Soy un bot de WhatsApp con multi funcione 👾, registrarte para poder usar mi comando 👌*
+
+*💫 MI INFO:*
+👑 *Mi creador es: wa.me/5492266466080*
+👥 Tengo: ${Object.keys(global.db.data.users).length} usuario usandome puedo ser lenta :v
+*🤖 Estoy activa desde:* ${runtime(process.uptime())}
+*⚠️ PD:* No hagan spam del comando o te van baneado
+  
+• *PORFAVOR LEE LAS REGLAS:*
+${prefix}reglas
+
+• *QUIERES VER QUE HAY DE NUEVO?*
+*Escribe: ${prefix}nuevo*
+
+*💫 ¿Quieres apoyar este proyecto para que siga actualizándose? puede apoyar con una donación voluntaria por nuestro Mercado pago:
+• Alias: elrebelde21
+• CVU: 0000003100059201491917
+
+*⚡ subscriberte a nuestro canal del youtube*
+${global.yt}
+
+*💕 visitar nuestro repositorio oficial para mas infomarcion*
+${md}`, contextInfo:{mentionedJid:[sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": wm, thumbnail: imagen2, sourceUrl: md}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+conn.user.mensaje = true
+}
 
 //ARRANCA LA DIVERSIÓN 
 switch (command) { 
@@ -354,7 +382,7 @@ case 'verdad': case 'reto': case 'piropo': game2(m, command, sendImageAsUrl, pic
 break
 case 'slot': case 'apuesta':  case 'fake': case 'ppt': case 'suit': game3(m, command, conn, args, prefix, msToTime, text, body, from, sender, quoted, pushname)
 break    
-
+              
 //convertidores
 case 'bass': case 'blown': case 'deep': case 'earrape': case 'fast': case 'fat': case 'nightcore': case 'reverse': case 'robot': case 'slow': case 'smooth': case 'squirrel': efec(conn, command, mime, quoted, exec, prefix, m, from)  
 break   
@@ -502,7 +530,7 @@ return list[Math.floor(list.length * Math.random())]
 }  
 
 //-------------------[ AUDIO/TEXTOS ]----------------------
-//🟢Comando que responde sin prefix
+//🟢Comando que responde sin prefix  
 default:  
 if (budy.includes(`Todo bien`)) {
 conn.sendPresenceUpdate('composing', m.chat)
@@ -518,8 +546,10 @@ if (media === 'texto')
 m.reply('*Mi jefe no me quiere 😢*') 
 if (media === 'sticker')
 conn.sendFile(m.chat, e, 'sticker.webp', '',m, true, { contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: 'ᶜ ᴬᵘᵗᵒᵈᵉˢᶜʳᵘʸᵉ', mediaType: 2, sourceUrl: nna, thumbnail: imagen1}}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
-if (budy.includes(`NovaBot`)) {
+if (budy.includes(`NovaBot`) || budy.includes(`novabot`)) {
 m.react(`${pickRandom(['🌟', '👀', '🤑'])}`)}
+if (budy.includes(`Avisos`) || budy.includes(`Atencion`)) {
+m.react(`${pickRandom(['📢', '👀', '⚠️'])}`)}
 if (budy.includes(`Bot`)) { 
 await conn.sendPresenceUpdate('composing', m.chat)
 m.reply(`${pickRandom([ '*Hola soy un bot yo puedo ayudar?*', 'Hello hablemos un ratito justos ☺, que me cuenta?', 'Hola 👋😄 aqui estoy para hacerte reir un rato, mi amigo me dices que soy muy Divertida 😆', 'Que onda perro tdo bien?', 'Hey estoy aburrida podemos hablar un rato?'])}`)}
