@@ -44,9 +44,27 @@ resultado += segundos + " segundos";
 return resultado;
 }
 
-function pickRandom(list) {
+exports.pickRandom = async (list) => {
 return list[Math.floor(list.length * Math.random())]
 }  
+
+//información del usuario
+exports.getUserProfilePic = async (conn, sender) => {
+  try {
+    const userProfilePicUrl = await conn.profilePictureUrl(sender, "image");
+    return await getBuffer(userProfilePicUrl);
+  } catch {
+    return fs.readFileSync("./media/Menu1");
+  }
+}
+
+exports.getUserBio = async (conn, sender) => {
+  try {
+    const statusData = await conn.fetchStatus(sender);
+    return statusData.status;
+  } catch {
+    return "";
+  }}
 
 // Tiempo de Actividad del bot
 const used = process.memoryUsage()
