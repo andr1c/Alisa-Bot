@@ -192,36 +192,31 @@ global.db.data.users[m.sender].lastmiming = new Date * 1;
 }
 
 if (command == 'minar2' || command == 'mine2') {
-const date = global.db.data.users[m.sender].lastmiming + 600000;
-if (new Date - global.db.data.users[m.sender].lastmiming < 600000) return m.reply(`*${lenguaje.rpg.text9} ${msToTime(date - new Date())} ${lenguaje.rpg.text10}*`) 
-const exp = Math.floor(Math.random() * 2500)
+const date = global.db.data.users[m.sender].lastmiming + 3600000;
+if (new Date - global.db.data.users[m.sender].lastmiming < 3600000) return m.reply(`*${lenguaje.rpg.text9} ${msToTime(date - new Date())} ${lenguaje.rpg.text10}*`)
+let minar = `${pickRandom(['Que pro 😎 has minado',
+'🌟✨ Genial!! Obtienes', 'WOW!! eres un(a) gran Minero(a) ⛏️ Obtienes', 'Has Minado!!', '😲 Lograste Minar la cantidad de', 'Tus Ingresos subiran gracias a que minaste', '⛏️⛏️⛏️⛏️⛏️ Minando', '🤩 SII!!! AHORA TIENES', 'La minaria esta de tu lado, por ello obtienes', '😻 La suerte de Minar', '♻️ Tu Mision se ha cumplido, lograste minar', '⛏️ La Mineria te ha beneficiado con', '🛣️ Has encontrado un Lugar y por minar dicho lugar Obtienes', '👾 Gracias a que has minado tus ingresos suman', 'Felicidades!! Ahora tienes','⛏️⛏️⛏️ Obtienes'])}` 
+//const exp = Math.floor(Math.random() * 2500)
 const diamond = Math.floor(Math.random() * 60)
 const money = Math.floor(Math.random() * 2500)
-global.db.data.users[m.sender].exp += exp
+//global.db.data.users[m.sender].exp += exp
 global.db.data.users[m.sender].limit += diamond
 global.db.data.users[m.sender].money += money
-m.reply(`┏┅┅🎅┅┅🎁•┅┅🎅┅┅┅⧼
-┋✨ 𝙊𝘽𝙏𝙄𝙀𝙉𝙀𝙎 𝙐𝙉 𝙍𝙀𝙂𝘼𝙇𝙊!!
-┋✨ 𝙔𝙊𝙐 𝙂𝙀𝙏 𝘼 𝙂𝙄𝙁𝙏!!
-┋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅
-┋💎 𝐃𝐈𝐀𝐌𝐀𝐍𝐓𝐄: ${diamond}
-┋🪙 𝐂𝐎𝐈𝐍𝐒: ${money}
-┋🆙 𝐗𝐏: ${exp}
-┗┅┅🎅┅┅🎁•┅┅🎅┅┅┅⧼`)
-m.react('🎅') 
+m.reply(`${minar}\n💎 𝐃𝐈𝐀𝐌𝐀𝐍𝐓𝐄: ${diamond}\n🪙 𝐂𝐎𝐈𝐍𝐒: ${money}`)
+m.react('💎') 
 global.db.data.users[m.sender].lastmiming = new Date * 1;
 }
 
 if (command == 'trabajar' || command == 'work' || command == 'w') {
 let hasil = Math.floor(Math.random() * 3000)
-let dono = Math.floor(Math.random() * 40)
+//let dono = Math.floor(Math.random() * 40)
 let time = global.db.data.users[m.sender].lastwork + 3600000 //3600000
 if (new Date - global.db.data.users[m.sender].lastwork < 3600000) return m.reply(`${lenguaje.rpg.text12}\n\n*${lenguaje.rpg.text9}* ${msToTime(time - new Date())} ${lenguaje.rpg.text13}`) 
 let anu = (await axios.get('https://raw.githubusercontent.com/fgmods/fg-team/main/games/work.json')).data
 let res = pickRandom(anu)
 global.db.data.users[m.sender].exp += hasil
-global.db.data.users[m.sender].limit += dono
-m.reply(`⚒️ ${res.fgwork} *${hasil} XP*\n\n🎅 *Por tu buen trabajos obtienes un bonos navideños de:* ${dono} diamante 💎`)
+//global.db.data.users[m.sender].limit += dono
+m.reply(`⚒️ ${res.fgwork} *${hasil} XP*`)
 global.db.data.users[m.sender].lastwork = new Date * 1
 }
 
@@ -265,7 +260,7 @@ return m.reply(`╭╌「 ${lenguaje.rpg.level} 」
 ├ ${lenguaje.rpg.level2}
 ├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 ├─ ${lenguaje.rpg.level3} ${pushname}
-├─ 🎅 *XP 🆙:* ${user.exp - min}/${xp}
+├─ ❐ *XP 🆙:* ${user.exp - min}/${xp}
 ├─ ${lenguaje['smsAutonivel3']()} ${user.level}
 ├─ ${lenguaje['smsAutonivel6']()} ${user.role}
 ╰╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌

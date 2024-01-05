@@ -22,7 +22,7 @@ let wa = m.key.id.length > 21 ? 'Android' : m.key.id.substring(0, 2) == '3A' ? '
 m.react('🙌') 
 let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
-║🎅 ${lenguaje['smsWel']()} @${sender.split("@")[0]} ${user.registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''} 👋🏻
+║${lenguaje['smsWel']()} @${sender.split("@")[0]} ${user.registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''} 👋🏻
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
 ║${lenguaje.menu.text} [ ${prefix} ]
 ║${lenguaje.menu.text2} ${date}
@@ -36,8 +36,8 @@ let menu = `╔══════ ≪ •❈• ≫ ══════╗
 ║${lenguaje.menu.text8} ${user.limit}
 ║${lenguaje.menu.text9} ${user.level}
 ║${lenguaje.menu.text10} ${user.role}
-║🎅 ᴇxᴘ : ${user.exp}
-║🎅 ᴄᴏɪɴs : ${user.money}
+║❐ ᴇxᴘ : ${user.exp}
+║❐ ᴄᴏɪɴs : ${user.money}
 ║ 
 ║${lenguaje.menu.text11} ${rtotalreg} de ${totalreg}
 ║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
