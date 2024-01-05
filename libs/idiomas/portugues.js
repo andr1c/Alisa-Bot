@@ -59,7 +59,7 @@ const smsConexioncerrar = () => { return `⚠️ CONEXÃO FECHADA, TENTATIVA DE 
 const Bio = { 
 text: `🦁 ɴᴏᴠᴀʙᴏᴛ - Ter:`, 
 text2: `Os usuários que me usam podem responder lentamente, minha velocidade de resposta é:`,
-text3: `🎅 ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ | Ativo ✅️:`, 
+text3: `👑 ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ | Ativo ✅️:`, 
 text4: `Para cronometrar minha lista de comandos, use #menu`, 
 text5: `ɴᴏᴠᴀʙᴏᴛ ᴘᴏʀ ʟᴏʟɪʙᴏᴛ - Inscreva-se em nosso canal no YouTube 🔔\nhttps://www.youtube.com/@elrebelde.21`, 
 text6: `✅ Atividade:`, 
@@ -82,13 +82,13 @@ const smsAutoSicker = () => { return `🤡 Ei, onde diabos você viu um pedaço 
 //autonivel
 const smsAutonivel = () => { return `*「 FELICIDADES LEVEL UP 🆙🥳 」*\n\n🥳 Felicidades` }
 const smsAutonivel2 = () => { return `👏 Você subiu de nível, continue assim 👏\n` }
-const smsAutonivel3 = () => { return `*🎅 NÍVEL :*` }
-const smsAutonivel4 = () => { return `*🎅 NÍVEL ANTERIOR :* ` }
-const smsAutonivel5 = () => { return `*🎅 NÍVEL ATUAL :*` }
-const smsAutonivel6 = () => { return `*🎅 FAIXA :*` }
-const smsAutonivel7 = () => { return `*🎅 DATA :*` }
+const smsAutonivel3 = () => { return `*❐ NÍVEL :*` }
+const smsAutonivel4 = () => { return `*❐ NÍVEL ANTERIOR :* ` }
+const smsAutonivel5 = () => { return `*❐ NÍVEL ATUAL :*` }
+const smsAutonivel6 = () => { return `*❐ FAIXA :*` }
+const smsAutonivel7 = () => { return `*❐ DATA :*` }
 const smsAutonivel8 = () => { return `_*Para saber qual é a sua porta superior, digite o comando #lb*_` }
-const smsAutonivel9 = () => { return `*🎅 PARABÉNS POR ALCANÇAR UM NOVO NÍVEL 🎊*\n\n` }
+const smsAutonivel9 = () => { return `*🥳 PARABÉNS POR ALCANÇAR UM NOVO NÍVEL 🎊*\n\n` }
 
 //info
 const nivel = () => { return `[ ❇️ ] Preciso do nível` }
@@ -215,26 +215,26 @@ https://panel.vortexuscloud.com
 text21: `*Digite o comando com falha*\n\n*Exemplo:`, 
 text22: `O relato foi enviado ao meu criador, entraremos em contato se necessário, se for falso será ignorado e bloqueado do bot*`, 
 text23: `*╼╼╼╼╼╼╼[ 💖 doação 💖 ]╾╾╾╾╾╾╾╾*\n\n* Olá 👋, se você quiser apoiar este projeto, poderá fazê-lo através de doações voluntárias através do Mercado Pago Arg.*\n\n╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍\n\n*❇️Mercado pago:*\n*• Alias :* elrebelde21\n*• CVU :* 0000003100059201491917`, 
-text24: `*💖 Você também pode compartilhar o seguinte como uma demonstração de apoio 💕*\n\n*🎅 Apoie o repositório com uma estrelinha, obrigado 🙏💕*`, 
+text24: `*💖 Você também pode compartilhar o seguinte como uma demonstração de apoio 💕*\n\n*💖 Apoie o repositório com uma estrelinha, obrigado 🙏💕*`, 
 text25: `┗❴ ⚠ AVISO ⚠ ❵┛\n\nÉ proibido marcar meu criador/desenvolvimento. Se você tiver alguma sugestão sobre o Bot, escreva para mim em particular.` }
 
 const menu = {
-text: `🎅 Prefixo`, 
-text2: `🎅 Data :`, 
-text3: `🎅 Hora :`, 
-text4: `🎅 Versão :`, 
-text5: `🎅 Usuários :`, 
-text6: `🎅 Atividade :`, 
-text7: `🎅 Caminho :`, 
-text8: `🎅 Limite :`, 
-text9: `🎅 Nível : `, 
-text10: `🎅 Classificações:`, 
-text11: `🎅 Registrado :`, 
-textt: `🎅 Bot Oficial: este é o Bot oficial`, 
-texttt: `🎅 Eu sou um SubBots :`, 
-text12: `\`\`\`🎅 LISTA DE COMANDOS 🎅\`\`\`
+text: `❐ Prefixo`, 
+text2: `❐ Data :`, 
+text3: `❐ Hora :`, 
+text4: `❐ Versão :`, 
+text5: `❐ Usuários :`, 
+text6: `❐ Atividade :`, 
+text7: `❐ Caminho :`, 
+text8: `❐ Limite :`, 
+text9: `❐ Nível : `, 
+text10: `❐ Classificações:`, 
+text11: `❐ Registrado :`, 
+textt: `❐ Bot Oficial: este é o Bot oficial`, 
+texttt: `❐ Eu sou um SubBots :`, 
+text12: `\`\`\`LISTA DE COMANDOS\`\`\`
 \`\`\`Bot simples com poucos comandos\`\`\``, 
-text13: `*🎅 Palavras específicas para o bot interagir com você 🎅*`, 
+text13: `*Palavras específicas para o bot interagir com você*`, 
 text14: `_*Olhinhos escrevem como está na mensagem*_`,
 text15: `🤔 *O que há de novo?* 🤗\n\n*🌐 Nova versão:*`, 
 text16: `* Novo comando:*
@@ -419,9 +419,9 @@ text42: `🔸️ O usuário não tem aviso` }
 
 //juegos.js
 const juegos = {
-text: `*🎅 e a pergunta?*\n\n*Exemplo:*`, 
-text1: `*🤔 Perguntar:*`, 
-text2: `*🎅 Responder:*`, 
+text: `*e a pergunta?*\n\n*Exemplo:*`, 
+text1: `*• Perguntar:*`, 
+text2: `*• Responder:*`, 
 text3: `você deveria se casar`, 
 text4: `Eles formam um belo casal 💕`, 
 text5: `*Digite o @ ou o nome da pessoa*`, 
@@ -510,12 +510,12 @@ text8: `*Usar :*\n║ Você pode comprar 💎 diamante\n║ Usando o seguinte co
 text9: `[ ⏳ ] Espere`, 
 text10: `para o meu novamente`, 
 text11: `⚒️ Genial eu`, 
-text12: `*🎅 Você já trabalhou muito por hoje*`, 
+text12: `*Você já trabalhou muito por hoje*`, 
 text13: `*para volver a chambea*`, 
 text14: `🎁 *Você já coletou sua recompensa diária*\n\n🕚 volte para dentro :`, 
-text15: `*🎁 Você ganha um presente de Natal 🎁🎅*
+text15: `*🎁 Você ganha um presente de Natal 🎁*
 
-🎅 *Recebeu:*`, 
+• *Recebeu:*`, 
 text16: `*🎁 E você pegou seu peito*\n🕚 Ele volta:`, 
 text17: `🛒 Pegue um baú`, 
 unreg: `*✳️ Digite o número de série, verifique seu número de série com o comando:* #myns`, 
@@ -535,19 +535,19 @@ buy3: `*você gastou :*`,
 buy4: `🔶 Você não tem XP suficiente para comprar`, 
 buy5: `Diamante 💎 você pode obter *XP* usando o comando #minar`, 
 pp: `              *⪨ ＰＥＲＦＩＬ ⪩*`, 
-pp2: `*🎅 NOME :*`, 
+pp2: `*💫 NOME :*`, 
 pp3: `*📱 NÚMERO :*`, 
 pp4: `*💎 DIAMANTES :*`, 
 pp5: `*🆙 NÍVEL :*`, 
 pp6: `*🏆 FAIXA :*`, 
 pp7: `*📇 REGISTRADOS :*`, 
-level: `*🎅 SUAS ESTATÍSTICAS 🆙*`, 
+level: `*💫 SUAS ESTATÍSTICAS 🆙*`, 
 level2: `『 Suas estatísticas em tempo real 🕐 』`, 
-level3: `🎅 *NOME:*`, 
+level3: `💫 *NOME:*`, 
 level4: `🎊 você está faltando`, 
 level5: `*XP* para subir de nível`, 
 level6: `Felicidades\n├ Você alcançou um novo nível 』`, 
-level7: `*🎅 Quanto mais você interage com os bots, maior será o seu nível.*` }
+level7: `*💫 Quanto mais você interage com os bots, maior será o seu nível.*` }
 
 //sticker.js
 const sticker = {

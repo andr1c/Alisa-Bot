@@ -59,7 +59,7 @@ const smsConexioncerrar = () => { return `⚠️ KONEKSI DITUTUP, UPAYA UNTUK ME
 const Bio = { 
 text: `🦁 ɴᴏᴠᴀʙᴏᴛ - sudah:`,  
 text2: `Pengguna menggunakan saya, saya dapat merespons dengan lambat, kecepatan saya:`,
-text3: `🎅 ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ | Aset ✅️:`,   
+text3: `👑 ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ | Aset ✅️:`,   
 text4: `Untuk mengatur waktu penggunaan daftar perintah saya #menu`,  
 text5: `ɴᴏᴠᴀʙᴏᴛ Oleh ʟᴏʟɪʙᴏᴛ - Berlangganan saluran YouTube kami 🔔\nhttps://www.youtube.com/@elrebelde.21`, 
 text6: `✅ Aktivitas:`, 
@@ -82,13 +82,13 @@ const smsAutoSicker = () => { return `🤡 Hei, di mana kamu melihat tongkat yan
 //autonivel
 const smsAutonivel = () => { return `*「 NAIK LEVEL KEBAHAGIAAN 🆙🥳 」*\n\n🥳 Cheers` }
 const smsAutonivel2 = () => { return `👏 Anda naik level, pertahankan 👏\n` }
-const smsAutonivel3 = () => { return `*🎅 TINGKAT :*` }
-const smsAutonivel4 = () => { return `*🎅 TINGKAT SEBELUMNYA :* ` }
-const smsAutonivel5 = () => { return `*🎅 LEVEL SAAT INI :*` }
-const smsAutonivel6 = () => { return `*🎅 JANGKAUAN :*` }
-const smsAutonivel7 = () => { return `*🎅 TANGGAL :*` }
+const smsAutonivel3 = () => { return `*❐ TINGKAT :*` }
+const smsAutonivel4 = () => { return `*❐ TINGKAT SEBELUMNYA :* ` }
+const smsAutonivel5 = () => { return `*❑ LEVEL SAAT INI :*` }
+const smsAutonivel6 = () => { return `*❑ JANGKAUAN :*` }
+const smsAutonivel7 = () => { return `*❐ TANGGAL :*` }
 const smsAutonivel8 = () => { return `_*Untuk mengetahui port teratas Anda, masukkan perintah #lb*_` }
-const smsAutonivel9 = () => { return `*🎅 SELAMAT MENCAPAI LEVEL BARU 🎊*\n\n` }
+const smsAutonivel9 = () => { return `*🥳 SELAMAT MENCAPAI LEVEL BARU 🎊*\n\n` }
 
 //info
 const nivel = () => { return `[ ❇️ ] Butuh levelnya` }
@@ -215,26 +215,26 @@ https://panel.vortexuscloud.com
 text21: `*Masukkan perintah dengan kesalahan*\n\n*Contoh:`,  
 text22: `Laporan telah dikirim ke pencipta saya, kami akan menghubungi Anda jika perlu, jika salah akan diabaikan dan diblokir dari bot*`,  
 text23: `*╼╼╼╼╼╼╼[ 💖 sumbangan 💖 ]╾╾╾╾╾╾╾╾*\n\n*Halo 👋, jika Anda ingin mendukung proyek ini, Anda dapat melakukannya melalui donasi sukarela melalui Mercado Pago Arg.*\n\n╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍\n\n*❇️Mercado pago:*\n*• Alias :* elrebelde21\n*• CVU :* 0000003100059201491917`, 
-text24: `*💖 Anda juga dapat membagikan hal berikut sebagai bentuk dukungan 💕*\n\n*🎅 Dukung repositori dengan sedikit bintang, terima kasih 🙏💕*`,  
+text24: `*💖 Anda juga dapat membagikan hal berikut sebagai bentuk dukungan 💕*\n\n*💖 Dukung repositori dengan sedikit bintang, terima kasih 🙏💕*`,  
 text25: `┗❴ ⚠ PERINGATAN ⚠ ❵┛\n\nDilarang menandai pencipta/pengembangan jika Anda memiliki saran mengenai Bot tulis ke pesan pribadi mereka` }
  
 const menu = { 
-text: `🎅 Awalan`, 
-text2: `🎅 Tanggal :`,  
-text3: `🎅 Waktu :`, 
-text4: `🎅 versi :`, 
-text5: `🎅 pengguna :`, 
-text6: `🎅 aktivitas :`, 
-text7: `🎅 mode :`, 
-text8: `🎅 Batas :`, 
-text9: `🎅 level : `, 
-text10: `🎅 jangkauan:`, 
-text11: `🎅 dicatat :`, 
-textt: `🎅 Bot ofc : ini adalah Bot ofc`, 
-texttt: `🎅 Saya seorang SubBot :`,  
-text12: `\`\`\`🎅 DAFTAR PERINTAH 🎅\`\`\`
+text: `❐ Awalan`, 
+text2: `❐ Tanggal :`,  
+text3: `❐ Waktu :`, 
+text4: `❐ versi :`, 
+text5: `❐ pengguna :`, 
+text6: `❐ aktivitas :`, 
+text7: `❐ mode :`, 
+text8: `❐ Batas :`, 
+text9: `❐ level : `, 
+text10: `❐ jangkauan:`, 
+text11: `❐ dicatat :`, 
+textt: `❐ Bot ofc : ini adalah Bot ofc`, 
+texttt: `❐ Saya seorang SubBot :`,  
+text12: `\`\`\`DAFTAR PERINTAH\`\`\`
 \`\`\`Bot sederhana dengan sedikit perintah\`\`\``,  
-text13: `*🎅 Kata-kata khusus agar bot dapat berinteraksi dengan Anda 🎅*`,   
+text13: `*Kata-kata khusus agar bot dapat berinteraksi dengan Anda*`,   
 text14: `_*Hati-hati, tulis apa adanya di pesan*_`,
 text15: `🤔 *Apa yang baru?* 🤗\n\n*🌐 Versi Baru:*`,  
 text16: `* Perintah baru:*
@@ -420,9 +420,9 @@ text42: `🔸️ Pengguna tidak mendapat peringatan` }
 
 //juegos.js
 const juegos = {
-text: `*🎅 dan pertanyaannya?*\n\n*Contoh:*`, 
-text1: `*🤔 Bertanya:*`, 
-text2: `*🎅 Menjawab:*`, 
+text: `*dan pertanyaannya?*\n\n*Contoh:*`, 
+text1: `*• Bertanya:*`, 
+text2: `*• Menjawab:*`, 
 text3: `kamu harus menikah`, 
 text4: `Mereka adalah pasangan yang serasi 💕`, 
 text5: `*Masukkan @ atau nama orang tersebut*`, 
@@ -511,12 +511,12 @@ text8: `*MENGGUNAKAN :*\n║Anda dapat membeli 💎 berlian\n║Menggunakan peri
 text9: `[ ⏳ ] Tunggu`,  
 text10: `untuk milikku lagi`, 
 text11: `⚒️ Aku yang ramah`,  
-text12: `*🎅 Anda sudah bekerja keras hari ini*`, 
+text12: `*Anda sudah bekerja keras hari ini*`, 
 text13: `*untuk kembali bekerja*`, 
 text14: `🎁 *Anda telah mengumpulkan hadiah harian Anda*\n\n🕚 masuk kembali :`,   
-text15: `*🎁 Mendapat hadiah Natal 🎁🎅*
+text15: `*🎁 Mendapat hadiah Natal 🎁*
  
-🎅 *Anda telah menerima:*`,   
+• *Anda telah menerima:*`,   
 text16: `*🎁 KAMU SUDAH MENGANGKAT DADAMU*\n🕚 DATANG KEMBALI:`, 
 text17: `🛒 DAPATKAN DADA`,   
 unreg: `*✳️ Masukkan nomor seri, periksa nomor seri Anda dengan perintah:* #myns`, 
@@ -536,19 +536,19 @@ buy3: `*kamu telah menghabiskan :*`,
 buy4: `🔶 Anda tidak memiliki cukup pengalaman untuk membeli`,  
 buy5: `Berlian 💎 Anda bisa mendapatkan *XP* menggunakan perintah: #minar`, 
 pp: `              *⪨ PROFIL ⪩*`,  
-pp2: `*🎅 NAMA :*`,  
+pp2: `*💫 NAMA :*`,  
 pp3: `*📱 NOMOR :*`, 
 pp4: `*💎 BERLIAN :*`,   
 pp5: `*🆙 TINGKAT :*`,  
 pp6: `*🏆 JANGKAUAN :*`, 
 pp7: `*📇 TERDAFTAR :*`, 
-level: `*🎅 STATISTIK ANDA 🆙*`, 
+level: `*💫 STATISTIK ANDA 🆙*`, 
 level2: `『 Statistik Anda secara real time 🕐 』`, 
-level3: `🎅 *NAMA:*`, 
+level3: `💫 *NAMA:*`, 
 level4: `🎊 kamu hilang`,  
 level5: `*XP* untuk naik level`,    
 level6: `Bersulang\n├ Dapatkan ke tingkat yang baru 』`, 
-level7: `*🎅 Semakin banyak Anda berinteraksi dengan bot, semakin tinggi level Anda*` } 
+level7: `*💫 Semakin banyak Anda berinteraksi dengan bot, semakin tinggi level Anda*` } 
  
 //sticker.js
 const sticker = {
