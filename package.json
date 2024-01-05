@@ -1,6 +1,6 @@
 {
   "name": "NovaBot-MD",
-  "version": "1.0.5 (navideñas)",
+  "version": "1.0.7",
   "description": "Bot de whatsapp",
   "main": "index.js",
   "type": "commonjs",
