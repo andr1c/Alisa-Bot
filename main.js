@@ -318,11 +318,14 @@ if (m.isGroup) return !1;
 if (!m.message) return !0;
 let str = [nna, md, yt, tiktok, fb] 
 let info = str[Math.floor(Math.random() * str.length)]
+let totalreg = Object.keys(global.db.data.users).length
+let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length
 conn.sendMessage(m.chat, { text: `*Hola @${sender.split`@`[0]} 👋😄 Mi nombre es ${botname} Soy un bot de WhatsApp con multi funcione 👾, registrarte para poder usar mi comando 👌*
 
 *💫 MI INFO:*
-👑 *Mi creador es: wa.me/5492266466080*
-👥 Tengo: ${Object.keys(global.db.data.users).length} usuario usandome puedo ser lenta :v
+*👑 Mi creador es:* wa.me/5492266466080
+*👥 Usuarios:* ${totalreg} 
+*✨ Registrado:* ${rtotalreg}
 *🤖 Estoy activa desde:* ${runtime(process.uptime())}
 *⚠️ PD:* No hagan spam del comando o te van baneado
   
@@ -332,10 +335,10 @@ conn.sendMessage(m.chat, { text: `*Hola @${sender.split`@`[0]} 👋😄 Mi nombr
 • *QUIERES VER QUE HAY DE NUEVO?*
 *Escribe:* #nuevo 
 
-• ¿QUIERE SOLICITA UN BOT PARA TU GRUPO? 
+• *¿QUIERE SOLICITA UN BOT PARA TU GRUPO?*
 *Escribe:* #solicitud
 
-*💫 ¿Quieres apoyar este proyecto para que siga actualizándose? 
+*💫 ¿Quieres apoyar este proyecto para que siga actualizándose?*
 • #donar  
 
 * ✨ CUENTA OFICIALES*
