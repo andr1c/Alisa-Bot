@@ -313,7 +313,7 @@ global.lenguaje = rs
 global.lenguaje = es
 }    
 
-if (!user.mensaje) { 
+if (!user.mensaje && m.message) { 
 //if (m.isGroup) return !1;
 //if (!m.message) return !0;
 let str = [nna, md, yt, tiktok, fb] 
