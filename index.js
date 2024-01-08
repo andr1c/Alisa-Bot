@@ -1,10 +1,10 @@
 (async () => {
 require("./settings")
-const { default: makeWASocket, Browsers, makeInMemoryStore, useMultiFileAuthState, DisconnectReason, proto , jidNormalizedUser,WAMessageStubType, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, msgRetryCounterMap, makeCacheableSignalKeyStore, fetchLatestBaileysVersion, getAggregateVotesInPollMessage } = require("@whiskeysockets/baileys")
+const { default: makeWASocket, PHONENUMBER_MCC, Browsers, makeInMemoryStore, useMultiFileAuthState, DisconnectReason, proto , jidNormalizedUser,WAMessageStubType, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, msgRetryCounterMap, makeCacheableSignalKeyStore, fetchLatestBaileysVersion, getAggregateVotesInPollMessage } = require("@whiskeysockets/baileys")
 const { state, saveCreds } = await useMultiFileAuthState('./sessions')
 const chalk = require('chalk')
 const moment = require('moment')
-const fs = require('fs')
+const fs = require('fs') 
 const yargs = require('yargs/yargs')
 const { smsg, sleep, delay, getBuffer} = require('./libs/fuctions')
 const _ = require('lodash')
@@ -13,11 +13,15 @@ const os = require('os')
 const { execSync } = require('child_process')
 const util = require('util')
 const pino = require('pino')
+const Pino = require("pino")
 const cfonts = require('cfonts') 
 const { tmpdir } = require('os')
 const { join } = require('path')
 const { readdirSync, statSync, unlinkSync } = require('fs')
 const {say} = cfonts;
+const PhoneNumber = require('awesome-phonenumber')
+const readline = require("readline")
+const { parsePhoneNumber } = require("libphonenumber-js")
 const color = (text, color) => {
 return !color ? chalk.green(text) : color.startsWith('#') ? chalk.hex(color)(text) : chalk.keyword(color)(text)
 }
@@ -153,41 +157,69 @@ setInterval(async () => {
 }, 1000 * 60 * 60);
 //___________
     
+const store = makeInMemoryStore({
+logger: pino().child({
+level: 'silent',
+stream: 'store'
+})})
+
+const pairingCode = !!phoneNumber || process.argv.includes("--pairing-code")
+const useMobile = process.argv.includes("--mobile")
+const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
+const question = (text) => new Promise((resolve) => rl.question(text, resolve))
+         
 async function startBot() {
+let { version, isLatest } = await fetchLatestBaileysVersion()
+const {  state, saveCreds } =await useMultiFileAuthState(`./sessions`)
+const msgRetryCounterCache = new NodeCache() //para mensaje de reintento, "mensaje en espera"
+const sock = makeWASocket({logger: pino({ level: 'silent' }), printQRInTerminal: !pairingCode, 
+mobile: useMobile, //API móvil (propensa a prohibiciones)
+browser: ['Chrome (Linux)', '', ''], // 
+auth: {creds: state.creds, keys: makeCacheableSignalKeyStore(state.keys, Pino({ level: "fatal" }).child({ level: "fatal" })),
+},
+browser: ['Chrome (Linux)', '', ''],  
+markOnlineOnConnect: true, //establecer falso para fuera de línea
+generateHighQualityLinkPreview: true, //hacer enlace de vista previa alta
+getMessage: async (key) => {
+let jid = jidNormalizedUser(key.remoteJid)
+let msg = await store.loadMessage(jid, key.id)
+return msg?.message || "" 
+},
+msgRetryCounterCache, //Resolver mensajes en espera
+defaultQueryTimeoutMs: undefined, // 
+})
+   
+store.bind(sock.ev)
 
-console.info = () => {}
-const store = makeInMemoryStore({ logger: pino().child({ level: "silent", stream: "store" }), })
-const msgRetry = (MessageRetryMap) => { }
-const msgRetryCache = new NodeCache()
-let { version, isLatest } = await fetchLatestBaileysVersion();   
+//iniciar sesión usar código de emparejamiento
+if (pairingCode && !sock.authState.creds.registered) {
+if (useMobile) throw new Error('No se puede usar el código de emparejamiento con la API móvil') 
 
-const socketSettings = {
-printQRInTerminal: true,
-logger: pino({ level: 'silent' }),
-auth: { creds: state.creds, keys: makeCacheableSignalKeyStore(state.keys, pino({level: 'silent'})) },
-browser: ['NovaBot-MD', 'Safari', '1.0.0'],
-msgRetry,
-msgRetryCache,
-version,
-syncFullHistory: true,
-getMessage: async (key) => { 
-if (store) { 
-const msg = await store.loadMessage(key.remoteJid, key.id); 
-return sock.chats[key.remoteJid] && sock.chats[key.remoteJid].messages[key.id] ? sock.chats[key.remoteJid].messages[key.id].message : undefined; 
-} 
-return proto.Message.fromObject({}); 
+let phoneNumber
+if (!!phoneNumber) {
+phoneNumber = phoneNumber.replace(/[^0-9]/g, '')
+if (!Object.keys(PHONENUMBER_MCC).some(v => phoneNumber.startsWith(v))) {
+console.log(chalk.bgBlack(chalk.redBright("Comience con el código de país de su número de WhatsApp, ejemplo: +595879999999")))
+process.exit(0)
+}} else {
+phoneNumber = await question(chalk.bgBlack(chalk.greenBright(`Ingresa el número que sera bot\nEjemplo: +595879999999 : `)))
+phoneNumber = phoneNumber.replace(/[^0-9]/g, '')
+ 
+//Preguntar nuevamente al ingresar el número incorrecto
+if (!Object.keys(PHONENUMBER_MCC).some(v => phoneNumber.startsWith(v))) {
+console.log(chalk.bgBlack(chalk.redBright("Comience con el código de país de su número de WhatsApp, ejemplo: +595879999999")))
+phoneNumber = await question(chalk.bgBlack(chalk.greenBright(`Ingresa el número que sera bot\nEjemplo: +595879999999: `)))
+phoneNumber = phoneNumber.replace(/[^0-9]/g, '')
+rl.close()
 }}
 
-const sock = makeWASocket(socketSettings)
-
-async function getMessage(key) {
-if (store) {
-const msg = store.loadMessage(key.remoteJid, key.id)
-return msg.message && undefined
-} return {
-conversation: 'SimpleBot',
-}}
-
+setTimeout(async () => {
+let code = await sock.requestPairingCode(phoneNumber)
+code = code?.match(/.{1,4}/g)?.join("-") || code
+console.log(chalk.black(chalk.bgGreen(`👑 CÓDIGO DE VINCULACIÓN 👑: `)), chalk.black(chalk.white(code)))
+}, 3000)
+}
+   
 sock.ev.on('messages.upsert', async chatUpdate => {
 //console.log(JSON.stringify(chatUpdate, undefined, 2))
 try {
@@ -521,8 +553,9 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 sock.ev.on('connection.update', async (update) => {
 const { connection, lastDisconnect, qr, receivedPendingNotifications } = update;
 console.log(receivedPendingNotifications)
-if (connection == 'connecting') {
-console.log('iniciando...')
+
+if (connection == "open") {
+console.log(chalk.gray('Iniciando...'));
 say('NovaBot-MD', {
   font: 'chrome',
   align: 'center',
@@ -531,28 +564,32 @@ say(`By: elrebelde21`, {
   font: 'console',
   align: 'center',
   gradient: ['red', 'magenta']});
-  
 console.log(color(` `,'magenta'))
 console.log(color(`\n${lenguaje['smsConexion']()} ` + JSON.stringify(sock.user, null, 2), 'yellow'))
-} else if (qr !== undefined) {
-console.log(color('[SYS]', '#009FFF'),
-color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
-color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│${lenguaje['smsEscaneaQR']()}\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯`, '#f12711'))
-} else if (connection === 'close') {
-console.log(color('[SYS]', '#009FFF'),
-color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
-color(`${lenguaje['smsConexioncerrar']()}`, '#f64f59'));
-lastDisconnect.error?.output?.statusCode !== DisconnectReason.loggedOut
-? startBot()
-: console.log(color('[SYS]', '#009FFF'),
-color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
-color(`Wa Web logged Out`, '#f64f59')
-);
-} else if (connection == 'open') {
 console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
 color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│${lenguaje['smsConectado']()}\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯` + receivedPendingNotifications, '#38ef7d')
 );
+
+const rainbowColors = ['red', 'yellow', 'green', 'blue', 'purple'];
+let index = 0;
+
+function printRainbowMessage() {
+const color = rainbowColors[index];
+console.log(chalk.keyword(color)('\n\n⏳️ Cargando los mensajes...'));
+index = (index + 1) % rainbowColors.length;
+setTimeout(printRainbowMessage, 60000) //Ajuste el tiempo de espera a la velocidad deseada
+}
+
+printRainbowMessage()
+
+if (connection === "close" && lastDisconnect && lastDisconnect.error && lastDisconnect.error.output.statusCode != 401 ) {
+console.log(color('[SYS]', '#009FFF'),
+color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
+color(`${lenguaje['smsConexioncerrar']()}`, '#f64f59'));
+startBot()
+}
+
 if (!sock.user.connect) {
 /*let res = await sock.groupAcceptInvite(global.nna2);
 await delay(5 * 5000)
@@ -569,6 +606,7 @@ sock.user.connect = true
 sock.public = true
 store.bind(sock.ev)
 sock.ev.on('creds.update', saveCreds)
+sock.ev.on("messages.upsert",  () => { })
 process.on('uncaughtException', console.log)
 process.on('unhandledRejection', console.log)
 process.on('RefenceError', console.log)
