@@ -95,7 +95,7 @@ const nivel = () => { return `[ ❇️ ] Butuh levelnya` }
 const nivel2 = () => { return `Untuk dapat menggunakan perintah ini, periksa level Anda dengan perintah tersebut` }   
 const admin = () => { return `*⚠️ Anda bukan admin 🤡 hanya admin yang dapat menggunakan perintah ini*` }
 const botAdmin = () => { return `*⚠️ Hai, pertama-tama bot yang saya maksud (Saya), saya harus menjadi admin untuk menggunakan perintah ini*` }
-const propietario = () => { return `*⚠️ Siapa kamu? hanya bos saya yang bisa menggunakan perintah ini*` }
+const propietario = () => { return `*⚠️ Perintah ini hanya dapat digunakan oleh SAYA atau atasan saya*` } 
 const group = () => { return `*⚠️ Brengsek, perintah ini hanya bisa digunakan oleh grup*` }
 const private = () => { return `*⚠️ Perintah ini hanya dapat digunakan dalam obrolan pribadi*` }
 const bot = () => { return `*⚠️ Perintah ini hanya dapat digunakan oleh (ME)*` }

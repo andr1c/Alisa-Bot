@@ -96,7 +96,7 @@ const nivel = () => { return `[ ❇️ ] ɴᴇᴇᴅ ᴛʜᴇ ʟᴇᴠᴇʟ` }
 const nivel2 = () => { return `ᴛᴏ ʙᴇ ᴀʙʟᴇ ᴛᴏ ᴜsᴇ ᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ ᴄʜᴇᴄᴋ ʏᴏᴜʀ ᴄᴜʀʀᴇɴᴛ ʟᴇᴠᴇʟ ᴡɪᴛʜ ᴛʜᴇ ᴄᴏᴍᴍᴀɴᴅ` }
 const admin = () => { return `*⚠️ You are not admins 🤡 only admins can use this command*` }
 const botAdmin = () => { return `*⚠️ Hey, first the bot (Me), I need to be an admin to use this command*` }
-const propietario = () => { return `*⚠️ Who the hell are you? only my boss can use this command*` }
+const propietario = () => { return `*⚠️ This command can only be used by ME or my boss*` } 
 const group = () => { return `*⚠️ Asshole, this command can only be used by the group*` }
 const private = () => { return `*⚠️ This command can only be used in private chat*` }
 const bot = () => { return `*⚠️ This command can only be used by (ME)*` }

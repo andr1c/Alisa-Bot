@@ -95,7 +95,7 @@ const nivel = () => { return `[ ❇️ ] Preciso do nível` }
 const nivel2 = () => { return `Para poder usar este comando verifique seu nível atual com o comando` }
 const admin = () => { return `*⚠️ Vocês não são administradores 🤡 apenas administradores podem usar este comando*` }
 const botAdmin = () => { return `*⚠️ Ei, primeiro o bot, quero dizer (eu), preciso ser um administrador para usar este comando*` }
-const propietario = () => { return `*⚠️ Quem diabos é você? somente meu chefe pode usar este comando*` }
+const propietario = () => { return `*⚠️ Este comando só pode ser usado por mim ou pelo meu chefe*` } 
 const group = () => { return `*⚠️ Idiota, esse comando só pode ser usado pelo grupo*` }
 const private = () => { return `*⚠️ Este comando só pode ser usado em chat privado*` }
 const bot = () => { return `*⚠️ Este comando só pode ser usado por (ME)*` }
