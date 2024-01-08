@@ -149,94 +149,34 @@ m.react(error)
 return m.reply(info.error) 
 console.log(e)}}}}
 
-if (command == 'play.1' || command == 'musica' || command == 'play.2' || command == 'video') {
-let data;
-let buff;
-let mimeType;
-let fileName;
-let apiUrl;
-let enviando = false;
+if (command == 'play.1' || command == 'musica') {
+m.react(rwait) 
 if (!text) return m.reply(lenguaje.descargar.text + ` *${prefix + command}* ozuna`) 
-if (enviando) return enviando = true
-try {
-m.react(rwait) 
-const apiUrls = [`https://api-brunosobrino.zipponodes.xyz/api/ytplay?text=${text}`, `https://api-brunosobrino.onrender.com/api/ytplay?text=${text}`];
-for (const url of apiUrls) {
-try {
-const res = await fetch(url);
-data = await res.json();
-if (data.resultado && data.resultado.url) {
-break;
-}} catch {}
-}
-if (!data.resultado || !data.resultado.url) {
-enviando = false;
-} else {
-try {
-if (command === 'play.1' || command == 'musica') {
 m.reply(lenguaje.descargar.audio) 
-apiUrl = `https://api-brunosobrino.zipponodes.xyz/api/v1/ytmp3?url=${data.resultado.url}`;
-mimeType = 'audio/mpeg';
-fileName = 'error.mp3';
-buff = await conn.getFile(apiUrl);
-} else if (command === 'play.2' || command == 'video') {
+const Ayushplaymp3 = require('../libs/ytdl2')
+let yts = require("youtube-yts")
+let search = await yts(text)
+let anup3k = search.videos[0]
+const pl= await Ayushplaymp3.mp3(anup3k.url);
+await conn.sendMessage(m.chat, { audio: fs.readFileSync(pl.path), contextInfo: { "externalAdReply": { "title": anup3k.title, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null, thumbnail: await fetchBuffer(pl.meta.image), "sourceUrl": md, "showAdAttribution": true}},mimetype: 'audio/mp4', ptt: true, fileName: `error.mp3` }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}).catch(console.error)
+await fs.unlinkSync(pl.path)
+m.react(done)}
+
+if (command == 'play.2' || command == 'video') {
+m.react("📥") 
+if (!text) return m.reply(lenguaje.descargar.text + ` *${prefix + command}* ozuna`) 
 m.reply(lenguaje.descargar.video) 
-apiUrl = `https://api-brunosobrino.zipponodes.xyz/api/v1/ytmp4?url=${data.resultado.url}`;
-mimeType = 'video/mp4';
-fileName = 'error.mp4';
-buff = await conn.getFile(apiUrl);
-}} catch {
-try {
-if (command === 'play.1' || command == 'musica') {
-m.reply(lenguaje.descargar.audio) 
-apiUrl = `https://api-brunosobrino.onrender.com/api/v1/ytmp3?url=${data.resultado.url}`;
-mimeType = 'audio/mpeg';
-fileName = 'error.mp3';
-buff = await conn.getFile(apiUrl);
-} else if (command === 'play.2' || command == 'video') {
-m.reply(lenguaje.descargar.video) 
-apiUrl = `https://api-brunosobrino.onrender.com/api/v1/ytmp4?url=${data.resultado.url}`;
-mimeType = 'video/mp4';
-fileName = 'error.mp4';
-buff = await conn.getFile(apiUrl)}
-} catch {
-enviando = false;
-return
-}}}
-if (buff) {
-await conn.sendMessage(m.chat, {[mimeType.startsWith('audio') ? 'audio' : 'video']: buff.data, mimetype: mimeType, fileName: fileName}, {quoted: m});
-m.react(done) 
-enviando = false
-} else {
-enviando = false
-}} catch (error) {
-enviando = false
-return m.reply(`${info.error}\n\n${lenguaje.lengua.erro}`)}}
-if (command == 'ytmp3' || command == 'ytaudio') {
-const mp = require('../libs/ytdl2')
-const vid = await mp.mp4(text)
-if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return m.reply(lenguaje.lengua.ejemplo + `\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
-m.react(rwait) 
-conn.sendMessage(m.chat, { text: `${lenguaje.descargar.text5}\n\n• ${lenguaje.descargar.title} ${vid.title}\n• ${lenguaje.descargar.duracion} ${vid.date}\n\n${lenguaje.descargar.text6}` }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
-try {
-let mediaa = await ytplayvid(text)
-const audio = await mp.mp3(text)
-await conn.sendMessage(m.chat, {audio: fs.readFileSync(audio.path), mimetype: 'audio/mp4',
-contextInfo: {
-externalAdReply: { title:audio.meta.title,
-body: botname,
-//await getBuffer(pl.meta.image),
-thumbnail: getBuffer(audio.meta.image), 
-mediaType:2,
-mediaUrl:text,
-}}}, {quoted:m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}) 
-await fs.unlinkSync(audio.path)
-m.react(done) 
+const Ayushplaymp3 = require('../libs/ytdl2')
+let yts = require("youtube-yts")
+let search = await yts(text)
+let anup3k = search.videos[0]
+const pl= await Ayushplaymp3.mp3(anup3k.url);
+await conn.sendMessage(m.chat, {video: fs.readFileSync(pl.path), caption: wm }, {quoted:m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}).catch(console.error)
+//conn.sendMessage(m.chat, { audio: fs.readFileSync(pl.path), contextInfo: { "externalAdReply": { "title": anup3k.title, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null, thumbnail: await fetchBuffer(pl.meta.image), "sourceUrl": md, "showAdAttribution": true}},mimetype: 'audio/mp4', ptt: true, fileName: `error.mp3` }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+await fs.unlinkSync(pl.path)
 db.data.users[m.sender].limit -= 1
 m.reply('1 ' + info.limit)
-} catch {
-m.react(error) 
-m.reply(info.error)}}
+m.react(done)}
 
 if (command == 'ytmp4' || command == 'ytvideo') {
 const mp = require('../libs/ytdl2')
@@ -315,6 +255,7 @@ m.reply(info.error)}}
 
 if (command == 'tiktokimg' || command == 'ttimg') {
 if (!text) return m.reply(`${lenguaje.lengua.espere}\n${prefix + command} https://vm.tiktok.com/ZMjnPvJuF/`) 
+m.react("📥") 
 let imagesSent
 if (imagesSent) return;
 imagesSent = true    
@@ -340,6 +281,7 @@ m.reply('1 ' + info.limit)}
 if (command == 'mediafire') {
 const { mediafireDl } = require('../libs/mediafire.js') 
 if (!text) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} https://www.mediafire.com/file/admrdma1ff3cq10/Siete-Ocho.zip/file`) 
+m.react("📥") 
 const baby1 = await mediafireDl(text)
 if (baby1[0].size.split('MB')[0] >= 1500) return reply(lenguaje.descargar.text15 + util.format(baby1))
 const result4 = `╭━─━─━─≪💎≫─━─━─━╮
@@ -379,20 +321,20 @@ m.reply(info.error)}}
 
 if (command == 'instagram' || command == 'ig') {
 if (!text) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} https://www.instagram.com/p/CCoI4DQBGVQ/?igshid=YmMyMTA2M2Y=`)
+m.react("📥") 
 conn.fakeReply(m.chat, `${lenguaje.lengua.espere}`, '0@s.whatsapp.net', 'No haga spam')
-try {
-const human = await fetch(`https://api.lolhuman.xyz/api/instagram?apikey=${lolkeysapi}&url=${args[0]}`);
-const json = await human.json();
-const videoig = json.result;
+let res = await fetch(`https://vihangayt.me/download/instagram?url=${text}`)
+let json = await res.json()
 const shortUrl1 = await (await fetch(`https://tinyurl.com/api-create.php?url=${args[0]}`)).text();
-conn.sendMessage(m.chat, {video: {url: videoig}, caption: `🔗 *Url:* ${shortUrl1}`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+conn.sendMessage(m.chat, { video: { url: json.data.data[0].url }, caption: `🔗 *Url:* ${shortUrl1}`}, {quoted: m})
+.catch(console.error)
 db.data.users[m.sender].limit -= 1
 m.reply('1 ' + info.limit)
-} catch {
-m.reply(info.error)}}
+}
 
 if (command == 'igstalk') {
 if (!args[0]) return m.reply(lenguaje.descargar.text17 + ` ${prefix + command} Emilia`)
+m.react("📥") 
 const fg = require('api-dylux')
 try {
 let res = await fg.igStalk(args[0])
@@ -432,8 +374,7 @@ if (command == 'gdrive') {
 const {sizeFormatter} = require('human-readable') 
 const formatSize = sizeFormatter({
   std: 'JEDEC', decimalPlaces: 2, keepTrailingZeroes: false, render: (literal, symbol) => `${literal} ${symbol}B`});
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
+m.react("📥") 
 if (!args[0]) return m.reply(`${lenguaje.lengua.ejem}\n*𝘌𝘑𝘌𝘔𝘗𝘓𝘖:* ${prefix + command} https://drive.google.com/file/d/1dmHlx1WTbH5yZoNa_ln325q5dxLn1QHU/view*`) 
 try {
 GDriveDl(args[0]).then(async (res) => {
