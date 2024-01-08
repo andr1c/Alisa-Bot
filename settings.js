@@ -14,6 +14,8 @@ global.blockList = []
 global.botname = "𝐍𝐨𝐯𝐚𝐁𝐨𝐭-𝐌𝐃"
 global.wm = 'Ｎ Ｏ Ｖ Ａ Ｂ Ｏ Ｔ- Ｍ Ｄ 💫'
 global.vs = '1.0.7'
+//Función beta : escribe el número que quiere que sea bot para que mande el Código de 8 digitos
+global.phoneNumber = "" //Ejemplo: +59178862672
 
 //---------[ FECHA/IDIOMAS ]---------
 global.place = 'America/Bogota' // Aquí puedes encontrar tu ubicación https://momentjs.com/timezone/
