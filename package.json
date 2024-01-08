@@ -43,7 +43,7 @@
    "node-fetch": "2.x",
    "moment": "^2.29.4",
    "moment-timezone": "^0.5.43",
-   "yargs": "^17.2.1",
+   "yargs": "^17.3.1",
    "fs": "0.0.1-security",
    "lowdb": "^2.1.0",
    "lodash": "^4.17.21",
