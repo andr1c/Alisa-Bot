@@ -96,6 +96,7 @@ conn.fakeReply(m.chat, sn, '0@s.whatsapp.net', `${lenguaje.rpg.myns2}`, 'status@
 async function rpg(m, command, participants, args, sender, pushname, text, conn, fkontak, replace, who) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (command == 'lb' || command == 'leaderboard') {
+if (!m.isGroup) return m.reply(info.group) 
 let member = participants.map(u => u.id)
 let me = m.split
 const users = Object.entries(global.db.data.users).map(([key, value]) => {
@@ -103,9 +104,11 @@ return {...value, jid: key}});
 const sortedExp = users.map(toNumber('exp')).sort(sort('exp'));
 const sortedLim = users.map(toNumber('limit')).sort(sort('limit'));
 const sortedLevel = users.map(toNumber('level')).sort(sort('level'));
+const sortedRole = users.map(toNumber('role')).sort(sort('role'))
 const usersExp = sortedExp.map(enumGetKey);
 const usersLim = sortedLim.map(enumGetKey);
 const usersLevel = sortedLevel.map(enumGetKey);
+const usersRole = sortedRole.map(enumGetKey)
 const len = args[0] && args[0].length > 0 ? Math.min(100, Math.max(parseInt(args[0]), 10)) : Math.min(10, sortedExp.length);
 const texto = `${lenguaje.rpg.text3}
 
@@ -122,11 +125,18 @@ ${sortedLim.slice(0, len).map(({jid, limit}, i) => `║${i + 1}. ${participants.
 ╔═❖ *𝚃𝙾𝙿 ${len} 𝙽𝙸𝚅𝙴𝙻* ⬆️
 ║𝚃𝚞 : ${usersLevel.indexOf(m.sender) + 1} 𝚍𝚎 ${usersLevel.length}
 ${sortedLevel.slice(0, len).map(({jid, level}, i) => `║${i + 1}. ${participants.some((p) => jid === p.jid) ? `(${conn.getName(jid)}) wa.me/` : '@'}${jid.split`@`[0]} ➭ *nivel ${level}*`).join`\n`}
-╚═══════════════ `.trim();
+╚═══════════════ 
+
+╔═❖ *𝚃𝙾𝙿 ${len} 𝚁𝙾𝙻 | 𝚁𝙰𝙽𝙶𝙾  💪* 
+║𝚃𝚞 : ${usersLevel.indexOf(m.sender) + 1} 𝚍𝚎 ${usersLevel.length} 𝚄𝚜𝚞𝚊𝚛𝚒𝚘𝚜
+ 
+${sortedLevel.slice(0, len).map(({jid, role, level}, i) => `║${i + 1}. ${participants.some((p) => jid === p.jid) ? `(${conn.getName(jid)}) wa.me/` : '@'}${jid.split`@`[0]} ➭ *${role}*`).join`\n`}
+╚═══════════════`.trim();
 conn.sendMessage(m.chat, { text: texto, contextInfo:{
 mentionedJid: [...texto.matchAll(/@(\d{0,16})/g)].map(v => v[1] + '@s.whatsapp.net')}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 if (command == 'afk') {
+if (!m.isGroup) return m.reply(info.group) 
 let user = global.db.data.users[m.sender]
 user.afkTime = + new Date
 user.afkReason = text
@@ -134,6 +144,7 @@ const afk = `${lenguaje.rpg.text4} ${pushname} ${lenguaje.rpg.text5} ${text ? te
 conn.relayMessage(m.chat, {scheduledCallCreationMessage: {callType: 'VIDEO', scheduledTimestampMs: 0, title: afk }}, {})}
 
 if (command == 'rob' || command == 'robar') {
+if (!m.isGroup) return m.reply(info.group) 
 const user = global.db.data.users[m.sender]
 const date = global.db.data.users[m.sender].robs + 600000; //600000
 if (new Date - global.db.data.users[m.sender].robs < 600000) return m.reply(`${lenguaje.rpg.text6} ${msToTime(date - new Date())}`) 
@@ -152,7 +163,7 @@ global.db.data.users[m.sender].exp += exp * 1;
 global.db.data.users[m.sender].limit += limit * 1;
 global.db.data.users[who].exp -= exp * 1;
 global.db.data.users[who].limit -= limit * 1;
-conn.sendMessage(m.chat, {text: `${lenguaje.rpg.rob5} @${who.split`@`[0]}*\n◦ ᴇxᴘ ${exp}\n◦ ᴅɪᴀᴍᴀɴᴛᴇ: ${limit}\n\n${lenguaje.rpg.rob6} @${m.sender.split("@")[0]}`, mentions: [who, m.sender]}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
+conn.sendMessage(m.chat, {text: `${lenguaje.rpg.rob5} @${who.split`@`[0]}\n◦ ᴇxᴘ ${exp}\n◦ ᴅɪᴀᴍᴀɴᴛᴇ: ${limit}\n\n${lenguaje.rpg.rob6} @${m.sender.split("@")[0]}`, mentions: [who, m.sender]}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
 global.db.data.users[m.sender].robs = new Date * 1;
  } catch {
 m.reply(lenguaje.rpg.rob7)}}
@@ -202,7 +213,7 @@ const money = Math.floor(Math.random() * 2500)
 //global.db.data.users[m.sender].exp += exp
 global.db.data.users[m.sender].limit += diamond
 global.db.data.users[m.sender].money += money
-m.reply(`${minar}\n💎 𝐃𝐈𝐀𝐌𝐀𝐍𝐓𝐄: ${diamond}\n🪙 𝐂𝐎𝐈𝐍𝐒: ${money}`)
+m.reply(`${minar}\n${diamond} 𝐃𝐈𝐀𝐌𝐀𝐍𝐓𝐄 💎\n${money} 𝐂𝐎𝐈𝐍𝐒 🪙`)
 m.react('💎') 
 global.db.data.users[m.sender].lastmiming = new Date * 1;
 }
