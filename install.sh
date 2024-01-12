@@ -16,10 +16,10 @@ echo -e "\e[35m
 ...
 COMMENT
 
-echo -e "\033[01;93m ＰＲＥＰＡＲＡＮＤＯ ＩＮＳＴＡＬＡＣＩＯＮ...\n\033[0m"
-mp3_array=("install-automatica1.mp3" "install-automatica1.mp3")
+echo -e "\033[01;93m ＰＲＥＰＡＲＡＮＤＯ ＩＮＳＴＡＬＡＣＩＯＮ...\n\033[0m" 
+mp3_array=("install-automatica1.mp3" "install-automatica1.mp3" "install-automatica1.mp3" "install-automatica1.mp3" "install-automatica1.mp3" "install-automatica1.mp3" "install-automatica1.mp3" "install-automatica1.mp3" "install-automatica1.mp3" "install-automatica1.mp3" "install-automatica1.mp3" "install-automatica1.mp3")
 random_mp3=${mp3_array[$RANDOM % ${#mp3_array[@]}]}
-if wget -q https://github.com/elrebelde21/prueba/blob/main/"$random_mp3"; then
+if wget -q https://github.com/elrebelde21/prueba/raw/master/"$random_mp3"; then
 echo -e ""
 while true; do
 mpv --no-terminal "$random_mp3" &
