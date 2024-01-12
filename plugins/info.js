@@ -22,9 +22,9 @@ var timestamp = speed();
 var latensi = speed() - timestamp  
 let user = [...new Set([...global.listJadibot.filter((conn) => conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED).map((conn) => conn)])];
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-let stateRun = `╭╼⪨ ${lenguaje.info.text} ⪩╼╮
+let stateRun = `╭╼╼⪨ ${lenguaje.info.text} ⪩╾╼╮
 ┋
-┋🎅 ${lenguaje['smsWel']()} @${sender.split("@")[0]} ${user.registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''} 
+┋✨ ${lenguaje['smsWel']()} @${sender.split("@")[0]} ${user.registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''} 
 ┋
 ┋${lenguaje.info.text2} ${usedMemory} GB / ${totalMemory} GB
 ┋${lenguaje.info.text3} ${os.platform()}
@@ -36,7 +36,7 @@ let stateRun = `╭╼⪨ ${lenguaje.info.text} ⪩╼╮
 ┋${lenguaje.info.text8} ${runtime(process.uptime())} 
 ┋${lenguaje.info.text9} ${conn.public ? 'Público' : `Privado`}
 ┋${lenguaje.info.text10} ${user.length} 
-┗╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ ${conn.user.id == global.numBot2 ? '' : `\n\n${lenguaje.info.text11} wa.me/${global.numBot.split`@`[0]}`}`.trim()
+┗╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ ${conn.user.id == global.numBot2 ? '' : `\n\n${lenguaje.info.text11} wa.me/${global.numBot.split`@`[0]}`}`.trim()
 let ments = [me]      
 conn.sendMessage(m.chat, {image: imagen1, caption: stateRun, contextInfo:{ mentionedJid:[sender]}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }
@@ -85,7 +85,7 @@ m.reply(`${lenguaje.info.text22}`)
 }
 
 if (command == 'donar') {
-conn.sendMessage(m.chat, { text: lenguaje.info.text23, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "body": `ayuda a mantener el bot activo`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: md}}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+conn.sendMessage(m.chat, { text: lenguaje.info.text23, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "body": `Ayuda a mantener el bot activo`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: md}}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 m.reply(`${lenguaje.info.text24}\n${md}`)}
 
 if (command == 'solicitud') {

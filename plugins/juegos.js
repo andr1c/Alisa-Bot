@@ -40,7 +40,7 @@ console.log(e)}}}
 if (command == 'pregunta' || command == 'preg') { 
 if (!text) return m.reply(`${lenguaje.juegos.text} ${prefix + command} mañana llover?`) 
 m.react('🤔') 
-let pr = ['no', 'si', 'nose', 'puede ser', 'no creo', 'olvio', 'Que pregunta mas boluda', 'A']
+let pr = ['no', 'si', 'nose', 'puede ser', 'no creo', 'olvio', 'Que pregunta mas boluda', 'A', 'pendejo', 'pues nose']
 let preg = pr[Math.floor(Math.random() * pr.length)]
 m.reply(`${lenguaje.juegos.text1}  ${text}\n${lenguaje.juegos.text2} ${preg}`)}
 
@@ -326,7 +326,7 @@ if (new Date - users.lastslot < 30000) return m.reply(`*${lenguaje.juegos.text21
 if (apuesta < 100) return m.reply(lenguaje.juegos.text23) 
 if (users.exp < apuesta) {
 return m.reply(lenguaje.juegos.text24)}
-const emojis = ['💎', '🎅', '🎊'];
+const emojis = ['💎', '🪙', '🌀'];
 let a = Math.floor(Math.random() * emojis.length);
 let b = Math.floor(Math.random() * emojis.length);
 let c = Math.floor(Math.random() * emojis.length);

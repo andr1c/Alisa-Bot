@@ -5,8 +5,9 @@ const chalk = require("chalk");
 const axios = require('axios')
 const fetch = require('node-fetch')
 const cheerio = require('cheerio')
-const yts = require("yt-search") 
+const yts = require('yt-search') 
 const ytdl = require('ytdl-core') 
+const {youtubedl, youtubedlv2} = require('@bochilteam/scraper') 
 const { smsg, fetchBuffer, getBuffer, buffergif, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getFile, getRandom, msToTime, downloadMediaMessage, convertirMsADiasHorasMinutosSegundos} = require('../libs/fuctions')
 const { ytmp4, ytmp3, ytplay, ytplayvid } = require('../libs/youtube') 
 const {sizeFormatter} = require('human-readable') 
@@ -17,8 +18,6 @@ async function descarga(m, command, conn, text, command, args, fkontak, from, bu
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (command == 'play') {
-const yts = require("yt-search") 
-const ytdl = require('ytdl-core') 
 if (!text) return m.reply(lenguaje.descargar.text + ` *${prefix + command}* ozuna`) 
 try { 
 m.react(rwait) 
@@ -26,54 +25,74 @@ let vid = (await yts(text)).all[0]
 const yt_play = await search(args.join(" "))
 let { title, description, url, thumbnail, videoId, timestamp, views, published } = vid
 let message = await conn.sendMessage(m.chat, { text: `${lenguaje.descargar.text2}\n\n◉ ${lenguaje.descargar.title} ${yt_play[0].title}\n◉ ${lenguaje.descargar.duracion} ${secondString(yt_play[0].duration.seconds)}\n◉ ${lenguaje.descargar.ago} ${yt_play[0].ago}\n◉ ${lenguaje.descargar.autor} ${yt_play[0].author.name}\n◉ ${lenguaje.descargar.views} ${MilesNumber(yt_play[0].views)}\n\n${lenguaje.descargar.music}`, contextInfo: { externalAdReply: { title: wm, body: yt_play[0].title.replace(/\*/g, ''), thumbnailUrl: thumbnail, sourceUrl: yt_play[0].url, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: true }}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
-let mediaa = await ytMp4(yt_play[0].url)
-conn.sendMessage(m.chat, { audio: { url: mediaa.result }, mimetype: 'audio/mpeg', contextInfo: {
-externalAdReply: {
-title: yt_play[0].title,
-body: "",
-thumbnailUrl: yt_play[0].thumbnail, 
-mediaType: 1,
-showAdAttribution: true,
-renderLargerThumbnail: true
-}}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})  
+const q = '128kbps';
+const v = yt_play[0].url;
+const yt = await youtubedl(v).catch(async (_) => await youtubedlv2(v));
+const dl_url = await yt.audio[q].download();
+const ttl = await yt.title;
+const size = await yt.audio[q].fileSizeH;
+await conn.sendMessage(m.chat, { audio: { url: dl_url }, mimetype: 'audio/mpeg' }, { quoted: m})
+m.react(done) 
+} catch {
+try {
+const lolhuman = await fetch(`https://api.lolhuman.xyz/api/ytaudio2?apikey=${lolkeysapi}&url=${yt_play[0].url}`);
+const lolh = await lolhuman.json();
+const n = lolh.result.title || 'error';
+await conn.sendMessage(m.chat, { audio: { url: lolh.result.link }, mimetype: 'audio/mpeg' }, { quoted: m})
+m.react(done) 
+} catch {
+try {
+const searchh = await yts(yt_play[0].url);
+const __res = searchh.all.map((v) => v).filter((v) => v.type == 'video');
+const infoo = await ytdl.getInfo('https://youtu.be/' + __res[0].videoId);
+const ress = await ytdl.chooseFormat(infoo.formats, {filter: 'audioonly'});
+conn.sendMessage(m.chat, { audio: { url: ress.url }, mimetype: 'audio/mpeg' }, { quoted: m})
 db.data.users[m.sender].limit -= 1
 m.reply('1 ' + info.limit)
 m.react(done) 
-} catch {
-try { 
-let search = await yts(text)
-let anup3k = search.videos[0]
-let anu = search.videos[Math.floor(Math.random() * search.videos.length)] 
-eek = await getBuffer(anu.thumbnail) 
-const playmp3 = require('../libs/ytdl2')
-const pl= await playmp3.mp3(anup3k.url)
-await conn.sendMessage(m.chat, { audio: fs.readFileSync(pl.path), fileName: `error.mp3`, mimetype: 'audio/mp4' },  {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
-m.react(done) 
-await fs.unlinkSync(pl.path)
 } catch (e) {
 m.react(error) 
-console.log(e)}}}
+return m.reply(info.error) 
+console.log(e)}}}}
 
 if (command == 'play2') {
-const yts = require("yt-search") 
-const ytdl = require('ytdl-core') 
 if (!text) return m.reply(lenguaje.descargar.text + ` *${prefix + command}* ozuna`) 
 m.react(rwait) 
+try { 
 let vid = (await yts(text)).all[0]
 const yt_play = await search(args.join(" "))
 let { title, description, url, thumbnail, videoId, timestamp, views, published } = vid
 let message = await conn.sendMessage(m.chat, { text: `${lenguaje.descargar.text3}\n\n◉ ${lenguaje.descargar.title} ${yt_play[0].title}\n◉ ${lenguaje.descargar.duracion} ${secondString(yt_play[0].duration.seconds)}\n◉ ${lenguaje.descargar.ago} ${yt_play[0].ago}\n◉ ${lenguaje.descargar.autor} ${yt_play[0].author.name}\n◉ ${lenguaje.descargar.views} ${MilesNumber(yt_play[0].views)}\n\n${lenguaje.descargar.vid}`, contextInfo: { externalAdReply: { title: wm, body: yt_play[0].title.replace(/\*/g, ''), thumbnailUrl: thumbnail, sourceUrl: yt_play[0].url, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: true }}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
-let mediaa = await ytMp4(yt_play[0].url)
-await conn.sendMessage(m.chat, { video: { url: mediaa.result }, fileName: `error.mp4`, caption: `${lenguaje.descargar.text4}\n🔰 ${lenguaje.descargar.title} ${yt_play[0].title}`, thumbnail: mediaa.thumb, mimetype: 'video/mp4' }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
-m.react(done)}
+const qu = '360';
+const q = qu + 'p';
+const v = yt_play[0].url;
+const yt = await youtubedl(v).catch(async (_) => await youtubedlv2(v));
+const dl_url = await yt.video[q].download();
+const ttl = await yt.title;
+const size = await yt.video[q].fileSizeH;
+await await conn.sendMessage(m.chat, {video: {url: dl_url}, fileName: `${ttl}.mp4`, mimetype: 'video/mp4', caption: `${lenguaje.descargar.text4}\n🔰 ${lenguaje.descargar.title} ${ttl}`, thumbnail: await fetch(yt.thumbnail)}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
+m.react(done) 
+} catch {
+try {
+const mediaa = await ytMp4(yt_play[0].url);
+await await conn.sendMessage(m.chat, {video: {url: dl_url}, caption: wm, mimetype: 'video/mp4', fileName: ttl + `.mp4`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
+} catch {
+try {
+const lolhuman = await fetch(`https://api.lolhuman.xyz/api/ytvideo2?apikey=${lolkeysapi}&url=${yt_play[0].url}`);
+const lolh = await lolhuman.json();
+const n = lolh.result.title || 'error';
+const n2 = lolh.result.link;
+const n3 = lolh.result.size;
+const n4 = lolh.result.thumbnail;
+await conn.sendMessage(m.chat, {video: {url: n2}, fileName: `${n}.mp4`, mimetype: 'video/mp4', caption: `${lenguaje.descargar.text4}\n🔰 ${lenguaje.descargar.title} ${n}`, thumbnail: await fetch(n4)}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
+m.react(done) 
+} catch (e) {
+m.react(error) 
+return m.reply(info.error) 
+console.log(e)}}}}
 
 if (command == 'play3' || command == 'playdoc' || command == 'playaudiodoc' || command == 'ytmp3doc') {
-const fetch = require('node-fetch') 
-const yts = require('yt-search') 
-const ytdl = require('ytdl-core') 
-const axios = require('axios') 
-const {youtubedl, youtubedlv2} = require('@bochilteam/scraper') 
-if (!text) return m.reply(lenguaje.descargar.text + ` *${prefix + command}* ozuna`) 
+if (!text) return m.reply(lenguaje.descargar.text1 + `\n• *${prefix + command}* ozuna\n• ${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`) 
 try { 
 m.react(rwait) 
 let vid = (await yts(text)).all[0]
@@ -108,13 +127,8 @@ m.react(error)
 return m.reply(info.error) 
 console.log(e)}}}}
 
-if (command == 'play4' || command == 'playdoc2' || command == 'playvideodoc' || command == 'ytmp4doc') {
-const fetch = require('node-fetch') 
-const yts = require('yt-search') 
-const ytdl = require('ytdl-core') 
-const axios = require('axios') 
-const {youtubedl, youtubedlv2} = require('@bochilteam/scraper') 
-if (!text) return m.reply(lenguaje.descargar.text + ` *${prefix + command}* ozuna`) 
+if (command == 'play4' || command == 'playdoc2' || command == 'playvideodoc' || command == 'ytmp4doc' || command == 'ytmp4') {
+if (!text) return m.reply(lenguaje.descargar.text1 + `\n• *${prefix + command}* ozuna\n• ${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`) 
 try { 
 m.react(rwait) 
 let vid = (await yts(text)).all[0]
@@ -149,72 +163,97 @@ m.react(error)
 return m.reply(info.error) 
 console.log(e)}}}}
 
-if (command == 'play.1' || command == 'musica') {
-m.react(rwait) 
+if (command == 'play.1' || command == 'musica' || command == 'play.2' || command == 'video') {
+let data;
+let buff;
+let mimeType;
+let fileName;
+let apiUrl;
+let enviando = false;
 if (!text) return m.reply(lenguaje.descargar.text + ` *${prefix + command}* ozuna`) 
-m.reply(lenguaje.descargar.audio) 
-const Ayushplaymp3 = require('../libs/ytdl2')
-let yts = require("youtube-yts")
-let search = await yts(text)
-let anup3k = search.videos[0]
-const pl= await Ayushplaymp3.mp3(anup3k.url);
-await conn.sendMessage(m.chat, { audio: fs.readFileSync(pl.path), contextInfo: { "externalAdReply": { "title": anup3k.title, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null, thumbnail: await fetchBuffer(pl.meta.image), "sourceUrl": md, "showAdAttribution": true}},mimetype: 'audio/mp4', ptt: true, fileName: `error.mp3` }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}).catch(console.error)
-await fs.unlinkSync(pl.path)
-m.react(done)}
-
-if (command == 'play.2' || command == 'video') {
-m.react("📥") 
-if (!text) return m.reply(lenguaje.descargar.text + ` *${prefix + command}* ozuna`) 
-m.reply(lenguaje.descargar.video) 
-const Ayushplaymp3 = require('../libs/ytdl2')
-let yts = require("youtube-yts")
-let search = await yts(text)
-let anup3k = search.videos[0]
-const pl= await Ayushplaymp3.mp3(anup3k.url);
-await conn.sendMessage(m.chat, {video: fs.readFileSync(pl.path), caption: wm }, {quoted:m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}).catch(console.error)
-//conn.sendMessage(m.chat, { audio: fs.readFileSync(pl.path), contextInfo: { "externalAdReply": { "title": anup3k.title, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null, thumbnail: await fetchBuffer(pl.meta.image), "sourceUrl": md, "showAdAttribution": true}},mimetype: 'audio/mp4', ptt: true, fileName: `error.mp3` }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
-await fs.unlinkSync(pl.path)
-db.data.users[m.sender].limit -= 1
-m.reply('1 ' + info.limit)
-m.react(done)}
-
-if (command == 'ytmp4' || command == 'ytvideo') {
-const mp = require('../libs/ytdl2')
-const vid = await mp.mp4(text)
-if (args.length < 1 || !isUrl(text) || !mp.isYTUrl(text)) return m.reply(lenguaje.lengua.ejemplo + `\n${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`)
+if (enviando) return;
+enviando = true
 m.react(rwait) 
-conn.sendMessage(m.chat, { text: `${lenguaje.descargar.text3}\n\n• ${lenguaje.descargar.title} ${vid.title}\n\n${lenguaje.descargar.text7}` }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});    
 try {
-const ytc = `❏ ${lenguaje.lengua.titulo} ${vid.title}\n❏ ${lenguaje.lengua.subidos} ${vid.date}\n❏ ${lenguaje.lengua.calidad} ${vid.quality}`
-await conn.sendMessage(m.chat, {video: {url : vid.videoUrl}, caption: ytc }, {quoted:m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
-db.data.users[m.sender].limit -= 1
-m.reply('1 ' + info.limit)
+const apiUrls = [`https://api.cafirexos.com/api/ytplay?text=${text}`, `https://api-brunosobrino.onrender.com/api/ytplay?text=${text}` ];
+for (const url of apiUrls) {
+try {
+const res = await fetch(url);
+data = await res.json();
+if (data.resultado && data.resultado.url) {
+break;
+}} catch {}
+}
+if (!data.resultado || !data.resultado.url) {
+enviando = false;
+} else {
+try {
+if (command == 'play.1' || command == 'musica') {
+m.reply(lenguaje.descargar.audio) 
+apiUrl = `https://api-brunosobrino.zipponodes.xyz/api/v1/ytmp3?url=${data.resultado.url}`;
+mimeType = 'audio/mpeg';
+fileName = 'error.mp3';
+buff = await conn.getFile(apiUrl);
 m.react(done) 
-} catch {
+} else if (command == 'play.2' || command == 'video') {
+m.reply(lenguaje.descargar.video) 
+apiUrl = `https://api-brunosobrino.zipponodes.xyz/api/v1/ytmp4?url=${data.resultado.url}`;
+mimeType = 'video/mp4';
+fileName = 'error.mp4';
+buff = await conn.getFile(apiUrl);
+m.react(done) 
+}} catch {
+try {
+if (command == 'play.1' || command == 'musica') {
+apiUrl = `https://api-brunosobrino.onrender.com/api/v1/ytmp3?url=${data.resultado.url}`;
+mimeType = 'audio/mpeg';
+fileName = 'error.mp3';
+buff = await conn.getFile(apiUrl);
+m.react(done) 
+} else if (command == 'play.2' || command == 'video') {
+apiUrl = `https://api-brunosobrino.onrender.com/api/v1/ytmp4?url=${data.resultado.url}`;
+mimeType = 'video/mp4';
+fileName = 'error.mp4';
+buff = await conn.getFile(apiUrl);
+m.react(done) 
+}} catch {
+enviando = false;
+m.reply(info.error)
 m.react(error) 
-m.reply(info.error)}}
+}}}
+
+if (buff) {
+await conn.sendMessage(m.chat, {[mimeType.startsWith('audio') ? 'audio' : 'video']: buff.data, mimetype: mimeType, fileName: fileName}, {quoted: m});
+enviando = false;
+} else {
+enviando = false;
+}} catch (error) {
+enviando = false;
+m.react(error) 
+m.reply(info.error)
+}}
 
 if (command == 'music' || command == 'spotify') {
 if (!text) return m.reply(lenguaje.descargar.text8) 
-try { 
+try {
 m.react(rwait) 
 m.reply(lenguaje.descargar.espere) 
-const res = await fetch(global.API('ApiEmpire', '/api/spotifysearch?text=' + text))
+const res = await fetch(global.API('CFROSAPI', '/api/spotifysearch?text=' + text))
 const data = await res.json()
 const linkDL = data.spty.resultado[0].link;
-const musics = await fetch(global.API('ApiEmpire', '/api/spotifydl?text=' + linkDL))
+const musics = await fetch(global.API('CFROSAPI', '/api/spotifydl?text=' + linkDL))
 const music = await conn.getFile(musics.url)
-const infos = await fetch(global.API('ApiEmpire', '/api/spotifyinfo?text=' + linkDL))
+const infos = await fetch(global.API('CFROSAPI', '/api/spotifyinfo?text=' + linkDL))
 const info = await infos.json()
 const spty = info.spty.resultado
 const img = await (await fetch(`${spty.thumbnail}`)).buffer()  
 let spotifyi = `◦  ${lenguaje.lengua.titulo} ${spty.title}\n`
 spotifyi += `◦  ${lenguaje.lengua.artista} ${spty.artist}\n`
-spotifyi += `◦  ${lenguaje.lengua.album} ${spty.album}\n`          
+spotifyi += `◦  ${lenguaje.lengua.album} ${spty.album}\n`
 spotifyi += `◦  ${lenguaje.lengua.publi} ${spty.year}\n\n`   
 spotifyi += `${lenguaje.descargar.music}`
 await conn.sendMessage(m.chat, {text: spotifyi.trim(), contextInfo: {forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "renderLargerThumbnail": true, "title": global.titulowm2, "containsAutoReply": true, "mediaType": 1, "thumbnail": img, "thumbnailUrl": img, "mediaUrl": linkDL, "sourceUrl": linkDL}}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
-await conn.sendMessage(m.chat, {audio: music.data, fileName: `${spty.name}.mp3`, mimetype: 'audio/mpeg'}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
+await conn.sendMessage(m.chat, {audio: music.data, fileName: `${spty.name}.mp3`, mimetype: 'audio/mpeg'}, {quoted: m});
 m.react(done) 
 } catch (error) {
 m.react(error) 
