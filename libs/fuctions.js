@@ -436,7 +436,7 @@ if (!isNumber(user.regTime)) user.regTime = -1
   if(!isNumber(user.health)) user.health = 100  
   if(!isNumber(user.warn)) user.warn = 0  
   if(!isNumber(user.exp)) user.exp = 0
-  if(!isNumber(user.role)) user.role = 'Novato I'
+  if(!isNumber(user.role)) user.role = '🙊 NOVATO(A) :v'
   if (!('autolevelup' in user)) user.autolevelup = true
   if(!isNumber(user.level)) user.level = 0
   if(!isNumber(user.armor)) user.armor = 0
@@ -484,7 +484,7 @@ if (!isNumber(user.regTime)) user.regTime = -1
   health: 100,  
   warn: 0, 
   exp: 0,
-  role: 'Novato I',
+  role: '🙊 NOVATO(A) :v',
   autolevelup: true, 
   level: 1,
   armor: 0,
@@ -559,11 +559,11 @@ if (user) { //@skidy89
 if (user.level <= 3) {
  user.role = '🙊 NOVATO(A) :v'
 } else if (user.level <= 6) {
-  user.role = '🙊 NOVATO(A) IV'
-} else if (user.level <= 9) {
   user.role = '🙊 NOVATO(A) III'
-} else if (user.level <= 12) {
+} else if (user.level <= 9) {
   user.role = '🙊 NOVATO(A) II'
+} else if (user.level <= 12) {
+  user.role = '🙊 NOVATO(A) I'
 } else if (user.level <= 15) {
   user.role = '🤓 APRENDIS IV'
 } else if (user.level <= 18) {
@@ -665,7 +665,7 @@ if (user.level <= 3) {
 } else if (user.level <= 270) {
   user.role = '👑 *∞ ÉLITE GLOBAL I* 💎🏁'    
 } else if (user.level <= 300) {
-  user.role = '👑  *QUE PRO 🙌*\n\n🥳 Eres el mas activo del grupo te mereces ser un admins 🤩🥳'
+  user.role = '👑 *QUE PRO 🙌*\n\n🥳 Eres el mas activo del grupo te mereces ser un admins 🤩🥳'
 }}} catch (error) {
 m.error = error
 if (error) {
