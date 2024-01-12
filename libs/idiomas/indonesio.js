@@ -292,6 +292,7 @@ text18: `*SUBBOT TERHUBUNG:*` }
 //descargar.js
 const descargar = { 
 text: `*Apa yang dicari? masukkan nama tema*\n\nContoh:`, 
+text1: `*Apa yang Anda cari?\n\nMasukkan nama topik atau link YouTube untuk mendownload audio/videonya\n\nContoh:`, 
 text2: `         *⌜Lagu yang Ditemukan ✅⌟*`,
 text3: `         *⌜Video Ditemukan ✅⌟*`, 
 text4: `*Ini video Anda👌*`, 

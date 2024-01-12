@@ -299,6 +299,7 @@ text18: `*𝘊𝘖𝘕𝘕𝘌𝘊𝘛𝘌𝘋 𝘚𝘜𝘉𝘉𝘖𝘛𝘚:*` }
 
 const descargar = {
 text: `*What is looking for? enter theme name*\n\nExample:`, 
+text1: `*What are you looking for?\n\nEnter the topic name or YouTube link to download the audio/video\n\nExample:`, 
 text2: `         *⌜Song Found ✅⌟*`,
 text3: `         *⌜Video Found ✅⌟*`, 
 text4: `*Here are your videos 👌*`, 

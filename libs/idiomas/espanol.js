@@ -299,6 +299,7 @@ text18: `*𝘚𝘜𝘉𝘉𝘖𝘛𝘚 𝘊𝘖𝘕𝘌𝘊𝘛𝘈𝘋𝘖𝘚:
 //descargar.js
 const descargar = {
 text: `*Que esta buscado? ingrese el nombre del tema*\n\nEjemplo:`, 
+text1: `*Que esta buscado?\n\ningrese el nombre del tema o el link de YouTube para descargar sus audio/video\n\nEjemplo:`, 
 text2: `         *⌜Cancion Encontrada ✅⌟*`,
 text3: `         *⌜Video Encontrado ✅⌟*`, 
 text4: `*Aqui tiene sus video 👌*`, 
