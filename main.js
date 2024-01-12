@@ -15,7 +15,9 @@ const os = require('os') // Proporciona información del sistema operativo
 const fs = require('fs') // Trabajar con el sistema de archivos    
 const fetch = require('node-fetch')
 const axios = require('axios') 
+const {fileURLToPath} = require('url') 
 const cheerio = require('cheerio')
+const yts = require('yt-search') 
 const gpt = require('api-dylux')
 const util = require('util')
 const createHash = require('crypto') 
@@ -65,9 +67,8 @@ var budy = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == '
 //----------------------[ ATRIBUTOS ]-------------------------
 if (m.key.id.startsWith("BAE5")) return  
 var body = (typeof m.text == 'string' ? m.text : '')
-//var _prefix = /^[°•÷×™+✓_=|~!?@#%^.©^]/gi.test(body) ? body.match(/^[°•÷×™+✓_=|~!?@#%^.©^]/gi)[0] : ""
-global.prefix = body.match(/^[/.*#]/)  
-//const prefix = global.prefijo
+var prefix = /^[°•÷×™+✓/_=|~!?@#%^.©^]/gi.test(body) ? body.match(/^[°•÷×™+/✓_=|~!?@#%^.©^]/gi)[0] : ""
+//global.prefix = body.match(/^[/.*#]/)  
 const isCmd = body.startsWith(prefix)
 const command = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase()
 const args = body.trim().split(/ +/).slice(1)
@@ -75,7 +76,7 @@ const full_args = body.replace(command, '').slice(1).trim()
 const from = m.chat 
 const msg = JSON.parse(JSON.stringify(m, undefined, 2)) 
 const content = JSON.stringify(m.message) 
-const type = m.mtype 
+const type = m.mtype   
 let t = m.messageTimestamp 
 const pushname = m.pushName || "Sin nombre" 
 const botnm = conn.user.id.split(":")[0] + "@s.whatsapp.net"  
@@ -316,18 +317,16 @@ global.lenguaje = es
 }    
 
 //mensaje automático
-let mensaje
-if (mensaje) {  
-if (m.isGroup) return !1;
-if (!m.message) return !0;
+/*if (global.db.data.users[m.sender].registered < true && prefix) {  
+//if (m.isGroup) return !1;
+//if (!m.message) return !0;
 let str = [nna, md, yt, tiktok, fb] 
 let info = str[Math.floor(Math.random() * str.length)]
 let totalreg = Object.keys(global.db.data.users).length
 let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length
-conn.sendMessage(m.chat, { text: `*Hola @${sender.split`@`[0]} 👋😄 Mi nombre es ${botname} Soy un bot de WhatsApp con multi funcione 👾, registrarte para poder usar mi comando 👌*\n\n*💫 MI INFO:*\n*👑 Mi creador es:* wa.me/5492266466080\n*👥 Usuarios:* ${totalreg}\n*✨ Registrado:* ${rtotalreg}\n*🤖 Estoy activa desde:* ${runtime(process.uptime())}\n*⚠️ PD:* No hagan spam del comando o te van baneado\n\n• *PORFAVOR LEE LAS REGLAS:*\n#reglas\n\n• *QUIERES VER QUE HAY DE NUEVO?*\n*Escribe:* #nuevo\n\n• *¿QUIERE SOLICITA UN BOT PARA TU GRUPO?*\n*Escribe:* #solicitud\n\n*💫 ¿Quieres apoyar este proyecto para que siga actualizándose?*\n• #donar\n\n*✨ CUENTA OFICIALES*\n• #cuentas`, contextInfo:{mentionedJid:[sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": wm, thumbnail: imagen2, sourceUrl: info}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
-mensaje = true
-return !1;
-}
+await delay(5 * 5000)
+conn.sendMessage(m.chat, { text: `*Hola @${sender.split`@`[0]} 👋😄 Mi nombre es ${botname} Soy un bot de WhatsApp con multi funcione 👾, registrarte para poder usar mi comando 👌*\n\n*💫 MI INFO:*\n*👑 Mi creador es:* ${fb}\n*👥 Usuarios:* ${totalreg}\n*✨ Registrado:* ${rtotalreg}\n*🤖 Estoy activa desde:* ${runtime(process.uptime())}\n*⚠️ PD:* No hagan spam del comando o te van baneado\n\n• *PORFAVOR LEE LAS REGLAS:*\n#reglas\n\n• *QUIERES VER QUE HAY DE NUEVO?*\n*Escribe:* #nuevo\n\n• *¿QUIERE SOLICITA UN BOT PARA TU GRUPO?*\n*Escribe:* #solicitud\n\n*💫 ¿Quieres apoyar este proyecto para que siga actualizándose?*\n• #donar\n\n*✨ CUENTA OFICIALES*\n• #cuentas`, contextInfo:{mentionedJid:[sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": wm, thumbnail: imagen2, sourceUrl: info}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+}*/
 
 //ARRANCA LA DIVERSIÓN 
 switch (command) { 
@@ -386,11 +385,11 @@ break
 case 'memes': case 'loli': case 'lolivid': case 'neko': case 'akira': case 'akiyama': case 'anna': case 'asuna': case 'ayuzawa': case 'boruto': case 'chiho': case 'chitoge': case 'deidara': case 'erza': case 'elaina': case 'eba': case 'emilia': case 'hestia': case 'hinata': case 'inori': case 'isuzu': case 'itachi': case 'itori': case 'kaga': case 'kagura': case 'kaori': case 'keneki': case 'kotori': case 'kurumi': case 'madara': case 'mikasa': case 'miku': case 'minato': case 'naruto': case 'nezuko': case 'sagiri': case 'sasuke': case 'sakura': case 'cosplay': case 'blackpink': case 'navidad': randow(m, sender, command, sendImageAsUrl, pickRandom, conn)
 break     
 case 'horny': case 'simp': case 'lolice': case 'comentar': case 'comment': randow2(conn, m, command, text, sender, pushname)  
-break  
-      
+break 
+
 //descargas
-case 'play': case 'musica': case 'play2': case 'video': case 'play3': case 'playdoc': case 'playaudiodoc': case 'ytmp3doc': case 'play4': case 'playdoc2': case 'playvideodoc': case 'ytmp4doc': case "ytmp3": case "ytaudio": case 'ytmp4': case 'ytvideo': case 'music': case 'spotify': case 'gitclone': case 'tiktok': case 'tt': case 'lyrics': case 'letra': case 'mediafire': case 'facebook': case 'fb': case 'instagram': case 'ig': case 'igstalk': case 'apk': case 'modoapk': case 'gdrive': case 'tiktokimg': case 'ttimg': case 'play.1': case 'play.2': descarga(m, command, conn, text, command, args, fkontak, from, lolkeysapi)    
-break    
+case 'play': case 'musica': case 'play2': case 'video': case 'play3': case 'playdoc': case 'playaudiodoc': case 'ytmp3doc': case 'play4': case 'playdoc2': case 'playvideodoc': case 'ytmp4doc': case "ytmp3": case "ytaudio": case 'ytmp4': case 'ytvideo': case 'music': case 'spotify': case 'gitclone': case 'tiktok': case 'tt': case 'lyrics': case 'letra': case 'mediafire': case 'facebook': case 'fb': case 'instagram': case 'ig': case 'igstalk': case 'apk': case 'modoapk': case 'gdrive': case 'tiktokimg': case 'ttimg': case 'play.1': case 'play.2': descarga(m, command, conn, text, command, args, fkontak, from, lolkeysapi)     
+break     
 
 //rpg 
 case 'reg': case 'verificar': case 'unreg': case 'myns': await reg(command, conn, m, sender, text, budy, fkontak, delay, args)
@@ -511,7 +510,7 @@ m.reply(lenguaje.owner.text28)
 await delay(3 * 3000) 
 conn.ws.close()}   
 break  
-/////////////////////////////////  
+/////////////////////////////////   
    
 //--------------------[ FUNCIONES ]-----------------------
 function pickRandom(list) {
@@ -520,13 +519,13 @@ return list[Math.floor(list.length * Math.random())]
 
 //-------------------[ AUDIO/TEXTOS ]----------------------
 //🟢Comando que responde sin prefix  
-default:  
+default:   
 if (budy.includes(`Todo bien`)) {
 conn.sendPresenceUpdate('composing', m.chat)
 await m.reply(`${pickRandom(['Si amigo todo bien, vite', 'Todo bien capo y tu 😎'])}`)} 
 if (budy.includes(`Buenos dias`)) {
 conn.sendPresenceUpdate('composing', m.chat)
-m.reply(`${pickRandom(['Buenos Dias trolos de mierda', '*Buen dias mi amor 😘*', '*Buenos Dias hermosa mañana 🥰*'])}`)}  
+m.reply(`${pickRandom(['Buenos Dias trolos de mierda', '*Buen dias mi amor 😘*', '*Buenos Dias hermosa mañana verdad 🥰*'])}`)}  
 if (budy.includes(`autodestruction`)) { 
 let e = fs.readFileSync('./src/autodestruction.webp')
 let or = ['texto', 'sticker'];
@@ -551,6 +550,7 @@ conn.sendFile(m.chat, noetiqueta, 'sticker.webp', '',m, true, { contextInfo: { '
 if (media === 'texto')
 await conn.sendMessage(m.chat, {text: `${pickRandom(['*QUE YO QUE?*', 'Que?'])}`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 if (budy.includes(`Yaoi`)) {
+m.react(`${pickRandom(['😐', '👀', '😹'])}`)
 m.reply(`${pickRandom(['Que mamada? vete a estudiar mejor', 'Soy un bot hetero, no pida mamada (︶｡︶)zzZ '])}`)}
 if (budy.startsWith(`a`)) {
 if (!global.db.data.chats[m.chat].audios) return
@@ -559,7 +559,8 @@ await conn.sendPresenceUpdate('recording', m.chat)
 conn.sendMessage(m.chat, { audio: { url: vn }, contextInfo: { "externalAdReply": { "title": botname, "body": ``, "previewType": "PHOTO", "thumbnailUrl": null,"thumbnail": imagen1, "sourceUrl": md, "showAdAttribution": true}}, seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 if (budy.startsWith(`Feliz cumpleaños`)) {
 const vn = './media/Feliz cumple.mp3'
-conn.sendAudio(m.chat, vn, m)} 
+conn.sendAudio(m.chat, vn, m)
+m.react(`${pickRandom(['🥳', '💫', '🎊'])}`)} 
 if (budy.startsWith(`Feliz navidad`) || budy.startsWith(`Merry Christmas`) || budy.startsWith(`feliz navidad`)) {
 const vn = './media/navidad.mp3'
 conn.sendAudio(m.chat, vn, m)} 
