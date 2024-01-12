@@ -156,13 +156,12 @@ conn.ev.emit('messages.upsert', msg)}
 //--------------------[ INFO CONSOLE ]-----------------------
 if (m.message) {
 console.log(chalk.bold.cyanBright(`▣────────────···\n│+${conn.user.jid.split`@`[0]} ➢ ${botname} ${conn.user.id == global.numBot2 ? '' : '(SubBot)'} ${vs}`), 
-chalk.bold.magenta(`\n│────────────\n│⏰HORARIO: `) + chalk.magentaBright(moment(t * 1000).tz(place).format('DD/MM/YY HH:mm:ss'),
-chalk.bold.red('\n️│🏷️ MODO: ') + chalk.bold.white(`[${conn.public ? 'Publico' : 'Privado'}]`), 
-chalk.bold.yellow('\n│📑TIPO (SMS): ') + chalk.yellowBright(`${type}`),  
-chalk.bold.cyan('\n│📊USUARIO: ') + chalk.cyanBright(pushname) + ' ➜', gradient.rainbow(userSender), 
-m.isGroup ? chalk.bold.greenBright('\n│📤GRUPO: ') + chalk.greenBright(groupName) + ' ➜ ' + gradient.rainbow(from) : chalk.bold.greenBright('\n│📥PRIVADO'), 
-//chalk.bold.red('\nETIQUETA: ') + chalk.redBright(`[${isBaneed ? 'Banned' : ''}]`),
-chalk.bold.white('\n│💬MENSAJE: ') + chalk.whiteBright(`\n▣────────────···\n${msgs(m.text)}\n`))
+chalk.bold.magenta(`\n│────────────\n│⏰${lenguaje.consola.text} `) + chalk.magentaBright(moment(t * 1000).tz(place).format('DD/MM/YY HH:mm:ss'),
+chalk.bold.red(`\n️│🏷️ ${lenguaje.consola.text1} `) + chalk.bold.white(`[${conn.public ? 'Publico' : 'Privado'}]`), 
+chalk.bold.yellow(`\n│📑${lenguaje.consola.text2} `) + chalk.yellowBright(`${type}`),  
+m.isGroup ? chalk.bold.greenBright(`\n│📤CHAT ${lenguaje.consola.text4} `) + chalk.greenBright(groupName) + ' ➜ ' + gradient.rainbow(from) : chalk.bold.greenBright(`\n│📥CHAT ${lenguaje.consola.text5}`, userSender), 
+chalk.bold.cyan(`\n│📊${lenguaje.consola.text3} `) + chalk.cyanBright(pushname) + ' ➜', gradient.rainbow(userSender), 
+chalk.bold.white(`\n│💬${lenguaje.consola.text6}`) + chalk.whiteBright(`\n▣────────────···\n${msgs(m.text)}\n`))
 )}          
 
 //--------------------[ AUTOBIO ]----------------------- 
@@ -242,7 +241,7 @@ await fs.unlinkSync(encmedia)
 } else if (/video/.test(mime)) {  
 if ((quoted.msg || quoted).seconds > 25) return reply(lenguaje['smsAutoSicker']())  
 media = await quoted.download()  
-let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: goblal.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: wm, body: `h`, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}}, { quoted: m })
+let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: goblal.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: wm, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}}, { quoted: m })
 await new Promise((resolve) => setTimeout(resolve, 2000));   
 await fs.unlinkSync(encmedia)  
 }}
@@ -271,7 +270,8 @@ const data = await ressimi.json()
 if (data.success == 'No s\u00e9 lo qu\u00e9 est\u00e1s diciendo. Por favor ense\u00f1ame.') return m.reply(`${lol}`); /* EL TEXTO "lol" NO ESTA DEFINIDO PARA DAR ERROR Y USAR LA OTRA API */
 await m.reply(data.success)
 } catch {
-/*🟢 SI DA ERROR USARA ESTA OTRA OPCION DE API DE IA QUE RECUERDA EL NOMBRE DE LA PERSONA */
+//🟢 [ES] SI DA ERROR USARA ESTA OTRA OPCION DE API DE IA QUE RECUERDA EL NOMBRE DE LA PERSONA
+//🟢 [EN] IF IT ERROR, IT WILL USE THIS OTHER AI API OPTION THAT REMEMBER THE NAME OF THE PERSON 
 if (textodem.includes('Hola')) textodem = textodem.replace('Hola', 'Hello')
 if (textodem.includes('hola')) textodem = textodem.replace('hola', 'hello')
 if (textodem.includes('HOLA')) textodem = textodem.replace('HOLA', 'HELLO')
@@ -317,7 +317,7 @@ global.lenguaje = es
 }    
 
 //mensaje automático
-/*if (global.db.data.users[m.sender].registered < true && prefix) {  
+if (global.db.data.users[m.sender].registered < true && prefix) {  
 //if (m.isGroup) return !1;
 //if (!m.message) return !0;
 let str = [nna, md, yt, tiktok, fb] 
@@ -326,7 +326,7 @@ let totalreg = Object.keys(global.db.data.users).length
 let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length
 await delay(5 * 5000)
 conn.sendMessage(m.chat, { text: `*Hola @${sender.split`@`[0]} 👋😄 Mi nombre es ${botname} Soy un bot de WhatsApp con multi funcione 👾, registrarte para poder usar mi comando 👌*\n\n*💫 MI INFO:*\n*👑 Mi creador es:* ${fb}\n*👥 Usuarios:* ${totalreg}\n*✨ Registrado:* ${rtotalreg}\n*🤖 Estoy activa desde:* ${runtime(process.uptime())}\n*⚠️ PD:* No hagan spam del comando o te van baneado\n\n• *PORFAVOR LEE LAS REGLAS:*\n#reglas\n\n• *QUIERES VER QUE HAY DE NUEVO?*\n*Escribe:* #nuevo\n\n• *¿QUIERE SOLICITA UN BOT PARA TU GRUPO?*\n*Escribe:* #solicitud\n\n*💫 ¿Quieres apoyar este proyecto para que siga actualizándose?*\n• #donar\n\n*✨ CUENTA OFICIALES*\n• #cuentas`, contextInfo:{mentionedJid:[sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": wm, thumbnail: imagen2, sourceUrl: info}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
-}*/
+}
 
 //ARRANCA LA DIVERSIÓN 
 switch (command) { 
@@ -512,10 +512,10 @@ conn.ws.close()}
 break  
 /////////////////////////////////   
    
-//--------------------[ FUNCIONES ]-----------------------
+//--------------------[ FUNCIONES ]-----------------------  
 function pickRandom(list) {
 return list[Math.floor(list.length * Math.random())]
-}  
+}    
 
 //-------------------[ AUDIO/TEXTOS ]----------------------
 //🟢Comando que responde sin prefix  
