@@ -64,6 +64,7 @@
    "node-youtube-music": "^0.8.3",
    "jsdom": "^16.4.0",
    "youtube-yts": "^2.0.0",
+   "yt-search": "^2.10.3",
    "ytdl-core": "^4.11.4",
    "youtubedl-core": "^4.11.4"
   }
