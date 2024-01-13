@@ -35,7 +35,7 @@
    "cfonts": "^2.10.0",   
    "cheerio": "^1.0.0-rc.10",
    "axios": "^0.24.0",
-   "api-dylux": "^1.2.2",
+   "api-dylux": "^1.6.2",
    "aptoide-scraper": "^1.0.1",
    "similarity": "^1.2.1",
    "performance-now": "^2.1.0",  
