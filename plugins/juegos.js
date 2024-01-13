@@ -11,15 +11,15 @@ const Jimp = require('jimp')
 const os = require('os')
 const translate = require('@vitalets/google-translate-api')
 
-async function game(m, command, text, pickRandom, pushname, conn, participants, sender, who, body, ra) {
+async function game(m, budy, command, text, pickRandom, pushname, conn, participants, sender, who, body, ra) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (command == 'simi' || command == 'alexa' || command == 'siri') {
-if (!text) return m.reply(`${pickRandom([`Hola 👋 *${pushname}* Como esta? quiere charlar cormigo 👀`, '*Hola soy un bot yo puedo ayudar?*', 'Hello hablemos un ratito justos ☺, que me cuenta?', 'Hola 👋😄 aqui estoy para hacerte reir un rato, mi amigo me dices que soy muy Diventida 😆', 'Que onda perro tdo bien?', 'Hey estoy aburrida podemos hablar un rato?'])}`) 
-try {     
+if (budy.includes(`Bot`) || budy.includes(`simi`)) {   
+if (!text) return m.reply(`*Hola ${pushname} 👋 Quieres hablar un rato conmigo? usar de esta forma*\n\n• *Ejemplo:* ${prefix}Bot Hola`) 
+try {
 await conn.sendPresenceUpdate('composing', m.chat)
-let anu = await fetchJson(`https://api.simsimi.net/v2/?text=${text}&lc=es&cf=false`)
-let res = anu.success;
-m.reply(res)
+const api = await fetch('https://api.simsimi.net/v2/?budy=' + budy + '&lc=es');
+const resSimi = await api.json();
+m.reply(resSimi.success)
 } catch {
 try {
 if (text.includes('Hola')) text = text.replace('Hola', 'Hello');
@@ -33,7 +33,7 @@ const res = await api.json();
 const reis2 = await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=es&dt=t&q=' + res.cnt);
 const resu2 = await reis2.json();
 m.reply(resu2[0][0][0]);
-} catch (e) { 
+} catch (e) {
 return m.reply(`*Api simsimi caida vuelva mas tardes*`)
 console.log(e)}}}
 

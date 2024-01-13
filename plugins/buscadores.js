@@ -13,7 +13,7 @@ const Jimp = require('jimp')
 const FormData = require("form-data") 
 const os = require('os')
 
-async function buscadores(m, command, conn, text, from, fkontak, prefix, args, q, quoted, lang, lolkeysapi) {
+async function buscadores(m, command, conn, text, budy, from, fkontak, prefix, args, q, quoted, lang, lolkeysapi) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (command == 'yts' || command == 'ytsearch') {
 if (global.db.data.users[m.sender].level < 2) return m.reply(`${lenguaje['nivel']()} 2 ${lenguaje['nivel2']()}`) 
@@ -58,6 +58,7 @@ m.reply(teks)})
 
 if (command == 'imagen') {
 const {googleImage} = require('@bochilteam/scraper') 
+if (budy.includes('gore') || budy.includes('cp')|| budy.includes('porno')|| budy.includes('Gore')|| budy.includes('rule')|| budy.includes('CP')|| budy.includes('Rule34')) return m.reply('😐 NO PIDA BOLUDECES');
 if (!text) return m.reply(`${lenguaje.lengua.ejemplo}\n${prefix + command} gatito`)
 try {  
 image = await fetchJson(`https://api.akuari.my.id/search/googleimage?query=${text}`)

@@ -55,7 +55,7 @@ let imagen = `${pickRandom([imagen1, imagen2, imagen3])}`
 conn.sendMessage(m.chat, { text: `${lenguaje.info.text13}\n1) ${nn}\n\n2) ${nn2}\n\n${lenguaje.info.text14}\n• ${nn3}\n\n• ${nn4}\n\n• ${nn5}\n\n• ${multi}\n\n${lenguaje.info.text15}\n• ${nn6}\n\n${lenguaje.info.text16}\n• ${nna}\n\n${lenguaje.info.text17}\n• ${nn7}\n\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n${lenguaje.info.text18}\n\n*⇶⃤꙰𝑬𝒏𝒍𝒂𝒄𝒆 𝒍𝒐𝒍𝒊𝒃𝒐𝒕ꦿ⃟⃢*\n${nn8}\n\nPrinces kiara : (  ┞⃞࠘🇧🇷̷̸̶᪵᩵᪰ 𝄈  𝐅࣭𝐌̶𝐋𝐀᪵.  𝐊𝐍̶𝚺࣪𝐙࠘𝐄𝐕𝐈𝐂)\n${amix}\n\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n\n${lenguaje.info.text19}`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: a}}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 if (command == 'instalarbot' || command == 'crearbot') {
-conn.sendMessage(m.chat, { text: `${lenguaje.info.text20}`,
+conn.sendMessage(m.chat, { text: `${lenguaje.info.text20(fb, md)}`,
 contextInfo:{
 mentions: [sender], 
 forwardingScore: 9999999,
@@ -91,7 +91,7 @@ m.reply(`${lenguaje.info.text24}\n${md}`)}
 if (command == 'solicitud') {
 conn.sendMessage(m.chat, { text: lenguaje.grupos.text8, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn, md, yt])}`}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
-if (command == 'cuenta' || command == 'cuentaofc' || command == 'cuentaoficiales') {
+if (command == 'cuenta' || command == 'cuentaofc' || command == 'cuentaoficiales' || command == 'cuentas') {
 conn.sendMessage(m.chat, { text: `*🔰 ${lenguaje['smsWel']()}* @${sender.split("@")[0]} ${lenguaje['cuenta'](nna, md, yt, tiktok, fb)}`, contextInfo:{ mentionedJid:[sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn, md, yt])}`}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 if (command == '5492266613038' || command == '593980586516' || command == '595975740803') {
