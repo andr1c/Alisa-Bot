@@ -21,6 +21,15 @@ const PhoneNumber = require('awesome-phonenumber')
 const readline = require("readline")
 const { Boom } = require('@hapi/boom')
 const { parsePhoneNumber } = require("libphonenumber-js")
+const methodCodeQR = process.argv.includes("qr")
+const pairingCode = !!phoneNumber || process.argv.includes("--pairing-code")
+const methodCode = !!phoneNumber || process.argv.includes("code")
+const useMobile = process.argv.includes("--mobile")
+const MethodMobile = process.argv.includes("mobile")
+const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
+const question = (text) => new Promise((resolve) => rl.question(text, resolve))
+let { version, isLatest } = await fetchLatestBaileysVersion()
+const msgRetryCounterCache = new NodeCache() //para mensaje de reintento, "mensaje en espera"
 
 const { readdirSync, statSync, unlinkSync } = require('fs')
 const {say} = cfonts;
@@ -163,17 +172,6 @@ const store = makeInMemoryStore({logger: pino().child({
 level: 'silent',
 stream: 'store'
 })})
-
-//configuración 
-const methodCodeQR = process.argv.includes("qr")
-const pairingCode = !!phoneNumber || process.argv.includes("--pairing-code")
-const methodCode = !!phoneNumber || process.argv.includes("code")
-const useMobile = process.argv.includes("--mobile")
-const MethodMobile = process.argv.includes("mobile")
-const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
-const question = (text) => new Promise((resolve) => rl.question(text, resolve))
-let { version, isLatest } = await fetchLatestBaileysVersion()
-const msgRetryCounterCache = new NodeCache() //para mensaje de reintento, "mensaje en espera"
 
 async function startBot() {
 
