@@ -6,8 +6,9 @@
   "type": "commonjs",
   "scripts": {
   "start": "node index.js", 
-  "vortexus": "bash vortexus.sh" 
-  },
+  "qr": "node index.js qr",
+  "code": "node index.js code",
+  "vortexus": "bash vortexus.sh" },
   "author": "elrebelde21",
   "license": "ISC",
   "dependencies": {
