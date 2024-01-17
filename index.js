@@ -1,6 +1,6 @@
 (async () => {
 require("./settings")
-const { default: makeWASocket, Browsers, makeInMemoryStore, useMultiFileAuthState, DisconnectReason, proto , jidNormalizedUser,WAMessageStubType, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, msgRetryCounterMap, makeCacheableSignalKeyStore, fetchLatestBaileysVersion, getAggregateVotesInPollMessage } = require("@whiskeysockets/baileys")
+const { default: makeWASocket, CONNECTING, PHONENUMBER_MCC, Browsers, makeInMemoryStore, useMultiFileAuthState, DisconnectReason, proto , jidNormalizedUser,WAMessageStubType, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, msgRetryCounterMap, makeCacheableSignalKeyStore, fetchLatestBaileysVersion, getAggregateVotesInPollMessage } = require("@whiskeysockets/baileys")
 const { state, saveCreds } = await useMultiFileAuthState('./sessions')
 const chalk = require('chalk')
 const moment = require('moment')
@@ -13,9 +13,15 @@ const os = require('os')
 const { execSync } = require('child_process')
 const util = require('util')
 const pino = require('pino')
+const Pino = require("pino")
 const cfonts = require('cfonts') 
 const { tmpdir } = require('os')
 const { join } = require('path')
+const PhoneNumber = require('awesome-phonenumber')
+const readline = require("readline")
+const { Boom } = require('@hapi/boom')
+const { parsePhoneNumber } = require("libphonenumber-js")
+
 const { readdirSync, statSync, unlinkSync } = require('fs')
 const {say} = cfonts;
 const color = (text, color) => {
@@ -153,40 +159,104 @@ setInterval(async () => {
 }, 1000 * 60 * 60);
 //___________
     
+const store = makeInMemoryStore({logger: pino().child({
+level: 'silent',
+stream: 'store'
+})})
+
+//configuración 
+const methodCodeQR = process.argv.includes("qr")
+const pairingCode = !!phoneNumber || process.argv.includes("--pairing-code")
+const methodCode = !!phoneNumber || process.argv.includes("code")
+const useMobile = process.argv.includes("--mobile")
+const MethodMobile = process.argv.includes("mobile")
+const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
+const question = (text) => new Promise((resolve) => rl.question(text, resolve))
+let { version, isLatest } = await fetchLatestBaileysVersion()
+const msgRetryCounterCache = new NodeCache() //para mensaje de reintento, "mensaje en espera"
+
 async function startBot() {
 
-console.info = () => {}
-const store = makeInMemoryStore({ logger: pino().child({ level: "silent", stream: "store" }), })
-const msgRetry = (MessageRetryMap) => { }
-const msgRetryCache = new NodeCache()
-let { version, isLatest } = await fetchLatestBaileysVersion();   
+//codigo adaptado por: https://github.com/GataNina-Li && https://github.com/elrebelde21
+let opcion
+if (methodCodeQR) {
+opcion = '1'
+}
+if (!methodCodeQR && !methodCode && !fs.existsSync(`./sessions/creds.json`)) {
+do {        
+let lineM = '┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅'
+opcion = await question(`┏${lineM}  
+┋ ${chalk.blueBright('┏┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}
+┋ ${chalk.blueBright('┋')} ${chalk.blue.bgBlue.bold.cyan('MÉTODO DE VINCULACIÓN')}
+┋ ${chalk.blueBright('┗┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}   
+┋ ${chalk.blueBright('┏┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}     
+┋ ${chalk.blueBright('┋')} ${chalk.green.bgMagenta.bold.yellow('¿CÓMO DESEA CONECTARSE?')}
+┋ ${chalk.blueBright('┋')} ${chalk.bold.redBright('⇢  Opción 1:')} ${chalk.greenBright('Código QR.')}
+┋ ${chalk.blueBright('┋')} ${chalk.bold.redBright('⇢  Opción 2:')} ${chalk.greenBright('Código de 8 digitos.')}
+┋ ${chalk.blueBright('┗┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}
+┋ ${chalk.blueBright('┏┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}     
+┋ ${chalk.blueBright('┋')} ${chalk.italic.magenta('Escriba sólo el número de')}
+┋ ${chalk.blueBright('┋')} ${chalk.italic.magenta('la opción para conectarse.')}
+┋ ${chalk.blueBright('┗┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}
+┗${lineM}\n${chalk.bold.magentaBright('---> ')}`)
+if (!/^[1-2]$/.test(opcion)) {
+console.log(chalk.bold.redBright(`NO SE PERMITE NÚMEROS QUE NO SEAN ${chalk.bold.greenBright("1")} O ${chalk.bold.greenBright("2")}, TAMPOCO LETRAS O SÍMBOLOS ESPECIALES.\n${chalk.bold.yellowBright("CONSEJO: COPIE EL NÚMERO DE LA OPCIÓN Y PÉGUELO EN LA CONSOLA.")}`))
+}} while (opcion !== '1' && opcion !== '2' || fs.existsSync(`./sessions/creds.json`))
+}
 
-const socketSettings = {
-printQRInTerminal: true,
+const sock = makeWASocket({
 logger: pino({ level: 'silent' }),
-auth: { creds: state.creds, keys: makeCacheableSignalKeyStore(state.keys, pino({level: 'silent'})) },
-browser: ['NovaBot-MD', 'Safari', '1.0.0'],
-msgRetry,
-msgRetryCache,
-version,
-syncFullHistory: true,
-getMessage: async (key) => { 
-if (store) { 
-const msg = await store.loadMessage(key.remoteJid, key.id); 
-return sock.chats[key.remoteJid] && sock.chats[key.remoteJid].messages[key.id] ? sock.chats[key.remoteJid].messages[key.id].message : undefined; 
-} 
-return proto.Message.fromObject({}); 
-}}
+printQRInTerminal: opcion == '1' ? true : methodCodeQR ? true : false,
+mobile: MethodMobile, 
+browser: opcion == '1' ? ['NovaBot-MD', 'Safari', '1.0.0'] : methodCodeQR ? ['NovaBot-MD', 'Safari', '1.0.0'] : ['Chrome (Linux)', '', ''],
+auth: {
+creds: state.creds,
+keys: makeCacheableSignalKeyStore(state.keys, Pino({ level: "fatal" }).child({ level: "fatal" })),
+},
+browser: ['Chrome (Linux)', '', ''], //
+markOnlineOnConnect: true, //establecer falso para fuera de línea
+generateHighQualityLinkPreview: true, //hacer enlace de vista previa alta
+getMessage: async (key) => {
+let jid = jidNormalizedUser(key.remoteJid)
+let msg = await store.loadMessage(jid, key.id)
+return msg?.message || ""
+},
+msgRetryCounterCache, //Resolver mensajes en espera
+defaultQueryTimeoutMs: undefined, //
+})
 
-const sock = makeWASocket(socketSettings)
+store.bind(sock.ev)
 
-async function getMessage(key) {
-if (store) {
-const msg = store.loadMessage(key.remoteJid, key.id)
-return msg.message && undefined
-} return {
-conversation: 'SimpleBot',
+if (!fs.existsSync(`./sessions/creds.json`)) {
+if (opcion === '2' || methodCode) {
+opcion = '2'
+if (!sock.authState.creds.registered) {  
+let addNumber
+if (!!phoneNumber) {
+addNumber = phoneNumber.replace(/[^0-9]/g, '')
+if (!Object.keys(PHONENUMBER_MCC).some(v => addNumber.startsWith(v))) {
+console.log(chalk.bgBlack(chalk.bold.redBright("Comience con el código de país de su número de WhatsApp, ejemplo: +59178862672")))
+process.exit(0)
+}} else {
+while (true) {
+addNumber = await question(chalk.bgBlack(chalk.bold.greenBright(`Su número de bot de WhatsApp, por favor\nPor ejemplo: +59178862672:`)))
+addNumber = addNumber.replace(/[^0-9]/g, '')
+  
+if (addNumber.match(/^\d+$/) && Object.keys(PHONENUMBER_MCC).some(v => addNumber.startsWith(v))) {
+break 
+} else {
+console.log(chalk.bold.redBright("Asegúrese de agregar el código de país."))
 }}
+rl.close()  
+}
+
+setTimeout(async () => {
+let codeBot = await sock.requestPairingCode(addNumber)
+codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot
+console.log(chalk.bold.white(chalk.bgMagenta(`👑 CÓDIGO DE VINCULACIÓN 👑: `)), chalk.bold.white(chalk.white(codeBot)))
+}, 2000)
+}}
+}
 
 sock.ev.on('messages.upsert', async chatUpdate => {
 //console.log(JSON.stringify(chatUpdate, undefined, 2))
@@ -519,10 +589,11 @@ return list[Math.floor(list.length * Math.random())]
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 sock.ev.on('connection.update', async (update) => {
-const { connection, lastDisconnect, qr, receivedPendingNotifications } = update;
+const { connection, lastDisconnect, qr, receivedPendingNotifications, isNewLogin} = update;
 console.log(receivedPendingNotifications)
+if (isNewLogin) sock.isInit = true
 if (connection == 'connecting') {
-console.log('iniciando...')
+console.log(chalk.gray('iniciando...'));
 say('NovaBot-MD', {
   font: 'chrome',
   align: 'center',
@@ -531,28 +602,38 @@ say(`By: elrebelde21`, {
   font: 'console',
   align: 'center',
   gradient: ['red', 'magenta']});
-  
-console.log(color(` `,'magenta'))
-console.log(color(`\n${lenguaje['smsConexion']()} ` + JSON.stringify(sock.user, null, 2), 'yellow'))
-} else if (qr !== undefined) {
-console.log(color('[SYS]', '#009FFF'),
-color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
-color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│${lenguaje['smsEscaneaQR']()}\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯`, '#f12711'))
-} else if (connection === 'close') {
+ 
+} else if (connection === "close" && lastDisconnect && lastDisconnect.error && lastDisconnect.error.output.statusCode != 401) {
 console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
 color(`${lenguaje['smsConexioncerrar']()}`, '#f64f59'));
-lastDisconnect.error?.output?.statusCode !== DisconnectReason.loggedOut
-? startBot()
-: console.log(color('[SYS]', '#009FFF'),
+startBot()
+} else if (opcion == '1' || methodCodeQR && qr !== undefined) {
+if (opcion == '1' || methodCodeQR) {
+console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
-color(`Wa Web logged Out`, '#f64f59')
-);
+color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│${lenguaje['smsEscaneaQR']()}\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯`, '#f12711'))
+}
 } else if (connection == 'open') {
+console.log(color(` `,'magenta'))
+console.log(color(`\n${lenguaje['smsConexion']()} ` + JSON.stringify(sock.user, null, 2), 'yellow'))
 console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
 color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│${lenguaje['smsConectado']()}\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯` + receivedPendingNotifications, '#38ef7d')
 );
+
+const rainbowColors = ['red', 'yellow', 'green', 'blue', 'purple'];
+let index = 0;
+
+function printRainbowMessage() {
+const color = rainbowColors[index];
+console.log(chalk.keyword(color)('\n\n⏳️ Cargado los mensajes....'));
+index = (index + 1) % rainbowColors.length;
+setTimeout(printRainbowMessage, 60000) //Ajuste el tiempo de espera a la velocidad deseada
+}
+
+printRainbowMessage();
+
 if (!sock.user.connect) {
 /*let res = await sock.groupAcceptInvite(global.nna2);
 await delay(5 * 5000)
@@ -561,7 +642,7 @@ contextInfo:{
 forwardingScore: 9999999, 
 isForwarded: true
 }})*/
-await sock.groupAcceptInvite(global.nna2);
+await sock.groupAcceptInvite(global.nna2)
 sock.user.connect = true
 }
 }});

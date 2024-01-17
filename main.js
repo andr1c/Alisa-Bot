@@ -43,7 +43,7 @@ const {efec, convertidores} = require('./plugins/convertidores.js')
 const {grupo} = require('./plugins/grupos.js')
 const {nsfw} = require('./plugins/nsfw.js') 
 const {randow, randow2} = require('./plugins/randow.js') 
-const {descarga} = require('./plugins/descargas.js')   
+const {descarga, descarga2} = require('./plugins/descargas.js')   
 const {stickers} = require('./plugins/stickers.js') 
 const {owner} = require('./plugins/propietario.js')  
 const {enable} = require('./plugins/enable.js')
@@ -217,10 +217,32 @@ if (isgclink) return
 if (isGroupAdmins) return reply(`${lenguaje['smsAntiLink5']()}`) 
 conn.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: bang, participant: delet }})
 conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')}}
-  
+
+//--------------------[ ANTITOXIC ]-----------------------
+if (global.db.data.chats[m.chat].antitoxic && !isCreator) {   
+if (budy.match(`g0re|g0r3|g.o.r.e|sap0|sap4|malparido|malparida|malparidos|malparidas|m4lp4rid0|m4lp4rido|m4lparido|malp4rido|m4lparid0|malp4rid0|chocha|chup4la|chup4l4|chupalo|chup4lo|chup4l0|chupal0|chupon|chupameesta|sabandija|hijodelagranputa|hijodeputa|hijadeputa|hijadelagranputa|kbron|kbrona|cajetuda|laconchadedios|putita|putito|put1t4|putit4|putit0|put1to|put1ta|pr0stitut4s|pr0stitutas|pr05titutas|pr0stitut45|prostitut45|prostituta5|pr0stitut45|fanax|f4nax|drogas|droga|dr0g4|nepe|p3ne|p3n3|pen3|p.e.n.e|pvt0|puto|pvto|put0|hijodelagransetentamilparesdeputa|Chingadamadre|coño|c0ño|coñ0|c0ñ0|afeminado|drog4|cocaína|marihuana|chocho|chocha|cagon|pedorro|agrandado|agrandada|pedorra|sape|nmms|mamar|chigadamadre|hijueputa|chupa|kaka|caca|bobo|boba|loco|loca|chupapolla|estupido|estupida|estupidos|polla|pollas|idiota|maricon|chucha|verga|vrga|naco|zorra|zorro|zorras|zorros|pito|huevon|huevona|huevones|rctmre|mrd|ctm|csm|cp|cepe|sepe|sepesito|cepecito|cepesito|hldv|ptm|baboso|babosa|babosos|babosas|feo|fea|feos|feas|webo|webos|mamawebos|chupame|bolas|qliao|imbecil|embeciles|kbrones|cabron|capullo|carajo|gore|gorre|gorreo|sapo|sapa|mierda|cerdo|cerda|puerco|puerca|perra|perro|joden|jodemos|dumb|fuck|shit|bullshit|cunt|cum|semen|bitch|motherfucker|foker|fucking`)) { 
+if (m.isBaileys && m.fromMe) { 
+return !0 }   
+if (!m.isGroup) { 
+return !1 }
+if (isGroupAdmins) return
+const user = global.db.data.users[m.sender];
+const chat = global.db.data.chats[m.chat];
+const bot = global.db.data.settings[conn.user.jid] || {};
+const isToxic = budy.match;
+user.warn += 1;
+if (!(user.warn >= 4)) await conn.sendMessage(m.chat, {text: `Hey @${m.sender.split('@')[0]} decir la palabra *(${budy})* Esta prohibida En este grupo, No seas Toxico(a)\n\nADVERTENCIA\n⚠️ *${user.warn}/4*\n\n${botname}`, mentions: [m.sender]}, {quoted: m})
+if (user.warn >= 4) {
+user.warn = 0;
+await conn.sendMessage(m.chat, {text: `*@${m.sender.split('@')[0]} superaste las 4 advertencias serás eliminado de este grupo 😐....*`, mentions: [m.sender]}, {quoted: m})
+user.banned = true
+await conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')}
+return !1;
+}} 
+
 //-------[ MODO PUBLIC/PRIVADO ]-----------
 if (!conn.public && !isCreator) {
-if (!m.key.fromMe) return }        	
+if (!m.key.fromMe) return }        	 
 
 //--------------------[ BANCHAT ]---------------------
 if (global.db.data.chats[m.chat].isBanned && isCreator) {
@@ -329,7 +351,7 @@ conn.sendMessage(m.chat, { text: `*Hola @${sender.split`@`[0]} 👋😄 Mi nombr
 
 //ARRANCA LA DIVERSIÓN 
 switch (prefix && command) { 
-case 'yts': case 'ytsearch': case 'acortar': case 'google': case 'imagen': case 'traducir': case 'translate': case "tts": case 'ia': case 'chatgpt': case 'dalle': case 'ia2': case 'aimg': case 'imagine': case 'dall-e': case 'ss': case 'ssweb': case 'wallpaper': case 'hd': await buscadores(m, command, conn, text, budy, from, fkontak, prefix, args, quoted, lolkeysapi)
+case 'yts': case 'ytsearch': case 'acortar': case 'google': case 'imagen': case 'traducir': case 'translate': case "tts": case 'ia': case 'chatgpt': case 'dalle': case 'ia2': case 'aimg': case 'imagine': case 'dall-e': case 'ss': case 'ssweb': case 'wallpaper': case 'hd': case 'horario': await buscadores(m, command, conn, text, budy, from, fkontak, prefix, args, quoted, lolkeysapi)
 break  
 
 //jadibot/serbot
@@ -355,20 +377,71 @@ case 'estado': case 'infobot': case 'owner': case 'creador': case 'contacto': ca
 break   
   
 //activar/desactivar
-case 'welcome': case 'bienvenida': case 'antilink': case 'antienlace': case 'antifake': case 'antiFake': case 'antiarabe': case 'antiArabe': case 'autodetect': case 'detect': case 'audios': case 'autosticker': case 'stickers': case 'modocaliente': case 'antinsfw': case 'modoadmin': case 'modoadmins': case 'soloadmin': case 'antiprivado': case 'antipv': case 'anticall': case 'antillamada': case 'modojadibot': case 'jadibot': case 'autoread': case 'autovisto': case 'antispam': case 'chatbot': case 'simsimi': case 'autolevelup': case 'autonivel': enable(m, command, isGroupAdmins, text, command, args, isBotAdmins, isGroupAdmins, isCreator) 
+case 'welcome': case 'bienvenida': case 'antilink': case 'antienlace': case 'antifake': case 'antiFake': case 'antiarabe': case 'antiArabe': case 'autodetect': case 'detect': case 'audios': case 'autosticker': case 'stickers': case 'modocaliente': case 'antinsfw': case 'modoadmin': case 'modoadmins': case 'soloadmin': case 'antiprivado': case 'antipv': case 'anticall': case 'antillamada': case 'modojadibot': case 'jadibot': case 'autoread': case 'autovisto': case 'antispam': case 'chatbot': case 'simsimi': case 'autolevelup': case 'autonivel': case 'antitoxic': enable(m, command, isGroupAdmins, text, command, args, isBotAdmins, isGroupAdmins, isCreator) 
 break
 
 //Grupos 
 case 'grupo': case 'delete': case 'del': case 'join': case 'unete': case 'hidetag': case 'notificar': case 'tag': case 'setppgroup': case 'setpp': case 'setppname': case 'nuevonombre': case 'newnombre': case 'setdesc': case 'descripción': case 'anularlink': case 'resetlink': case 'revoke': case 'add': case 'agregar': case 'invitar': case 'kick': case 'echar': case 'sacar': case 'promote': case 'darpoder': case 'demote': case 'quitarpoder': case 'link': case 'linkgc': case 'banchat': case 'tagall': case 'invocar': case 'todos': case 'admins': case 'administradores': case 'infogrupo': case 'groupinfo': case 'warn': case 'advertencia': case 'unwarn': case 'quitardvertencia': case 'listwarn': case 'enline': case 'online': case 'listonine': case 'listaenlinea': case 'enlinea': case 'listonline': grupo(m, command, isGroupAdmins, text, conn, participants, isBotAdmins, args, isCreator, delay, sender, quoted, mime, from, isCreator, groupMetadata, fkontak, delay) 
 break    
- 
+   
 //juegos 
 case 'simi': case 'bot': case 'pregunta': case 'preg': case 'gay': case 'pareja': case 'formarpareja': case 'follar': case 'violar': case 'coger': case 'doxear': case 'doxxeo': case 'personalidad': case 'top': case 'topgays': case 'topotakus': case 'racista': case 'love': case 'ship': case 'formartrio': case 'formapareja5': game(m, budy, command, text, pickRandom, pushname, conn, participants, sender, who, body, sendImageAsUrl)  
-break                
+break                   
 case 'verdad': case 'reto': case 'piropo': game2(m, command, sendImageAsUrl, pickRandom)
 break
 case 'slot': case 'apuesta':  case 'fake': case 'ppt': case 'suit': game3(m, command, conn, args, prefix, msToTime, text, body, from, sender, quoted, pushname)
 break    
+               
+/*case 'horario': {
+const moment = require('moment-timezone') 
+  const tzPE = moment().tz('America/Lima').format('DD/MM HH:mm');
+  const tzMX = moment().tz('America/Mexico_City').format('DD/MM HH:mm');
+  const tzBO = moment().tz('America/La_Paz').format('DD/MM HH:mm');
+  const tzCL = moment().tz('America/Santiago').format('DD/MM HH:mm');
+  const tzAR = moment().tz('America/Argentina/Buenos_Aires').format('DD/MM HH:mm');
+  const tzCO = moment().tz('America/Bogota').format('DD/MM HH:mm');
+  const tzEC = moment().tz('America/Guayaquil').format('DD/MM HH:mm');
+  const tzCR = moment().tz('America/Costa_Rica').format('DD/MM HH:mm');
+  const tzCU = moment().tz('America/Havana').format('DD/MM HH:mm');
+  const tzGT = moment().tz('America/Guatemala').format('DD/MM HH:mm');
+  const tzHN = moment().tz('America/Tegucigalpa').format('DD/MM HH:mm');
+  const tzNI = moment().tz('America/Managua').format('DD/MM HH:mm');
+  const tzPA = moment().tz('America/Panama').format('DD/MM HH:mm');
+  const tzUY = moment().tz('America/Montevideo').format('DD/MM HH:mm');
+  const tzVE = moment().tz('America/Caracas').format('DD/MM HH:mm');
+  const tzPY = moment().tz('America/Asuncion').format('DD/MM HH:mm');
+  const tzNY = moment().tz('America/New_York').format('DD/MM HH:mm');
+  const tzBR = moment().tz('America/Sao_Paulo').format('DD/MM HH:mm');
+  const tzAS = moment().tz('Asia/Jakarta').format('DD/MM HH:mm');
+  const tzAF = moment().tz('Africa/Malabo').format('DD/MM HH:mm');
+  await conn.sendMessage(m.chat, {text: `┏╼┅┅⪻ \`\`\`ZONA-HORARIA 🗺️\`\`\` ⪼┅┅┅┓
+┋• Perú       : ${tzPE}
+┋• México     : ${tzMX}
+┋• Bolivia    : ${tzBO}
+┋• Chile      : ${tzCL}
+┋• Argentina  : ${tzAR}
+┋• Colombia   : ${tzCO}
+┋• Ecuador    : ${tzEC}
+┋• Costa Rica : ${tzCR}
+┋• Cuba       : ${tzCU}
+┋• Guatemala  : ${tzGT}
+┋• Honduras   : ${tzHN}
+┋• Nicaragua  : ${tzNI}
+┋• Panamá     : ${tzPA}
+┋• Uruguay    : ${tzUY}
+┋• Venezuela  : ${tzVE}
+┋• Paraguay   : ${tzPY}
+┋• New York   : ${tzNY}
+┋• Brasil     : ${tzBR}
+┋• Asia       : ${tzAS}
+┋• África     : ${tzAF}
+┋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅
+┋${String.fromCharCode(8206).repeat(850)} 💻 *ᴢᴏɴᴀ ʜᴏʀᴀʀɪᴀ ᴅᴇʟ sᴇʀᴠɪᴅᴏʀ ᴀᴄᴛᴜᴀʟ:*
+┋ *[ ${Intl.DateTimeFormat().resolvedOptions().timeZone} ]*
+┋ *${moment().tz(Intl.DateTimeFormat().resolvedOptions().timeZone).format('DD/MM/YY HH:mm:ss')}*
+┗┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┉┛`}, {quoted: m});
+};
+break*/
               
 //convertidores
 case 'bass': case 'blown': case 'deep': case 'earrape': case 'fast': case 'fat': case 'nightcore': case 'reverse': case 'robot': case 'slow': case 'smooth': case 'squirrel': efec(conn, command, mime, quoted, exec, prefix, m, from)  
@@ -387,15 +460,17 @@ case 'horny': case 'simp': case 'lolice': case 'comentar': case 'comment': rando
 break 
 
 //descargas
-case 'play': case 'musica': case 'play2': case 'video': case 'play3': case 'playdoc': case 'playaudiodoc': case 'ytmp3doc': case 'play4': case 'playdoc2': case 'playvideodoc': case 'ytmp4doc': case "ytmp3": case "ytaudio": case 'ytmp4': case 'ytvideo': case 'music': case 'spotify': case 'gitclone': case 'tiktok': case 'tt': case 'lyrics': case 'letra': case 'mediafire': case 'facebook': case 'fb': case 'instagram': case 'ig': case 'igstalk': case 'apk': case 'modoapk': case 'gdrive': case 'tiktokimg': case 'ttimg': case 'play.1': case 'play.2': descarga(m, command, conn, text, command, args, fkontak, from, lolkeysapi)     
-break     
+case 'play': case 'musica': case 'play2': case 'video': case 'play3': case 'playdoc': case 'playaudiodoc': case 'ytmp3doc': case 'play4': case 'playdoc2': case 'playvideodoc': case 'ytmp4doc': case "ytmp3": case "ytaudio": case 'ytmp4': case 'ytvideo': case 'music': case 'spotify': case 'gitclone': case 'tiktok': case 'tt': case 'lyrics': case 'letra': case 'mediafire': case 'tiktokimg': case 'ttimg': case 'play.1': case 'play.2': descarga(m, command, conn, text, command, args, fkontak, from, lolkeysapi)   
+break
+case 'facebook': case 'fb': case 'instagram': case 'ig': case 'igstalk': case 'apk': case 'modoapk': case 'gdrive': descarga2(m, command, text, args, conn, lolkeysapi)
+break
 
 //rpg 
 case 'reg': case 'verificar': case 'unreg': case 'myns': await reg(command, conn, m, sender, text, budy, fkontak, delay, args)
 break   
-case 'lb': case 'leaderboard': case 'afk': case 'rob': case 'robar': case 'buy': case 'buyall': case 'bal': case 'balance': case 'diamond': case 'minar': case 'mine': case 'trabajar': case 'work': case 'w': case 'claim': case 'daily': case 'perfil': case 'levelup': case 'nivel': case 'cofre': case 'minar2': case 'mine2': rpg(m, command, participants, args, sender, pushname, text, conn, fkontak, who)   
-break    
-    
+case 'lb': case 'leaderboard': case 'afk': case 'rob': case 'robar': case 'buy': case 'buyall': case 'bal': case 'balance': case 'diamond': case 'minar': case 'mine': case 'trabajar': case 'work': case 'w': case 'claim': case 'daily': case 'perfil': case 'levelup': case 'nivel': case 'cofre': case 'minar2': case 'mine2': rpg(m, command, participants, args, sender, pushname, text, conn, fkontak, who)    
+break          
+      
 //stickers
 case 's': case 'sticker': case 'wm': case 'take': case 'attp': case 'dado': stickers(m, command, conn, mime, quoted, args, text, lolkeysapi, fkontak)  
 break
@@ -529,7 +604,7 @@ let e = fs.readFileSync('./src/autodestruction.webp')
 let or = ['texto', 'sticker'];
 let media = or[Math.floor(Math.random() * 2)]  
 if (media === 'texto')
-m.reply('*Mi jefe no me quiere 😢*')       
+m.reply('*Mi jefe no me quiere 😢*')        
 if (media === 'sticker')      
 conn.sendFile(m.chat, e, 'sticker.webp', '',m, true, { contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: 'ᶜ ᴬᵘᵗᵒᵈᵉˢᶜʳᵘʸᵉ', mediaType: 2, sourceUrl: nna, thumbnail: imagen1}}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 if (budy.includes(`NovaBot`) || budy.includes(`novabot`)) {
