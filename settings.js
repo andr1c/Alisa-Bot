@@ -85,7 +85,7 @@ global.tiktok = 'tiktok.com/@elrebelde21'
 global.fb = 'https://www.facebook.com/elrebelde21'
 global.faceb = 'https://facebook.com/groups/872989990425789/'
 
-global.nna = 'https://whatsapp.com/channel/0029Va4QjH7DeON0ePwzjS1A' //Update 
+global.nna = 'https://whatsapp.com/channel/0029VaKn22pDJ6GwY61Ftn15' //Update 
 global.nn = 'https://chat.whatsapp.com/C6sxsP2ckrr2vxMKclOeCD' //LoliBot
 global.nn2 = 'https://chat.whatsapp.com/H4hxytyGvucIF1k0UAR7es' //Loli & Nova
 global.nn3 = 'https://chat.whatsapp.com/Ej5AUrpmYnJKYtEa6YMwK6' //Grupo de Colaboracion
