@@ -518,6 +518,7 @@ let chats = global.db.data.chats[m.chat]
   if (!('antispam' in chats)) chats.antispam = true
   if (!('antiFake' in chats)) chats.antiFake = false
   if (!('antiArabe' in chats)) chats.antiArabe = false
+  if (!('antitoxic' in chats)) chats.antitoxic = false
   if (!('autosticker' in chats)) chats.autosticker = false
   if (!('detect' in chats)) chats.detect = true
   if (!('autoread' in chats)) chats.autoread = true
@@ -531,8 +532,7 @@ let chats = global.db.data.chats[m.chat]
   antiNsfw: true, 
   antispam: true, 
   antiFake: false,
-  aprobar: false, 
-  antiArabe: false,
+  antitoxic: false, 
   autosticker: false, 
   detect: true, 
   autoread: false
@@ -1005,20 +1005,14 @@ conn.user.chat = m.chat // chat in user?????????
     }
     conn.sendPoll = (jid, name = '', values = [], selectableCount = 1) => { return conn.sendMessage(jid, { poll: { name, values, selectableCount }}) }
     
- 	/**
-	 * 
-	 * @param {*} jid 
-	 * @param {*} forceForward 
-	 * @param {*} options 
-	 * @returns 
-	 */
-	m.copyNForward = (jid = m.chat, forceForward = false, options = {}) => conn.copyNForward(jid, m, forceForward, options)
     /**
     * a normal reply
     */
     m.reply = (text, chatId, options) => conn.sendMessage(chatId ? chatId : m.chat, { text: text }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100, detectLinks: false, thumbnail: global.thumb, ...options })
 
 m.react = (text, key, options) => conn.sendMessage(m.chat, { react: {text, key: m.key }})
+
+m.copyNForward = (jid = m.chat, forceForward = false, options = {}) => conn.copyNForward(jid, true, {readViewOnce: true})
 
 //m.react = (text, chatId, key, options) => conn.relayMessage(chatId ? chatId : m.chat, {reactionMessage: { key: m.key, text, }}, { messageId: m.key.id })
 
