@@ -44,15 +44,14 @@ conn.sendMessage(m.chat, {image: imagen1, caption: stateRun, contextInfo:{ menti
 if (command == 'owner' || command == 'creador' || command == 'contacto') {
 let vcard = `BEGIN:VCARD\nVERSION:3.0\nN:;PROPIETARIO/OWNER DEL BOT 👑;;;\nFN:OWNER\nORG:PROPIETARIO/OWNER DEL BOT 👑\nTITLE:\nitem1.TEL;waid=5492266466080:+54 9 2266 46-6080\nitem1.X-ABLabel:PROPIETARIO/OWNER DEL BOT👑\nX-WA-BIZ-DESCRIPTION:ᴇsᴄʀɪʙɪ sᴏʟᴏ ᴘᴏʀ ᴄᴏsᴀs ᴅᴇʟ ʙᴏᴛ.\nX-WA-BIZ-NAME:PROPIETARIO/OWNER DEL BOT 👑\nEND:VCARD`
 let a = await conn.sendMessage(m.chat, { contacts: { displayName: 'ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ 👑', contacts: [{ vcard }] }}, {quoted: m})
-await conn.sendMessage(m.chat, { text : `${lenguaje['smsWel']()} @${sender.split("@")[0]}, ${lenguaje.info.text12}`, mentions: [sender]}, { quoted: a, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+await conn.sendMessage(m.chat, { text : `${lenguaje['smsWel']()} @${sender.split("@")[0]}, ${lenguaje.info.text12}\n\n${fb}`, mentions: [sender]}, { quoted: a, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }
 
 if (command == 'grupos' || command == 'grupoficiales') {
 //const grupp = Math.floor(Math.random() * 70);
-let amix = 'https://chat.whatsapp.com/BkU9t4dkJnEBKKhBjEzQf8'
 let a = `${pickRandom([nn, nn2, nn3, nn4, nn5, nn6, nna, nn7, nn8, multi])}`
 let imagen = `${pickRandom([imagen1, imagen2, imagen3])}`
-conn.sendMessage(m.chat, { text: `${lenguaje.info.text13}\n1) ${nn}\n\n2) ${nn2}\n\n${lenguaje.info.text14}\n• ${nn3}\n\n• ${nn4}\n\n• ${nn5}\n\n• ${multi}\n\n${lenguaje.info.text15}\n• ${nn6}\n\n${lenguaje.info.text16}\n• ${nna}\n\n${lenguaje.info.text17}\n• ${nn7}\n\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n${lenguaje.info.text18}\n\n*⇶⃤꙰𝑬𝒏𝒍𝒂𝒄𝒆 𝒍𝒐𝒍𝒊𝒃𝒐𝒕ꦿ⃟⃢*\n${nn8}\n\nPrinces kiara : (  ┞⃞࠘🇧🇷̷̸̶᪵᩵᪰ 𝄈  𝐅࣭𝐌̶𝐋𝐀᪵.  𝐊𝐍̶𝚺࣪𝐙࠘𝐄𝐕𝐈𝐂)\n${amix}\n\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n\n${lenguaje.info.text19}`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: a}}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+conn.sendMessage(m.chat, { text: `${lenguaje.info.text13}\n1) ${nn}\n\n2) ${nn2}\n\n${lenguaje.info.text14}\n• ${nn3}\n\n• ${nn4}\n\n• ${nn5}\n\n• ${multi}\n\n${lenguaje.info.text15}\n• ${nn6}\n\n${lenguaje.info.text16}\n• ${nna}\n\n${lenguaje.info.text17}\n• ${nn7}\n\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n${lenguaje.info.text18}\n\n*⇶⃤꙰𝑬𝒏𝒍𝒂𝒄𝒆 𝒍𝒐𝒍𝒊𝒃𝒐𝒕ꦿ⃟⃢*\n${nn8}\n\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n\n${lenguaje.info.text19}`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: a}}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 if (command == 'instalarbot' || command == 'crearbot') {
 conn.sendMessage(m.chat, { text: `${lenguaje.info.text20(fb, md)}`,

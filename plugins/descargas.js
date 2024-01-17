@@ -8,7 +8,7 @@ const cheerio = require('cheerio')
 const yts = require('yt-search') 
 const ytdl = require('ytdl-core') 
 const {youtubedl, youtubedlv2} = require('@bochilteam/scraper') 
-const { smsg, fetchBuffer, getBuffer, buffergif, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getFile, getRandom, msToTime, downloadMediaMessage, convertirMsADiasHorasMinutosSegundos} = require('../libs/fuctions')
+const { smsg, fetchBuffer, getBuffer, buffergif, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getFile, getRandom, msToTime, downloadMediaMessage} = require('../libs/fuctions')
 const { ytmp4, ytmp3, ytplay, ytplayvid } = require('../libs/youtube') 
 const {sizeFormatter} = require('human-readable') 
 const formatSize = sizeFormatter({
@@ -342,21 +342,25 @@ m.reply(`${result4}`)
    mediaUrl: md,  
  sourceUrl: md }}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
  db.data.users[m.sender].limit -= 2
-m.reply('2 ' + info.limit)}
+m.reply('2 ' + info.limit)}}
 
-if (command == 'facebook' || command == 'fb') {
+async function descarga2(m, command, text, args, conn, lolkeysapi) {
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
+if (command == 'facebook' || command == 'fb') { 
 if (!text) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} https://fb.watch/ncowLHMp-x/?mibextid=rS40aB7S9Ucbxw6v`)
+if (!args[0].match(/www.facebook.com|fb.watch|web.facebook.com|business.facebook.com|video.fb.com/g)) return m.reply(`Error`) 
+m.react("📥") 
 conn.fakeReply(m.chat, `${lenguaje.lengua.espere}`, '0@s.whatsapp.net', 'No haga spam')
 try {
-const Rres = await fetch(`https://api.lolhuman.xyz/api/facebook?apikey=${lolkeysapi}&url=${args[0]}`);
-const Jjson = await Rres.json();
-let VIDEO = Jjson.result[0];
-if (VIDEO == '' || !VIDEO || VIDEO == null) VIDEO = Jjson.result[1];
-conn.sendMessage(m.chat, {video: {url: VIDEO}, caption: `${lenguaje.descargar.text16}`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
-db.data.users[m.sender].limit -= 1
-m.reply('1 ' + info.limit)
-} catch {
-m.reply(info.error)}}
+let res = await fetch(`https://api.lolhuman.xyz/api/facebook?apikey=${lolkeysapi}&url=${args[0]}`)
+let _json = await res.json()
+vid = _json.result[0]
+if (vid == '' || !vid || vid == null) vid = _json.result[1]
+await conn.sendMessage(m.chat, {video: {url: vid}, caption: `${lenguaje.descargar.text16}`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+} catch (e) {
+m.reply(info.error)
+console.log(e)}}
 
 if (command == 'instagram' || command == 'ig') {
 if (!text) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} https://www.instagram.com/p/CCoI4DQBGVQ/?igshid=YmMyMTA2M2Y=`)
@@ -414,7 +418,7 @@ const {sizeFormatter} = require('human-readable')
 const formatSize = sizeFormatter({
   std: 'JEDEC', decimalPlaces: 2, keepTrailingZeroes: false, render: (literal, symbol) => `${literal} ${symbol}B`});
 m.react("📥") 
-if (!args[0]) return m.reply(`${lenguaje.lengua.ejem}\n*𝘌𝘑𝘌𝘔𝘗𝘓𝘖:* ${prefix + command} https://drive.google.com/file/d/1dmHlx1WTbH5yZoNa_ln325q5dxLn1QHU/view*`) 
+if (!args[0]) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} https://drive.google.com/file/d/1dmHlx1WTbH5yZoNa_ln325q5dxLn1QHU/view*`) 
 try {
 GDriveDl(args[0]).then(async (res) => {
  m.reply(lenguaje.descargar.text10);
@@ -554,7 +558,7 @@ async function ttimg(link) {
     };
 };
 
-module.exports = { descarga }
+module.exports = { descarga, descarga2}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
