@@ -41,7 +41,7 @@
    "similarity": "^1.2.1",
    "performance-now": "^2.1.0",  
    "fluent-ffmpeg": "^2.1.2",
-   "node-fetch": "^3.2.0",
+   "node-fetch": "2.x",
    "moment": "^2.29.4",
    "moment-timezone": "^0.5.43",
    "yargs": "^17.3.1",
