@@ -64,8 +64,7 @@ others: {},
 sticker: {},
 ...(global.db.data || {})}
   global.db.chain = _.chain(global.db.data)}
-loadDatabase() //Gracias aiden pro 😎 
-//skid chinga tu madre :v
+loadDatabase() //@aidenlogin
 
 if (global.db) setInterval(async () => {
 if (global.db.data) await global.db.write()
@@ -175,8 +174,6 @@ const question = (text) => new Promise((resolve) => rl.question(text, resolve))
 let { version, isLatest } = await fetchLatestBaileysVersion()
 const msgRetryCounterCache = new NodeCache() //para mensaje de reintento, "mensaje en espera"
 
-async function startBot() {
-
 //codigo adaptado por: https://github.com/GataNina-Li && https://github.com/elrebelde21
 let opcion
 if (methodCodeQR) {
@@ -203,6 +200,8 @@ if (!/^[1-2]$/.test(opcion)) {
 console.log(chalk.bold.redBright(`NO SE PERMITE NÚMEROS QUE NO SEAN ${chalk.bold.greenBright("1")} O ${chalk.bold.greenBright("2")}, TAMPOCO LETRAS O SÍMBOLOS ESPECIALES.\n${chalk.bold.yellowBright("CONSEJO: COPIE EL NÚMERO DE LA OPCIÓN Y PÉGUELO EN LA CONSOLA.")}`))
 }} while (opcion !== '1' && opcion !== '2' || fs.existsSync(`./sessions/creds.json`))
 }
+
+async function startBot() {
 
 const sock = makeWASocket({
 logger: pino({ level: 'silent' }),
