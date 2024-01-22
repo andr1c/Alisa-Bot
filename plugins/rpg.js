@@ -78,7 +78,7 @@ conn.sendMessage(m.chat, { text: lenguaje.smsReg8(), contextInfo:{forwardingScor
 }
 
 if (command == 'unreg') {
-const {createHash} = require('crypto') 
+const {createHash} = require('crypto')
 if (!args[0]) return m.reply(lenguaje.rpg.unreg) 
 const user = global.db.data.users[m.sender];
 const sn = createHash('md5').update(m.sender).digest('hex');
