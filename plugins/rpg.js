@@ -60,7 +60,7 @@ conn.sendMessage(m.chat, { text: lenguaje.smsReg7(name, user, age, time, date, s
 contextInfo:{
 mentionedJid:[name],
 forwardingScore: 9999999,
-isForwarded: true, 
+isForwarded: false, 
 "externalAdReply": {
 "showAdAttribution": true,
 "containsAutoReply": true,
@@ -72,9 +72,9 @@ isForwarded: true,
 "sourceUrl": md}}},
 { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 await delay(2 * 2000)
-conn.sendMessage(m.chat, { text: sn, contextInfo:{forwardingScore: 9999999, isForwarded: true, }}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+conn.sendMessage(m.chat, { text: sn, contextInfo:{forwardingScore: 9999999, isForwarded: false, }}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 await delay(2 * 2000)
-conn.sendMessage(m.chat, { text: lenguaje.smsReg8(), contextInfo:{forwardingScore: 9999999, isForwarded: true, }}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+conn.sendMessage(m.chat, { text: lenguaje.smsReg8(), contextInfo:{forwardingScore: 9999999, isForwarded: false, }}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }
 
 if (command == 'unreg') {
