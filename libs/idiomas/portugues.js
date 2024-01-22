@@ -223,7 +223,7 @@ https://panel.vortexuscloud.com
 • https://whatsapp.com/channel/0029Va8ZD6O3mFXxTPl1m13A`, 
 text21: `*Digite o comando com falha*\n\n*Exemplo:`, 
 text22: `O relato foi enviado ao meu criador, entraremos em contato se necessário, se for falso será ignorado e bloqueado do bot*`, 
-text23: `*╼╼╼╼╼╼╼[ 💖 doação 💖 ]╾╾╾╾╾╾╾╾*\n\n* Olá 👋, se você quiser apoiar este projeto, poderá fazê-lo através de doações voluntárias através do Mercado Pago Arg.*\n\n╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍\n\n*❇️Mercado pago:*\n*• Alias :* elrebelde21\n*• CVU :* 0000003100059201491917`, 
+text23: `*╼╼╼╼╼╼╼[ 💖 doação 💖 ]╾╾╾╾╾╾╾╾*\n\n* Olá 👋, se você quiser apoiar este projeto, poderá fazê-lo através de doações voluntárias através do Mercado Pago Arg.*\n\n╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍\n\n*❇️Mercado pago:*\n*• Alias :* OficialGB\n*• CVU :* 0000003100059201491917`, 
 text24: `*💖 Você também pode compartilhar o seguinte como uma demonstração de apoio 💕*\n\n*💖 Apoie o repositório com uma estrelinha, obrigado 🙏💕*`, 
 text25: `┗❴ ⚠ AVISO ⚠ ❵┛\n\nÉ proibido marcar meu criador/desenvolvimento. Se você tiver alguma sugestão sobre o Bot, escreva para mim em particular.` }
 
@@ -374,7 +374,7 @@ Você pode solicitá-lo fazendo uma doação voluntária através do Mercado Pag
 Através do nosso Mercado de Pagamentos.
 
 ❇️Mercado de pagamento:
-• Alias: elrebelde21
+• Alias: OficialGB
 • CVU: 0000003100059201491917
 
 *⚡ Não posso doar, existe outra opção de conseguir um bot para meu Grupo?*

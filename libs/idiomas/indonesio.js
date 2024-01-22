@@ -223,7 +223,7 @@ https://panel.vortexuscloud.com
 • https://whatsapp.com/channel/0029Va8ZD6O3mFXxTPl1m13A`, 
 text21: `*Masukkan perintah dengan kesalahan*\n\n*Contoh:`,  
 text22: `Laporan telah dikirim ke pencipta saya, kami akan menghubungi Anda jika perlu, jika salah akan diabaikan dan diblokir dari bot*`,  
-text23: `*╼╼╼╼╼╼╼[ 💖 sumbangan 💖 ]╾╾╾╾╾╾╾╾*\n\n*Halo 👋, jika Anda ingin mendukung proyek ini, Anda dapat melakukannya melalui donasi sukarela melalui Mercado Pago Arg.*\n\n╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍\n\n*❇️Mercado pago:*\n*• Alias :* elrebelde21\n*• CVU :* 0000003100059201491917`, 
+text23: `*╼╼╼╼╼╼╼[ 💖 sumbangan 💖 ]╾╾╾╾╾╾╾╾*\n\n*Halo 👋, jika Anda ingin mendukung proyek ini, Anda dapat melakukannya melalui donasi sukarela melalui Mercado Pago Arg.*\n\n╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍\n\n*❇️Mercado pago:*\n*• Alias :* OficialGB\n*• CVU :* 0000003100059201491917`, 
 text24: `*💖 Anda juga dapat membagikan hal berikut sebagai bentuk dukungan 💕*\n\n*💖 Dukung repositori dengan sedikit bintang, terima kasih 🙏💕*`,  
 text25: `┗❴ ⚠ PERINGATAN ⚠ ❵┛\n\nDilarang menandai pencipta/pengembangan jika Anda memiliki saran mengenai Bot tulis ke pesan pribadi mereka` }
  
@@ -374,7 +374,7 @@ Anda dapat memintanya dengan memberikan sumbangan sukarela melalui Mercado Pago 
 Melalui Pasar Pembayaran kami.
 
 ❇️Pasar pembayaran:
-• Alias: elrebelde21
+• Alias: OficialGB
 • CVU: 0000003100059201491917
 
 *⚡ Saya tidak bisa berdonasi, apakah ada opsi lain untuk mendapatkan bot untuk Grup saya?*
