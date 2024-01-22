@@ -73,7 +73,7 @@ isForwarded: false,
 
 if (command == 'ping') {
 var timestamp = speed();  
-var latensi = speed() - timestamp  
+var latensi = speed() - timestamp
 conn.sendMessage(from, { text: `*Pong 🏓  ${latensi.toFixed(4)}*` }, { quoted: msg, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }
 
