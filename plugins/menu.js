@@ -386,7 +386,7 @@ mentionedJid:[sender, numBot],
 "title": wm,   
 "containsAutoReply": true,  
 "mediaType": 1,   
-"thumbnail": imagen2, 
+"thumbnail": imagen2,
 sourceUrl: `${pickRandom([nna, nn, md, yt])}`
 }}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}) 
 }
