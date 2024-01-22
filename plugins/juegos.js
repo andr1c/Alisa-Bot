@@ -45,7 +45,7 @@ let preg = pr[Math.floor(Math.random() * pr.length)]
 m.reply(`${lenguaje.juegos.text1}  ${text}\n${lenguaje.juegos.text2} ${preg}`)}
 
 if (command == 'gay') {
-if (!m.isGroup) return m.reply(info.group) 
+if (!m.isGroup) return m.reply(info.group)
 let vn = './media/gay2.mp3'
 m.react('🏳‍🌈') 
 let member = participants.map(u => u.id)
