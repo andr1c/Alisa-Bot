@@ -336,7 +336,7 @@ mentionedJid:[m.sender],
 "containsAutoReply": false,
 "renderLargerThumbnail": false,  
 "title": lenguaje['smsAvisos'](), 
-"mediaType": 1,   
+"mediaType": 1,  
 "thumbnail": imagen1,  
 "mediaUrl": md,  
 "sourceUrl": md
