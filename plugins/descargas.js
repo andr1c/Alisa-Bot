@@ -399,7 +399,7 @@ m.reply(info.error)}}
 
 if (command == 'apk' || command == 'modoapk') {
 let { search, download } = require('aptoide-scraper')
-if (!text) return m.reply(lenguaje.descargar.text24) 
+if (!text) return m.reply(lenguaje.descargar.text24)
 try {     
 let searchA = await search(text); 
 let data5 = await download(searchA[0].id); 
