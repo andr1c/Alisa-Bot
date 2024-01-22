@@ -207,7 +207,8 @@ const groupAdmins = participants.filter((p) => p.admin);
 const listAdmin = groupAdmins.map((v, i) => `${i + 1}. @${v.id.split('@')[0]}`).join('\n➥ ');
 let delet = m.key.participant
 let bang = m.key.id
-user = m.sender
+//user = m.sender
+const user = global.db.data.users[m.sender];
 conn.sendMessage(m.chat, {text: `${lenguaje['smsAntiLink']()} @${user.split("@")[0]} ${lenguaje['smsAntiLink2']()}`, mentions: [user], },{quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 if (!isBotAdmins) return conn.sendMessage(m.chat, { text: `${lenguaje['smsAntiLink3']()}\n${listAdmin}\n\n${lenguaje['smsAntiLink4']()}`, mentions: participants.map(a => a.id) }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})  
 let gclink = (`https://chat.whatsapp.com/`+await conn.groupInviteCode(m.chat))
@@ -229,7 +230,7 @@ if (isGroupAdmins) return
 const user = global.db.data.users[m.sender];
 const chat = global.db.data.chats[m.chat];
 const bot = global.db.data.settings[conn.user.jid] || {};
-const isToxic = budy.match;
+const isToxic = budy.match; 
 user.warn += 1;
 if (!(user.warn >= 4)) await conn.sendMessage(m.chat, {text: `Hey @${m.sender.split('@')[0]} decir la palabra *(${budy})* Esta prohibida En este grupo, No seas Toxico(a)\n\nADVERTENCIA\n⚠️ *${user.warn}/4*\n\n${botname}`, mentions: [m.sender]}, {quoted: m})
 if (user.warn >= 4) {
@@ -254,18 +255,16 @@ return }
 
 //----------------[ AUTOSTICKERS]--------------------
 if (global.db.data.chats[m.chat].autosticker) {  
-if (/image/.test(mime)) {  
 await conn.sendPresenceUpdate('composing', m.chat)
+if (/image/.test(mime) && !/webp/.test(mime)) {
 //m.reply(`_Calma crack estoy haciendo tu sticker 👏_\n\n_*Autosticker esta activado*_`)   
-media = await quoted.download()  
-let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: botname, body: `h`, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}}, { quoted: m })
-await fs.unlinkSync(encmedia)   
-} else if (/video/.test(mime)) {  
+let media = await quoted.download()
+await conn.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: botname, body: `h`, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}}, { quoted: m })
+console.log(`Auto sticker detected`)
+} else if (/video/.test(mime)) {
 if ((quoted.msg || quoted).seconds > 25) return reply(lenguaje['smsAutoSicker']())  
-media = await quoted.download()  
-let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: goblal.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: wm, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}}, { quoted: m })
-await new Promise((resolve) => setTimeout(resolve, 2000));   
-await fs.unlinkSync(encmedia)  
+let media = await quoted.download()
+await conn.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: goblal.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: wm, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}}, { quoted: m })
 }}
 
 //----------------[ AUTOLEVELUP/AUTONIVEL ]-------------------
@@ -383,7 +382,7 @@ break
 //Grupos 
 case 'grupo': case 'delete': case 'del': case 'join': case 'unete': case 'hidetag': case 'notificar': case 'tag': case 'setppgroup': case 'setpp': case 'setppname': case 'nuevonombre': case 'newnombre': case 'setdesc': case 'descripción': case 'anularlink': case 'resetlink': case 'revoke': case 'add': case 'agregar': case 'invitar': case 'kick': case 'echar': case 'sacar': case 'promote': case 'darpoder': case 'demote': case 'quitarpoder': case 'link': case 'linkgc': case 'banchat': case 'tagall': case 'invocar': case 'todos': case 'admins': case 'administradores': case 'infogrupo': case 'groupinfo': case 'warn': case 'advertencia': case 'unwarn': case 'quitardvertencia': case 'listwarn': case 'enline': case 'online': case 'listonine': case 'listaenlinea': case 'enlinea': case 'listonline': grupo(m, command, isGroupAdmins, text, conn, participants, isBotAdmins, args, isCreator, delay, sender, quoted, mime, from, isCreator, groupMetadata, fkontak, delay) 
 break    
-   
+
 //juegos 
 case 'simi': case 'bot': case 'pregunta': case 'preg': case 'gay': case 'pareja': case 'formarpareja': case 'follar': case 'violar': case 'coger': case 'doxear': case 'doxxeo': case 'personalidad': case 'top': case 'topgays': case 'topotakus': case 'racista': case 'love': case 'ship': case 'formartrio': case 'formapareja5': game(m, budy, command, text, pickRandom, pushname, conn, participants, sender, who, body, sendImageAsUrl)  
 break                   
@@ -391,58 +390,7 @@ case 'verdad': case 'reto': case 'piropo': game2(m, command, sendImageAsUrl, pic
 break
 case 'slot': case 'apuesta':  case 'fake': case 'ppt': case 'suit': game3(m, command, conn, args, prefix, msToTime, text, body, from, sender, quoted, pushname)
 break    
-               
-/*case 'horario': {
-const moment = require('moment-timezone') 
-  const tzPE = moment().tz('America/Lima').format('DD/MM HH:mm');
-  const tzMX = moment().tz('America/Mexico_City').format('DD/MM HH:mm');
-  const tzBO = moment().tz('America/La_Paz').format('DD/MM HH:mm');
-  const tzCL = moment().tz('America/Santiago').format('DD/MM HH:mm');
-  const tzAR = moment().tz('America/Argentina/Buenos_Aires').format('DD/MM HH:mm');
-  const tzCO = moment().tz('America/Bogota').format('DD/MM HH:mm');
-  const tzEC = moment().tz('America/Guayaquil').format('DD/MM HH:mm');
-  const tzCR = moment().tz('America/Costa_Rica').format('DD/MM HH:mm');
-  const tzCU = moment().tz('America/Havana').format('DD/MM HH:mm');
-  const tzGT = moment().tz('America/Guatemala').format('DD/MM HH:mm');
-  const tzHN = moment().tz('America/Tegucigalpa').format('DD/MM HH:mm');
-  const tzNI = moment().tz('America/Managua').format('DD/MM HH:mm');
-  const tzPA = moment().tz('America/Panama').format('DD/MM HH:mm');
-  const tzUY = moment().tz('America/Montevideo').format('DD/MM HH:mm');
-  const tzVE = moment().tz('America/Caracas').format('DD/MM HH:mm');
-  const tzPY = moment().tz('America/Asuncion').format('DD/MM HH:mm');
-  const tzNY = moment().tz('America/New_York').format('DD/MM HH:mm');
-  const tzBR = moment().tz('America/Sao_Paulo').format('DD/MM HH:mm');
-  const tzAS = moment().tz('Asia/Jakarta').format('DD/MM HH:mm');
-  const tzAF = moment().tz('Africa/Malabo').format('DD/MM HH:mm');
-  await conn.sendMessage(m.chat, {text: `┏╼┅┅⪻ \`\`\`ZONA-HORARIA 🗺️\`\`\` ⪼┅┅┅┓
-┋• Perú       : ${tzPE}
-┋• México     : ${tzMX}
-┋• Bolivia    : ${tzBO}
-┋• Chile      : ${tzCL}
-┋• Argentina  : ${tzAR}
-┋• Colombia   : ${tzCO}
-┋• Ecuador    : ${tzEC}
-┋• Costa Rica : ${tzCR}
-┋• Cuba       : ${tzCU}
-┋• Guatemala  : ${tzGT}
-┋• Honduras   : ${tzHN}
-┋• Nicaragua  : ${tzNI}
-┋• Panamá     : ${tzPA}
-┋• Uruguay    : ${tzUY}
-┋• Venezuela  : ${tzVE}
-┋• Paraguay   : ${tzPY}
-┋• New York   : ${tzNY}
-┋• Brasil     : ${tzBR}
-┋• Asia       : ${tzAS}
-┋• África     : ${tzAF}
-┋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅
-┋${String.fromCharCode(8206).repeat(850)} 💻 *ᴢᴏɴᴀ ʜᴏʀᴀʀɪᴀ ᴅᴇʟ sᴇʀᴠɪᴅᴏʀ ᴀᴄᴛᴜᴀʟ:*
-┋ *[ ${Intl.DateTimeFormat().resolvedOptions().timeZone} ]*
-┋ *${moment().tz(Intl.DateTimeFormat().resolvedOptions().timeZone).format('DD/MM/YY HH:mm:ss')}*
-┗┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┉┛`}, {quoted: m});
-};
-break*/
-              
+                             
 //convertidores
 case 'bass': case 'blown': case 'deep': case 'earrape': case 'fast': case 'fat': case 'nightcore': case 'reverse': case 'robot': case 'slow': case 'smooth': case 'squirrel': efec(conn, command, mime, quoted, exec, prefix, m, from)  
 break   
@@ -511,6 +459,24 @@ break
 case 'bcgc': case 'bcgroup': case 'bc': case 'broadcast': case 'bcall': case 'block': case 'bloquear': case 'unblock': case 'desbloquear': case 'setcmd':  case 'addcmd': case 'delcmd': case 'listcmd': case 'añadirdiamantes': case 'dardiamantes': case 'addlimit': case 'añadirxp': case 'addexp': case 'addxp': owner(isCreator, m, command, conn, text, delay, fkontak, store, quoted, sender) 
 break 
 
+case 'fetch': case 'get': {
+if (!/^https?:\/\//.test(text)) return m.reply(' Comience *URL* con: http:// atau https://')
+const _url = new URL(text);
+const url = global.API(_url.origin, _url.pathname, Object.fromEntries(_url.searchParams.entries()), 'APIKEY');
+const res = await fetch(url);
+if (res.headers.get('content-length') > 100 * 1024 * 1024 * 1024) {
+throw `Content-Length: ${res.headers.get('content-length')}`;
+}
+if (!/text|json/.test(res.headers.get('content-type'))) return conn.sendFile(m.chat, url, 'file', text, m);
+let txt = await res.buffer();
+try {
+txt = format(JSON.parse(txt + ''));
+} catch (e) {
+txt = txt + '';
+} finally {
+m.reply(txt.slice(0, 65536) + '');
+}}
+break
 case 'banuser': {  
 if (!isCreator) return reply(info.owner)
 let who 
