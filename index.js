@@ -329,7 +329,7 @@ ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 sock.sendMessage(res.id, {text: lenguaje['smsAvisos2'](),  
 contextInfo:{  
 forwardingScore: 9999999,  
-isForwarded: true,   
+isForwarded: false,   
 mentionedJid:[m.sender],  
 "externalAdReply": {  
 "showAdAttribution": true,  
@@ -353,7 +353,7 @@ sock.sendMessage(res.id, {
 text: lenguaje['smsAvisos4'](),  
 contextInfo:{  
 forwardingScore: 9999999,  
-isForwarded: true,   
+isForwarded: false,   
 mentionedJid:[m.sender],  
 "externalAdReply": {  
 "showAdAttribution": true,  
@@ -376,7 +376,7 @@ ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 sock.sendMessage(res.id, {text: lenguaje['smsAvisos6'](),
 contextInfo:{  
 forwardingScore: 9999999,  
-isForwarded: true,   
+isForwarded: false,   
 mentionedJid:[m.sender],  
 "externalAdReply": {  
 "showAdAttribution": true,  
@@ -400,7 +400,7 @@ ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 sock.sendMessage(res.id, {text: lenguaje['smsAvisos7'](),  
 contextInfo:{  
 forwardingScore: 9999999,  
-isForwarded: true,   
+isForwarded: false,   
 mentionedJid:[m.sender],  
 "externalAdReply": {  
 "showAdAttribution": true,  
@@ -424,7 +424,7 @@ let text = `${lenguaje['smsAvisos8']()}\n${res.desc}`
 sock.sendMessage(res.id, {text: text,  
 contextInfo:{  
 forwardingScore: 9999999,  
-isForwarded: true,   
+isForwarded: false,   
 mentionedJid:[m.sender],  
 "externalAdReply": {  
 "showAdAttribution": true,  
@@ -448,7 +448,7 @@ let text = `${lenguaje['smsAvisos9']()}\n${res.subject}`
 sock.sendMessage(res.id, {text: text,  
 contextInfo:{  
 forwardingScore: 9999999,  
-isForwarded: true,   
+isForwarded: false,   
 mentionedJid:[m.sender],  
 "externalAdReply": {  
 "showAdAttribution": true,  
@@ -512,7 +512,7 @@ seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, {qu
 if (media === 'texto2')
 sock.sendMessage(anu.id, { text: `${lenguaje['smsWel7']()} ${lenguaje['smsWel']()} @${name.split("@")[0]} ${lenguaje['smsWel2']()}\n${lenguaje['smsWel8']()} ${metadata.subject}\n${lenguaje['smsWel9']()} ${miembros}\n${lenguaje['smsWel10']()} ${date}\n\n${lenguaje['smsWel11']()} \n\n${metadata.desc}`, contextInfo:{
 forwardingScore: 9999999,
-isForwarded: true, 
+isForwarded: false, 
 mentionedJid:[num],
 "externalAdReply": {"showAdAttribution": true,
 "containsAutoReply": true,
@@ -537,7 +537,7 @@ if (media === 'texto2')
 sock.sendMessage(anu.id, { text: `\`\`\`[!] C fue alv : @${name.split("@")[0]} 😹\`\`\``,
 contextInfo:{
 forwardingScore: 9999999,
-isForwarded: true, 
+isForwarded: false, 
 mentionedJid:[num],
 "externalAdReply": {"showAdAttribution": true,
 "containsAutoReply": true,
@@ -639,7 +639,7 @@ await delay(5 * 5000)
 sock.sendMessage(res, { text: `${pickRandom(['Hola me he conectado como un nuevo bot 🥳', 'Hola 👋😄 me presento soy un nuevo bot activo 🚀\n\nPoner #menu para vez mi comando\n\nᴺᵒ ʰᵃᵍᵃⁿ ˢᵖᵃᵐ ᵈᵉˡ ᶜᵒᵐᵃⁿᵈᵒ', 'Hola chavales me he conectado como un nuevo botsito (NovaBot-MD) 😎'])}`, 
 contextInfo:{
 forwardingScore: 9999999, 
-isForwarded: true
+isForwarded: false
 }})*/
 await sock.groupAcceptInvite(global.nna2)
 sock.user.connect = true
