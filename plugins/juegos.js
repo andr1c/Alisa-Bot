@@ -59,7 +59,7 @@ let jawab = `@${who.split("@")[0]} Es 🏳️‍🌈 ${random}% Gay\n\n${ga}`
 let ments = [me, jodoh]
 conn.sendMessage(m.chat, { image: { url: global.API('https://some-random-api.com', '/canvas/gay', { 
 avatar: await conn.profilePictureUrl(who, 'image').catch((_) => 'https://telegra.ph/file/24fa902ead26340f3df2c.png'), 
-   })}, caption: jawab, contextInfo:{ mentionedJid:[who], forwardingScore: 9999999, isForwarded: true, }}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+   })}, caption: jawab, contextInfo:{ mentionedJid:[who], forwardingScore: 9999999, isForwarded: false, }}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 conn.sendAudio(m.chat, vn, m)}
 
 if (command == 'pareja' || command == 'formarpareja') {
@@ -72,7 +72,7 @@ conn.sendMessage(m.chat, { text: `*@${jodoh.split('@')[0]} ${lenguaje.juegos.tex
 contextInfo:{
 mentionedJid:[jodoh, love],
 forwardingScore: 9999999,
-isForwarded: true, 
+isForwarded: false, 
 "externalAdReply": {
 "showAdAttribution": true,
 "containsAutoReply": true,
@@ -94,7 +94,7 @@ let me = m.sender
 let a = member[Math.floor(Math.random() * member.length)]
 let b = member[Math.floor(Math.random() * member.length)]
 let c = member[Math.floor(Math.random() * member.length)]
-conn.sendMessage(m.chat, { text: `🥵 Hey!!! @${a.split('@')[0]}, @${b.split('@')[0]} y @${c.split('@')[0]} ${lenguaje.juegos.text9}`, contextInfo:{mentionedJid:[a, b, c], forwardingScore: 9999999, isForwarded: true, }}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+conn.sendMessage(m.chat, { text: `🥵 Hey!!! @${a.split('@')[0]}, @${b.split('@')[0]} y @${c.split('@')[0]} ${lenguaje.juegos.text9}`, contextInfo:{mentionedJid:[a, b, c], forwardingScore: 9999999, isForwarded: false, }}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 if (command == 'formapareja5') {
 let member = participants.map(u => u.id)
@@ -134,7 +134,7 @@ const top = `*${x} Top 5 ${text} ${x}*
 conn.sendMessage(m.chat, { text: top, contextInfo:{
 mentionedJid:[a, b, c, d, e],
 forwardingScore: 9999999,
-isForwarded: true, }}, { quoted: m })
+isForwarded: false, }}, { quoted: m })
 conn.sendMessage(m.chat, { audio: { url: vn }, fileName: 'error.mp3', mimetype: 'audio/mp4', ptt: true }, { quoted : m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 if (command == 'topgays') { 
@@ -166,7 +166,7 @@ const top = `*🌈TOP 10 GAYS/LESBIANAS DEL GRUPO🌈*
 conn.sendMessage(m.chat, { text: top, contextInfo:{
 mentionedJid:[a, b, c, d, e, f, g, h, i, j],
 forwardingScore: 9999999,
-isForwarded: true, }}, { quoted: m })
+isForwarded: false, }}, { quoted: m })
 await conn.sendMessage(m.chat, { audio: { url: vn }, fileName: 'error.mp3', mimetype: 'audio/mp4', ptt: true }, { quoted : m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 if (command == 'topotakus') {
 let member = participants.map(u => u.id)
@@ -197,7 +197,7 @@ const top = `*🌸 TOP 10 OTAKUS DEL GRUPO 🌸*
 conn.sendMessage(m.chat, { text: top, contextInfo:{
 mentionedJid:[a, b, c, d, e, f, g, h, i, j],
 forwardingScore: 9999999,
-isForwarded: true, }}, { quoted: m })
+isForwarded: false, }}, { quoted: m })
 await conn.sendMessage(m.chat, { audio: { url: vn }, fileName: 'error.mp3', mimetype: 'audio/mp4', ptt: true }, { quoted : m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 if (command == 'racista') {
