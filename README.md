@@ -27,6 +27,10 @@
     
 <a href="wa.me/5492266466080" target="blank"><img src="https://img.shields.io/badge/Creador-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" /></a>
 
+### 🟢Bot Oficial 
+<a href="https://wa.me/message/4ZOKKOZTPLUXJ1" target="blank"><img src="https://img.shields.io/badge/NovaBot oficial-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" />
+</a>
+
 ### Quiere probar la funciones del bot, antes de instalar, probar el bot aquí
 
 [![Grupos](https://img.shields.io/badge/Grupos-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/Em4Byf4w5VgHObPvZQlfnM) 
