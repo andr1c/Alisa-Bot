@@ -27,7 +27,7 @@
     
 <a href="wa.me/5492266466080" target="blank"><img src="https://img.shields.io/badge/Creador-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" /></a>
 
-### 🟢Bot Oficial 
+### `🟢 Bot Oficial 🟢`
 <a href="https://wa.me/message/4ZOKKOZTPLUXJ1" target="blank"><img src="https://img.shields.io/badge/NovaBot oficial-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" />
 </a>
 
