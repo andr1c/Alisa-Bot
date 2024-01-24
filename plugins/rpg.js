@@ -14,6 +14,8 @@ const {createHash} = require('crypto')
 const { canLevelUp, xpRange } = require('../libs/levelling.js')
 let minar = `${pickRandom(['Que pro 😎 has minado',
 '🌟✨ Genial!! Obtienes', 'WOW!! eres un(a) gran Minero(a) ⛏️ Obtienes', 'Has Minado!!', '😲 Lograste Minar la cantidad de', 'Tus Ingresos subiran gracias a que minaste', '⛏️⛏️⛏️⛏️⛏️ Minando', '🤩 SII!!! AHORA TIENES', 'La minaria esta de tu lado, por ello obtienes', '😻 La suerte de Minar', '♻️ Tu Mision se ha cumplido, lograste minar', '⛏️ La Mineria te ha beneficiado con', '🛣️ Has encontrado un Lugar y por minar dicho lugar Obtienes', '👾 Gracias a que has minado tus ingresos suman', 'Felicidades!! Ahora tienes','⛏️⛏️⛏️ Obtienes', '⛏️ has obtenido'])}` 
+let robar = `${pickRandom(['Robaste un Banco 🏦 y obtuviste', 'Negociarte con el jefe de la mafia y obtuvist𝐞 recompensa de :', 'Casi te atrapa la policía pero lograste robar una cantidad valiosa de 💰. !Te cuidado la próxima vez! obtuviste:', 'Los mafiosos te han pagado :', 'Le has robado al Administrador del Grupo', 'Le robarte a tu presidente una sumar de :', 'le robarte a un famoso un valor de :'])}` 
+let robmal = `${pickRandom(['*LA POLICIA TE VIO 🙀👮‍♂️ PERDISTE', 'Fuiste a robar un banco 🏦 y tu ayudarte que vendio a la policía, perdiste', 'No pudiste escapar de la Policía 🚔🤡, perdiste :'])}` 
 
 let mentionUser = [...new Set([...(m.mentionedJid || []), ...(m.quoted ? [m.quoted.sender] : [])])]
 for (let jid of mentionUser) {
@@ -78,7 +80,7 @@ conn.sendMessage(m.chat, { text: lenguaje.smsReg8(), contextInfo:{forwardingScor
 }
 
 if (command == 'unreg') {
-const {createHash} = require('crypto')
+const {createHash} = require('crypto') 
 if (!args[0]) return m.reply(lenguaje.rpg.unreg) 
 const user = global.db.data.users[m.sender];
 const sn = createHash('md5').update(m.sender).digest('hex');
@@ -168,6 +170,25 @@ global.db.data.users[m.sender].robs = new Date * 1;
  } catch {
 m.reply(lenguaje.rpg.rob7)}}
 
+if (command == 'crime' || command == 'Crime') {
+const date = global.db.data.users[m.sender].crime + 3600000; //3600000 = 1 hs
+if (new Date - global.db.data.users[m.sender].crime < 3600000) return m.reply(`*《🚓︎》LA POLICIA ESTA VIGILANDO EN ESTE MOMENTO, VUELVE EN:* ${msToTime(date - new Date())}`)
+const exp = Math.floor(Math.random() * 9000)
+const diamond = Math.floor(Math.random() * 90)
+const money = Math.floor(Math.random() * 9000)
+
+if (global.db.data.users[m.sender].exp < 0) return m.reply(`《💰》${robar} ${exp} XP`).catch(global.db.data.users[m.sender].exp += exp)
+if (global.db.data.users[m.sender].limit < 0) return m.reply(`《💰》${robar} ${diamond} 💎 Diamante`).catch(global.db.data.users[m.sender].limit += diamond)
+if (global.db.data.users[m.sender].money < 0) return m.reply(`《💰》${robar} ${money} 🪙 Coins`).catch(global.db.data.users[m.sender].money += money) 
+
+let or = ['text', 'text2', 'text3', 'text4']; 
+let media = or[Math.floor(Math.random() * 4)]
+global.db.data.users[m.sender].crime = new Date * 1;
+if (media === 'text') m.reply(`《💰》${robar} ${exp} XP`).catch(global.db.data.users[m.sender].exp += exp) 
+if (media === 'text2') m.reply(`《🚓》${robmal} ${exp} XP`).catch(global.db.data.users[m.sender].exp -= exp) 
+if (media === 'text3') m.reply(`《💰》${robar}\n\n💎 ${diamond} diamante\n🪙${money} Coins`).catch(global.db.data.users[m.sender].limit += diamond).catch(global.db.data.users[m.sender].money += money) 
+if (media === 'text4') m.reply(`《🚓》${robmal}\n\n💎${diamond} diamante\n🪙 ${money} coins`).catch(global.db.data.users[m.sender].limit -= diamond).catch(global.db.data.users[m.sender].money -= money)}
+
 if (command == 'buy' || command == 'buyall') {
 let count = command.replace(/^buy/i, '');
 count = count ? /all/i.test(count) ? Math.floor(global.db.data.users[m.sender].exp / 450) : parseInt(count) : args[0] ? parseInt(args[0]) : 1;
@@ -240,10 +261,7 @@ const money = Math.floor(Math.random() * 800)
 global.db.data.users[m.sender].limit += limit;
 global.db.data.users[m.sender].money += money
 global.db.data.users[m.sender].exp += exp
-m.reply(`${lenguaje.rpg.text15}
-🆙 *xᴘ* : ${exp}
-💎 *ᴅɪᴀᴍᴀɴᴛᴇ :* ${limit}
-🪙 *ᴄᴏɪɴs :* ${money}`)
+m.reply(`${lenguaje.rpg.text15}\n🆙 *xᴘ* : ${exp}\n💎 *ᴅɪᴀᴍᴀɴᴛᴇ :* ${limit}\n🪙 *ᴄᴏɪɴs :* ${money}`)
 global.db.data.users[m.sender].lastclaim = new Date * 1
 }
 
@@ -262,7 +280,7 @@ ${lenguaje.rpg.pp7} ${registered ? 'Si': 'No'}`}, { quoted: fkontak, ephemeralEx
 m.react(done)}
 
 if (command == 'levelup' || command == 'nivel') {
-let name = conn.getName(m.sender);  
+//let name = conn.getName(m.sender);  
 let user = global.db.data.users[m.sender]; 
 if (!canLevelUp(user.level, user.exp, global.multiplier)) { 
 let {min, xp, max} = xpRange(user.level, global.multiplier);

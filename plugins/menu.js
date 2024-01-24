@@ -319,6 +319,7 @@ ${lenguaje.menu.text12}
 ├❥ᰰຼ ❏ ${prefix}minar _(Para minar exp)_
 ├❥ᰰຼ ❏ ${prefix}robar
 ├❥ᰰຼ ❏ ${prefix}rob _(Roba exp algun usuarios)_
+├❥ᰰຼ ❏ ${prefix}crime
 ├❥ᰰຼ ❏ ${prefix}trabajar
 ├❥ᰰຼ ❏ ${prefix}work _(Trabaja y ganas exp)_
 ├❥ᰰຼ ❏ ${prefix}buy _(Comprar mas diamantes (limit)_
@@ -378,7 +379,7 @@ ${lenguaje.menu.text12}
 conn.sendMessage(m.chat, { text: menu,  
 contextInfo:{  
 forwardingScore: 9999999,  
-isForwarded: false,   
+isForwarded: true,   
 mentionedJid:[sender, numBot],  
 "externalAdReply": {  
 "showAdAttribution": true,  
@@ -386,7 +387,7 @@ mentionedJid:[sender, numBot],
 "title": wm,   
 "containsAutoReply": true,  
 "mediaType": 1,   
-"thumbnail": imagen2,
+"thumbnail": imagen2, 
 sourceUrl: `${pickRandom([nna, nn, md, yt])}`
 }}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}) 
 }
@@ -397,10 +398,10 @@ let menu2 = `${lenguaje.menu.text13}\n\na\nfeliz navidad\nMerry Christmas\nFeliz
 conn.sendMessage(m.chat, { text: menu2}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 if (command == 'nuevo' || command == 'extreno') {
-conn.sendMessage(m.chat, { text: lenguaje.menu.text15(vs), contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: false, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn, md, yt])}`}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+conn.sendMessage(m.chat, { text: lenguaje.menu.text15(vs), contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn, md, yt])}`}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 if (command == 'reglas') {
-conn.sendMessage(m.chat, { text: lenguaje.menu.text16, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: false, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn, md, yt])}`}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}}
+conn.sendMessage(m.chat, { text: lenguaje.menu.text16, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn, md, yt])}`}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}}
 
 module.exports = { menu }
 
