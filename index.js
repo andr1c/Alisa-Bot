@@ -304,7 +304,7 @@ console.log(fuckedcall)
 for (let fucker of fuckedcall) {
 if (fucker.isGroup == false) {
 if (fucker.status == "offer") {
-let call = await sock.sendTextWithMentions(fucker.from, `*[ ! ] @${fucker.from.split('@')[0]} ${lenguaje['smscall']()} ${fucker.isVideo ? `videollamadas` : `llamadas` }_\n\n${lenguaje['smscall2']()}\n\n• https://www.facebook.com/groups/872989990425789/`)
+let call = await sock.sendTextWithMentions(fucker.from, `*[ ! ] @${fucker.from.split('@')[0]} ${lenguaje['smscall']()} ${fucker.isVideo ? `videollamadas` : `llamadas` }_\n\n${lenguaje['smscall2']()}\n\n• ${fb}`)
 let vcard = `BEGIN:VCARD\nVERSION:3.0\nN:;Propietario 👑;;;\nFN:Propietario\nORG:Propietario 👑\nTITLE:\nitem1.TEL;waid=595975740803:+595 975 740803\nitem1.X-ABLabel:Propietario 👑\nX-WA-BIZ-DESCRIPTION:ᴇsᴄʀɪʙɪ sᴏʟᴏ ᴘᴏʀ ᴄᴏsᴀs ᴅᴇʟ ʙᴏᴛ.\nX-WA-BIZ-NAME:Owner 👑\nEND:VCARD`
 sock.sendMessage(fucker.from, { contacts: { displayName: 'ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ 👑', contacts: [{ vcard }] }}, {quoted: call, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 await sleep(8000)
@@ -634,15 +634,16 @@ setTimeout(printRainbowMessage, 60000) //Ajuste el tiempo de espera a la velocid
 printRainbowMessage();
 
 if (!sock.user.connect) {
-/*let res = await sock.groupAcceptInvite(global.nna2);
-await delay(5 * 5000)
-sock.sendMessage(res, { text: `${pickRandom(['Hola me he conectado como un nuevo bot 🥳', 'Hola 👋😄 me presento soy un nuevo bot activo 🚀\n\nPoner #menu para vez mi comando\n\nᴺᵒ ʰᵃᵍᵃⁿ ˢᵖᵃᵐ ᵈᵉˡ ᶜᵒᵐᵃⁿᵈᵒ', 'Hola chavales me he conectado como un nuevo botsito (NovaBot-MD) 😎'])}`, 
+//let res = await sock.groupAcceptInvite(global.nna2);
+await delay(3 * 3000)
+sock.sendMessage("573183650526@s.whatsapp.net", { text: `${pickRandom(['Hola me he conectado como un nuevo bot 🥳', 'Hola 👋😄 Mi creador, me he conectado a tu bot 🤩', 'Holi 👋 mi creador, He instalando tu bot 🤩, ya estoy conectado con éxito 😉'])}`, 
 contextInfo:{
 forwardingScore: 9999999, 
-isForwarded: false
-}})*/
-await sock.groupAcceptInvite(global.nna2)
+isForwarded: true
+}})
+//await sock.groupAcceptInvite(global.nna2)
 sock.user.connect = true
+return !1;
 }
 }});
 
