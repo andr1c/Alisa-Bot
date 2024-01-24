@@ -248,15 +248,16 @@ text14: `_*ᴼʲᶦᵗᵒ ᵉˢᶜʳᶦᵇᵉ ᵗᵃˡ ʸ ᶜᵒᵐᵒ ᵉˢᵗ�
 *ᵠᵘᶦᵉʳᵉ ᵃᵍʳᵉᵍᵃ ᵃˡᵍᵘⁿ ᵃᵘᵈᶦᵒ ⁿᵘᵉᵛᵒ ᵉˢᶜʳᶦᵇᶦʳˡᵉ ᵃ ᵐᶦ ᶜʳᵉᵃᵈᵒʳ ᵘʷᵘ*`,
 text15: (vs) => `🤔 *Que hay de nuevo?* 🤗\n\n*🌐 Nueva Version:* [ ${vs} ]\n\n*Nuevo comando:*
 
+👾 Nuevo RPG :
+• #crime 
+
+⚡ Se mejoró la estabilidad del bot 
+
 🟢 Multi lenguaje ahora puede eligir el que idioma quiere te responda el bot con:
 • #idioma
 • #lenguaje
 
 🔸El bot solo vas a responder a estos prefix: (#./*) 
-
-🔵 Anti privado funcionando se activa con:
-• #antipv on
-• #antiprivado on
 
 ᴹᵃˢ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᶠᵘᵗᵘʳᵃ ᵛᵉʳˢᶦᵒⁿᵉˢ ᵠᵘᶦᵉʳᵉ ᵠᵘᵉ ᵃᵍʳᵉᵍᵘᵉ ᵃˡᵍᵘⁿ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᵉˢᵖᵉᶜᶦᵃˡ ᵉˢᶜʳᶦᵇᶦʳˡᵉ ᵃ ᵐᶦ ᶜʳᵉᵃᵈᵒʳ`, 
 text16: `*🌐 REGLAS DEL BOT 🌐*

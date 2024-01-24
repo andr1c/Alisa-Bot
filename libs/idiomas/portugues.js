@@ -245,15 +245,21 @@ text12: `\`\`\`LISTA DE COMANDOS\`\`\`
 \`\`\`Bot simples com poucos comandos\`\`\``, 
 text13: `*Palavras específicas para o bot interagir com você*`, 
 text14: `_*Olhinhos escrevem como está na mensagem*_`,
-text15: `🤔 *O que há de novo?* 🤗\n\n*🌐 Nova versão:*`, 
-text16: `* Novo comando:*
+text15: (vs) => `🤔 *O que há de novo?* 🤗\n\n*🌐 Nova versão:* [ ${vs} ]\n\n*Novo comando:*
+
+👾 Novo RPG:
+• #crime 
+
+⚡ Estabilidade do bot melhorada
 
 🟢 Multi idioma agora você pode escolher o idioma ao qual deseja que o bot responda:
 • #idioma
-• #lenguaje
+• #lenguaje 
 
-Mais comandos, a versão futura quer que eu adicione alguns comandos especiais, escreva para meu criador`, 
-text17: `*🌐 REGRAS DO BOT 🌐*
+🔸O bot responderá apenas a estes prefixos: (#./*) 
+
+Mais comandos, versões futuras querem que eu adicione algum comando especial, escreva para meu criador`, 
+text16: `*🌐 REGRAS DO BOT 🌐*
 
 *• Não envie comandos de spam*
 

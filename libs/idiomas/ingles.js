@@ -252,17 +252,21 @@ text13: `*Specific words for the bot to interact with you *`,
 text14: `_*ᴼʲᶦᵗᵒ ʷʳᶦᵗᵉˢ ᵃˢ ᶦᵗ ᶦˢ ᶦⁿ ᵗʰᵉ ᵐᵉˢˢᵃᵍᵉ*_
 *ʰᵉ ʷᵃⁿᵗˢ ᵗᵒ ᵃᵈᵈ ˢᵒᵐᵉ ⁿᵉʷ ᵃᵘᵈᶦᵒ ʷʳᶦᵗᵉ ᵗᵒ ᵐʸ ᶜʳᵉᵃᵗᵒʳ ᵘʷᵘ*`,
 //, 
-text15: `🤔 *Whats new?* 🤗\n\n*🌐 New version:*`, 
-text16: `*New command:*
+text15: (vs) => `🤔 * What's new?* 🤗\n\n*🌐 New Version:* [ ${vs} ]\n\n*New command:*
 
-🔵 THE MULTI LANGUAGE PER HOUR FUNCTION IS ARRIVED 2 LANGUAGE AVAILABLE SPANISH/ENGLISH
+👾 New RPG:
+• #crime 
+
+⚡ Bot stability improved
 
 🟢 Multi language now you can choose the language you want the bot to respond to with:
-• #idioma 
-• #lenguaje
+• #idioma
+• #lenguaje 
 
-ᴹᵒʳᵉ ᶜᵒᵐᵐᵃⁿᵈˢ, ᶠᵘᵗᵘʳᵉ ᵛᵉʳˢᶦᵒⁿˢ ʷᵃⁿᵗ ᵐᵉ ᵗᵒ ᵃᵈᵈ ˢᵒᵐᵉ ˢᵖᵉᶜᶦᵃˡ ᶜᵒᵐᵐᵃⁿᵈˢ, ʷʳᶦᵗᵉ ᵗᵒ ᵐʸ ᶜʳᵉᵃᵗᵒʳ`, 
-text17: `*🌐 BOT RULES 🌐*
+🔸The bot will only respond to these prefixes: (#./*) 
+
+More commands, future versions want me to add a special command, write to my creator`, 
+text16: `*🌐 BOT RULES 🌐*
 
 *• Dont spam commands*
 

@@ -245,15 +245,21 @@ text12: `\`\`\`DAFTAR PERINTAH\`\`\`
 \`\`\`Bot sederhana dengan sedikit perintah\`\`\``,  
 text13: `*Kata-kata khusus agar bot dapat berinteraksi dengan Anda*`,   
 text14: `_*Hati-hati, tulis apa adanya di pesan*_`,
-text15: `🤔 *Apa yang baru?* 🤗\n\n*🌐 Versi Baru:*`,  
-text16: `* Perintah baru:*
+text15: (vs) => `🤔 *Apa yang baru?* 🤗\n\n*🌐 Versi Baru:*[ ${vs} ]\n\n* Perintah baru:*
+
+👾 RPG baru:
+• #crime 
+
+⚡ Stabilitas bot ditingkatkan
 
 🟢 Multi bahasa sekarang Anda dapat memilih bahasa yang Anda inginkan untuk ditanggapi oleh bot:
 • #idioma
 • #lenguaje
 
-Lebih banyak perintah, versi mendatang ingin saya menambahkan beberapa perintah khusus, tulis ke pembuat saya`, 
-text17: `*🌐 ATURAN BOT 🌐*
+🔸Bot hanya akan merespons awalan berikut: (#./*) 
+
+Lebih banyak perintah, versi mendatang ingin saya menambahkan perintah khusus, tulis ke pembuat saya`,
+text16: `*🌐 ATURAN BOT 🌐*
 
 *• Jangan mengirim spam perintah*
 
