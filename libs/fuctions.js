@@ -447,6 +447,7 @@ if (!isNumber(user.regTime)) user.regTime = -1
   if(!isNumber(user.gold)) user.gold = 0
   if(!isNumber(user.copper)) user.copper = 0
   if (!isNumber(user.lastmiming)) user.lastmiming = 0
+  if (!isNumber(user.crime)) user.crime = 0
   if (!isNumber(user.robs)) user.robs = 0
   if (!isNumber(user.spam)) user.spam = 0
   if (!isNumber(user.spam2)) user.spam2 = 0
