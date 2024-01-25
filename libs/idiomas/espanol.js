@@ -38,15 +38,15 @@ const smsWel5 = () => { return `[ NUEVO MIEMBRO ]\n\n` }
 const smsWel6 = () => { return `𝘓𝘦 𝘥𝘢𝘮𝘰𝘴 𝘭𝘢 𝘣𝘪𝘦𝘯𝘷𝘦𝘯𝘪𝘥𝘢 𝘢` }
 const smsWel7 = () => { return `⪨────[ ＷＥＬＣＯＭＥ ]────⪩\n\n` }
 const smsWel8 = () => { return `💫 *Bienvenido a :*` }
-const smsWel9 = () => { return `💫 *Participarte*` }
+const smsWel9 = () => { return `💫 *Participantes*` }
 const smsWel10 = () => { return `💫 *Fecha*` }
 const smsWel11 = () => { return `📢 *Lee la descripcion* 📢\n` }
 const smsBye = () => { return `Adios` }
 const smsBye2 = () => { return `Bueno, se fue` }
 const smsBye3 = () => { return `Que dios lo bendiga 😎` }
 const smsBye4 = () => { return `Salió del grupo._` }
-const smsBye5 = () => { return `se fue\n┃ un fan del bts` }
-const promote = () => { return `Felicidades ahora eres parte staff 🎉` }
+const smsBye5 = () => { return `se fue\n┃ un fan de bts` }
+const promote = () => { return `Felicidades ahora eres parte del staff 🎉` }
 const demote = () => { return `ya no eres admins 🥲` }
 
 //mensaje el la consola inicio
@@ -75,7 +75,7 @@ text6: `✅ Actividad:`,
 text7: `👥 Usuarios:` }
 
 //antiarabe
-const smsAntiFake = () => { return `✳️ El este grupo no esta permitido numero fake sera expulsado...` }
+const smsAntiFake = () => { return `✳️ En este grupo no esta permitido numero fake sera expulsado...` }
 const smsAntiArabe = () => { return `✳️ En este grupo no esta permitido numero arabe hasta la próxima...` }
 
 //antilink
@@ -86,7 +86,7 @@ const smsAntiLink4 = () => { return `ᴱˡ ᵇᵒᵗ ⁿᵉᶜᵉˢᶦᵗᵃ ᵃ
 const smsAntiLink5 = () => { return `Te salvarte por que eres un admins :v` }
 
 //autosticker
-const smsAutoSicker = () => { return `🤡 Hey Donde carajo viste un stickes que dure tanto bobo 🤣. (Máximo 15 segundos)` }
+const smsAutoSicker = () => { return `🤡 Hey Donde carajo viste un sticker que dure tanto bobo 🤣. (Máximo 15 segundos)` }
 
 //autonivel
 const smsAutonivel = () => { return `*「 FELICIDADES LEVEL UP 🆙🥳 」*\n\n🥳 Felicidades` }
@@ -96,25 +96,25 @@ const smsAutonivel4 = () => { return `*❐ NIVEL ANTERIOR :* ` }
 const smsAutonivel5 = () => { return `*❐ NIVEL ACTUAL :*` }
 const smsAutonivel6 = () => { return `*❑ RANGO :*` }
 const smsAutonivel7 = () => { return `*❐ FECHA :*` }
-const smsAutonivel8 = () => { return `_*Para saber cual es tu puerto del top, coloca el comando #lb*_` }
+const smsAutonivel8 = () => { return `_*Para saber cual es tu puesto del top, coloca el comando #lb*_` }
 const smsAutonivel9 = () => { return `*🥳 FELICIDADES LLEGARTE A UN NUEVO NIVEL 🎊*\n\n` }
 
 //info
 const nivel = () => { return `[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀ ᴇʟ ɴɪᴠᴇʟ` }
 const nivel2 = () => { return `ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ` }
-const admin = () => { return `*⚠️ Tu no eres admins 🤡 solo los admins puede usar este comando*` }
-const botAdmin = () => { return `*⚠️ Hey primero el bot osea (Yo), Necesito ser admins para usar este comando*` }
-const propietario = () => { return `*⚠️ Este comando solo YO o mi jefe los puede usar*` }
+const admin = () => { return `*⚠️ Tu no eres admins 🤡 solo los admins pueden usar este comando*` }
+const botAdmin = () => { return `*⚠️ Hey primero el bot osea (Yo), Necesito ser admin para usar este comando*` }
+const propietario = () => { return `*⚠️ Este comando solo YO o mi jefe lo puede usar*` }
 const group = () => { return `*⚠️ Pendejo este comando solo se puede usar el grupo*` }
 const private = () => { return `*⚠️ Este comando solo se puede usar al chat privado*` }
-const bot = () => { return `*⚠️ Este comando solo (YO) los puedo usar*` }
+const bot = () => { return `*⚠️ Este comando solo (YO) lo puedo usar*` }
 const error = () => { return `⪨╼╼≪⚠️ ERROR ⚠️≫╾╼⪩\n\nOCURRIÓ UN ERROR INESPERADO, (API CAIDA 😢)` }
 const AvisoMG = () => { return `⪨╼╼≪⚠️ ACCION MAL USADA ⚠️≫╾╼⪩\n\n` }
 const advertencia = () => { return `[ ⚠️ ＡＤＶＥＲＴＥＮＣＩＡ ]` }
-const registra = () => { return `*[ 🔴 HEY ALTO NO ESTAS REGISTRADO 🔴 ]*\n\nNO APARECES EN MI BASE DE DATOS ✋\n\nPara poder usar el bot necesita esta registrado:\n\n#reg nombre.edad` }
+const registra = () => { return `*[ 🔴 HEY ALTO NO ESTAS REGISTRADO 🔴 ]*\n\nNO APARECES EN MI BASE DE DATOS ✋\n\nPara poder usar el bot necesita estar registrado:\n\n#reg nombre.edad` }
 const limit = () => { return `*ᴅɪᴀᴍᴀɴᴛᴇ 💎 ᴜsᴀᴅᴏ*` }
 const AntiNsfw = () => { return `*Los comando +18 esta desactivado*\nSi eres admin y quiere activarlos usar:\n• modocaliente on` }
-const endLimit = () => { return `*😢 NOO TENER MAS DIAMANTE 💎*\n\nPuede comprar mas usando el comando: #buy` }
+const endLimit = () => { return `*😢 NOO TIENE MAS DIAMANTE 💎*\n\nPuede comprar mas usando el comando: #buy` }
 const exito = () => { return `*EXITOS ✅*` }
 const result = () => { return `*Resultados de :*` }
 
@@ -138,7 +138,7 @@ desc: `DESCRIPCION :`,
 text: `Ingresa un link para acortar!`, 
 trad: `🔸 Traducción`, 
 text2: `*Y EL TEXTO?*`, 
-ia: `*⚠️ INGRESE EL TEXTO DE LOS QUE QUIERE BUSCAR?*\n\n*• EJEMPLO :*\n`, 
+ia: `*⚠️ INGRESE EL TEXTO DE LO QUE QUIERE BUSCAR?*\n\n*• EJEMPLO :*\n`, 
 ia2: `*⚠️ INGRESE UN TEXTO PARA CREAR UNA IMAGEN Y ASI USAR LA FUNCION DE DALL-E*\n\n*• EJEMPLO:*\n`,
 espere: `⏳ *Aguarde un momento....*`, 
 aguarde: `⏳ *𝘗𝘙𝘖𝘊𝘌𝘚𝘈𝘕𝘋𝘖 𝘓𝘈 𝘐𝘔𝘈𝘎𝘌𝘕, 𝘈𝘎𝘜𝘈𝘙𝘋𝘌𝘕 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖....*`, 
@@ -151,7 +151,7 @@ error: `No se pudo descargar sus video por favor vuelve a intenta`
 //convertidores
 const sms = {
 text: `*Responde al audio que deseas cambiar con el comando:*`, 
-text2: `*Responde a una imagen/video para converti el url`, 
+text2: `*Responde a una imagen/video para convertir en url`, 
 text3: `*[ ⚠️ ] Responda a un audio*`, 
 text4: `*Y el sticker?*\n*Responde a un stickers capo*`, 
 text5: `*🕔 𝘈𝘎𝘜𝘈𝘙𝘋𝘌 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖....*\n𝘌𝘴𝘵𝘰𝘺 𝘤𝘰𝘯𝘷𝘪𝘦𝘳𝘵𝘪𝘥𝘰 𝘪𝘮𝘢𝘨𝘦𝘯 𝘢 𝘥𝘪𝘴𝘦𝘯̃𝘰 𝘢𝘯𝘪𝘮𝘦, 𝘴𝘦𝘢 𝘱𝘢𝘤𝘪𝘦𝘯𝘵𝘦 𝘦𝘯 𝘭𝘰 𝘲𝘶𝘦 𝘦𝘯𝘷𝘪𝘰 𝘦𝘭 𝘳𝘦𝘴𝘶𝘭𝘵𝘢𝘥𝘰`, 
@@ -581,10 +581,10 @@ const idioma2 = () => { return `✅Idiomas cambiado con éxito a ` }
 
 const smsReg = () => { return `*Ya estas registrado 🧐*` }
 const smsReg1 = (prefix) => { return `*❌ Forma incorrecta*\n\nuse de esta forma\nEjemplo: ${prefix}reg nombre.edad` }
-const smsReg2 = () => { return `El nombre no puede esta vacio` }
-const smsReg3 = () => { return `La edad no puede esta vacia (Numeros)` }
+const smsReg2 = () => { return `El nombre no puede estar vacio` }
+const smsReg3 = () => { return `La edad no puede estar vacia (Numeros)` }
 const smsReg4 = () => { return 'Esta Viejo (。-`ω´-)' }
-const smsReg5 = () => { return `🚼  Basado, los bebes saber escribir.✍️😳` }
+const smsReg5 = () => { return `🚼  Basado, los bebes saben escribir.✍️😳` }
 const smsReg6 = () => { return `🐈 Fua que basado, el nombre es muy largo que quiere un puente como nombre😹` }
 const smsReg7 = (name, user, age, time, date, sender, sn, prefix, rtotalreg) => { return `[ ✅ REGISTRO COMPLETADO ]\n\n ◉ *Nombre:* ${name} ${user.registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''}\n ◉ *Edad:* ${age} años\n ◉ *Hora:* ${time}\n ◉ *Fecha:* ${date}\n ◉ *Número:* wa.me/${sender.split("@")[0]}\n ◉ *Numero del serie*\n ⤷ ${sn}\n\n 🎁 *Recompensa:*\n ⤷ 2 diamante 💎\n ⤷ 200 exp\n\n *◉ Para ver los comandos del bot usar:*
  ${prefix}menu\n\n ◉ *Total de usuários registrados:* ${rtotalreg}` }
