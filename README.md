@@ -105,6 +105,22 @@ npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
 
 ------------------ 
 
+### 📌 CAFIREXOS HOST
+[![blog](https://img.shields.io/badge/Vortexuscloud-NovaBotMD-FF0000?style=for-the-badge&logo=youtube&logoColor=white)
+]()
+> Activar NovaBot-MD 24/7 en cafirexos Host
+
+<a href="https://www.cafirexos.com/"><img src="https://telegra.ph/file/f400ffe819ad3c0fc87b9.jpg" height="125px"></a>
+### Cafirexos
+
+- Pagina Oficial: [`https://www.cafirexos.com/`](https://www.cafirexos.com/)
+- Canal sobre informacion del host : [`https://whatsapp.com/channel/0029VaFVSkRCMY0KFmCMDX2q`](https://whatsapp.com/channel/0029VaFVSkRCMY0KFmCMDX2q)
+- Dashboard: [`https://dash.cafirexos.com/home`](https://dash.cafirexos.com/home)
+- Panel: [`https://panel.cafirexos.com/`](https://panel.cafirexos.com/)
+- Dudas UNICAMENTE SOBRE EL HOST: [`https://chat.whatsapp.com/FBtyc8Q5w2iJXVl5zGJdFJ`](https://chat.whatsapp.com/FBtyc8Q5w2iJXVl5zGJdFJ) (pregunta por Diego) 
+
+------------------ 
+
 ## `𝙴𝙳𝙸𝚃𝙾𝚁 𝚈 𝙿𝚁𝙾𝙿𝙸𝙴𝚃𝙰𝚁𝙸𝙾 𝙳𝙴𝙻 𝙱𝙾𝚃`
 
 <a href="https://github.com/elrebelde21"><img src="https://github.com/elrebelde21.png" width="250" height="250" alt="elrebelde21"/></a>
