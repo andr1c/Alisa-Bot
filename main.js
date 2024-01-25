@@ -304,7 +304,7 @@ const resu2 = await reis2.json()
 await m.reply(resu2[0][0][0])}}
  
 //---------------------[ ANTIPRIVADO ]------------------------
-if (global.db.data.chats[m.chat].antiprivado && !isCreator) {
+if (global.db.data.settings[numBot].antiprivado && !isCreator) { 
 if (m.isBaileys && m.fromMe) return !0;
 if (m.isGroup) return !0
 if (!m.message) return !1
