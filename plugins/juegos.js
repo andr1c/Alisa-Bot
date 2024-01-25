@@ -38,7 +38,7 @@ return m.reply(`*Api simsimi caida vuelva mas tardes*`)
 console.log(e)}}}
 
 if (command == 'pregunta' || command == 'preg') { 
-if (!text) return m.reply(`${lenguaje.juegos.text} ${prefix + command} mañana llover?`) 
+if (!text) return m.reply(`${lenguaje.juegos.text} ${prefix + command} mañana va a llover?`) 
 m.react('🤔') 
 let pr = ['no', 'si', 'nose', 'puede ser', 'no creo', 'olvio', 'Que pregunta mas boluda', 'A', 'pendejo', 'pues nose']
 let preg = pr[Math.floor(Math.random() * pr.length)]
