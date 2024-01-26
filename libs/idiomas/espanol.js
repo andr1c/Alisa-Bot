@@ -220,7 +220,25 @@ https://dash.vortexuscloud.com
 https://panel.vortexuscloud.com
 
 • Canal de WhatsApp sobre informacion del host 
-• https://whatsapp.com/channel/0029Va8ZD6O3mFXxTPl1m13A`, 
+• https://whatsapp.com/channel/0029Va8ZD6O3mFXxTPl1m13A
+
+🚀 --------[ Cafirexos host ]--------- 🚀
+
+*Página oficial:*
+https://www.cafirexos.com/
+
+*Panel:*
+https://panel.cafirexos.com/
+
+*dashboard:*
+https://dash.cafirexos.com/home
+
+*Dudas UNICAMENTE SOBRE EL HOST:*
+https://chat.whatsapp.com/FBtyc8Q5w2iJXVl5zGJdFJ 
+(Pregunta por Diego: cafirexos) 
+
+*Canal de WhatsApp:*
+https://whatsapp.com/channel/0029VaFVSkRCMY0KFmCMDX2q`, 
 text21: `*𝙸𝙽𝙶𝚁𝙴𝚂𝙴 𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙲𝙾𝙽 𝙵𝙰𝙻𝙻𝙾𝚂*\n\n*𝙴𝙹𝙴𝙼𝙿𝙻𝙾:`, 
 text22: `𝙴𝙻 𝚁𝙴𝙿𝙾𝚁𝚃𝙴 𝙵𝚄𝙴 𝙴𝙽𝚅𝙸𝙰𝙳𝙾 𝙰 𝙼𝙸 𝙲𝚁𝙴𝙰𝙳𝙾𝚁, 𝙽𝙾𝚂 𝙲𝙾𝙽𝚃𝙰𝚁𝙴𝙼𝙾𝚂 𝙲𝙾𝙽 𝚄𝚂𝚃𝙴𝙳 𝚂𝙸 𝙴𝚂 𝙽𝙴𝙲𝙴𝚂𝙰𝚁𝙸𝙾, 𝙳𝙴 𝚂𝙴𝚁 𝙵𝙰𝙻𝚂𝙾 𝚂𝙴𝚁𝙰 𝙸𝙶𝙽𝙾𝚁𝙰𝙳𝙾 𝚈 𝙱𝙻𝙾𝚀𝚄𝙴𝙰𝙳𝙾 𝙳𝙴𝙻 𝙱𝙾𝚃*`, 
 text23: `*╼╼╼╼╼╼╼[ 💖 DONACION 💖 ]╾╾╾╾╾╾╾╾*\n\n*Hola 👋, si quieres apoyar este proyecto, puedes hacerlo a través de donaciones voluntarias por Mercado Pago Arg.*\n\n╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍\n\n*❇️Mercado pago:*\n*• Alias :* OficialGB\n*• CVU :* 0000003100059201491917`, 

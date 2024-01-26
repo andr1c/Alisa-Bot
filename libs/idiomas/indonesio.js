@@ -220,7 +220,25 @@ https://dash.vortexuscloud.com
 https://panel.vortexuscloud.com
 
 • Saluran WhatsApp tentang informasi tuan rumah
-• https://whatsapp.com/channel/0029Va8ZD6O3mFXxTPl1m13A`, 
+• https://whatsapp.com/channel/0029Va8ZD6O3mFXxTPl1m13A
+
+🚀 --------[ Tuan rumah Cafirexos ]--------- 🚀
+
+*Halaman resmi:*
+https://www.cafirexos.com/
+
+*Panel:*
+https://panel.cafirexos.com/
+ 
+*dasbor:*
+https://dash.cafirexos.com/home
+
+*HANYA Keraguan TENTANG PEMBAWA ACARA:*
+https://chat.whatsapp.com/FBtyc8Q5w2iJXVl5zGJdFJ 
+(Minta Diego: cafirexos)
+
+*Saluran WhatsApp:*
+https://whatsapp.com/channel/0029VaFVSkRCMY0KFmCMDX2q`, 
 text21: `*Masukkan perintah dengan kesalahan*\n\n*Contoh:`,  
 text22: `Laporan telah dikirim ke pencipta saya, kami akan menghubungi Anda jika perlu, jika salah akan diabaikan dan diblokir dari bot*`,  
 text23: `*╼╼╼╼╼╼╼[ 💖 sumbangan 💖 ]╾╾╾╾╾╾╾╾*\n\n*Halo 👋, jika Anda ingin mendukung proyek ini, Anda dapat melakukannya melalui donasi sukarela melalui Mercado Pago Arg.*\n\n╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍\n\n*❇️Mercado pago:*\n*• Alias :* OficialGB\n*• CVU :* 0000003100059201491917`, 

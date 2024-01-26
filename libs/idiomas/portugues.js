@@ -220,7 +220,25 @@ https://dash.vortexuscloud.com
 https://panel.vortexuscloud.com
 
 • Canal WhatsApp sobre informações do anfitrião
-• https://whatsapp.com/channel/0029Va8ZD6O3mFXxTPl1m13A`, 
+• https://whatsapp.com/channel/0029Va8ZD6O3mFXxTPl1m13A
+
+🚀 --------[ Anfitrião dos Cafirexos ]--------- 🚀
+
+*Página Oficial:*
+https://www.cafirexos.com/
+
+*Painel:*
+https://panel.cafirexos.com/
+
+*painel:*
+https://dash.cafirexos.com/home
+
+*Dúvidas SOMENTE SOBRE O ANFITRIÃO:*
+https://chat.whatsapp.com/FBtyc8Q5w2iJXVl5zGJdFJ 
+(Peça pelo Diego: caferexos)
+
+*Canal WhatsApp:*
+https://whatsapp.com/channel/0029VaFVSkRCMY0KFmCMDX2q`, 
 text21: `*Digite o comando com falha*\n\n*Exemplo:`, 
 text22: `O relato foi enviado ao meu criador, entraremos em contato se necessário, se for falso será ignorado e bloqueado do bot*`, 
 text23: `*╼╼╼╼╼╼╼[ 💖 doação 💖 ]╾╾╾╾╾╾╾╾*\n\n* Olá 👋, se você quiser apoiar este projeto, poderá fazê-lo através de doações voluntárias através do Mercado Pago Arg.*\n\n╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍\n\n*❇️Mercado pago:*\n*• Alias :* OficialGB\n*• CVU :* 0000003100059201491917`, 

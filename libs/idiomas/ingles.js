@@ -219,7 +219,25 @@ https://dash.vortexuscloud.com
 https://panel.vortexuscloud.com
 
 • WhatsApp channel about host information
-• https://whatsapp.com/channel/0029Va8ZD6O3mFXxTPl1m13A`, 
+• https://whatsapp.com/channel/0029Va8ZD6O3mFXxTPl1m13A
+
+🚀 --------[ Cafirexos host ]--------- 🚀
+
+*Official page:*
+https://www.cafirexos.com/
+
+*Panel:*
+https://panel.cafirexos.com/
+
+*dashboard:*
+https://dash.cafirexos.com/home
+
+*Doubts ONLY ABOUT THE HOST:*
+https://chat.whatsapp.com/FBtyc8Q5w2iJXVl5zGJdFJ 
+(Ask for Diego: cafirexos)
+
+*WhatsApp channel:*
+https://whatsapp.com/channel/0029VaFVSkRCMY0KFmCMDX2q`, 
 text21: `*𝙴𝙽𝚃𝙴𝚁 𝚃𝙷𝙴 𝙲𝙾𝙼𝙼𝙰𝙽𝙳 𝚆𝙸𝚃𝙷 𝙵𝙰𝚄𝙻𝚃𝚂*\n\n*𝙴𝚇𝙰𝙼𝙿𝙻𝙴:*`, //
 text22: `*𝚃𝙷𝙴 𝚁𝙴𝙿𝙾𝚁𝚃 𝚆𝙰𝚂 𝚂𝙴𝙽𝚃 𝚃𝙾 𝙼𝚈 𝙲𝚁𝙴𝙰𝚃𝙾𝚁, 𝚆𝙴 𝚆𝙸𝙻𝙻 𝙲𝙾𝙽𝚃𝙰𝙲𝚃 𝚈𝙾𝚄 𝙸𝙵 𝙽𝙴𝙲𝙴𝚂𝚂𝙰𝚁𝚈, 𝙸𝙵 𝙸𝚃 𝙸𝚂 𝙵𝙰𝙻𝚂𝙴 𝙸𝚃 𝚆𝙸𝙻𝙻 𝙱𝙴 𝙸𝙶𝙽𝙾𝚁𝙴𝙳 𝙰𝙽𝙳 𝙱𝙻𝙾𝙲𝙺𝙴𝙳 𝙵𝚁𝙾𝙼 𝚃𝙷𝙴 𝙱𝙾𝚃*`, 
 text23: `*╼╼╼╼╼╼╼[ 💖 DONATION 💖 ]╾╾╾╾╾╾╾╾*\n\n* Hello 👋, if you want to support this project, you can do so through voluntary donations through Mercado Pago Arg.*
