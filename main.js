@@ -302,9 +302,9 @@ const res = await api.json()
 const reis2 = await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=es&dt=t&q=' + res.cnt)
 const resu2 = await reis2.json()
 await m.reply(resu2[0][0][0])}}
- 
+  
 //---------------------[ ANTIPRIVADO ]------------------------
-if (global.db.data.settings[numBot].antiprivado && !isCreator) { 
+if (global.db.data.chats[m.chat].antiprivado && !isCreator) {
 if (m.isBaileys && m.fromMe) return !0;
 if (m.isGroup) return !0
 if (!m.message) return !1
@@ -374,7 +374,7 @@ case 'estado': case 'infobot': case 'owner': case 'creador': case 'contacto': ca
 break   
   
 //activar/desactivar
-case 'welcome': case 'bienvenida': case 'antilink': case 'antienlace': case 'antifake': case 'antiFake': case 'antiarabe': case 'antiArabe': case 'autodetect': case 'detect': case 'audios': case 'autosticker': case 'stickers': case 'modocaliente': case 'antinsfw': case 'modoadmin': case 'modoadmins': case 'soloadmin': case 'antiprivado': case 'antipv': case 'anticall': case 'antillamada': case 'modojadibot': case 'jadibot': case 'autoread': case 'autovisto': case 'antispam': case 'chatbot': case 'simsimi': case 'autolevelup': case 'autonivel': case 'antitoxic': enable(m, command, isGroupAdmins, text, command, args, isBotAdmins, isGroupAdmins, isCreator) 
+case 'welcome': case 'bienvenida': case 'antilink': case 'antienlace': case 'antifake': case 'antiFake': case 'antiarabe': case 'antiArabe': case 'autodetect': case 'detect': case 'audios': case 'autosticker': case 'stickers': case 'modocaliente': case 'antinsfw': case 'modoadmin': case 'modoadmins': case 'soloadmin': case 'antiprivado': case 'antipv': case 'anticall': case 'antillamada': case 'modojadibot': case 'jadibot': case 'autoread': case 'autovisto': case 'antispam': case 'chatbot': case 'simsimi': case 'autolevelup': case 'autonivel': case 'antitoxic': enable(m, command, isGroupAdmins, text, command, args, isBotAdmins, isGroupAdmins, isCreator, conn) 
 break
 
 //Grupos 
