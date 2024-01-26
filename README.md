@@ -25,7 +25,7 @@
 <a href="https://github.com/elrebelde21"><img src="http://readme-typing-svg.herokuapp.com?font=mono&size=14&duration=3000&color=ABF7BB&center=verdadero&vCenter=verdadero&lines=Solo+escr%C3%ADba+si+tiene+dudas." height="40px"
 </p>
     
-<a href="https://wa.me/573183650526?text=%C2%A1Hola%21%20ElRebelde21" target="blank"><img src="https://img.shields.io/badge/Creador-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" /></a>
+<a href="wa.me/573183650526" target="blank"><img src="https://img.shields.io/badge/Creador-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" /></a>
 
 ### `🟢 Bot Oficial 🟢`
 <a href="https://wa.me/message/4ZOKKOZTPLUXJ1" target="blank"><img src="https://img.shields.io/badge/NovaBot oficial-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" />
