@@ -175,11 +175,11 @@ let text = [`${lenguaje.Bio.text} ${Object.keys(global.db.data.users).length} ${
 let bio = text[Math.floor(Math.random() * text.length)]
 try {
 await sock.updateProfileStatus(bio)
-setting.status = new Date() * 1
+setting.status = new Date() * 1 
 } catch {
 console.log(`[𝚄𝙿𝙳𝙰𝚃𝙴]\n𝙿𝚒𝚗𝚐: ${latensi.toFixed(4)}`) 
 }}} 
- 
+  
 //--------------------[ AUTOREAD ]-----------------------
 if (!conn.autoread && m.message && prefix) {
 await delay(1 * 1000) 
@@ -266,7 +266,7 @@ await conn.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, aut
 }}
 
 //----------------[ AUTOLEVELUP/AUTONIVEL ]-------------------
-if (global.db.data.users[m.sender].autolevelup) {	
+if (global.db.data.settings[numBot].autolevelup) {	
 let user = global.db.data.users[m.sender]
 if (!user.autolevelup)
 return !0
@@ -302,7 +302,7 @@ const res = await api.json()
 const reis2 = await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=es&dt=t&q=' + res.cnt)
 const resu2 = await reis2.json()
 await m.reply(resu2[0][0][0])}}
-  
+    
 //---------------------[ ANTIPRIVADO ]------------------------
 if (global.db.data.chats[m.chat].antiprivado && !isCreator) {
 if (m.isBaileys && m.fromMe) return !0;

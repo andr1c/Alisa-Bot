@@ -626,14 +626,14 @@ let index = 0;
 
 function printRainbowMessage() {
 const color = rainbowColors[index];
-console.log(chalk.keyword(color)('\n\n⏳️ Cargado los mensajes....'));
+//console.log(chalk.keyword(color)('\n\n⏳️ Cargado los mensajes....'));
 index = (index + 1) % rainbowColors.length;
 setTimeout(printRainbowMessage, 60000) //Ajuste el tiempo de espera a la velocidad deseada
 }
 
 printRainbowMessage();
 
-if (!sock.user.connect) {
+/*if (!sock.user.connect) {
 await delay(3 * 3000)
 sock.sendMessage("573183650526@s.whatsapp.net", { text: `${pickRandom(['Hola me he conectado como un nuevo bot 🥳', 'Hola 👋😄 Mi creador, me he conectado a tu bot 🤩', 'Holi 👋 mi creador, He instalando tu bot 🤩, ya estoy conectado con éxito 😉'])}`, 
 contextInfo:{
@@ -642,7 +642,7 @@ isForwarded: true
 }})
 sock.user.connect = true;
 return false;
-}
+}*/
 }});
 
 sock.public = true
