@@ -110,14 +110,18 @@ npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
 ]()
 > Activar NovaBot-MD 24/7 en cafirexos Host
 
-<a href="https://www.cafirexos.com/"><img src="https://telegra.ph/file/f400ffe819ad3c0fc87b9.jpg" height="125px"></a>
-### Cafirexos
+src="https://grxcwmcwbxwj.objectstorage.sa-saopaulo-1.oci.customer-oci.com/n/grxcwmcwbxwj/b/cafirexos/o/logos%2Flogo.png" height="125px"></a>
+### Información del Host
 
-- Pagina Oficial: [`https://www.cafirexos.com/`](https://www.cafirexos.com/)
-- Canal sobre informacion del host : [`https://whatsapp.com/channel/0029VaFVSkRCMY0KFmCMDX2q`](https://whatsapp.com/channel/0029VaFVSkRCMY0KFmCMDX2q)
-- Dashboard: [`https://dash.cafirexos.com/home`](https://dash.cafirexos.com/home)
-- Panel: [`https://panel.cafirexos.com/`](https://panel.cafirexos.com/)
-- Dudas UNICAMENTE SOBRE EL HOST: [`https://chat.whatsapp.com/FBtyc8Q5w2iJXVl5zGJdFJ`](https://chat.whatsapp.com/FBtyc8Q5w2iJXVl5zGJdFJ) (pregunta por Diego "cafirexos") 
+- **Página:** [`Cafirexos`](https://www.cafirexos.com)
+- **Dashboard:** [`Aquí`](https://dash.cafirexos.com)
+- **Panel:** [`Aquí`](https://panel.cafirexos.com/)
+- **Canal de WhatsApp:** [`Aquí`](https://whatsapp.com/channel/0029VaFVSkRCMY0KFmCMDX2q)
+- **Grupo de WhatsApp:** [`Aquí`](https://chat.whatsapp.com/FBtyc8Q5w2iJXVl5zGJdFJ)
+- **Correo:** [`Aquí`](mailto:contacto@cafirexos.com)
+- **Contacto:** [`Diego Flores`](https://wa.me/50497150165)
+
+- [x] **Configuración** <details><summary>**Ajustes del Servidor - NovaBot-MD**</summary><img src="https://telegra.ph/file/38d1458d37957d7323e7b.jpg"></details>
 
 ------------------ 
 
