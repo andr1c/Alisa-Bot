@@ -96,12 +96,14 @@ npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
 <a href="https://vortexuscloud.com"><img src="https://telegra.ph/file/4bd3d8d14e5683073d4f3.jpg" height="125px"></a>
 ### vortexus cloud
 
-- Pagina Oficial: [`https://vortexuscloud.com`](https://vortexuscloud.com)
-- Canal sobre informacion del host : [`https://whatsapp.com/channel/0029Va8ZD6O3mFXxTPl1m13A`](https://whatsapp.com/channel/0029Va8ZD6O3mFXxTPl1m13A)
-- Dashboard: [`https://dash.vortexuscloud.com`](https://dash.vortexuscloud.com)
-- Panel: [`https://panel.vortexuscloud.com`](https://panel.vortexuscloud.com)
-- Dudas UNICAMENTE SOBRE EL HOST: [`wa.me/258858119033`](wa.me/258858119033) (Creador: Mauro) 
-- Tutorial - Crea una cuenta en la Dashboard: [`https://youtu.be/U3CEj0OlB9U?si=IMQAcGfGgYOqqVyZ`](https://youtu.be/U3CEj0OlB9U?si=IMQAcGfGgYOqqVyZ)
+- **Pagina Oficial:** [`Vortexuscloud`](https://vortexuscloud.com)
+- **Crear cuenta en la Dashboard:** [`Dashboard`](https://youtu.be/JUg7DWUY6_Y?si=DHwk9dwjvWdPEIBJ)
+- **Dashboard:** [`Dash`](https://dash.vortexuscloud.com)
+- **Panel:** [`Aquí`](https://panel.vortexuscloud.com)
+- **Contacto:** [`Aquí`](https://wa.me/258858119033) 
+- **Canal de WhatsApp:** [`Aquí`](https://whatsapp.com/channel/0029Va8ZD6O3mFXxTPl1m13A)
+
+- [x] **Configuración** <details><summary>**Ajustes del Servidor - NovaBot-MD**</summary><img src="https://telegra.ph/file/5f7ea409a01756d76568f.jpg"></details>
 
 ------------------ 
 
