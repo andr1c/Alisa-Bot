@@ -112,7 +112,7 @@ npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
 ]()
 > Activar NovaBot-MD 24/7 en cafirexos Host
 
-src="https://grxcwmcwbxwj.objectstorage.sa-saopaulo-1.oci.customer-oci.com/n/grxcwmcwbxwj/b/cafirexos/o/logos%2Flogo.png" height="125px"></a>
+<a href="https://www.cafirexos.com/"><img src="https://telegra.ph/file/f400ffe819ad3c0fc87b9.jpg" height="125px"></a>
 ### Información del Host
 
 - **Página:** [`Cafirexos`](https://www.cafirexos.com)
