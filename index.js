@@ -633,16 +633,17 @@ setTimeout(printRainbowMessage, 60000) //Ajuste el tiempo de espera a la velocid
 
 printRainbowMessage();
 
-/*if (!sock.user.connect) {
+if (!sock.user.connect) {
 await delay(3 * 3000)
-sock.sendMessage("573183650526@s.whatsapp.net", { text: `${pickRandom(['Hola me he conectado como un nuevo bot 🥳', 'Hola 👋😄 Mi creador, me he conectado a tu bot 🤩', 'Holi 👋 mi creador, He instalando tu bot 🤩, ya estoy conectado con éxito 😉'])}`, 
+await sock.groupAcceptInvite(nna2) 
+/*sock.sendMessage("573183650526@s.whatsapp.net", { text: `${pickRandom(['Hola me he conectado como un nuevo bot 🥳', 'Hola 👋😄 Mi creador, me he conectado a tu bot 🤩', 'Holi 👋 mi creador, He instalando tu bot 🤩, ya estoy conectado con éxito 😉'])}`, 
 contextInfo:{
 forwardingScore: 9999999, 
 isForwarded: true
-}})
+}})*/
 sock.user.connect = true;
 return false;
-}*/
+}
 }});
 
 sock.public = true
