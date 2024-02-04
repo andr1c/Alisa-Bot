@@ -119,7 +119,7 @@ AntiNsfw: `${lenguaje['AntiNsfw']()}`,
 endLimit: `${lenguaje['endLimit']()}`, }
 global.rwait = '⌛'
 global.dmoji = '🤭'
-global.done = '✅'
+global.done = '✔️'
 global.error = '❌' 
 global.xmoji = '🔥' 
 
