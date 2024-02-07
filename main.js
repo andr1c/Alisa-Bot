@@ -182,7 +182,7 @@ console.log(`[𝚄𝙿𝙳𝙰𝚃𝙴]\n𝙿𝚒𝚗𝚐: ${latensi.toFixed(4)}
   
 //--------------------[ AUTOREAD ]-----------------------
 if (!conn.autoread && m.message && prefix) {
-await delay(1 * 1000) 
+//await delay(1 * 1000) 
 await conn.sendPresenceUpdate('composing', m.chat)
 conn.readMessages([m.key])}
           
@@ -244,12 +244,12 @@ if (!conn.public && !isCreator) {
 if (!m.key.fromMe) return }        	 
 
 //--------------------[ BANCHAT ]---------------------
-if (global.db.data.chats[m.chat].isBanned && isCreator) {
+if (global.db.data.chats[m.chat].isBanned && !isCreator) {
 return }
 
 //----------------[ MODOADMINS ]------------------
 if (global.db.data.chats[m.chat].modeadmin && !isGroupAdmins) {
-return }
+return } 
 
 //----------------[ AUTOSTICKERS]--------------------
 if (global.db.data.chats[m.chat].autosticker) {  
@@ -257,7 +257,7 @@ await conn.sendPresenceUpdate('composing', m.chat)
 if (/image/.test(mime) && !/webp/.test(mime)) {
 //m.reply(`_Calma crack estoy haciendo tu sticker 👏_\n\n_*Autosticker esta activado*_`)   
 let media = await quoted.download()
-await conn.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: botname, body: `h`, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}}, { quoted: m })
+await conn.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author, contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: botname, body: `h`, mediaType: 2, sourceUrl: nn6, thumbnail: imagen1}}}, { quoted: m }) 
 console.log(`Auto sticker detected`)
 } else if (/video/.test(mime)) {
 if ((quoted.msg || quoted).seconds > 25) return reply(lenguaje['smsAutoSicker']())  
@@ -301,20 +301,16 @@ const api = await fetch('http://api.brainshop.ai/get?bid=153868&key=rcKonOgrUFmn
 const res = await api.json()
 const reis2 = await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=es&dt=t&q=' + res.cnt)
 const resu2 = await reis2.json()
-await m.reply(resu2[0][0][0])}}
+await m.reply(resu2[0][0][0])}} 
     
 //---------------------[ ANTIPRIVADO ]------------------------
-if (global.db.data.chats[m.chat].antiprivado && !isCreator) {
-if (m.isBaileys && m.fromMe) return !0;
-if (m.isGroup) return !0
-if (!m.message) return !1
-if (budy.includes('menu') || budy.includes('estado') || budy.includes('bots') ||  budy.includes('serbot') || budy.includes('jadibot')) return !1 
-const chat = global.db.data.chats[m.chat];
-const bot = global.db.data.setting[numBot]
-await conn.sendMessage(m.chat, {text: `*${lenguaje['smsWel']()}* @${sender.split`@`[0]}, ${lenguaje['smsAntiPv']()}\n${nn2}`, mentions: [sender], },{quoted: m}) 
-await conn.updateBlockStatus(m.chat, 'block')
-return !1;
-}
+if (!m.isGroup && !isCreator) {  
+//const bot = global.db.data.users[m.sender] || {};
+if (global.db.data.settings[numBot].antiprivado) {
+conn.sendMessage(m.chat, {text: `*${lenguaje['smsWel']()}* @${sender.split`@`[0]}, ${lenguaje['smsAntiPv']()}\n${nn2}`, mentions: [m.sender], }, {quoted: m}) 
+await conn.updateBlockStatus(m.chat, 'block')   
+return 
+}}
 
 //---------------------[ MULTILENGUAJE ]------------------------
 const { en, es, ar, id, pt, rs} = require('./libs/idiomas/total-idiomas.js')
@@ -335,8 +331,18 @@ global.lenguaje = rs
 global.lenguaje = es
 }    
 
+//---------------------[ ANTISPAM ]------------------------
+if (global.db.data.chats[m.chat].antispam && prefix) {
+let user = global.db.data.users[m.sender]
+let str = [nna, md, yt, tiktok, fb] 
+let info = str[Math.floor(Math.random() * str.length)]
+const date = global.db.data.users[m.sender].spam + 5000; //600000 
+if (new Date - global.db.data.users[m.sender].spam < 5000) return console.log(`[ SPAM ] ➢ ${command} [${args.length}]`)  
+global.db.data.users[m.sender].spam = new Date * 1;
+}
+   
 //mensaje automático
-/*if (global.db.data.users[m.sender].registered < true && prefix) {  
+/*if (!m.isGroup) {  
 //if (m.isGroup) return !1;
 //if (!m.message) return !0;
 let str = [nna, md, yt, tiktok, fb] 
@@ -370,7 +376,7 @@ break
 //Info 
 case 'menu': case 'help': case 'menucompleto': case 'menu2': case 'audio': case 'nuevo': case 'extreno': case 'reglas': menu(m, command, conn, prefix, pushname, sender, pickRandom, fkontak) 
 break  
-case 'estado': case 'infobot': case 'owner': case 'creador': case 'contacto': case 'grupos': case 'grupoficiales': case 'instalarbot': case 'crearbot': case 'ping': case '5492266613038': case '593980586516': case '595975740803': case 'report': case 'sc': case 'donar': case 'solicitud': case 'cuenta': case 'cuentas': case 'cuentaoficiales': case 'cuentaofc': info(command, conn, m, speed, sender, fkontak, pickRandom, pushname, from, msg, text) 
+case 'estado': case 'infobot': case 'owner': case 'creador': case 'contacto': case 'grupos': case 'grupoficiales': case 'instalarbot': case 'crearbot': case 'ping': case '5492266613038': case '593980586516': case '595975740803': case 'report': case 'sc': case 'donar': case 'solicitud': case 'cuenta': case 'cuentas': case 'cuentaoficiales': case 'cuentaofc': case 'cafirexos': case 'Cafirexos': info(command, conn, m, speed, sender, fkontak, pickRandom, pushname, from, msg, text) 
 break   
   
 //activar/desactivar
@@ -456,15 +462,15 @@ break
 //propietario/owner
 case 'bcgc': case 'bcgroup': case 'bc': case 'broadcast': case 'bcall': case 'block': case 'bloquear': case 'unblock': case 'desbloquear': case 'setcmd':  case 'addcmd': case 'delcmd': case 'listcmd': case 'añadirdiamantes': case 'dardiamantes': case 'addlimit': case 'añadirxp': case 'addexp': case 'addxp': owner(isCreator, m, command, conn, text, delay, fkontak, store, quoted, sender) 
 break 
-
+  
 case 'fetch': case 'get': {
-if (!/^https?:\/\//.test(text)) return m.reply(' Comience *URL* con: http:// atau https://')
+if (!/^https?:\/\//.test(text)) return m.reply('*Ej:* https://www.xxx.com')
 const _url = new URL(text);
 const url = global.API(_url.origin, _url.pathname, Object.fromEntries(_url.searchParams.entries()), 'APIKEY');
-const res = await fetch(url);
-if (res.headers.get('content-length') > 100 * 1024 * 1024 * 1024) {
+const res = await fetch(url); 
+if (res.headers.get('content-length') > 100 * 1024 * 1024 * 1024) { 
 throw `Content-Length: ${res.headers.get('content-length')}`;
-}
+} 
 if (!/text|json/.test(res.headers.get('content-type'))) return conn.sendFile(m.chat, url, 'file', text, m);
 let txt = await res.buffer();
 try {
@@ -587,7 +593,7 @@ if (media === 'texto')
 await conn.sendMessage(m.chat, {text: `${pickRandom(['*QUE YO QUE?*', 'Que?'])}`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 if (budy.includes(`Yaoi`)) {
 m.react(`${pickRandom(['😐', '👀', '😹'])}`)
-m.reply(`${pickRandom(['Que mamada? vete a estudiar mejor', 'Soy un bot hetero, no pida mamada (︶｡︶)zzZ '])}`)}
+m.reply(`${pickRandom(['Que mamada? vete a estudiar mejor', 'Soy un bot hetero, no pida mamada (︶｡︶)zzZ ', 'enviar que doy permiso 😼 ˡᵒˢ ᵃᵈᵐᶦⁿˢ ˢᵉ ᶠᵘᵉʳᵒⁿ ᵃ ᵈᵒʳᵐᶦʳ  ᵃᵖʳᵒᵛᵉᶜʰᵃʳ ᵉˡ ᵇᵘᵍ ˣᵈ'])}`)}
 if (budy.startsWith(`a`)) {
 if (!global.db.data.chats[m.chat].audios) return
 let vn = './media/a.mp3'
