@@ -543,12 +543,14 @@ let chats = global.db.data.chats[m.chat]
   if (typeof setting !== 'object') global.db.data.settings[conn.user.jid] = {}  
   if (setting) {  
   if (!isNumber(setting.status)) setting.status = 0  
+  if (!('self' in setting)) setting.self = false;
   if (!('autobio' in setting)) setting.autobio = true
   if (!('jadibot' in setting)) setting.jadibot = true 
   if (!('anticall' in setting)) setting.anticall = true
   if (!('antiprivado' in setting)) setting.antiprivado = false;
   } else global.db.data.settings[conn.user.jid] = {  
   status: 0,  
+  self: false, 
   autobio: true,
   jadibot: true,
   anticall: true, 
