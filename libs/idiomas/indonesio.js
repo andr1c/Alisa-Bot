@@ -243,7 +243,34 @@ text21: `*Masukkan perintah dengan kesalahan*\n\n*Contoh:`,
 text22: `Laporan telah dikirim ke pencipta saya, kami akan menghubungi Anda jika perlu, jika salah akan diabaikan dan diblokir dari bot*`,  
 text23: `*╼╼╼╼╼╼╼[ 💖 sumbangan 💖 ]╾╾╾╾╾╾╾╾*\n\n*Halo 👋, jika Anda ingin mendukung proyek ini, Anda dapat melakukannya melalui donasi sukarela melalui Mercado Pago Arg.*\n\n╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍\n\n*❇️Mercado pago:*\n*• Alias :* OficialGB\n*• CVU :* 0000003100059201491917`, 
 text24: `*💖 Anda juga dapat membagikan hal berikut sebagai bentuk dukungan 💕*\n\n*💖 Dukung repositori dengan sedikit bintang, terima kasih 🙏💕*`,  
-text25: `┗❴ ⚠ PERINGATAN ⚠ ❵┛\n\nDilarang menandai pencipta/pengembangan jika Anda memiliki saran mengenai Bot tulis ke pesan pribadi mereka` }
+text25: `┗❴ ⚠ PERINGATAN ⚠ ❵┛\n\nDilarang menandai pencipta/pengembangan jika Anda memiliki saran mengenai Bot tulis ke pesan pribadi mereka`, 
+text26: `*⚡ Sedang mencari hots berkualitas yang pas di kantong?*
+
+⚡ Apakah bot Anda perlu ditingkatkan? Cafirexos memiliki solusi sempurna! Hosting berkinerja tinggi kami akan menjaga bot Anda tetap aktif 24/7 dengan harga yang sangat rendah. Lupakan masalah memori dan pertahankan bot Anda Aktif 24/7 dengan harga yang dapat diterima. Bergabunglah dengan komunitas kami dan berikan bot Anda peningkatan yang layak.
+
+*🔵 \`\`\`Informasi Host\`\`\`*
+
+💻 *Halaman*
+• https://www.cafirexos.com
+
+✨ *Dasbor*
+• https://dash.cafirexos.com
+
+⚙️ *Panel*
+• https://panel.cafirexos.com
+
+📢 *Saluran WhatsApp*
+• https://whatsapp.com/channel/0029VaFVSkRCMY0KFmCMDX2q
+
+💥 *Grup WhatsApp*
+• https://chat.whatsapp.com/FBtyc8Q5w2iJXVl5zGJdFJ 
+
+📧 *Benar*
+• contacto@cafirexos.com
+
+🧑‍💻 *Kontak (Diego Flores)*
+_(Keraguan HANYA PADA PEMBAWA ACARA)_
+• https://wa.me/50497150165` }
  
 const menu = { 
 text: `❐ Awalan`, 

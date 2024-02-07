@@ -243,7 +243,34 @@ text21: `*𝙸𝙽𝙶𝚁𝙴𝚂𝙴 𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 �
 text22: `𝙴𝙻 𝚁𝙴𝙿𝙾𝚁𝚃𝙴 𝙵𝚄𝙴 𝙴𝙽𝚅𝙸𝙰𝙳𝙾 𝙰 𝙼𝙸 𝙲𝚁𝙴𝙰𝙳𝙾𝚁, 𝙽𝙾𝚂 𝙲𝙾𝙽𝚃𝙰𝚁𝙴𝙼𝙾𝚂 𝙲𝙾𝙽 𝚄𝚂𝚃𝙴𝙳 𝚂𝙸 𝙴𝚂 𝙽𝙴𝙲𝙴𝚂𝙰𝚁𝙸𝙾, 𝙳𝙴 𝚂𝙴𝚁 𝙵𝙰𝙻𝚂𝙾 𝚂𝙴𝚁𝙰 𝙸𝙶𝙽𝙾𝚁𝙰𝙳𝙾 𝚈 𝙱𝙻𝙾𝚀𝚄𝙴𝙰𝙳𝙾 𝙳𝙴𝙻 𝙱𝙾𝚃*`, 
 text23: `*╼╼╼╼╼╼╼[ 💖 DONACION 💖 ]╾╾╾╾╾╾╾╾*\n\n*Hola 👋, si quieres apoyar este proyecto, puedes hacerlo a través de donaciones voluntarias por Mercado Pago Arg.*\n\n╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍\n\n*❇️Mercado pago:*\n*• Alias :* OficialGB\n*• CVU :* 0000003100059201491917`, 
 text24: `*💖 ᵀᵃᵐᵇᶦᵉⁿ ᵖᵘᵉᵈᵉˢ ᶜᵒᵐᵖᵃʳᵗᶦʳ ˡᵒ ˢᶦᵍᵘᶦᵉⁿᵗᵉ ᶜᵒᵐᵒ ᴹᵘᵉˢᵗʳᵃ ᵈᵉ ᴬᵖᵒʸᵒ 💕*\n\n*❤ ᴬᵖᵒʸᵃʳ ᵉˡ ʳᵉᵖᵒˢᶦᵗᵒʳᶦᵒ ᶜᵒⁿ ᵘⁿᵃ ᵉˢᵗʳᵉˡˡᶦᵗᵃˢ ᴳʳᵃᶜᶦᵃˢ 🙏💕*`, 
-text25: `┗❴ ⚠ 𝐀𝐃𝐕𝐄𝐑𝐓𝐄𝐍𝐂𝐈𝐀 ⚠ ❵┛\n\nᴇsᴛᴀ ᴘʀᴏʜɪʙɪᴅᴏ ᴇᴛɪǫᴜᴇᴛᴀʀ ᴀʟ ᴄʀᴇᴀᴅᴏʀ/ᴅᴇsᴀʀʀᴏʟʟᴏ sɪ ᴛɪᴇɴᴇs ᴜɴᴀ sᴜɢᴇʀᴇɴᴄɪᴀs ʀᴇғᴇʀᴇɴᴛᴇ ᴀʟ ʙᴏᴛ ᴇsᴄʀɪʙɪʀʟᴇ ᴀ sᴜs ᴘʀɪᴠ` }
+text25: `┗❴ ⚠ 𝐀𝐃𝐕𝐄𝐑𝐓𝐄𝐍𝐂𝐈𝐀 ⚠ ❵┛\n\nᴇsᴛᴀ ᴘʀᴏʜɪʙɪᴅᴏ ᴇᴛɪǫᴜᴇᴛᴀʀ ᴀʟ ᴄʀᴇᴀᴅᴏʀ/ᴅᴇsᴀʀʀᴏʟʟᴏ sɪ ᴛɪᴇɴᴇs ᴜɴᴀ sᴜɢᴇʀᴇɴᴄɪᴀs ʀᴇғᴇʀᴇɴᴛᴇ ᴀʟ ʙᴏᴛ ᴇsᴄʀɪʙɪʀʟᴇ ᴀ sᴜs ᴘʀɪᴠ`, 
+text26: `*⚡ ¿Esta buscando un hots de calidad y al ajuste de su bolsillo?*
+
+⚡ ¿Su bot necesita un impulso? ¡Cafirexos tiene la solución perfecta! Nuestro hosting de alto rendimiento mantendrá tu bot activo 24/7 a un precio increíblemente bajo. Olvídese de los problemas de memoria y manténga su bot 24/7 Activo a un precio aceptable. Únase a nuestra comunidad y dale a su bot el impulso que se merece.
+
+*🔵 \`\`\`Información del Host\`\`\`*
+
+💻 *Página*
+• https://www.cafirexos.com
+
+✨ *Dashboard*
+• https://dash.cafirexos.com
+
+⚙️ *Panel*
+• https://panel.cafirexos.com
+
+📢 *Canal de WhatsApp*
+• https://whatsapp.com/channel/0029VaFVSkRCMY0KFmCMDX2q
+
+💥 *Grupo de WhatsApp* 
+• https://chat.whatsapp.com/FBtyc8Q5w2iJXVl5zGJdFJ 
+
+📧 *Correo*
+• contacto@cafirexos.com
+
+🧑‍💻 *Contacto (Diego Flores)*
+_(Dudas UNICAMENTE SOBRE EL HOST)_
+• https://wa.me/50497150165` }
 
 const menu = {
 text: `❐ ᴘʀᴇғɪᴊᴏ`, 
@@ -405,6 +432,7 @@ A través de nuestro Mercado Pago.
 *⚡ ¿No puedo donar hay otra opción para obtener un bot el mi Grupo?*
 puede apoyar nuestro repositorio oficial con una estrellita 🌟
 • ${md}
+• https://github.com/elrebelde21/LoliBot-MD
 
 🔔 Subscrirte a nuestro canal de YouTube oficial
 • ${yt}

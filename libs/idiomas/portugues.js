@@ -243,7 +243,34 @@ text21: `*Digite o comando com falha*\n\n*Exemplo:`,
 text22: `O relato foi enviado ao meu criador, entraremos em contato se necessário, se for falso será ignorado e bloqueado do bot*`, 
 text23: `*╼╼╼╼╼╼╼[ 💖 doação 💖 ]╾╾╾╾╾╾╾╾*\n\n* Olá 👋, se você quiser apoiar este projeto, poderá fazê-lo através de doações voluntárias através do Mercado Pago Arg.*\n\n╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍\n\n*❇️Mercado pago:*\n*• Alias :* OficialGB\n*• CVU :* 0000003100059201491917`, 
 text24: `*💖 Você também pode compartilhar o seguinte como uma demonstração de apoio 💕*\n\n*💖 Apoie o repositório com uma estrelinha, obrigado 🙏💕*`, 
-text25: `┗❴ ⚠ AVISO ⚠ ❵┛\n\nÉ proibido marcar meu criador/desenvolvimento. Se você tiver alguma sugestão sobre o Bot, escreva para mim em particular.` }
+text25: `┗❴ ⚠ AVISO ⚠ ❵┛\n\nÉ proibido marcar meu criador/desenvolvimento. Se você tiver alguma sugestão sobre o Bot, escreva para mim em particular.`, 
+text26: `*⚡Você está procurando hots de qualidade que caibam no seu bolso?*
+
+⚡ Seu bot precisa de um impulso? A Cafirexos tem a solução perfeita! Nossa hospedagem de alto desempenho manterá seu bot ativo 24 horas por dia, 7 dias por semana, por um preço incrivelmente baixo. Esqueça os problemas de memória e mantenha seu bot ativo 24 horas por dia, 7 dias por semana, por um preço aceitável. Junte-se à nossa comunidade e dê ao seu bot o impulso que ele merece.
+
+*🔵 \`\`\`Informações do anfitrião\`\`\`*
+
+💻 *Página*
+• https://www.cafirexos.com
+
+✨ *Painel*
+• https://dash.cafirexos.com
+
+⚙️ *Painel*
+• https://panel.cafirexos.com
+
+📢 *Canal WhatsApp*
+• https://whatsapp.com/channel/0029VaFVSkRCMY0KFmCMDX2q
+
+💥 *Grupo de WhatsApp*
+• https://chat.whatsapp.com/FBtyc8Q5w2iJXVl5zGJdFJ 
+
+📧 *Correo*
+• contacto@cafirexos.com
+
+🧑‍💻 *Contato (Diego Flores)*
+_(Dúvidas SOMENTE SOBRE O ANFITRIÃO)_
+• https://wa.me/50497150165` }
 
 const menu = {
 text: `❐ Prefixo`, 

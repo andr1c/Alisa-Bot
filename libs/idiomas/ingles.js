@@ -248,7 +248,34 @@ text23: `*╼╼╼╼╼╼╼[ 💖 DONATION 💖 ]╾╾╾╾╾╾╾╾*\n
 *• Alias :* OficialGB
 *• CVU :* 0000003100059201491917`, 
 text24: `*💖 ʸᵒᵘ ᶜᵃⁿ ᵃˡˢᵒ ˢʰᵃʳᵉ ᵗʰᵉ ᶠᵒˡˡᵒʷᶦⁿᵍ ᵃˢ ᵃ ˢʰᵒʷ ᵒᶠ ˢᵘᵖᵖᵒʳᵗ 💕*\n\n*💖 ˢᵘᵖᵖᵒʳᵗ ᵗʰᵉ ʳᵉᵖᵒˢᶦᵗᵒʳʸ ʷᶦᵗʰ ᵃ ˡᶦᵗᵗˡᵉ ˢᵗᵃʳ, ᵗʰᵃⁿᵏ ʸᵒᵘ 🙏💕*`, // 
-text25: `┗❴ ⚠ 𝐖𝐀𝐑𝐍𝐈𝐍𝐆 ⚠ ❵┛\n\nɪᴛ ɪs ᴘʀᴏʜɪʙɪᴛᴇᴅ ᴛᴏ ᴛᴀɢ ᴛʜᴇ ᴄʀᴇᴀᴛᴏʀ/ᴅᴇᴠᴇʟᴏᴘᴍᴇɴᴛ ɪғ ʏᴏᴜ ʜᴀᴠᴇ ᴀ sᴜɢɢᴇsᴛɪᴏɴ ʀᴇɢᴀʀᴅɪɴɢ ᴛʜᴇ ʙᴏᴛ ᴡʀɪᴛᴇ ᴛᴏ ᴛʜᴇɪʀ ᴘʀɪᴠᴀᴛᴇ ᴍᴇssᴀɢᴇ` }
+text25: `┗❴ ⚠ 𝐖𝐀𝐑𝐍𝐈𝐍𝐆 ⚠ ❵┛\n\nɪᴛ ɪs ᴘʀᴏʜɪʙɪᴛᴇᴅ ᴛᴏ ᴛᴀɢ ᴛʜᴇ ᴄʀᴇᴀᴛᴏʀ/ᴅᴇᴠᴇʟᴏᴘᴍᴇɴᴛ ɪғ ʏᴏᴜ ʜᴀᴠᴇ ᴀ sᴜɢɢᴇsᴛɪᴏɴ ʀᴇɢᴀʀᴅɪɴɢ ᴛʜᴇ ʙᴏᴛ ᴡʀɪᴛᴇ ᴛᴏ ᴛʜᴇɪʀ ᴘʀɪᴠᴀᴛᴇ ᴍᴇssᴀɢᴇ`, 
+text26: `*⚡ Are you looking for quality hots that fit your pocket?*
+
+⚡ Does your bot need a boost? Cafirexos has the perfect solution! Our high-performance hosting will keep your bot up 24/7 at an incredibly low price. Forget about memory problems and keep your bot Active 24/7 at an acceptable price. Join our community and give your bot the boost it deserves.
+
+*🔵 \`\`\`Host Information\`\`\`*
+
+💻 *Page*
+• https://www.cafirexos.com
+
+✨ *Dashboard*
+• https://dash.cafirexos.com
+
+⚙️ *Panel*
+• https://panel.cafirexos.com
+
+📢 *WhatsApp Channel*
+• https://whatsapp.com/channel/0029VaFVSkRCMY0KFmCMDX2q
+
+💥 *WhatsApp Group*
+• https://chat.whatsapp.com/FBtyc8Q5w2iJXVl5zGJdFJ 
+
+📧 *Correo*
+• contacto@cafirexos.com
+
+🧑‍💻 *Contact (Diego Flores)*
+_(Doubts ONLY ABOUT THE HOST)_
+• https://wa.me/50497150165` }
 
 const menu = {
 text: `❐ ᴘʀᴇғɪx`, 
