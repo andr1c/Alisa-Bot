@@ -15,6 +15,7 @@ const os = require('os')
 
 async function buscadores(m, command, conn, text, budy, from, fkontak, prefix, args, q, quoted, lang, lolkeysapi) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].banned) return
 if (command == 'yts' || command == 'ytsearch') {
 if (global.db.data.users[m.sender].level < 2) return m.reply(`${lenguaje['nivel']()} 2 ${lenguaje['nivel2']()}`) 
 if (!text) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} anime`)
@@ -120,23 +121,23 @@ const openaiii = new OpenAIApi(configuration)
 if (prefix == 'a' || prefix == 'A') return
 if (!text) return m.reply(`${lenguaje.lengua.ia} ${prefix + command} Recomienda un top 10 de películas de acción`) 
 try {
-conn.sendPresenceUpdate('composing', m.chat)
-let sistema1 = `Actuaras como un Bot de WhatsApp el cual fue creado por elrebelde, tu seras NovaBot-MD`
+conn.sendPresenceUpdate('composing', m.chat);
+let sistema1 = `Actuaras como un Bot de WhatsApp el cual fue creado por elrebelde21, tu seras NovaBot-MD`;
 async function getOpenAIChatCompletion(texto) {
-const openaiAPIKey = global.openai_key
-let chgptdb = global.chatgpt.data.users[m.sender]
-chgptdb.push({ role: 'user', content: texto })
-const url = "https://api.openai.com/v1/chat/completions"
-const headers = { "Content-Type": "application/json", "Authorization": `Bearer ${openaiAPIKey}` }
-const data = { "model": "gpt-3.5-turbo", "messages": [{ "role": "system", "content": sistema1 }, ...chgptdb, ]}
-const response = await fetch(url, {method: "POST", headers: headers, body: JSON.stringify(data)})
-const result = await response.json()
-const finalResponse = result.choices[0].message.content
-return finalResponse
-}
-let respuesta = await getOpenAIChatCompletion(text)
+const openaiAPIKey = global.openai_key;
+let chgptdb = global.chatgpt.data.users[m.sender];
+chgptdb.push({ role: 'user', content: texto });
+const url = "https://api.openai.com/v1/chat/completions";
+const headers = { "Content-Type": "application/json", "Authorization": `Bearer ${openaiAPIKey}` };
+const data = { "model": "gpt-3.5-turbo", "messages": [{ "role": "system", "content": sistema1 }, ...chgptdb, ]};
+const response = await fetch(url, {method: "POST", headers: headers, body: JSON.stringify(data)});
+const result = await response.json();
+const finalResponse = result.choices[0].message.content;
+return finalResponse;
+};
+let respuesta = await getOpenAIChatCompletion(text);
 if (respuesta == 'error' || respuesta == '' || !respuesta) return XD; // causar error undefined para usar otra api
-m.reply(`${respuesta}`.trim())
+m.reply(`${respuesta}`.trim());
 } catch {
 try {
 const botIA222 = await openaiii.createCompletion({model: 'text-davinci-003', prompt: text, temperature: 0.3, max_tokens: 4097, stop: ['Ai:', 'Human:'], top_p: 1, frequency_penalty: 0.2, presence_penalty: 0});
@@ -144,62 +145,13 @@ if (botIA222.data.choices[0].text == 'error' || botIA222.data.choices[0].text ==
 m.reply(botIA222.data.choices[0].text.trim());
 } catch {
 try {
-const syms1 = `Actuaras como un Bot de WhatsApp el cual fue creado por elrebelde, tu seras NovaBot-MD.`;
-const fgapi1 = await fetch(`https://api-fgmods.ddns.net/api/info/openai?text=${text}&symsg=${syms1}&apikey=XlwAnX8d`);
-const fgjson1 = await fgapi1.json();
-if (fgjson1.result == 'error' || fgjson1.result == '' || !fgjson1.result) return XD; // causar error undefined para lanzar msg de error
-m.reply(`${fgjson1.result}`.trim());
+const syms1 = `Actuaras como un Bot de WhatsApp el cual fue creado por elrebelde21, tu seras NovaBot-MD`
+const Empireapi1 = await fetch(`https://api.cafirexos.com/api/chatgpt?text=${text}&name=${m.name}&prompt=${syms1}`);
+const empireApijson1 = await Empireapi1.json();
+if (empireApijson1.resultado == 'error' || empireApijson1.resultado == '' || !empireApijson1.resultado) return XD; // causar error undefined para lanzar msg de error
+m.reply(`${empireApijson1.resultado}`.trim());
 } catch {
-try {
-const vihangayt1 = await fetch(`https://vihangayt.me/tools/chatgpt?q=${text}`);
-const vihangaytjson1 = await vihangayt1.json();
-if (vihangaytjson1.data == 'error' || vihangaytjson1.data == '' || !vihangaytjson1.data) return XD; // causar error undefined para usar otra api
-m.reply(`${vihangaytjson1.data}`.trim());
-} catch {
-try {
-const vihangayt2 = await fetch(`https://vihangayt.me/tools/chatgpt2?q=${text}`);
-const vihangaytjson2 = await vihangayt2.json();
-if (vihangaytjson2.data == 'error' || vihangaytjson2.data == '' || !vihangaytjson2.data) return XD; // causar error undefined para usar otra api
-m.reply(`${vihangaytjson2.data}`.trim());
-} catch {
-try {
-const vihangayt3 = await fetch(`https://vihangayt.me/tools/chatgpt3?q=${text}`);
-const vihangaytjson3 = await vihangayt3.json();
-if (vihangaytjson3.data == 'error' || vihangaytjson3.data == '' || !vihangaytjson3.data) return XD; // causar error undefined para usar otra api
-m.reply(`${vihangaytjson3.data}`.trim());        
-} catch {
-try {
-const tioress22 = await fetch(`https://api.lolhuman.xyz/api/openai?apikey=${lolkeysapi}&text=${text}&user=${m.sender}`);
-const hasill22 = await tioress22.json();
-if (hasill22.result == 'error' || hasill22.result == '' || !hasill22.result) return XD; // causar error undefined para usar otra api
-const hasill22_result = await translate(`${hasill22.result}`, {to: 'es', autoCorrect: true});
-m.reply(`${hasill22_result.text}`.trim());
-} catch {
-try {
-const searchString2 = ' Indonesia ';
-const replacementString2 = ' español ';
-const rres = await fetch(`https://api.ibeng.tech/api/others/chatgpt?q=Hola&apikey=eMlBNRzUXv`);
-const jjson = await rres.json();
-const hahaha = await translate(`${jjson.data}`, {to: 'es', autoCorrect: true});
-const sextS = hahaha.text;
-const replacedText = sextS.replace(searchString2, replacementString2).trim();
-m.reply(replacedText);
-} catch {
-try {
-const akuariapi2 = await fetch(`https://api.akuari.my.id/ai/gpt?chat=${text}`);
-const akuariapijson2 = await akuariapi2.json();
-if (akuariapijson2.respon == 'error' || akuariapijson2.respon == '' || !akuariapijson2.respon) return XD; // causar error undefined para lanzar msg de error
-const akuariapiresult2 = await translate(`${akuariapijson2.respon}`, {to: 'es', autoCorrect: true});
-m.reply(akuariapiresult2.text.trim());
-} catch {
-try {
-const akuariapi1 = await fetch(`https://api.azz.biz.id/api/bard?q=${text}&key=global`);
-const akuariapijson1 = await akuariapi1.json();
-if (akuariapijson1.respon == 'error' || akuariapijson1.respon == '' || !akuariapijson1.respon) return XD; // causar error undefined para usar otra api
-const akuariapiresult1 = await translate(`${akuariapijson1.respon}`, {to: 'es', autoCorrect: true});
-m.reply(`${akuariapiresult1.text}`.trim());
-} catch {
-return m.reply(info.error)}}}}}}}}}}}
+return m.reply(info.error)}}}}
 
 if (command == 'dalle' || command == 'ia2' || command == 'aimg' || command == 'imagine' || command == 'dall-e') {
 if (!text) return m.reply(`${lenguaje.lengua.ia2} ${prefix + command} gatitos llorando`) 

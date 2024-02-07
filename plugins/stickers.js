@@ -9,6 +9,7 @@ const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, slee
 async function stickers(m, command, conn, mime, quoted, args, text, lolkeysapi, fkontak) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
+if (global.db.data.users[m.sender].banned) return m.reply(`_🚫ESTA BANEADO POR MI PROPIETARIO_`) 
 if (command == 's' || command == 'sticker') {
 if (/image/.test(mime)) {  
 conn.fakeReply(m.chat, `${lenguaje.sticker.text}`, '0@s.whatsapp.net', 'No haga spam')

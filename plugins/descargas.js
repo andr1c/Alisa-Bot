@@ -17,6 +17,7 @@ const formatSize = sizeFormatter({
 async function descarga(m, command, conn, text, command, args, fkontak, from, buffer, getFile, q, includes, lolkeysapi) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
+if (global.db.data.users[m.sender].banned) return
 if (command == 'play') {
 if (!text) return m.reply(lenguaje.descargar.text + ` *${prefix + command}* ozuna`) 
 try { 
@@ -347,6 +348,7 @@ m.reply('2 ' + info.limit)}}
 async function descarga2(m, command, text, args, conn, lolkeysapi) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
+if (global.db.data.users[m.sender].banned) return
 if (command == 'facebook' || command == 'fb') { 
 if (!text) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} https://fb.watch/ncowLHMp-x/?mibextid=rS40aB7S9Ucbxw6v`)
 if (!args[0].match(/www.facebook.com|fb.watch|web.facebook.com|business.facebook.com|video.fb.com/g)) return m.reply(`Error`) 

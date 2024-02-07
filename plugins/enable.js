@@ -126,11 +126,11 @@ if (!isCreator) return m.reply(info.owner)
 if (!text) return m.reply(`${lenguaje.enable.text}\n\n*• ${prefix + command} on*\n*• ${prefix + command} off*`)
 if (args[0] === "on") {
 global.db.data.settings[numBot].antiprivado = true
-//global.db.data.chats[m.chat].antiprivado = true
+//conn.antiprivado = true
 m.reply(`✅ *${command}* ${lenguaje.enable.text1}`)
 } else if (args[0] === "off") {
 global.db.data.settings[numBot].antiprivado = false
-//global.db.data.chats[m.chat].antiprivado = false
+//conn.antiprivado = false
 m.reply(`🟢 *${command}* ${lenguaje.enable.text2}`)}}
 
 if (command == 'anticall' || command == 'antillamada') {

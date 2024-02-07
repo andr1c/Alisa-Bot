@@ -8,6 +8,7 @@ const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, slee
 
 async function owner(isCreator, m, command, conn, text, delay, fkontak, store, quoted, sender) {
 if (!isCreator) return m.reply(info.owner) 
+if (global.db.data.users[m.sender].banned) return
 if (command == 'bcgc' || command == 'bcgroup') {
 if (!text) return conn.sendMessage(m.chat, { text: `${lenguaje.owner.text}` }, { quoted: m }); 
 let getGroups = await conn.groupFetchAllParticipating()

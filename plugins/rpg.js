@@ -33,6 +33,7 @@ user.afkReason = ''
 }
 
 async function reg(command, conn, m, sender, text, budy, fkontak, delay, args) {
+if (global.db.data.users[m.sender].banned) return
 if (command == 'reg' || command == 'verificar') {
 let Reg = /\|?(.*)([.|] *?)([0-9]*)$/i
 let user = global.db.data.users[m.sender]
@@ -97,6 +98,7 @@ conn.fakeReply(m.chat, sn, '0@s.whatsapp.net', `${lenguaje.rpg.myns2}`, 'status@
 
 async function rpg(m, command, participants, args, sender, pushname, text, conn, fkontak, replace, who) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].banned) return
 if (command == 'lb' || command == 'leaderboard') {
 if (!m.isGroup) return m.reply(info.group) 
 let member = participants.map(u => u.id)

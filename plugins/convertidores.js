@@ -9,6 +9,7 @@ const { toAudio, toPTT, toVideo } = require('../libs/converter.js')
 async function efec(conn, command, mime, quoted, exec, prefix, m, from) {
 try {  
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].banned) return
 await conn.sendPresenceUpdate('recording', m.chat)
 let set  
 if (/bass/.test(command)) set = '-af equalizer=f=54:width_type=o:width=2:g=20'  
@@ -39,6 +40,7 @@ console.log(e)}}
 
 async function convertidores(conn, command, mime, quoted, util, m, exec, lolkeysapi) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].banned) return
 if (command == 'tourl') {
 if (!mime) return m.reply(`${lenguaje.sms.text2}`)  
 m.reply(info.wait) 

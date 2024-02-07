@@ -9,9 +9,13 @@
  const chalk = require('chalk')
  const fs = require("fs")
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('../libs/fuctions.js'); 
+let panel = "https://www.cafirexos.com"
+let cafi = "https://whatsapp.com/channel/0029VaFVSkRCMY0KFmCMDX2q"
+let cafi2 = "https://chat.whatsapp.com/FBtyc8Q5w2iJXVl5zGJdFJ"
 
 async function info(command, conn, m, speed, sender, fkontak, pickRandom, pushname, from, msg, text) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].banned) return
 if (command == 'estado' || command == 'infobot') {
 const totalMemory = Math.round(os.totalmem() / (1024 * 1024 * 1024))
 const freeMemory = Math.round(os.freemem() / (1024 * 1024 * 1024))
@@ -23,20 +27,20 @@ var latensi = speed() - timestamp
 let user = [...new Set([...global.listJadibot.filter((conn) => conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED).map((conn) => conn)])];
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 let stateRun = `╭╼╼⪨ ${lenguaje.info.text} ⪩╾╼╮
-┋
-┋✨ ${lenguaje['smsWel']()} @${sender.split("@")[0]} ${user.registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''} 
-┋
-┋${lenguaje.info.text2} ${usedMemory} GB / ${totalMemory} GB
-┋${lenguaje.info.text3} ${os.platform()}
-┋${lenguaje.info.text4} ${os.hostname()}
-┋${lenguaje.info.text5} ${cpuUsage.toFixed(2)}%
-┋${lenguaje.info.text6} ${totalMemory} GB
-┋╍╍╍╍╍╍╍╍╍╍╍╍╍
-┋${lenguaje.info.text7} ${Object.keys(global.db.data.users).length}
-┋${lenguaje.info.text8} ${runtime(process.uptime())} 
-┋${lenguaje.info.text9} ${conn.public ? 'Público' : `Privado`}
-┋${lenguaje.info.text10} ${user.length} 
-┗╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ ${conn.user.id == global.numBot2 ? '' : `\n\n${lenguaje.info.text11} wa.me/${global.numBot.split`@`[0]}`}`.trim()
+┃
+┃ ✨ ${lenguaje['smsWel']()} @${sender.split("@")[0]} ${user.registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''} 
+┃
+┃ ${lenguaje.info.text2} ${usedMemory} GB / ${totalMemory} GB
+┃ ${lenguaje.info.text3} ${os.platform()}
+┃ ${lenguaje.info.text4} ${os.hostname()}
+┃ ${lenguaje.info.text5} ${cpuUsage.toFixed(2)}%
+┃ ${lenguaje.info.text6} ${totalMemory} GB
+┃╍╍╍╍╍╍╍╍╍╍╍╍╍
+┃ ${lenguaje.info.text7} ${Object.keys(global.db.data.users).length}
+┃ ${lenguaje.info.text8} ${runtime(process.uptime())} 
+┃ ${lenguaje.info.text9} ${conn.public ? 'Público' : `Privado`}
+┃ ${lenguaje.info.text10} ${user.length}
+┗╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ ${conn.user.id == global.numBot2 ? '' : `\n\n${lenguaje.info.text11} wa.me/${global.numBot.split`@`[0]}`}`.trim()
 let ments = [me]      
 conn.sendMessage(m.chat, {image: imagen1, caption: stateRun, contextInfo:{ mentionedJid:[sender]}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }
@@ -54,7 +58,7 @@ let imagen = `${pickRandom([imagen1, imagen2, imagen3])}`
 conn.sendMessage(m.chat, { text: `${lenguaje.info.text13}\n1) ${nn}\n\n2) ${nn2}\n\n${lenguaje.info.text14}\n• ${nn3}\n\n• ${nn4}\n\n• ${nn5}\n\n• ${multi}\n\n${lenguaje.info.text15}\n• ${nn6}\n\n${lenguaje.info.text16}\n• ${nna}\n\n${lenguaje.info.text17}\n• ${nn7}\n\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n${lenguaje.info.text18}\n\n*⇶⃤꙰𝑬𝒏𝒍𝒂𝒄𝒆 𝒍𝒐𝒍𝒊𝒃𝒐𝒕ꦿ⃟⃢*\n${nn8}\n\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n\n${lenguaje.info.text19}`, contextInfo:{mentions: [sender], forwardingScore: 9999999, isForwarded: false, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: a}}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 if (command == 'instalarbot' || command == 'crearbot') {
-conn.sendMessage(m.chat, { text: `${lenguaje.info.text20(fb, md)}`,
+conn.sendMessage(m.chat, { text: lenguaje.info.text20(fb, md),
 contextInfo:{
 mentions: [sender], 
 forwardingScore: 9999999,
@@ -62,8 +66,8 @@ isForwarded: false,
 "externalAdReply": {
 "showAdAttribution": true,
 "containsAutoReply": true,
-"title": ` ${wm}`,
-"body": `${pushname}`,
+"title": wm,
+"body": pushname,
 "previewType": "PHOTO",
 "thumbnailUrl": ``,
 "thumbnail": imagen1, 
@@ -92,6 +96,22 @@ conn.sendMessage(m.chat, { text: lenguaje.grupos.text8, contextInfo:{mentions: [
 
 if (command == 'cuenta' || command == 'cuentaofc' || command == 'cuentaoficiales' || command == 'cuentas') {
 conn.sendMessage(m.chat, { text: `*🔰 ${lenguaje['smsWel']()}* @${sender.split("@")[0]} ${lenguaje['cuenta'](nna, md, yt, tiktok, fb)}`, contextInfo:{ mentionedJid:[sender], forwardingScore: 9999999, isForwarded: false, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": ` ${wm}`, "body": ` ${vs}`, "previewType": "PHOTO", thumbnail: imagen1, sourceUrl: `${pickRandom([nna, nn, md, yt])}`}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+
+if (command == 'cafirexos' || command == 'Cafirexos') {
+conn.sendMessage(m.chat, { text: lenguaje.info.text26,
+contextInfo:{
+mentions: [sender], 
+forwardingScore: 9999999,
+isForwarded: false, 
+"externalAdReply": {
+"showAdAttribution": true,
+"containsAutoReply": true,
+title: `🔵 C A F I R E X O S 🔵`, 
+body: `✅ Hosting de Calidad`, 
+"previewType": "PHOTO",
+thumbnailUrl: 'https://grxcwmcwbxwj.objectstorage.sa-saopaulo-1.oci.customer-oci.com/n/grxcwmcwbxwj/b/cafirexos/o/logos%2Flogo_2.png', 
+"sourceUrl": pickRandom([nna, panel, cafi, cafi2, md, yt])}}},
+{ quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 if (command == '5492266613038' || command == '593980586516' || command == '595975740803') {
 if (!args.join(" ")) return m.reply(lenguaje.info.text25)

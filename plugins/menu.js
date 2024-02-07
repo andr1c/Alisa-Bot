@@ -12,6 +12,7 @@ const os = require('os')
 
 const menu = (m, command, conn, prefix, pushname, sender, pickRandom, fkontak) => {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].banned) return 
 if (command == 'menu' || command == 'menucompleto') {
 let user = global.db.data.users[m.sender]
 let totalreg = Object.keys(global.db.data.users).length
@@ -65,6 +66,7 @@ ${lenguaje.menu.text12}
 ├❥ᰰຼ ❏ ${prefix}solicitud
 ├❥ᰰຼ ❏ ${prefix}cuenta 
 ├❥ᰰຼ ❏ ${prefix}cuentaoficiales
+├❥ᰰຼ ❏ ${prefix}cafirexos
 ├❥ᰰຼ ❏ ${prefix}report _(reporta errores)_
 ╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫
 
@@ -369,6 +371,7 @@ ${lenguaje.menu.text12}
 ├❥ᰰຼ ❏ ${prefix}public (Modo público) 
 ├❥ᰰຼ ❏ ${prefix}privado (Modo privado) 
 ├❥ᰰຼ ❏ ${prefix}getcase
+├❥ᰰຼ ❏ ${prefix}fetch
 ├❥ᰰຼ ❏ ${prefix}update
 ├❥ᰰຼ ❏ ${prefix}restart 
 ├❥ᰰຼ ❏ ${prefix}reiniciar
