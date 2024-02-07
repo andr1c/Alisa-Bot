@@ -1,4 +1,4 @@
-> <b>  🚀 Version 1.0.8 (beta) </b>
+> <b>  🚀 Version 1.0.9 </b>
 
 
 <p align="center">
