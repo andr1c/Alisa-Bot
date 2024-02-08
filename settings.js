@@ -1,11 +1,12 @@
-//Bot echo desde 0 por favor deja crédito rata
+//Este Bot Esta Hecho Desde 0 Si Editas Este Bot, Deja Los Creditos Rata!
+
 const fs = require('fs') 
 const path = require('path')
 const chalk = require('chalk') 
 const { en, es, ar, id, pt, rs} = require('./libs/idiomas/total-idiomas.js') 
 
 //---------[ PROPIETADO/OWNER ]---------
-global.owner = [["5492266466080", "Owner", true], ["573026191480"], ["593968585383"], ["5492266466080"], ["595985451858"], ["5492266613038"], ["5217294888993"],["5214437863111"], ["51906662557"], ["595992302861"], ["5217441298510"], ["5491155983299"], ["573107133321"]]
+global.owner = [["5492266466080", "Owner", true], ["573026191480"], ["593968585383"], ["5492266466080"], ["595985451858"], ["5492266613038"], ["5217294888993"],["5214437863111"], ["51906662557"], ["595992302861"], ["5217441298510"], ["5491155983299"], ["573013482814"]]
 global.mods = []
 global.premium = []  
 global.blockList = []  
