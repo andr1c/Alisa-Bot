@@ -165,6 +165,7 @@ ${lenguaje.menu.text12}
 ├❥ᰰຼ ❏ ${prefix}google _(buscar información con google)_
 ├❥ᰰຼ ❏ ${prefix}chatgpt
 ├❥ᰰຼ ❏ ${prefix}ia _(buscar información con la IA)_
+├❥ᰰຼ ❏ ${prefix}bard _(buscar información)_
 ├❥ᰰຼ ❏ ${prefix}imagen _(Imagen en google)_
 ├❥ᰰຼ ❏ ${prefix}traducir _(Traducir algun texto)_
 ├❥ᰰຼ ❏ ${prefix}wallpaper _(imagen del wallpaper)_

@@ -153,7 +153,20 @@ m.reply(`${empireApijson1.resultado}`.trim());
 } catch {
 return m.reply(info.error)}}}}
 
-if (command == 'dalle' || command == 'ia2' || command == 'aimg' || command == 'imagine' || command == 'dall-e') {
+if (command == 'bard' || command == 'ia2') { 
+if (prefix == 'a' || prefix == 'A') return
+if (!text) return m.reply(`${lenguaje.lengua.ia} ${prefix + command} Recomienda un top 10 de películas de acción`) 
+try {
+conn.sendPresenceUpdate('composing', m.chat);
+var apii = await fetch(`https://aemt.me/bard?text=${text}`)
+var res = await apii.json()
+await m.reply(res.result)
+} catch (e) {
+return m.reply(info.error)
+console.log(e)
+}}
+
+if (command == 'dalle' || command == 'aimg' || command == 'imagine' || command == 'dall-e') {
 if (!text) return m.reply(`${lenguaje.lengua.ia2} ${prefix + command} gatitos llorando`) 
 m.reply(`${lenguaje.lengua.espere}`) 
 try {
