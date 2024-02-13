@@ -53,13 +53,13 @@ const demote = () => { return `ya no eres admins 🥲` }
 const smsConexion = () => { return `🟢 𝘜𝘚𝘜𝘈𝘙𝘐𝘖𝘚 𝘊𝘖𝘕𝘌𝘊𝘛𝘈𝘋𝘖 =>` }
 const smsEscaneaQR = () => { return `ESCANEA EL QR, EXPIRA 45 SEG...` }
 const smsConectado = () => { return `YA ESTA CONECTADO CORRECTAMENTE` }
+const smsConexionOFF = () => { return `[ ⚠️ ]  Conexion cerrada, por favor elimina la carpeta sessions y escanea nuevamente.`}
 const smsConexioncerrar = () => { return `⚠️ CONEXION CERRADA, SE INTENTARA RECONECTAR` }
 const smsConexionperdida = () => { return `[ ⚠️ ] Conexión perdida con el servidor, reconectando...`}
 const smsConexionreem = () => { return `[ ⚠️ ] Conexión reemplazada, se ha abierto otra nueva sesión. Por favor, cierra la sesión actual primero.`}
 const smsConexionreinicio = () => { return `🔁 Reinicio necesario, reiniciando...`}
-const smsConexionOFF = () => { return `[ ⚠️ ] Sesión incorrecta, por favor elimina la carpeta (sessions) y escanea nuevamente.`}
 const smsConexiontiem = () => { return `[ ⚠️ ] Tiempo de conexión agotado, reconectando...`}
-const smsConexiondescon = () => { return `[ ⚠️ ] Razón de desconexión desconocida:: ${reason || ''} >> ${connection || ''}`}
+const smsConexiondescon = () => { return `[ ⚠️ ] Razón de desconexión desconocida:`}
 
 const consola = {
 text: `HORARIO:`, 

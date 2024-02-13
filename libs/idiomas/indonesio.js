@@ -53,7 +53,13 @@ const demote = () => { return `Anda bukan lagi admin 🥲` }
 const smsConexion = () => { return `🟢 PENGGUNA TERHUBUNG =>` }  
 const smsEscaneaQR = () => { return `PINDAI QR, KEDALUWARSA 45 DETIK...` }
 const smsConectado = () => { return `SUDAH TERHUBUNG DENGAN BENAR` }
+const smsConexionOFF = () => { return `[ ⚠️ ]  Koneksi ditutup, harap hapus folder sesi dan pindai lagi.`}
 const smsConexioncerrar = () => { return `⚠️ KONEKSI DITUTUP, UPAYA UNTUK MENGHUBUNGKAN KEMBALI` }
+const smsConexionperdida = () => { return `[ ⚠️ ] Kehilangan koneksi ke server, menghubungkan kembali...`}
+const smsConexionreem = () => { return `[ ⚠️ ] Koneksi diganti, sesi baru lainnya telah dibuka. Silakan keluar dari sesi saat ini terlebih dahulu.`}
+const smsConexionreinicio = () => { return `🔁 Diperlukan reboot, reboot...`}
+const smsConexiontiem = () => { return `[ ⚠️ ] Waktu koneksi habis, sambungkan kembali...`}
+const smsConexiondescon = () => { return `[ ⚠️ ] Alasan pemutusan tidak diketahui:`}
 
 const consola = {
 text: `WAKTU:`, 
