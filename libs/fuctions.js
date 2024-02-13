@@ -58,6 +58,8 @@ exports.getUserProfilePic = async (conn, sender) => {
   }
 }
 
+
+
 exports.getUserBio = async (conn, sender) => {
   try {
     const statusData = await conn.fetchStatus(sender);
@@ -417,7 +419,7 @@ try {
   let user = global.db.data.users[m.sender]  
 if (typeof user !== 'object') global.db.data.users[m.sender] = {}  
 if (user) {
-if (!('premium' in user)) user.premium = false;
+if (!("premium" in user)) user.premium = false
 if (!('registered' in user)) user.registered = false
 if (!user.registered) {
 if (!('name' in user)) user.name = m.name
@@ -431,6 +433,7 @@ if (!isNumber(user.regTime)) user.regTime = -1
   if (!('afkReason' in user)) user.afkReason = ''  
   if (!('banned' in user)) user.banned = false
   if (!isNumber(user.limit)) user.limit = 20  
+  if (!user.premiumTime)  user.premiumTime = 0
   if (!isNumber(user.warn)) user.warn = 0
   if(!isNumber(user.money)) user.money = 0  
   if(!isNumber(user.health)) user.health = 100  
@@ -483,6 +486,8 @@ if (!isNumber(user.regTime)) user.regTime = -1
   afkReason: '',
   money: 0,  
   health: 100,  
+  prem: false,
+ premiumTime: 0,
   warn: 0, 
   exp: 0,
   role: '🙊 NOVATO(A) :v',
@@ -557,7 +562,7 @@ let chats = global.db.data.chats[m.chat]
   antiprivado: false
   } 
 
-global.db.data.sticker = global.db.data.sticker || {} // sticker for addcmd    
+global.db.data.sticker = global.db.data.sticker || {} // sticker for addcmd   
 if (user) { //@skidy89
 if (user.level <= 3) {
  user.role = '🙊 NOVATO(A) :v'
@@ -1008,6 +1013,14 @@ conn.user.chat = m.chat // chat in user?????????
     }
     conn.sendPoll = (jid, name = '', values = [], selectableCount = 1) => { return conn.sendMessage(jid, { poll: { name, values, selectableCount }}) }
     
+conn.parseMention = (text = '') => {
+return [...text.matchAll(/@([0-9]{5,16}|0)/g)].map(v => v[1] + '@s.whatsapp.net')
+}
+
+conn.sendTextWithMentions = async (jid, text, quoted, options = {}) => conn.sendMessage(jid, { text: text, contextInfo: { mentionedJid: [...text.matchAll(/@(\d{0,16})/g)].map(v => v[1] + '@s.whatsapp.net') }, ...options }, { quoted })
+
+conn.sendText = (jid, text, quoted = '', options) => conn.sendMessage(jid, { text: text, ...options }, { quoted })
+
     /**
     * a normal reply
     */
