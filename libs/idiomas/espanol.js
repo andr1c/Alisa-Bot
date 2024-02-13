@@ -54,6 +54,12 @@ const smsConexion = () => { return `🟢 𝘜𝘚𝘜𝘈𝘙𝘐𝘖𝘚 𝘊�
 const smsEscaneaQR = () => { return `ESCANEA EL QR, EXPIRA 45 SEG...` }
 const smsConectado = () => { return `YA ESTA CONECTADO CORRECTAMENTE` }
 const smsConexioncerrar = () => { return `⚠️ CONEXION CERRADA, SE INTENTARA RECONECTAR` }
+const smsConexionperdida = () => { return `[ ⚠️ ] Conexión perdida con el servidor, reconectando...`}
+const smsConexionreem = () => { return `[ ⚠️ ] Conexión reemplazada, se ha abierto otra nueva sesión. Por favor, cierra la sesión actual primero.`}
+const smsConexionreinicio = () => { return `🔁 Reinicio necesario, reiniciando...`}
+const smsConexionOFF = () => { return `[ ⚠️ ] Sesión incorrecta, por favor elimina la carpeta (sessions) y escanea nuevamente.`}
+const smsConexiontiem = () => { return `[ ⚠️ ] Tiempo de conexión agotado, reconectando...`}
+const smsConexiondescon = () => { return `[ ⚠️ ] Razón de desconexión desconocida:: ${reason || ''} >> ${connection || ''}`}
 
 const consola = {
 text: `HORARIO:`, 
@@ -82,7 +88,7 @@ const smsAntiArabe = () => { return `✳️ En este grupo no esta permitido nume
 const smsAntiLink = () => { return `\`\`\`「 ANTILINK DETECTADO 」\`\`\`\n\n` }
 const smsAntiLink2 = () => { return `🤨 eso no esta permitido rata, Sera expulsado del grupo....` }
 const smsAntiLink3 = () => { return `Te salvarte puto no soy admins 🙄\n\n*[ LLAMADO A LOS ADMINS ]*` }
-const smsAntiLink4 = () => { return `ᴱˡ ᵇᵒᵗ ⁿᵉᶜᵉˢᶦᵗᵃ ᵃᵈᵐᶦⁿ ᵖᵃʳᵃ ᵉˡᶦᵐᶦⁿᵃʳ ᵃ ᵉˢᵗᵃ ˢᵘᶜᶦᵃ ʳᵃᵗᵃ` }
+const smsAntiLink4 = () => { return `> ᴱˡ ᵇᵒᵗ ⁿᵉᶜᵉˢᶦᵗᵃ ᵃᵈᵐᶦⁿ ᵖᵃʳᵃ ᵉˡᶦᵐᶦⁿᵃʳ ᵃ ᵉˢᵗᵃ ˢᵘᶜᶦᵃ ʳᵃᵗᵃ` }
 const smsAntiLink5 = () => { return `Te salvarte por que eres un admins :v` }
 
 //autosticker
