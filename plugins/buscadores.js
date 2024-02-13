@@ -89,13 +89,13 @@ text = args.join(' ');
 if (!text && m.quoted && m.quoted.text) text = m.quoted.text;
 try {
 const result = await translate(`${text}`, {to: lang, autoCorrect: true});
-await m.reply(`${lenguaje.lengua.trad} ` + result.text);
+await m.reply(`${lenguaje.lengua.trad} : ` + result.text);
 } catch {
 try {
 const lol = await fetch(`https://api.lolhuman.xyz/api/translate/auto/${lang}?apikey=${lolkeysapi}&text=${text}`);
 const loll = await lol.json();
 const result2 = loll.result.translated;
-await m.reply(`${lenguaje.lengua.trad} ` + result2);
+await m.reply(`${lenguaje.lengua.trad} : ` + result2);
 } catch {
 await m.reply(info.error)
 }}}
@@ -195,6 +195,7 @@ console.log(e);}}}}}
 if (command == 'ss' || command == 'ssweb') {
 const scp1 = require('../libs/scraper') 
 if (!text) return m.reply(`${lenguaje.lengua.ejem} ${prefix+command} link`)
+m.react("🔍") 
 conn.fakeReply(m.chat, `${lenguaje.lengua.espere}`, '0@s.whatsapp.net', 'No haga spam')
 let krt = await scp1.ssweb(q)
 conn.sendMessage(m.chat, {image:krt.result, caption: info.result}, {quoted:m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
@@ -202,6 +203,7 @@ conn.sendMessage(m.chat, {image:krt.result, caption: info.result}, {quoted:m, ep
 if (command == 'wallpaper') {
 if (global.db.data.users[m.sender].level < 3) return m.reply(`${lenguaje['nivel']()} 3 ${lenguaje['nivel2']()}`) 
 if (!text) return m.reply(`${lenguaje.lengua.ejem} ${prefix + command} anime*`) 
+m.react("🔍") 
 let { wallpaper, wallpaperv2 } = require('@bochilteam/scraper')
 let _res = await (/2/.test(command) ? wallpaperv2 : wallpaper)(text) 
 let _img = _res[Math.floor(Math.random() * _res.length)]

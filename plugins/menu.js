@@ -57,7 +57,8 @@ ${lenguaje.menu.text12}
 ├❥ᰰຼ ❏ ${prefix}audios 
 ├❥ᰰຼ ❏ ${prefix}nuevo _(nuevo comando)_
 ├❥ᰰຼ ❏ ${prefix}reglas _(reglas)_
-├❥ᰰຼ ❏ ${prefix}ping _(Velocidad)_
+├❥ᰰຼ ❏ ${prefix}ping
+├❥ᰰຼ ❏ ${prefix}velocidad
 ├❥ᰰຼ ❏ ${prefix}grupos _(grupos oficiales)_
 ├❥ᰰຼ ❏ ${prefix}join _(solicita un bot para tu grupo)_
 ├❥ᰰຼ ❏ ${prefix}owner
@@ -66,6 +67,7 @@ ${lenguaje.menu.text12}
 ├❥ᰰຼ ❏ ${prefix}solicitud
 ├❥ᰰຼ ❏ ${prefix}cuenta 
 ├❥ᰰຼ ❏ ${prefix}cuentaoficiales
+├❥ᰰຼ ❏ ${prefix}status 
 ├❥ᰰຼ ❏ ${prefix}cafirexos
 ├❥ᰰຼ ❏ ${prefix}report _(reporta errores)_
 ╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫
@@ -366,6 +368,11 @@ ${lenguaje.menu.text12}
 ├❥ᰰຼ ❏ ${prefix}banuser _(@tag)_
 ├❥ᰰຼ ❏ ${prefix}unbanuser _(@tag)_
 ├❥ᰰຼ ❏ ${prefix}autoadmin 
+├❥ᰰຼ ❏ ${prefix}nuevonombre
+├❥ᰰຼ ❏ ${prefix}botname _(cambiar el name del bot)_
+├❥ᰰຼ ❏ ${prefix}nuevafoto
+├❥ᰰຼ ❏ ${prefix}seppbot
+├❥ᰰຼ ❏ ${prefix}fotobot _(cambiar la foto del bot)_
 ├❥ᰰຼ ❏ ${prefix}bc (Difusión a todos los chat)
 ├❥ᰰຼ ❏ ${prefix}bcgc (Difusión solo a grupos)
 ├❥ᰰຼ ❏ ${prefix}setpp (Cambia la foto del bot) 

@@ -13,6 +13,7 @@ const { ytmp4, ytmp3, ytplay, ytplayvid } = require('../libs/youtube')
 const {sizeFormatter} = require('human-readable') 
 const formatSize = sizeFormatter({
   std: 'JEDEC', decimalPlaces: 2, keepTrailingZeroes: false, render: (literal, symbol) => `${literal} ${symbol}B`});
+let user = global.db.data.users[m.sender]
 
 async function descarga(m, command, conn, text, command, args, fkontak, from, buffer, getFile, q, includes, lolkeysapi) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
@@ -345,7 +346,7 @@ m.reply(`${result4}`)
  db.data.users[m.sender].limit -= 2
 m.reply('2 ' + info.limit)}}
 
-async function descarga2(m, command, text, args, conn, lolkeysapi) {
+async function descarga2(m, command, text, args, conn, lolkeysapi, isCreator) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (global.db.data.users[m.sender].banned) return
@@ -416,16 +417,17 @@ m.reply('3 ' + info.limit)
 return m.reply(info.error)}}
 
 if (command == 'gdrive') {
-const {sizeFormatter} = require('human-readable') 
-const formatSize = sizeFormatter({
-  std: 'JEDEC', decimalPlaces: 2, keepTrailingZeroes: false, render: (literal, symbol) => `${literal} ${symbol}B`});
-m.react("📥") 
-if (!args[0]) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} https://drive.google.com/file/d/1dmHlx1WTbH5yZoNa_ln325q5dxLn1QHU/view*`) 
+const fg = require('api-dylux') 
+let free = 300 // limite de descarga
+let prem = 650
+if (!args[0]) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} https://drive.google.com/file/d/1dmHlx1WTbH5yZoNa_ln325q5dxLn1QHU/view*`)
 try {
-GDriveDl(args[0]).then(async (res) => {
- m.reply(lenguaje.descargar.text10);
-if (!res) throw res;
-conn.sendMessage(m.chat, {document: {url: res.downloadUrl, mimetype: res.mimetype, asDocument: true, fileName: `${res}`}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}) 
+m.react("📥") 
+let res = await fg.GDriveDl(args[0])
+let limit = user.premium || isCreator ? user.premium : free
+ let isLimit = limit * 1024 < res.fileSizeB
+await m.reply(isLimit ? `${lenguaje.descargar.text10}` : `\n• 𝐄𝐥 𝐀𝐫𝐜𝐡𝐢𝐯𝐨 𝐬𝐮𝐩𝐞𝐫𝐨 𝐞𝐥 𝐥𝐢𝐦𝐢𝐭 𝐝𝐞 *+${free} 𝐌𝐁* 𝐩𝐚𝐫𝐚 𝐝𝐞𝐬𝐜𝐚𝐫𝐠𝐚 𝐚𝐫𝐜𝐡𝐢𝐯𝐨 𝐝𝐞 𝐦𝐚𝐬 𝐝𝐞 : *${prem} 𝐌𝐁* 𝐏𝐚𝐬𝐚𝐫𝐭𝐞 𝐚 𝐮𝐬𝐮𝐚𝐫𝐢𝐨𝐬 𝐩𝐫𝐞𝐦𝐢𝐮𝐦 𝐩𝐨𝐧 : #premium`)
+if (!isLimit) conn.sendMessage(m.chat, { document: { url: res.downloadUrl }, fileName: res.fileName, mimetype: res.mimetype }, { quoted: m })
 db.data.users[m.sender].limit -= 3
 m.reply('3 ' + info.limit)
 } catch (e) {
