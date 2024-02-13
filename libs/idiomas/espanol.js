@@ -645,7 +645,7 @@ const smsReg8 = () => { return `*💬 Elegir tu idioma con:* #idioma` }
 const cuenta = (nna, md, yt, tiktok, fb) => { return `*Bienvenido a las cuentas oficiales ✨*
 
 *👑 Numero del bot oficial:*
-• wa.me/51910628581
+• wa.me/584125418042
 
 *✨ Canal del WhatsApp / Update:*
 • ${nna}
