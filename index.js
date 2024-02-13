@@ -613,27 +613,27 @@ try {
 let reason = new Boom(lastDisconnect?.error)?.output.statusCode
 if (connection === 'close') {
 if (reason === DisconnectReason.badSession) {
-console.log(chalk.yellow(`[ ⚠️ ] Sesión incorrecta, por favor elimina la carpeta sessions y escanea nuevamente.`)) 
+console.log(chalk.yellow(`${lenguaje['smsConexionOFF']()}`)) 
 startBot();
 } else if (reason === DisconnectReason.connectionClosed) {
-console.log(chalk.yellow(`[ ⚠️ ] Conexión cerrada, reconectando...`)) 
+console.log(chalk.yellow(`${lenguaje['smsConexioncerrar']()}`)) 
 startBot();
 } else if (reason === DisconnectReason.connectionLost) {
-console.log(chalk.yellow(`[ ⚠️ ] Conexión perdida con el servidor, reconectando...`)) 
+console.log(chalk.yellow(`${lenguaje['smsConexionperdida']()}`)) 
 startBot();
 } else if (reason === DisconnectReason.connectionReplaced) {
-console.log(chalk.yellow(`[ ⚠️ ] Conexión reemplazada, se ha abierto otra nueva sesión. Por favor, cierra la sesión actual primero.`)) 
+console.log(chalk.yellow(`${lenguaje['smsConexionreem']()}`)) 
 startBot();
 } else if (reason === DisconnectReason.loggedOut) {
-console.log(chalk.yellow(`[ ⚠️ ]  Dispositivo desconectado, escanee nuevamente y ejecútelo.`)) 
+console.log(chalk.yellow(`${lenguaje['smsConexionOFF']()}`))
 startBot();
 } else if (reason === DisconnectReason.restartRequired) {
-console.log(chalk.yellow("🔁 Reinicio necesario, reiniciando...")) 
+console.log(chalk.yellow(`${lenguaje['smsConexionreinicio']()}`)) 
 startBot();
 } else if (reason === DisconnectReason.timedOut) {
-console.log(chalk.yellow(`[ ⚠️ ] Tiempo de conexión agotado, reconectando...`)) 
+console.log(chalk.yellow(`${lenguaje['smsConexiontiem']()}`)) 
 startBot();
-} else sock.end(`[ ⚠️ ] Razón de desconexión desconocida. ${reason || ''}: ${connection || ''}`);}
+} else sock.end(`${lenguaje['smsConexiondescon']()} ${reason || ''}: ${connection || ''}`);}
 	
 if (opcion == '1' || methodCodeQR && qr !== undefined) {
 if (opcion == '1' || methodCodeQR) {
