@@ -63,7 +63,7 @@ setting: {},
 others: {},
 sticker: {},
 ...(global.db.data || {})}
-  global.db.chain = _.chain(global.db.data)}
+ global.db.chain = _.chain(global.db.data)}
 loadDatabase() //@aidenlogin
 
 if (global.db) setInterval(async () => {
@@ -550,11 +550,15 @@ body: `Esperemos que no vuelva -_-`,
 if (media === 'stickers')
 sock.sendFile(anu.id, byegc, 'sticker.webp', '', null, true, { contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: '乂 ＡＤＩＯ́Ｓ 乂', body: `${name.split("@")[0]}`, mediaType: 2, sourceUrl: `${pickRandom([md, yt])}`, thumbnail: leave}}})
 } else if (anu.action == 'promote') {
+//let users = participants.map(u => sock.decodeJid(u.id))
+const groupAdmins = participants.filter(p => p.admin)
+const listAdmin = groupAdmins.map((v, i) => `*» ${i + 1}. @${v.id.split('@')[0]}*`).join('\n')
 const buffer = await getBuffer(ppuser)
 let name = num
-sock.sendMessage(anu.id, { text: `${pickRandom(['[ NUEVO ADMINS ]\n\n', 'Hey'])} @${name.split("@")[0]} ${pickRandom(['Ahora eres admin del grupo 🥳', 'Felicidades ahora eres parte staff 🎉'])}`, 
+let usuario = anu.author
+sock.sendMessage(anu.id, { text: `${pickRandom(['[ NUEVO ADMINS ]\n\n', 'Hey'])} @${name.split("@")[0]} ${pickRandom(['Ahora eres admin del grupo 🥳', 'Felicidades ahora eres parte staff 🎉'])}\n\n🫵 Acción echa por : @${usuario.split("@")[0]}`, mentions: [...groupAdmins.map(v => v.id)], 
  contextInfo:{
- mentionedJid:[num],
+ mentionedJid: [num, usuario],
  "externalAdReply": {"showAdAttribution": true,
  "containsAutoReply": true,
  "title": `乂 ＮＵＥＶＯ ＡＤＭＩＮ 乂`,
@@ -566,9 +570,10 @@ sock.sendMessage(anu.id, { text: `${pickRandom(['[ NUEVO ADMINS ]\n\n', 'Hey'])}
 } else if (anu.action == 'demote') {
 const buffer = await getBuffer(ppuser)
 let name = num
-sock.sendMessage(anu.id, { text: `@${name.split("@")[0]} ${pickRandom(['Joderte ya no eres admin 🥲', 'jjjjj ya no eres admin culiado 🤣'])}`,
+let usuario = anu.author
+sock.sendMessage(anu.id, { text: `@${name.split("@")[0]} ${pickRandom(['Joderte ya no eres admin 🥲', 'jjjjj ya no eres admin culiado 🤣'])}\n\n🫵 Acción echa por : @${usuario.split("@")[0]}`,
  contextInfo:{
- mentionedJid:[num],
+ mentionedJid:[num, usuario],
  "externalAdReply": {"showAdAttribution": true,
  "containsAutoReply": true,
  "title": `乂 ＵＮ ＡＤＭＩＮ ＭＥＮＯＳ  乂`,
@@ -578,7 +583,7 @@ sock.sendMessage(anu.id, { text: `@${name.split("@")[0]} ${pickRandom(['Joderte 
 "thumbnail": leave,
 "sourceUrl": `${pickRandom([nna, md, yt])}`}}}, {quoted: null, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }}} catch (err) {
-console.log(`${err} Error`)
+console.log(err)
 }})
 
 function pickRandom(list) {
@@ -591,7 +596,9 @@ sock.ev.on('connection.update', async (update) => {
 const { connection, lastDisconnect, qr, receivedPendingNotifications, isNewLogin} = update;
 console.log(receivedPendingNotifications)
 if (isNewLogin) sock.isInit = true
-if (connection == 'connecting') {
+const code = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode;
+
+if (update.connection == "connecting" || update.receivedPendingNotifications == "false") {
 console.log(chalk.gray('iniciando...'));
 say('NovaBot-MD', {
   font: 'chrome',
@@ -600,26 +607,53 @@ say('NovaBot-MD', {
 say(`By: elrebelde21`, {
   font: 'console',
   align: 'center',
-  gradient: ['red', 'magenta']});
- 
-} else if (connection === "close" && lastDisconnect && lastDisconnect.error && lastDisconnect.error.output.statusCode != 401) {
-console.log(color('[SYS]', '#009FFF'),
-color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
-color(`${lenguaje['smsConexioncerrar']()}`, '#f64f59'));
-startBot()
-} else if (opcion == '1' || methodCodeQR && qr !== undefined) {
+  gradient: ['red', 'magenta']})}
+  
+try {
+let reason = new Boom(lastDisconnect?.error)?.output.statusCode
+if (connection === 'close') {
+if (reason === DisconnectReason.badSession) {
+console.log(chalk.yellow(`[ ⚠️ ] Sesión incorrecta, por favor elimina la carpeta sessions y escanea nuevamente.`)) 
+startBot();
+} else if (reason === DisconnectReason.connectionClosed) {
+console.log(chalk.yellow(`[ ⚠️ ] Conexión cerrada, reconectando...`)) 
+startBot();
+} else if (reason === DisconnectReason.connectionLost) {
+console.log(chalk.yellow(`[ ⚠️ ] Conexión perdida con el servidor, reconectando...`)) 
+startBot();
+} else if (reason === DisconnectReason.connectionReplaced) {
+console.log(chalk.yellow(`[ ⚠️ ] Conexión reemplazada, se ha abierto otra nueva sesión. Por favor, cierra la sesión actual primero.`)) 
+startBot();
+} else if (reason === DisconnectReason.loggedOut) {
+console.log(chalk.yellow(`[ ⚠️ ]  Dispositivo desconectado, escanee nuevamente y ejecútelo.`)) 
+startBot();
+} else if (reason === DisconnectReason.restartRequired) {
+console.log(chalk.yellow("🔁 Reinicio necesario, reiniciando...")) 
+startBot();
+} else if (reason === DisconnectReason.timedOut) {
+console.log(chalk.yellow(`[ ⚠️ ] Tiempo de conexión agotado, reconectando...`)) 
+startBot();
+} else sock.end(`[ ⚠️ ] Razón de desconexión desconocida. ${reason || ''}: ${connection || ''}`);}
+	
+if (opcion == '1' || methodCodeQR && qr !== undefined) {
 if (opcion == '1' || methodCodeQR) {
 console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
 color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│${lenguaje['smsEscaneaQR']()}\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯`, '#f12711'))
-}
-} else if (connection == 'open') {
+}}
+
+if (update.connection == "open" || update.receivedPendingNotifications == "true") {
 console.log(color(` `,'magenta'))
 console.log(color(`\n${lenguaje['smsConexion']()} ` + JSON.stringify(sock.user, null, 2), 'yellow'))
 console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
 color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│${lenguaje['smsConectado']()}\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯` + receivedPendingNotifications, '#38ef7d')
-);
+)}  
+	
+} catch (err) {
+console.log('Error en Connection.update '+err)
+startBot()
+//}}) 
 
 const rainbowColors = ['red', 'yellow', 'green', 'blue', 'purple'];
 let index = 0;
@@ -644,8 +678,28 @@ isForwarded: true
 sock.user.connect = true;
 return false;
 }
-}});
+}}) 
 
+//responder cmd pollMensaje
+async function getMessage(key){
+if (store) {
+const msg = await store.loadMessage(key.remoteJid, key.id)
+return msg?.message
+}
+return { conversation: "hola" }}
+
+sock.ev.on('messages.update', async chatUpdate => {
+for(const { key, update } of chatUpdate) {
+if (update.pollUpdates && key.fromMe) {
+const pollCreation = await getMessage(key)
+if (pollCreation) {
+const pollUpdate = await getAggregateVotesInPollMessage({message: pollCreation, pollUpdates: update.pollUpdates, })
+var toCmd = pollUpdate.filter(v => v.voters.length !== 0)[0]?.name
+if (toCmd == undefined) return
+var prefCmd = prefix+toCmd
+sock.appenTextMessage(prefCmd, chatUpdate)
+}}}})
+    
 sock.public = true
 store.bind(sock.ev)
 sock.ev.on('creds.update', saveCreds)
