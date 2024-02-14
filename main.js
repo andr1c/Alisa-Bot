@@ -162,7 +162,7 @@ conn.ev.emit('messages.upsert', msg)
 //--------------------[ INFO CONSOLE ]-----------------------
 if (m.message) {
 console.log(chalk.bold.cyanBright(`▣────────────···\n│+${conn.user.jid.split`@`[0]} ➢ ${botname} ${conn.user.id == global.numBot2 ? '' : '(SubBot)'} ${vs}`), 
-chalk.bold.magenta(`\n│────────────\n│⏰${lenguaje.consola.text} `) + chalk.magentaBright(moment(t * 1000).tz(place).format('DD/MM/YY HH:mm:ss'),
+chalk.bold.magenta(`\n│────────────\n│⏰${lenguaje.consola.text} `) + chalk.magentaBright(new Date().toLocaleString('es-ES', { timeZone: 'America/Argentina/Buenos_Aires' }),
 chalk.bold.red(`\n️│🏷️ ${lenguaje.consola.text1} `) + chalk.bold.white(`[${conn.public ? 'Publico' : 'Privado'}]`), 
 chalk.bold.yellow(`\n│📑${lenguaje.consola.text2} `) + chalk.yellowBright(`${type}`),  
 m.isGroup ? chalk.bold.greenBright(`\n│📤${lenguaje.consola.text4} `) + chalk.greenBright(groupName) + ' ➜ ' + gradient.rainbow(from) : chalk.bold.greenBright(`\n│📥${lenguaje.consola.text5}`, userSender), 
@@ -484,17 +484,16 @@ m.reply("Se acabó el tiempo\nRespuesta: " + kuismath[m.sender.split('@')[0]])
 delete kuismath[m.sender.split('@')[0]]
 }}
 break*/
+
+case 'prueba': {
+await conn.sendPoll(m.chat, `Hola ${pushname}\n\n> 𝐒𝐮𝐩𝐞𝐫 𝐁𝐨𝐭 𝐃𝐞 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩 `, ['play3 billie eilish', 'estado', 'menu', 'fb'])}
+break
            
 //propietario/owner
 case 'bcgc': case 'bcgroup': case 'bc': case 'broadcast': case 'bcall': case 'block': case 'bloquear': case 'unblock': case 'desbloquear': case 'setcmd':  case 'addcmd': case 'delcmd': case 'listcmd': case 'añadirdiamantes': case 'dardiamantes': case 'addlimit': case 'añadirxp': case 'addexp': case 'addxp': owner(isCreator, m, command, conn, text, delay, fkontak, store, quoted, sender) 
 break  
    
-case 'prueba': {
-await conn.sendPoll(m.chat, `Hola ${pushname}\n\n> 𝐒𝐮𝐩𝐞𝐫 𝐁𝐨𝐭 𝐃𝐞 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩 `, ['play3 billie eilish', 'estado', 'menu', 'fb'])}
-break
-
-case 'id': {
-m.reply(from)}            
+case 'id': {m.reply(from)}            
           	    
 case 'fetch': case 'get': {   
 if (!/^https?:\/\//.test(text)) return m.reply('*Ej:* https://www.xxx.com') 
@@ -538,6 +537,18 @@ m.reply(`exito`)
 }}
 break
 
+case 'getcase': 
+if (!isCreator) return reply(info.owner)
+   if (!text) return m.reply(`no hay comando a buscar o que?`) 
+   try { 
+   bbreak = 'break' 
+ reply('case ' + `'${args[0]}'` + fs.readFileSync('./main.js').toString().split(`case '${args[0]}'`)[1].split(bbreak)[0] + bbreak) 
+ } catch (err) { 
+ console.error(err) 
+ reply(" Error, tal vez no existe el comando") 
+ } 
+ break
+ 
 case 'banuser': {  
 if (!isCreator) return reply(info.owner)
 let who  
