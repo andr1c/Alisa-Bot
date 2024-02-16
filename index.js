@@ -207,12 +207,12 @@ const sock = makeWASocket({
 logger: pino({ level: 'silent' }),
 printQRInTerminal: opcion == '1' ? true : methodCodeQR ? true : false,
 mobile: MethodMobile, 
-browser: opcion == '1' ? ['NovaBot-MD', 'Chrome', '2.0.0'] : methodCodeQR ? ['NovaBot-MD', 'Chrome', '2.0.0'] : ['Ubuntu', 'Chrome', '110.0.5585.95'],
+browser: opcion == '1' ? ['NovaBot-MD', 'Edge', '2.0.0'] : methodCodeQR ? ['NovaBot-MD', 'Edge', '2.0.0'] : ['Ubuntu', 'Edge', '110.0.5585.95'],
 auth: {
 creds: state.creds,
 keys: makeCacheableSignalKeyStore(state.keys, Pino({ level: "fatal" }).child({ level: "fatal" })),
 },
-browser: ['Ubuntu', 'Chrome', '110.0.5585.95'], //
+browser: ['Ubuntu', 'Edge', '110.0.5585.95'], //
 markOnlineOnConnect: true, //establecer falso para fuera de línea
 generateHighQualityLinkPreview: true, //hacer enlace de vista previa alta
 getMessage: async (key) => {
