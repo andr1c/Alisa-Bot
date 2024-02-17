@@ -348,6 +348,7 @@ ${lenguaje.menu.text12}
 ├❥ᰰຼ ❏ ${prefix}sticker 
 ├❥ᰰຼ ❏ ${prefix}wm
 ├❥ᰰຼ ❏ ${prefix}attp
+├❥ᰰຼ ❏ ${prefix}qc
 ├❥ᰰຼ ❏ ${prefix}emojimix
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
 
