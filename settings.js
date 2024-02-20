@@ -3,7 +3,7 @@ const path = require('path')
 const chalk = require('chalk') 
 const { en, es, ar, id, pt, rs} = require('./libs/idiomas/total-idiomas.js') 
 
-//---------[ PROPIETADO/OWNER ]---------
+//---------[ PROPIETARIO/OWNER ]---------
 global.owner = [["5492266466080", "Owner", true], ["573026191480"], ["593968585383"], ["5492266466080"], ["595986172767"], ["5492266613038"], ["5217294888993"],["5214437863111"], ["51906662557"], ["595992302861"], ["5217441298510"], ["5491155983299"], ["5493795319022"], ["5217821153974"], ["573013482814"]]
 global.mods = []
 global.premium = []  
@@ -78,7 +78,7 @@ global.imagen2 = fs.readFileSync('./media/menu2.jpg')
 global.imagen3 = fs.readFileSync('./media/menu3.jpg')
 global.noperfil = fs.readFileSync('./media/sinfoto.jpg')
 
-//---------[ ENLACE ]---------
+//---------[ ENLACES ]---------
 global.md = 'https://github.com/elrebelde21/NovaBot-MD'
 global.yt = 'https://www.youtube.com/@elrebelde.21'
 global.tiktok = 'tiktok.com/@elrebelde21'
