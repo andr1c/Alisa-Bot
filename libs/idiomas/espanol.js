@@ -50,7 +50,7 @@ const promote = () => { return `Felicidades ahora eres parte del staff 🎉` }
 const demote = () => { return `ya no eres admins 🥲` }
 
 //mensaje el la consola inicio
-const smsConexion = () => { return `🟢 𝘜𝘚𝘜𝘈𝘙𝘐𝘖𝘚 𝘊𝘖𝘕𝘌𝘊𝘛𝘈𝘋𝘖𝘚 =>` }
+const smsConexion = () => { return `🟢 𝘜𝘚𝘜𝘈𝘙𝘐𝘖 𝘊𝘖𝘕𝘌𝘊𝘛𝘈𝘋𝘖 =>` }
 const smsEscaneaQR = () => { return `ESCANEA EL QR, EXPIRA 45 SEG...` }
 const smsConectado = () => { return `YA ESTA CONECTADO CORRECTAMENTE` }
 const smsConexionOFF = () => { return `[ ⚠️ ]  Conexion cerrada, por favor elimina la carpeta sessions y escanea nuevamente.`}
@@ -108,7 +108,7 @@ const smsAutonivel9 = () => { return `*🥳 FELICIDADES LLEGARTE A UN NUEVO NIVE
 //info
 const nivel = () => { return `[ ❇️ ] ɴᴇᴄᴇsɪᴛᴀ ᴇʟ ɴɪᴠᴇʟ` }
 const nivel2 = () => { return `ᴘᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴄᴏᴍᴘʀᴜᴇʙᴀ ᴛᴜ ɴɪᴠᴇʟ ᴀᴄᴛᴜᴀʟ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ` }
-const admin = () => { return `*⚠️ TU NO ERES ADMINISTRADOR 🤡 SOLO LOS ADMINISTRADORES PUEDEN USAR ESTE COMANDO*` }
+const admin = () => { return `*⚠️ Tu no eres admins 🤡 solo los admins pueden usar este comando*` }
 const botAdmin = () => { return `*⚠️ Hey primero el bot osea (Yo), Necesito ser admin para usar este comando*` }
 const propietario = () => { return `*⚠️ Este comando solo YO o mi jefe lo puede usar*` }
 const group = () => { return `*⚠️ Pendejo este comando solo se puede usar el grupo*` }
@@ -359,7 +359,7 @@ text18: `*𝘚𝘜𝘉𝘉𝘖𝘛𝘚 𝘊𝘖𝘕𝘌𝘊𝘛𝘈𝘋𝘖𝘚:
 //descargar.js
 const descargar = {
 text: `*Que esta buscado? ingrese el nombre del tema*\n\nEjemplo:`, 
-text1: `*Que esta buscado?\n\ningrese el nombre del tema o el link de YouTube para descargar sus audio/video\n\nEjemplo:`, 
+text1: `*Que esta buscado?*\n\ningrese el nombre del tema o el link de YouTube para descargar sus audio/video\n\nEjemplo:`, 
 text2: `         *⌜Cancion Encontrada ✅⌟*`,
 text3: `         *⌜Video Encontrado ✅⌟*`, 
 text4: `*Aqui tiene sus video 👌*`, 
@@ -370,7 +370,7 @@ text6: `*𝘌𝘚𝘗𝘌𝘙𝘌 𝘌𝘕𝘝𝘐𝘈𝘕𝘋𝘖 𝘚𝘜 𝘈
 text7: `*𝘌𝘚𝘗𝘌𝘙𝘌 𝘌𝘕𝘝𝘐𝘈𝘕𝘋𝘖 𝘚𝘜 𝘈𝘙𝘊𝘏𝘐𝘝𝘖 𝘔𝘗4 ⚠*
 
 *𝘚𝘦𝘳𝘷𝘪𝘤𝘪𝘰 𝘱𝘳𝘰𝘷𝘦𝘪𝘥𝘰 𝘱𝘰𝘳 𝘕𝘰𝘷𝘢𝘉𝘰𝘵*`, 
-text8: `*Que esta buscando?*\n*Ingrese el nombre de canción de spotify.*`, 
+text8: `*Que esta buscando?*\n*Ingrese el nombre de algunas canción de spotify.*`, 
 text9: `*Donde esta el link del github?*\n\n*Ejemplo :*`, 
 text10: `*𝘈𝘎𝘜𝘈𝘙𝘋𝘌 𝘜𝘕 𝘔𝘖𝘔𝘌𝘕𝘛𝘖...*\n\nˢᶦ ᵉˡ ᵃʳᶜʰᶦᵛᵒ ⁿᵒ ˡˡᵉᵍᵃ ᵉˢ ᵠᵘᵉ ʳᵉᵖᵒˢᶦᵗᵒʳᶦᵒ ᵉˢ ᵐᵘʸ ᵖᵉˢᵃᵈᵒ`, 
 text11: `*Que esta buscando? ingresa el titulo/nombre de la canción, para buscar la letra*\n*Ejemplo:*`, 
@@ -408,7 +408,7 @@ const enable = {
 text: `⪨╼╼≪⚠️ ACCION MAL USADA ⚠️≫╾╼⪩\n\n*Use de esta forma ejemplo:*`, 
 text1: `*Se activo con exito*`, 
 text2: `*Esta desactivado!*`, 
-text3: `*Atención a todos los miembros activos de este grupo 📣*\n\n*El antilink esta activo*\n\n*Y solo los admins de este grupo podran pasar enlaces de grupos o canales*\n\nSi algun participante que no es admin envía un enlace de otro grupo sera expulsado de este grupo de inmediato`, 
+text3: `*Atención a todos los miembros activos de este grupo 📣*\n\n*El antilink esta activo*\n\n*Y solo los admins de este grupo podran pasar enlaces*\n\nSi algun participante que no es admin envía un enlace de otro grupo sera expulsado de este grupo de inmediato`, 
 text4: `El Bot solo responderá a los admins del grupo.`, 
 text5: `Ahora el bot funciona para todos los participante del grupo 🥳` }
 
@@ -638,7 +638,7 @@ const smsReg3 = () => { return `La edad no puede estar vacia (Numeros)` }
 const smsReg4 = () => { return 'Esta Viejo (。-`ω´-)' }
 const smsReg5 = () => { return `🚼  Basado, los bebes saben escribir.✍️😳` }
 const smsReg6 = () => { return `🐈 Fua que basado, el nombre es muy largo que quiere un puente como nombre😹` }
-const smsReg7 = (name, user, age, time, date, sender, sn, prefix, rtotalreg) => { return `[ ✅ REGISTRO COMPLETADO ]\n\n ◉ *NOMBRE:* ${name} ${user.registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''}\n ◉ *EDAD:* ${age} años\n ◉ *HORA:* ${time}\n ◉ *FECHA:* ${date}\n ◉ *NUMERO:* wa.me/${sender.split("@")[0]}\n ◉ *NUMERO DE SERIE*\n ⤷ ${sn}\n\n 🎁 *RECOMPENSA POR REGISTRARSE:*\n ⤷ 2 DIAMANTES 💎\n ⤷ 200 EXP\n\n *◉ Para ver los comandos del bot usar:*
+const smsReg7 = (name, user, age, time, date, sender, sn, prefix, rtotalreg) => { return `[ ✅ REGISTRO COMPLETADO ]\n\n ◉ *Nombre:* ${name} ${user.registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''}\n ◉ *Edad:* ${age} años\n ◉ *Hora:* ${time}\n ◉ *Fecha:* ${date}\n ◉ *Número:* wa.me/${sender.split("@")[0]}\n ◉ *Numero del serie*\n ⤷ ${sn}\n\n 🎁 *Recompensa:*\n ⤷ 2 diamante 💎\n ⤷ 200 exp\n\n *◉ Para ver los comandos del bot usar:*
  ${prefix}menu\n\n ◉ *Total de usuários registrados:* ${rtotalreg}` }
 const smsReg8 = () => { return `*💬 Elegir tu idioma con:* #idioma` }
  
