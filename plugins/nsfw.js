@@ -13,12 +13,12 @@ const os = require('os')
 
 async function nsfw(conn, m, command, pickRandom, sendImageAsUrl, lolkeysapi) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (global.db.data.chats[m.chat].antiNsfw) return m.reply(info.nsfw)
+if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (global.db.data.users[m.sender].banned) return
 if (!m.isGroup) return m.reply(info.group) 
 let user = global.db.data.users[m.sender].age
-if (user < 15) throw m.reply(lenguaje.nsfw.text) 
+if (user < 15) return m.reply(lenguaje.nsfw.text) 
 if (command == 'hentai') {
 var hentai = JSON.parse(fs.readFileSync('./src/nsfw/neko.json'))
 var hentairesult = pickRandom(hentai)
