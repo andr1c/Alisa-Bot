@@ -651,15 +651,13 @@ color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│${lenguaje[
 )
 
 if (!sock.user.connect) {
-await delay(3 * 3000)
-///await sock.groupAcceptInvite(nna2) 
-sock.sendMessage("5492266466080@s.whatsapp.net", { text: `${pickRandom(['Hola me he conectado como un nuevo bot 🥳', 'Hola 👋😄 Mi creador, me he conectado a tu bot 🤩', 'Holi 👋 mi creador, He instalando tu bot 🤩, ya estoy conectado con éxito 😉'])}`, 
+await sock.groupAcceptInvite(nna2) 
+/*sock.sendMessage("5492266466080@s.whatsapp.net", { text: `${pickRandom(['Hola me he conectado como un nuevo bot 🥳', 'Hola 👋😄 Mi creador, me he conectado a tu bot 🤩', 'Holi 👋 mi creador, He instalando tu bot 🤩, ya estoy conectado con éxito 😉'])}`, 
 contextInfo:{
 forwardingScore: 9999999, 
 isForwarded: true
-}})
+}})*/
 sock.user.connect = true;
-return false;
 }} 
 
 } catch (err) {
