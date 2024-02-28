@@ -280,15 +280,20 @@ console.log(e)
 console.log(err)
 }})
 
+//responder cmd pollMensaje
+async function getMessage(key){
+if (store) {
+const msg = await store.loadMessage(key.remoteJid, key.id)
+return msg?.message
+}
+return { conversation: "hola" }}
+
 sock.ev.on('messages.update', async chatUpdate => {
 for(const { key, update } of chatUpdate) {
-if(update.pollUpdates && key.fromMe) {
+if (update.pollUpdates && key.fromMe) {
 const pollCreation = await getMessage(key)
-if(pollCreation) {
-const pollUpdate = await getAggregateVotesInPollMessage({
-message: pollCreation,
-pollUpdates: update.pollUpdates,
-})
+if (pollCreation) {
+const pollUpdate = await getAggregateVotesInPollMessage({message: pollCreation, pollUpdates: update.pollUpdates, })
 var toCmd = pollUpdate.filter(v => v.voters.length !== 0)[0]?.name
 if (toCmd == undefined) return
 var prefCmd = prefix+toCmd
@@ -598,7 +603,7 @@ console.log(receivedPendingNotifications)
 if (isNewLogin) sock.isInit = true
 const code = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode;
 
-if (update.connection == "connecting" || update.receivedPendingNotifications == "false") {
+if (connection == 'connecting') {
 console.log(chalk.gray('iniciando...'));
 say('NovaBot-MD', {
   font: 'chrome',
@@ -642,61 +647,29 @@ color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
 color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│${lenguaje['smsEscaneaQR']()}\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯`, '#f12711'))
 }}
 
-if (update.connection == "open" || update.receivedPendingNotifications == "true") {
+if (connection == 'open') {
 console.log(color(` `,'magenta'))
 console.log(color(`\n${lenguaje['smsConexion']()} ` + JSON.stringify(sock.user, null, 2), 'yellow'))
 console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
 color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│${lenguaje['smsConectado']()}\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯` + receivedPendingNotifications, '#38ef7d')
-)
-
-if (!sock.user.connect) {
-await sock.groupAcceptInvite(nna2) 
-/*sock.sendMessage("5492266466080@s.whatsapp.net", { text: `${pickRandom(['Hola me he conectado como un nuevo bot 🥳', 'Hola 👋😄 Mi creador, me he conectado a tu bot 🤩', 'Holi 👋 mi creador, He instalando tu bot 🤩, ya estoy conectado con éxito 😉'])}`, 
-contextInfo:{
-forwardingScore: 9999999, 
-isForwarded: true
-}})*/
-sock.user.connect = true;
-}} 
+)}
 
 } catch (err) {
 console.log('Error en Connection.update '+err)
 startBot()
-}}) 
+}});
 
-const rainbowColors = ['red', 'yellow', 'green', 'blue', 'purple'];
-let index = 0;
+//if (!conn.user.connect) {
+//await sock.groupAcceptInvite(nna2) 
+/*conn.sendMessage("5492266466080@s.whatsapp.net", { text: `${pickRandom(['Hola me he conectado como un nuevo bot 🥳', 'Hola 👋😄 Mi creador, me he conectado a tu bot 🤩', 'Holi 👋 mi creador, He instalando tu bot 🤩, ya estoy conectado con éxito 😉'])}`, 
+contextInfo:{
+forwardingScore: 9999999, 
+isForwarded: true
+}})*/
+//conn.user.connect = true;
+//}
 
-function printRainbowMessage() {
-const color = rainbowColors[index];
-console.log(chalk.keyword(color)('\n\n⏳️ Cargado los mensajes....'));
-index = (index + 1) % rainbowColors.length;
-setTimeout(printRainbowMessage, 60000) //Ajuste el tiempo de espera a la velocidad deseada
-}
-
-printRainbowMessage();
-
-//responder cmd pollMensaje
-async function getMessage(key){
-if (store) {
-const msg = await store.loadMessage(key.remoteJid, key.id)
-return msg?.message
-}
-return { conversation: "hola" }}
-
-sock.ev.on('messages.update', async chatUpdate => {
-for(const { key, update } of chatUpdate) {
-if (update.pollUpdates && key.fromMe) {
-const pollCreation = await getMessage(key)
-if (pollCreation) {
-const pollUpdate = await getAggregateVotesInPollMessage({message: pollCreation, pollUpdates: update.pollUpdates, })
-var toCmd = pollUpdate.filter(v => v.voters.length !== 0)[0]?.name
-if (toCmd == undefined) return
-var prefCmd = prefix+toCmd
-sock.appenTextMessage(prefCmd, chatUpdate)
-}}}})
-    
 sock.public = true
 store.bind(sock.ev)
 sock.ev.on('creds.update', saveCreds)
