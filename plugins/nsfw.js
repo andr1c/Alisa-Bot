@@ -1,17 +1,10 @@
 require('../main.js') 
 const fs = require("fs")
-const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('../libs/fuctions.js'); 
-const path = require("path")
 const chalk = require("chalk");
-const moment = require('moment-timezone') 
-const gradient = require('gradient-string') 
-const fetch = require('node-fetch') 
 const axios = require('axios')
-const cheerio = require('cheerio')
-const Jimp = require('jimp')
-const os = require('os')
+const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom} = require('../libs/fuctions.js'); 
 
-async function nsfw(conn, m, command, pickRandom, sendImageAsUrl, lolkeysapi) {
+async function nsfw(m, sender, command, pickRandom, conn, sendImageAsUrl) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (global.db.data.chats[m.chat].antiNsfw) return m.reply(info.nsfw)
 if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
@@ -20,12 +13,10 @@ if (!m.isGroup) return m.reply(info.group)
 let user = global.db.data.users[m.sender].age
 if (user < 15) return m.reply(lenguaje.nsfw.text) 
 if (command == 'hentai') {
-var hentai = JSON.parse(fs.readFileSync('./src/nsfw/neko.json'))
-var hentairesult = pickRandom(hentai)
-conn.sendMessage(m.chat, { caption: `🥵`, image: { url: hentairesult.url } }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+sendImageAsUrl("https://delirius-nsfw.onrender.com/media/h/bdsm", '🥵')
 m.react(xmoji) 
-db.data.users[m.sender].limit -= 2
-m.reply(info.limit)}
+db.data.users[m.sender].limit -= 1
+m.reply('1 ' + info.limit)}
 if (command == 'nsfwloli') {
 var nsfw = JSON.parse(fs.readFileSync('./src/nsfw/nsfwloli.json'))
 var result = pickRandom(nsfw)
@@ -43,10 +34,12 @@ m.reply('3 ' + info.limit)}
 
 if (command == 'hentai2') {
 if (global.db.data.users[m.sender].level < 3) return m.reply(`${lenguaje['nivel']()} 3 ${lenguaje['nivel2']()}`) 
-sendImageAsUrl("https://delirius-nsfw.onrender.com/media/h/bdsm", '🥵')
+var hentai = JSON.parse(fs.readFileSync('./src/nsfw/neko.json'))
+var hentairesult = pickRandom(hentai)
+conn.sendMessage(m.chat, { caption: `🥵`, image: { url: hentairesult.url } }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 m.react(xmoji) 
-db.data.users[m.sender].limit -= 1
-m.reply('1 ' + info.limit)}
+db.data.users[m.sender].limit -= 2
+m.reply('2 ' + info.limit)}
 
 if (command == 'porno') {
 sendImageAsUrl("https://delirius-nsfw.onrender.com/media/r/ass", '🥵');
@@ -91,7 +84,7 @@ conn.sendMessage(m.chat, {image: {url: url}, caption: `_${command}_`.trim()}, {q
 db.data.users[m.sender].limit -= 1
 m.reply('1 ' + info.limit)}}
 
-module.exports = {nsfw}
+module.exports = { nsfw }
 
 global.pack = ['https://telegra.ph/file/957fe4031132ef90b66ec.jpg',
   'https://telegra.ph/file/c4b85bd53030cb648382f.jpg',

@@ -8,6 +8,7 @@
  const os = require('os')
  const chalk = require('chalk')
  const fs = require("fs")
+ const ws = require('ws')
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('../libs/fuctions.js'); 
 let panel = "https://www.cafirexos.com"
 let cafi = "https://whatsapp.com/channel/0029VaFVSkRCMY0KFmCMDX2q"
@@ -24,25 +25,28 @@ const cpuUsage = os.loadavg()[0]
 let me = m.sender
 var timestamp = speed();  
 var latensi = speed() - timestamp  
-let user = [...new Set([...global.listJadibot.filter((conn) => conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED).map((conn) => conn)])];
+const user = [...new Set([...global.listJadibot.filter((conn) => conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED).map((conn) => conn)])];
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-let stateRun = `╭╼╼⪨ ${lenguaje.info.text} ⪩╾╼╮
-┃
-┃ ✨ ${lenguaje['smsWel']()} @${sender.split("@")[0]} ${user.registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''} 
-┃
-┃ ${lenguaje.info.text2} ${usedMemory} GB / ${totalMemory} GB
-┃ ${lenguaje.info.text3} ${os.platform()}
-┃ ${lenguaje.info.text4} ${os.hostname()}
-┃ ${lenguaje.info.text5} ${cpuUsage.toFixed(2)}%
-┃ ${lenguaje.info.text6} ${totalMemory} GB
-┃╍╍╍╍╍╍╍╍╍╍╍╍╍
-┃ ${lenguaje.info.text7} ${Object.keys(global.db.data.users).length}
-┃➢ 𝙶𝚁𝚄𝙿𝙾𝚂 𝙱𝙰𝙽𝙴𝙰𝙳𝙾𝚂: ${Object.entries(global.db.data.chats).filter(chat => chat[1].isBanned).length}
-┃➢ 𝚄𝚂𝚄𝙰𝚁𝙸𝙾𝚂 𝙱𝙰𝙽𝙴𝙰𝙳𝙾𝚂: ${Object.entries(global.db.data.users).filter(user => user[1].banned).length}
-┃ ${lenguaje.info.text8} ${runtime(process.uptime())} 
-┃ ${lenguaje.info.text9} ${conn.public ? 'Público' : `Privado`}
-┃ ${lenguaje.info.text10} ${user.length}
-┗╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ ${conn.user.id == global.numBot2 ? '' : `\n\n${lenguaje.info.text11} wa.me/${global.numBot.split`@`[0]}`}`.trim()
+let stateRun = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
+┊┏━━━━━━━━━━━━━━•
+┊┃ *${lenguaje.info.text}*
+┊┃━━━━━━━━━━━━━━•
+┊┃ ✨ ${lenguaje['smsWel']()} @${sender.split("@")[0]} ${user.registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''} 
+┊┃
+┊┃ ${lenguaje.info.text2} ${usedMemory} GB / ${totalMemory} GB
+┊┃ ${lenguaje.info.text3} ${os.platform()}
+┊┃ ${lenguaje.info.text4} ${os.hostname()}
+┊┃ ${lenguaje.info.text5} ${cpuUsage.toFixed(2)}%
+┊┃ ${lenguaje.info.text6} ${totalMemory} GB
+┊┃━━━━━━━━━━━━━━•
+┊┃ ${lenguaje.info.text7} ${Object.keys(global.db.data.users).length}
+┊┃➢ 𝙶𝚁𝚄𝙿𝙾𝚂 𝙱𝙰𝙽𝙴𝙰𝙳𝙾𝚂: ${Object.entries(global.db.data.chats).filter(chat => chat[1].isBanned).length}
+┊┃➢ 𝚄𝚂𝚄𝙰𝚁𝙸𝙾𝚂 𝙱𝙰𝙽𝙴𝙰𝙳𝙾𝚂: ${Object.entries(global.db.data.users).filter(user => user[1].banned).length}
+┊┃ ${lenguaje.info.text8} ${runtime(process.uptime())} 
+┊┃ ${lenguaje.info.text9} ${conn.public ? 'Público' : `Privado`}
+┊┃ ${lenguaje.info.text10} ${user.length}
+┊┗━━━━━━━━━━━━━━•
+╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩ ${conn.user.id == global.numBot2 ? '' : `\n\n${lenguaje.info.text11} wa.me/${global.numBot.split`@`[0]}`}`.trim()
 let ments = [me]      
 conn.sendMessage(m.chat, {image: imagen1, caption: stateRun, contextInfo:{ mentionedJid:[sender]}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }
