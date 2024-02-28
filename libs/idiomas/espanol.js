@@ -177,7 +177,7 @@ text8: `➢ 𝙰𝙲𝚃𝙸𝚅𝙾 :`,
 text9: `➢ 𝙼𝙾𝙳𝙾 :`, 
 text10: `➢ 𝙱𝙾𝚃 𝚂𝙴𝙲𝚄𝙽𝙳𝙰𝚁𝙸𝙾𝚂 𝙰𝙲𝚃𝙸𝚅𝙾𝚂 :`, 
 text11: `➢ 𝐒𝐨𝐲 𝐮𝐧 𝐒𝐮𝐛𝐁𝐨𝐭 𝐝𝐞 :`,
-text12: `este bot esta desarrollo si quiere contactar con mi creador aqui te dejo su número\n\nᴺᵒ ʰᵃᵍᵃⁿ ˢᵖᵃᵐ ᵃ ᵐᶦ ᶜʳᵉᵃᵈᵒʳ ᵒ ᵠᵘᵉ ᵇˡᵒᵠᵘᵉᵃ`, 
+text12: `𝐚𝐪𝐮𝐢 𝐭𝐢𝐞𝐧𝐞 𝐞𝐥 𝐧𝐮𝐦𝐞𝐫𝐨 𝐝𝐞 𝐦𝐢 𝐩𝐫𝐨𝐩𝐢𝐞𝐭𝐚𝐫𝐢𝐨, 𝐬𝐨𝐥𝐨 𝐡𝐚𝐛𝐥𝐚𝐫𝐥𝐞 𝐩𝐨𝐫 𝐝𝐮𝐝𝐚𝐬, 𝐩𝐫𝐨𝐛𝐥𝐞𝐦𝐚𝐬 𝐬𝐨𝐛𝐫𝐞 𝐞𝐥 𝐛𝐨𝐭.\n\nᴺᵒ ʰᵃᵍᵃⁿ ˢᵖᵃᵐ ᵃ ᵐᶦ ᶜʳᵉᵃᵈᵒʳ ᵒ ᵠᵘᵉ ᵇˡᵒᵠᵘᵉᵃ`, 
 text13: `*ʜᴏʟᴀ ᴇsᴛɪᴍᴀᴅᴏs ᴜsᴜᴀʀɪᴏs 👋🏻, ᴛᴇ ɪɴᴠɪᴛᴏ ᴀ ᴜɴɪʀᴛᴇ ᴀ ʟᴏs ɢʀᴜᴘᴏs ᴏғɪᴄɪᴀʟᴇs ᴅᴇ ʟᴀs ғᴀᴍɪʟᴀs ᴛʜᴇ ʟᴏʟɪʙᴏᴛ-ᴍᴅ ʏ ɴᴏᴠᴀʙᴏᴛ-ᴍᴅ, ᴘᴀʀᴀ ᴄᴏɴᴠɪᴠɪʀ ᴄᴏɴ ʟᴀ ᴄᴏᴍᴜɴɪᴅᴀᴅ :ᴠ*\n\n*➤ ɢʀᴜᴘᴏs ᴏғɪᴄɪᴀʟᴇs ᴅᴇʟ ʙᴏᴛ:*`, 
 text14: `*➤ ɢʀᴜᴘᴏ ᴅᴇʟ ᴄᴏʟᴀʙᴏʀᴀᴄɪᴏɴ:*`, 
 text15: `*➤ ɢʀᴜᴘᴏs ᴛᴇsᴛ ᴘᴀʀᴀ ᴘʀᴜᴇʙᴀ ᴅᴇʟ ʙᴏᴛ:*`, 
@@ -186,14 +186,14 @@ text17: `*➤ ɢʀᴜᴘᴏ ᴅᴇʟ ᴀʏᴜᴅᴀ sᴏʙʀᴇ ᴇʟ ʙᴏᴛ:*
 text18: `• ɢʀᴜᴘᴏs ᴅᴇʟ ᴀᴍɪsᴛᴀᴅᴇs ᴅᴏɴᴅᴇ ᴇsᴛᴀ ᴇʟ ʙᴏᴛ`, 
 text19: `ˢᶦ ᵠᵘᶦᵉʳᵉˢ ᵠᵘᵉ ᵗᵘ ᵍʳᵘᵖᵒˢ ᵃᵖᵃʳᵉᶻᶜᵃⁿ ᵃᵠᵘᶦ ʰᵃᵇˡᵃʳ ᶜᵒⁿ ᵐᶦ ᶜʳᵉᵃᵈᵒ`, 
 text20: (fb, md) => `╭─────────────┈⊷
-│ \`\`\`COMO INSTALAR ESTE BOT?\`\`\`
+│ \`COMO INSTALAR ESTE BOT?\`
 ╰┬────────────┈⊷
-┌┤\`\`\`📌 REQUISITOS PARA LAS INSTALACION \`\`\`
-┌┤❇️ _Dudas: ${fb}
+┌┤\`📌 REQUISITOS PARA LAS INSTALACION \`
+┌┤❇️ _Dudas: ${fb}_
 ┌┤❇️ _Tutoríal: https://youtu.be/OhbJjp0L2QA?si=ZqRgG3SGTRFSW6CH_
 ┌┤❇️ _1 GB de almacenamiento_
 ┌┤❇️ _Termux: https://www.mediafire.com/file/3hsvi3xkpq3a64o/termux_118.apk/file_
-┌┤❇️ _GitHub: ${md}
+┌┤❇️ _GitHub: ${md}_
 ┌┤❇️ _un whatsapp inmune (secundario)_
 ┌┤❇️ _un número victual (otro numero)_
 ┌┤❇️ _2 dispositivo o una PC para escanear_
@@ -201,34 +201,34 @@ text20: (fb, md) => `╭─────────────┈⊷
 
  \`\`\`📌 COMANDO DE INSTALACION TERMUX\`\`\`
 
-> termux-setup-storage
+* termux-setup-storage
 
-> apt update && apt upgrade && pkg update && pkg upgrade && pkg install bash && pkg install libwebp && pkg install git -y && pkg install nodejs -y && pkg install ffmpeg -y && pkg install wget && pkg install imagemagick -y && pkg install yarn
+* apt update && apt upgrade && pkg update && pkg upgrade && pkg install bash && pkg install libwebp && pkg install git -y && pkg install nodejs -y && pkg install ffmpeg -y && pkg install wget && pkg install imagemagick -y && pkg install yarn
 
-> git clone https://github.com/elrebelde21/NovaBot-MD && cd NovaBot-MD && yarn && npm install
+* git clone https://github.com/elrebelde21/NovaBot-MD && cd NovaBot-MD && yarn && npm install
 
-> npm start
+* npm start
 
 (𝘌𝘴𝘤𝘢𝘯𝘦𝘢𝘳 𝘦𝘭 𝘘𝘙, 𝘙𝘢𝘱𝘪𝘥𝘰)
 
-🚀 --------[ Vortexuscloud host ]--------- 🚀
-💞 Agraciemiento a: mauro 
+\`🚀 --------[ Vortexuscloud host ]--------- 🚀\`
+> 💞 Agraciemiento a: mauro 
 
-• https://youtube.com/@vortexuscloud
+https://youtube.com/@vortexuscloud
 
-• pagina oficial :
+> Pagina oficial :
 https://vortexuscloud.com
 
-• dashboard:
+> dashboard:
 https://dash.vortexuscloud.com
 
-• panel:
+> panel:
 https://panel.vortexuscloud.com
 
-• Canal de WhatsApp sobre informacion del host 
-• https://whatsapp.com/channel/0029Va8ZD6O3mFXxTPl1m13A
+> Canal de WhatsApp sobre informacion del host 
+https://whatsapp.com/channel/0029Va8ZD6O3mFXxTPl1m13A
 
-🚀 --------[ Cafirexos host ]--------- 🚀
+\`🚀 --------[ Cafirexos host ]--------- 🚀\`
 
 *Página oficial:*
 https://www.cafirexos.com/
@@ -254,7 +254,7 @@ text26: `*⚡ ¿Esta buscando un hots de calidad y al ajuste de su bolsillo?*
 
 ⚡ ¿Su bot necesita un impulso? ¡Cafirexos tiene la solución perfecta! Nuestro hosting de alto rendimiento mantendrá tu bot activo 24/7 a un precio increíblemente bajo. Olvídese de los problemas de memoria y manténga su bot 24/7 Activo a un precio aceptable. Únase a nuestra comunidad y dale a su bot el impulso que se merece.
 
-*🔵 \`\`\`Información del Host\`\`\`*
+🔵 \`\`\`Información del Host\`\`\`
 
 💻 *Página*
 • https://www.cafirexos.com
@@ -302,7 +302,7 @@ text15: (vs) => `🤔 *Que hay de nuevo?* 🤗\n\n*🌐 Nueva Version:* [ ${vs} 
 👾 Nuevo RPG :
 • #crime 
 
-⚡ Se mejoró la estabilidad del bot 
+⚡ Se esta mejoraron la estabilidad del bot. 
 
 🟢 Multi lenguaje ahora puede eligir el que idioma quiere te responda el bot con:
 • #idioma
@@ -311,7 +311,7 @@ text15: (vs) => `🤔 *Que hay de nuevo?* 🤗\n\n*🌐 Nueva Version:* [ ${vs} 
 🔸El bot solo vas a responder a estos prefix: (#./*) 
 
 ᴹᵃˢ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᶠᵘᵗᵘʳᵃ ᵛᵉʳˢᶦᵒⁿᵉˢ ᵠᵘᶦᵉʳᵉ ᵠᵘᵉ ᵃᵍʳᵉᵍᵘᵉ ᵃˡᵍᵘⁿ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᵉˢᵖᵉᶜᶦᵃˡ ᵉˢᶜʳᶦᵇᶦʳˡᵉ ᵃ ᵐᶦ ᶜʳᵉᵃᵈᵒʳ`, 
-text16: `*🌐 REGLAS DEL BOT 🌐*
+text16: `\`🌐 REGLAS DEL BOT 🌐\`
 
 *• No hacer spam de comandos*
 
@@ -344,7 +344,7 @@ text4: `*✅ Ya estas conectado, sea paciente, los mensajes se estan cargando...
 text5: `*Conectado con exito*`, 
 text6: `× Bot :`, 
 text7: `× Dueño :`, 
-text8: `*NOTA:* el bot se puede reiniciar si deja de recibir comandos use: #serbot o la id que se enviara a continuación, para volver, a conectarte`, 
+text8: `\`NOTA:\` Esto es temporal si el Bot principal se reinicia o se desactiva, todos los sub bots tambien lo haran\n\nPuede iniciar sesión sin el codigo qr con el siguiente mensaje, envialo cuando no funcione el bot....`, 
 text9: `*⚠️ Dispositivo desconectado tendra que volver a conectarte con #jadibot*`, 
 text10: `*⚠️ Reenvia el comando....*`, 
 text11: `[ ⚠️ ] Reinicio requerido, Reiniciando...`, 
