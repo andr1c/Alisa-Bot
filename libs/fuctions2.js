@@ -5,7 +5,7 @@ const webp = require("node-webpmux")
 const path = require("path") 
 
 //Ruta a la carpeta "temp" en el mismo directorio que este script
-const tempFolder = path.join(__dirname, "..", "/tmp/");
+const tempFolder = path.join(__dirname, "../tmp/");
 
 async function imageToWebp(media) { 
 const tmpFileOut = path.join(tempFolder, `${Crypto.randomBytes(6).readUIntLE(0, 6).toString(36)}.webp`) 
