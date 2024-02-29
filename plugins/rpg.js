@@ -47,7 +47,7 @@ if (!age) return m.reply(lenguaje.smsReg3())
 age = parseInt(age)
 if (age > 100) return m.reply(lenguaje.smsReg4()) 
 if (age < 6) return m.reply(lenguaje.smsReg5()) 
-if (name.length >= 30) return m.reply(lenguaje.smsReg6()) 
+if (name.length >= 45) return m.reply(lenguaje.smsReg6()) 
 user.name = name + 'ͧͧͧͦꙶͣͤ✓'.trim()
 user.age = age
 user.regTime = + new Date

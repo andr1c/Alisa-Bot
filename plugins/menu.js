@@ -155,6 +155,8 @@ let juegos = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┃ ❏ ${prefix}personalidad
 ┊┃ ❏ ${prefix}racista
 ┊┃ ❏ ${prefix}slot
+┊┃ ❏ ${prefix}math
+┊┃ ❏ ${prefix}matematicas
 ┊┃ ❏ ${prefix}dado
 ┊┃ ❏ ${prefix}piropo
 ┊┃ ❏ ${prefix}ship
