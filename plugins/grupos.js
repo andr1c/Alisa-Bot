@@ -19,8 +19,11 @@ if (global.db.data.users[m.sender].banned) return
 if (command == 'hidetag' || command == 'notificar' || command == 'tag') {  
 if (!m.isGroup) return m.reply(info.group) 
 if (!isGroupAdmins) return m.reply(info.admin)
-if (!text) return m.reply(lenguaje.grupos.text) 
-conn.sendMessage(m.chat, { text : text ? text : '' , mentions: participants.map(a => a.id)}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
+if (!m.quoted && !text) return m.reply(lenguaje.grupos.text) 
+try { 
+conn.sendMessage(m.chat, { forward: m.quoted.fakeObj, mentions: participants.map(a => a.id) })
+} catch {  
+conn.sendMessage(m.chat, { text : text ? text : '' , mentions: participants.map(a => a.id)}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}}
 
 if (command == 'grupo') {
 if (!m.isGroup) return m.reply(info.group);  
@@ -52,7 +55,7 @@ let link = (m.quoted ? m.quoted.text ? m.quoted.text : text : text) || text
 let [_, code] = link.match(linkRegex) || []
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (!code) return m.reply(`${lenguaje.grupos.text3}\n*#join ${nn}*`) 
-if ( isCreator || m.fromMe) {
+if (isCreator || m.fromMe) {
 m.reply(lenguaje.grupos.text4)
 await delay(3 * 3000)
 let res = await conn.groupAcceptInvite(code).then((code) => m.reply(jsonformat(code))).catch((err) => m.reply(jsonformat(err)))

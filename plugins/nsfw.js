@@ -3,10 +3,13 @@ const fs = require("fs")
 const chalk = require("chalk");
 const axios = require('axios')
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom} = require('../libs/fuctions.js'); 
+let porn = 'https://qu.ax/bXMB.webp'
+let porn2 = 'https://qu.ax/TxtQ.webp'
 
 async function nsfw(m, sender, command, pickRandom, conn, sendImageAsUrl) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
-if (global.db.data.chats[m.chat].antiNsfw) return m.reply(info.nsfw)
+if (global.db.data.chats[m.chat].antiNsfw < true) return conn.sendFile(m.chat, pickRandom([porn, porn2]), 'sticker.webp', '', m, true, { contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: `ᴸᵒˢ ᶜᵒᵐᵃⁿᵈᵒ ʰᵒʳⁿʸ ᵉˢᵗᵃ ᵈᵉˢᵃᶜᵗᶦᵛᵃᵈᵒ ˢᶦ ᵉʳᵉˢ ᵃᵈᵐᶦⁿ ʸ ᵠᵘᶦᵉʳᵉ ᵃᶜᵗᶦᵛᵃʳˡᵒˢ ᵘˢᵃʳ:`, body: '#modocaliente on', mediaType: 2, sourceUrl: md, thumbnail: imagen1}}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})   
+//m.reply(info.nsfw)
 if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (global.db.data.users[m.sender].banned) return
 if (!m.isGroup) return m.reply(info.group) 

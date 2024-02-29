@@ -47,7 +47,7 @@ m.reply(`${lenguaje.juegos.text1}  ${text}\n${lenguaje.juegos.text2} ${preg}`)}
 
 if (command == 'gay') {
 if (!m.isGroup) return m.reply(info.group)
-let vn = './media/gay2.mp3'
+let vn = 'https://qu.ax/HfeP.mp3'
 m.react('🏳‍🌈') 
 let member = participants.map(u => u.id)
 let me = m.sender
@@ -151,7 +151,7 @@ let g = member[Math.floor(Math.random() * member.length)]
 let h = member[Math.floor(Math.random() * member.length)]
 let i = member[Math.floor(Math.random() * member.length)]
 let j = member[Math.floor(Math.random() * member.length)]
-const vn = './media/gay2.mp3';
+const vn = 'https://qu.ax/HfeP.mp3';
 const top = `*🌈TOP 10 GAYS/LESBIANAS DEL GRUPO🌈*
     
 *1. @${a.split('@')[0]}*
@@ -182,7 +182,7 @@ let g = member[Math.floor(Math.random() * member.length)]
 let h = member[Math.floor(Math.random() * member.length)]
 let i = member[Math.floor(Math.random() * member.length)]
 let j = member[Math.floor(Math.random() * member.length)]
-const vn = './media/otaku.mp3';
+const vn = 'https://qu.ax/ZgFZ.mp3';
 const top = `*🌸 TOP 10 OTAKUS DEL GRUPO 🌸*
     
 *1. @${a.split('@')[0]}*
