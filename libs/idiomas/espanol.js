@@ -297,18 +297,29 @@ text12: `\`\`\`🟢 ＬＩＳＴＡ ＤＥ ＣＯＭＡＮＤＯＳ 🟢\`\`\`
 text13: `*Palabras especificas para que el bot interactue con usted*`, 
 text14: `_*ᴼʲᶦᵗᵒ ᵉˢᶜʳᶦᵇᵉ ᵗᵃˡ ʸ ᶜᵒᵐᵒ ᵉˢᵗᵃ ᵉⁿ ᵉˡ ᵐᵉⁿˢᵃʲᵉ*_
 *ᵠᵘᶦᵉʳᵉ ᵃᵍʳᵉᵍᵃ ᵃˡᵍᵘⁿ ᵃᵘᵈᶦᵒ ⁿᵘᵉᵛᵒ ᵉˢᶜʳᶦᵇᶦʳˡᵉ ᵃ ᵐᶦ ᶜʳᵉᵃᵈᵒʳ ᵘʷᵘ*`,
-text15: (vs) => `🤔 *Que hay de nuevo?* 🤗\n\n*🌐 Nueva Version:* [ ${vs} ]\n\n*Nuevo comando:*
+text15: (vs) => `*\`🤔 Que hay de nuevo? 🤗\`*\n\n*🌐 Nueva Version:* [ ${vs} ]\n\n*Nuevo comando:*
 
-👾 Nuevo RPG :
-• #crime 
+\`🎮👾 Nuevo juegos :\`
+#math
+#matematicas
 
-⚡ Se esta mejoraron la estabilidad del bot. 
+> *⚡ Se esta mejoraron la estabilidad del bot.* 
 
-🟢 Multi lenguaje ahora puede eligir el que idioma quiere te responda el bot con:
-• #idioma
-• #lenguaje
-
-🔸El bot solo vas a responder a estos prefix: (#./*) 
+> *💫 Se acambiado el diseño del menu y se has agregado nuevo SubMenu :*
+#menucompleto 
+#allmenu (muestra el menu completo) 
+#menu1 (Menu de descarga) 
+#menu2 (menu audios) 
+#menu3 (menu para grupos) 
+#menu4 (menu buscadores) 
+#menu5 (menu de juegos) 
+#menu6 (menu de efecto) 
+#menu7 (menu convertidores) 
+#menu8 (menu randow) 
+#menu9 (menu RPG) 
+#menu10 (menu de sticker) 
+#menu11 (menu comando solo para propietario del bot) 
+#menu18 (menu comando +18) 
 
 ᴹᵃˢ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᶠᵘᵗᵘʳᵃ ᵛᵉʳˢᶦᵒⁿᵉˢ ᵠᵘᶦᵉʳᵉ ᵠᵘᵉ ᵃᵍʳᵉᵍᵘᵉ ᵃˡᵍᵘⁿ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᵉˢᵖᵉᶜᶦᵃˡ ᵉˢᶜʳᶦᵇᶦʳˡᵉ ᵃ ᵐᶦ ᶜʳᵉᵃᵈᵒʳ`, 
 text16: `\`🌐 REGLAS DEL BOT 🌐\`
