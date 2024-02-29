@@ -47,6 +47,9 @@ const {descarga, descarga2} = require('./plugins/descargas.js')
 const {stickers} = require('./plugins/stickers.js') 
 const {owner} = require('./plugins/propietario.js')  
 const {enable} = require('./plugins/enable.js')
+//global.db.data.sticker = global.db.data.sticker || {} 
+let tebaklagu = global.db.data.game.tebaklagu = []
+let kuismath = global.db.data.game.math = []
 
 const msgs = (message) => { 
 if (message.length >= 10) { 
@@ -67,11 +70,11 @@ var budy = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == '
 //----------------------[ ATRIBUTOS ]-------------------------
 if (m.key.id.startsWith("BAE5")) return  
 var body = (typeof m.text == 'string' ? m.text : '')
-//var prefix = /^[~/!@#.^]/gi.test(body) ? body.match(/^[~/!@#.^]/gi)[0] : "/"
-var prefix = body.match(/^[/.*#]/)  
-const isCmd = body.startsWith(prefix)
+var prefix = /^[./*#]/gi.test(body) ? body.match(/^[/.*#]/gi)[0] : ""
+//var prefix = body.match(/^[/.*#]/)   
+const isCmd = body.startsWith(prefix) 
 const command = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase()
-const args = body.trim().split(/ +/).slice(1)
+const args = body.trim().split(/ +/).slice(1) 
 const full_args = body.replace(command, '').slice(1).trim()
 const from = m.chat
 const msg = JSON.parse(JSON.stringify(m, undefined, 2)) 
@@ -83,16 +86,19 @@ const botnm = conn.user.id.split(":")[0] + "@s.whatsapp.net"
 const _isBot = conn.user.jid 
 const userSender = m.key.fromMe ? botnm : m.isGroup && m.key.participant.includes(":") ? m.key.participant.split(":")[0] + "@s.whatsapp.net" : m.key.remoteJid.includes(":") ? m.key.remoteJid.split(":")[0] + "@s.whatsapp.net" : m.key.fromMe ? botnm : m.isGroup ? m.key.participant : m.key.remoteJid  
 const isCreator = [conn.decodeJid(conn.user.id), ...global.owner.map(([numero]) => numero)].map((v) => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender);
+//const isCreator = global.owner.map(([numero]) => numero.replace(/[^\d\s().+:]/g, '').replace(/\s/g, '') + '@s.whatsapp.net').includes(userSender) 
 const isOwner = isCreator || m.fromMe;
 const isMods = isOwner || global.mods.map((v) => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender);
-//const isCreator = global.owner.map(([numero]) => numero.replace(/[^\d\s().+:]/g, '').replace(/\s/g, '') + '@s.whatsapp.net').includes(userSender) 
 const itsMe = m.sender == conn.user.id ? true : false 
-const text = q = args.join(" ")
+const text = args.join(" ") 
+const q = args.join(" ") 
 const quoted = m.quoted ? m.quoted : m 
 const sender = m.key.fromMe ? botnm : m.isGroup ? m.key.participant : m.key.remoteJid 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 const mime = (quoted.msg || quoted).mimetype || ''  
 const isMedia = /image|video|sticker|audio/.test(mime)
+const numBot = conn.user.id.split(":")[0] + "@s.whatsapp.net" // JID del Bot
+const numBot2 = conn.user.id // Número de teléfono del bot
 const mentions = []  
 if (m.message[type].contextInfo) {    
 if (m.message[type].contextInfo.mentionedJid) {  
@@ -138,14 +144,6 @@ const isQuotedDocument = type === 'extendedTextMessage' && content.includes('doc
 const isQuotedMsg = type === 'extendedTextMessage' && content.includes('Message') // Mensaje citado de cualquier tipo  
 const isViewOnce = (type === 'viewOnceMessage') // Verifica si el tipo de mensaje es (mensaje de vista única)  
    
-async function connMessage(chatId, message, options = {}){
-    let generate = await generateWAMessage(chatId, message, options)
-    let type2 = getContentType(generate.message)
-    if ('contextInfo' in options) generate.message[type2].contextInfo = options?.contextInfo
-    if ('contextInfo' in message) generate.message[type2].contextInfo = message?.contextInfo
-    return await conn.relayMessage(chatId, generate.message, { messageId: generate.key.id })
-}   
-
 //Responder cmd con medios
 if (isMedia && m.msg.fileSha256 && (m.msg.fileSha256.toString('base64') in global.db.data.sticker)) {
 let hash = global.db.data.sticker[m.msg.fileSha256.toString('base64')]
@@ -250,7 +248,7 @@ return !1;
 }} 
 
 //-------[ MODO PUBLIC/PRIVADO ]-----------
-if (!conn.public && !isCreator) {
+if (!conn.public && !isOwner) {
 if (!m.key.fromMe) return }        	 
 
 //--------------------[ BANCHAT ]---------------------
@@ -276,7 +274,7 @@ await conn.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, aut
 }}
 
 //----------------[ AUTOLEVELUP/AUTONIVEL ]-------------------
-if (global.db.data.settings[numBot].autolevelup) {	
+if (global.db.data.chats[m.chat].autolevelup) {	
 let user = global.db.data.users[m.sender]
 if (!user.autolevelup)
 return !0
@@ -285,7 +283,7 @@ while (canLevelUp(user.level, user.exp, global.multiplier))
 user.level++
 //user.role = global.rpg.role(user.level).name
 if (before !== user.level) { 
-let text = [`${lenguaje['smsAutonivel']()} @${sender.split`@`[0]} ${lenguaje['smsAutonivel2']()}\n${lenguaje['smsAutonivel3']()} ${before} ⟿ ${user.level}\n${lenguaje['smsAutonivel6']()} ${user.role}\n${lenguaje['smsAutonivel7']()} ${new Date().toLocaleString('id-ID')}\n\n${lenguaje['smsAutonivel8']()}`, `${lenguaje['smsAutonivel9']()} ${lenguaje['smsAutonivel4']()} ${before}\n${lenguaje['smsAutonivel5']()} ${user.level}\n${lenguaje['smsAutonivel6']()} ${user.role}\n${lenguaje['smsAutonivel7']()} ${new Date().toLocaleString('id-ID')}`]
+let text = [`${lenguaje['smsAutonivel']()} @${sender.split`@`[0]} ${lenguaje['smsAutonivel2']()}\n${lenguaje['smsAutonivel3']()} ${before} ⟿ ${user.level}\n${lenguaje['smsAutonivel6']()} ${user.role}\n${lenguaje['smsAutonivel7']()} ${new Date().toLocaleString('id-ID')}\n\n${lenguaje['smsAutonivel8']()}`, `${lenguaje['smsAutonivel9']()} ${lenguaje['smsAutonivel4']()} ${before}\n${lenguaje['smsAutonivel5']()} ${user.level}\n${lenguaje['smsAutonivel6']()} ${user.role}\n${lenguaje['smsAutonivel7']()} ${new Date().toLocaleString('id-ID')}`] 
 let str = text[Math.floor(Math.random() * text.length)]
 return conn.sendMessage(m.chat, { text: str, contextInfo:{mentionedJid:[sender]}},{quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}} 
  
@@ -354,19 +352,18 @@ if (new Date - global.db.data.users[m.sender].spam < 5000) return console.log(`[
 global.db.data.users[m.sender].spam = new Date * 1;
 }
 
-//global.db.data.sticker = global.db.data.sticker || {} 
-let tebaklagu = global.db.data.game.tebaklagu = []
-let kuismath = global.db.data.game.math = []
 //math
 if (kuismath.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
 kuis = true
 jawaban = kuismath[m.sender.split('@')[0]]
-if (budy.toLowerCase() == jawaban) {
-await m.reply(`*Respuesta correcta 🎉*\n\n¿Quieres jugar de nuevo? Enviar ${prefix}math mode`)
+if (budy.toLowerCase() == jawaban) { 
+const exp = Math.floor(Math.random() * 500)
+global.db.data.users[m.sender].exp += exp;
+await m.reply(`*Respuesta correcta 🎉*\n\n*Ganarte :* ${exp} Exp`) 
 m.react(`✅`) 
 delete kuismath[m.sender.split('@')[0]]
-} else m.react(`❌`) 
-}
+} else m.react(`❌`)  
+} 
             
 //mensaje automático
 /*if (!m.isGroup) {  
@@ -455,8 +452,8 @@ break
 case 'lb': case 'leaderboard': case 'afk': case 'rob': case 'robar': case 'buy': case 'buyall': case 'bal': case 'balance': case 'diamond': case 'minar': case 'mine': case 'trabajar': case 'work': case 'w': case 'claim': case 'daily': case 'perfil': case 'levelup': case 'nivel': case 'cofre': case 'minar2': case 'mine2': case 'crime': case 'Crime': rpg(m, command, participants, args, sender, pushname, text, conn, fkontak, who)    
 break            
       
-//stickers 
-case 's': case 'sticker': case 'wm': case 'take': case 'attp': case 'dado': case 'qc': stickers(m, command, conn, mime, quoted, args, text, lolkeysapi, fkontak)  
+//stickers  
+case 's': case 'sticker': case 'wm': case 'take': case 'attp': case 'dado': case 'qc': stickers(m, command, conn, mime, quoted, args, text, lolkeysapi, fkontak)   
 break
   
 //idiomas 
@@ -491,7 +488,7 @@ user.Language = idioma
 m.reply(lenguaje.idioma2() + idiomas)}  
 break  
 
-case 'mathquiz': case 'math': {
+case 'math': case 'matematicas': {
 if (kuismath.hasOwnProperty(m.sender.split('@')[0])) return m.reply('¡Aún quedan sesiones sin terminar!') 
 let { genMath, modes } = require('./libs/math')
 if (!text) return m.reply(`Modo: ${Object.keys(modes).join(' | ')}\nEjemplo de uso: ${prefix}math medium`)
@@ -506,7 +503,7 @@ delete kuismath[m.sender.split('@')[0]]
 }}
 break
 
-case 'prueba': {
+case 'prueba': { 
 await conn.sendPoll(m.chat, `Hola ${pushname}\n\n> 𝐒𝐮𝐩𝐞𝐫 𝐁𝐨𝐭 𝐃𝐞 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩 `, ['play3 billie eilish', 'estado', 'menu', 'fb'])}
 break
                       
@@ -647,7 +644,7 @@ break
 //--------------------[ FUNCIONES ]-----------------------  
 function pickRandom(list) {
 return list[Math.floor(list.length * Math.random())]
-}     
+}       
 
 //-------------------[ AUDIO/TEXTOS ]----------------------
 default:   
@@ -682,7 +679,7 @@ if (media === 'texto')
 await conn.sendMessage(m.chat, {text: `${pickRandom(['*QUE YO QUE?*', 'Que?'])}`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 if (budy.includes(`Yaoi`)) {
 m.react(`${pickRandom(['😐', '👀', '😹'])}`)
-m.reply(`${pickRandom(['Que mamada? vete a estudiar mejor', 'Soy un bot hetero, no pida mamada (︶｡︶)zzZ ', 'enviar que doy permiso 😼 ˡᵒˢ ᵃᵈᵐᶦⁿˢ ˢᵉ ᶠᵘᵉʳᵒⁿ ᵃ ᵈᵒʳᵐᶦʳ  ᵃᵖʳᵒᵛᵉᶜʰᵃʳ ᵉˡ ᵇᵘᵍ ˣᵈ'])}`)}
+m.reply(`${pickRandom(['Que mamada? vete a estudiar mejor', 'Soy un bot hetero, no pida mamada (︶｡︶)zzZ '])}`)}
 if (budy.startsWith(`a`)) {
 if (!global.db.data.chats[m.chat].audios) return
 let vn = './media/a.mp3'
@@ -897,28 +894,13 @@ return reply(String(execSync(budy.slice(2), { encoding: 'utf-8' })))
 } catch (err) { 
 console.log(util.format(err))  
  
-if (m.chat.endsWith('@s.whatsapp.net') && !isCmd) {
-let room = Object.values(anon.anonymous).find(p => p.state == "CHATTING" && p.check(sender))
-if (room) {
-let other = room.other(sender)
-m.copyNForward(other, true, m.quoted && m.quoted.fromMe ? {
-contextInfo: {
-...m.msg.contextInfo,
-forwardingScore: 0,
-isForwarded: true,
-participant: other
-}
-} : {})
-}
-}
-
-if (isCmd && budy.toLowerCase() != undefined) {
+/*if (isCmd && budy.toLowerCase() != undefined) {
 if (m.chat.endsWith('broadcast')) return
 if (m.isBaileys) return
 let msgs = global.db.data.database
 if (!(budy.toLowerCase() in msgs)) return
 conn.copyNForward(m.chat, msgs[budy.toLowerCase()], true)
-}
+}*/
  
 //--------------------[ REPORTE/ERRORS ]-----------------------     
 let e = String(err) 
