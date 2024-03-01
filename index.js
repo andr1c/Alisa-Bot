@@ -610,7 +610,7 @@ say('NovaBot-MD', {
 say(`By: elrebelde21`, {
   font: 'console',
   align: 'center',
-  gradient: ['red', 'magenta']})}
+  gradient: ['red', 'magenta']})
 } else if (opcion == '1' || methodCodeQR && qr !== undefined) {
 if (opcion == '1' || methodCodeQR) {
 console.log(color('[SYS]', '#009FFF'),
