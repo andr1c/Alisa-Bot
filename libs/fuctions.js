@@ -500,6 +500,7 @@ if (!('antitoxic' in chats)) chats.antitoxic = false
 if (!('autosticker' in chats)) chats.autosticker = false
 if (!('detect' in chats)) chats.detect = true
 if (!('autoread' in chats)) chats.autoread = true
+if (!('autolevelup' in chats)) chats.autolevelup = true
 } else global.db.data.chats[m.chat] = {  
 antilink: false,  
 isBanned: false,   
@@ -513,7 +514,8 @@ antiFake: false,
 antitoxic: false, 
 autosticker: false, 
 detect: true, 
-autoread: false
+autoread: false, 
+autolevelup: true
 }
   
 let setting = global.db.data.settings[conn.user.jid]
