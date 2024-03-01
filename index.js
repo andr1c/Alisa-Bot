@@ -599,8 +599,11 @@ return list[Math.floor(list.length * Math.random())]
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 sock.ev.on('connection.update', async (update) => {
-const { connection, lastDisconnect, qr, receivedPendingNotifications } = update;
+const { connection, lastDisconnect, qr, receivedPendingNotifications, isNewLogin} = update;
 console.log(receivedPendingNotifications)
+if (isNewLogin) sock.isInit = true
+const code = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode;
+
 if (connection == 'connecting') {
 console.log(chalk.gray('iniciando...'));
 say('NovaBot-MD', {
@@ -610,28 +613,63 @@ say('NovaBot-MD', {
 say(`By: elrebelde21`, {
   font: 'console',
   align: 'center',
-  gradient: ['red', 'magenta']})
-} else if (opcion == '1' || methodCodeQR && qr !== undefined) {
+  gradient: ['red', 'magenta']})}
+  
+try {
+let reason = new Boom(lastDisconnect?.error)?.output.statusCode
+if (connection === 'close') {
+if (reason === DisconnectReason.badSession) {
+console.log(chalk.yellow(`${lenguaje['smsConexionOFF']()}`)) 
+startBot();
+} else if (reason === DisconnectReason.connectionClosed) {
+console.log(chalk.yellow(`${lenguaje['smsConexioncerrar']()}`)) 
+startBot();
+} else if (reason === DisconnectReason.connectionLost) {
+console.log(chalk.yellow(`${lenguaje['smsConexionperdida']()}`)) 
+startBot();
+} else if (reason === DisconnectReason.connectionReplaced) {
+console.log(chalk.yellow(`${lenguaje['smsConexionreem']()}`)) 
+startBot();
+} else if (reason === DisconnectReason.loggedOut) {
+console.log(chalk.yellow(`${lenguaje['smsConexionOFF']()}`))
+startBot();
+} else if (reason === DisconnectReason.restartRequired) {
+console.log(chalk.yellow(`${lenguaje['smsConexionreinicio']()}`)) 
+startBot();
+} else if (reason === DisconnectReason.timedOut) {
+console.log(chalk.yellow(`${lenguaje['smsConexiontiem']()}`)) 
+startBot();
+} else sock.end(`${lenguaje['smsConexiondescon']()} ${reason || ''}: ${connection || ''}`);}
+	
+if (opcion == '1' || methodCodeQR && qr !== undefined) {
 if (opcion == '1' || methodCodeQR) {
 console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
 color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│${lenguaje['smsEscaneaQR']()}\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯`, '#f12711'))
-}} else if (connection === 'close') {
-console.log(chalk.yellow(`${lenguaje['smsConexionOFF']()}`))
-lastDisconnect.error?.output?.statusCode !== DisconnectReason.loggedOut
-? startBot()
-: console.log(
-color('[SYS]', '#009FFF'), 
-color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
-color(`Wa Web logged Out`, '#f64f59')
-);
-} else if (connection == 'open') {
+}}
+
+if (connection == 'open') {
 console.log(color(` `,'magenta'))
 console.log(color(`\n${lenguaje['smsConexion']()} ` + JSON.stringify(sock.user, null, 2), 'yellow'))
 console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
 color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│${lenguaje['smsConectado']()}\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯` + receivedPendingNotifications, '#38ef7d')
+)}
+
+} catch (err) {
+console.log('Error en Connection.update '+err)
+startBot()
 }});
+
+//if (!conn.user.connect) {
+//await sock.groupAcceptInvite(nna2) 
+/*conn.sendMessage("5492266466080@s.whatsapp.net", { text: `${pickRandom(['Hola me he conectado como un nuevo bot 🥳', 'Hola 👋😄 Mi creador, me he conectado a tu bot 🤩', 'Holi 👋 mi creador, He instalando tu bot 🤩, ya estoy conectado con éxito 😉'])}`, 
+contextInfo:{
+forwardingScore: 9999999, 
+isForwarded: true
+}})*/
+//conn.user.connect = true;
+//}
 
 sock.public = true
 store.bind(sock.ev)
