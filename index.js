@@ -599,10 +599,10 @@ return list[Math.floor(list.length * Math.random())]
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 sock.ev.on('connection.update', async (update) => {
-const { connection, lastDisconnect, qr, receivedPendingNotifications, isNewLogin} = update;
+const { connection, lastDisconnect, qr, receivedPendingNotifications} = update;
 console.log(receivedPendingNotifications)
-if (isNewLogin) sock.isInit = true
-const code = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode;
+//if (isNewLogin) sock.isInit = true
+//const code = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode;
 
 if (connection == 'connecting') {
 console.log(chalk.gray('iniciando...'));
