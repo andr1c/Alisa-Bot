@@ -611,7 +611,6 @@ say(`By: elrebelde21`, {
   font: 'console',
   align: 'center',
   gradient: ['red', 'magenta']})}
-);
 } else if (opcion == '1' || methodCodeQR && qr !== undefined) {
 if (opcion == '1' || methodCodeQR) {
 console.log(color('[SYS]', '#009FFF'),
@@ -625,7 +624,7 @@ lastDisconnect.error?.output?.statusCode !== DisconnectReason.loggedOut
 color('[SYS]', '#009FFF'), 
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
 color(`Wa Web logged Out`, '#f64f59')
-);;
+);
 } else if (connection == 'open') {
 console.log(color(` `,'magenta'))
 console.log(color(`\n${lenguaje['smsConexion']()} ` + JSON.stringify(sock.user, null, 2), 'yellow'))
