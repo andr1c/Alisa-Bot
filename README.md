@@ -129,8 +129,7 @@ npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
 🟢 ACTIVAR EN CODES SPACES 
 
 [`CREAR SERVIDOR`](https://github.com/codespaces/new?skip_quickstart=true&machine=basicLinux32gb&repo=elrebelde21/NovaBot-MD&ref=main&geo=UsEast)
-## Tutorial pronto 😁
------ 
+---- 
 
 ## `𝙴𝙳𝙸𝚃𝙾𝚁 𝚈 𝙿𝚁𝙾𝙿𝙸𝙴𝚃𝙰𝚁𝙸𝙾 𝙳𝙴𝙻 𝙱𝙾𝚃`
 
