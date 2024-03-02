@@ -126,10 +126,11 @@ npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
 - [x] **Configuración** <details><summary>**Ajustes del Servidor - NovaBot-MD**</summary><img src="https://telegra.ph/file/38d1458d37957d7323e7b.jpg"></details>
 
 ------------------ 
-🟢 ACTIVAR EN CODES SPACES 
+### 🟢 ACTIVAR EN CODES SPACES 
 
 [`CREAR SERVIDOR`](https://github.com/codespaces/new?skip_quickstart=true&machine=basicLinux32gb&repo=elrebelde21/NovaBot-MD&ref=main&geo=UsEast)
----- 
+
+------------------ 
 
 ## `𝙴𝙳𝙸𝚃𝙾𝚁 𝚈 𝙿𝚁𝙾𝙿𝙸𝙴𝚃𝙰𝚁𝙸𝙾 𝙳𝙴𝙻 𝙱𝙾𝚃`
 
