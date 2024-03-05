@@ -158,11 +158,6 @@ setInterval(async () => {
 }, 1000 * 60 * 60);
 //___________
     
-const store = makeInMemoryStore({logger: pino().child({
-level: 'silent',
-stream: 'store'
-})})
-
 //configuración 
 const methodCodeQR = process.argv.includes("qr")
 const pairingCode = !!phoneNumber || process.argv.includes("--pairing-code")
@@ -173,9 +168,7 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
 const question = (text) => new Promise((resolve) => rl.question(text, resolve))
 let { version, isLatest } = await fetchLatestBaileysVersion()
 const msgRetryCounterCache = new NodeCache() //para mensaje de reintento, "mensaje en espera"
-
-async function startBot() {
-
+    
 //codigo adaptado por: https://github.com/GataNina-Li && https://github.com/elrebelde21
 let opcion
 if (methodCodeQR) {
@@ -202,29 +195,34 @@ if (!/^[1-2]$/.test(opcion)) {
 console.log(chalk.bold.redBright(`NO SE PERMITE NÚMEROS QUE NO SEAN ${chalk.bold.greenBright("1")} O ${chalk.bold.greenBright("2")}, TAMPOCO LETRAS O SÍMBOLOS ESPECIALES.\n${chalk.bold.yellowBright("CONSEJO: COPIE EL NÚMERO DE LA OPCIÓN Y PÉGUELO EN LA CONSOLA.")}`))
 }} while (opcion !== '1' && opcion !== '2' || fs.existsSync(`./sessions/creds.json`))
 }
+    
+async function startBot() {
 
-const sock = makeWASocket({
-logger: pino({ level: 'silent' }),
+console.info = () => {}
+const store = makeInMemoryStore({ logger: pino().child({ level: "silent", stream: "store" }), })
+const msgRetry = (MessageRetryMap) => { }
+const msgRetryCache = new NodeCache()
+let { version, isLatest } = await fetchLatestBaileysVersion();   
+
+const socketSettings = {
 printQRInTerminal: opcion == '1' ? true : methodCodeQR ? true : false,
+logger: pino({ level: 'silent' }),
+auth: { creds: state.creds, keys: makeCacheableSignalKeyStore(state.keys, pino({level: 'silent'})) },
 mobile: MethodMobile, 
-browser: opcion == '1' ? ['NovaBot-MD', 'Safari', '2.0.0'] : methodCodeQR ? ['NovaBot-MD', 'Safari', '2.0.0'] : ['Ubuntu', 'Chrome', '110.0.5585.95'],
-auth: {
-creds: state.creds,
-keys: makeCacheableSignalKeyStore(state.keys, Pino({ level: "fatal" }).child({ level: "fatal" })),
-},
-browser: ['Ubuntu', 'Chrome', '110.0.5585.95'], //
-markOnlineOnConnect: true, //establecer falso para fuera de línea
-generateHighQualityLinkPreview: true, //hacer enlace de vista previa alta
-getMessage: async (key) => {
-let jid = jidNormalizedUser(key.remoteJid)
-let msg = await store.loadMessage(jid, key.id)
-return msg?.message || ""
-},
-msgRetryCounterCache, //Resolver mensajes en espera
-defaultQueryTimeoutMs: undefined, //
-})
+browser: opcion == '1' ? ['NovaBot-MD', 'Safari', '1.0.0'] : methodCodeQR ? ['NovaBot-MD', 'Safari', '1.0.0'] : ['Ubuntu', 'Safari', '2.0.0'],
+msgRetry,
+msgRetryCache,
+version,
+syncFullHistory: true,
+getMessage: async (key) => { 
+if (store) { 
+const msg = await store.loadMessage(key.remoteJid, key.id); 
+return sock.chats[key.remoteJid] && sock.chats[key.remoteJid].messages[key.id] ? sock.chats[key.remoteJid].messages[key.id].message : undefined; 
+} 
+return proto.Message.fromObject({}); 
+}}
 
-store.bind(sock.ev)
+const sock = makeWASocket(socketSettings)
 
 if (!fs.existsSync(`./sessions/creds.json`)) {
 if (opcion === '2' || methodCode) {
@@ -257,6 +255,14 @@ console.log(chalk.bold.white(chalk.bgMagenta(`👑 CÓDIGO DE VINCULACIÓN 👑:
 }}
 }
 
+async function getMessage(key) {
+if (store) {
+const msg = store.loadMessage(key.remoteJid, key.id)
+return msg.message && undefined
+} return {
+conversation: 'SimpleBot',
+}}
+
 sock.ev.on('messages.upsert', async chatUpdate => {
 //console.log(JSON.stringify(chatUpdate, undefined, 2))
 try {
@@ -279,14 +285,6 @@ console.log(e)
 } catch (err) {
 console.log(err)
 }})
-
-//responder cmd pollMensaje
-async function getMessage(key){
-if (store) {
-const msg = await store.loadMessage(key.remoteJid, key.id)
-return msg?.message
-}
-return { conversation: "hola" }}
 
 sock.ev.on('messages.update', async chatUpdate => {
 for(const { key, update } of chatUpdate) {
@@ -660,16 +658,6 @@ color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│${lenguaje[
 console.log('Error en Connection.update '+err)
 startBot()
 }});
-
-//if (!conn.user.connect) {
-//await sock.groupAcceptInvite(nna2) 
-/*conn.sendMessage("5492266466080@s.whatsapp.net", { text: `${pickRandom(['Hola me he conectado como un nuevo bot 🥳', 'Hola 👋😄 Mi creador, me he conectado a tu bot 🤩', 'Holi 👋 mi creador, He instalando tu bot 🤩, ya estoy conectado con éxito 😉'])}`, 
-contextInfo:{
-forwardingScore: 9999999, 
-isForwarded: true
-}})*/
-//conn.user.connect = true;
-//}
 
 sock.public = true
 store.bind(sock.ev)
