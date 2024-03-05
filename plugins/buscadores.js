@@ -17,7 +17,7 @@ async function buscadores(m, command, conn, text, budy, from, fkontak, prefix, a
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (global.db.data.users[m.sender].banned) return
 if (command == 'yts' || command == 'ytsearch') {
-if (global.db.data.users[m.sender].level < 2) return m.reply(`${lenguaje['nivel']()} 2 ${lenguaje['nivel2']()}`) 
+if (global.db.data.users[m.sender].level < 2) return m.reply(`${lenguaje['nivel']()} 2 ${lenguaje['nivel2']()} ${prefix}nivel`) 
 if (!text) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} anime`)
 const yts = require("youtube-yts");
 const search = await yts(text);
@@ -37,7 +37,7 @@ m.react('💫')
 }
 
 if (command == 'acortar') {
-if (global.db.data.users[m.sender].level < 2) return m.reply(`${lenguaje['nivel']()} 2 ${lenguaje['nivel2']()}`) 
+if (global.db.data.users[m.sender].level < 2) return m.reply(`${lenguaje['nivel']()} 2 ${lenguaje['nivel2']()} ${prefix}nivel`) 
  if (!text) return m.reply(`${lenguaje.lengua.text}`)
 let shortUrl1 = await (await fetch(`https://tinyurl.com/api-create.php?url=${args[0]}`)).text()  
 if (!shortUrl1) return m.reply(`${lenguaje['error']()}`)
@@ -201,7 +201,7 @@ let krt = await scp1.ssweb(q)
 conn.sendMessage(m.chat, {image:krt.result, caption: info.result}, {quoted:m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
 if (command == 'wallpaper') {
-if (global.db.data.users[m.sender].level < 3) return m.reply(`${lenguaje['nivel']()} 3 ${lenguaje['nivel2']()}`) 
+if (global.db.data.users[m.sender].level < 3) return m.reply(`${lenguaje['nivel']()} 3 ${lenguaje['nivel2']()} ${prefix}nivel`) 
 if (!text) return m.reply(`${lenguaje.lengua.ejem} ${prefix + command} anime*`) 
 m.react("🔍") 
 let { wallpaper, wallpaperv2 } = require('@bochilteam/scraper')

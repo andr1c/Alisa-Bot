@@ -14,7 +14,7 @@ const os = require('os')
 require('../main')
 
 async function grupo(m, command, isGroupAdmins, text, conn, participants, isBotAdmins, args, isCreator, delay, sender, quoted, mime, from, isCreator, groupMetadata, fkontak, delay, store) {
-if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+//if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (global.db.data.users[m.sender].banned) return
 if (command == 'hidetag' || command == 'notificar' || command == 'tag') {  
 if (!m.isGroup) return m.reply(info.group) 
@@ -157,7 +157,8 @@ conn.sendText(m.chat, `https://chat.whatsapp.com/${response}`, m, { detectLink: 
 if (command == 'banchat') { 
 if (!m.isGroup) return m.reply(info.group) 
 if (!isCreator) return m.reply(info.owner) 
-if (!text) return m.reply(`${lenguaje.enable.text}\n*${prefix + command} on*\n*${prefix + command} off*`)
+if (!text) return conn.sendPoll(m.chat, `${lenguaje.enable.text}\n*$*${prefix + command} on*\n*${prefix + command} off*`, ['banchat on','banchat off'])
+//m.reply(`${lenguaje.enable.text}\n*${prefix + command} on*\n*${prefix + command} off*`)
 if (args[0] === "on") {
 global.db.data.chats[m.chat].isBanned = true
 m.reply(lenguaje.grupos.text19)

@@ -29,14 +29,14 @@ db.data.users[m.sender].limit -= 1
 m.reply('1 ' + info.limit)}
 
 if (command == 'lewd' || command == 'feed' || command == 'gasm' || command == 'anal' || command == 'holo' || command == 'tits' || command == 'kuni' || command == 'kiss' || command == 'erok' || command == 'erok' || command == 'smug' || command == 'solog' || command == 'feetg' || command == 'lewdk' || command == 'waifu' || command == 'pussy' || command == 'femdom' || command == 'cuddle' || command == 'eroyuri' || command == 'cum_jpg' || command == 'blowjob' || command == 'holoero' || command == 'erokemo' || command == 'fox_girl' || command == 'futanari' || command == 'wallpaper') {
-if (global.db.data.users[m.sender].level < 3) return m.reply(`${lenguaje['nivel']()} 3 ${lenguaje['nivel2']()}`) 
+if (global.db.data.users[m.sender].level < 3) return m.reply(`${lenguaje['nivel']()} 3 ${lenguaje['nivel2']()} ${prefix}nivel`) 
 sendImageAsUrl(`https://api.lolhuman.xyz/api/random2/${command}?apikey=${lolkeysapi}`, `*🔥 ${command} 🔥*`)
 m.react(xmoji) 
 db.data.users[m.sender].limit -= 3
 m.reply('3 ' + info.limit)}
 
 if (command == 'hentai2') {
-if (global.db.data.users[m.sender].level < 3) return m.reply(`${lenguaje['nivel']()} 3 ${lenguaje['nivel2']()}`) 
+if (global.db.data.users[m.sender].level < 3) return m.reply(`${lenguaje['nivel']()} 3 ${lenguaje['nivel2']()} ${prefix}nivel`) 
 var hentai = JSON.parse(fs.readFileSync('./src/nsfw/neko.json'))
 var hentairesult = pickRandom(hentai)
 conn.sendMessage(m.chat, { caption: `🥵`, image: { url: hentairesult.url } }, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
@@ -61,12 +61,14 @@ db.data.users[m.sender].limit -= 1
 m.reply('1 ' + info.limit)}
 
 if (command == 'videoxxx' || command == 'vídeoxxx' || command == 'videoxxxlesbi') {
+if (global.db.data.users[m.sender].level < 5) return m.reply(`${lenguaje['nivel']()} 5 ${lenguaje['nivel2']()} ${prefix}nivel`) 
 const url4 = await videosxxxc[Math.floor(Math.random() * videosxxxc.length)];
 await conn.sendMessage(m.chat, {video: {url: url4}, caption: `${lenguaje.nsfw.text2}`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 db.data.users[m.sender].limit -= 1
 m.reply('1 ' + info.limit)}
 
 if (command == 'videolesbixxx' || command == 'pornolesbivid' || command == 'pornolesbianavid' || command == 'pornolesbiv' || command == 'pornolesbianav') {
+if (global.db.data.users[m.sender].level < 6) return m.reply(`${lenguaje['nivel']()} 6 ${lenguaje['nivel2']()} ${prefix}nivel`) 
 const url5 = await videosxxxc2[Math.floor(Math.random() * videosxxxc2.length)];
 await conn.sendMessage(m.chat, {video: {url: url5}, caption: `${lenguaje.nsfw.text2}`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 db.data.users[m.sender].limit -= 2

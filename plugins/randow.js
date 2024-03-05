@@ -37,7 +37,10 @@ sendImageAsUrl("https://delirius-image-random.vercel.app/api/all")}
 if (command == 'navidad') {
 const res = (await axios.get(`https://raw.githubusercontent.com/elrebelde21/NovaBot-MD/master/src/randow/navidad.json`)).data;
 const result = await res[Math.floor(res.length * Math.random())];
-sendImageAsUrl(result, `${command}`)}}
+sendImageAsUrl(result, `${command}`)}
+if (command == 'china') {
+sendImageAsUrl("https://delirius-api.vercel.app/api/china")
+}}
 
 async function randow2(conn, m, command, text, sender, pushname) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)

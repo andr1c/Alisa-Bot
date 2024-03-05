@@ -260,6 +260,7 @@ let menurandow = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┃ ❏ ${prefix}navidad
 ┊┃ ❏ ${prefix}akira
 ┊┃ ❏ ${prefix}akiyama
+┊┃ ❏ ${prefix}china
 ┊┃ ❏ ${prefix}anna
 ┊┃ ❏ ${prefix}asuna
 ┊┃ ❏ ${prefix}ayuzawa

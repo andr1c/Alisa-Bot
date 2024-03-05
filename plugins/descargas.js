@@ -8,7 +8,7 @@ const cheerio = require('cheerio')
 const yts = require('yt-search') 
 const ytdl = require('ytdl-core') 
 const fg = require('api-dylux') 
-const {youtubedl, youtubedlv2} = require('@bochilteam/scraper') 
+const {savefrom, youtubedl, youtubedlv2} = require('@bochilteam/scraper') 
 const { smsg, fetchBuffer, getBuffer, buffergif, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getFile, getRandom, msToTime, downloadMediaMessage} = require('../libs/fuctions')
 const { ytmp4, ytmp3, ytplay, ytplayvid } = require('../libs/youtube') 
 const {sizeFormatter} = require('human-readable') 
@@ -40,15 +40,15 @@ m.react(done)
 } catch {
 try {
 let chat = global.db.data.chats[m.chat]
-  let res = await yts(text)
-  //let vid = res.all.find(video => video.seconds < 3600)
-  let vid = res.videos[0]
-  if (!vid) throw `✳️ Vídeo/Audio no encontrado`
-  let isVideo = /vid$/.test(command)
+let res = await yts(text)
+//let vid = res.all.find(video => video.seconds < 3600)
+let vid = res.videos[0]
+if (!vid) return `⚠️ Audio no encontrado`
+let isVideo = /vid$/.test(command)
 let q = isVideo ? '360p' : '128kbps' 
-  let yt = await (isVideo ? fg.ytv : fg.yta)(vid.url, q)
-  let { title, dl_url, quality, size, sizeB } = yt
-  let isLimit = limit * 1024 < sizeB 
+let yt = await (isVideo ? fg.ytv : fg.yta)(vid.url, q)
+let { title, dl_url, quality, size, sizeB } = yt
+let isLimit = limit * 1024 < sizeB 
 if (!isLimit) conn.sendMessage(m.chat, { audio: { url: dl_url }, mimetype: 'audio/mpeg', asDocument: chat.useDocument }, { quoted: m})
 m.react(done)
 } catch {
@@ -76,11 +76,11 @@ console.log(e)}}}}}
 if (command == 'play2') {
 if (!text) return m.reply(lenguaje.descargar.text + ` *${prefix + command}* ozuna`) 
 m.react(rwait) 
-try { 
 let vid = (await yts(text)).all[0]
 const yt_play = await search(args.join(" "))
 let { title, description, url, thumbnail, videoId, timestamp, views, published } = vid
 let message = await conn.sendMessage(m.chat, { text: `${lenguaje.descargar.text3}\n\n◉ ${lenguaje.descargar.title} ${yt_play[0].title}\n◉ ${lenguaje.descargar.duracion} ${secondString(yt_play[0].duration.seconds)}\n◉ ${lenguaje.descargar.ago} ${yt_play[0].ago}\n◉ ${lenguaje.descargar.autor} ${yt_play[0].author.name}\n◉ ${lenguaje.descargar.views} ${MilesNumber(yt_play[0].views)}\n\n${lenguaje.descargar.vid}`, contextInfo: { externalAdReply: { title: wm, body: yt_play[0].title.replace(/\*/g, ''), thumbnailUrl: thumbnail, sourceUrl: yt_play[0].url, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: true }}}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+try { 
 const qu = '360';
 const q = qu + 'p';
 const v = yt_play[0].url;
@@ -90,6 +90,20 @@ const ttl = await yt.title;
 const size = await yt.video[q].fileSizeH;
 await await conn.sendMessage(m.chat, {video: {url: dl_url}, fileName: `${ttl}.mp4`, mimetype: 'video/mp4', caption: `${lenguaje.descargar.text4}\n🔰 ${lenguaje.descargar.title} ${ttl}`, thumbnail: await fetch(yt.thumbnail)}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
 m.react(done) 
+} catch {
+try {
+let chat = global.db.data.chats[m.chat]
+let res = await yts(text)
+//let vid = res.all.find(video => video.seconds < 3600)
+let vid = res.videos[0]
+if (!vid) return `⚠️ Vídeo no encontrado`
+let isVideo = /vid$/.test(command)
+let q = isVideo ? '360p' : '128kbps' 
+let yt = await (isVideo ? fg.ytv : fg.yta)(vid.url, q)
+let { title, dl_url, quality, size, sizeB } = yt
+let isLimit = limit * 1024 < sizeB 
+if (!isLimit) conn.sendMessage(m.chat, { video: { url: dl_url }, mimetype: 'video/mp4', asDocument: chat.useDocument }, { quoted: m})
+m.react(done)
 } catch {
 try {
 const mediaa = await ytMp4(yt_play[0].url);
@@ -107,7 +121,7 @@ m.react(done)
 } catch (e) {
 m.react(error) 
 return m.reply(info.error) 
-console.log(e)}}}}
+console.log(e)}}}}}
 
 if (command == 'play3' || command == 'playdoc' || command == 'playaudiodoc' || command == 'ytmp3doc') {
 if (!text) return m.reply(lenguaje.descargar.text1 + `\n• *${prefix + command}* ozuna\n• ${prefix + command} https://youtu.be/7ouFkoU8Ap8?si=Bvm3LypvU_uGv0bw`) 
@@ -351,7 +365,7 @@ const result4 = `╭━─━─━─≪💎≫─━─━─━╮
 ┆🔸️ ${lenguaje.descargar.text14} ${baby1[0].mime}
 ╰━─━─━─≪💎≫─━─━─━╯\n\n${lenguaje.descargar.descargado}` 
 m.reply(`${result4}`) 
- conn.sendMessage(m.chat, { document : { url : baby1[0].link}, fileName : baby1[0].nama, mimetype: baby1[0].mime ,  quoted : m, contextInfo: { externalAdReply:{ 
+conn.sendMessage(m.chat, { document : { url : baby1[0].link}, fileName : baby1[0].nama, mimetype: baby1[0].mime ,  quoted : m, contextInfo: { externalAdReply:{ 
    title: botname, 
    body:"💫", 
    showAdAttribution: true, 
@@ -367,20 +381,45 @@ if (global.db.data.users[m.sender].registered < true) return m.reply(info.regist
 if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (global.db.data.users[m.sender].banned) return
 if (command == 'facebook' || command == 'fb') { 
-if (!text) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} https://fb.watch/ncowLHMp-x/?mibextid=rS40aB7S9Ucbxw6v`)
-if (!args[0].match(/www.facebook.com|fb.watch|web.facebook.com|business.facebook.com|video.fb.com/g)) return m.reply(`Error`) 
+const igeh = require(`../libs/scraper.js`) 
+if (!args[0] || !text) m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} https://fb.watch/ncowLHMp-x/?mibextid=rS40aB7S9Ucbxw6v`)
+if (!args[0].match(/www.facebook.com|fb.watch/g)) throw `_*< DESCARGAS - FACEBOOK />*_\n\n*[ ℹ️ ] Ingrese un enlace de Facebook.*\n\n*[ 💡 ] Ejemplo:* _${prefix + command} https://fb.watch/fOTpgn6UFQ/_`;
 m.react("📥") 
 conn.fakeReply(m.chat, `${lenguaje.lengua.espere}`, '0@s.whatsapp.net', 'No haga spam')
 try {
-let res = await fetch(`https://api.lolhuman.xyz/api/facebook?apikey=${lolkeysapi}&url=${args[0]}`)
-let _json = await res.json()
-vid = _json.result[0]
-if (vid == '' || !vid || vid == null) vid = _json.result[1]
-await conn.sendMessage(m.chat, {video: {url: vid}, caption: `${lenguaje.descargar.text16}`}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
-} catch (e) {
+const d2ata = await facebook.v1(args[0]);
+let r2es = '';
+if (d2ata.urls && d2ata.urls.length > 0) {
+r2es = `${d2ata.urls[0]?.hd || d2ata.urls[1]?.sd || ''}`;
+}
+conn.sendFile(m.chat, r2es, 'error.mp4', `${lenguaje.descargar.text16}`, m);
+} catch (err1) {
+try {
+const req = await igeh(args[0]);
+conn.sendMessage(m.chat, {video: {url: req.url_list}}, m);
+} catch (err1_2) {
+try {
+const Rres = await fetch(`https://api.lolhuman.xyz/api/facebook?apikey=${lolkeysapi}&url=${args[0]}`);
+const Jjson = await Rres.json();
+let VIDEO = Jjson.result[0];
+if (VIDEO == '' || !VIDEO || VIDEO == null) VIDEO = Jjson.result[1];
+conn.sendFile(m.chat, VIDEO, 'error.mp4', `${lenguaje.descargar.text16}`, m);
+} catch (err2) {
+try {
+const ress = await fg.fbdl(args[0]);
+const urll = await ress.data[0].url;
+await conn.sendFile(m.chat, urll, 'error.mp4', `${lenguaje.descargar.text16}`, m);
+} catch (err3) {
+try {            
+const res3 = await fetch(`https://latam-api.vercel.app/api/facebookdl?apikey=nekosmic&q=${args[0]}`);
+const json = await res3.json();
+const url3 = await json.video;
+await conn.sendFile(m.chat, url3, 'error.mp4', `${lenguaje.descargar.text16}`, m);
+} catch (err6) {
 m.reply(info.error)
-console.log(e)}}
-
+console.log(e)
+}}}}}}
+  
 if (command == 'instagram' || command == 'ig') {
 if (!text) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} https://www.instagram.com/p/CCoI4DQBGVQ/?igshid=YmMyMTA2M2Y=`)
 m.react("📥") 
