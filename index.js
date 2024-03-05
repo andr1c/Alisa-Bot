@@ -216,10 +216,10 @@ version,
 syncFullHistory: true,
 getMessage: async (key) => { 
 if (store) { 
-const msg = await store.loadMessage(key.remoteJid, key.id); 
-return sock.chats[key.remoteJid] && sock.chats[key.remoteJid].messages[key.id] ? sock.chats[key.remoteJid].messages[key.id].message : undefined; 
+const msg = await store.loadMessage(key.remoteJid, key.id)
+return msg.message || undefined
 } 
-return proto.Message.fromObject({}); 
+conversation: "SimpleBot"
 }}
 
 const sock = makeWASocket(socketSettings)
@@ -255,14 +255,6 @@ console.log(chalk.bold.white(chalk.bgMagenta(`👑 CÓDIGO DE VINCULACIÓN 👑:
 }}
 }
 
-async function getMessage(key) {
-if (store) {
-const msg = store.loadMessage(key.remoteJid, key.id)
-return msg.message && undefined
-} return {
-conversation: 'SimpleBot',
-}}
-
 sock.ev.on('messages.upsert', async chatUpdate => {
 //console.log(JSON.stringify(chatUpdate, undefined, 2))
 try {
@@ -286,6 +278,15 @@ console.log(e)
 console.log(err)
 }})
 
+async function getMessage(key){
+if (store) {
+const msg = await store.loadMessage(key.remoteJid, key.id)
+return msg?.message
+}
+return {
+conversation: "Hola"
+}}
+    
 sock.ev.on('messages.update', async chatUpdate => {
 for(const { key, update } of chatUpdate) {
 if (update.pollUpdates && key.fromMe) {

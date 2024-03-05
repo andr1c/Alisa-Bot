@@ -362,8 +362,7 @@ global.db.data.users[m.sender].exp += exp;
 await m.reply(`*Respuesta correcta 🎉*\n\n*Ganarte :* ${exp} Exp`) 
 m.react(`✅`) 
 delete kuismath[m.sender.split('@')[0]]
-} else m.react(`❌`)  
-} 
+} else m.react(`❌`)} 
             
 //mensaje automático
 /*if (!m.isGroup) {  
@@ -505,13 +504,14 @@ break
 
 case 'prueba': { 
 await conn.sendPoll(m.chat, `Hola ${pushname}\n\n> 𝐒𝐮𝐩𝐞𝐫 𝐁𝐨𝐭 𝐃𝐞 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩 `, ['play3 billie eilish', 'estado', 'menu', 'fb'])}
-break
-                      
+break   
+
 //propietario/owner
 case 'bcgc': case 'bcgroup': case 'bc': case 'broadcast': case 'bcall': case 'block': case 'bloquear': case 'unblock': case 'desbloquear': case 'setcmd':  case 'addcmd': case 'delcmd': case 'listcmd': case 'añadirdiamantes': case 'dardiamantes': case 'addlimit': case 'añadirxp': case 'addexp': case 'addxp': owner(isCreator, m, command, conn, text, delay, fkontak, store, quoted, sender) 
 break  
    
-case 'id': {m.reply(from)}            
+case 'id': {m.reply(from)}
+break
           	    
 case 'fetch': case 'get': {   
 if (!/^https?:\/\//.test(text)) return m.reply('*Ej:* https://ingresa.link.aqui.com') 
@@ -521,16 +521,16 @@ const res = await fetch(url);
 if (res.headers.get('content-length') > 100 * 1024 * 1024 * 1024) { 
 throw `Content-Length: ${res.headers.get('content-length')}`;
 } 
-if (!/text|json/.test(res.headers.get('content-type'))) return conn.sendFile(m.chat, url, 'file', text, m);
+if (!/text|json/.test(res.headers.get('content-type'))) return conn.sendFile(m.chat, url, 'file', text, m); 
 let txt = await res.buffer();
 try {
-txt = format(JSON.parse(txt + ''));
+txt = format(JSON.parse(txt + '')); 
 } catch (e) {
 txt = txt + '';
 } finally {
-m.reply(txt.slice(0, 65536) + '');
+m.reply(txt.slice(0, 65536) + ''); 
 }}
-break
+break 
 case 'botname': case 'nuevonombre': case 'namebot': {
 if (!isCreator) return reply(info.owner)
 if (!text) return m.reply(`Ej: ${prefix + command} NovaBot`)
@@ -551,8 +551,7 @@ m.reply(`exito`)
 } else {
 var memeg = await conn.updateProfilePicture(numBot, { url: mediz })
 fs.unlinkSync(mediz)
-m.reply(`exito`)
-}}
+m.reply(`exito`)}}
 break
 
 case 'getcase': 
@@ -563,7 +562,7 @@ bbreak = 'break'
 reply('case ' + `'${args[0]}'` + fs.readFileSync('./main.js').toString().split(`case '${args[0]}'`)[1].split(bbreak)[0] + bbreak) 
 } catch (err) { 
 console.error(err) 
-reply(" Error, tal vez no existe el comando")} 
+reply("Error, tal vez no existe el comando")} 
 break
                  
 case 'banuser': {  
@@ -754,7 +753,11 @@ const vn = 'https://qu.ax/wqXs.mp3'
 conn.sendAudio(m.chat, vn, m)}
 if (budy.startsWith(`:v`)) {
 const vn = 'https://qu.ax/cxDg.mp3'
-conn.sendAudio(m.chat, vn, m)}
+const stic = 'https://qu.ax/ahLV.webp'
+let or = ['sticker', 'audio'];   
+let media = or[Math.floor(Math.random() * 2)] 
+if (media === 'sticker') conn.sendFile(m.chat, stic, 'sticker.webp', '',m, true, { contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: `${pushname}`, mediaType: 2, sourceUrl: md, thumbnail: imagen1}}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})   
+if (media === 'audio') conn.sendAudio(m.chat, vn, m)}
 if (budy.startsWith(`La toca 7w7`)) {
 const vn = 'https://qu.ax/Payh.mp3'
 conn.sendAudio(m.chat, vn, m)}
