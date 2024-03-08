@@ -89,7 +89,8 @@ const smsAntiLink = () => { return `\`\`\`「 ANTILINK DETECTADO 」\`\`\`\n\n` 
 const smsAntiLink2 = () => { return `🤨 eso no esta permitido rata, Sera expulsado del grupo....` }
 const smsAntiLink3 = () => { return `Te salvarte puto no soy admins 🙄\n\n*[ LLAMADO A LOS ADMINS ]*` }
 const smsAntiLink4 = () => { return `> ᴱˡ ᵇᵒᵗ ⁿᵉᶜᵉˢᶦᵗᵃ ᵃᵈᵐᶦⁿ ᵖᵃʳᵃ ᵉˡᶦᵐᶦⁿᵃʳ ᵃ ᵉˢᵗᵃ ˢᵘᶜᶦᵃ ʳᵃᵗᵃ` }
-const smsAntiLink5 = () => { return `Te salvarte por que eres un admins :v` }
+const smsAntiLink5 = () => { return `Eres un admins del grupo, así que no te prohibiré el uso de enlaces :)` }
+const smsAntiLink6 = () => { return `Te salvarte gil, no soy admin no te puedo eliminar` }
 
 //autosticker
 const smsAutoSicker = () => { return `🤡 Hey Donde carajo viste un sticker que dure tanto bobo 🤣. (Máximo 15 segundos)` }
@@ -209,9 +210,9 @@ text20: (fb, md) => `╭─────────────┈⊷
 
 * npm start
 
-(𝘌𝘴𝘤𝘢𝘯𝘦𝘢𝘳 𝘦𝘭 𝘘𝘙, 𝘙𝘢𝘱𝘪𝘥𝘰)
+> (𝘌𝘴𝘤𝘢𝘯𝘦𝘢𝘳 𝘦𝘭 𝘘𝘙, 𝘙𝘢𝘱𝘪𝘥𝘰)
 
-\`🚀 --------[ Vortexuscloud host ]--------- 🚀\`
+🚀 --------[ Vortexuscloud host ]--------- 🚀
 > 💞 Agraciemiento a: mauro 
 
 https://youtube.com/@vortexuscloud
@@ -228,7 +229,7 @@ https://panel.vortexuscloud.com
 > Canal de WhatsApp sobre informacion del host 
 https://whatsapp.com/channel/0029Va8ZD6O3mFXxTPl1m13A
 
-\`🚀 --------[ Cafirexos host ]--------- 🚀\`
+🚀 --------[ Cafirexos host ]--------- 🚀
 
 *Página oficial:*
 https://www.cafirexos.com/
@@ -300,26 +301,57 @@ text14: `_*ᴼʲᶦᵗᵒ ᵉˢᶜʳᶦᵇᵉ ᵗᵃˡ ʸ ᶜᵒᵐᵒ ᵉˢᵗ�
 text15: (vs) => `*\`🤔 Que hay de nuevo? 🤗\`*\n\n*🌐 Nueva Version:* [ ${vs} ]\n\n*Nuevo comando:*
 
 \`🎮👾 Nuevo juegos :\`
+> Juegos matemático, adivina y ganar premios
 #math
 #matematicas
+> Jugar un tateti (ttt) con algun usuario del Grupo y ganar puntos 👾
+#ttt
+#tictactoe
+
+\`🚀 Ahora puede descargar video de twiter (X) :\`
+#twitter
+#x
+
+\`🚀 Buscar usuario de Tiktok:
+#tiktokstalk
+
+\`🔍 Se han agregado nuevos buscadores :\`
+#pinterest
+#wikipedia
+#wiki
+
+\`🪄 Ahora con NovaBot puede crear logos personalizado :\`
+#logos
+
+\`🔱 Ahora puede agregar la reglas del tu grupo con :\`
+#setrules
+#addrules
+
+\`🟢 Usar el comando :\`
+#rules 
+> para vez la reglas del Grupo
+
+\`🏦 Ahora puede guarda tu dinero (diamante) el Banco con:\`
+#dep
+#depositar
+
+\`🏦 También puede retirar dinero (diamante) del Banco con :\`
+#retirar
+#toremove
+
+\`🔰Mejorar tu grupo con NovaBot protegiéndolos del spam de todos tipo!! :\`
+#Antilink2 (Prohíbe todos tipo de link https/) 
+#AntiTelegram (Prohíbe link del Telegram) 
+#AntiFacebook (Prohíbe link del Facebook) 
+#AntInstagram (Prohíbe link del Instagram) 
+#AntiYoutube (Prohíbe link del YouTube) 
+#AntiTwiter (Prohíbe link del Twiter) 
+
+> (mira todos los ajuste de la configuración de tu grupo) 
+#enable 
+#configurar 
 
 > *⚡ Se esta mejoraron la estabilidad del bot.* 
-
-> *💫 Se acambiado el diseño del menu y se has agregado nuevo SubMenu :*
-#menucompleto 
-#allmenu (muestra el menu completo) 
-#menu1 (Menu de descarga) 
-#menu2 (menu audios) 
-#menu3 (menu para grupos) 
-#menu4 (menu buscadores) 
-#menu5 (menu de juegos) 
-#menu6 (menu de efecto) 
-#menu7 (menu convertidores) 
-#menu8 (menu randow) 
-#menu9 (menu RPG) 
-#menu10 (menu de sticker) 
-#menu11 (menu comando solo para propietario del bot) 
-#menu18 (menu comando +18) 
 
 ᴹᵃˢ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᶠᵘᵗᵘʳᵃ ᵛᵉʳˢᶦᵒⁿᵉˢ ᵠᵘᶦᵉʳᵉ ᵠᵘᵉ ᵃᵍʳᵉᵍᵘᵉ ᵃˡᵍᵘⁿ ᶜᵒᵐᵃⁿᵈᵒ ᵉˡ ᵉˢᵖᵉᶜᶦᵃˡ ᵉˢᶜʳᶦᵇᶦʳˡᵉ ᵃ ᵐᶦ ᶜʳᵉᵃᵈᵒʳ`, 
 text16: `\`🌐 REGLAS DEL BOT 🌐\`
@@ -656,7 +688,7 @@ const smsReg8 = () => { return `*💬 Elegir tu idioma con:* #idioma` }
 const cuenta = (nna, md, yt, tiktok, fb) => { return `*Bienvenido a las cuentas oficiales ✨*
 
 *👑 Numero del bot oficial:*
-• wa.me/584125418042
+• https://wa.me/message/3KXD5XHYHUZBC1
 
 *✨ Canal del WhatsApp / Update:*
 • ${nna}
@@ -675,4 +707,4 @@ const cuenta = (nna, md, yt, tiktok, fb) => { return `*Bienvenido a las cuentas 
 
 *ˢᶦ ᵗᶦᵉⁿᵉⁿ ᵈᵘᵈᵃˢ ˢᵘᵍᵉʳᵉⁿᶜᶦᵃˢ ᵒ ᵖʳᵉᵍᵘⁿᵗᵃˢ ᵐᵉ ᵖᵘᵉᵈᵉ ᵉˢᶜʳᶦᵇᶦʳ ᵖᵒʳ ᶠᵃᶜᵉᵇᵒᵒᵏ*` }
 
-module.exports = { lenguaje, exito, tmp, session, errorsession, archivo, AvisoMG, archborrado, archivoborrado, purgesessions, purgesubbots, purgeoldfiles, smscall, smscall2, smsAvisos, smsAvisos2, smsAvisos3, smsAvisos4, smsAvisos5, smsAvisos6, smsAvisos7, smsAvisos8, smsAvisos9, smsWel, smsWel2, smsWel3, smsWel4, smsWel5, smsWel6, smsWel7, smsWel8, smsWel9, smsWel10, smsWel11, smsBye, smsBye2, smsBye3, smsBye4, smsBye5, smsConexion, smsEscaneaQR, smsConectado,  smsConexionOFF, smsConexioncerrar, smsConexionperdida, smsConexionreem, smsConexionreinicio, smsConexiontiem, smsConexiondescon, nivel, nivel2, admin, botAdmin, propietario, group, private, bot, error, advertencia, registra, limit, AntiNsfw, endLimit, result, lengua, sms, Bio, smsAntiFake, smsAntiArabe, smsAntiLink, smsAntiLink2, smsAntiLink3, smsAntiLink4, smsAntiLink5, smsAutoSicker, smsAutonivel, smsAutonivel2, smsAutonivel3, smsAutonivel4, smsAutonivel5, smsAutonivel6, smsAutonivel7, smsAutonivel8, smsAutonivel9, smsAntiPv, info, menu, jadibot, descargar, demote, promote, enable, grupos, juegos, nsfw, owner, ramdow, rpg, sticker, idioma, idioma2, smsReg, smsReg1, smsReg2, smsReg3, smsReg4, smsReg5, smsReg6, smsReg7, smsReg8, cuenta, consola}
+module.exports = { lenguaje, exito, tmp, session, errorsession, archivo, AvisoMG, archborrado, archivoborrado, purgesessions, purgesubbots, purgeoldfiles, smscall, smscall2, smsAvisos, smsAvisos2, smsAvisos3, smsAvisos4, smsAvisos5, smsAvisos6, smsAvisos7, smsAvisos8, smsAvisos9, smsWel, smsWel2, smsWel3, smsWel4, smsWel5, smsWel6, smsWel7, smsWel8, smsWel9, smsWel10, smsWel11, smsBye, smsBye2, smsBye3, smsBye4, smsBye5, smsConexion, smsEscaneaQR, smsConectado,  smsConexionOFF, smsConexioncerrar, smsConexionperdida, smsConexionreem, smsConexionreinicio, smsConexiontiem, smsConexiondescon, nivel, nivel2, admin, botAdmin, propietario, group, private, bot, error, advertencia, registra, limit, AntiNsfw, endLimit, result, lengua, sms, Bio, smsAntiFake, smsAntiArabe, smsAntiLink, smsAntiLink2, smsAntiLink3, smsAntiLink4, smsAntiLink5, smsAntiLink6, smsAutoSicker, smsAutonivel, smsAutonivel2, smsAutonivel3, smsAutonivel4, smsAutonivel5, smsAutonivel6, smsAutonivel7, smsAutonivel8, smsAutonivel9, smsAntiPv, info, menu, jadibot, descargar, demote, promote, enable, grupos, juegos, nsfw, owner, ramdow, rpg, sticker, idioma, idioma2, smsReg, smsReg1, smsReg2, smsReg3, smsReg4, smsReg5, smsReg6, smsReg7, smsReg8, cuenta, consola}
