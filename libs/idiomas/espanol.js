@@ -320,6 +320,9 @@ text15: (vs) => `*\`🤔 Que hay de nuevo? 🤗\`*\n\n*🌐 Nueva Version:* [ ${
 #wikipedia
 #wiki
 
+\`💢Comando ramdow :\`
+#china
+
 \`🪄 Ahora con NovaBot puede crear logos personalizado :\`
 #logos
 
