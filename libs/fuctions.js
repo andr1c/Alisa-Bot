@@ -404,6 +404,7 @@ if (!isNumber(user.joincount)) user.joincount = 1;
 if (!('afkReason' in user)) user.afkReason = ''  
 if (!('banned' in user)) user.banned = false
 if (!isNumber(user.limit)) user.limit = 20  
+if (!isNumber(user.banco)) user.banco = 0
 if (!user.premiumTime)  user.premiumTime = 0
 if (!isNumber(user.warn)) user.warn = 0
 if(!isNumber(user.money)) user.money = 0  
@@ -416,11 +417,24 @@ if(!isNumber(user.level)) user.level = 0
 if(!isNumber(user.armor)) user.armor = 0
 if(!isNumber(user.sword)) user.sword = 0
 if(!isNumber(user.pickaxe)) user.pickaxe = 0
+if (!isNumber(user.banteng)) user.banteng = 0
+if (!isNumber(user.harimau)) user.harimau = 0
+if (!isNumber(user.gajah)) user.gajah = 0
+if (!isNumber(user.kambing)) user.kambing = 0
+if (!isNumber(user.panda)) user.panda = 0
+if (!isNumber(user.buaya)) user.buaya = 0
+if (!isNumber(user.kerbau)) user.kerbau = 0
+if (!isNumber(user.sapi)) user.sapi = 0
+if (!isNumber(user.monyet)) user.monyet = 0
+if (!isNumber(user.babihutan)) user.babihutan = 0
+if (!isNumber(user.babi)) user.babi = 0
+if (!isNumber(user.ayam)) user.ayam = 0
 if(!isNumber(user.axe)) user.axe = 0
 if(!isNumber(user.gems)) user.gems = 0
 if(!isNumber(user.gold)) user.gold = 0
 if(!isNumber(user.copper)) user.copper = 0
 if (!isNumber(user.lastmiming)) user.lastmiming = 0
+if (!isNumber(user.lastmiming2)) user.lastmiming2 = 0
 if (!isNumber(user.crime)) user.crime = 0
 if (!isNumber(user.robs)) user.robs = 0
 if (!isNumber(user.spam)) user.spam = 0
@@ -445,6 +459,7 @@ banned: false,
 limit: 20,  
 warn: 0,
 money: 0,
+banco: 0,
 registered: false,
 premium: false, 
 joincount: 1,
@@ -452,6 +467,8 @@ lastclaim: 0,
 name: m.name,
 Language: 0,
 mensaje: 0,
+lastmiming: 0,
+lastmiming2: 0,
 age: -1,
 regTime: -1,
 afk: -1,
@@ -487,6 +504,13 @@ let chats = global.db.data.chats[m.chat]
 if (typeof chats !== 'object') global.db.data.chats[m.chat] = {}  
 if (chats) {  
 if (!('antilink' in chats)) chats.antilink = false  
+if (!('antiLink2' in chats)) chats.antiLink2 = false
+if (!('AntiTwitter' in chats)) chats.AntiTwitter = false
+if (!('AntiTiktok' in chats)) chats.AntiTiktok = false
+if (!('AntiTelegram' in chats)) chats.AntiTelegram = false
+if (!('AntiFacebook' in chats)) chats.AntiFacebook = false
+if (!('AntInstagram' in chats)) chats.AntInstagram = false
+if (!('AntiYoutube' in chats)) chats.AntiYoutube = false
 if (!('isBanned' in chats)) chats.isBanned = false
 if (!('modeadmin' in chats)) chats.modeadmin = false  
 if (!('welcome' in chats)) chats.welcome = true
@@ -501,8 +525,16 @@ if (!('autosticker' in chats)) chats.autosticker = false
 if (!('detect' in chats)) chats.detect = true
 if (!('autoread' in chats)) chats.autoread = true
 if (!('autolevelup' in chats)) chats.autolevelup = true
+if (!('rules' in chats)) chats.rules = ''
 } else global.db.data.chats[m.chat] = {  
 antilink: false,  
+antiLink2: false, 
+AntiTwitter: false, 
+AntiTiktok: false, 
+AntiTelegram: false, 
+AntiFacebook: false, 
+AntInstagram: false, 
+AntiYoutube: false, 
 isBanned: false,   
 modeAdmin: false,  
 welcome: true, 
@@ -515,7 +547,8 @@ antitoxic: false,
 autosticker: false, 
 detect: true, 
 autoread: false, 
-autolevelup: true
+autolevelup: true, 
+rules: ''
 }
   
 let setting = global.db.data.settings[conn.user.jid]
@@ -713,7 +746,7 @@ m.quoted.delete = () => conn.sendMessage(m.quoted.chat, { delete: vM.key })
 * @param {*} options 
 * @returns 
 */
-m.quoted.copyNForward = (jid, forceForward = false, options = {}) => conn.copyNForward(jid, vM, forceForward, options)
+m.copyNForward = (jid = m.chat, forceForward = false, options = {}) => conn.copyNForward(jid, m, forceForward, options)
 
 /**** @returns */
 m.quoted.download = () => downloadMediaMessage(m.quoted)
