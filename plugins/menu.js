@@ -61,12 +61,15 @@ let descargar = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┃ ❏ ${prefix}tiktok _(descargar video de tiktok)_
 ┊┃ ❏ ${prefix}tiktokimg
 ┊┃ ❏ ${prefix}ttimg _(descarga imagen de tiktok)_
-┊┃ ❏ ${prefix}igstalk _(nombre de un usuario de ig)_
+┊┃ ❏ ${prefix}igstalk _(nombre de un user de ig)_
 ┊┃ ❏ ${prefix}facebook
 ┊┃ ❏ ${prefix}fb _(Descarga videos de Facebook)_
 ┊┃ ❏ ${prefix}instagram
 ┊┃ ❏ ${prefix}ig _(Descarga videos de Instagram)_
 ┊┃ ❏ ${prefix}mediafire _(descarga archivo de mediafire)_
+┊┃ ❏ ${prefix}tiktokstalk _(nombre del user de TikTok)_
+┊┃ ❏ ${prefix}twitter
+┊┃ ❏ ${prefix}x _(descarga video de twiter (X)_
 ┊┃ ❏ ${prefix}gdrive _(Descarga archivos de gdrive)_
 ┊┗━━━━━━━━━━━━━━•
 ╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩`
@@ -82,6 +85,19 @@ let grupos = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┃ ❏ ${prefix}antifake _(on/off)_
 ┊┃ ❏ ${prefix}antiarabe _(on/off)_
 ┊┃ ❏ ${prefix}antitoxic _(on/off)_
+┊┃ ❏ ${prefix}antilink2 _(on/off)_
+┊┃ ❏ ${prefix}AntiTwiter _(on/off)_
+┊┃ ❏ ${prefix}antitiktok _(on/off)_
+┊┃ ❏ ${prefix}AntiTikTok _(on/off)_
+┊┃ ❏ ${prefix}antitelegram _(on/off)_
+┊┃ ❏ ${prefix}AntiTelegram _(on/off)_
+┊┃ ❏ ${prefix}antifacebook _(on/off)_
+┊┃ ❏ ${prefix}AntiFb _(on/off)_
+┊┃ ❏ ${prefix}AntiFaceBook _(on/off)_
+┊┃ ❏ ${prefix}AntInstagram _(on/off)_
+┊┃ ❏ ${prefix}AntiIg _(on/off)_
+┊┃ ❏ ${prefix}antiyoutube _(on/off)_
+┊┃ ❏ ${prefix}AntiYoutube _(on/off)_
 ┊┃ ❏ ${prefix}autosticker _(on/off)_
 ┊┃ ❏ ${prefix}detect _(on/off)_
 ┊┃ ❏ ${prefix}autodetect _(on/off)_
@@ -93,6 +109,9 @@ let grupos = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┃ ❏ ${prefix}chatbot _(on/off)_
 ┊┃ ❏ ${prefix}autolevelup _(on/off)_
 ┊┃ ❏ ${prefix}autonivel _(on/off)_
+┊┃ ❏ ${prefix}addrules _(text)_
+┊┃ ❏ ${prefix}setrules _(text)_
+┊┃ ❏ ${prefix}rules _(reglas del Grupo)_
 ┊┃ ❏ ${prefix}kick _(@tag)_
 ┊┃ ❏ ${prefix}add _(@tag)_
 ┊┃ ❏ ${prefix}invita _(@tag)_
@@ -131,6 +150,9 @@ let buscadores = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┃ ❏ ${prefix}wallpaper _(imagen del wallpaper)_
 ┊┃ ❏ ${prefix}ss _(link)_
 ┊┃ ❏ ${prefix}dall-e
+┊┃ ❏ ${prefix}pinterest
+┊┃ ❏ ${prefix}wikipedia
+┊┃ ❏ ${prefix}wiki
 ┊┃ ❏ ${prefix}ia2 _(Crear imagen con la (IA)_
 ┊┃ ❏ ${prefix}horario
 ┊┗━━━━━━━━━━━━━━•
@@ -157,11 +179,16 @@ let juegos = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┃ ❏ ${prefix}slot
 ┊┃ ❏ ${prefix}math
 ┊┃ ❏ ${prefix}matematicas
+┊┃ ❏ ${prefix}ttt
+┊┃ ❏ ${prefix}tictactoe
+┊┃ ❏ ${prefix}ttc
+┊┃ ❏ ${prefix}delttt
 ┊┃ ❏ ${prefix}dado
 ┊┃ ❏ ${prefix}piropo
 ┊┃ ❏ ${prefix}ship
 ┊┃ ❏ ${prefix}formartrio
 ┊┃ ❏ ${prefix}formapareja5
+┊┃ ❏ ${prefix}txt _(texto)_
 ┊┃ ❏ ${prefix}fake _(texto + tag)_
 ┊┗━━━━━━━━━━━━━━•
 ╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩`
@@ -196,6 +223,7 @@ let convertidores = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈�
 ┊┃ ❏ ${prefix}toaudio
 ┊┃ ❏ ${prefix}toanime
 ┊┃ ❏ ${prefix}hd
+┊┃ ❏ ${prefix}logos
 ┊┗━━━━━━━━━━━━━━•
 ╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩`
 let menu18 = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
@@ -315,6 +343,10 @@ let menuRPG = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┃ ❏ ${prefix}cofre
 ┊┃ ❏ ${prefix}perfil
 ┊┃ ❏ ${prefix}nivel
+┊┃ ❏ ${prefix}dep
+┊┃ ❏ ${prefix}depositar
+┊┃ ❏ ${prefix}retirar
+┊┃ ❏ ${prefix}toremove
 ┊┃ ❏ ${prefix}levelup
 ┊┃ ❏ ${prefix}afk 
 ┊┗━━━━━━━━━━━━━━•
@@ -428,6 +460,7 @@ https://www.facebook.com/elrebelde21`, `\`□ COMO INSTALAR EL BOT\`\n${yt}`, `\
 ┊┃ ❏ ${prefix}menu10 | menuSticker
 ┊┃ ❏ ${prefix}menu11 | menuOwner
 ┊┃ ❏ ${prefix}menu18 | Menuhony
+┊┃ ❏ ${prefix}logos 
 ┊┃━━━━━━━━━━━━━━•
 ┊┃ *💫 ＩＮＦＯＲＭＡＣＩＯ́Ｎ 💫*
 ┊┃━━━━━━━━━━━━━━•
@@ -445,6 +478,8 @@ https://www.facebook.com/elrebelde21`, `\`□ COMO INSTALAR EL BOT\`\n${yt}`, `\
 ┊┃ ❏ ${prefix}cuenta 
 ┊┃ ❏ ${prefix}cuentaoficiales
 ┊┃ ❏ ${prefix}status 
+┊┃ ❏ ${prefix}enable 
+┊┃ ❏ ${prefix}configurar
 ┊┃ ❏ ${prefix}cafirexos
 ┊┃ ❏ ${prefix}report _(reporta errores)_
 ┊┗━━━━━━━━━━━━━━•
@@ -766,6 +801,19 @@ ${lenguaje.menu.text12}
 ├❥ᰰຼ ❏ ${prefix}antifake _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}antiarabe _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}antitoxic _(on/off)_
+├❥ᰰຼ ❏ ${prefix}antilink2 _(on/off)_
+├❥ᰰຼ ❏ ${prefix}AntiTwiter _(on/off)_
+├❥ᰰຼ ❏ ${prefix}antitiktok _(on/off)_
+├❥ᰰຼ ❏ ${prefix}AntiTikTok _(on/off)_
+├❥ᰰຼ ❏ ${prefix}antitelegram _(on/off)_
+├❥ᰰຼ ❏ ${prefix}AntiTelegram _(on/off)_
+├❥ᰰຼ ❏ ${prefix}antifacebook _(on/off)_
+├❥ᰰຼ ❏ ${prefix}AntiFb _(on/off)_
+├❥ᰰຼ ❏ ${prefix}AntiFaceBook _(on/off)_
+├❥ᰰຼ ❏ ${prefix}AntInstagram _(on/off)_
+├❥ᰰຼ ❏ ${prefix}AntiIg _(on/off)_
+├❥ᰰຼ ❏ ${prefix}antiyoutube _(on/off)_
+├❥ᰰຼ ❏ ${prefix}AntiYoutube _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}autosticker _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}detect _(on/off)_
 ├❥ᰰຼ ❏ ${prefix}autodetect _(on/off)_
@@ -829,6 +877,12 @@ ${lenguaje.menu.text12}
 ├❥ᰰຼ ❏ ${prefix}verdad
 ├❥ᰰຼ ❏ ${prefix}reto
 ├❥ᰰຼ ❏ ${prefix}doxear
+├❥ᰰຼ ❏ ${prefix}math
+├❥ᰰຼ ❏ ${prefix}matematicas
+├❥ᰰຼ ❏ ${prefix}ttt
+├❥ᰰຼ ❏ ${prefix}tictactoe
+├❥ᰰຼ ❏ ${prefix}ttc
+├❥ᰰຼ ❏ ${prefix}delttt
 ├❥ᰰຼ ❏ ${prefix}personalidad
 ├❥ᰰຼ ❏ ${prefix}racista
 ├❥ᰰຼ ❏ ${prefix}slot
@@ -837,6 +891,7 @@ ${lenguaje.menu.text12}
 ├❥ᰰຼ ❏ ${prefix}ship
 ├❥ᰰຼ ❏ ${prefix}formartrio
 ├❥ᰰຼ ❏ ${prefix}formapareja5
+┊┃ ❏ ${prefix}txt _(texto)_
 ├❥ᰰຼ ❏ ${prefix}fake _(texto + tag)_
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
 

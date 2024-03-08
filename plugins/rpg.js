@@ -14,8 +14,8 @@ const {createHash} = require('crypto')
 const { canLevelUp, xpRange } = require('../libs/levelling.js')
 let minar = `${pickRandom(['Que pro 😎 has minado',
 '🌟✨ Genial!! Obtienes', 'WOW!! eres un(a) gran Minero(a) ⛏️ Obtienes', 'Has Minado!!', '😲 Lograste Minar la cantidad de', 'Tus Ingresos subiran gracias a que minaste', '⛏️⛏️⛏️⛏️⛏️ Minando', '🤩 SII!!! AHORA TIENES', 'La minaria esta de tu lado, por ello obtienes', '😻 La suerte de Minar', '♻️ Tu Mision se ha cumplido, lograste minar', '⛏️ La Mineria te ha beneficiado con', '🛣️ Has encontrado un Lugar y por minar dicho lugar Obtienes', '👾 Gracias a que has minado tus ingresos suman', 'Felicidades!! Ahora tienes','⛏️⛏️⛏️ Obtienes', '⛏️ has obtenido'])}` 
-let robar = `${pickRandom(['Robaste un Banco 🏦 y obtuviste', 'Negociarte con el jefe de la mafia y obtuvist𝐞 recompensa de :', 'Casi te atrapa la policía pero lograste robar una cantidad valiosa de 💰. !Te cuidado la próxima vez! obtuviste:', 'Los mafiosos te han pagado :', 'Le has robado al Administrador del Grupo', 'Le robarte a tu presidente una sumar de :', 'le robarte a un famoso un valor de :'])}` 
-let robmal = `${pickRandom(['*LA POLICIA TE VIO 🙀👮‍♂️ PERDISTE', 'Fuiste a robar un banco 🏦 y tu ayudarte que vendio a la policía, perdiste', 'No pudiste escapar de la Policía 🚔🤡, perdiste :'])}` 
+let robar = `${pickRandom(['Robaste un Banco 🏦 y Obtuviste', 'Negociarte con el jefe de la mafia y Obtuviste :', 'Casi te atrapa la policía pero lograste robar una cantidad valiosa de 💰. !Te cuidado la próxima vez! Obtuviste:', 'Los mafiosos te han pagado :', 'Le has robado al Administrador del Grupo', 'Le robarte a tu presidente una sumar de :', 'le robarte a un famoso un valor de :', 'Entraste sigilosamente en el museo y robaste una obra de arte valiosa:', 'Infiltraste una joyería y obtuviste un botín impresionante:', 'Te convertiste en el ladrón más buscado del país, obtuviste:', 'Robaste un camión lleno de productos valiosos y obtuviste', 'Asaltaste un tren y conseguiste', 'Robaste un avión cargado de mercancía y obtuviste', 'Te hiciste pasar por un millonario para robar una joya única, obtuviste', 'Entraste a la casa de un coleccionista de arte y robaste una pieza invaluable, obtuviste', 'Secuestraste a un empresario y conseguiste un rescate importante:', 'Amenazaste a un político y obtuviste una gran suma de dinero:', 'Sobornaste a un oficial de policía para obtener información valiosa, conseguiste'])}` 
+let robmal = `${pickRandom(['LA POLICIA TE VIO 🙀👮‍♂️ PERDISTE', 'Fuiste a robar un banco 🏦 y tu ayudarte que vendio a la policía, perdiste', 'No pudiste escapar de la Policía 🚔🤡, perdiste :', 'Intentaste robar un casino pero te descubrieron, perdiste', 'Te atraparon tratando de robar una tienda, perdiste :', 'La alarma sonó cuando intentabas robar un almacén, perdiste', 'El dueño del lugar te atrapó in fraganti, perdiste', 'Intentaste hackear una cuenta bancaria pero te rastrearon, perdiste', 'Fuiste descubierto tratando de sobornar a un oficial, perdiste', 'Tu plan para chantajear a un empresario salió mal, perdiste'])}` 
 
 let mentionUser = [...new Set([...(m.mentionedJid || []), ...(m.quoted ? [m.quoted.sender] : [])])]
 for (let jid of mentionUser) {
@@ -206,17 +206,66 @@ if (command == 'bal' || command == 'balance' || command == 'diamond') {
 let who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
 let user = global.db.data.users[who]
 if (!(who in global.db.data.users)) return m.reply(lenguaje.grupos.text31)
-conn.sendMessage(m.chat, {text: `╔════≪ 𝙱𝙰𝙻𝙰𝙽𝙲𝙴 ≫════╗
-║ • 📌 ${lenguaje.rpg.text7} @${who.split('@')[0]} ${user.registered === true ? 'ͧͧͧͦꙶͣͤ✓' : ''} 
-║ • *💎𝙳𝙸𝙰𝙼𝙰𝙽𝚃𝙴 :* ${user.limit}
-║ • *⬆️𝙴𝚇𝙿 :* ${user.exp}
-║ • *🪙𝙲𝙾𝙸𝙽𝚂 :* ${user.money}
-║◤━━━━━ ☆. ∆ .☆ ━━━━━◥
-║ ${lenguaje.rpg.text8}
-║ • *${prefix}buy <cantidad>*
-║ • *${prefix}buyall*
-╚═══════════════`, mentions: [who]}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+conn.sendMessage(m.chat, {text: `•───⧼⧼⧼ 𝙱𝙰𝙻𝙰𝙽𝙲𝙴 ⧽⧽⧽───•
+
+@${who.split('@')[0]} ${user.registered === true ? '✓' : ''} Tiene : 
+
+*💎 𝙳𝙸𝙰𝙼𝙰𝙽𝚃𝙴 :* ${user.limit}
+*⬆️ 𝙴𝚇𝙿 :* ${user.exp}
+*🪙 𝙲𝙾𝙸𝙽𝚂 :* ${user.money}
+> Afuera del Banco 
+
+•───⧼⧼⧼ 𝙱𝙰𝙽𝙲𝙾 ⧽⧽⧽───•
+
+*🏦 𝙳𝙸𝙽𝙴𝚁𝙾 :* ${user.banco}
+> Adentro del Banco 🏦 
+
+•───────────────•
+
+> 📒 𝐍𝐎𝐓𝐀 : 𝐏𝐮𝐞𝐝𝐞 𝐜𝐨𝐦𝐩𝐫𝐚𝐫 𝐦𝐚𝐬 💎 𝐝𝐢𝐚𝐦𝐚𝐧𝐭𝐞
+> 𝐮𝐬𝐚𝐧𝐝𝐨 𝐥𝐨𝐬 𝐜𝐨𝐦𝐚𝐧𝐝𝐨 𝐝𝐞 𝐚𝐛𝐚𝐣𝐨: 
+> • ${prefix}buy <cantidad>
+> • ${prefix}buyall`, mentions: [who]}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }
+
+if (command == 'dep' || command == 'depositar') {    
+let who;
+if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.sender;
+else who = m.sender;
+let users =  global.db.data.users[m.sender];
+if (!args[0]) return m.reply('*[ ⚠️ ] Ingresa la cantidad para agregar a sus cuenta bancaria*');
+if (args[0] == '--all') {
+let count = parseInt(users.limit);
+users.limit -= count * 1
+users.banco += count * 1
+await m.reply(`*[ 🏦 ] Has agregados (${count}) diamante 💎 al Banco.*`);
+return !0;
+};
+if (!Number(args[0])) return m.reply('*[ ⚠️ ] Falto en número de cantidad de diamante 💎*');
+let count = parseInt(args[0]);
+if (!users.limit) return m.reply('*Esta pobre no tener suficiente diamante*');
+if (users.limit < count) return m.reply(`*Che no sabes cuanto dinero tiene el tu cartera? usar el comando:* #bal`);
+users.limit -= count * 1;
+users.banco += count * 1;
+await m.reply(`*[ 🏦 ] Has ingresando ${count} diamante al Banco*`)}
+  
+if (command == 'retirar' || command == 'toremove') {     
+let user =  global.db.data.users[m.sender]
+if (!args[0]) return m.reply('*[ ⚠️ ] ingresa la cantidad a retirar*');
+if (args[0] == '--all') {
+let count = parseInt(user.banco);
+user.banco -= count * 1
+user.limit += count * 1
+await m.reply(`*[ 🏦 ] Retiraste (${count}) diamante 💎 del Banco.*`);
+return !0 
+}
+if (!Number(args[0])) return m.reply('La cantidad debe ser un mumero.'); 
+let count = parseInt(args[0]);
+if (!user.banco) return m.reply('Hey fantasma 👻, no tener esa cantidad de dinero el banco 🥲');
+if (user.banco < count) return m.reply(`*Che no sabes cuanto dinero tiene el tu cartera? usar el comando:* #bal`);
+user.banco -= count * 1
+user.limit += count * 1
+await m.reply(`*[ 🏦 ] Has Retirado (${count}) dinero del Banco.*`)}
 
 if (command == 'minar' || command == 'mine') {
 const date = global.db.data.users[m.sender].lastmiming + 600000;
@@ -228,8 +277,8 @@ global.db.data.users[m.sender].lastmiming = new Date * 1;
 }
 
 if (command == 'minar2' || command == 'mine2') {
-const date = global.db.data.users[m.sender].lastmiming + 3600000;
-if (new Date - global.db.data.users[m.sender].lastmiming < 3600000) return m.reply(`*${lenguaje.rpg.text9} ${msToTime(date - new Date())} ${lenguaje.rpg.text10}*`)
+const date = global.db.data.users[m.sender].lastmiming2 + 3600000;
+if (new Date - global.db.data.users[m.sender].lastmiming2 < 3600000) return m.reply(`*${lenguaje.rpg.text9} ${msToTime(date - new Date())} ${lenguaje.rpg.text10}*`)
 //const exp = Math.floor(Math.random() * 2500)
 const diamond = Math.floor(Math.random() * 60)
 const money = Math.floor(Math.random() * 2500)
@@ -238,7 +287,7 @@ global.db.data.users[m.sender].limit += diamond
 global.db.data.users[m.sender].money += money
 m.reply(`${minar}\n${diamond} 𝐃𝐈𝐀𝐌𝐀𝐍𝐓𝐄 💎\n${money} 𝐂𝐎𝐈𝐍𝐒 🪙`)
 m.react('💎') 
-global.db.data.users[m.sender].lastmiming = new Date * 1;
+global.db.data.users[m.sender].lastmiming2 = new Date * 1;
 }
 
 if (command == 'trabajar' || command == 'work' || command == 'w') {
@@ -313,7 +362,7 @@ ${lenguaje.rpg.level7}`.trim()
 return m.reply(str)}}
 
 if (command == 'cofre') {
-if (global.db.data.users[m.sender].level < 9) return m.reply(`${lenguaje['nivel']()} 9 ${lenguaje['nivel2']()}`) 
+if (global.db.data.users[m.sender].level < 9) return m.reply(`${lenguaje['nivel']()} 9 ${lenguaje['nivel2']()} ${prefix}nivel`) 
 const date = global.db.data.users[m.sender].lastcofre + 86400000; //10 hs
 if (new Date - global.db.data.users[m.sender].lastcofre < 86400000) return m.reply(`${lenguaje.rpg.text16} ${msToTime(date - new Date())}`) 
 exp = Math.floor(Math.random() * 9999)

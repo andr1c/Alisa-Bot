@@ -8,7 +8,7 @@ const gradient = require('gradient-string')
 const fetch = require('node-fetch') 
 const axios = require('axios')
 const cheerio = require('cheerio')
-const {googleImage} = require('@bochilteam/scraper') 
+const {googleImage, pinterest} = require('@bochilteam/scraper') 
 const Jimp = require('jimp')
 const FormData = require("form-data") 
 const os = require('os')
@@ -200,6 +200,28 @@ conn.fakeReply(m.chat, `${lenguaje.lengua.espere}`, '0@s.whatsapp.net', 'No haga
 let krt = await scp1.ssweb(q)
 conn.sendMessage(m.chat, {image:krt.result, caption: info.result}, {quoted:m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 
+if (command == 'pinterest') {
+if (global.db.data.users[m.sender].level < 2) return m.reply(`${lenguaje['nivel']()} 2 ${lenguaje['nivel2']()} ${prefix}nivel`) 
+if (!text) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} Gatos`)
+m.react("🔍") 
+const json = await pinterest(text)
+conn.sendFile(m.chat, pickRandom(json), 'pinterest.jpg', `${lenguaje['result']()} ${text}`.trim(), m)
+}
+
+if (command == 'wikipedia' || command == 'wiki') {
+if (global.db.data.users[m.sender].level < 3) return m.reply(`${lenguaje['nivel']()} 3 ${lenguaje['nivel2']()} ${prefix}nivel`) 
+if (!text) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} quien es Colón?`)
+m.react("🔍") 
+try {
+const link =  await axios.get(`https://es.wikipedia.org/wiki/${text}`)
+const $ = cheerio.load(link.data)
+let wik = $('#firstHeading').text().trim()
+let resulw = $('#mw-content-text > div.mw-parser-output').find('p').text().trim()
+m.reply(`‣ ${lenguaje['result']()}\n\n${resulw}`)
+} catch (e) {
+return m.reply(info.error) 
+console.log(e)}}
+
 if (command == 'wallpaper') {
 if (global.db.data.users[m.sender].level < 3) return m.reply(`${lenguaje['nivel']()} 3 ${lenguaje['nivel2']()} ${prefix}nivel`) 
 if (!text) return m.reply(`${lenguaje.lengua.ejem} ${prefix + command} anime*`) 
@@ -280,6 +302,11 @@ module.exports = {buscadores}
 
 exports.getRandom = (ext) => {
 return `${Math.floor(Math.random() * 10000)}${ext}`
+}
+
+//función pickrandow
+function pickRandom(list) {
+return list[Math.floor(list.length * Math.random())]
 }
 
 async function remini(imageData, operation) {

@@ -8,7 +8,7 @@ const cheerio = require('cheerio')
 const yts = require('yt-search') 
 const ytdl = require('ytdl-core') 
 const fg = require('api-dylux') 
-const {savefrom, youtubedl, youtubedlv2} = require('@bochilteam/scraper') 
+const {savefrom, lyrics, lyricsv2, youtubedl, youtubedlv2} = require('@bochilteam/scraper') 
 const { smsg, fetchBuffer, getBuffer, buffergif, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getFile, getRandom, msToTime, downloadMediaMessage} = require('../libs/fuctions')
 const { ytmp4, ytmp3, ytplay, ytplayvid } = require('../libs/youtube') 
 const {sizeFormatter} = require('human-readable') 
@@ -343,11 +343,22 @@ return m.reply(`${info.error}\n\n${e}`)}}
 
 if (command == 'lyrics' || command == 'letra') {
 if (!text) return m.reply(lenguaje.descargar.text11 + `\n${prefix + command} ozuna`)
-const { lyrics, lyricsv2 } = require('@bochilteam/scraper')
+m.react('🕔') 
+try {
+let res = await fg.lyrics(text);
+conn.sendFile(m.chat, res.thumb, 'img.png', `${lenguaje.lengua.espere}`, `❏ ${lenguaje.descargar.title} ${res.title}\n❏ ${lenguaje.descargar.autor}  ${res.artist}\n\n❏ ${lenguaje.descargar.letra} ${res.lyrics}`, fkontak);
+m.react(done) 
+} catch {
+try {
 const result = await lyricsv2(text).catch(async _ => await lyrics(text))
 conn.editMessage(m.chat, `${lenguaje.lengua.espere}`, `❏ ${lenguaje.descargar.title} ${result.title}\n❏ ${lenguaje.descargar.autor}  ${result.author}\n*❏ Url :* ${result.link}\n\n❏ ${lenguaje.descargar.letra} ${result.lyrics}`, 3, fkontak)
 db.data.users[m.sender].limit -= 1
-m.reply('1 ' + info.limit)} 
+m.reply('1 ' + info.limit)    
+m.react(done) 
+} catch (e) {
+m.react(error)
+console.log(e) 
+}}}
 
 if (command == 'mediafire') {
 const { mediafireDl } = require('../libs/mediafire.js') 
@@ -382,8 +393,8 @@ if (global.db.data.users[m.sender].limit < 1) return m.reply(info.endLimit)
 if (global.db.data.users[m.sender].banned) return
 if (command == 'facebook' || command == 'fb') { 
 const igeh = require(`../libs/scraper.js`) 
-if (!args[0] || !text) m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} https://fb.watch/ncowLHMp-x/?mibextid=rS40aB7S9Ucbxw6v`)
-if (!args[0].match(/www.facebook.com|fb.watch/g)) throw `_*< DESCARGAS - FACEBOOK />*_\n\n*[ ℹ️ ] Ingrese un enlace de Facebook.*\n\n*[ 💡 ] Ejemplo:* _${prefix + command} https://fb.watch/fOTpgn6UFQ/_`;
+if (!args[0] || !text) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} https://fb.watch/ncowLHMp-x/?mibextid=rS40aB7S9Ucbxw6v`)
+if (!args[0].match(/www.facebook.com|fb.watch/g)) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} https://fb.watch/ncowLHMp-x/?mibextid=rS40aB7S9Ucbxw6v`)
 m.react("📥") 
 conn.fakeReply(m.chat, `${lenguaje.lengua.espere}`, '0@s.whatsapp.net', 'No haga spam')
 try {
@@ -436,24 +447,40 @@ m.reply('1 ' + info.limit)
 if (command == 'igstalk') {
 if (!args[0]) return m.reply(lenguaje.descargar.text17 + ` ${prefix + command} Emilia`)
 m.react("📥") 
-const fg = require('api-dylux')
 try {
 let res = await fg.igStalk(args[0])
-let te = `╭━─━─━─≪≫─━─━─━╮
-│ ≡  *STALKING* 
-│——————«•»——————
-│🔸 🔖${lenguaje.descargar.text12} ${res.name} 
-│🔸 🔖${lenguaje.descargar.text19} ${res.username} 
-│🔸 👥 ${lenguaje.descargar.text20} ${res.followersH}
-│🔸 🫂 ${lenguaje.descargar.text21} ${res.followingH}
-│🔸 📌 ${lenguaje.descargar.text22} ${res.description}
-│🔸 🏝️ ${lenguaje.descargar.text23} ${res.postsH}
-│——————«•»——————
-│🔸 *🔗 Link* : https://instagram.com/${res.username.replace(/^@/, '')}
-╰━─━─━─≪≫─━─━─━╯`
-await conn.sendMessage(m.chat, {image: { url: res.profilePic }, caption: te }, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
-} catch {
-m.reply(info.error)}}
+let te = `┏━━≪ *STALKING* ≫━•
+┃🔸🔖 ${lenguaje.descargar.text12} ${res.name} 
+┃🔸🔖 ${lenguaje.descargar.text19} ${res.username} 
+┃🔸👥 ${lenguaje.descargar.text20} ${res.followersH}
+┃🔸🫂 ${lenguaje.descargar.text21} ${res.followingH}
+┃🔸📌 ${lenguaje.descargar.text22} ${res.description}
+┃🔸🏝️ ${lenguaje.descargar.text23} ${res.postsH}
+┃━━━━━━━━━━━━━━
+┃🔸 *🔗 Link* : https://instagram.com/${res.username.replace(/^@/, '')}
+┗━━━━━━━━━━━━━•`
+await conn.sendFile(m.chat, res.profilePic, 'tt.png', te, m)
+} catch (e) {
+m.reply(info.error)
+console.log(e)}}
+
+if (command == 'tiktokstalk') {
+if (!args[0]) return m.reply(lenguaje.descargar.text17 + ` ${prefix + command} EmiliaMermes`)
+try {  	
+let res = await fg.ttStalk(args[0])
+let txt = `┏━━≪ *TIKTOK STALK* ≫━•
+┃🔖 ${lenguaje.descargar.text12} ${res.name}
+┃🔖 ${lenguaje.descargar.text19} ${res.username}
+┃👥 ${lenguaje.descargar.text20} ${res.followers}
+┃🫂 ${lenguaje.descargar.text21} ${res.following}
+┃📌 ${lenguaje.descargar.text22} ${res.desc}
+┃━━━━━━━━━━━━━━
+┃ *🔗 Link* : https://tiktok.com/${res.username}
+┗━━━━━━━━━━━━━•`
+await conn.sendFile(m.chat, res.profile, 'tt.png', txt, m)
+} catch (e) {
+m.reply(info.error)
+console.log(e)}}
 
 if (command == 'apk' || command == 'modoapk') {
 let { search, download } = require('aptoide-scraper')
@@ -485,6 +512,19 @@ await m.reply(isLimit ? `${lenguaje.descargar.text10}` : `\n• 𝐄𝐥 𝐀�
 if (!isLimit) conn.sendMessage(m.chat, { document: { url: res.downloadUrl }, fileName: res.fileName, mimetype: res.mimetype }, { quoted: m })
 db.data.users[m.sender].limit -= 3
 m.reply('3 ' + info.limit)
+} catch (e) {
+m.reply(info.error) 
+console.log(e)}}
+
+if (command == 'twitter' || command == 'tw' || command == 'x') {
+if (!args[0]) return m.reply(`${lenguaje.lengua.ejem}\n${prefix + command} https://twitter.com/fernandavasro/status/1569741835555291139?t=ADxk8P3Z3prq8USIZUqXCg&s=19`) 
+m.react(rwait)          
+try {
+let { SD, HD, desc, thumb, audio } = await fg.twitter(args[0])
+conn.sendFile(m.chat, HD, 'twitter.mp4', `•─≪ *TWITTER DL* ≫─•\n\n${desc}`, m)
+m.react(done)
+db.data.users[m.sender].limit -= 2
+m.reply('2 ' + info.limit)
 } catch (e) {
 m.reply(info.error) 
 console.log(e)}}}

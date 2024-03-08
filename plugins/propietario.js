@@ -43,12 +43,19 @@ let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender :
 await conn.updateBlockStatus(users, 'unblock')}
 
 if (command == 'setcmd' || command == 'addcmd') {
+global.db.data.sticker = global.db.data.sticker || {}
 if (!m.quoted) return m.reply(lenguaje.owner.text7)
 if (!m.quoted.fileSha256) return m.reply(lenguaje.owner.text7)
 if (!text) return m.reply(`${lenguaje.owner.text9}\n*${prefix + command} <#menu> <responder a sticker o imagen>*`) 
+let sticker = global.db.data.sticker
 let hash = m.quoted.fileSha256.toString('base64')
-if (global.db.data.sticker[hash] && global.db.data.sticker[hash].locked) return m.reply(lenguaje.owner.text10)
-global.db.data.sticker[hash] = {text, mentionedJid: m.mentionedJid, creator: m.sender, at: + new Date, locked: false, }
+if (sticker[hash] && sticker[hash].locked) return m.reply(lenguaje.owner.text10)
+sticker[hash] = {
+text,
+mentionedJid: m.mentionedJid,
+creator: m.sender,
+at: + new Date,
+locked: false, }
 m.reply(lenguaje.owner.text11)}
 
 if (command == 'delcmd') {

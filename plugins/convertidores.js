@@ -38,7 +38,81 @@ fs.unlinkSync(ran)})
 m.reply(`${info.error} ${e}`)
 console.log(e)}}
 
-async function convertidores(conn, command, mime, quoted, util, m, exec, lolkeysapi) {
+async function efect2(m, text, prefix, command, conn) {
+if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
+if (global.db.data.users[m.sender].banned) return
+if (!text) return m.reply(`\`🪄 𝐋𝐈𝐒𝐓𝐀𝐒 𝐃𝐄 𝐋𝐎𝐆𝐎𝐒\`
+
+* ${prefix}logololi
+* ${prefix}neon
+* ${prefix}txt 
+* ${prefix}devil
+* ${prefix}transformer
+* ${prefix}thunder
+* ${prefix}graffiti
+* ${prefix}bpink
+* ${prefix}joker
+* ${prefix}matrix
+* ${prefix}wolf
+* ${prefix}phlogo
+* ${prefix}ballon
+* ${prefix}dmd
+* ${prefix}lightglow
+* ${prefix}american
+* ${prefix}halloween
+* ${prefix}green
+* ${prefix}glitch
+* ${prefix}paper
+* ${prefix}marvel
+* ${prefix}ninja
+* ${prefix}future
+* ${prefix}3dbox
+* ${prefix}graffiti2
+
+────────────────────────
+
+𝐔𝐬𝐚𝐫 𝐞𝐥 𝐜𝐨𝐦𝐚𝐧𝐝𝐨 𝐝𝐞 𝐥𝐚 𝐬𝐢𝐠𝐮𝐢𝐞𝐧𝐭𝐞 𝐦𝐚𝐧𝐞𝐫𝐚 𝐞𝐣𝐞𝐦𝐩𝐥𝐨 :
+${prefix}neon NovaBot
+
+𝐄𝐧 𝐜𝐚𝐬𝐨 𝐝𝐞 𝐪𝐮𝐞 𝐝𝐢𝐠𝐚 𝐟𝐚𝐥𝐭𝐚 𝐭𝐞𝐱𝐭𝐨 𝐮𝐬𝐚𝐫 𝐝𝐞 𝐞𝐬𝐭𝐚 𝐟𝐨𝐫𝐦𝐚, 𝐄𝐣𝐞𝐦𝐩𝐥𝐨 :
+${prefix}marvel texto1|texto2`) 
+
+let [a, e] = text.split `+`   
+if (!text.split) return m.reply(`Falta texto`) 
+m.react('🕛')
+try {
+let link
+if (/logololi/.test(command)) link = global.API('fgmods', '/api/maker/loli', { text }, 'apikey')
+if (/neon/.test(command)) link = global.API('fgmods', '/api/textpro/neon', { text }, 'apikey')
+if (/devil/.test(command)) link = global.API('fgmods', '/api/textpro/devil', { text }, 'apikey')
+if (/transformer/.test(command)) link = global.API('fgmods', '/api/textpro/transformers', { text }, 'apikey')
+if (/thunder/.test(command)) link = global.API('fgmods', '/api/textpro/thunder', { text }, 'apikey')
+if (/graffiti/.test(command)) link = global.API('fgmods', '/api/textpro/graffiti', { text: a, text2: e}, 'apikey')
+if (/bpink/.test(command)) link = global.API('fgmods', '/api/textpro/blackpink', { text }, 'apikey')
+if (/joker/.test(command)) link = global.API('fgmods', '/api/textpro/joker', { text }, 'apikey')
+if (/matrix/.test(command)) link = global.API('fgmods', '/api/textpro/matrix', { text }, 'apikey')
+if (/wolf/.test(command)) link = global.API('fgmods', '/api/textpro/logowolf', { text: wm, text2: text}, 'apikey')
+if (/phlogo/.test(command)) link = global.API('fgmods', '/api/textpro/pornhub', { text: a, text2: e}, 'apikey')
+if (/ballon/.test(command)) link = global.API('fgmods', '/api/textpro/pornhub', { text: a, text2: e}, 'apikey')
+if (/dmd/.test(command)) link = global.API('fgmods', '/api/textpro/diamond', { text }, 'apikey')
+if (/lightglow/.test(command)) link = global.API('fgmods', '/api/textpro/lightglow', { text }, 'apikey')
+if (/american/.test(command)) link = global.API('fgmods', '/api/textpro/American-flag', { text }, 'apikey')
+if (/halloween/.test(command)) link = global.API('fgmods', '/api/textpro/American-flag', { text }, 'apikey')
+if (/green/.test(command)) link = global.API('fgmods', '/api/textpro/green-horror', { text }, 'apikey')
+if (/glitch/.test(command)) link = global.API('fgmods', '/api/textpro/impressive-glitch', { text }, 'apikey')
+if (/paper/.test(command)) link = global.API('fgmods', '/api/textpro/art-paper-cut', { text }, 'apikey')
+if (/marvel/.test(command)) link = global.API('fgmods', '/api/textpro/marvel', { text: a, text2: e}, 'apikey')
+if (/ninja/.test(command)) link = global.API('fgmods', '/api/textpro/ninja', { text: a, text2: e}, 'apikey')
+if (/future/.test(command)) link = global.API('fgmods', '/api/textpro/futuristic', { text }, 'apikey')
+if (/3dbox/.test(command)) link = global.API('fgmods', '/api/textpro/3dboxtext', { text }, 'apikey')
+if (/graffiti2/.test(command)) link = global.API('fgmods', '/api/textpro/graffiti2', { text: a, text2: e}, 'apikey')
+conn.sendFile(m.chat, link, 'logo.png', `🪄 𝐓𝐎𝐌𝐀 𝐓𝐔 𝐋𝐎𝐆𝐎 𝐏𝐄𝐑𝐒𝐎𝐍𝐀𝐋𝐈𝐙𝐀𝐃𝐎!!\n\n❀ 𝐄𝐅𝐄𝐂𝐓𝐎: ${command}`, m)
+m.react('🪄')
+} catch (e) {  
+m.reply(`${info.error} ${e}`)
+console.log(e)}}
+
+async function convertidores(conn, command, mime, quoted, util, m, exec, lolkeysapi, text) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)
 if (global.db.data.users[m.sender].banned) return
 if (command == 'tourl') {
@@ -85,9 +159,15 @@ await conn.sendFile(m.chat, anime, 'error.jpg', null, m)
 } catch (e) {
 throw m.reply(info.error)}
 } else { 
-m.reply(lenguaje.sms.text7)}}}
+m.reply(lenguaje.sms.text7)}}
 
-module.exports = {efec, convertidores}
+if (command == 'txt') {
+if (!text) return m.reply(`⚠️ Y el texto?, Que quieres te escribar?`) 
+m.react('📝')
+let img = global.API('fgmods', '/api/maker/txt', { text: text }, 'apikey')
+conn.sendFile(m.chat, img, 'img.png', `✍🏻 ${lenguaje['exito']()}`, m)}}
+
+module.exports = {efec, convertidores, efect2}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {

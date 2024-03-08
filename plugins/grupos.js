@@ -49,6 +49,17 @@ let bang = m.message.extendedTextMessage.contextInfo.stanzaId
 return conn.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: bang, participant: delet }})
 }
   
+if (command == 'setrules' || command == 'addrules' || command == 'addrule') {  
+let chat = global.db.data.chats[m.chat]
+if (!text) return m.reply(`⚠️ Escriba la reglas de este grupo!`) 
+chat.rules = text
+m.reply(`${lenguaje['exito']()}`)}
+ 
+if (command == 'rules') { 
+let chat = global.db.data.chats[m.chat]
+if (!chat.rules === '') m.reply(`*Grupo sin reglas 😜*`) 
+m.reply(`*\`⚠️ ＲＥＧＬＡ ＤＥＬ ＧＲＵＰＯ :\`*\n\n${chat.rules}`)}
+  
 if (command == 'join' || command == 'unete') {
 let linkRegex = /chat.whatsapp.com\/([0-9A-Za-z]{20,24})/i
 let link = (m.quoted ? m.quoted.text ? m.quoted.text : text : text) || text
