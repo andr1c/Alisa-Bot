@@ -214,13 +214,13 @@ msgRetry,
 msgRetryCache,
 version,
 syncFullHistory: true,
-getMessage: async (key) => { 
-if (store) { 
-const msg = await store.loadMessage(key.remoteJid, key.id); 
-return sock.chats[key.remoteJid] && sock.chats[key.remoteJid].messages[key.id] ? sock.chats[key.remoteJid].messages[key.id].message : undefined; 
-} 
-return proto.Message.fromObject({}); 
-}}
+getMessage: async (key) => {
+if (store) {
+const msg = store.loadMessage(key.remoteJid, key.id)
+return msg.message && undefined
+} return {
+conversation: 'NovaBot-MD',
+}}}
 
 const sock = makeWASocket(socketSettings)
 
@@ -597,8 +597,10 @@ return list[Math.floor(list.length * Math.random())]
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 sock.ev.on('connection.update', async (update) => {
-const { connection, lastDisconnect, qr, receivedPendingNotifications} = update;
+const { connection, lastDisconnect, qr, receivedPendingNotifications, isNewLogin} = update;
 console.log(receivedPendingNotifications)
+if (isNewLogin) sock.isInit = true
+const code = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode;
 
 if (connection == 'connecting') {
 console.log(chalk.gray('iniciando...'));
