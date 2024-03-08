@@ -39,9 +39,9 @@ const {info} = require('./plugins/info.js')
 const {reg, rpg} = require('./plugins/rpg.js') 
 const {game, game2, game3} = require('./plugins/juegos.js')   
 const {buscadores} = require('./plugins/buscadores.js')
-const {efec, convertidores} = require('./plugins/convertidores.js') 
+const {efec, efect2, convertidores} = require('./plugins/convertidores.js')  
 const {grupo} = require('./plugins/grupos.js')
-const {nsfw} = require('./plugins/nsfw.js') 
+const {nsfw} = require('./plugins/nsfw.js')  
 const {randow, randow2} = require('./plugins/randow.js') 
 const {descarga, descarga2} = require('./plugins/descargas.js')   
 const {stickers} = require('./plugins/stickers.js') 
@@ -51,19 +51,19 @@ const {enable} = require('./plugins/enable.js')
 let tebaklagu = global.db.data.game.tebaklagu = []
 let kuismath = global.db.data.game.math = []
 
-const msgs = (message) => { 
+const msgs = (message) => {  
 if (message.length >= 10) { 
 return `${message.substr(0, 500)}` 
-} else { 
+} else {  
 return `${message}`}}
 const getFileBuffer = async (mediakey, MediaType) => {  
 const stream = await downloadContentFromMessage(mediakey, MediaType)  
 let buffer = Buffer.from([])  
 for await(const chunk of stream) {  
 buffer = Buffer.concat([buffer, chunk]) }  
-return buffer
-}  
-
+return buffer 
+}   
+  
 module.exports = conn = async (conn, m, chatUpdate, mek, store) => {  
 var budy = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
   
@@ -144,20 +144,17 @@ const isQuotedDocument = type === 'extendedTextMessage' && content.includes('doc
 const isQuotedMsg = type === 'extendedTextMessage' && content.includes('Message') // Mensaje citado de cualquier tipo  
 const isViewOnce = (type === 'viewOnceMessage') // Verifica si el tipo de mensaje es (mensaje de vista única)  
    
-//Responder cmd con medios
+// Responder cmd con medios
 if (isMedia && m.msg.fileSha256 && (m.msg.fileSha256.toString('base64') in global.db.data.sticker)) {
 let hash = global.db.data.sticker[m.msg.fileSha256.toString('base64')]
 let { text, mentionedJid } = hash
-let messages = await generateWAMessage(m.chat, { text: text, mentions: mentionedJid }, {userJid: conn.user.id, quoted: m.quoted && m.quoted.fakeObj
-})
+let messages = await generateWAMessage(m.chat, { text: text, mentions: mentionedJid }, {userJid: conn.user.id, quoted: m.quoted && m.quoted.fakeObj })
 messages.key.fromMe = areJidsSameUser(m.sender, conn.user.id)
-messages.key.id = m.key.id
+messages.key.id = m.key.id 
 messages.pushName = m.pushName
 if (m.isGroup) messages.participant = m.sender
-let msg = {...chatUpdate, messages: [proto.WebMessageInfo.fromObject(messages)], type: 'append'
-}
-conn.ev.emit('messages.upsert', msg)
-}
+let msg = {...chatUpdate, messages: [proto.WebMessageInfo.fromObject(messages)], type: 'append' }
+conn.ev.emit('messages.upsert', msg)}
    
 //--------------------[ INFO CONSOLE ]-----------------------
 if (m.message) {
@@ -209,6 +206,82 @@ m.reply(`${lenguaje['smsAntiArabe']()}`, m.sender)
 conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')}}} 
 
 //--------------------[ ANTILINK ]-----------------------
+if (global.db.data.chats[m.chat].AntiYoutube && !isCreator) {
+if (budy.includes("https://youtu.be/") || budy.includes("https://youtube.com/")) {
+if (isGroupAdmins) return reply(lenguaje['smsAntiLink5']())
+if (!isBotAdmins) return m.reply(lenguaje['smsAntiLink6']())
+if (m.key.fromMe) return
+if (!isCreator) return 
+conn.sendMessage(m.chat, {text:`*LINK DE YOUTUBE DETECTADO 📢*\n@${sender.split("@")[0]} Usted sera eliminado de este grupo`, mentions: [sender], },{quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+await conn.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: m.key.id, participant: m.key.participant }})
+conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
+}}
+
+if (global.db.data.chats[m.chat].AntInstagram && !isCreator) {
+if (budy.includes("https://www.instagram.com/")) {
+if (isGroupAdmins) return reply(lenguaje['smsAntiLink5']())
+if (!isBotAdmins) return m.reply(lenguaje['smsAntiLink6']())
+if (m.key.fromMe) return
+if (!isCreator) return 
+conn.sendMessage(m.chat, {text:`*LINK DE INSTAGRAM DETECTADO 📢*\n@${sender.split("@")[0]} Usted sera eliminado de este grupo`, mentions: [sender], },{quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+await conn.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: m.key.id, participant: m.key.participant }})
+conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
+}}
+
+if (global.db.data.chats[m.chat].AntiFacebook && !isCreator) {
+if (budy.includes("https://facebook.com/")) {
+if (isGroupAdmins) return reply(lenguaje['smsAntiLink5']())
+if (!isBotAdmins) return m.reply(lenguaje['smsAntiLink6']())
+if (m.key.fromMe) return
+if (!isCreator) return 
+conn.sendMessage(m.chat, {text:`*LINK DE FACEBOOK DETECTADO 📢*\n@${sender.split("@")[0]} Usted sera eliminado de este grupo`, mentions: [sender], },{quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+await conn.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: m.key.id, participant: m.key.participant }})
+conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
+}}
+
+if (global.db.data.chats[m.chat].AntiTelegram && !isCreator) {
+if (budy.includes("https://t.me/")) {
+if (isGroupAdmins) return reply(lenguaje['smsAntiLink5']())
+if (!isBotAdmins) return m.reply(lenguaje['smsAntiLink6']())
+if (m.key.fromMe) return
+if (!isCreator) return 
+conn.sendMessage(m.chat, {text:`*LINK DE TELEGRAM DETECTADO 📢*\n@${sender.split("@")[0]} Usted sera eliminado de este grupo`, mentions: [sender], },{quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+await conn.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: m.key.id, participant: m.key.participant }})
+conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
+}}
+
+if (global.db.data.chats[m.chat].AntiTiktok && !isCreator) {
+if (budy.match("https://www.tiktok.com/") || budy.match("https://vm.tiktok.com/")) {
+//f (!isCreator) return m.reply(`Es mi creador Salvador`) 
+if (isGroupAdmins) return reply(lenguaje['smsAntiLink5']())
+if (!isBotAdmins) return m.reply(lenguaje['smsAntiLink6']())
+conn.sendMessage(m.chat, {text:`*LINK DE TIKTOK DETECTADO 📢*\n\n@${sender.split("@")[0]} Usted sera eliminado de este grupo...`, mentions: [sender], },{quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+await conn.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: m.key.id, participant: m.key.participant }})
+conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
+}}
+
+if (global.db.data.chats[m.chat].AntiTwitter) {
+if (budy.includes("https://twitter.com/")){
+if (isGroupAdmins) return reply(lenguaje['smsAntiLink5']())
+if (!isBotAdmins) return m.reply(lenguaje['smsAntiLink6']())
+if (m.key.fromMe) return m.reply(lenguaje['smsAntiLink5']())
+if (!isCreator) return 
+conn.sendMessage(m.chat, {text:`*LINK DE TWITER (X) DETECTADO 📢*\n@${sender.split("@")[0]} Usted sera eliminado de este grupo`, mentions: [sender], },{quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+await conn.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: m.key.id, participant: m.key.participant }})
+conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
+}}
+
+if (global.db.data.chats[m.chat].antiLink2 && !isCreator) {
+if (budy.includes("https://")) {
+if (isGroupAdmins) return reply(lenguaje['smsAntiLink5']()) 
+if (!isBotAdmins) return m.reply(lenguaje['smsAntiLink6']())
+if (m.key.fromMe) return
+if (!isCreator) return 
+conn.sendMessage(m.chat, {text:`*LINK DE HTTPS DETECTADO 📢*\n@${sender.split("@")[0]} Usted sera eliminado de este grupo`, mentions: [sender], },{quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+await conn.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: m.key.id, participant: m.key.participant }})
+conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
+}}
+
 if (global.db.data.chats[m.chat].antilink) {
 if (budy.match(`chat.whatsapp.com`)) {
 const groupAdmins = participants.filter((p) => p.admin);
@@ -352,6 +425,73 @@ if (new Date - global.db.data.users[m.sender].spam < 5000) return console.log(`[
 global.db.data.users[m.sender].spam = new Date * 1;
 }
 
+//TicTacToe\\
+let winScore = 4999
+let playScore = 99
+this.game = this.game ? this.game : {}
+let room13 = Object.values(this.game).find(room13 => room13.id && room13.game && room13.state && room13.id.startsWith('tictactoe') && [room13.game.playerX, room13.game.playerO].includes(m.sender) && room13.state == 'PLAYING')
+if (room13) {
+let ok
+let isWin = !1
+let isTie = !1
+let isSurrender = !1
+//reply(`[DEBUG]\n${parseInt(m.text)}`)
+if (!/^([1-9]|(me)?give up|surr?ender|off|skip)$/i.test(m.text)) return
+isSurrender = !/^[1-9]$/.test(m.text)
+if (m.sender !== room13.game.currentTurn) { 
+if (!isSurrender) return !0
+}
+if (!isSurrender && 1 > (ok = room13.game.turn(m.sender === room13.game.playerO, parseInt(m.text) - 1))) {
+m.reply({'-3': 'El juego ha terminado',
+'-2': 'Inválido',
+'-1': 'Posición inválida',
+0: 'Posición inválida', }[ok])
+return !0
+}
+if (m.sender === room13.game.winner) isWin = true
+else if (room13.game.board === 511) isTie = true
+let arr = room13.game.render().map(v => {
+return {X: '❌',
+O: '⭕',
+1: '1️⃣',
+2: '2️⃣',
+3: '3️⃣',
+4: '4️⃣',
+5: '5️⃣',
+6: '6️⃣',
+7: '7️⃣',
+8: '8️⃣',
+9: '9️⃣',
+}[v]})
+if (isSurrender) {
+room13.game._currentTurn = m.sender === room13.game.playerX
+isWin = true
+}
+let winner = isSurrender ? room13.game.currentTurn : room13.game.winner
+let str = `\`${isWin ? `@${winner.split('@')[0]} HAS GANADOS 🎉 *+${winScore} XP*` : isTie ? `EMPARTE 🤨 *+${playScore} XP*` : `Turno : ${['❌', '⭕'][1 * room13.game._currentTurn]} (@${room13.game.currentTurn.split('@')[0]})`}\`
+	    
+${arr.slice(0, 3).join('')}
+${arr.slice(3, 6).join('')} 
+${arr.slice(6).join('')}
+	    
+▢ *ᴊᴜɢᴀᴅᴏʀ 1* ❎ : @${room13.game.playerX.split('@')[0]}
+▢ *ᴊᴜɢᴀᴅᴏʀ 2* ⭕: @${room13.game.playerO.split('@')[0]}
+
+Escribe *rendirse* para rendirte y admitir la derrota`
+let users = global.db.data.users
+if ((room13.game._currentTurn ^ isSurrender ? room13.x : room13.o) !== m.chat)
+room13[room13.game._currentTurn ^ isSurrender ? 'x' : 'o'] = m.chat
+if (room13.x !== room13.o) await conn.sendText(room13.x, str, m, { mentions: parseMention(str) } )
+await conn.sendText(room13.o, str, m, { mentions: parseMention(str) } )
+         
+if (isTie || isWin) {
+users[room13.game.playerX].exp += playScore
+users[room13.game.playerO].exp += playScore
+delete this.game[room13.id]
+if (isWin)
+users[winner].exp += winScore - playScore
+}}
+	    
 //math
 if (kuismath.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
 kuis = true
@@ -364,28 +504,12 @@ m.react(`✅`)
 delete kuismath[m.sender.split('@')[0]]
 } else m.react(`❌`)} 
             
-//mensaje automático
-/*if (!m.isGroup) {  
-//if (m.isGroup) return !1;
-//if (!m.message) return !0;
-if (m.chat.endsWith('broadcast') || m.fromMe || m.isGroup) return  
-let user = global.db.data.users[m.sender]
-let str = [nna, md, yt, tiktok, fb] 
-let info = str[Math.floor(Math.random() * str.length)]
-let totalreg = Object.keys(global.db.data.users).length
-let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length
-if (new Date() - user.pc < 86400000) return
-conn.sendMessage(m.chat, { text: `*Hola @${sender.split`@`[0]} 👋😄 Mi nombre es ${botname} Soy un bot de WhatsApp con multi funcione 👾, registrarte para poder usar mi comando 👌*\n\n*💫 MI INFO:*\n*👑 Mi creador es:* ${fb}\n*👥 Usuarios:* ${totalreg}\n*✨ Registrado:* ${rtotalreg}\n*🤖 Estoy activa desde:* ${runtime(process.uptime())}\n*⚠️ PD:* No hagan spam del comando o te van baneado\n\n• *PORFAVOR LEE LAS REGLAS:*\n#reglas\n\n• *QUIERES VER QUE HAY DE NUEVO?*\n*Escribe:* #nuevo\n\n• *¿QUIERE SOLICITA UN BOT PARA TU GRUPO?*\n*Escribe:* #solicitud\n\n*💫 ¿Quieres apoyar este proyecto para que siga actualizándose?*\n• #donar\n\n*✨ CUENTA OFICIALES*\n• #cuentas`, contextInfo:{mentionedJid:[sender], forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "title": wm, thumbnail: imagen2, sourceUrl: info}}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
-user.pc = new Date * 1
-m.message = false
-}*/ 
-        
 //ARRANCA LA DIVERSIÓN 
 switch (prefix && command) { 
-case 'yts': case 'ytsearch': case 'acortar': case 'google': case 'imagen': case 'traducir': case 'translate': case "tts": case 'ia': case 'chatgpt': case 'dalle': case 'ia2': case 'aimg': case 'imagine': case 'dall-e': case 'ss': case 'ssweb': case 'wallpaper': case 'hd': case 'horario': case 'bard': await buscadores(m, command, conn, text, budy, from, fkontak, prefix, args, quoted, lolkeysapi)
+case 'yts': case 'ytsearch': case 'acortar': case 'google': case 'imagen': case 'traducir': case 'translate': case "tts": case 'ia': case 'chatgpt': case 'dalle': case 'ia2': case 'aimg': case 'imagine': case 'dall-e': case 'ss': case 'ssweb': case 'wallpaper': case 'hd': case 'horario': case 'bard': case 'wikipedia': case 'wiki': case 'pinterest': await buscadores(m, command, conn, text, budy, from, fkontak, prefix, args, quoted, lolkeysapi)
 break  
- 
-//jadibot/serbot
+      
+//jadibot/serbot 
 case 'serbot': case 'jadibot': case 'qr':
 jadibot(conn, m, command, text, args, sender)
 break  
@@ -401,6 +525,67 @@ const responseMessage = `${lenguaje.jadibot.text18} ${totalUsers || '0'}\n\n${re
 await conn.sendMessage(m.chat, {text: responseMessage, mentions: conn.parseMention(responseMessage)}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
 break
  
+case 'ttc': case 'ttt': case 'tictactoe': {
+let TicTacToe = require("./libs/tictactoe")
+this.game = this.game ? this.game : {}
+if (Object.values(this.game).find(room13 => room13.id.startsWith('tictactoe') && [room13.game.playerX, room13.game.playerO].includes(m.sender))) return m.reply(`⚠️ Todavía estás en el juego`)
+let room13 = Object.values(this.game).find(room13 => room13.state === 'WAITING' && (text ? room13.name === text : true))
+if (room13) {
+room13.o = m.chat
+room13.game.playerO = m.sender
+room13.state = 'PLAYING'
+let arr = room13.game.render().map(v => {
+return {X: '❌',
+O: '⭕',
+1: '1️⃣',
+2: '2️⃣',
+3: '3️⃣',
+4: '4️⃣',
+5: '5️⃣',
+6: '6️⃣',
+7: '7️⃣',
+8: '8️⃣',
+9: '9️⃣', }[v]})
+let str = `\`🎮👾 ᴇsᴘᴇʀᴀᴅᴏ ᴀ @${room13.game.currentTurn.split('@')[0]} ᴄᴏᴍᴏ ᴘʀɪᴍᴇʀ ᴊᴜɢᴀᴅᴏʀ\`
+
+${arr.slice(0, 3).join('')}
+${arr.slice(3, 6).join('')}
+${arr.slice(6).join('')}
+
+▢ *sᴀʟᴀ* ${room13.id}
+
+▢ *ʀᴇɢʟᴀs*
+‣ ʜᴀᴢ 3 ғɪʟᴀs ᴅᴇ sɪᴍʙᴏʟᴏs ᴠᴇʀᴛɪᴄᴀʟᴇs, ʜᴏʀɪᴢᴏɴᴛᴀʟᴇs ᴏ ᴅɪᴀɢᴏɴᴀʟᴇs ᴘᴀʀᴀ ɢᴀɴᴀʀ
+‣ ᴇsᴄʀɪʙᴇ *rendirse* para rendirte y admitir la derrota.`
+if (room13.x !== room13.o) await conn.sendText(room13.x, str, m, { mentions: parseMention(str) } )
+await conn.sendText(room13.o, str, m, { mentions: parseMention(str) } )
+} else {
+room13 = {id: 'tictactoe-' + (+new Date),
+x: m.chat,
+o: '',
+game: new TicTacToe(m.sender, 'o'),
+state: 'WAITING'
+}
+if (text) room13.name = text
+m.reply('Esperando pareja' + (text ? ` Escriba el comando a ${prefix + command} ${text}` : ''))
+this.game[room13.id] = room13
+}}
+break
+
+case 'delttc': case 'delttt': {
+this.game = this.game ? this.game : {}
+try {
+if (this.game) {
+delete this.game
+conn.sendText(m.chat, `Sesión TicTacToe eliminada con éxito`, m)
+} else if (!this.game) {
+m.reply(`La sesión TicTacToe🎮 no existe`)
+} else throw '?'
+} catch (e) {
+m.reply('Nose que paso? hubor error pon de nuevo el comando jjjj')
+}}
+break
+             
 //Info  
 case 'menu': case 'help': case 'menucompleto': case 'allmenu': case 'menu2': case 'audio': case 'nuevo': case 'extreno': case 'reglas': case 'menu1': case 'menu3': case 'menu4': case 'menu5': case 'menu6': case 'menu7': case 'menu8': case 'menu9': case 'menu10': case 'menu11': case 'menu18': case 'descarga': case 'menugrupos': case 'menubuscadores': case 'menujuegos': case 'menuefecto': case 'menuconvertidores': case 'Menuhony': case 'menurandow': case 'menuRPG': case 'menuSticker': case 'menuOwner': menu(m, command, conn, prefix, pushname, sender, pickRandom, fkontak)  
 break       
@@ -408,13 +593,13 @@ case 'estado': case 'infobot': case 'owner': case 'creador': case 'contacto': ca
 break     
    
 //activar/desactivar
-case 'welcome': case 'bienvenida': case 'antilink': case 'antienlace': case 'antifake': case 'antiFake': case 'antiarabe': case 'antiArabe': case 'autodetect': case 'detect': case 'audios': case 'autosticker': case 'stickers': case 'modocaliente': case 'antinsfw': case 'modoadmin': case 'modoadmins': case 'soloadmin': case 'antiprivado': case 'antipv': case 'anticall': case 'antillamada': case 'modojadibot': case 'jadibot': case 'autoread': case 'autovisto': case 'antispam': case 'chatbot': case 'simsimi': case 'autolevelup': case 'autonivel': case 'antitoxic': enable(m, command, isGroupAdmins, text, command, args, isBotAdmins, isGroupAdmins, isCreator, conn) 
+case 'welcome': case 'bienvenida': case 'antilink': case 'antienlace': case 'antifake': case 'antiFake': case 'antiarabe': case 'antiArabe': case 'autodetect': case 'detect': case 'audios': case 'autosticker': case 'stickers': case 'modocaliente': case 'antinsfw': case 'modoadmin': case 'modoadmins': case 'soloadmin': case 'antiprivado': case 'antipv': case 'anticall': case 'antillamada': case 'modojadibot': case 'jadibot': case 'autoread': case 'autovisto': case 'antispam': case 'chatbot': case 'simsimi': case 'autolevelup': case 'autonivel': case 'antitoxic': case 'antilink2': case 'AntiTwiter': case 'antitwiter': case 'antitiktok': case 'AntiTikTok': case 'antitelegram': case 'AntiTelegram': case 'antifacebook': case 'AntiFb': case 'AntiFacebook': case 'antinstagram': case 'AntInstagram': case 'antiyoutube': case 'AntiYoutube': case 'AntiIg': case 'enable': case 'configuracion': case 'configurar': enable(m, command, isGroupAdmins, text, command, args, isBotAdmins, isGroupAdmins, isCreator, conn) 
 break
-
-//Grupos 
-case 'grupo': case 'delete': case 'del': case 'join': case 'unete': case 'hidetag': case 'notificar': case 'tag': case 'setppgroup': case 'setpp': case 'setppname': case 'nuevonombre': case 'newnombre': case 'setdesc': case 'descripción': case 'anularlink': case 'resetlink': case 'revoke': case 'add': case 'agregar': case 'invitar': case 'kick': case 'echar': case 'sacar': case 'promote': case 'darpoder': case 'demote': case 'quitarpoder': case 'link': case 'linkgc': case 'banchat': case 'tagall': case 'invocar': case 'todos': case 'admins': case 'administradores': case 'infogrupo': case 'groupinfo': case 'warn': case 'advertencia': case 'unwarn': case 'quitardvertencia': case 'listwarn': case 'enline': case 'online': case 'listonine': case 'listaenlinea': case 'enlinea': case 'listonline': grupo(m, command, isGroupAdmins, text, conn, participants, isBotAdmins, args, isCreator, delay, sender, quoted, mime, from, isCreator, groupMetadata, fkontak, delay) 
+    
+//Grupos    
+case 'grupo': case 'delete': case 'del': case 'join': case 'unete': case 'hidetag': case 'notificar': case 'tag': case 'setppgroup': case 'setpp': case 'setppname': case 'nuevonombre': case 'newnombre': case 'setdesc': case 'descripción': case 'anularlink': case 'resetlink': case 'revoke': case 'add': case 'agregar': case 'invitar': case 'kick': case 'echar': case 'sacar': case 'promote': case 'darpoder': case 'demote': case 'quitarpoder': case 'link': case 'linkgc': case 'banchat': case 'tagall': case 'invocar': case 'todos': case 'admins': case 'administradores': case 'infogrupo': case 'groupinfo': case 'warn': case 'advertencia': case 'unwarn': case 'quitardvertencia': case 'listwarn': case 'enline': case 'online': case 'listonine': case 'listaenlinea': case 'enlinea': case 'listonline': case 'setrules': case 'addrules': case 'addrule': case 'rules': grupo(m, command, isGroupAdmins, text, conn, participants, isBotAdmins, args, isCreator, delay, sender, quoted, mime, from, isCreator, groupMetadata, fkontak, delay) 
 break    
-
+ 
 //juegos 
 case 'simi': case 'bot': case 'pregunta': case 'preg': case 'gay': case 'pareja': case 'formarpareja': case 'follar': case 'violar': case 'coger': case 'doxear': case 'doxxeo': case 'personalidad': case 'top': case 'topgays': case 'topotakus': case 'racista': case 'love': case 'ship': case 'formartrio': case 'formapareja5': game(m, budy, command, text, pickRandom, pushname, conn, participants, sender, who, body, sendImageAsUrl)  
 break                   
@@ -426,14 +611,18 @@ break
 //convertidores
 case 'bass': case 'blown': case 'deep': case 'earrape': case 'fast': case 'fat': case 'nightcore': case 'reverse': case 'robot': case 'slow': case 'smooth': case 'squirrel': efec(conn, command, mime, quoted, exec, prefix, m, from)  
 break   
-case 'toaudio': case 'tomp3': case 'toimg': case 'toimagen': case 'tourl': case 'toanime': convertidores(conn, command, mime, quoted, util, m, exec, lolkeysapi)  
+case 'toaudio': case 'tomp3': case 'toimg': case 'toimagen': case 'tourl': case 'toanime': case 'txt': convertidores(conn, command, mime, quoted, util, m, exec, lolkeysapi, text)  
 break      
    
 //nsfw
 case 'hentai': case 'nsfwloli': case 'lewd': case 'feed': case 'gasm': case 'anal': case 'holo': case 'tits': case 'kuni': case 'kiss': case 'erok': case 'smug': case 'solog': case 'feetg': case 'lewdk': case 'waifu': case 'pussy': case 'femdom': case 'cuddle': case 'eroyuri': case 'cum_jpg': case 'blowjob': case 'holoero': case 'erokemo': case 'fox_girl': case 'futanari': case 'wallpaper': case 'hentai2': case 'porno': case 'pack': case 'pack2': case 'pack3': case 'videoxxx': case 'vídeoxxx': case 'videoxxxlesbi': case 'videolesbixxx': case 'pornolesbivid': case 'pornolesbianavid': case 'pornolesbiv': case 'pornolesbianav': case 'tetas': case 'pechos': nsfw(m, sender, command, pickRandom, conn, sendImageAsUrl)
-break  
-      
-//randow 
+break   
+ 
+//Efecto
+case 'logololi': case 'neon': case 'devil': case 'transformer': case 'thunder': case 'graffiti': case 'bpink': case 'joker': case 'matrix': case 'wolf': case 'phlogo': case 'ballon': case 'dmd': case 'lightglow': case 'american': case 'halloween': case 'green': case 'glitch': case 'paper': case 'marvel': case 'ninja': case 'future': case '3dbox': case 'graffiti2': case 'logos': efect2(m, text, prefix, command, conn)
+break
+     
+//randow  
 case 'memes': case 'loli': case 'lolivid': case 'neko': case 'akira': case 'akiyama': case 'anna': case 'asuna': case 'ayuzawa': case 'boruto': case 'chiho': case 'chitoge': case 'deidara': case 'erza': case 'elaina': case 'eba': case 'emilia': case 'hestia': case 'hinata': case 'inori': case 'isuzu': case 'itachi': case 'itori': case 'kaga': case 'kagura': case 'kaori': case 'keneki': case 'kotori': case 'kurumi': case 'madara': case 'mikasa': case 'miku': case 'minato': case 'naruto': case 'nezuko': case 'sagiri': case 'sasuke': case 'sakura': case 'cosplay': case 'blackpink': case 'navidad': randow(m, sender, command, sendImageAsUrl, pickRandom, conn)
 break     
 case 'horny': case 'simp': case 'lolice': case 'comentar': case 'comment': randow2(conn, m, command, text, sender, pushname)  
@@ -442,13 +631,13 @@ break
 //descargas
 case 'play': case 'musica': case 'play2': case 'video': case 'play3': case 'playdoc': case 'playaudiodoc': case 'ytmp3doc': case 'play4': case 'playdoc2': case 'playvideodoc': case 'ytmp4doc': case "ytmp3": case "ytaudio": case 'ytmp4': case 'ytvideo': case 'music': case 'spotify': case 'gitclone': case 'tiktok': case 'tt': case 'lyrics': case 'letra': case 'mediafire': case 'tiktokimg': case 'ttimg': case 'play.1': case 'play.2': descarga(m, command, conn, text, command, args, fkontak, from, lolkeysapi)   
 break
-case 'facebook': case 'fb': case 'instagram': case 'ig': case 'igstalk': case 'apk': case 'modoapk': case 'gdrive': descarga2(m, command, text, args, conn, lolkeysapi, isCreator) 
-break
- 
+case 'facebook': case 'fb': case 'instagram': case 'ig': case 'igstalk': case 'tiktokstalk': case 'apk': case 'modoapk': case 'gdrive': case 'tw': case 'twitter': descarga2(m, command, text, args, conn, lolkeysapi, isCreator) 
+break 
+
 //rpg  
 case 'reg': case 'verificar': case 'unreg': case 'myns': await reg(command, conn, m, sender, text, budy, fkontak, delay, args) 
 break     
-case 'lb': case 'leaderboard': case 'afk': case 'rob': case 'robar': case 'buy': case 'buyall': case 'bal': case 'balance': case 'diamond': case 'minar': case 'mine': case 'trabajar': case 'work': case 'w': case 'claim': case 'daily': case 'perfil': case 'levelup': case 'nivel': case 'cofre': case 'minar2': case 'mine2': case 'crime': case 'Crime': rpg(m, command, participants, args, sender, pushname, text, conn, fkontak, who)    
+case 'lb': case 'leaderboard': case 'afk': case 'rob': case 'robar': case 'buy': case 'buyall': case 'bal': case 'balance': case 'diamond': case 'minar': case 'mine': case 'trabajar': case 'work': case 'w': case 'claim': case 'daily': case 'perfil': case 'levelup': case 'nivel': case 'cofre': case 'minar2': case 'mine2': case 'crime': case 'Crime': case 'dep': case 'depositar': case 'retirar': case 'toremove': rpg(m, command, participants, args, sender, pushname, text, conn, fkontak, who)    
 break            
       
 //stickers  
@@ -459,6 +648,7 @@ break
 case 'idioma': case 'Language': case 'idiomas': { 
 let user = global.db.data.users[m.sender]
 if (!text) return m.reply(lenguaje.AvisoMG() + lenguaje.idioma(prefix)) 
+try { 
 if (budy.includes(`1`)) {  
 idioma = 'es' 
 idiomas = 'español'
@@ -484,7 +674,9 @@ idioma = 'rs'
 idiomas = 'ruso' 
 } 
 user.Language = idioma
-m.reply(lenguaje.idioma2() + idiomas)}  
+m.reply(lenguaje.idioma2() + idiomas)
+} catch (e) {
+m.reply(lenguaje.AvisoMG() + lenguaje.idioma(prefix))}}
 break  
 
 case 'math': case 'matematicas': {
@@ -656,11 +848,11 @@ m.reply(`${pickRandom(['Buenos Dias trolos de mierda', '*Buen dias mi amor 😘*
 if (budy.includes(`autodestruction`)) { 
 //let e = fs.readFileSync('./src/autodestruction.webp')
 let e = 'https://qu.ax/gCQo.webp'
-let or = ['texto', 'sticker'];
+let or = ['texto', 'sticker']; 
 let media = or[Math.floor(Math.random() * 2)]  
 if (media === 'texto')
 m.reply('*Mi jefe no me quiere 😢*')        
-if (media === 'sticker')      
+if (media === 'sticker')         
 conn.sendFile(m.chat, e, 'sticker.webp', '',m, true, { contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: 'ᶜ ᴬᵘᵗᵒᵈᵉˢᶜʳᵘʸᵉ', mediaType: 2, sourceUrl: nna, thumbnail: imagen1}}}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})}
 if (budy.includes(`NovaBot`) || budy.includes(`novabot`)) {
 m.react(`${pickRandom(['🌟', '👀', '🤑'])}`)}

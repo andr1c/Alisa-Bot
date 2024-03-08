@@ -209,17 +209,17 @@ printQRInTerminal: opcion == '1' ? true : methodCodeQR ? true : false,
 logger: pino({ level: 'silent' }),
 auth: { creds: state.creds, keys: makeCacheableSignalKeyStore(state.keys, pino({level: 'silent'})) },
 mobile: MethodMobile, 
-browser: opcion == '1' ? ['NovaBot-MD', 'Safari', '1.0.0'] : methodCodeQR ? ['NovaBot-MD', 'Safari', '1.0.0'] : ['Ubuntu', 'Safari', '2.0.0'],
+browser: opcion == '1' ? ['NovaBot-MD', 'Safari', '2.0.0'] : methodCodeQR ? ['NovaBot-MD', 'Safari', '2.0.0'] : ['Ubuntu', 'Chrome', '110.0.5585.95'],
 msgRetry,
 msgRetryCache,
 version,
 syncFullHistory: true,
 getMessage: async (key) => { 
 if (store) { 
-const msg = await store.loadMessage(key.remoteJid, key.id)
-return msg.message || undefined
+const msg = await store.loadMessage(key.remoteJid, key.id); 
+return sock.chats[key.remoteJid] && sock.chats[key.remoteJid].messages[key.id] ? sock.chats[key.remoteJid].messages[key.id].message : undefined; 
 } 
-conversation: "SimpleBot"
+return proto.Message.fromObject({}); 
 }}
 
 const sock = makeWASocket(socketSettings)
@@ -255,6 +255,15 @@ console.log(chalk.bold.white(chalk.bgMagenta(`👑 CÓDIGO DE VINCULACIÓN 👑:
 }}
 }
 
+async function getMessage(key){
+if (store) {
+const msg = await store.loadMessage(key.remoteJid, key.id)
+return msg?.message
+}
+return {
+conversation: "Hola"
+}}
+
 sock.ev.on('messages.upsert', async chatUpdate => {
 //console.log(JSON.stringify(chatUpdate, undefined, 2))
 try {
@@ -278,15 +287,6 @@ console.log(e)
 console.log(err)
 }})
 
-async function getMessage(key){
-if (store) {
-const msg = await store.loadMessage(key.remoteJid, key.id)
-return msg?.message
-}
-return {
-conversation: "Hola"
-}}
-    
 sock.ev.on('messages.update', async chatUpdate => {
 for(const { key, update } of chatUpdate) {
 if (update.pollUpdates && key.fromMe) {
