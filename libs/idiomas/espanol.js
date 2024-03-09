@@ -301,21 +301,13 @@ text14: `_*ᴼʲᶦᵗᵒ ᵉˢᶜʳᶦᵇᵉ ᵗᵃˡ ʸ ᶜᵒᵐᵒ ᵉˢᵗ�
 text15: (vs) => `*\`🤔 Que hay de nuevo? 🤗\`*\n\n*🌐 Nueva Version:* [ ${vs} ]\n\n*Nuevo comando:*
 
 \`🎮👾 Nuevo juegos :\`
-> Juegos matemático, adivina y ganar premios
 #math
 #matematicas
-> Jugar un tateti (ttt) con algun usuario del Grupo y ganar puntos 👾
 #ttt
 #tictactoe
 
-\`🚀 Ahora puede descargar video de twiter (X) :\`
-#twitter
-#x
-
-\`🚀 Buscar usuario de Tiktok:
-#tiktokstalk
-
 \`🔍 Se han agregado nuevos buscadores :\`
+#tiktokstalk
 #pinterest
 #wikipedia
 #wiki
@@ -330,9 +322,8 @@ text15: (vs) => `*\`🤔 Que hay de nuevo? 🤗\`*\n\n*🌐 Nueva Version:* [ ${
 #setrules
 #addrules
 
-\`🟢 Usar el comando :\`
+> *Para vez la reglas actual del Grupo*
 #rules 
-> para vez la reglas del Grupo
 
 \`🏦 Ahora puede guarda tu dinero (diamante) el Banco con:\`
 #dep
@@ -340,16 +331,12 @@ text15: (vs) => `*\`🤔 Que hay de nuevo? 🤗\`*\n\n*🌐 Nueva Version:* [ ${
 
 \`🏦 También puede retirar dinero (diamante) del Banco con :\`
 #retirar
-#toremove
 
-\`🔰Mejorar tu grupo con NovaBot protegiéndolos del spam de todos tipo!! :\`
-#Antilink2 (Prohíbe todos tipo de link https/) 
-#AntiTelegram (Prohíbe link del Telegram) 
-#AntiFacebook (Prohíbe link del Facebook) 
-#AntInstagram (Prohíbe link del Instagram) 
-#AntiYoutube (Prohíbe link del YouTube) 
-#AntiTwiter (Prohíbe link del Twiter) 
+\`📍Ahora puede realizar transferencia a otros usuarios con :\`
+#transferir
+#transfer
 
+\`🔰Mejorar tu grupo con NovaBot protegiéndolos de todos tipo de spam:\`
 > (mira todos los ajuste de la configuración de tu grupo) 
 #enable 
 #configurar 
