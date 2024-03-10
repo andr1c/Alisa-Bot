@@ -4,9 +4,13 @@ const path = require("path")
 const chalk = require("chalk");
 const axios = require('axios')
 const cheerio = require('cheerio')
-const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('../libs/fuctions.js'); 
+const fetch = require('node-fetch')
+const util = require('util')
+const {fileURLToPath} = require('url') 
+const { WaMessageStubType, WA_DEFAULT_EPHEMERAL, BufferJSON, areJidsSameUser, downloadContentFromMessage, generateWAMessageContent, generateWAMessageFromContent, generateWAMessage, prepareWAMessageMedia, getContentType,  relayMessage} = require('@whiskeysockets/baileys')
+const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, buffer, getRandom } = require('../libs/fuctions.js'); 
 
-async function owner(isCreator, m, command, conn, text, delay, fkontak, store, quoted, sender) {
+async function owner(isCreator, m, command, conn, text, delay, fkontak, store, quoted, sender, mime, args) {
 if (!isCreator) return m.reply(info.owner) 
 if (global.db.data.users[m.sender].banned) return
 if (command == 'bcgc' || command == 'bcgroup') {
@@ -109,7 +113,77 @@ users[who].exp += xp;
 m.reply(`≡ ᥊⍴ ${lenguaje.owner.text19}
 ┏╍╍╍╍╍╍╍╍╍╍╍╍╍
 ┃• *𝗍᥆𝗍ᥲᥣ:* ${xp}
-┗╍╍╍╍╍╍╍╍╍╍╍╍╍`)}}
+┗╍╍╍╍╍╍╍╍╍╍╍╍╍`)}
+
+if (command == 'fotobot' || command == 'nuevafoto' || command == 'seppbot') {
+if (!quoted) return m.reply(`¿Donde esta la imagen?\n\nEnviar/responder a una imagen con : ${prefix + command}`)
+if (!/image/.test(mime)) return m.reply(`Enviar/responder imagen con : ${prefix + command}`)
+if (/webp/.test(mime)) return m.reply(`Enviar/responder imagen con : ${prefix + command}`)
+var mediz = await conn.downloadAndSaveMediaMessage(quoted, 'ppgc.jpeg')
+if (args[0] == `full`) {
+var { img } = await generateProfilePicture(mediz)
+await conn.query({tag: 'iq', attrs: {to: m.chat, type:'set', xmlns: 'w:profile:picture' }, content: [{tag: 'picture', attrs: { type: 'image' }, content: img }]})
+fs.unlinkSync(mediz)
+m.reply(`exito`)
+} else {
+var memeg = await conn.updateProfilePicture(numBot, { url: mediz })
+fs.unlinkSync(mediz)
+m.reply(`exito`)}}
+
+if (command == 'botname' || command == 'nuevonombre' || command == 'namebot') {
+if (!text) return m.reply(`Ej: ${prefix + command} NovaBot`)
+await conn.updateProfileName(text)
+m.reply(`Exito`)}
+
+if (command == 'banuser') {
+let who  
+if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false
+else who = m.chat
+let user = global.db.data.users[who]
+if (!who) return m.reply(lenguaje.owner.text15) 
+let users = global.db.data.users
+users[who].banned = true
+m.reply(lenguaje.owner.text22)}
+
+if (command == 'unbanuser') {
+let who 
+if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false
+else who = m.chat
+let user = global.db.data.users[who]
+if (!who) return m.reply(lenguaje.owner.text15) 
+let users = global.db.data.users
+users[who].banned = false
+m.reply(lenguaje.owner.text23)}
+
+if (command == 'backup' || command == 'respaldo' || command == 'copia') {
+try {
+let d = new Date
+let date = d.toLocaleDateString('fr', { day: 'numeric', month: 'long', year: 'numeric' })
+let database = await fs.readFileSync(`./database.json`)
+let creds = await fs.readFileSync(`./sessions/creds.json`)
+await m.reply(lenguaje.owner.text27)
+await conn.sendMessage(m.sender, {document: database, mimetype: 'application/json', fileName: `database.json`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+await conn.sendMessage(m.sender, {document: creds, mimetype: 'application/json', fileName: `creds.json`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+} catch (e) {
+console.log(e)}}
+
+if (command == 'fetch' || command == 'get') {
+if (!/^https?:\/\//.test(text)) return m.reply('*Ej:* https://ingresa.link.aqui.com') 
+const _url = new URL(text);
+const url = global.API(_url.origin, _url.pathname, Object.fromEntries(_url.searchParams.entries()), 'APIKEY');
+const res = await fetch(url); 
+if (res.headers.get('content-length') > 100 * 1024 * 1024 * 1024) { 
+throw `Content-Length: ${res.headers.get('content-length')}`;
+} 
+if (!/text|json/.test(res.headers.get('content-type'))) return conn.sendFile(m.chat, url, 'file', text, m); 
+let txt = await res.buffer();
+try {
+txt = format(JSON.parse(txt + '')); 
+} catch (e) {
+txt = txt + '';
+} finally {
+m.reply(txt.slice(0, 65536) + ''); 
+}}}
 
 module.exports = { owner }
 

@@ -10,6 +10,9 @@ const cheerio = require('cheerio')
 const Jimp = require('jimp')
 const os = require('os')
 const translate = require('@vitalets/google-translate-api')
+let tebaklagu = global.db.data.game.tebaklagu = []
+let kuismath = global.db.data.game.math = []
+let tekateki = global.db.data.game.tekateki = []
 
 async function game(m, budy, command, text, pickRandom, pushname, conn, participants, sender, who, body, ra) {
 if (global.db.data.users[m.sender].registered < true) return m.reply(info.registra)

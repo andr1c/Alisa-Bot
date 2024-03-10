@@ -240,6 +240,7 @@ let menu18 = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┃ ❏ ${prefix}pack
 ┊┃ ❏ ${prefix}pack2
 ┊┃ ❏ ${prefix}pack3
+┊┃ ❏ ${prefix}china
 ┊┃ ❏ ${prefix}videoxxx
 ┊┃ ❏ ${prefix}videoxxxlesbi
 ┊┃ ❏ ${prefix}pornolesbianavid
@@ -348,6 +349,8 @@ let menuRPG = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┃ ❏ ${prefix}retirar
 ┊┃ ❏ ${prefix}toremove
 ┊┃ ❏ ${prefix}levelup
+┊┃ ❏ ${prefix}transferir
+┊┃ ❏ ${prefix}transfer
 ┊┃ ❏ ${prefix}afk 
 ┊┗━━━━━━━━━━━━━━•
 ╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩`
@@ -1031,6 +1034,8 @@ ${lenguaje.menu.text12}
 ├❥ᰰຼ ❏ ${prefix}perfil
 ├❥ᰰຼ ❏ ${prefix}nivel
 ├❥ᰰຼ ❏ ${prefix}levelup
+├❥ᰰຼ ❏ ${prefix}transferir
+├❥ᰰຼ ❏ ${prefix}transfer
 ├❥ᰰຼ ❏ ${prefix}afk 
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*
 
