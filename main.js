@@ -707,7 +707,7 @@ break
 case 'transferir': case 'transfer': case 'regalar': {
 let items = ['money', 'exp', 'limit']
 this.confirm = this.confirm ? this.confirm : {}
-if (this.confirm[m.sender]) return conn.sendText(m.chat, `*⚠️ estas haciendo una transferencia*`, m)
+if (!this.confirm[m.sender]) return conn.sendText(m.chat, `*⚠️ estas haciendo una transferencia*`, m)
 let user = global.db.data.users[m.sender]
 let item = items.filter((v) => v in user && typeof user[v] == 'number')
 let lol = `*⚠️ Uso correcto del comando :*\n*${prefix + command}* [tipo] [cantidad] [@user]\n\n> *Ejemplo :*
@@ -718,7 +718,7 @@ let count = Math.min(Number.MAX_SAFE_INTEGER, Math.max(1, (isNumber(args[1]) ? p
 let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : args[2] ? (args[2].replace(/[@ .+-]/g, '') + '@s.whatsapp.net') : ''
 if (!who) return conn.sendMessage(m.chat, {text: '*⚠️ Etiquetas al usuario que desea hacer la transferencia.*', mentions: [m.sender]}, {quoted: m});
 if (!(who in global.db.data.users)) return m.reply('*❌ El Usuario no está en mi base de datos*')
-if (user[type] * 1 < count) m.reply(`*⚠️ No tienes suficientes ${type} para transferir*`)
+if (user[type] * 1 < count) return m.reply(`*⚠️ No tienes suficientes ${type} para transferir*`)
 let confirm = `¿ESTA SEGURO QUE DESEA TRANSFERIR ${count} ${type} a @${(who || '').replace(/@s\.whatsapp\.net/g, '')}?\n\n> *Tienes 60 segundos para confirmar*\n\n*• Escriba:*\n* si = *para acertar*\n* no = *para cancelar*`
 await conn.sendTextWithMentions(m.chat, confirm, m)
 this.confirm[m.sender.split('@')[0]] = { sender: m.sender, to: who, message: m, type, count, timeout: setTimeout(() => (m.reply(`*⚠️ Se acabó el tiempo, no se obtuvo respuesta. Transferencia cancelada.*`), delete this.confirm[m.sender.split('@')[0]]), 60 * 1000)}}
