@@ -50,6 +50,7 @@ const {enable} = require('./plugins/enable.js')
 //global.db.data.sticker = global.db.data.sticker || {} 
 let tebaklagu = global.db.data.game.tebaklagu = []
 let kuismath = global.db.data.game.math = []
+let tekateki = global.db.data.game.tekateki = []
 
 const msgs = (message) => {  
 if (message.length >= 10) { 
@@ -425,7 +426,7 @@ if (new Date - global.db.data.users[m.sender].spam < 5000) return console.log(`[
 global.db.data.users[m.sender].spam = new Date * 1;
 }
 
-//TicTacToe\\
+//---------------------[ TicTacToe ]------------------------
 let winScore = 4999
 let playScore = 99
 this.game = this.game ? this.game : {}
@@ -451,8 +452,8 @@ return !0
 if (m.sender === room13.game.winner) isWin = true
 else if (room13.game.board === 511) isTie = true
 let arr = room13.game.render().map(v => {
-return {X: '❌',
-O: '⭕',
+return {X: '❎',
+O: '❌',
 1: '1️⃣',
 2: '2️⃣',
 3: '3️⃣',
@@ -468,16 +469,16 @@ room13.game._currentTurn = m.sender === room13.game.playerX
 isWin = true
 }
 let winner = isSurrender ? room13.game.currentTurn : room13.game.winner
-let str = `\`${isWin ? `@${winner.split('@')[0]} HAS GANADOS 🎉 *+${winScore} XP*` : isTie ? `EMPARTE 🤨 *+${playScore} XP*` : `Turno : ${['❌', '⭕'][1 * room13.game._currentTurn]} (@${room13.game.currentTurn.split('@')[0]})`}\`
-	    
-${arr.slice(0, 3).join('')}
-${arr.slice(3, 6).join('')} 
-${arr.slice(6).join('')}
-	    
-▢ *ᴊᴜɢᴀᴅᴏʀ 1* ❎ : @${room13.game.playerX.split('@')[0]}
-▢ *ᴊᴜɢᴀᴅᴏʀ 2* ⭕: @${room13.game.playerO.split('@')[0]}
+let str = `*\`🎮 ＴＲＥＳ ＥＮ ＲＡＹＡ 🎮\`*
 
-Escribe *rendirse* para rendirte y admitir la derrota`
+       ${arr.slice(0, 3).join('')}
+       ${arr.slice(3, 6).join('')} 
+       ${arr.slice(6).join('')}
+	    
+❎ = @${room13.game.playerX.split('@')[0]}
+❌ = @${room13.game.playerO.split('@')[0]}
+
+${isWin ? `@${winner.split('@')[0]} *HAS GANADOS 🎉*\n*🎁 OBTIENE :* ${winScore} XP` : isTie ? `*EMPATE 😹*` : `𝐓𝐮𝐫𝐧𝐨 𝐝𝐞 : ${['❎', '❌'][1 * room13.game._currentTurn]} (@${room13.game.currentTurn.split('@')[0]})`}` //`
 let users = global.db.data.users
 if ((room13.game._currentTurn ^ isSurrender ? room13.x : room13.o) !== m.chat)
 room13[room13.game._currentTurn ^ isSurrender ? 'x' : 'o'] = m.chat
@@ -497,18 +498,58 @@ if (kuismath.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
 kuis = true
 jawaban = kuismath[m.sender.split('@')[0]]
 if (budy.toLowerCase() == jawaban) { 
-const exp = Math.floor(Math.random() * 500)
+const exp = Math.floor(Math.random() * 600)
 global.db.data.users[m.sender].exp += exp;
 await m.reply(`*Respuesta correcta 🎉*\n\n*Ganarte :* ${exp} Exp`) 
 m.react(`✅`) 
 delete kuismath[m.sender.split('@')[0]]
 } else m.react(`❌`)} 
-            
+                          
+this.confirm = this.confirm ? this.confirm : {}
+if (this.confirm[m.sender.split('@')[0]]) {
+let { timeout, sender, message, to, type, count } = this.confirm[m.sender.split('@')[0]]
+let user = global.db.data.users[sender]
+let _user = global.db.data.users[to]
+if (/^No|no$/i.test(body)) {
+clearTimeout(timeout)
+delete this.confirm[m.sender.split('@')[0]]
+return this.sendTextWithMentions(m.chat, `⚠️ Cancelado, la transferencia no se realizará.`, m)}
+
+if (/^Si|si$/i.test(body)) { 
+let previous = user[type] * 1
+let _previous = _user[type] * 1
+user[type] -= count * 1
+_user[type] += count * 1
+if (previous > user[type] * 1 && _previous < _user[type] * 1) {
+conn.sendMessage(m.chat, {text: `*✅ Se transfirierón correctamente ${count} ${type} a @${(to || '').replace(/@s\.whatsapp\.net/g, '')}*`, mentions: [to]}, {quoted: m}); 
+} else { 
+user[type] = previous; 
+_user[type] = _previous; 
+conn.sendMessage(m.chat, {text: `*[ ⚠️ ] Error al transferir ${count} ${type} a @${(to || '').replace(/@s\.whatsapp\.net/g, '')}*`, mentions: [to]}, {quoted: m})} 
+clearTimeout(timeout); 
+delete this.confirm[sender]; 
+}}
+
+let mentionUser = [...new Set([...(m.mentionedJid || []), ...(m.quoted ? [m.quoted.sender] : [])])]
+for (let jid of mentionUser) {
+let user = global.db.data.users[jid]
+if (!user) continue
+let afkTime = user.afkTime 
+if (!afkTime || afkTime < 0) continue 
+let reason = user.afkReason || ''
+m.reply(`${lenguaje.rpg.text}\n\n${reason ? '🔸️ *𝚁𝙰𝚉𝙾𝙽* : ' + reason : '🔸️ *𝚁𝙰𝚉𝙾𝙽* : 𝚂𝚒𝚗 𝚛𝚊𝚣𝚘𝚗'}\n🔸️ ${lenguaje.rpg.text1} ${clockString(new Date - afkTime)}`.trim())}
+if (global.db.data.users[m.sender].afkTime > -1) {
+let user = global.db.data.users[m.sender]
+m.reply(`${lenguaje.rpg.text2}\n${user.afkReason ? '\n*𝚁𝙰𝚉𝙾𝙽 :* ' + user.afkReason : ''}\n${lenguaje.rpg.text1} ${clockString(new Date - user.afkTime)}`.trim())
+user.afkTime = -1
+user.afkReason = ''  
+}
+
 //ARRANCA LA DIVERSIÓN 
 switch (prefix && command) { 
 case 'yts': case 'ytsearch': case 'acortar': case 'google': case 'imagen': case 'traducir': case 'translate': case "tts": case 'ia': case 'chatgpt': case 'dalle': case 'ia2': case 'aimg': case 'imagine': case 'dall-e': case 'ss': case 'ssweb': case 'wallpaper': case 'hd': case 'horario': case 'bard': case 'wikipedia': case 'wiki': case 'pinterest': await buscadores(m, command, conn, text, budy, from, fkontak, prefix, args, quoted, lolkeysapi)
 break  
-      
+       
 //jadibot/serbot 
 case 'serbot': case 'jadibot': case 'qr':
 jadibot(conn, m, command, text, args, sender)
@@ -524,7 +565,51 @@ const totalUsers = user.length;
 const responseMessage = `${lenguaje.jadibot.text18} ${totalUsers || '0'}\n\n${replyMessage.trim()}`.trim();
 await conn.sendMessage(m.chat, {text: responseMessage, mentions: conn.parseMention(responseMessage)}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100});
 break
- 
+              
+//Info  
+case 'menu': case 'help': case 'menucompleto': case 'allmenu': case 'menu2': case 'audio': case 'nuevo': case 'extreno': case 'reglas': case 'menu1': case 'menu3': case 'menu4': case 'menu5': case 'menu6': case 'menu7': case 'menu8': case 'menu9': case 'menu10': case 'menu11': case 'menu18': case 'descarga': case 'menugrupos': case 'menubuscadores': case 'menujuegos': case 'menuefecto': case 'menuconvertidores': case 'Menuhony': case 'menurandow': case 'menuRPG': case 'menuSticker': case 'menuOwner': menu(m, command, conn, prefix, pushname, sender, pickRandom, fkontak)  
+break        
+case 'estado': case 'infobot': case 'owner': case 'creador': case 'contacto': case 'grupos': case 'grupoficiales': case 'instalarbot': case 'crearbot': case 'ping': case '5492266613038': case '593980586516': case '595975740803': case 'report': case 'sc': case 'donar': case 'solicitud': case 'cuenta': case 'cuentas': case 'cuentaoficiales': case 'cuentaofc': case 'cafirexos': case 'Cafirexos': case 'velocidad': case 'status': info(command, conn, m, speed, sender, fkontak, pickRandom, pushname, from, msg, text) 
+break      
+   
+//activar/desactivar
+case 'welcome': case 'bienvenida': case 'antilink': case 'antienlace': case 'antifake': case 'antiFake': case 'antiarabe': case 'antiArabe': case 'autodetect': case 'detect': case 'audios': case 'autosticker': case 'stickers': case 'modocaliente': case 'antinsfw': case 'modoadmin': case 'modoadmins': case 'soloadmin': case 'antiprivado': case 'antipv': case 'anticall': case 'antillamada': case 'modojadibot': case 'jadibot': case 'autoread': case 'autovisto': case 'antispam': case 'chatbot': case 'simsimi': case 'autolevelup': case 'autonivel': case 'antitoxic': case 'antilink2': case 'AntiTwiter': case 'antitwiter': case 'antitiktok': case 'AntiTikTok': case 'antitelegram': case 'AntiTelegram': case 'antifacebook': case 'AntiFb': case 'AntiFacebook': case 'antinstagram': case 'AntInstagram': case 'antiyoutube': case 'AntiYoutube': case 'AntiIg': case 'enable': case 'configuracion': case 'configurar': enable(m, command, isGroupAdmins, text, command, args, isBotAdmins, isGroupAdmins, isCreator, conn) 
+break
+    
+//Grupos    
+case 'grupo': case 'delete': case 'del': case 'join': case 'unete': case 'hidetag': case 'notificar': case 'tag': case 'setppgroup': case 'setpp': case 'setppname': case 'nuevonombre': case 'newnombre': case 'setdesc': case 'descripción': case 'anularlink': case 'resetlink': case 'revoke': case 'add': case 'agregar': case 'invitar': case 'kick': case 'echar': case 'sacar': case 'promote': case 'darpoder': case 'demote': case 'quitarpoder': case 'link': case 'linkgc': case 'banchat': case 'tagall': case 'invocar': case 'todos': case 'admins': case 'administradores': case 'infogrupo': case 'groupinfo': case 'warn': case 'advertencia': case 'unwarn': case 'quitardvertencia': case 'listwarn': case 'enline': case 'online': case 'listonine': case 'listaenlinea': case 'enlinea': case 'listonline': case 'setrules': case 'addrules': case 'addrule': case 'rules': grupo(m, command, isGroupAdmins, text, conn, participants, isBotAdmins, args, isCreator, delay, sender, quoted, mime, from, isCreator, groupMetadata, fkontak, delay) 
+break    
+
+//juegos  
+case 'simi': case 'bot': case 'pregunta': case 'preg': case 'gay': case 'pareja': case 'formarpareja': case 'follar': case 'violar': case 'coger': case 'doxear': case 'doxxeo': case 'personalidad': case 'top': case 'topgays': case 'topotakus': case 'racista': case 'love': case 'ship': case 'formartrio': case 'formapareja5': game(m, budy, command, text, pickRandom, pushname, conn, participants, sender, who, body, sendImageAsUrl)  
+break                   
+case 'verdad': case 'reto': case 'piropo': game2(m, command, sendImageAsUrl, pickRandom)
+break 
+case 'slot': case 'apuesta':  case 'fake': case 'ppt': case 'suit': game3(m, command, conn, args, prefix, msToTime, text, body, from, sender, quoted, pushname)
+break    
+
+case 'math': case 'matematicas': {
+if (kuismath.hasOwnProperty(m.sender.split('@')[0])) return m.reply('⚠️ 𝚃𝚘𝚍𝚊𝚟𝚒𝚊 𝚑𝚊𝚢 𝚙𝚛𝚎𝚐𝚞𝚗𝚝𝚊𝚜 𝚜𝚒𝚗 𝚛𝚎𝚜𝚙𝚞𝚎𝚜𝚝𝚊 𝚎𝚗 𝚎𝚜𝚝𝚎 𝚌𝚑𝚊𝚝') 
+let { genMath, modes } = require('./libs/math')
+if (!text) return m.reply(`🧮 𝙳𝚒𝚏𝚒𝚌𝚞𝚕𝚝𝚊𝚍𝚎𝚜 𝚍𝚒𝚜𝚙𝚘𝚗𝚒𝚋𝚕𝚎𝚜 :\n\n${Object.keys(modes).join(' | ')}\n• *Ejemplo de uso:* ${prefix}math medium`)
+let result = await genMath(text.toLowerCase())         
+conn.sendText(m.chat, `╔═≪ \`MATEMÁTICAS\` ≫═•
+║ *¿𝙲𝚄𝙰𝙽𝚃𝙾 𝙴𝚂 : ${result.soal.toLowerCase()}?*
+║━━━━━━━━━━━━━━━━
+║🕕 𝚃𝙸𝙴𝙼𝙿𝙾: ${(result.waktu / 1000).toFixed(2)} 𝚜𝚎𝚐𝚞𝚗𝚍𝚘
+║━━━━━━━━━━━━━━━━
+║ *𝚁𝙴𝚂𝙿𝙾𝙽𝙳𝙴 𝙰 𝙴𝚂𝚃𝙴 𝙼𝙴𝙽𝚂𝙰𝙹𝙴*
+║ *𝙲𝙾𝙽 𝙻𝙰 𝚁𝙴𝚂𝙿𝚄𝙴𝚂𝚃𝙰*
+╚════ ≪ •❈• ≫ ═════•`, m).then(() => {
+kuismath[m.sender.split('@')[0]] = result.jawaban
+})
+await sleep(result.waktu)
+if (kuismath.hasOwnProperty(m.sender.split('@')[0])) {
+m.reply("⏳ sᴇ ᴀᴄᴀʙᴏ ᴇʟ ᴛɪᴇᴍᴘᴏ!, ʟᴀ ʀᴇsᴘᴜᴇsᴛᴀ ᴇs: " + kuismath[m.sender.split('@')[0]])
+delete kuismath[m.sender.split('@')[0]]
+}}
+break
+
 case 'ttc': case 'ttt': case 'tictactoe': {
 let TicTacToe = require("./libs/tictactoe")
 this.game = this.game ? this.game : {}
@@ -535,8 +620,8 @@ room13.o = m.chat
 room13.game.playerO = m.sender
 room13.state = 'PLAYING'
 let arr = room13.game.render().map(v => {
-return {X: '❌',
-O: '⭕',
+return {X: '❎',
+O: '❌',
 1: '1️⃣',
 2: '2️⃣',
 3: '3️⃣',
@@ -546,17 +631,19 @@ O: '⭕',
 7: '7️⃣',
 8: '8️⃣',
 9: '9️⃣', }[v]})
-let str = `\`🎮👾 ᴇsᴘᴇʀᴀᴅᴏ ᴀ @${room13.game.currentTurn.split('@')[0]} ᴄᴏᴍᴏ ᴘʀɪᴍᴇʀ ᴊᴜɢᴀᴅᴏʀ\`
+let str = `*\`🕹 ＴＲＥＳ ＥＮ ＲＡＹＡ 🎮\`*
+
+🎮👾 ᴇsᴘᴇʀᴀɴᴅᴏ ᴀ @${room13.game.currentTurn.split('@')[0]} ᴄᴏᴍᴏ ᴘʀɪᴍᴇʀ ᴊᴜɢᴀᴅᴏʀ
 
 ${arr.slice(0, 3).join('')}
 ${arr.slice(3, 6).join('')}
 ${arr.slice(6).join('')}
-
-▢ *sᴀʟᴀ* ${room13.id}
-
-▢ *ʀᴇɢʟᴀs*
-‣ ʜᴀᴢ 3 ғɪʟᴀs ᴅᴇ sɪᴍʙᴏʟᴏs ᴠᴇʀᴛɪᴄᴀʟᴇs, ʜᴏʀɪᴢᴏɴᴛᴀʟᴇs ᴏ ᴅɪᴀɢᴏɴᴀʟᴇs ᴘᴀʀᴀ ɢᴀɴᴀʀ
-‣ ᴇsᴄʀɪʙᴇ *rendirse* para rendirte y admitir la derrota.`
+ 
+▢ *𝐒𝐀𝐋𝐀 :* ${room13.id}
+ 
+▢ *𝐑𝐄𝐆𝐋𝐀𝐒 :*
+* ʜᴀᴢ 3 ғɪʟᴀs ᴅᴇ sɪᴍʙᴏʟᴏs ᴠᴇʀᴛɪᴄᴀʟᴇs, ʜᴏʀɪᴢᴏɴᴛᴀʟᴇs ᴏ ᴅɪᴀɢᴏɴᴀʟᴇs ᴘᴀʀᴀ ɢᴀɴᴀʀ
+* ᴇsᴄʀɪʙᴇ *rendirse* para rendirte y admitir la derrota.`
 if (room13.x !== room13.o) await conn.sendText(room13.x, str, m, { mentions: parseMention(str) } )
 await conn.sendText(room13.o, str, m, { mentions: parseMention(str) } )
 } else {
@@ -567,7 +654,7 @@ game: new TicTacToe(m.sender, 'o'),
 state: 'WAITING'
 }
 if (text) room13.name = text
-m.reply('Esperando pareja' + (text ? ` Escriba el comando a ${prefix + command} ${text}` : ''))
+m.reply('*⏳ ᴇsᴘᴇʀᴀɴᴅᴏ ᴀʟ sɪɢᴜɪᴇɴᴛᴇ ᴊᴜɢᴀᴅᴏ*' + (text ? ` *ᴇsᴄʀɪʙᴀ ᴇʟ sɪɢᴜɪᴇɴᴛᴇ ᴄᴏᴍᴀɴᴅᴏ: ${prefix + command} ${text}\n\n🎁 ʀᴇᴄᴏᴍᴘᴇɴsᴀ : *4999 XP*` : ''))
 this.game[room13.id] = room13
 }}
 break
@@ -577,36 +664,14 @@ this.game = this.game ? this.game : {}
 try {
 if (this.game) {
 delete this.game
-conn.sendText(m.chat, `Sesión TicTacToe eliminada con éxito`, m)
+conn.sendText(m.chat, `✅ sᴇ ʀᴇɪɴɪᴄɪᴏ ʟᴀ sᴇsɪᴏɴ ᴅᴇ *ᴛɪᴄᴛᴀᴄᴛᴏᴇ 🎮*`, m)
 } else if (!this.game) {
-m.reply(`La sesión TicTacToe🎮 no existe`)
+m.reply(`⚠️ ɴᴏ ᴇsᴛᴀs ᴇɴ ᴘᴀʀᴛɪᴅᴀ ᴅᴇ ᴛɪᴄᴛᴀᴄᴛᴏᴇ 🎮`)
 } else throw '?'
 } catch (e) {
 m.reply('Nose que paso? hubor error pon de nuevo el comando jjjj')
 }}
 break
-             
-//Info  
-case 'menu': case 'help': case 'menucompleto': case 'allmenu': case 'menu2': case 'audio': case 'nuevo': case 'extreno': case 'reglas': case 'menu1': case 'menu3': case 'menu4': case 'menu5': case 'menu6': case 'menu7': case 'menu8': case 'menu9': case 'menu10': case 'menu11': case 'menu18': case 'descarga': case 'menugrupos': case 'menubuscadores': case 'menujuegos': case 'menuefecto': case 'menuconvertidores': case 'Menuhony': case 'menurandow': case 'menuRPG': case 'menuSticker': case 'menuOwner': menu(m, command, conn, prefix, pushname, sender, pickRandom, fkontak)  
-break       
-case 'estado': case 'infobot': case 'owner': case 'creador': case 'contacto': case 'grupos': case 'grupoficiales': case 'instalarbot': case 'crearbot': case 'ping': case '5492266613038': case '593980586516': case '595975740803': case 'report': case 'sc': case 'donar': case 'solicitud': case 'cuenta': case 'cuentas': case 'cuentaoficiales': case 'cuentaofc': case 'cafirexos': case 'Cafirexos': case 'velocidad': case 'status': info(command, conn, m, speed, sender, fkontak, pickRandom, pushname, from, msg, text) 
-break     
-   
-//activar/desactivar
-case 'welcome': case 'bienvenida': case 'antilink': case 'antienlace': case 'antifake': case 'antiFake': case 'antiarabe': case 'antiArabe': case 'autodetect': case 'detect': case 'audios': case 'autosticker': case 'stickers': case 'modocaliente': case 'antinsfw': case 'modoadmin': case 'modoadmins': case 'soloadmin': case 'antiprivado': case 'antipv': case 'anticall': case 'antillamada': case 'modojadibot': case 'jadibot': case 'autoread': case 'autovisto': case 'antispam': case 'chatbot': case 'simsimi': case 'autolevelup': case 'autonivel': case 'antitoxic': case 'antilink2': case 'AntiTwiter': case 'antitwiter': case 'antitiktok': case 'AntiTikTok': case 'antitelegram': case 'AntiTelegram': case 'antifacebook': case 'AntiFb': case 'AntiFacebook': case 'antinstagram': case 'AntInstagram': case 'antiyoutube': case 'AntiYoutube': case 'AntiIg': case 'enable': case 'configuracion': case 'configurar': enable(m, command, isGroupAdmins, text, command, args, isBotAdmins, isGroupAdmins, isCreator, conn) 
-break
-    
-//Grupos    
-case 'grupo': case 'delete': case 'del': case 'join': case 'unete': case 'hidetag': case 'notificar': case 'tag': case 'setppgroup': case 'setpp': case 'setppname': case 'nuevonombre': case 'newnombre': case 'setdesc': case 'descripción': case 'anularlink': case 'resetlink': case 'revoke': case 'add': case 'agregar': case 'invitar': case 'kick': case 'echar': case 'sacar': case 'promote': case 'darpoder': case 'demote': case 'quitarpoder': case 'link': case 'linkgc': case 'banchat': case 'tagall': case 'invocar': case 'todos': case 'admins': case 'administradores': case 'infogrupo': case 'groupinfo': case 'warn': case 'advertencia': case 'unwarn': case 'quitardvertencia': case 'listwarn': case 'enline': case 'online': case 'listonine': case 'listaenlinea': case 'enlinea': case 'listonline': case 'setrules': case 'addrules': case 'addrule': case 'rules': grupo(m, command, isGroupAdmins, text, conn, participants, isBotAdmins, args, isCreator, delay, sender, quoted, mime, from, isCreator, groupMetadata, fkontak, delay) 
-break    
- 
-//juegos 
-case 'simi': case 'bot': case 'pregunta': case 'preg': case 'gay': case 'pareja': case 'formarpareja': case 'follar': case 'violar': case 'coger': case 'doxear': case 'doxxeo': case 'personalidad': case 'top': case 'topgays': case 'topotakus': case 'racista': case 'love': case 'ship': case 'formartrio': case 'formapareja5': game(m, budy, command, text, pickRandom, pushname, conn, participants, sender, who, body, sendImageAsUrl)  
-break                   
-case 'verdad': case 'reto': case 'piropo': game2(m, command, sendImageAsUrl, pickRandom)
-break 
-case 'slot': case 'apuesta':  case 'fake': case 'ppt': case 'suit': game3(m, command, conn, args, prefix, msToTime, text, body, from, sender, quoted, pushname)
-break    
                                                          
 //convertidores
 case 'bass': case 'blown': case 'deep': case 'earrape': case 'fast': case 'fat': case 'nightcore': case 'reverse': case 'robot': case 'slow': case 'smooth': case 'squirrel': efec(conn, command, mime, quoted, exec, prefix, m, from)  
@@ -638,7 +703,25 @@ break
 case 'reg': case 'verificar': case 'unreg': case 'myns': await reg(command, conn, m, sender, text, budy, fkontak, delay, args) 
 break     
 case 'lb': case 'leaderboard': case 'afk': case 'rob': case 'robar': case 'buy': case 'buyall': case 'bal': case 'balance': case 'diamond': case 'minar': case 'mine': case 'trabajar': case 'work': case 'w': case 'claim': case 'daily': case 'perfil': case 'levelup': case 'nivel': case 'cofre': case 'minar2': case 'mine2': case 'crime': case 'Crime': case 'dep': case 'depositar': case 'retirar': case 'toremove': rpg(m, command, participants, args, sender, pushname, text, conn, fkontak, who)    
-break            
+break             
+case 'transferir': case 'transfer': case 'regalar': {
+let items = ['money', 'exp', 'limit']
+this.confirm = this.confirm ? this.confirm : {}
+if (this.confirm[m.sender.split('@')[0]]) return conn.sendText(m.chat, `*⚠️ estas haciendo una transferencia*`, m)
+let user = global.db.data.users[m.sender]
+let item = items.filter((v) => v in user && typeof user[v] == 'number')
+let lol = `*⚠️ Uso correcto del comando :*\n*${prefix + command}* [tipo] [cantidad] [@user]\n\n> *Ejemplo :*
+• ${prefix + command} exp 100 @0\n\n📍 Artículos transferibles\n╔═════ೋೋ═════╗\n● *limit* = Diamante\n● *exp* = Experiencia\n● *money* = coins\n╚════ ≪ •❈• ≫ ════╝`
+let type = (args[0] || '').toLowerCase()
+if (!item.includes(type)) return conn.sendTextWithMentions(m.chat, lol, m)
+let count = Math.min(Number.MAX_SAFE_INTEGER, Math.max(1, (isNumber(args[1]) ? parseInt(args[1]) : 1))) * 1
+let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : args[2] ? (args[2].replace(/[@ .+-]/g, '') + '@s.whatsapp.net') : ''
+if (!(who in global.db.data.users)) m.reply('*❌ El Usuario no está en mi base de datos*')
+if (user[type] * 1 < count) m.reply(`*⚠️ No tienes suficientes ${type} para transferir*`)
+let confirm = `¿ESTA SEGURO QUE DESEA TRANSFERIR ${count} ${type} a @${(who || '').replace(/@s\.whatsapp\.net/g, '')}?\n\n> *Tienes 60 segundos para confirmar*\n\n*• Escriba:*\n* si = *para acertar*\n* no = *para cancelar*`
+await conn.sendTextWithMentions(m.chat, confirm, m)
+this.confirm[m.sender.split('@')[0]] = { sender: m.sender, to: who, message: m, type, count, timeout: setTimeout(() => (m.reply(`*⚠️ Se acabó el tiempo, no se obtuvo respuesta. Transferencia cancelada.*`), delete this.confirm[m.sender.split('@')[0]]), 60 * 1000)}}
+break
       
 //stickers  
 case 's': case 'sticker': case 'wm': case 'take': case 'attp': case 'dado': case 'qc': stickers(m, command, conn, mime, quoted, args, text, lolkeysapi, fkontak)   
@@ -679,105 +762,23 @@ m.reply(lenguaje.idioma2() + idiomas)
 m.reply(lenguaje.AvisoMG() + lenguaje.idioma(prefix))}}
 break  
 
-case 'math': case 'matematicas': {
-if (kuismath.hasOwnProperty(m.sender.split('@')[0])) return m.reply('¡Aún quedan sesiones sin terminar!') 
-let { genMath, modes } = require('./libs/math')
-if (!text) return m.reply(`Modo: ${Object.keys(modes).join(' | ')}\nEjemplo de uso: ${prefix}math medium`)
-let result = await genMath(text.toLowerCase())
-conn.sendText(m.chat, `*¿Cuál es el resultado de: ${result.soal.toLowerCase()}*?\n\nTiempo: ${(result.waktu / 1000).toFixed(2)} segundo`, m).then(() => {
-kuismath[m.sender.split('@')[0]] = result.jawaban
-})
-await sleep(result.waktu)
-if (kuismath.hasOwnProperty(m.sender.split('@')[0])) {
-m.reply("Se acabó el tiempo\nRespuesta: " + kuismath[m.sender.split('@')[0]])
-delete kuismath[m.sender.split('@')[0]]
-}}
-break
-
 case 'prueba': { 
 await conn.sendPoll(m.chat, `Hola ${pushname}\n\n> 𝐒𝐮𝐩𝐞𝐫 𝐁𝐨𝐭 𝐃𝐞 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩 `, ['play3 billie eilish', 'estado', 'menu', 'fb'])}
 break   
 
 //propietario/owner
-case 'bcgc': case 'bcgroup': case 'bc': case 'broadcast': case 'bcall': case 'block': case 'bloquear': case 'unblock': case 'desbloquear': case 'setcmd':  case 'addcmd': case 'delcmd': case 'listcmd': case 'añadirdiamantes': case 'dardiamantes': case 'addlimit': case 'añadirxp': case 'addexp': case 'addxp': owner(isCreator, m, command, conn, text, delay, fkontak, store, quoted, sender) 
-break  
-   
-case 'id': {m.reply(from)}
-break
-          	    
-case 'fetch': case 'get': {   
-if (!/^https?:\/\//.test(text)) return m.reply('*Ej:* https://ingresa.link.aqui.com') 
-const _url = new URL(text);
-const url = global.API(_url.origin, _url.pathname, Object.fromEntries(_url.searchParams.entries()), 'APIKEY');
-const res = await fetch(url); 
-if (res.headers.get('content-length') > 100 * 1024 * 1024 * 1024) { 
-throw `Content-Length: ${res.headers.get('content-length')}`;
-} 
-if (!/text|json/.test(res.headers.get('content-type'))) return conn.sendFile(m.chat, url, 'file', text, m); 
-let txt = await res.buffer();
-try {
-txt = format(JSON.parse(txt + '')); 
-} catch (e) {
-txt = txt + '';
-} finally {
-m.reply(txt.slice(0, 65536) + ''); 
-}}
-break 
-case 'botname': case 'nuevonombre': case 'namebot': {
-if (!isCreator) return reply(info.owner)
-if (!text) return m.reply(`Ej: ${prefix + command} NovaBot`)
-await conn.updateProfileName(text)
-m.reply(`Exito`)}
-break
-case 'fotobot': case 'nuevafoto': case 'seppbot': {
-if (!isCreator) return reply(info.owner)
-if (!quoted) return m.reply(`¿Donde esta la imagen?\n\nEnviar/responder a una imagen con : ${prefix + command}`)
-if (!/image/.test(mime)) return m.reply(`Enviar/responder imagen con : ${prefix + command}`)
-if (/webp/.test(mime)) return m.reply(`Enviar/responder imagen con : ${prefix + command}`)
-var mediz = await conn.downloadAndSaveMediaMessage(quoted, 'ppgc.jpeg')
-if (args[0] == `full`) {
-var { img } = await generateProfilePicture(mediz)
-await conn.query({tag: 'iq', attrs: {to: m.chat, type:'set', xmlns: 'w:profile:picture' }, content: [{tag: 'picture', attrs: { type: 'image' }, content: img }]})
-fs.unlinkSync(mediz)
-m.reply(`exito`)
-} else {
-var memeg = await conn.updateProfilePicture(numBot, { url: mediz })
-fs.unlinkSync(mediz)
-m.reply(`exito`)}}
-break
-
-case 'getcase': 
+case 'bcgc': case 'bcgroup': case 'bc': case 'broadcast': case 'bcall': case 'block': case 'bloquear': case 'unblock': case 'desbloquear': case 'setcmd':  case 'addcmd': case 'delcmd': case 'listcmd': case 'añadirdiamantes': case 'dardiamantes': case 'addlimit': case 'añadirxp': case 'addexp': case 'addxp': case 'fetch': case 'get': case 'fotobot': case 'nuevafoto': case 'seppbot': case 'botname': case 'nuevonombre': case 'namebot': case 'banuser': case 'unbanuser': case 'backup': case 'respaldo': case 'copia': owner(isCreator, m, command, conn, text, delay, fkontak, store, quoted, sender, mime, args) 
+break    
+case 'id': {m.reply(from)} break 
+case 'getcase':  
 if (!isCreator) return reply(info.owner)
 if (!text) return m.reply(`*Que comando esta buscando o que?*`) 
-try { 
-bbreak = 'break' 
+try {  
+bbreak = 'break'  
 reply('case ' + `'${args[0]}'` + fs.readFileSync('./main.js').toString().split(`case '${args[0]}'`)[1].split(bbreak)[0] + bbreak) 
 } catch (err) { 
 console.error(err) 
 reply("Error, tal vez no existe el comando")} 
-break
-                 
-case 'banuser': {  
-if (!isCreator) return reply(info.owner)
-let who  
-if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false
-else who = m.chat
-let user = global.db.data.users[who]
-if (!who) return m.reply(lenguaje.owner.text15) 
-let users = global.db.data.users
-users[who].banned = true
-m.reply(lenguaje.owner.text22)}
-break 
-case 'unbanuser': {
-if (!isCreator) return reply(info.owner)
-let who 
-if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false
-else who = m.chat
-let user = global.db.data.users[who]
-if (!who) return m.reply(lenguaje.owner.text15) 
-let users = global.db.data.users
-users[who].banned = false
-m.reply(lenguaje.owner.text23)}
 break
 case 'public': case 'publico': {
 if (!isCreator) return reply(info.owner)
@@ -802,20 +803,7 @@ reply(lenguaje.owner.text26)
 await delay(3 * 3000)
 await conn.groupLeave(m.chat)}
 break
-case 'backup': case 'respaldo': case 'copia':
-if (!isCreator) return reply(info.owner)
-try {
-let d = new Date
-let date = d.toLocaleDateString('fr', { day: 'numeric', month: 'long', year: 'numeric' })
-let database = await fs.readFileSync(`./database.json`)
-let creds = await fs.readFileSync(`./sessions/creds.json`)
-await m.reply(lenguaje.owner.text27)
-await conn.sendMessage(m.sender, {document: database, mimetype: 'application/json', fileName: `database.json`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
-await conn.sendMessage(m.sender, {document: creds, mimetype: 'application/json', fileName: `creds.json`}, { quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
-} catch (e) {
-console.log(e)}   
-break 
-case 'update':  
+case 'update':   
 if (!isCreator) return reply(info.owner)
 try {    
 let stdout = execSync('git pull' + (m.fromMe && q ? ' ' + q : ''))
@@ -833,9 +821,9 @@ break
 /////////////////////////////////   
    
 //--------------------[ FUNCIONES ]-----------------------  
-function pickRandom(list) {
-return list[Math.floor(list.length * Math.random())]
-}       
+function pickRandom(list) {return list[Math.floor(list.length * Math.random())]}       
+
+function isNumber(x) {return !isNaN(x)}
 
 //-------------------[ AUDIO/TEXTOS ]----------------------
 default:   
@@ -845,7 +833,7 @@ await m.reply(`${pickRandom(['Si amigo todo bien, vite', 'Todo bien capo y tu �
 if (budy.includes(`Buenos dias`)) {
 conn.sendPresenceUpdate('composing', m.chat)
 m.reply(`${pickRandom(['Buenos Dias trolos de mierda', '*Buen dias mi amor 😘*', '*Buenos Dias hermosa mañana verdad 🥰*'])}`)}  
-if (budy.includes(`autodestruction`)) { 
+if (budy.includes(`Autodestruction`)) { 
 //let e = fs.readFileSync('./src/autodestruction.webp')
 let e = 'https://qu.ax/gCQo.webp'
 let or = ['texto', 'sticker']; 
@@ -1089,13 +1077,13 @@ return reply(String(execSync(budy.slice(2), { encoding: 'utf-8' })))
 } catch (err) { 
 console.log(util.format(err))  
  
-/*if (isCmd && budy.toLowerCase() != undefined) {
+if (isCmd && budy.toLowerCase() != undefined) {
 if (m.chat.endsWith('broadcast')) return
 if (m.isBaileys) return
 let msgs = global.db.data.database
 if (!(budy.toLowerCase() in msgs)) return
 conn.copyNForward(m.chat, msgs[budy.toLowerCase()], true)
-}*/
+}
  
 //--------------------[ REPORTE/ERRORS ]-----------------------     
 let e = String(err) 

@@ -214,13 +214,13 @@ msgRetry,
 msgRetryCache,
 version,
 syncFullHistory: true,
-getMessage: async (key) => {
-if (store) {
-const msg = store.loadMessage(key.remoteJid, key.id)
-return msg.message && undefined
-} return {
-conversation: 'NovaBot-MD',
-}}}
+getMessage: async (key) => { 
+if (store) { 
+const msg = await store.loadMessage(key.remoteJid, key.id); 
+return sock.chats[key.remoteJid] && sock.chats[key.remoteJid].messages[key.id] ? sock.chats[key.remoteJid].messages[key.id].message : undefined; 
+} 
+return proto.Message.fromObject({}); 
+}}
 
 const sock = makeWASocket(socketSettings)
 
@@ -599,8 +599,13 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 sock.ev.on('connection.update', async (update) => {
 const { connection, lastDisconnect, qr, receivedPendingNotifications, isNewLogin} = update;
 console.log(receivedPendingNotifications)
-if (isNewLogin) sock.isInit = true
+if (isNewLogin) sock.isInit = true;
 const code = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode;
+if (code && code !== DisconnectReason.loggedOut && sock?.ws.socket == null) {
+await startBot(true).catch(console.error);
+global.timestamp.connect = new Date;
+}
+if (global.db.data == null) loadDatabase();
 
 if (connection == 'connecting') {
 console.log(chalk.gray('iniciando...'));
