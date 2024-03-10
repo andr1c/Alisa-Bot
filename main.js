@@ -707,7 +707,7 @@ break
 case 'transferir': case 'transfer': case 'regalar': {
 let items = ['money', 'exp', 'limit']
 this.confirm = this.confirm ? this.confirm : {}
-if (confirm[m.sender]) return conn.sendText(m.chat, `*⚠️ estas haciendo una transferencia*`, m)
+if (this.confirm[m.sender]) return conn.sendText(m.chat, `*⚠️ estas haciendo una transferencia*`, m)
 let user = global.db.data.users[m.sender]
 let item = items.filter((v) => v in user && typeof user[v] == 'number')
 let lol = `*⚠️ Uso correcto del comando :*\n*${prefix + command}* [tipo] [cantidad] [@user]\n\n> *Ejemplo :*
