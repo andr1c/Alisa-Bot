@@ -286,7 +286,7 @@ console.log(e)
 console.log(err)
 }})
 
-sock.ev.on('messages.update', async chatUpdate => {
+/*sock.ev.on('messages.update', async chatUpdate => {
 for(const { key, update } of chatUpdate) {
 if (update.pollUpdates && key.fromMe) {
 const pollCreation = await getMessage(key)
@@ -296,7 +296,7 @@ var toCmd = pollUpdate.filter(v => v.voters.length !== 0)[0]?.name
 if (toCmd == undefined) return
 var prefCmd = prefix+toCmd
 sock.appenTextMessage(prefCmd, chatUpdate)
-}}}})
+}}}})*/
 
 //anticall
 sock.ev.on('call', async (fuckedcall) => { 
