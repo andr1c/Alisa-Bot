@@ -74,22 +74,21 @@ var body = (typeof m.text == 'string' ? m.text : '')
 var prefix = /^[./*#]/gi.test(body) ? body.match(/^[/.*#]/gi)[0] : ""
 //var prefix = body.match(/^[/.*#]/)   
 const isCmd = body.startsWith(prefix) 
-const command = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase()
+const command = isCmd ? body.slice(1).trim().split(/ +/).shift().toLocaleLowerCase() : null
 const args = body.trim().split(/ +/).slice(1) 
-const full_args = body.replace(command, '').slice(1).trim()
-const from = m.chat
+const from = m.chat 
 const msg = JSON.parse(JSON.stringify(m, undefined, 2)) 
 const content = JSON.stringify(m.message) 
-const type = m.mtype   
+const type = m.mtype 
 let t = m.messageTimestamp 
 const pushname = m.pushName || "Sin nombre" 
 const botnm = conn.user.id.split(":")[0] + "@s.whatsapp.net"  
-const _isBot = conn.user.jid 
+const _isBot = conn.user.jid
 const userSender = m.key.fromMe ? botnm : m.isGroup && m.key.participant.includes(":") ? m.key.participant.split(":")[0] + "@s.whatsapp.net" : m.key.remoteJid.includes(":") ? m.key.remoteJid.split(":")[0] + "@s.whatsapp.net" : m.key.fromMe ? botnm : m.isGroup ? m.key.participant : m.key.remoteJid  
 const isCreator = [conn.decodeJid(conn.user.id), ...global.owner.map(([numero]) => numero)].map((v) => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender);
-//const isCreator = global.owner.map(([numero]) => numero.replace(/[^\d\s().+:]/g, '').replace(/\s/g, '') + '@s.whatsapp.net').includes(userSender) 
 const isOwner = isCreator || m.fromMe;
 const isMods = isOwner || global.mods.map((v) => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender);
+//const isCreator = global.owner.map(([numero]) => numero.replace(/[^\d\s().+:]/g, '').replace(/\s/g, '') + '@s.whatsapp.net').includes(userSender) 
 const itsMe = m.sender == conn.user.id ? true : false 
 const text = args.join(" ") 
 const q = args.join(" ") 
@@ -98,14 +97,12 @@ const sender = m.key.fromMe ? botnm : m.isGroup ? m.key.participant : m.key.remo
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 const mime = (quoted.msg || quoted).mimetype || ''  
 const isMedia = /image|video|sticker|audio/.test(mime)
-const numBot = conn.user.id.split(":")[0] + "@s.whatsapp.net" // JID del Bot
-const numBot2 = conn.user.id // Número de teléfono del bot
 const mentions = []  
-if (m.message[type].contextInfo) {    
+if (m.message[type].contextInfo) {   
 if (m.message[type].contextInfo.mentionedJid) {  
 const msd = m.message[type].contextInfo.mentionedJid  
 for (let i = 0; i < msd.length; i++) {  
-mentions.push(msd[i])}}} 
+mentions.push(msd[i])}}}
   
 //----------------------[ FUNCION/GRUPO ]-------------------------
 const groupMetadata = m.isGroup ? await conn.groupMetadata(from) : ''
@@ -322,9 +319,10 @@ return !1;
 }} 
 
 //-------[ MODO PUBLIC/PRIVADO ]-----------
-if (!conn.public && !isOwner) {
-if (!m.key.fromMe) return }        	 
-
+if (!conn.public && !isCreator) {
+if (!m.key.fromMe) return 
+}          	 
+ 
 //--------------------[ BANCHAT ]---------------------
 if (global.db.data.chats[m.chat].isBanned && !isCreator) {
 return }
@@ -569,10 +567,10 @@ break
 //Info  
 case 'menu': case 'help': case 'menucompleto': case 'allmenu': case 'menu2': case 'audio': case 'nuevo': case 'extreno': case 'reglas': case 'menu1': case 'menu3': case 'menu4': case 'menu5': case 'menu6': case 'menu7': case 'menu8': case 'menu9': case 'menu10': case 'menu11': case 'menu18': case 'descarga': case 'menugrupos': case 'menubuscadores': case 'menujuegos': case 'menuefecto': case 'menuconvertidores': case 'Menuhony': case 'menurandow': case 'menuRPG': case 'menuSticker': case 'menuOwner': menu(m, command, conn, prefix, pushname, sender, pickRandom, fkontak)  
 break        
-case 'estado': case 'infobot': case 'owner': case 'creador': case 'contacto': case 'grupos': case 'grupoficiales': case 'instalarbot': case 'crearbot': case 'ping': case '5492266613038': case '593980586516': case '595975740803': case 'report': case 'sc': case 'donar': case 'solicitud': case 'cuenta': case 'cuentas': case 'cuentaoficiales': case 'cuentaofc': case 'cafirexos': case 'Cafirexos': case 'velocidad': case 'status': info(command, conn, m, speed, sender, fkontak, pickRandom, pushname, from, msg, text) 
+case 'estado': case 'infobot': case 'owner': case 'creador': case 'contacto': case 'grupos': case 'grupoficiales': case 'instalarbot': case 'crearbot': case 'ping': case '5492266613038': case '593980586516': case '595975740803': case 'report': case 'sc': case 'donar': case 'solicitud': case 'cuenta': case 'cuentas': case 'cuentaoficiales': case 'cuentaofc': case 'cafirexos': case 'Cafirexos': case 'velocidad': case 'status': case 'speedtest': case 'speed': info(command, conn, m, speed, sender, fkontak, pickRandom, pushname, from, msg, text) 
 break      
-   
-//activar/desactivar
+     
+//activar/desactivar  
 case 'welcome': case 'bienvenida': case 'antilink': case 'antienlace': case 'antifake': case 'antiFake': case 'antiarabe': case 'antiArabe': case 'autodetect': case 'detect': case 'audios': case 'autosticker': case 'stickers': case 'modocaliente': case 'antinsfw': case 'modoadmin': case 'modoadmins': case 'soloadmin': case 'antiprivado': case 'antipv': case 'anticall': case 'antillamada': case 'modojadibot': case 'jadibot': case 'autoread': case 'autovisto': case 'antispam': case 'chatbot': case 'simsimi': case 'autolevelup': case 'autonivel': case 'antitoxic': case 'antilink2': case 'AntiTwiter': case 'antitwiter': case 'antitiktok': case 'AntiTikTok': case 'antitelegram': case 'AntiTelegram': case 'antifacebook': case 'AntiFb': case 'AntiFacebook': case 'antinstagram': case 'AntInstagram': case 'antiyoutube': case 'AntiYoutube': case 'AntiIg': case 'enable': case 'configuracion': case 'configurar': enable(m, command, isGroupAdmins, text, command, args, isBotAdmins, isGroupAdmins, isCreator, conn) 
 break
     
