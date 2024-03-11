@@ -46,7 +46,7 @@ let stateRun = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┃ ${lenguaje.info.text9} ${conn.public ? 'Público' : `Privado`}
 ┊┃ ${lenguaje.info.text10} ${user.length}
 ┊┗━━━━━━━━━━━━━━•
-╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩ ${conn.user.id == global.numBot2 ? '' : `\n\n${lenguaje.info.text11} wa.me/${global.numBot.split`@`[0]}`}`.trim()
+╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩ ${conn.user.id == global.numBot2 ? '' : `\n\n${lenguaje.info.text11} wa.me/${global.numBot.split`@`[0]}`}`.trim() //`
 let ments = [me]      
 conn.sendMessage(m.chat, {image: imagen1, caption: stateRun, contextInfo:{ mentionedJid:[sender]}}, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 }
@@ -203,7 +203,24 @@ ${cpus[0] ? `\`❐ Uso total de CPU\`
 ${cpus[0].model.trim()} (${cpu.speed} MHZ)\n${Object.keys(cpu.times).map(type => `- *${(type + '*').padEnd(6)}: ${(100 * cpu.times[type] / cpu.total).toFixed(2)}%`).join('\n')}
 _Uso de núcleo(s) de CPU (${cpus.length} CPU central)_
 ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Object.keys(cpu.times).map(type => `- *${(type + '*').padEnd(6)}: ${(100 * cpu.times[type] / cpu.total).toFixed(2)}%`).join('\n')}`).join('\n\n')}` : ''}`.trim()
-conn.sendFile(m.chat, imagen1, 'lp.jpg', respon, m, false, { contextInfo: { externalAdReply: {title: "𝘐𝘔𝘍𝘖𝘙𝘔𝘈𝘊𝘐𝘖𝘕 𝘈𝘊𝘌𝘙𝘊𝘈 𝘋𝘌𝘓 𝘉𝘖𝘛", body: "Click para entrar", sourceUrl: md, thumbnail: imagen3 }}})}}
+conn.sendFile(m.chat, imagen1, 'lp.jpg', respon, m, false, { contextInfo: { externalAdReply: {title: "𝘐𝘔𝘍𝘖𝘙𝘔𝘈𝘊𝘐𝘖𝘕 𝘈𝘊𝘌𝘙𝘊𝘈 𝘋𝘌𝘓 𝘉𝘖𝘛", body: "Click para entrar", sourceUrl: md, thumbnail: imagen3 }}})}
+
+if (command == 'speedtest' || command == 'speed') {
+const cp = require('child_process') 
+const {promisify} = require('util') 
+const exec = promisify(cp.exec).bind(cp);
+let o;
+conn.fakeReply(m.chat, `🚀 Prueba de velocidad`, '0@s.whatsapp.net', 'test')
+try {
+o = await exec('python3 speed.py --secure --share');
+} catch (e) {
+o = e;
+} finally {
+const {stdout, stderr} = o;
+if (stdout.trim()) m.reply(stdout);
+if (stderr.trim()) m.reply(stderr)
+console.log(stderr) 
+}}}
 
 module.exports = { info }
 
