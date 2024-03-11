@@ -214,13 +214,13 @@ msgRetry,
 msgRetryCache,
 version,
 syncFullHistory: true,
-getMessage: async (key) => { 
-if (store) { 
-const msg = await store.loadMessage(key.remoteJid, key.id); 
-return sock.chats[key.remoteJid] && sock.chats[key.remoteJid].messages[key.id] ? sock.chats[key.remoteJid].messages[key.id].message : undefined; 
-} 
-return proto.Message.fromObject({}); 
-}}
+getMessage: async (key) => {
+if (store) {
+const msg = store.loadMessage(key.remoteJid, key.id)
+return msg.message && undefined
+} return {
+conversation: 'bot',
+}}}
 
 const sock = makeWASocket(socketSettings)
 
@@ -258,7 +258,7 @@ console.log(chalk.bold.white(chalk.bgMagenta(`👑 CÓDIGO DE VINCULACIÓN 👑:
 async function getMessage(key) {
 if (store) {
 const msg = store.loadMessage(key.remoteJid, key.id)
-return msg.message && undefined
+return msg.message
 } return {
 conversation: 'SimpleBot',
 }}
@@ -468,9 +468,9 @@ mentionedJid:[m.sender],
 
 //Welcome adaptado
 sock.ev.on('group-participants.update', async (anu) => {
-let isWelcome = global.db.data.chats[anu.id].welcome
-if(!isWelcome) return
 console.log(anu)
+//let Welc = global.db.data.chats[anu.id].welcome
+if(global.db.data.chats[anu.id].welcome < true) return
 try {
 let metadata = await sock.groupMetadata(anu.id)
 let participants = anu.participants
@@ -597,9 +597,8 @@ return list[Math.floor(list.length * Math.random())]
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 sock.ev.on('connection.update', async (update) => {
-const { connection, lastDisconnect, qr, receivedPendingNotifications} = update;
+const { connection, lastDisconnect, qr, receivedPendingNotifications } = update;
 console.log(receivedPendingNotifications)
-
 if (connection == 'connecting') {
 console.log(chalk.gray('iniciando...'));
 say('NovaBot-MD', {
@@ -609,52 +608,32 @@ say('NovaBot-MD', {
 say(`By: elrebelde21`, {
   font: 'console',
   align: 'center',
-  gradient: ['red', 'magenta']})}
+  gradient: ['red', 'magenta']})
   
-try {
-let reason = new Boom(lastDisconnect?.error)?.output.statusCode
-if (connection === 'close') {
-if (reason === DisconnectReason.badSession) {
-console.log(chalk.yellow(`${lenguaje['smsConexionOFF']()}`)) 
-startBot();
-} else if (reason === DisconnectReason.connectionClosed) {
-console.log(chalk.yellow(`${lenguaje['smsConexioncerrar']()}`)) 
-startBot();
-} else if (reason === DisconnectReason.connectionLost) {
-console.log(chalk.yellow(`${lenguaje['smsConexionperdida']()}`)) 
-startBot();
-} else if (reason === DisconnectReason.connectionReplaced) {
-console.log(chalk.yellow(`${lenguaje['smsConexionreem']()}`)) 
-startBot();
-} else if (reason === DisconnectReason.loggedOut) {
-console.log(chalk.yellow(`${lenguaje['smsConexionOFF']()}`))
-startBot();
-} else if (reason === DisconnectReason.restartRequired) {
-console.log(chalk.yellow(`${lenguaje['smsConexionreinicio']()}`)) 
-startBot();
-} else if (reason === DisconnectReason.timedOut) {
-console.log(chalk.yellow(`${lenguaje['smsConexiontiem']()}`)) 
-startBot();
-} else sock.end(`${lenguaje['smsConexiondescon']()} ${reason || ''}: ${connection || ''}`);}
-	
-if (opcion == '1' || methodCodeQR && qr !== undefined) {
+} else if (opcion == '1' || methodCodeQR && qr !== undefined) {
 if (opcion == '1' || methodCodeQR) {
 console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
 color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│${lenguaje['smsEscaneaQR']()}\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯`, '#f12711'))
-}}
-
-if (connection == 'open') {
+}} else if (connection === 'close') {
+console.log(
+color('[SYS]', '#009FFF'),
+color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
+color(`${lenguaje['smsConexionOFF']()}`, '#f64f59')
+);
+lastDisconnect.error?.output?.statusCode !== DisconnectReason.loggedOut
+? startBot()
+: console.log(
+color('[SYS]', '#009FFF'), 
+color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
+color(`Wa Web logged Out`, '#f64f59')
+);;
+} else if (connection == 'open') {
 console.log(color(` `,'magenta'))
 console.log(color(`\n${lenguaje['smsConexion']()} ` + JSON.stringify(sock.user, null, 2), 'yellow'))
 console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
-color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│${lenguaje['smsConectado']()}\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯` + receivedPendingNotifications, '#38ef7d')
-)}
-
-} catch (err) {
-console.log('Error en Connection.update '+err)
-startBot()
+color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│${lenguaje['smsConectado']()}\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯` + receivedPendingNotifications, '#38ef7d')) 
 }});
 
 sock.public = true
