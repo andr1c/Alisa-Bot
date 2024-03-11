@@ -219,7 +219,7 @@ if (store) {
 const msg = store.loadMessage(key.remoteJid, key.id)
 return msg.message && undefined
 } return {
-conversation: 'bot',
+conversation: 'NovaBot-MD',
 }}}
 
 const sock = makeWASocket(socketSettings)
@@ -255,13 +255,13 @@ console.log(chalk.bold.white(chalk.bgMagenta(`👑 CÓDIGO DE VINCULACIÓN 👑:
 }}
 }
 
-async function getMessage(key) {
+/*async function getMessage(key) {
 if (store) {
 const msg = store.loadMessage(key.remoteJid, key.id)
 return msg.message
 } return {
 conversation: 'SimpleBot',
-}}
+}}*/
 
 sock.ev.on('messages.upsert', async chatUpdate => {
 //console.log(JSON.stringify(chatUpdate, undefined, 2))
