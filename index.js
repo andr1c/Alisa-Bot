@@ -209,8 +209,6 @@ logger: pino({ level: 'silent' }),
 auth: { creds: state.creds, keys: makeCacheableSignalKeyStore(state.keys, pino({level: 'silent'})) },
 mobile: MethodMobile, 
 browser: opcion == '1' ? ['NovaBot-MD', 'Safari', '1.0.0'] : methodCodeQR ? ['NovaBot-MD', 'Safari', '1.0.0'] : ['Ubuntu', 'Chrome', '2.0.0'],
-msgRetry,
-version,
 syncFullHistory: true,
 getMessage: async (key) => {
 if (store) {
@@ -219,7 +217,9 @@ return msg?.message || ""
 } return {
 conversation: 'NovaBot-MD',
 msgRetryCounterCache, //Resolver mensajes en espera
-defaultQueryTimeoutMs: undefined, //
+defaultQueryTimeoutMs: undefined,
+msgRetry,
+version,
 }}}
 
 const sock = makeWASocket(socketSettings)
