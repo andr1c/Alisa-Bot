@@ -68,10 +68,18 @@ loadDatabase() //@aidenlogin
 
 if (global.db) setInterval(async () => {
 if (global.db.data) await global.db.write()
-}, 30 * 1000)
+}, 5 * 1000)
 //_________________
 
 //tmp
+if (!opts['test']) {
+if (global.db) {
+setInterval(async () => {
+if (global.db.data) await global.db.write();
+if (opts['autocleartmp'] && (global.support || {}).find) (tmp = [os.tmpdir(), 'tmp', 'jadibts'], tmp.forEach((filename) => cp.spawn('find', [filename, '-amin', '3', '-type', 'f', '-delete'])));
+}, 30 * 1000)
+}}
+
 function clearTmp() {
 const tmp = [tmpdir(), join(__dirname, './tmp')];
 const filename = [];
@@ -84,13 +92,6 @@ return unlinkSync(file); // 3 minutes
 return false;
 })}
 
-if (!opts['test']) { 
-if (global.db) { 
-setInterval(async () => { 
-if (global.db.data) await global.db.write(); 
-if (opts['autocleartmp'] && (global.support || {}).find) (tmp = [os.tmpdir(), 'tmp'], tmp.forEach((filename) => cp.spawn('find', [filename, '-amin', '3', '-type', 'f', '-delete']))); 
-}, 30 * 1000); 
-}}
 setInterval(async () => {
 await clearTmp()
 console.log(chalk.cyanBright(lenguaje['tmp']()))}, 180000)
@@ -158,6 +159,8 @@ setInterval(async () => {
 }, 1000 * 60 * 60);
 //___________
     
+const store = makeInMemoryStore({logger: pino().child({level: 'silent', stream: 'store' })})
+
 //configuración 
 const methodCodeQR = process.argv.includes("qr")
 const pairingCode = !!phoneNumber || process.argv.includes("--pairing-code")
@@ -166,8 +169,9 @@ const useMobile = process.argv.includes("--mobile")
 const MethodMobile = process.argv.includes("mobile")
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
 const question = (text) => new Promise((resolve) => rl.question(text, resolve))
-let { version, isLatest } = await fetchLatestBaileysVersion()
+const msgRetry = (MessageRetryMap) => { }
 const msgRetryCounterCache = new NodeCache() //para mensaje de reintento, "mensaje en espera"
+let { version, isLatest } = await fetchLatestBaileysVersion();   
     
 //codigo adaptado por: https://github.com/GataNina-Li && https://github.com/elrebelde21
 let opcion
@@ -199,11 +203,6 @@ console.log(chalk.bold.redBright(`NO SE PERMITE NÚMEROS QUE NO SEAN ${chalk.bol
 async function startBot() {
 
 console.info = () => {}
-const store = makeInMemoryStore({ logger: pino().child({ level: "silent", stream: "store" }), })
-const msgRetry = (MessageRetryMap) => { }
-const msgRetryCache = new NodeCache()
-let { version, isLatest } = await fetchLatestBaileysVersion();   
-
 const socketSettings = {
 printQRInTerminal: opcion == '1' ? true : methodCodeQR ? true : false,
 logger: pino({ level: 'silent' }),
@@ -211,16 +210,17 @@ auth: { creds: state.creds, keys: makeCacheableSignalKeyStore(state.keys, pino({
 mobile: MethodMobile, 
 browser: opcion == '1' ? ['NovaBot-MD', 'Safari', '1.0.0'] : methodCodeQR ? ['NovaBot-MD', 'Safari', '1.0.0'] : ['Ubuntu', 'Chrome', '2.0.0'],
 msgRetry,
-msgRetryCache,
 version,
 syncFullHistory: true,
 getMessage: async (key) => {
-if (store) { 
-const msg = await store.loadMessage(key.remoteJid, key.id); 
-return sock.chats[key.remoteJid] && sock.chats[key.remoteJid].messages[key.id] ? sock.chats[key.remoteJid].messages[key.id].message : undefined; 
-} 
-return proto.Message.fromObject({}); 
-}}
+if (store) {
+const msg = store.loadMessage(key.remoteJid, key.id)
+return msg?.message || ""
+} return {
+conversation: 'NovaBot-MD',
+msgRetryCounterCache, //Resolver mensajes en espera
+defaultQueryTimeoutMs: undefined, //
+}}}
 
 const sock = makeWASocket(socketSettings)
 
@@ -286,7 +286,7 @@ console.log(e)
 console.log(err)
 }})
 
-/*sock.ev.on('messages.update', async chatUpdate => {
+sock.ev.on('messages.update', async chatUpdate => {
 for(const { key, update } of chatUpdate) {
 if (update.pollUpdates && key.fromMe) {
 const pollCreation = await getMessage(key)
@@ -296,7 +296,7 @@ var toCmd = pollUpdate.filter(v => v.voters.length !== 0)[0]?.name
 if (toCmd == undefined) return
 var prefCmd = prefix+toCmd
 sock.appenTextMessage(prefCmd, chatUpdate)
-}}}})*/
+}}}})
 
 //anticall
 sock.ev.on('call', async (fuckedcall) => { 
