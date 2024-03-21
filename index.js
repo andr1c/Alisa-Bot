@@ -158,7 +158,7 @@ setInterval(async () => {
   console.log(chalk.cyanBright(`${lenguaje['purgeoldfiles']()}`));
 }, 1000 * 60 * 60);
 //___________
-    
+
 const store = makeInMemoryStore({logger: pino().child({level: 'silent', stream: 'store' })})
 
 //configuración 
@@ -172,7 +172,7 @@ const question = (text) => new Promise((resolve) => rl.question(text, resolve))
 const msgRetry = (MessageRetryMap) => { }
 const msgRetryCounterCache = new NodeCache() //para mensaje de reintento, "mensaje en espera"
 let { version, isLatest } = await fetchLatestBaileysVersion();   
-    
+
 //codigo adaptado por: https://github.com/GataNina-Li && https://github.com/elrebelde21
 let opcion
 if (methodCodeQR) {
@@ -224,6 +224,7 @@ version,
 }
 
 const sock = makeWASocket(socketSettings)
+sock.isInit = false 
 
 if (!fs.existsSync(`./sessions/creds.json`)) {
 if (opcion === '2' || methodCode) {
@@ -598,8 +599,9 @@ return list[Math.floor(list.length * Math.random())]
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 sock.ev.on('connection.update', async (update) => {
-const { connection, lastDisconnect, qr, receivedPendingNotifications } = update;
+const { connection, lastDisconnect, qr, receivedPendingNotifications, isNewLogin} = update;
 console.log(receivedPendingNotifications)
+if (isNewLogin) sock.isInit = true
 if (connection == 'connecting') {
 console.log(chalk.gray('iniciando...'));
 say('NovaBot-MD', {
@@ -610,51 +612,44 @@ say(`By: elrebelde21`, {
   font: 'console',
   align: 'center',
   gradient: ['red', 'magenta']})
-  
+ 
+} else if (connection === "close" && lastDisconnect && lastDisconnect.error && lastDisconnect.error.output.statusCode != 401) {
+console.log(color('[SYS]', '#009FFF'),
+color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
+color(`${lenguaje['smsConexioncerrar']()}`, '#f64f59'));
+startBot()
 } else if (opcion == '1' || methodCodeQR && qr !== undefined) {
 if (opcion == '1' || methodCodeQR) {
 console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
 color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│${lenguaje['smsEscaneaQR']()}\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯`, '#f12711'))
-}} 
-
-try {
-let reason = new Boom(lastDisconnect?.error)?.output.statusCode
-if (connection === 'close') {
-if (reason === DisconnectReason.badSession) {
-console.log(chalk.yellow(`${lenguaje['smsConexionOFF']()}`)) 
-startBot();
-} else if (reason === DisconnectReason.connectionClosed) {
-console.log(chalk.yellow(`${lenguaje['smsConexioncerrar']()}`)) 
-startBot();
-} else if (reason === DisconnectReason.connectionLost) {
-console.log(chalk.yellow(`${lenguaje['smsConexionperdida']()}`)) 
-startBot();
-} else if (reason === DisconnectReason.connectionReplaced) {
-console.log(chalk.yellow(`${lenguaje['smsConexionreem']()}`)) 
-startBot();
-} else if (reason === DisconnectReason.loggedOut) {
-console.log(chalk.yellow(`${lenguaje['smsConexionOFF']()}`))
-startBot();
-} else if (reason === DisconnectReason.restartRequired) {
-console.log(chalk.yellow(`${lenguaje['smsConexionreinicio']()}`)) 
-startBot();
-} else if (reason === DisconnectReason.timedOut) {
-console.log(chalk.yellow(`${lenguaje['smsConexiontiem']()}`)) 
-startBot();
-} else sock.end(`${lenguaje['smsConexiondescon']()} ${reason || ''}: ${connection || ''}`)
-
+}
 } else if (connection == 'open') {
 console.log(color(` `,'magenta'))
 console.log(color(`\n${lenguaje['smsConexion']()} ` + JSON.stringify(sock.user, null, 2), 'yellow'))
 console.log(color('[SYS]', '#009FFF'),
 color(moment().format('DD/MM/YY HH:mm:ss'), '#A1FFCE'),
-color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│${lenguaje['smsConectado']()}\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯` + receivedPendingNotifications, '#38ef7d'))}
+color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│${lenguaje['smsConectado']()}\n╰━─━━─━─≪ 🟢 ≫─━─━━─━╯` + receivedPendingNotifications, '#38ef7d')
+);
 
-} catch (err) {
-console.log('Error en Connection.update '+err)
-startBot()
+/*if (!sock.user.connect) {
+await sock.groupAcceptInvite(nn2) 
+sock.user.connect = true
+return !1;
+}*/
 }});
+
+const rainbowColors = ['red', 'yellow', 'green', 'blue', 'purple'];
+let index = 0;
+
+function printRainbowMessage() {
+const color = rainbowColors[index];
+console.log(chalk.keyword(color)('\n[UPTIME]'));
+index = (index + 1) % rainbowColors.length;
+setTimeout(printRainbowMessage, 60000) //Ajuste el tiempo de espera a la velocidad deseada
+}
+
+printRainbowMessage();
 
 sock.public = true
 store.bind(sock.ev)
