@@ -81,6 +81,16 @@ Detener el bot apretado CTRL y aplastas Z en tu teclado, darle enter y escribe:
 > rm -rf sessions
 > npm start
 ```
+
+- ### 🟢 𝙰𝙲𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝚁 𝙽𝙾𝚅𝙰𝙱𝙾𝚃-𝙼𝙳
+> Note Comandos para actualizar NovaBot-MD de forma automática
+```bash
+grep -q 'bash\|wget' <(dpkg -l) || apt install -y bash wget && wget -O - https://raw.githubusercontent.com/elrebelde21/NovaBot-MD/master/update.sh | bash
+```
+Para que no pierda su progreso en CuriosityBot, estos comandos realizarán un respaldo de su `database.json` y se agregará a la versión más reciente.
+
+> Warning Estos comandos solo funcionan para TERMUX, REPLIT, LINUX
+
 ### `🤖 𝙿𝙰𝚁𝙰 𝙰𝙲𝚃𝙸𝚅𝙰𝚁 𝟸𝟺/𝟽 (𝚃𝙴𝚁𝙼𝚄𝚇)`
 ```bash
 npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
