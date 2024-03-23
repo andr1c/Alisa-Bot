@@ -127,7 +127,7 @@ const result = () => { return `results of :` }
 
 //Buscadores | Search engines 
 const lengua = { 
-ejem: ` Example :`, 
+ejem: `Example :`, 
 ejemplo: `*What is this search engine?\n*Example:*`, 
 opcion: `OPTION :`, 
 tipo: `TYPE :`, 
@@ -200,13 +200,13 @@ text20: `╭─────────────┈⊷
 
  \`\`\`📌 TERMUX INSTALLATION COMMAND\`\`\`
 
-> termux-setup-storage
+* termux-setup-storage
 
-> apt update && apt upgrade && pkg update && pkg upgrade && pkg install bash && pkg install libwebp && pkg install git -y && pkg install nodejs -y && pkg install ffmpeg -y && pkg install wget && pkg install imagemagick -y && pkg install yarn
+* apt update && apt upgrade && pkg update && pkg upgrade && pkg install bash && pkg install libwebp && pkg install git -y && pkg install nodejs -y && pkg install ffmpeg -y && pkg install wget && pkg install imagemagick -y && pkg install yarn
 
-> git clone https://github.com/elrebelde21/NovaBot-MD && cd NovaBot-MD && yarn && npm install
+* git clone https://github.com/elrebelde21/NovaBot-MD && cd NovaBot-MD && yarn && npm install
 
-> npm start
+* npm start
 
 (Scan the QR, Fast)
 
@@ -246,13 +246,7 @@ https://chat.whatsapp.com/FBtyc8Q5w2iJXVl5zGJdFJ
 https://whatsapp.com/channel/0029VaFVSkRCMY0KFmCMDX2q`, 
 text21: `*𝙴𝙽𝚃𝙴𝚁 𝚃𝙷𝙴 𝙲𝙾𝙼𝙼𝙰𝙽𝙳 𝚆𝙸𝚃𝙷 𝙵𝙰𝚄𝙻𝚃𝚂*\n\n*𝙴𝚇𝙰𝙼𝙿𝙻𝙴:*`, //
 text22: `*𝚃𝙷𝙴 𝚁𝙴𝙿𝙾𝚁𝚃 𝚆𝙰𝚂 𝚂𝙴𝙽𝚃 𝚃𝙾 𝙼𝚈 𝙲𝚁𝙴𝙰𝚃𝙾𝚁, 𝚆𝙴 𝚆𝙸𝙻𝙻 𝙲𝙾𝙽𝚃𝙰𝙲𝚃 𝚈𝙾𝚄 𝙸𝙵 𝙽𝙴𝙲𝙴𝚂𝚂𝙰𝚁𝚈, 𝙸𝙵 𝙸𝚃 𝙸𝚂 𝙵𝙰𝙻𝚂𝙴 𝙸𝚃 𝚆𝙸𝙻𝙻 𝙱𝙴 𝙸𝙶𝙽𝙾𝚁𝙴𝙳 𝙰𝙽𝙳 𝙱𝙻𝙾𝙲𝙺𝙴𝙳 𝙵𝚁𝙾𝙼 𝚃𝙷𝙴 𝙱𝙾𝚃*`, 
-text23: `*╼╼╼╼╼╼╼[ 💖 DONATION 💖 ]╾╾╾╾╾╾╾╾*\n\n* Hello 👋, if you want to support this project, you can do so through voluntary donations through Mercado Pago Arg.*
-
-╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍
-
-*❇️Payment market:*
-*• Alias :* OficialGB
-*• CVU :* 0000003100059201491917`, 
+text23: `*╼╼╼╼╼╼╼[ 💖 donation 💖 ]╾╾╾╾╾╾╾╾*\n\n*Hello 👋, if you want to support this project, you can do so through voluntary donations through PayPal, Mercado Pago or Naranja X.*\n\n╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍\n\n*❇️ PayPal:*\nhttps://paypal.me/OfcGB\n\n╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍\n\n*❇️ Payment market:*\n*• Alias :* OficialGB\n*• CVU :* 0000003100059201491917\n\n╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍\n\n*❇️ Orange X:*\n*• Alias :* OficialGL\n*• CVU :* 4530000800017922067114`, 
 text24: `*💖 ʸᵒᵘ ᶜᵃⁿ ᵃˡˢᵒ ˢʰᵃʳᵉ ᵗʰᵉ ᶠᵒˡˡᵒʷᶦⁿᵍ ᵃˢ ᵃ ˢʰᵒʷ ᵒᶠ ˢᵘᵖᵖᵒʳᵗ 💕*\n\n*💖 ˢᵘᵖᵖᵒʳᵗ ᵗʰᵉ ʳᵉᵖᵒˢᶦᵗᵒʳʸ ʷᶦᵗʰ ᵃ ˡᶦᵗᵗˡᵉ ˢᵗᵃʳ, ᵗʰᵃⁿᵏ ʸᵒᵘ 🙏💕*`, // 
 text25: `┗❴ ⚠ 𝐖𝐀𝐑𝐍𝐈𝐍𝐆 ⚠ ❵┛\n\nɪᴛ ɪs ᴘʀᴏʜɪʙɪᴛᴇᴅ ᴛᴏ ᴛᴀɢ ᴛʜᴇ ᴄʀᴇᴀᴛᴏʀ/ᴅᴇᴠᴇʟᴏᴘᴍᴇɴᴛ ɪғ ʏᴏᴜ ʜᴀᴠᴇ ᴀ sᴜɢɢᴇsᴛɪᴏɴ ʀᴇɢᴀʀᴅɪɴɢ ᴛʜᴇ ʙᴏᴛ ᴡʀɪᴛᴇ ᴛᴏ ᴛʜᴇɪʀ ᴘʀɪᴠᴀᴛᴇ ᴍᴇssᴀɢᴇ`, 
 text26: `*⚡ Are you looking for quality hots that fit your pocket?*
@@ -426,30 +420,39 @@ text4: `*I ALREADY JOINED😼*`,
 text5: `📧 *ＡＰＰＬＩＣＡＴＩＯＮ ＦＯＲ Ａ ＧＲＯＵＰ*\n\n*👤 ＡＰＰＬＩＣＡＮＴ*`, 
 text6: `*🔮 ＬＩＮＫ*`, 
 text7: `*✅ 𝘠𝘰𝘶𝘳 𝘭𝘪𝘯𝘬 𝘸𝘢𝘴 𝘴𝘦𝘯𝘵 𝘵𝘰 𝘮𝘺 𝘰𝘸𝘯𝘦𝘳*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n⚠️ *𝘠𝘰𝘶𝘳 𝘨𝘳𝘰𝘶𝘱 𝘸𝘪𝘭𝘭 𝘣𝘦 𝘦𝘷𝘢𝘭𝘶𝘢𝘵𝘦𝘥 𝘢𝘯𝘥 𝘪𝘵 𝘸𝘪𝘭𝘭 𝘣𝘦 𝘶𝘱 𝘵𝘰 𝘮𝘺 𝘰𝘸𝘯𝘦𝘳 𝘵𝘰 𝘥𝘦𝘤𝘪𝘥𝘦 𝘸𝘩𝘦𝘵𝘩𝘦𝘳 𝘰𝘳 𝘯𝘰𝘵 𝘵𝘩𝘦 𝘣𝘰𝘵 𝘫𝘰𝘪𝘯𝘴 𝘵𝘩𝘦*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n❕ *𝘠𝘰𝘶𝘳 𝘢𝘱𝘱𝘭𝘪𝘤𝘢𝘵𝘪𝘰𝘯 𝘮𝘢𝘺 𝘣𝘦 𝘳𝘦𝘫𝘦𝘤𝘵𝘦𝘥 𝘧𝘰𝘳 𝘵𝘩𝘦 𝘧𝘰𝘭𝘭𝘰𝘸𝘪𝘯𝘨 𝘳𝘦𝘢𝘴𝘰𝘯𝘴:*\n*1️⃣ 𝘛𝘩𝘦 𝘣𝘰𝘵 𝘪𝘴 𝘴𝘢𝘵𝘶𝘳𝘢𝘵𝘦𝘥.*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n2️⃣ *𝘵𝘩𝘦 𝘣𝘰𝘵 𝘸𝘢𝘴 𝘳𝘦𝘮𝘰𝘷𝘦𝘥 𝘧𝘳𝘰𝘮 𝘵𝘩𝘦 𝘎𝘳𝘰𝘶𝘱.*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n3️⃣ *𝘵𝘩𝘦 𝘨𝘳𝘰𝘶𝘱 𝘥𝘰𝘦𝘴 𝘯𝘰𝘵 𝘤𝘰𝘮𝘱𝘭𝘺 𝘸𝘪𝘵𝘩 𝘣𝘰𝘵 𝘳𝘦𝘨𝘶𝘭𝘢𝘵𝘪𝘰𝘯𝘴*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n4️⃣ *𝘵𝘩𝘦 𝘎𝘳𝘰𝘶𝘱 𝘭𝘪𝘯𝘬 𝘩𝘢𝘴 𝘣𝘦𝘦𝘯 𝘳𝘦𝘴𝘦𝘵.*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n5️⃣ *𝘪𝘵 𝘪𝘴 𝘯𝘰𝘵 𝘢𝘥𝘥𝘦𝘥 𝘵𝘰 𝘎𝘳𝘰𝘶𝘱𝘴 𝘢𝘤𝘤𝘰𝘳𝘥𝘪𝘯𝘨 𝘵𝘰 𝘮𝘺 𝘰𝘸𝘯𝘦𝘳*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n📧 *𝘛𝘩𝘦 𝘳𝘦𝘲𝘶𝘦𝘴𝘵 𝘮𝘢𝘺 𝘵𝘢𝘬𝘦 𝘩𝘰𝘶𝘳𝘴 𝘵𝘰 𝘣𝘦 𝘳𝘦𝘴𝘱𝘰𝘯𝘥𝘦𝘥 𝘵𝘰. 𝘗𝘭𝘦𝘢𝘴𝘦 𝘣𝘦 𝘱𝘢𝘵𝘪𝘦𝘯𝘵, 𝘵𝘩𝘢𝘯𝘬 𝘺𝘰𝘶*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n*ʸᵒᵘ ᶜᵃⁿ ˢᵘᵖᵖᵒʳᵗ ᵗʰᵉ ᵇᵒᵗ ʷᶦᵗʰ ᵃ ˡᶦᵗᵗˡᵉ ˢᵗᵃʳ ᶦⁿ ᵒᵘʳ ᵒᶠᶠᶦᶜᶦᵃˡ ʳᵉᵖᵒˢᶦᵗᵒʳʸ ᵃⁿᵈ ˢᵘᵇˢᶜʳᶦᵇᵉ ᵗᵒ ᵒᵘʳ ʸᵒᵘᵀᵘᵇᵉ ᶜʰᵃⁿⁿᵉˡ ˢᵉⁿᵈ ᵃ ˢᶜʳᵉᵉⁿˢʰᵒᵗ ᵗᵒ ᵐʸ ᶜʳᵉᵃᵗᵒʳ ˢᵒ ʰᵉ ᶜᵃⁿ ᵃᵈᵈ ᵗʰᵉ ᵇᵒᵗ ᵗᵒ ʸᵒᵘʳ ᵍʳᵒᵘᵖ 💫*`, // 
-text8: `*[ Ａ ＢＯＴ ＩＮ ＴＵ ＧＲＵＰＯ ]*
+text8: (md, yt, nn7, fb) => `*[ A bot in your group ]*
 
-You can request it by making a voluntary donation through Mercado Pago arg.
+You can request it by making a voluntary donation through PayPal or Mercado Pago arg.
 
 🚀 The bot will be active 24/7 for your group.
 
 *⚡ Where can I donate?*
-Through our Payment Market.
+Through our Paypal, Mercado Pago or Naranja X.
 
-❇️Payment market:
-• Alias: OficialGB
-• CVU: 0000003100059201491917
+*❇️ PayPal:* 
+https://paypal.me/OfcGB
+
+*❇️Payment market:*
+*• Alias :* OficialGB
+*• CVU :* 0000003100059201491917
+
+*❇️ Orange X:*
+*• Alias :* OficialGL
+*• CVU :* 4530000800017922067114
 
 *⚡ I can't donate, is there another option to get a bot for my Group?*
 You can support our official repository with a little star 🌟
-• https://github.com/elrebelde21/NovaBot-MD
+• ${md}
+• https://github.com/elrebelde21/LoliBot-MD
 
 🔔 Subscribe to our official YouTube channel
-• https://www.youtube.com/@elrebelde.21
+• ${yt}
 
 *⏩ Next step ⏩*
 
 Once payment is made, you can inform my creator and send proof of sending the money (screenshot) so I can add the bot to your group 👇.
-https://chat.whatsapp.com/BvElRVdgTVW34KRXtnvBfB
+• ${nn7}
+• ${fb}
 
 *⚡ Will the bot be active 24/7?*
 Yes, our bot is hosted on a paid server to keep it up 24/7 (which is why we also ask for donations to keep it running).`, 

@@ -247,7 +247,7 @@ https://chat.whatsapp.com/FBtyc8Q5w2iJXVl5zGJdFJ
 https://whatsapp.com/channel/0029VaFVSkRCMY0KFmCMDX2q`, 
 text21: `*Digite o comando com falha*\n\n*Exemplo:`, 
 text22: `O relato foi enviado ao meu criador, entraremos em contato se necessário, se for falso será ignorado e bloqueado do bot*`, 
-text23: `*╼╼╼╼╼╼╼[ 💖 doação 💖 ]╾╾╾╾╾╾╾╾*\n\n* Olá 👋, se você quiser apoiar este projeto, poderá fazê-lo através de doações voluntárias através do Mercado Pago Arg.*\n\n╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍\n\n*❇️Mercado pago:*\n*• Alias :* OficialGB\n*• CVU :* 0000003100059201491917`, 
+text23: `*╼╼╼╼╼╼╼[ 💖 doação 💖 ]╾╾╾╾╾╾╾╾*\n\n*Olá 👋, se você quiser apoiar este projeto, você pode fazê-lo através de doações voluntárias através do PayPal, Mercado Pago ou Naranja X.*\n\n╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍\n\n*❇️ PayPal:*\nhttps://paypal.me/OfcGB\n\n╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍\n\n*❇️ Mercado de pagamentos:*\n*• Alias :* OficialGB\n*• CVU :* 0000003100059201491917\n\n╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍\n\n*❇️ Laranja:*\n*• Alias :* OficialGL\n*• CVU :* 4530000800017922067114`, 
 text24: `*💖 Você também pode compartilhar o seguinte como uma demonstração de apoio 💕*\n\n*💖 Apoie o repositório com uma estrelinha, obrigado 🙏💕*`, 
 text25: `┗❴ ⚠ AVISO ⚠ ❵┛\n\nÉ proibido marcar meu criador/desenvolvimento. Se você tiver alguma sugestão sobre o Bot, escreva para mim em particular.`, 
 text26: `*⚡Você está procurando hots de qualidade que caibam no seu bolso?*
@@ -421,30 +421,39 @@ text4: `*JÁ PARTICIPEI 😼*`,
 text5: `📧 *APLICAÇÃO PARA UM GRUPO*\n\n*👤 SOLICITANTE*`, 
 text6: `*🔮 LINK*`, 
 text7: `*✅ Seu link foi enviado para meu proprietário*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n⚠️ *Seu grupo será avaliado e caberá ao meu proprietário decidir se o Bot ingressará ou não no grupo..*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n❕ *Sua inscrição poderá ser rejeitada pelos seguintes motivos::*\n*1️⃣ O bot está saturado.*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n2️⃣ *O bot foi removido do grupo.*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n3️⃣ *O grupo não cumpre os regulamentos do bot*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n4️⃣ *O link do grupo foi restaurado.*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n5️⃣ *Não adicionado a grupos de acordo com meu proprietário*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n📧 *A solicitação pode levar horas para ser respondida. Por favor, seja paciente, obrigado*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n*Você pode apoiar o bot com uma estrela em nosso repositório oficial e se inscrever em nosso canal no YouTube enviar uma captura de tela para meu criador para que ele adicione o bot ao seu grupo 💫*`, 
-text8: `*[ UM BOT NO SEU GRUPO ]*
+text8: (md, yt, nn7, fb) => `*[ Um bot no seu grupo ]*
 
-Você pode solicitá-lo fazendo uma doação voluntária através do Mercado Pago arg.
+Você pode solicitá-lo fazendo uma doação voluntária através do PayPal ou Mercado Pago arg.
 
 🚀 O bot estará ativo 24 horas por dia, 7 dias por semana para o seu grupo.
 
 *⚡ Onde posso doar?*
-Através do nosso Mercado de Pagamentos.
+Através do nosso Paypal, Mercado Pago ou Naranja X.
 
-❇️Mercado de pagamento:
-• Alias: OficialGB
-• CVU: 0000003100059201491917
+*❇️PayPal:* 
+https://paypal.me/OfcGB
+
+*❇️ Mercado de pagamentos:*
+*• Alias :* OficialGB
+*• CVU :* 0000003100059201491917
+
+*❇️ Laranja X:*
+*• Alias :* OficialGL
+*• CVU :* 4530000800017922067114
 
 *⚡ Não posso doar, existe outra opção de conseguir um bot para meu Grupo?*
 Você pode apoiar nosso repositório oficial com uma estrelinha 🌟
-• https://github.com/elrebelde21/NovaBot-MD
+• ${md}
+• https://github.com/elrebelde21/LoliBot-MD
 
 🔔 Inscreva-se em nosso canal oficial no YouTube
-• https://www.youtube.com/@elrebelde.21
+• ${yt}
 
 *⏩ Próxima etapa ⏩*
 
 Assim que o pagamento for efetuado, você pode informar meu criador e enviar o comprovante de envio do dinheiro (captura de tela) para que eu possa adicionar o bot ao seu grupo 👇.
-https://chat.whatsapp.com/BvElRVdgTVW34KRXtnvBfB
+• ${nn7}
+• ${fb}
 
 *⚡ O bot estará ativo 24 horas por dia, 7 dias por semana?*
 Sim, nosso bot está hospedado em um servidor pago para mantê-lo funcionando 24 horas por dia, 7 dias por semana (é por isso que também pedimos doações para mantê-lo funcionando).`, 

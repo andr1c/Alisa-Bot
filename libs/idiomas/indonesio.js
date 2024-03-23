@@ -247,7 +247,7 @@ https://chat.whatsapp.com/FBtyc8Q5w2iJXVl5zGJdFJ
 https://whatsapp.com/channel/0029VaFVSkRCMY0KFmCMDX2q`, 
 text21: `*Masukkan perintah dengan kesalahan*\n\n*Contoh:`,  
 text22: `Laporan telah dikirim ke pencipta saya, kami akan menghubungi Anda jika perlu, jika salah akan diabaikan dan diblokir dari bot*`,  
-text23: `*╼╼╼╼╼╼╼[ 💖 sumbangan 💖 ]╾╾╾╾╾╾╾╾*\n\n*Halo 👋, jika Anda ingin mendukung proyek ini, Anda dapat melakukannya melalui donasi sukarela melalui Mercado Pago Arg.*\n\n╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍\n\n*❇️Mercado pago:*\n*• Alias :* OficialGB\n*• CVU :* 0000003100059201491917`, 
+text23: `*╼╼╼╼╼╼╼[ 💖 sumbangan 💖 ]╾╾╾╾╾╾╾╾*\n\n*Halo 👋, jika Anda ingin mendukung proyek ini, Anda dapat melakukannya melalui donasi sukarela melalui PayPal, Mercado Pago, atau Naranja X.*\n\n╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍\n\n*❇️PayPal:*\nhttps://paypal.me/OfcGB\n\n╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍\n\n*❇️ Pasar pembayaran:*\n*• Alias :* OficialGB\n*• CVU :* 0000003100059201491917\n\n╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍\n\n*❇️ Oranye:*\n*• Alias :* OficialGL\n*• CVU :* 4530000800017922067114`, 
 text24: `*💖 Anda juga dapat membagikan hal berikut sebagai bentuk dukungan 💕*\n\n*💖 Dukung repositori dengan sedikit bintang, terima kasih 🙏💕*`,  
 text25: `┗❴ ⚠ PERINGATAN ⚠ ❵┛\n\nDilarang menandai pencipta/pengembangan jika Anda memiliki saran mengenai Bot tulis ke pesan pribadi mereka`, 
 text26: `*⚡ Sedang mencari hots berkualitas yang pas di kantong?*
@@ -421,30 +421,39 @@ text4: `*SAYA SUDAH BERGABUNG😼*`,
 text5: `📧 *APLIKASI UNTUK GRUP*\n\n*👤 Permintaan kamu*`,    
 text6: `*🔮 Tautan*`, 
 text7: `*✅ Tautan Anda telah dikirim ke pemilik saya*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n⚠️ *Grup Anda akan dievaluasi dan terserah kepada pemilik saya untuk memutuskan apakah Bot bergabung dengan grup atau tidak.*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n❕*Permohonan Anda mungkin ditolak karena alasan berikut:*\n*1️⃣ Bot sudah jenuh.*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n2️⃣ *Bot telah dihapus dari Grup.*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n3️⃣ *Grup tidak mematuhi peraturan Bot*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n4️⃣ *Tautan grup telah dipulihkan.*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n5️⃣ *Tidak ditambahkan ke grup menurut pemilik saya*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n📧 *Permintaan tersebut mungkin memerlukan waktu berjam-jam untuk ditanggapi. Mohon bersabar, terima kasih*\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n*Anda dapat mendukung Bot dengan bintang kecil di repositori resmi kami dan berlangganan saluran YouTube kami, kirimkan tangkapan layar ke pembuat saya sehingga dia dapat menambahkan Bot ke grup Anda 💫*`, 
-text8: `*[ BOT DI TU GRUPO ]*
+text8: (md, yt, nn7, fb) => `*[ Bot di grup Anda ]*
 
-Anda dapat memintanya dengan memberikan sumbangan sukarela melalui Mercado Pago arg.
+Anda dapat memintanya dengan memberikan sumbangan sukarela melalui PayPal atau Mercado Pago arg.
 
 🚀 Bot akan aktif 24/7 untuk grup Anda.
- 
+
 *⚡ Dimana saya bisa berdonasi?*
-Melalui Pasar Pembayaran kami.
+Melalui Paypal kami, Mercado Pago atau Naranja X.
 
-❇️Pasar pembayaran:
-• Alias: OficialGB
-• CVU: 0000003100059201491917
+*❇️PayPal:*
+https://paypal.me/OfcGB
 
-*⚡ Saya tidak bisa berdonasi, apakah ada opsi lain untuk mendapatkan bot untuk Grup saya?*
+*❇️Pasar pembayaran:*
+*• Alias :* OficialGB
+*• CVU :* 0000003100059201491917
+
+*❇️ Oranye X:*
+*• Alias :* OficialGL
+*• CVU :* 4530000800017922067114
+
+*⚡ Saya tidak bisa berdonasi, apakah ada pilihan lain untuk mendapatkan bot untuk Grup saya?*
 Anda dapat mendukung repositori resmi kami dengan sedikit bintang 🌟
-• https://github.com/elrebelde21/NovaBot-MD
+• ${md}
+• https://github.com/elrebelde21/LoliBot-MD
 
 🔔 Berlangganan saluran YouTube resmi kami
-• https://www.youtube.com/@elrebelde.21
+• ${yt}
 
 *⏩ Langkah selanjutnya ⏩*
 
 Setelah pembayaran dilakukan, Anda dapat memberi tahu pembuat saya dan mengirimkan bukti pengiriman uang (tangkapan layar) sehingga saya dapat menambahkan bot ke grup Anda 👇.
-https://chat.whatsapp.com/BvElRVdgTVW34KRXtnvBfB
+• ${nn7}
+• ${fb}
 
 *⚡ Apakah bot akan aktif 24/7?*
 Ya, bot kami dihosting di server berbayar agar tetap aktif 24/7 (itulah sebabnya kami juga meminta sumbangan agar tetap berjalan).`, 
