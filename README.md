@@ -18,7 +18,8 @@
 </a>
 <a href="https://paypal.me/OfcGB" target="_blank"> <img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white" target="_blank"></a> <img src="https://github.com/siegrin/siegrin/blob/main/Assets/Handshake.gif" height="30px">
 </a>
-[![Enlaces](https://img.shields.io/badge/Todos_los_en_un_único_lugar-000000%7D?style=for-the-badge&logo=biolink&logoColor=white)](https://atom.bio/lolibot)
+    
+[![Enlaces](https://img.shields.io/badge/Link+Ofc-000000%7D?style=for-the-badge&logo=biolink&logoColor=white)](https://atom.bio/lolibot)
 </div>
     
 ### `👑 DUDAS SOBRE EL BOT?, CONTACTAME 👑`
