@@ -38,46 +38,46 @@ let submenu = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩ 
 
 ${pickRandom([`\`𝐐𝐮𝐢𝐞𝐫𝐞𝐬 𝐨𝐛𝐭𝐞𝐧𝐞𝐫 𝐭𝐮 𝐛𝐨𝐭 𝐩𝐞𝐫𝐬𝐨𝐧𝐚𝐥𝐢𝐳𝐚𝐝𝐨?\`
-https://www.facebook.com/elrebelde21`, `\`□ COMO INSTALAR EL BOT\`\n${yt}`, `\`Que hay de nuevo?\`\n• Pon : ${prefix}nuevo`, `\`💫 INFORMARTE SOBRE LAS NUEVA ACTUALIZACIONES, NOVEDADES DEL BOT AQUI\`\n${nna}`, `\`🌟Te agrada el bot? calificar nuestro repo con una estrellita ☺\`\n${md}\``])}\n\n`
+https://www.facebook.com/elrebelde21`, `\`□ CÓMO INSTALAR EL BOT\`\n${yt}`, `\`¿Qué hay de nuevo?\`\n• Pon : ${prefix}nuevo`, `\`💫 INFÓRMATE SOBRE LAS NUEVAS ACTUALIZACIONES, NOVEDADES DEL BOT AQUÍ\`\n${nna}`, `\`🌟¿Te agrada el bot? califica nuestro repo con una estrellita ☺\`\n${md}\``])}\n\n`
 let descargar = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┏━━━━━━━━━━━━━━•
-┊┃ *🚀 ＭＥＮＵ ＤＥＳＣＡＲＧＡ 🚀*
+┊┃ *🚀 ＭＥＮＵ ＤＥＳＣＡＲＧＡＳ 🚀*
 ┊┃━━━━━━━━━━━━━━•
 ┊┃ ❏ ${prefix}play _(descargar música)_
-┊┃ ❏ ${prefix}play2 _(Descargar video)_
+┊┃ ❏ ${prefix}play2 _(descargar video)_
 ┊┃ ❏ ${prefix}play.1 _(descargar música)_
 ┊┃ ❏ ${prefix}play.2 _(descargar video)_
 ┊┃ ❏ ${prefix}musica
 ┊┃ ❏ ${prefix}video
 ┊┃ ❏ ${prefix}playdoc
-┊┃ ❏ ${prefix}play3 _(Descarga audio en documento)_
-┊┃ ❏ ${prefix}play4 _(Descarga video en documento)_
-┊┃ ❏ ${prefix}yts _(Buscador de youtube)_
+┊┃ ❏ ${prefix}play3 _(descargar audio en documento)_
+┊┃ ❏ ${prefix}play4 _(descargar video en documento)_
+┊┃ ❏ ${prefix}yts _(buscador de youtube)_
 ┊┃ ❏ ${prefix}ytmp3 _(link para descargar el audio)_
 ┊┃ ❏ ${prefix}ytmp4 _(link para descargar el video)_
 ┊┃ ❏ ${prefix}spotify
-┊┃ ❏ ${prefix}music _(Descarga musica de Spotify)_
-┊┃ ❏ ${prefix}gitclone _(descarga repositorio de GitHub)_
+┊┃ ❏ ${prefix}music _(Descargar musica de Spotify)_
+┊┃ ❏ ${prefix}gitclone _(descargar repositorio de GitHub)_
 ┊┃ ❏ ${prefix}tiktok _(descargar video de tiktok)_
 ┊┃ ❏ ${prefix}tiktokimg
-┊┃ ❏ ${prefix}ttimg _(descarga imagen de tiktok)_
-┊┃ ❏ ${prefix}igstalk _(nombre de un user de ig)_
+┊┃ ❏ ${prefix}ttimg _(descargar imagen de tiktok)_
+┊┃ ❏ ${prefix}igstalk _(nombre de un usuario de ig)_
 ┊┃ ❏ ${prefix}facebook
-┊┃ ❏ ${prefix}fb _(Descarga videos de Facebook)_
+┊┃ ❏ ${prefix}fb _(descargar videos de Facebook)_
 ┊┃ ❏ ${prefix}instagram
-┊┃ ❏ ${prefix}ig _(Descarga videos de Instagram)_
-┊┃ ❏ ${prefix}mediafire _(descarga archivo de mediafire)_
-┊┃ ❏ ${prefix}tiktokstalk _(nombre del user de TikTok)_
+┊┃ ❏ ${prefix}ig _(descargar videos de Instagram)_
+┊┃ ❏ ${prefix}mediafire _(descargar archivo de mediafire)_
+┊┃ ❏ ${prefix}tiktokstalk _(nombre del usuario de TikTok)_
 ┊┃ ❏ ${prefix}twitter
-┊┃ ❏ ${prefix}x _(descarga video de twiter (X)_
-┊┃ ❏ ${prefix}gdrive _(Descarga archivos de gdrive)_
+┊┃ ❏ ${prefix}x _(descargar video de twiter (X)_
+┊┃ ❏ ${prefix}gdrive _(descargar archivos de gdrive)_
 ┊┗━━━━━━━━━━━━━━•
 ╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩`
 let grupos = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┏━━━━━━━━━━━━━━•
 ┊┃ *🔰 ＭＥＮＵ ＰＡＲＡ ⃐ＧＲＵＰＯＳ 🔰*
 ┊┃━━━━━━━━━━━━━━•
-┊┃Gestionar tu grupo con NovaBot
+┊┃Gestiona tu grupo con NovaBot
 ┊┃━━━━━━━━━━━━━━•
 ┊┃ ❏ ${prefix}welcome _(on/off)_
 ┊┃ ❏ ${prefix}antilink _(on/off)_
@@ -111,7 +111,7 @@ let grupos = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┃ ❏ ${prefix}autonivel _(on/off)_
 ┊┃ ❏ ${prefix}addrules _(text)_
 ┊┃ ❏ ${prefix}setrules _(text)_
-┊┃ ❏ ${prefix}rules _(reglas del Grupo)_
+┊┃ ❏ ${prefix}rules _(reglas del grupo)_
 ┊┃ ❏ ${prefix}kick _(@tag)_
 ┊┃ ❏ ${prefix}add _(@tag)_
 ┊┃ ❏ ${prefix}invita _(@tag)_
@@ -125,12 +125,12 @@ let grupos = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┃ ❏ ${prefix}advertencia _(@tag)_
 ┊┃ ❏ ${prefix}unwarn _(@tag)_
 ┊┃ ❏ ${prefix}quitardvertencia _(@tag)_
-┊┃ ❏ ${prefix}setppname _(cambia name del grupo)_
-┊┃ ❏ ${prefix}setdesc _(cambia la desc del grupo)_
-┊┃ ❏ ${prefix}setppgroup _(cambia la foto del grupo)_
+┊┃ ❏ ${prefix}setppname _(cambiar nombre del grupo)_
+┊┃ ❏ ${prefix}setdesc _(cambia la descripción del grupo)_
+┊┃ ❏ ${prefix}setppgroup _(cambiar la foto del grupo)_
 ┊┃ ❏ ${prefix}anularlink 
 ┊┃ ❏ ${prefix}resetlink _(restablecer el link del grupo)_
-┊┃ ❏ ${prefix}hidetag _(Etiqueta a todos en un mensaje)_
+┊┃ ❏ ${prefix}hidetag _(etiquetar a todos en un mensaje)_
 ┊┃ ❏ ${prefix}tagall 
 ┊┃ ❏ ${prefix}invocar _(invocar a todos en una lista)_
 ┊┃ ❏ ${prefix}listonline _(usuarios online)_
@@ -145,21 +145,21 @@ let buscadores = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┃ ❏ ${prefix}chatgpt
 ┊┃ ❏ ${prefix}ia _(buscar información con la IA)_
 ┊┃ ❏ ${prefix}bard _(buscar información)_
-┊┃ ❏ ${prefix}imagen _(Imagen en google)_
-┊┃ ❏ ${prefix}traducir _(Traducir algun texto)_
-┊┃ ❏ ${prefix}wallpaper _(imagen del wallpaper)_
+┊┃ ❏ ${prefix}imagen _(imagen en google)_
+┊┃ ❏ ${prefix}traducir _(traducir algun texto)_
+┊┃ ❏ ${prefix}wallpaper _(imagen de wallpaper)_
 ┊┃ ❏ ${prefix}ss _(link)_
 ┊┃ ❏ ${prefix}dall-e
 ┊┃ ❏ ${prefix}pinterest
 ┊┃ ❏ ${prefix}wikipedia
 ┊┃ ❏ ${prefix}wiki
-┊┃ ❏ ${prefix}ia2 _(Crear imagen con la (IA)_
+┊┃ ❏ ${prefix}ia2 _(crear imagen con la (IA)_
 ┊┃ ❏ ${prefix}horario
 ┊┗━━━━━━━━━━━━━━•
 ╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩`
 let juegos = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┏━━━━━━━━━━━━━━•
-┊┃ *👾 ＭＥＮＵＪＵＥＧＯＳ 👾*
+┊┃ *👾 ＭＥＮＵ ＪＵＥＧＯＳ 👾*
 ┊┃━━━━━━━━━━━━━━•
 ┊┃ ❏ ${prefix}simi _(hablar con el bot)_
 ┊┃ ❏ ${prefix}ppt _(piedra, papel, o tijera)_
@@ -187,7 +187,7 @@ let juegos = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┃ ❏ ${prefix}piropo
 ┊┃ ❏ ${prefix}ship
 ┊┃ ❏ ${prefix}formartrio
-┊┃ ❏ ${prefix}formapareja5
+┊┃ ❏ ${prefix}formarpareja
 ┊┃ ❏ ${prefix}txt _(texto)_
 ┊┃ ❏ ${prefix}fake _(texto + tag)_
 ┊┗━━━━━━━━━━━━━━•
@@ -196,7 +196,7 @@ let efecto = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┏━━━━━━━━━━━━━━•
 ┊┃ *🎤 ＭＥＮＵ ＤＥ ＥＦＥＣＴＯＳ 🎤*
 ┊┃━━━━━━━━━━━━━━•
-┊┃ *(𝚁𝙴𝚂𝙿𝙾𝙽𝙳𝙴 𝙰 𝙰𝚄𝙳𝙸𝙾 𝙾 𝙽𝙾𝚃𝙰 𝙳𝙴 𝚅𝙾𝚉)*
+┊┃ *(𝚁𝙴𝚂𝙿𝙾𝙽𝙳𝙴 𝙰 UN 𝙰𝚄𝙳𝙸𝙾 𝙾 𝙽𝙾𝚃𝙰 𝙳𝙴 𝚅𝙾𝚉)*
 ┊┃━━━━━━━━━━━━━━•
 ┊┃ ❏ ${prefix}bass
 ┊┃ ❏ ${prefix}blown
@@ -273,7 +273,7 @@ let menu18 = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩`
 let menurandow = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┏━━━━━━━━━━━━━━•
-┊┃ *⛩️ ＭＥＮＵ ＲＡＮＤＯＷ ⛩️*
+┊┃ *⛩️ ＭＥＮＵ ＲＡＮＤＯＭ ⛩️*
 ┊┃━━━━━━━━━━━━━━•
 ┊┃ ❏ ${prefix}memes
 ┊┃ ❏ ${prefix}horny
@@ -329,16 +329,16 @@ let menuRPG = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┏━━━━━━━━━━━━━━•
 ┊┃ *🪙 ＭＥＮＵ ＲＰＧ / ＥＣＯＮＯＭＩＡ*
 ┊┃━━━━━━━━━━━━━━•
-┊┃ ❏ ${prefix}minar _(Para minar exp)_
+┊┃ ❏ ${prefix}minar _(para minar exp)_
 ┊┃ ❏ ${prefix}robar
-┊┃ ❏ ${prefix}rob _(Roba exp algun usuarios)_
+┊┃ ❏ ${prefix}rob _(roba exp algun usuarios)_
 ┊┃ ❏ ${prefix}crime
 ┊┃ ❏ ${prefix}trabajar
-┊┃ ❏ ${prefix}work _(Trabaja y ganas exp)_
-┊┃ ❏ ${prefix}buy _(Comprar mas diamantes (limit)_
+┊┃ ❏ ${prefix}work _(crabaja y ganas exp)_
+┊┃ ❏ ${prefix}buy _(comprar mas diamantes (limit)_
 ┊┃ ❏ ${prefix}bal
 ┊┃ ❏ ${prefix}balace _(diamante/exp tenés)_
-┊┃ ❏ ${prefix}claim _(Recoger tu recompensa)_
+┊┃ ❏ ${prefix}claim _(recoger tu recompensa)_
 ┊┃ ❏ ${prefix}lb
 ┊┃ ❏ ${prefix}leaderboard
 ┊┃ ❏ ${prefix}cofre
@@ -393,10 +393,10 @@ let menuOwner = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┃ ❏ ${prefix}nuevafoto
 ┊┃ ❏ ${prefix}seppbot
 ┊┃ ❏ ${prefix}fotobot _(cambiar la foto del bot)_
-┊┃ ❏ ${prefix}bc (Difusión a todos los chat)
-┊┃ ❏ ${prefix}bcgc (Difusión solo a grupos)
-┊┃ ❏ ${prefix}public (Modo público) 
-┊┃ ❏ ${prefix}privado (Modo privado) 
+┊┃ ❏ ${prefix}bc (difusión a todos los chat)
+┊┃ ❏ ${prefix}bcgc (difusión solo a grupos)
+┊┃ ❏ ${prefix}public (modo público) 
+┊┃ ❏ ${prefix}privado (modo privado) 
 ┊┃ ❏ ${prefix}getcase
 ┊┃ ❏ ${prefix}fetch
 ┊┃ ❏ ${prefix}update
@@ -443,12 +443,12 @@ let menu = `╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┗━━━━━━━━━━━━━━•
 ╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩ 
 
-${pickRandom([`\`𝐐𝐮𝐢𝐞𝐫𝐞𝐬 𝐨𝐛𝐭𝐞𝐧𝐞𝐫 𝐭𝐮 𝐛𝐨𝐭 𝐩𝐞𝐫𝐬𝐨𝐧𝐚𝐥𝐢𝐳𝐚𝐝𝐨?\`
-https://www.facebook.com/elrebelde21`, `\`□ COMO INSTALAR EL BOT\`\n${yt}`, `\`Que hay de nuevo?\`\n• Pon : ${prefix}nuevo`, `\`💫 INFORMARTE SOBRE LAS NUEVA ACTUALIZACIONES, NOVEDADES DEL BOT AQUI\`\n${nna}`, `\`🌟Te agrada el bot? calificar nuestro repo con una estrellita ☺\`\n${md}\``])}
+${pickRandom([`\`¿𝐐𝐮𝐢𝐞𝐫𝐞𝐬 𝐨𝐛𝐭𝐞𝐧𝐞𝐫 𝐭𝐮 𝐛𝐨𝐭 𝐩𝐞𝐫𝐬𝐨𝐧𝐚𝐥𝐢𝐳𝐚𝐝𝐨?\`
+https://www.facebook.com/elrebelde21`, `\`□ CÓMO INSTALAR EL BOT\`\n${yt}`, `\`¿Qué hay de nuevo?\`\n• Pon : ${prefix}nuevo`, `\`💫 INFÓMARTE SOBRE LAS NUEVAS ACTUALIZACIONES, NOVEDADES DEL BOT AQUI\`\n${nna}`, `\`🌟¿Te agrada el bot? califica nuestro repositorio con una estrellita ☺\`\n${md}\``])}
 
 ╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⪩
 ┊┏━━━━━━━━━━━━━━•
-┊┃ *🟢 ＬＩＳＴＡ ＤＥＬ ＣＯＭＡＮＤＯ*
+┊┃ *🟢 ＬＩＳＴＡ ＤＥ ＣＯＭＡＮＤＯＳ*
 ┊┃━━━━━━━━━━━━━━•
 ┊┃ ❏ ${prefix}allmenu | menucompleto
 ┊┃ ❏ ${prefix}menu1 | descarga
@@ -458,11 +458,11 @@ https://www.facebook.com/elrebelde21`, `\`□ COMO INSTALAR EL BOT\`\n${yt}`, `\
 ┊┃ ❏ ${prefix}menu5 | menujuegos
 ┊┃ ❏ ${prefix}menu6 | menuefecto
 ┊┃ ❏ ${prefix}menu7 | menuconvertidores
-┊┃ ❏ ${prefix}menu8 | menurandow
+┊┃ ❏ ${prefix}menu8 | menurandom
 ┊┃ ❏ ${prefix}menu9 | menuRPG
 ┊┃ ❏ ${prefix}menu10 | menuSticker
 ┊┃ ❏ ${prefix}menu11 | menuOwner
-┊┃ ❏ ${prefix}menu18 | Menuhony
+┊┃ ❏ ${prefix}menu18 | menuhorny
 ┊┃ ❏ ${prefix}logos 
 ┊┃━━━━━━━━━━━━━━•
 ┊┃ *💫 ＩＮＦＯＲＭＡＣＩＯ́Ｎ 💫*
