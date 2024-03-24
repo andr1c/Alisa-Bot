@@ -158,7 +158,7 @@ setInterval(async () => {
   console.log(chalk.cyanBright(`${lenguaje['purgeoldfiles']()}`));
 }, 1000 * 60 * 60);
 //___________
-
+    
 const store = makeInMemoryStore({logger: pino().child({level: 'silent', stream: 'store' })})
 
 //configuración 
@@ -172,7 +172,7 @@ const question = (text) => new Promise((resolve) => rl.question(text, resolve))
 const msgRetry = (MessageRetryMap) => { }
 const msgRetryCounterCache = new NodeCache() //para mensaje de reintento, "mensaje en espera"
 let { version, isLatest } = await fetchLatestBaileysVersion();   
-
+    
 //codigo adaptado por: https://github.com/GataNina-Li && https://github.com/elrebelde21
 let opcion
 if (methodCodeQR) {
@@ -224,7 +224,7 @@ version,
 }
 
 const sock = makeWASocket(socketSettings)
-sock.isInit = false 
+sock.isInit = false
 
 if (!fs.existsSync(`./sessions/creds.json`)) {
 if (opcion === '2' || methodCode) {
@@ -633,7 +633,8 @@ color(`\n╭━─━─━─≪ ${vs} ≫─━─━─━╮\n│${lenguaje[
 );
 
 /*if (!sock.user.connect) {
-await sock.groupAcceptInvite(nn2) 
+await delay(3 * 1000)
+await sock.groupAcceptInvite(global.nna2)
 sock.user.connect = true
 return !1;
 }*/
