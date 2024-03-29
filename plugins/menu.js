@@ -1088,6 +1088,10 @@ ${lenguaje.menu.text12}
 *╰┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭࣭࣭۫┄̸࣭۫┄̸࣭࣭࣭࣭࣭ٜ۫┄̸࣭࣭࣭࣭࣭ٜ۫┄࣭۫*`
 conn.sendMessage(m.chat, { text: menu,  
 contextInfo:{  
+forwardedNewsletterMessageInfo: { 
+newsletterJid: '120363160031023229@newsletter', 
+serverMessageId: '', 
+newsletterName: 'INFINITY-WA 💫' },
 forwardingScore: 9999999,  
 isForwarded: true,   
 mentionedJid:[sender, numBot],  
