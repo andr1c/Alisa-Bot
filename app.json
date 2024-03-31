@@ -1,7 +1,7 @@
 {
   "name": "NovaBot-MD",
   "description": "Bot de whatsapp simple",
-  "repository": "https://github.com/elrebelde21/NovaBot-MD",
+  "repository": "https://github.com/andr1c/NovaBot-MD",
   "logo": "https://pbs.twimg.com/media/FO7fojOakAAyYgt?format=jpg&name=900x900",
   "keywords": ["nodejs", "bot", "whatsapp bot", "whatsapp automation", "multi device"],
   "buildpacks": [
