@@ -45,7 +45,7 @@ if pkg install git -y 2>&1 >/dev/null | grep -E -i -q '(command not found|unable
 error=$(pkg install git -y 2>&1 >/dev/null)
 echo -e "\033[0;31mError: $error\033[0m" 
 echo -e "\033[0;34mNo se pudo instalar Git. Verifique su conexión a Internet e inténtelo de nuevo. Si el error continúa, instale de forma manual!!\033[0m" 
-echo -e "\033[01;33mpkg install git -y\npkg install nodejs -y\npkg install ffmpeg -y\npkg install imagemagick -y\npkg install -y yarn\ngit clone https://github.com/elrebelde21/NovaBot-MD\ncd NovaBot-MD\nyarn install\nnpm install\nnpm start\033[0m"
+echo -e "\033[01;33mpkg install git -y\npkg install nodejs -y\npkg install ffmpeg -y\npkg install imagemagick -y\npkg install -y yarn\ngit clone https://github.com/andr1c/NovaBot-MD\ncd NovaBot-MD\nyarn install\nnpm install\nnpm start\033[0m"
 exit 1
 else
 echo -e "\033[01;32m\033[01mGit se ha instalado correctamente.\n\033[0m" 
@@ -66,7 +66,7 @@ if pkg install nodejs -y 2>&1 >/dev/null | grep -E -i -q '(command not found|una
 error=$(pkg install nodejs -y 2>&1 >/dev/null)
 echo -e "\033[0;31mError: $error\033[0m" 
 echo -e "" 
-echo -e "\033[01;33mpkg install git -y\npkg install nodejs -y\npkg install ffmpeg -y\npkg install imagemagick -y\npkg install -y yarn\ngit clone https://github.com/elrebelde21/NovaBot-MD\ncd NovaBot-MD\nyarn install\nnpm install\nnpm start\033[0m"
+echo -e "\033[01;33mpkg install git -y\npkg install nodejs -y\npkg install ffmpeg -y\npkg install imagemagick -y\npkg install -y yarn\ngit clone https://github.com/andr1c/NovaBot-MD\ncd NovaBot-MD\nyarn install\nnpm install\nnpm start\033[0m"
 exit 1
 else
 echo -e "\033[01;32m\033[01mNode.js se ha instalado correctamente.\n\033[0m" 
@@ -87,7 +87,7 @@ if pkg install ffmpeg -y 2>&1 >/dev/null | grep -E -i -q '(command not found|una
 error=$(pkg install ffmpeg -y 2>&1 >/dev/null)
 echo -e "\033[0;31mError: $error\033[0m" 
 echo -e "\033[0;34mNo se pudo instalar FFmpeg. Verifique su conexión a Internet e inténtelo de nuevo. Si el error continúa, instale de forma manual!!\033[0m" 
-echo -e "\033[01;33mpkg install git -y\npkg install nodejs -y\npkg install ffmpeg -y\npkg install imagemagick -y\npkg install -y yarn\ngit clone https://github.com/elrebelde21/NovaBot-MD\ncd NovaBot-MD\nyarn install\nnpm install\nnpm start\033[0m"
+echo -e "\033[01;33mpkg install git -y\npkg install nodejs -y\npkg install ffmpeg -y\npkg install imagemagick -y\npkg install -y yarn\ngit clone https://github.com/andric/NovaBot-MD\ncd NovaBot-MD\nyarn install\nnpm install\nnpm start\033[0m"
 exit 1
 else
 echo -e "" 
@@ -103,7 +103,7 @@ if pkg install imagemagick -y 2>&1 >/dev/null | grep -E -i -q '(command not foun
 error=$(pkg install imagemagick -y 2>&1 >/dev/null)
 echo -e "\033[0;31mError: $error\033[0m" 
 echo -e "\033[0;34mNo se pudo instalar ImageMagick. Verifique su conexión a Internet e inténtelo de nuevo. Si el error continúa, instale de forma manual!!!\033[0m" 
-echo -e "\033[01;33mpkg install git -y\npkg install nodejs -y\npkg install ffmpeg -y\npkg install imagemagick -y\npkg install -y yarn\ngit clone https://github.com/elrebelde21/NovaBot-MD\ncd NovaBot-MD\nyarn install\nnpm install\nnpm start\033[0m"
+echo -e "\033[01;33mpkg install git -y\npkg install nodejs -y\npkg install ffmpeg -y\npkg install imagemagick -y\npkg install -y yarn\ngit clone https://github.com/andr1c/NovaBot-MD\ncd NovaBot-MD\nyarn install\nnpm install\nnpm start\033[0m"
 exit 1
 else
 echo -e "\033[01;32m\033[01mImageMagick se ha instalado correctamente.\n\033[0m" 
@@ -119,7 +119,7 @@ if npm install -g yarn 2>&1 >/dev/null | grep -E -i -q '(command not found|unabl
 error=$(npm install -g yarn 2>&1 >/dev/null)
 echo -e "\033[0;31mError: $error\033[0m" 
 echo -e "\033[0;34mNo se pudo instalar Yarn. Verifique su conexión a Internet e inténtelo de nuevo. Si el error continúa, instale de forma manual!!\033[0m" 
-echo -e "\033[01;33mpkg install git -y\npkg install nodejs -y\npkg install ffmpeg -y\npkg install imagemagick -y\npkg install -y yarn\ngit clone https://github.com/elrebelde21/NovaBot-MD\ncd NovaBot-MD\nyarn install\nnpm install\nnpm start\033[0m"
+echo -e "\033[01;33mpkg install git -y\npkg install nodejs -y\npkg install ffmpeg -y\npkg install imagemagick -y\npkg install -y yarn\ngit clone https://github.com/andr1c/NovaBot-MD\ncd NovaBot-MD\nyarn install\nnpm install\nnpm start\033[0m"
 exit 1
 else
 echo -e "\033[01;33m𝙻𝙾𝚂 𝙿𝙰𝚀𝚄𝙴𝚃𝙴𝚂 𝙳𝙴 𝙸𝙽𝚂𝚃𝙰𝙻𝙰𝙲𝙸𝙾́𝙽 𝚈𝙰 𝙵𝚄𝙴𝚁𝙾𝙽 𝙸𝙽𝚂𝚃𝙰𝙻𝙰𝙽𝙳𝙾 𝙲𝙾𝚁𝚁𝙴𝙲𝚃𝙰𝙼𝙴𝙽𝚃𝙴\033[0m"
@@ -132,7 +132,7 @@ echo -e "\033[01;32m\033[01m\nTodas las dependencias se han instalado correctame
 echo -e "\e[35mＩＮＳＴＡＬＡＮＤＯ ＧＩＴ ＣＬＯＮＥ\n\e[0m"
 
 echo -e "\033[1;35m"
-git clone https://github.com/elrebelde21/NovaBot-MD.git
+git clone https://github.com/andr1c/NovaBot-MD.git
 echo -e "\033[01;32m\033[01mLa clonación se ha descargado e instalado correctamente.\n\033[0m"
 
 echo -e "\033[01;32m\033[01mCambiando al directorio del repositorio!!\n\033[0m" 
@@ -229,10 +229,10 @@ echo -e ""
 
 echo -e "\e[31m
 ┏╍┅┅┅╍⪻ 𝐍𝐨𝐯𝐚𝐁𝐨𝐭-𝐌𝐃 ⪼┅┅┅┅┅┓
-┋❥ 𝐂𝐫𝐞𝐚𝐝𝐨𝐫 : elrebelde21
-┋❥ 𝐘𝐨𝐮𝐭𝐮𝐛𝐞 : www.youtube.com/@elrebelde.21
-┋❥ 𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤 : www.facebook.com/elrebelde21
-┋❥ 𝐆𝐢𝐭𝐇𝐮𝐛 : github.com/elrebelde21
+┋❥ 𝐂𝐫𝐞𝐚𝐝𝐨𝐫 : andr1c
+┋❥ 𝐘𝐨𝐮𝐭𝐮𝐛𝐞 : w
+┋❥ 𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤 : 
+┋❥ 𝐆𝐢𝐭𝐇𝐮𝐛 : github.com/andr1c
 ┋❥ 𝐌𝐞𝐫𝐜𝐚𝐝𝐨 𝐩𝐚𝐠𝐨 : 0000003100059201491917
 ┋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅
 ┋❥ 𝐍𝐨𝐬 𝐨𝐥𝐯𝐢𝐝𝐞𝐧 𝐝𝐞 𝐚𝐩𝐨𝐲𝐚𝐫 𝐧𝐮𝐞𝐬𝐭𝐫𝐨 𝐫𝐞𝐩𝐨𝐬𝐢𝐭𝐨𝐫𝐢𝐨 𝐨𝐟𝐢𝐜𝐢𝐚𝐥 
