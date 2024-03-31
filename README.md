@@ -134,7 +134,7 @@ npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
 
 ## `𝙴𝙳𝙸𝚃𝙾𝚁 𝚈 𝙿𝚁𝙾𝙿𝙸𝙴𝚃𝙰𝚁𝙸𝙾 𝙳𝙴𝙻 𝙱𝙾𝚃`
 
-<a href="https://github.com/andr1c"><img src="https://github.com/andr1c.png" width="250" height="250" alt="elrebelde21"/></a>
+<a href="https://github.com/andr1c"><img src="https://github.com/andr1c.png" width="250" height="250" alt="andr1c"/></a>
 
 ## `👑 𝙲𝙾𝙻𝙰𝙱𝙾𝚁𝙰𝙳𝙾𝚁𝙴𝚂 👑`
 
